@@ -8613,6 +8613,75 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1001 &1463634492
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1114260476483171701, guid: f7a3b83d4996a5c4cba55bdeda5d9c72, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.91887474
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114260476483171701, guid: f7a3b83d4996a5c4cba55bdeda5d9c72, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.91887474
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114260476483171701, guid: f7a3b83d4996a5c4cba55bdeda5d9c72, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.91887474
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114260476483171701, guid: f7a3b83d4996a5c4cba55bdeda5d9c72, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.654
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114260476483171701, guid: f7a3b83d4996a5c4cba55bdeda5d9c72, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0075663663
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114260476483171701, guid: f7a3b83d4996a5c4cba55bdeda5d9c72, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.9079
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114260476483171701, guid: f7a3b83d4996a5c4cba55bdeda5d9c72, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114260476483171701, guid: f7a3b83d4996a5c4cba55bdeda5d9c72, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114260476483171701, guid: f7a3b83d4996a5c4cba55bdeda5d9c72, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114260476483171701, guid: f7a3b83d4996a5c4cba55bdeda5d9c72, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114260476483171701, guid: f7a3b83d4996a5c4cba55bdeda5d9c72, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114260476483171701, guid: f7a3b83d4996a5c4cba55bdeda5d9c72, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114260476483171701, guid: f7a3b83d4996a5c4cba55bdeda5d9c72, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3862277631971027947, guid: f7a3b83d4996a5c4cba55bdeda5d9c72, type: 3}
+      propertyPath: m_Name
+      value: RobotKyle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f7a3b83d4996a5c4cba55bdeda5d9c72, type: 3}
 --- !u!1 &1470054248
 GameObject:
   m_ObjectHideFlags: 0
@@ -17280,8 +17349,8 @@ Transform:
   m_GameObject: {fileID: 2110834810}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.022215, y: 0.256, z: 0.40301}
+  m_LocalScale: {x: 0.65823, y: 0.65823, z: 0.65823}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 774773727}
@@ -17315,3 +17384,4 @@ SceneRoots:
   - {fileID: 333018206}
   - {fileID: 1373909549}
   - {fileID: 130805360}
+  - {fileID: 1463634492}
