@@ -104,7 +104,7 @@ public sealed class GardenGrabSetup : MonoBehaviour
         }
     }
 
-    private static void ConfigureGrabbable(GameObject target)
+    internal static void ConfigureGrabbable(GameObject target)
     {
         Rigidbody body = target.GetComponent<Rigidbody>();
         if (body == null)
@@ -112,8 +112,8 @@ public sealed class GardenGrabSetup : MonoBehaviour
             body = target.AddComponent<Rigidbody>();
         }
 
-        body.useGravity = false;
-        body.isKinematic = true;
+        body.useGravity = true;
+        body.isKinematic = false;
         body.interpolation = RigidbodyInterpolation.Interpolate;
 
         if (target.GetComponentInChildren<Collider>(true) == null)
