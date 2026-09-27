@@ -27,7 +27,7 @@ public sealed class WateringCan : MonoBehaviour
 
     [Header("Refill input")]
     [SerializeField]
-    [Tooltip("Button.Two is B on the right Touch controller and Y on the left Touch controller.")]
+    [Tooltip("Button.Two is B on the right Touch controller. Y on the left opens the calendar.")]
     private OVRInput.Button refillButton = OVRInput.Button.Two;
     [SerializeField] private bool requireCanToBeHeldForRefill = true;
 
@@ -65,7 +65,8 @@ public sealed class WateringCan : MonoBehaviour
     {
         bool isHeld = _grabbable != null && _grabbable.SelectingPointsCount > 0;
 
-        if (OVRInput.GetDown(refillButton) && (!requireCanToBeHeldForRefill || isHeld))
+        if (OVRInput.GetDown(refillButton, OVRInput.Controller.RTouch) &&
+            (!requireCanToBeHeldForRefill || isHeld))
         {
             Refill();
         }

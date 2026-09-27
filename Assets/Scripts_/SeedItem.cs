@@ -2,19 +2,22 @@ using System;
 using Oculus.Interaction;
 using UnityEngine;
 
-/// <summary>Grabbable seed and provisional crop visuals.</summary>
+/// <summary>Grabbable seed. Tomato stages use replaceable prefab assets.</summary>
 [DisallowMultipleComponent]
 public sealed class SeedItem : MonoBehaviour
 {
     [SerializeField] private SeedCrop crop;
     [SerializeField] private string seedId;
     [SerializeField] private Renderer seedRenderer;
+    [Tooltip("Six ordered prefab slots: seed, sprout, young plant, flowering, green fruit, ripe fruit. Slot 0 may be empty to use SeedVisual.")]
+    [SerializeField] private GameObject[] tomatoStagePrefabs = new GameObject[6];
 
     private Grabbable _grabbable;
     private bool _wasHeld;
     private bool _everHeld;
     private GameObject _sproutVisual;
     private GameObject _matureVisual;
+    private readonly GameObject[] _tomatoStageInstances = new GameObject[6];
 
     public SeedCrop Crop => crop;
     public string SeedId => seedId;
@@ -65,6 +68,32 @@ public sealed class SeedItem : MonoBehaviour
 
     public void ShowStage(GrowthStage stage)
     {
+        if (crop == SeedCrop.Tomato)
+        {
+            int active = stage switch
+            {
+                GrowthStage.Sprout => 1,
+                GrowthStage.YoungPlant => 2,
+                GrowthStage.Flowering => 3,
+                GrowthStage.GreenFruit => 4,
+                GrowthStage.Mature => 5,
+                _ => 0
+            };
+            for (int i = 0; i < _tomatoStageInstances.Length; i++)
+            {
+                if (i == active && _tomatoStageInstances[i] == null &&
+                    tomatoStagePrefabs != null && i < tomatoStagePrefabs.Length && tomatoStagePrefabs[i] != null)
+                {
+                    _tomatoStageInstances[i] = Instantiate(tomatoStagePrefabs[i], transform);
+                    _tomatoStageInstances[i].name = tomatoStagePrefabs[i].name;
+                    _tomatoStageInstances[i].transform.localPosition = Vector3.zero;
+                    _tomatoStageInstances[i].transform.localRotation = Quaternion.identity;
+                }
+                if (_tomatoStageInstances[i] != null) _tomatoStageInstances[i].SetActive(i == active);
+            }
+            if (seedRenderer != null) seedRenderer.enabled = active == 0 && _tomatoStageInstances[0] == null;
+            return;
+        }
         if (_sproutVisual == null) _sproutVisual = BuildPlant(false);
         if (_matureVisual == null) _matureVisual = BuildPlant(true);
         if (seedRenderer != null) seedRenderer.enabled = stage == GrowthStage.Seed;

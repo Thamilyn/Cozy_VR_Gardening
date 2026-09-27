@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum SeedCrop { Tomato, Radish, Lettuce }
-public enum GrowthStage { Seed, Sprout, Mature }
+// Keep the original numeric values so existing scene and JSON data remain readable.
+public enum GrowthStage { Seed = 0, Sprout = 1, Mature = 2, YoungPlant = 3, Flowering = 4, GreenFruit = 5 }
 
 /// <summary>Owns planted seed references, crop requirements and stage transitions.</summary>
 [DisallowMultipleComponent]
@@ -15,6 +16,7 @@ public sealed class SeedsController : MonoBehaviour
         public SeedCrop crop;
         [Min(0f)] public float daysToSprout = 1f;
         [Min(0f)] public float daysToMature = 3f;
+        [Tooltip("Only used for radish and lettuce. Tomato growth follows its age, regardless of water.")]
         [Min(0f)] public float millilitresToSprout = 50f;
         [Min(0f)] public float millilitresToMature = 200f;
     }
@@ -35,11 +37,10 @@ public sealed class SeedsController : MonoBehaviour
     [SerializeField] private SeedItem[] seedPrefabs;
     [SerializeField] private CropRequirements[] requirements =
     {
-        new CropRequirements { crop = SeedCrop.Tomato, daysToSprout = 1f, daysToMature = 4f, millilitresToSprout = 60f, millilitresToMature = 300f },
         new CropRequirements { crop = SeedCrop.Radish, daysToSprout = 1f, daysToMature = 3f, millilitresToSprout = 40f, millilitresToMature = 180f },
         new CropRequirements { crop = SeedCrop.Lettuce, daysToSprout = 1f, daysToMature = 3f, millilitresToSprout = 50f, millilitresToMature = 220f }
     };
-    [SerializeField] private List<PlantedSeed> plantedSeeds = new();
+    private readonly List<PlantedSeed> plantedSeeds = new();
 
     public IReadOnlyList<PlantedSeed> PlantedSeeds => plantedSeeds;
     public CalendarSystem Calendar => calendar;
@@ -49,10 +50,12 @@ public sealed class SeedsController : MonoBehaviour
         if (calendar == null) calendar = FindFirstObjectByType<CalendarSystem>();
         if (calendar == null) { Debug.LogError("SeedsController needs CalendarSystem.", this); return; }
         if (pots == null || pots.Length == 0) pots = FindObjectsByType<GardenPot>(FindObjectsSortMode.None);
+        calendar.Changed += RefreshPlants;
 
         foreach (GardenPot pot in pots)
         {
             if (pot == null) continue;
+            pot.SetSoilWaterMillilitres(0f);
             PlantWaterReceiver receiver = pot.GetComponent<PlantWaterReceiver>();
             if (receiver == null) receiver = pot.gameObject.AddComponent<PlantWaterReceiver>();
             GardenPot target = pot;
@@ -74,9 +77,15 @@ public sealed class SeedsController : MonoBehaviour
             }
             Attach(seed, pot, saved, crop);
         }
+        RefreshPlants();
     }
 
-    private void Update()
+    private void OnDestroy()
+    {
+        if (calendar != null) calendar.Changed -= RefreshPlants;
+    }
+
+    private void RefreshPlants()
     {
         if (calendar == null) return;
         foreach (PlantedSeed plant in plantedSeeds)
@@ -88,11 +97,11 @@ public sealed class SeedsController : MonoBehaviour
             GrowthStage stage = CalculateStage(plant.crop, days, saved.waterMillilitres);
             plant.elapsedGameDays = days;
             plant.waterMillilitres = saved.waterMillilitres;
+            saved.elapsedGameDays = days;
             if (plant.stage == stage) continue;
             plant.stage = stage;
             plant.seed.ShowStage(stage);
             saved.stage = stage.ToString();
-            calendar.MarkChanged();
         }
     }
 
@@ -124,6 +133,7 @@ public sealed class SeedsController : MonoBehaviour
         if (saved == null) return;
         calendar.RecordWater(saved, amountLitres * 1000f);
         pot.SetSoilWaterMillilitres(saved.waterMillilitres);
+        RefreshPlants();
     }
 
     private void Attach(SeedItem seed, GardenPot pot, CalendarSystem.PlantSave saved, SeedCrop crop)
@@ -135,18 +145,30 @@ public sealed class SeedsController : MonoBehaviour
             elapsedGameDays = Mathf.Max(0f, calendar.ElapsedGameDays - saved.plantedAtGameDay)
         };
         plant.stage = CalculateStage(crop, plant.elapsedGameDays, plant.waterMillilitres);
+        saved.elapsedGameDays = plant.elapsedGameDays;
         seed.ShowStage(plant.stage);
         plantedSeeds.Add(plant);
         pot.SetSoilWaterMillilitres(saved.waterMillilitres);
         if (saved.stage != plant.stage.ToString())
-        {
             saved.stage = plant.stage.ToString();
-            calendar.MarkChanged();
-        }
     }
 
     private GrowthStage CalculateStage(SeedCrop crop, float days, float millilitres)
     {
+        if (crop == SeedCrop.Tomato)
+        {
+            int phase = calendar.PhaseIndexAt(days);
+            return phase switch
+            {
+                0 => GrowthStage.Seed,
+                1 => GrowthStage.Sprout,
+                2 => GrowthStage.YoungPlant,
+                3 => GrowthStage.Flowering,
+                4 => GrowthStage.GreenFruit,
+                _ => GrowthStage.Mature
+            };
+        }
+        // Radish and lettuce deliberately retain their age AND water gates.
         CropRequirements rule = Array.Find(requirements, r => r != null && r.crop == crop);
         if (rule == null) return GrowthStage.Seed;
         if (days >= rule.daysToMature && millilitres >= rule.millilitresToMature) return GrowthStage.Mature;

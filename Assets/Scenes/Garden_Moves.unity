@@ -235,6 +235,69 @@ MonoBehaviour:
     _installationVariants:
     - _memberName: mode
       _value: '{"value__":0}'
+--- !u!1 &9130589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9130592}
+  - component: {fileID: 9130591}
+  - component: {fileID: 9130590}
+  m_Layer: 0
+  m_Name: GardenVR_UI_EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &9130590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9130589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2518c50cb3fc6a6458d4b743c2f69c7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Oculus.Interaction::Oculus.Interaction.PointableCanvasModule
+  m_SendPointerHoverToParent: 1
+  _useInitialPressPositionForDrag: 1
+  _exclusiveMode: 1
+--- !u!114 &9130591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9130589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &9130592
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9130589}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &25599319
 Mesh:
   m_ObjectHideFlags: 0
@@ -1672,6 +1735,115 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1001 &360232289
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 850
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 710
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540746642152905183, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080878807755987614, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: m_Name
+      value: GardenCalendarCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667422114824519907, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: calendar
+      value: 
+      objectReference: {fileID: 3000000202}
+    - target: {fileID: 7667422114824519907, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: dayPrefix
+      value: 'Day '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8477128388395359590, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
+      propertyPath: viewTransform
+      value: 
+      objectReference: {fileID: 298698696}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b832e28f0dd38e64f91a28d3dba44657, type: 3}
 --- !u!1 &367502701
 GameObject:
   m_ObjectHideFlags: 0
@@ -18177,10 +18349,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ce21db1e8a4c0cbd7e09dfa3a5671e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CalendarSystem
-  secondsPerGameDay: 120
-  elapsedGameDays: 0
-  journal: []
-  plants: []
+  milestones:
+  - day: 0
+    displayName: Seed
+    icon: {fileID: 2738028763080834969, guid: 18721af65eb921a45b65df3ec2230d0b, type: 3}
+    color: {r: 0.75, g: 0.55, b: 0.35, a: 1}
+  - day: 7
+    displayName: Sprout / germination
+    icon: {fileID: -2392604758993345912, guid: 647f0806799f2704db155397968285e7, type: 3}
+    color: {r: 0.55, g: 0.75, b: 0.38, a: 1}
+  - day: 45
+    displayName: Young plant and growth
+    icon: {fileID: -2201909831242548149, guid: 35035682b05ad0344a074825e969b1eb, type: 3}
+    color: {r: 0.32, g: 0.7, b: 0.36, a: 1}
+  - day: 60
+    displayName: Flowering
+    icon: {fileID: -3840449707809081413, guid: 086353fe901150541b90133217766b5b, type: 3}
+    color: {r: 0.95, g: 0.8, b: 0.38, a: 1}
+  - day: 80
+    displayName: Green tomatoes
+    icon: {fileID: -4340009195191301107, guid: 45ab05a037b571b4991498e588b03c2f, type: 3}
+    color: {r: 0.42, g: 0.72, b: 0.3, a: 1}
+  - day: 110
+    displayName: Ripe tomatoes and harvest
+    icon: {fileID: 5640212542039582549, guid: 76d067a9354010a419b215c3ae838f13, type: 3}
+    color: {r: 0.9, g: 0.34, b: 0.25, a: 1}
 --- !u!114 &3000000203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18204,11 +18397,6 @@ MonoBehaviour:
   - {fileID: 1004, guid: f285a5b2d63c427eb406a3a31eac7886, type: 3}
   - {fileID: 1004, guid: 575a806064c24259b605d6ec46d4417f, type: 3}
   requirements:
-  - crop: 0
-    daysToSprout: 1
-    daysToMature: 4
-    millilitresToSprout: 60
-    millilitresToMature: 300
   - crop: 1
     daysToSprout: 1
     daysToMature: 3
@@ -18219,7 +18407,6 @@ MonoBehaviour:
     daysToMature: 3
     millilitresToSprout: 50
     millilitresToMature: 220
-  plantedSeeds: []
 --- !u!1001 &3000000300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18342,3 +18529,5 @@ SceneRoots:
   - {fileID: 3000000300}
   - {fileID: 3000000301}
   - {fileID: 3000000302}
+  - {fileID: 9130592}
+  - {fileID: 360232289}
