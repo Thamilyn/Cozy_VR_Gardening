@@ -3,8 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// Emits a notification when a plant is watered without tracking plant hydration.
-/// A later plant-care system can subscribe to this component without changing the can.
+/// Emits water delivered to one pot in litres; SeedsController records it in millilitres.
 /// </summary>
 [DisallowMultipleComponent]
 public sealed class PlantWaterReceiver : MonoBehaviour

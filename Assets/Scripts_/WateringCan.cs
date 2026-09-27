@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 /// <summary>
 /// Turns a grabbable object into a watering can with its own finite water supply.
-/// The can pours when held and tilted, and only Plants-tagged objects receive water.
+/// The can pours when held and tilted. GardenPot receivers get the measured amount in litres.
 /// </summary>
 [DisallowMultipleComponent]
 public sealed class WateringCan : MonoBehaviour
@@ -145,17 +145,15 @@ public sealed class WateringCan : MonoBehaviour
 
     private void DeliverWater(Collider hitCollider, float amountLitres)
     {
-        GameObject plant = FindTaggedParent(hitCollider.transform, PlantTag);
-        if (plant == null)
+        GardenPot pot = hitCollider.GetComponentInParent<GardenPot>();
+        GameObject plant = pot != null ? pot.gameObject : FindTaggedParent(hitCollider.transform, PlantTag);
+        PlantWaterReceiver receiver = pot != null
+            ? pot.GetComponent<PlantWaterReceiver>()
+            : plant != null ? plant.GetComponent<PlantWaterReceiver>() : null;
+        if (plant == null || receiver == null)
         {
             _lastWateredPlant = null;
             return;
-        }
-
-        PlantWaterReceiver receiver = plant.GetComponent<PlantWaterReceiver>();
-        if (receiver == null)
-        {
-            receiver = plant.AddComponent<PlantWaterReceiver>();
         }
 
         receiver.ReceiveWater(amountLitres);
