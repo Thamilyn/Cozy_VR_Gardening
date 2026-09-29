@@ -6,6 +6,53 @@ using UnityEngine;
 /// <summary>Optional editor check for milestone and session-only state behavior.</summary>
 public static class GardenCalendarVerification
 {
+    [MenuItem("Garden/Verify calendar hand input")]
+    public static void VerifyHandInput()
+    {
+        GameObject prefab = PrefabUtility.LoadPrefabContents("Assets/Prefabs/GardenCalendarVR.prefab");
+        try
+        {
+            CalendarVisibilityController visibility = prefab.GetComponent<CalendarVisibilityController>();
+            Assert(visibility != null, "Visibility controller");
+            Collider collider = prefab.GetComponent<Collider>();
+            Assert(collider != null, "Calendar ray collider");
+            SerializedObject settings = new SerializedObject(visibility);
+            Assert(settings.FindProperty("rayCollider").objectReferenceValue == collider, "Visibility ray collider binding");
+            SerializedObject surface = new SerializedObject(prefab.GetComponent<Oculus.Interaction.Surfaces.ColliderSurface>());
+            Assert(surface.FindProperty("_collider").objectReferenceValue == collider, "Meta ray surface binding");
+            Assert(settings.FindProperty("closeButton").objectReferenceValue != null, "Close button binding");
+            SerializedObject panel = new SerializedObject(prefab.GetComponent<CalendarPanel>());
+            Assert(panel.FindProperty("advanceButton").objectReferenceValue != null, "Advance button binding");
+
+            MethodInfo sample = typeof(CalendarVisibilityController).GetMethod("UpdatePinchState", BindingFlags.NonPublic | BindingFlags.Instance);
+            CheckPinch(visibility, sample, true, true, 1f, 0f, false, "Held on startup");
+            CheckPinch(visibility, sample, true, false, 0f, 1f, false, "Begin release");
+            CheckPinch(visibility, sample, true, false, 0f, 1.11f, false, "Stable release");
+            CheckPinch(visibility, sample, true, true, 1f, 1.2f, true, "First pinch");
+            for (int i = 0; i < 90; i++)
+                CheckPinch(visibility, sample, true, true, 1f, 1.21f + i / 90f, false, "Held pinch " + i);
+            CheckPinch(visibility, sample, true, false, 0.5f, 3f, false, "Partial release");
+            CheckPinch(visibility, sample, true, false, 0f, 3.1f, false, "Brief tracking noise");
+            CheckPinch(visibility, sample, true, true, 1f, 3.15f, false, "Noise must not rearm");
+            CheckPinch(visibility, sample, true, false, 0f, 4f, false, "Second release");
+            CheckPinch(visibility, sample, true, false, 0f, 4.11f, false, "Second stable release");
+            CheckPinch(visibility, sample, true, true, 1f, 4.2f, true, "Second pinch");
+            CheckPinch(visibility, sample, false, false, 0f, 5f, false, "Tracking lost");
+            CheckPinch(visibility, sample, true, true, 1f, 6f, false, "Held through tracking recovery");
+            CheckPinch(visibility, sample, true, false, 0f, 7f, false, "Recovery release");
+            CheckPinch(visibility, sample, true, false, 0f, 7.11f, false, "Recovery stable release");
+            CheckPinch(visibility, sample, true, true, 1f, 7.2f, true, "Pinch after recovery");
+            Debug.Log("Garden calendar hand input verification passed: ray/button wiring, held pinches, release debounce and tracking recovery.");
+        }
+        finally { PrefabUtility.UnloadPrefabContents(prefab); }
+    }
+
+    private static void CheckPinch(CalendarVisibilityController visibility, MethodInfo sample,
+        bool valid, bool pinching, float strength, float now, bool expected, string name)
+    {
+        Assert((bool)sample.Invoke(visibility, new object[] { valid, pinching, strength, now }) == expected, name);
+    }
+
     [MenuItem("Garden/Verify calendar session behavior")]
     public static void Verify()
     {

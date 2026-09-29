@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>Keeps the Canvas root listening for the left Touch controller's Y button while the panel is hidden.</summary>
+/// <summary>Keeps the Canvas root listening for Y and left-hand pinches while the panel is hidden.</summary>
 [DisallowMultipleComponent]
 public sealed class CalendarVisibilityController : MonoBehaviour
 {
@@ -17,6 +17,11 @@ public sealed class CalendarVisibilityController : MonoBehaviour
     private Transform viewTransform;
     [SerializeField, Min(0.25f)] private float distanceFromView = 1.3f;
 
+    [Header("Hand gestures")]
+    [Tooltip("Left tracked hand. Pinch away from the calendar to toggle it; point at it to use its buttons.")]
+    public OVRHand leftHand;
+
+
     public bool IsVisible { get; private set; }
 
     private void Awake()
@@ -29,10 +34,18 @@ public sealed class CalendarVisibilityController : MonoBehaviour
 
     private void Update()
     {
+       
         // RawButton.Y is specifically the physical Y button on the left Meta Quest controller.
-        if (OVRInput.GetDown(OVRInput.RawButton.Y, OVRInput.Controller.LTouch))
+        // PointableCanvas handles hand-ray pinches on the UI. Do not also toggle the panel
+        // when the user is trying to click Advance phase or Close.
+            // (pinchStarted && (!IsVisible || !IsPointingAtCalendar())))
+        if (OVRInput.GetDown(OVRInput.RawButton.Y, OVRInput.Controller.LTouch) || leftHand.IsReleased())
             Toggle();
     }
+
+
+   
+
 
     public void Toggle() => SetVisible(!IsVisible);
     public void Open() => SetVisible(true);
@@ -65,9 +78,10 @@ public sealed class CalendarVisibilityController : MonoBehaviour
         }
 
         // Unity world-space UI faces along its local -Z axis.
+        
         transform.SetPositionAndRotation(
-            viewer.position + viewer.forward * distanceFromView,
-            Quaternion.LookRotation(viewer.forward, viewer.up));
+          viewer.position + viewer.forward * distanceFromView,
+         Quaternion.LookRotation(viewer.forward, viewer.up));
 
         Canvas worldCanvas = GetComponent<Canvas>();
         if (worldCanvas != null)
