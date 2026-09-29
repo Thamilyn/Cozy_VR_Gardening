@@ -49,4 +49,4 @@ MonoBehaviour:
   - RiceBin
   - Plant_Pot
   grabButton: 16
-  searchDuration: 10
+  scanInterval: 0.5

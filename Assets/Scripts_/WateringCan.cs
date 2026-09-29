@@ -1,4 +1,8 @@
+using System.Collections.Generic;
 using Oculus.Interaction;
+using Oculus.Interaction.GrabAPI;
+using Oculus.Interaction.HandGrab;
+using Oculus.Interaction.Locomotion;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,6 +14,7 @@ using UnityEngine.Events;
 public sealed class WateringCan : MonoBehaviour
 {
     private const string PlantTag = "Plants";
+    private const string HeldLayerName = "GardenHeldObject";
 
     [Header("Water supply")]
     [SerializeField, Min(0.01f)] private float capacityLitres = 2f;
@@ -45,6 +50,8 @@ public sealed class WateringCan : MonoBehaviour
     private Material _runtimeStreamMaterial;
     private float _currentWaterLitres;
     private GameObject _lastWateredPlant;
+    private readonly Dictionary<GameObject, int> _restingColliderLayers = new();
+    private bool _usingHeldLayer;
 
     public float CurrentWaterLitres => _currentWaterLitres;
     public float CapacityLitres => capacityLitres;
@@ -53,7 +60,17 @@ public sealed class WateringCan : MonoBehaviour
 
     private void Awake()
     {
+        EnsureGardenCanColliders();
+        // Set the resting state before Meta saves it when the can is first grabbed.
+        GardenGrabSetup.ConfigureGrabbable(gameObject);
         _grabbable = GetComponent<Grabbable>();
+        _grabbable.ForceKinematicDisabled = true;
+        foreach (HandGrabInteractable handGrab in GetComponentsInChildren<HandGrabInteractable>(true))
+        {
+            // Keep a pinch held when one finger relaxes while another still holds.
+            handGrab.InjectPinchGrabRules(GrabbingRule.DefaultPinchRule);
+            handGrab.Slippiness = 0f;
+        }
         EnsureSpout();
         EnsureWaterStream();
 
@@ -64,6 +81,7 @@ public sealed class WateringCan : MonoBehaviour
     private void Update()
     {
         bool isHeld = _grabbable != null && _grabbable.SelectingPointsCount > 0;
+        UpdateHeldCollisionState(isHeld);
 
         if (OVRInput.GetDown(refillButton, OVRInput.Controller.RTouch) &&
             (!requireCanToBeHeldForRefill || isHeld))
@@ -98,6 +116,71 @@ public sealed class WateringCan : MonoBehaviour
         }
 
         DrawWaterStream(streamStart, streamEnd);
+    }
+
+    private void OnEnable()
+    {
+        if (_grabbable != null)
+            _grabbable.WhenPointerEventRaised += HandleGrabEvent;
+    }
+
+    private void OnDisable()
+    {
+        if (_grabbable != null)
+            _grabbable.WhenPointerEventRaised -= HandleGrabEvent;
+        UpdateHeldCollisionState(false);
+        SetStreamVisible(false);
+    }
+
+    private void HandleGrabEvent(PointerEvent evt)
+    {
+        if (evt.Type == PointerEventType.Select || evt.Type == PointerEventType.Unselect ||
+            evt.Type == PointerEventType.Cancel)
+            UpdateHeldCollisionState(_grabbable.SelectingPointsCount > 0);
+    }
+
+    private void UpdateHeldCollisionState(bool isHeld)
+    {
+        if (isHeld == _usingHeldLayer) return;
+
+        if (isHeld)
+        {
+            int heldLayer = LayerMask.NameToLayer(HeldLayerName);
+            if (heldLayer < 0)
+            {
+                Debug.LogError($"Add the {HeldLayerName} physics layer to prevent held tools moving the VR player.", this);
+                return;
+            }
+
+            // Meta's locomotor uses capsule/sphere casts, including a ground cast
+            // below the head. IgnoreCollision alone cannot exclude a held can
+            // from those casts; otherwise it can become the player's floor.
+            int playerMask = ~(1 << heldLayer);
+            foreach (Oculus.Interaction.Locomotion.CharacterController player in
+                     FindObjectsByType<Oculus.Interaction.Locomotion.CharacterController>(
+                         FindObjectsInactive.Include, FindObjectsSortMode.None))
+                player.LayerMask = player.LayerMask.value & playerMask;
+            foreach (WallPenetrationTunneling walls in FindObjectsByType<WallPenetrationTunneling>(
+                         FindObjectsInactive.Include, FindObjectsSortMode.None))
+                walls.LayerMask = walls.LayerMask.value & playerMask;
+
+            Rigidbody body = GetComponent<Rigidbody>();
+            foreach (Collider collider in GetComponentsInChildren<Collider>(true))
+            {
+                if (collider.attachedRigidbody != body) continue;
+                GameObject colliderObject = collider.gameObject;
+                if (!_restingColliderLayers.ContainsKey(colliderObject))
+                    _restingColliderLayers.Add(colliderObject, colliderObject.layer);
+                colliderObject.layer = heldLayer;
+            }
+        }
+        else
+        {
+            foreach (KeyValuePair<GameObject, int> entry in _restingColliderLayers)
+                if (entry.Key != null) entry.Key.layer = entry.Value;
+            _restingColliderLayers.Clear();
+        }
+        _usingHeldLayer = isHeld;
     }
 
     /// <summary>
@@ -192,6 +275,15 @@ public sealed class WateringCan : MonoBehaviour
         spoutObject.transform.SetParent(transform, false);
         spout = spoutObject.transform;
 
+        if (TryGetGardenCanMesh(out MeshFilter canMesh, out float modelScale, out float frontSign))
+        {
+            // Outlet centre measured from WateringCup.fbx, just outside the rose face.
+            // Mesh bounds account for the importer's units and mirrored forward axis.
+            spout.position = canMesh.transform.TransformPoint(
+                new Vector3(0f, 0.388f, frontSign * 0.409f) * modelScale);
+            return;
+        }
+
         Renderer[] renderers = GetComponentsInChildren<Renderer>(true);
         if (renderers.Length == 0)
         {
@@ -212,6 +304,55 @@ public sealed class WateringCan : MonoBehaviour
             Mathf.Abs(up.y) * extents.y +
             Mathf.Abs(up.z) * extents.z;
         spout.position = combinedBounds.center + up * extentAlongUp;
+    }
+
+    private bool TryGetGardenCanMesh(out MeshFilter canMesh, out float modelScale, out float frontSign)
+    {
+        canMesh = GetComponent<MeshFilter>();
+        modelScale = 1f;
+        frontSign = 1f;
+        // This model has a separate upper handle; the placeholder bottle does not.
+        if (canMesh == null || canMesh.sharedMesh == null || transform.Find("Handle") == null)
+            return false;
+
+        Bounds bounds = canMesh.sharedMesh.bounds;
+        float front = Mathf.Abs(bounds.max.z) > Mathf.Abs(bounds.min.z) ? bounds.max.z : bounds.min.z;
+        frontSign = Mathf.Sign(front);
+        modelScale = Mathf.Abs(front) / 0.46441045f;
+        return modelScale > 0f;
+    }
+
+    private void EnsureGardenCanColliders()
+    {
+        if (!TryGetGardenCanMesh(out MeshFilter canMesh, out float modelScale, out float frontSign))
+            return;
+
+        // A single hull over the whole model fills the space between the body,
+        // handles and nozzle. Use separate shapes so it rests on visible geometry.
+        BoxCollider bodyCollider = GetComponent<BoxCollider>();
+        if (bodyCollider == null) bodyCollider = gameObject.AddComponent<BoxCollider>();
+        bodyCollider.center = new Vector3(0f, 0.1885f, 0f) * modelScale;
+        bodyCollider.size = new Vector3(0.3645f, 0.377f, 0.4347f) * modelScale;
+        bodyCollider.isTrigger = false;
+
+        if (transform.Find("Spout Physics") != null) return;
+        GameObject nozzle = new("Spout Physics");
+        nozzle.transform.SetParent(canMesh.transform, false);
+        Vector3 start = new Vector3(0f, 0.075f, frontSign * 0.2f) * modelScale;
+        Vector3 end = new Vector3(0f, 0.345f, frontSign * 0.387f) * modelScale;
+        nozzle.transform.localPosition = (start + end) * 0.5f;
+        nozzle.transform.localRotation = Quaternion.FromToRotation(Vector3.up, end - start);
+        CapsuleCollider tube = nozzle.AddComponent<CapsuleCollider>();
+        tube.radius = 0.025f * modelScale;
+        tube.height = Vector3.Distance(start, end) + tube.radius * 2f;
+
+        GameObject rose = new("Rose Physics");
+        rose.transform.SetParent(canMesh.transform, false);
+        rose.transform.localPosition = new Vector3(0f, 0.368f, frontSign * 0.405f) * modelScale;
+        rose.transform.localRotation = Quaternion.FromToRotation(Vector3.up,
+            new Vector3(0f, 0.8f, frontSign * 0.6f));
+        BoxCollider roseCollider = rose.AddComponent<BoxCollider>();
+        roseCollider.size = new Vector3(0.15f, 0.025f, 0.125f) * modelScale;
     }
 
     private void EnsureWaterStream()

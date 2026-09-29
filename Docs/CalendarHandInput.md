@@ -16,6 +16,11 @@ pinch triggers only once. Another toggle requires the pinch strength to drop to
 low-confidence tracking and system gestures disarm the toggle until a reliable
 release is observed.
 
+Calendar gestures are sampled after the Meta grab interactors. A left hand near
+a grabbable prop, or either hand holding an object, consumes the calendar pinch.
+Afterwards, release the pinch fully before making a fresh calendar gesture.
+The Y button remains available while holding a tool.
+
 ## Verification
 
 Use **Garden > Verify calendar hand input** in Unity to check the prefab's
@@ -29,3 +34,6 @@ ray/button references and the pinch latch. On the Quest, also check:
    until you release and pinch again.
 5. Press **Y** with controllers while hands are untracked: toggle normally.
 6. Advance to the final phase: **Cycle complete** stays disabled for hand input.
+7. Pick up, tilt and release the watering can with each hand: the calendar must
+   remain unchanged. Release the left pinch, then pinch away from props to toggle
+   the calendar normally.

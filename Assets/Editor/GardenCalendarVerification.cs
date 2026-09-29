@@ -25,6 +25,7 @@ public static class GardenCalendarVerification
             Assert(panel.FindProperty("advanceButton").objectReferenceValue != null, "Advance button binding");
 
             MethodInfo sample = typeof(CalendarVisibilityController).GetMethod("UpdatePinchState", BindingFlags.NonPublic | BindingFlags.Instance);
+            Assert(sample != null, "Debounced pinch sampler");
             CheckPinch(visibility, sample, true, true, 1f, 0f, false, "Held on startup");
             CheckPinch(visibility, sample, true, false, 0f, 1f, false, "Begin release");
             CheckPinch(visibility, sample, true, false, 0f, 1.11f, false, "Stable release");
@@ -42,7 +43,15 @@ public static class GardenCalendarVerification
             CheckPinch(visibility, sample, true, false, 0f, 7f, false, "Recovery release");
             CheckPinch(visibility, sample, true, false, 0f, 7.11f, false, "Recovery stable release");
             CheckPinch(visibility, sample, true, true, 1f, 7.2f, true, "Pinch after recovery");
-            Debug.Log("Garden calendar hand input verification passed: ray/button wiring, held pinches, release debounce and tracking recovery.");
+            CheckPinch(visibility, sample, true, false, 0f, 8f, false, "Release before grabbing");
+            CheckPinch(visibility, sample, true, false, 0f, 8.11f, false, "Arm before grabbing");
+            CheckPinch(visibility, sample, false, true, 1f, 8.2f, false, "Object grab consumes pinch");
+            CheckPinch(visibility, sample, false, false, 0f, 8.3f, false, "Object release consumes gesture");
+            CheckPinch(visibility, sample, true, true, 1f, 8.4f, false, "Held pinch after object release");
+            CheckPinch(visibility, sample, true, false, 0f, 8.5f, false, "Release after grabbing");
+            CheckPinch(visibility, sample, true, false, 0f, 8.61f, false, "Stable release after grabbing");
+            CheckPinch(visibility, sample, true, true, 1f, 8.7f, true, "Fresh calendar gesture after grabbing");
+            Debug.Log("Garden calendar hand input verification passed: ray/button wiring, held pinches, release debounce, tracking recovery and consumed object gestures.");
         }
         finally { PrefabUtility.UnloadPrefabContents(prefab); }
     }

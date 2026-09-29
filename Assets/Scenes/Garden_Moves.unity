@@ -955,8 +955,8 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7357710399549294697, guid: e60a90c2ea974784eb497694fdb3db9e, type: 3}
   m_PrefabInstance: {fileID: 246201534}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &283815971
-MeshCollider:
+--- !u!65 &283815971
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -973,10 +973,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5334531528425760498, guid: 83737eac8982145dc8aa35bfc44eb99a, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.3645, y: 0.53579193, z: 0.63301057}
+  m_Center: {x: 0, y: 0.26789597, z: -0.0991547}
 --- !u!114 &283815973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -999,7 +998,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 283815974}
   _kinematicWhileSelected: 1
   _throwWhenUnselected: 1
-  _forceKinematicDisabled: 0
+  _forceKinematicDisabled: 1
 --- !u!54 &283815974
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1022,11 +1021,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!114 &283815975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9758,12 +9757,12 @@ MonoBehaviour:
   _slippiness: 0
   _supportedGrabTypes: 3
   _pinchGrabRules:
-    _thumbRequirement: 0
+    _thumbRequirement: 1
     _indexRequirement: 1
     _middleRequirement: 1
     _ringRequirement: 0
     _pinkyRequirement: 0
-    _unselectMode: 1
+    _unselectMode: 0
   _palmGrabRules:
     _thumbRequirement: 1
     _indexRequirement: 0
@@ -9808,7 +9807,7 @@ MonoBehaviour:
   - RiceBin
   - Plant_Pot
   grabButton: 16
-  searchDuration: 10
+  scanInterval: 0.5
 --- !u!4 &1539146278
 Transform:
   m_ObjectHideFlags: 0

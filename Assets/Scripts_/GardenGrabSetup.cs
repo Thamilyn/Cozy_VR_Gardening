@@ -1,25 +1,40 @@
 using System.Collections;
+using System.Collections.Generic;
 using Oculus.Interaction;
+using Oculus.Interaction.Grab;
+using Oculus.Interaction.HandGrab;
 using Oculus.Interaction.Input;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Prepares the movable garden props for Meta Quest controller grab interaction.
+/// Prepares garden props for both tracked hands and Meta Quest controllers.
 /// </summary>
 public sealed class GardenGrabSetup : MonoBehaviour
 {
     private const string SetupResourceName = "GardenGrabSetup";
 
     [SerializeField] private GameObject interactionRigPrefab;
+    // Extra names can still be supplied by existing scene/prefab overrides.
     [SerializeField] private string[] grabbableObjectNames = { "RiceBin", "Plant_Pot" };
     [SerializeField] private ControllerButtonUsage grabButton = ControllerButtonUsage.GripButton;
-    [SerializeField, Min(0.1f)] private float searchDuration = 10f;
+    [SerializeField, Min(0.1f)] private float scanInterval = 0.5f;
+
+    private static readonly string[] GardenPropNames =
+    {
+        "RiceBin", "Plant_Pot", "Basket_S", "Basket_L", "Shovel", "Rake", "Pruner",
+        "Watering", "WateringCup", "bottle-oil", "PotSmall", "PotBig", "PotRectangle",
+        "NameStake", "Sprout", "Tomato", "Potato", "Corn", "Carrot_Orange",
+        "Mint", "Hydrangea", "TulipRed", "TulipYellow", "Sickle", "Mallet",
+        "CeremicPot", "Barrel", "WoodenCrate_S", "WoodenCrate_L", "WoodenBox"
+    };
+
+    private readonly HashSet<GameObject> configuredObjects = new();
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void CreateForGardenScene()
     {
-        if (SceneManager.GetActiveScene().name != "Garden_Test" ||
+        if (!IsGardenScene(SceneManager.GetActiveScene()) ||
             FindFirstObjectByType<GardenGrabSetup>(FindObjectsInactive.Include) != null)
         {
             return;
@@ -42,45 +57,69 @@ public sealed class GardenGrabSetup : MonoBehaviour
 
     private IEnumerator Start()
     {
-        float deadline = Time.unscaledTime + searchDuration;
-
-        do
+        while (true)
         {
-            bool allObjectsReady = true;
+            ConfigureSceneObjects();
+            // Continue discovering spawned props without resetting held/planted objects.
+            yield return new WaitForSecondsRealtime(scanInterval);
+        }
+    }
 
-            foreach (string objectName in grabbableObjectNames)
+    internal static bool IsGardenScene(Scene scene)
+    {
+        return scene.name == "Garden_Test" || scene.name == "Garden_Moves" ||
+               scene.name == "Garden_Moves - Copy";
+    }
+
+    internal void ConfigureSceneObjects()
+    {
+        configuredObjects.RemoveWhere(target => target == null);
+        foreach (GameObject root in gameObject.scene.GetRootGameObjects())
+        {
+            foreach (Transform candidate in root.GetComponentsInChildren<Transform>(true))
             {
-                GameObject target = FindSceneObject(objectName);
-                if (target == null)
+                GameObject target = candidate.gameObject;
+                if (!target.activeInHierarchy || configuredObjects.Contains(target)) continue;
+                // A seed planted inside a pot must keep following the pot, including its visuals.
+                SeedItem seed = target.GetComponentInParent<SeedItem>();
+                if (seed != null && seed.IsPlanted) continue;
+
+                bool explicitlyGrabbable = target.GetComponent<Grabbable>() != null ||
+                    target.GetComponent<GardenPot>() != null ||
+                    target.GetComponent<WateringCan>() != null ||
+                    target.GetComponent<SeedItem>() != null;
+                if (!explicitlyGrabbable)
                 {
-                    allObjectsReady = false;
-                    continue;
+                    if (!MatchesPropName(target.name, GardenPropNames) &&
+                        !MatchesPropName(target.name, grabbableObjectNames)) continue;
+                    // Model prefabs can repeat the prop name inside a wrapper (e.g. PotSmall).
+                    // Those meshes must move with the wrapper instead of gaining another body.
+                    if (candidate.parent != null &&
+                        candidate.parent.GetComponentInParent<Grabbable>() != null) continue;
                 }
 
                 ConfigureGrabbable(target);
-            }
-
-            if (allObjectsReady)
-            {
-                yield break;
-            }
-
-            yield return null;
-        }
-        while (Time.unscaledTime < deadline);
-
-        foreach (string objectName in grabbableObjectNames)
-        {
-            if (FindSceneObject(objectName) == null)
-            {
-                Debug.LogWarning($"Garden grab setup could not find a GameObject named '{objectName}'.", this);
+                configuredObjects.Add(target);
             }
         }
     }
 
+    private static bool MatchesPropName(string name, string[] names)
+    {
+        if (names == null) return false;
+        foreach (string propName in names)
+        {
+            if (string.IsNullOrEmpty(propName)) continue;
+            if (name == propName || name.StartsWith(propName + " (") ||
+                name.StartsWith(propName + "(Clone)") || name.StartsWith(propName + " ")) return true;
+        }
+        return false;
+    }
+
     private void EnsureInteractionRig()
     {
-        if (FindFirstObjectByType<GrabInteractor>(FindObjectsInactive.Include) == null)
+        if (FindFirstObjectByType<GrabInteractor>(FindObjectsInactive.Include) == null &&
+            FindFirstObjectByType<HandGrabInteractor>(FindObjectsInactive.Include) == null)
         {
             if (interactionRigPrefab == null)
             {
@@ -106,20 +145,30 @@ public sealed class GardenGrabSetup : MonoBehaviour
 
     internal static void ConfigureGrabbable(GameObject target)
     {
+        SeedItem seed = target.GetComponent<SeedItem>();
+        if (seed != null && seed.IsPlanted) return;
+
         Rigidbody body = target.GetComponent<Rigidbody>();
         if (body == null)
         {
             body = target.AddComponent<Rigidbody>();
         }
 
-        body.useGravity = true;
-        body.isKinematic = false;
-        body.interpolation = RigidbodyInterpolation.Interpolate;
-
-        if (target.GetComponentInChildren<Collider>(true) == null)
+        // Non-convex imported meshes cannot belong to a moving Rigidbody.
+        bool hasSolidCollider = false;
+        foreach (Collider collider in target.GetComponentsInChildren<Collider>(true))
         {
-            AddBoundsCollider(target);
+            if (!collider.enabled || collider.GetComponentInParent<Rigidbody>() != body) continue;
+            if (collider is MeshCollider mesh && !mesh.convex)
+            {
+                // Keep the collider reference used by existing Meta interactables.
+                // Their proximity checks also visit disabled colliders.
+                mesh.convex = true;
+            }
+            hasSolidCollider |= !collider.isTrigger;
         }
+        // Planting trigger zones are preserved, but do not replace physical collisions.
+        if (!hasSolidCollider) AddBoundsCollider(target);
 
         Grabbable grabbable = target.GetComponent<Grabbable>();
         if (grabbable == null)
@@ -130,7 +179,23 @@ public sealed class GardenGrabSetup : MonoBehaviour
         grabbable.InjectOptionalTargetTransform(target.transform);
         grabbable.InjectOptionalRigidbody(body);
 
-        GrabInteractable grabInteractable = target.GetComponentInChildren<GrabInteractable>(true);
+        if (grabbable.SelectingPointsCount == 0)
+        {
+            body.useGravity = true;
+            body.isKinematic = false;
+        }
+        body.interpolation = RigidbodyInterpolation.Interpolate;
+        body.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+
+        GrabInteractable grabInteractable = null;
+        foreach (GrabInteractable candidate in target.GetComponentsInChildren<GrabInteractable>(true))
+        {
+            if (candidate.GetComponentInParent<Rigidbody>() == body)
+            {
+                grabInteractable = candidate;
+                break;
+            }
+        }
         if (grabInteractable == null)
         {
             GameObject interactableObject = new GameObject("ControllerGrabInteractable");
@@ -140,6 +205,26 @@ public sealed class GardenGrabSetup : MonoBehaviour
 
         grabInteractable.InjectRigidbody(body);
         grabInteractable.InjectOptionalPointableElement(grabbable);
+
+        HandGrabInteractable handGrab = null;
+        foreach (HandGrabInteractable candidate in target.GetComponentsInChildren<HandGrabInteractable>(true))
+        {
+            if (candidate.GetComponentInParent<Rigidbody>() == body)
+            {
+                handGrab = candidate;
+                break;
+            }
+        }
+        if (handGrab == null)
+        {
+            GameObject handGrabObject = new GameObject("HandGrabInteractable");
+            handGrabObject.transform.SetParent(target.transform, false);
+            handGrab = handGrabObject.AddComponent<HandGrabInteractable>();
+        }
+
+        handGrab.InjectRigidbody(body);
+        handGrab.InjectOptionalPointableElement(grabbable);
+        handGrab.InjectSupportedGrabTypes(GrabTypeFlags.All);
     }
 
     private static void AddBoundsCollider(GameObject target)
@@ -152,16 +237,20 @@ public sealed class GardenGrabSetup : MonoBehaviour
             return;
         }
 
-        Bounds firstBounds = renderers[0].bounds;
-        Bounds localBounds = new Bounds(
-            target.transform.InverseTransformPoint(firstBounds.center),
-            Vector3.zero);
+        Bounds localBounds = default;
+        bool hasBounds = false;
 
         foreach (Renderer renderer in renderers)
         {
+            if (renderer.GetComponentInParent<Rigidbody>() != target.GetComponent<Rigidbody>()) continue;
             Bounds bounds = renderer.bounds;
             Vector3 center = bounds.center;
             Vector3 extents = bounds.extents;
+            if (!hasBounds)
+            {
+                localBounds = new Bounds(target.transform.InverseTransformPoint(center), Vector3.zero);
+                hasBounds = true;
+            }
 
             for (int x = -1; x <= 1; x += 2)
             {
@@ -176,25 +265,11 @@ public sealed class GardenGrabSetup : MonoBehaviour
             }
         }
 
-        collider.center = localBounds.center;
-        collider.size = localBounds.size;
-    }
-
-    private static GameObject FindSceneObject(string objectName)
-    {
-        Scene scene = SceneManager.GetActiveScene();
-        foreach (GameObject root in scene.GetRootGameObjects())
+        if (hasBounds)
         {
-            Transform[] transforms = root.GetComponentsInChildren<Transform>(true);
-            foreach (Transform candidate in transforms)
-            {
-                if (candidate.name == objectName)
-                {
-                    return candidate.gameObject;
-                }
-            }
+            collider.center = localBounds.center;
+            collider.size = Vector3.Max(localBounds.size, Vector3.one * 0.001f);
         }
-
-        return null;
     }
+
 }

@@ -1,5 +1,6 @@
 using System;
 using Oculus.Interaction;
+using Oculus.Interaction.HandGrab;
 using UnityEngine;
 
 /// <summary>Grabbable seed. Tomato stages use replaceable prefab assets.</summary>
@@ -63,6 +64,7 @@ public sealed class SeedItem : MonoBehaviour
         if (body != null) { body.linearVelocity = Vector3.zero; body.angularVelocity = Vector3.zero; body.isKinematic = true; }
         if (_grabbable != null) _grabbable.enabled = false;
         foreach (GrabInteractable interactable in GetComponentsInChildren<GrabInteractable>(true)) interactable.enabled = false;
+        foreach (HandGrabInteractable interactable in GetComponentsInChildren<HandGrabInteractable>(true)) interactable.enabled = false;
         foreach (Collider collider in GetComponentsInChildren<Collider>(true)) collider.enabled = false;
     }
 
