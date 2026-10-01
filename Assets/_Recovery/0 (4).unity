@@ -18391,12 +18391,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ef3785e1b5e4f55a4a2663ee048e52c, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GardenerMixamoGreeting
-  idleClip: {fileID: -203655887218126122, guid: ed5841a00881c4b478066a81af74215a, type: 3}
+  idleClip: {fileID: -3100369314251171874, guid: 12e52e465ed793a4d801955e9f964a82, type: 3}
   greetingClips:
   - {fileID: -203655887218126122, guid: e256d31a9d9d6dc45a5e48976be86a38, type: 3}
   - {fileID: -203655887218126122, guid: 4cfa997eeb1d50748907a61388895ccd, type: 3}
+  - {fileID: -203655887218126122, guid: 34100a9ac602e1e449bee63afb531bd7, type: 3}
+  vrmaMotions:
+  - {fileID: -9202605092671148497, guid: 42208e9ae4159f445bc887e416ce3989, type: 3}
+  - {fileID: -9202605092671148497, guid: 07f9a0abc7d26ef4eb7ee93e6206b987, type: 3}
+  - {fileID: -9202605092671148497, guid: 711987a55711f7c42ab7451d677c80ce, type: 3}
+  - {fileID: -9202605092671148497, guid: 87efb6113a79ccc4baca67b5184ec22d, type: 3}
+  - {fileID: -9202605092671148497, guid: 9fcd62a15856b6244a6c69e85127463d, type: 3}
+  - {fileID: -9202605092671148497, guid: 12b18abb1e70ff5479ad0e47753939db, type: 3}
+  - {fileID: -9202605092671148497, guid: 0f8f105c2c42bc04392d3a19092269b7, type: 3}
   gazeAngleDegrees: 12
   gazeDuration: 0.8
   maximumDistance: 4
