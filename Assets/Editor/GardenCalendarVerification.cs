@@ -67,64 +67,111 @@ public static class GardenCalendarVerification
     {
         GameObject clockObject = null;
         GameObject controllerObject = null;
+        GameObject potObject = null;
+        GameObject seedObject = null;
         GameObject freshObject = null;
         try
         {
             clockObject = new GameObject("Calendar verification temporary");
             CalendarSystem clock = clockObject.AddComponent<CalendarSystem>();
-            Assert(clock.CurrentDay == 0 && clock.PhaseIndexAt(0) == 0 && clock.Plants.Count == 0, "Fresh day zero");
-            int[] expected = { 7, 45, 60, 80, 110 };
-            foreach (int day in expected)
-            {
-                clock.AdvancePhase();
-                Assert(clock.CurrentDay == day, "Milestone " + day);
-            }
+            int blocked = 0;
+            clock.AdvanceBlocked += _ => blocked++;
             clock.AdvancePhase();
-            clock.AdvancePhase();
-            Assert(clock.CurrentDay == 110 && clock.IsCycleComplete, "Final repeated clicks");
+            Assert(clock.CurrentDay == 0 && blocked == 1, "No planting, no time advance");
 
-            // Late planting: at global day 45 the plant is only 38 days old.
-            Set(clock, "elapsedGameDays", 7f);
-            var planted = new CalendarSystem.PlantSave
-            {
-                seedId = "verification-tomato", crop = "Tomato", potId = "verification-pot",
-                plantedAtGameDay = 7, stage = "Seed"
-            };
-            clock.RecordPlanting(planted);
-            clock.RecordWater(planted, 125);
-            Assert(clock.PhaseIndexAt(45 - planted.plantedAtGameDay) == 1, "Late plant at day 45");
-            Assert(clock.PhaseIndexAt(110 - planted.plantedAtGameDay) == 4, "Late plant at day 110");
+            potObject = UnityEngine.Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(
+                "Assets/MamkinEnthusiast/3D Mini Garden Props/Prefabs/PotSmall.prefab"));
+            potObject.transform.localScale = Vector3.one * 0.6f;
+            GardenPot pot = potObject.AddComponent<GardenPot>();
+            Set(pot, "potId", "verification-pot");
+            Set(pot, "localPlantingPoint", new Vector3(0, 0.23f, 0));
+            Assert(Mathf.Abs(pot.SubstrateAreaSquareMetres - 0.0144f) < 0.00001f, "Measured soil area");
+            Assert(!pot.ContainsSoilPoint(pot.PlantingPoint + Vector3.right * 0.2f), "Rim and outside soil rejected");
+            Assert(!pot.CanReceiveWaterAt(pot.PlantingPoint - Vector3.up * 0.2f), "Pot bottom is not soil watering");
+            seedObject = UnityEngine.Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(
+                "Assets/Prefabs/SeedsPrefab/TomatoSeed.prefab"));
+            SeedItem seed = seedObject.GetComponent<SeedItem>();
+            seed.AssignId("verification-tomato");
+            seed.transform.position = pot.PlantingPoint;
             controllerObject = new GameObject("Controller verification temporary");
             SeedsController controller = controllerObject.AddComponent<SeedsController>();
             Set(controller, "calendar", clock);
-            MethodInfo calculate = typeof(SeedsController).GetMethod("CalculateStage", BindingFlags.NonPublic | BindingFlags.Instance);
-            Assert((GrowthStage)calculate.Invoke(controller, new object[] { SeedCrop.Tomato, 38f, 0f }) ==
-                GrowthStage.Sprout, "Tomato ignores old water gate");
-            Assert((GrowthStage)calculate.Invoke(controller, new object[] { SeedCrop.Tomato, 103f, 0f }) ==
-                GrowthStage.GreenFruit, "Late tomato stays green");
-            Assert(planted.waterMillilitres == 125 && clock.Journal.Count == 2, "Water journal");
-
+            Set(controller, "pots", new[] { pot });
+            Invoke(controller, "Start");
+            Assert(controller.TryPlant(seed), "Planting valid tomato");
+            var plant = controller.PrototypeTomato;
+            var saved = controller.GetState(plant);
+            Assert(Mathf.Abs(controller.TargetMillilitres(plant) - 51.42857f) < 0.01f, "Area and care-day conversion");
+            clock.RecordHarvest(saved);
+            Assert(!saved.harvested, "No harvest before maturity");
+            float accumulated = 0f;
+            int[] days = { 7, 45, 60, 80, 110 };
+            GrowthStage[] stages = { GrowthStage.Sprout, GrowthStage.YoungPlant, GrowthStage.Flowering,
+                GrowthStage.GreenFruit, GrowthStage.Mature };
+            for (int phase = 0; phase < days.Length; phase++)
+            {
+                int before = clock.CurrentDay;
+                clock.AdvancePhase();
+                Assert(clock.CurrentDay == before, "Dry phase blocks " + phase);
+                float target = controller.TargetMillilitres(plant);
+                controller.ReceiveWater(pot, target * 0.5f / 1000f);
+                accumulated += target * 0.5f;
+                SettlePour(saved);
+                clock.AdvancePhase();
+                Assert(clock.CurrentDay == before, "Partial water blocks " + phase);
+                float remainder = target * (phase == 0 ? 2f : 0.5f);
+                controller.ReceiveWater(pot, remainder / 1000f);
+                accumulated += remainder;
+                SettlePour(saved);
+                if (phase == 0)
+                {
+                    clock.AdvancePhase();
+                    Assert(clock.CurrentDay == before, "Excess blocks until drainage");
+                    saved.lastWaterAt = Time.unscaledTime - 10f;
+                    Invoke(controller, "Update");
+                    Assert(saved.phaseWaterMillilitres > controller.ExcessLimit(plant), "Drainage preserves applied water");
+                }
+                Assert(plant.stage != stages[phase], "Water alone does not grow plant");
+                clock.AdvancePhase();
+                Assert(clock.CurrentDay == days[phase] && plant.stage == stages[phase], "Water permits phase " + phase);
+                Assert(saved.phaseWaterMillilitres == 0f && saved.currentPourMillilitres == 0f,
+                    "Phase counters reset " + phase);
+                Assert(Mathf.Abs(saved.waterMillilitres - accumulated) < 0.1f, "Cumulative water retained " + phase);
+            }
+            var visuals = (GameObject[])typeof(SeedItem).GetField("_tomatoStageInstances", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(seed);
+            Assert(visuals[5] != null && visuals[5].activeSelf, "Mature visual is available; physical grabbing is tested in Play");
+            clock.RecordHarvest(saved);
+            clock.RecordHarvest(saved);
+            Assert(saved.harvested, "Mature harvest recorded");
+            int harvests = 0;
+            foreach (var entry in clock.Journal) if (entry.action == "Harvested") harvests++;
+            Assert(harvests == 1, "Harvest is idempotent");
+            clock.AdvancePhase();
+            Assert(clock.CurrentDay == 110, "No advance past final milestone");
             freshObject = new GameObject("Fresh calendar verification temporary");
             CalendarSystem fresh = freshObject.AddComponent<CalendarSystem>();
             Assert(fresh.CurrentDay == 0 && fresh.Plants.Count == 0 && fresh.Journal.Count == 0,
                 "New session starts empty");
-            Debug.Log("Garden calendar verification passed: milestones, final clicks, late tomato, water and fresh session state.");
+            Debug.Log("Garden tomato verification passed: area, dry/partial/excess water gates, five transitions, counters, harvest and fresh session.");
         }
         finally
         {
-            if (clockObject != null) UnityEngine.Object.DestroyImmediate(clockObject);
             if (controllerObject != null) UnityEngine.Object.DestroyImmediate(controllerObject);
+            if (seedObject != null) UnityEngine.Object.DestroyImmediate(seedObject);
+            if (potObject != null) UnityEngine.Object.DestroyImmediate(potObject);
+            if (clockObject != null) UnityEngine.Object.DestroyImmediate(clockObject);
             if (freshObject != null) UnityEngine.Object.DestroyImmediate(freshObject);
         }
     }
 
+    private static void SettlePour(CalendarSystem.PlantSave saved) => saved.lastWaterAt = Time.unscaledTime - 1f;
+
+    private static void Invoke(object target, string method) =>
+        target.GetType().GetMethod(method, BindingFlags.NonPublic | BindingFlags.Instance).Invoke(target, null);
+
     private static void Set(object target, string field, object value)
     {
-        typeof(CalendarSystem).GetField(field, BindingFlags.NonPublic | BindingFlags.Instance)
-            ?.SetValue(target, value);
-        if (target is SeedsController)
-            typeof(SeedsController).GetField(field, BindingFlags.NonPublic | BindingFlags.Instance)
-                ?.SetValue(target, value);
+        target.GetType().GetField(field, BindingFlags.NonPublic | BindingFlags.Instance)?.SetValue(target, value);
     }
 
     private static void Assert(bool passes, string name)

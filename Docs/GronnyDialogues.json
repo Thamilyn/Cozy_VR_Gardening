@@ -1,0 +1,78 @@
+[
+  {
+    "id": "01_welcome",
+    "text": "Oh, hello there! Welcome to our little garden. My name is Gronny, and I'll help you learn how to grow and care for your plants."
+  },
+  {
+    "id": "02_tomato_intro",
+    "text": "Let's start with a tomato plant! I'll guide you through the first steps."
+  },
+  {
+    "id": "03_plant_seed",
+    "text": "Pick up the red tomato seed and gently drop it onto the soil in an empty small pot."
+  },
+  {
+    "id": "04_first_watering",
+    "text": "There we go! Now pick up the watering can and tilt it gently over the soil. Aim near the roots, and keep the water off the leaves."
+  },
+  {
+    "id": "05_water_target",
+    "text": "Watch the water amount on the panel. Try to reach the target without going over the limit."
+  },
+  {
+    "id": "06_enough_water",
+    "text": "That's enough water! Hold the can upright to stop pouring."
+  },
+  {
+    "id": "07_first_advance",
+    "text": "Now open your calendar and select Advance phase. Let's give our tomato some time to grow."
+  },
+  {
+    "id": "08_sprout",
+    "text": "Look, a little sprout! Check its new water target, then give it another careful watering."
+  },
+  {
+    "id": "09_young_plant",
+    "text": "Our tomato is getting bigger! Can you check how much water it needs at this stage?"
+  },
+  {
+    "id": "10_flowering",
+    "text": "The flowers are here! You've had some practice now. Take a look at the panel and decide what to do next."
+  },
+  {
+    "id": "11_green_fruit",
+    "text": "Look, green tomatoes! This time, you're in charge. Check what the plant needs and take care of it."
+  },
+  {
+    "id": "12_harvest",
+    "text": "Our tomato is ripe! Pick the largest red tomato and gently place it in the harvest tray."
+  },
+  {
+    "id": "13_complete",
+    "text": "Well done! You've grown and harvested a tomato. Thank you for taking care of our little garden!"
+  },
+  {
+    "id": "help_planting",
+    "text": "Try dropping the seed onto the soil in the centre of an empty small pot."
+  },
+  {
+    "id": "help_low_water",
+    "text": "The plant needs a little more water. Check the target on the panel."
+  },
+  {
+    "id": "help_excess_water",
+    "text": "There's too much water in the pot. Hold the can upright and let the extra water drain away."
+  },
+  {
+    "id": "help_drained",
+    "text": "The extra water has drained away. Next time, try stopping when you reach the target."
+  },
+  {
+    "id": "help_calendar",
+    "text": "Open your calendar and select Advance phase when you've finished caring for the plant."
+  },
+  {
+    "id": "help_refill",
+    "text": "Your watering can is empty. Open the calendar and select Refill water."
+  }
+]

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,6 +37,12 @@ public sealed class CalendarSystem : MonoBehaviour
         public float plantedAtGameDay;
         public float elapsedGameDays;
         public string stage;
+        public int tomatoPhase;
+        public float phaseWaterMillilitres;
+        public float retainedWaterMillilitres;
+        public float currentPourMillilitres;
+        public float lastWaterAt = float.NegativeInfinity;
+        public bool harvested;
     }
 
     [SerializeField] private Milestone[] milestones =
@@ -48,12 +55,19 @@ public sealed class CalendarSystem : MonoBehaviour
         new Milestone { day = 110, displayName = "Ripe tomatoes and harvest", color = new Color(0.9f, 0.34f, 0.25f) }
     };
     // Runtime state is intentionally not serialized into the scene or a JSON file.
+    [SerializeField] private GardenPhaseTimeCycle timeCycle;
+    private Coroutine phaseTransition;
     private float elapsedGameDays;
     private readonly List<JournalEntry> journal = new();
     private readonly List<PlantSave> plants = new();
 
     public event Action Changed;
+    public event Action PhaseAdvanced;
+    public event Action<string> AdvanceBlocked;
+    // A single owner checks the planted crops before any caller can change time.
+    public Func<string> AdvanceBlockReason { private get; set; }
     public float ElapsedGameDays => elapsedGameDays;
+    public bool IsAdvancing { get; private set; }
     public int CurrentDay => Mathf.FloorToInt(elapsedGameDays);
     public IReadOnlyList<Milestone> Milestones => milestones;
     public int CurrentPhaseIndex => PhaseIndexAt(elapsedGameDays);
@@ -73,15 +87,78 @@ public sealed class CalendarSystem : MonoBehaviour
     /// <summary>Called by the VR button. Repeated presses at the last milestone do nothing.</summary>
     public void AdvancePhase()
     {
-        if (milestones == null) return;
+        if (milestones == null || IsAdvancing || IsCycleComplete) return;
+        string reason = AdvanceBlockReason != null ? AdvanceBlockReason() : "Plant a tomato seed first.";
+        if (!string.IsNullOrEmpty(reason))
+        {
+            AdvanceBlocked?.Invoke(reason);
+            return;
+        }
         foreach (Milestone milestone in milestones)
         {
             if (milestone.day <= elapsedGameDays) continue;
-            elapsedGameDays = milestone.day;
+            if (timeCycle == null)
+            {
+                CompleteAdvance(milestone.day);
+                return;
+            }
+            if (!timeCycle.TryPrepare(out reason))
+            {
+                AdvanceBlocked?.Invoke(reason);
+                return;
+            }
+            IsAdvancing = true;
             Changed?.Invoke();
+            phaseTransition = StartCoroutine(AdvanceAfterCycle(milestone.day));
             return;
         }
     }
+
+    private IEnumerator AdvanceAfterCycle(int targetDay)
+    {
+        yield return timeCycle.PlayCycle();
+        phaseTransition = null;
+        IsAdvancing = false;
+        string reason;
+        if (timeCycle.TryPrepare(out reason))
+            reason = AdvanceBlockReason != null ? AdvanceBlockReason() : "Plant a tomato seed first.";
+        if (!string.IsNullOrEmpty(reason))
+        {
+            Changed?.Invoke();
+            AdvanceBlocked?.Invoke(reason);
+            yield break;
+        }
+        CompleteAdvance(targetDay);
+    }
+
+    private void CompleteAdvance(int targetDay)
+    {
+        elapsedGameDays = targetDay;
+        PhaseAdvanced?.Invoke();
+        Changed?.Invoke();
+    }
+
+    private void OnDisable()
+    {
+        if (phaseTransition != null) StopCoroutine(phaseTransition);
+        phaseTransition = null;
+        if (IsAdvancing && timeCycle != null) timeCycle.ResetToDay();
+        IsAdvancing = false;
+    }
+
+    public void RecordHarvest(PlantSave plant)
+    {
+        if (plant == null || plant.harvested || plant.stage != GrowthStage.Mature.ToString()) return;
+        plant.harvested = true;
+        journal.Add(new JournalEntry
+        {
+            day = CurrentDay, action = "Harvested", seedId = plant.seedId,
+            crop = plant.crop, potId = plant.potId
+        });
+        Changed?.Invoke();
+    }
+
+    public void NotifyChanged() => Changed?.Invoke();
 
     public PlantSave FindPlant(string seedId) => plants.Find(p => p.seedId == seedId);
 

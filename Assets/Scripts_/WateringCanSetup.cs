@@ -15,6 +15,15 @@ public sealed class WateringCanSetup : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void InstallForInitialScene()
     {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        InstallForGardenScene();
+    }
+
+    private static void OnSceneLoaded(Scene scene, LoadSceneMode mode) => InstallForGardenScene();
+
+    private static void InstallForGardenScene()
+    {
         if (SceneManager.GetActiveScene().name == TargetSceneName &&
             FindFirstObjectByType<WateringCanSetup>(FindObjectsInactive.Include) == null)
         {

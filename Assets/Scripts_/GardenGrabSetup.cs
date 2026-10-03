@@ -34,6 +34,15 @@ public sealed class GardenGrabSetup : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void CreateForGardenScene()
     {
+        SceneManager.sceneLoaded -= OnGardenSceneLoaded;
+        SceneManager.sceneLoaded += OnGardenSceneLoaded;
+        InstallForGardenScene();
+    }
+
+    private static void OnGardenSceneLoaded(Scene scene, LoadSceneMode mode) => InstallForGardenScene();
+
+    private static void InstallForGardenScene()
+    {
         if (!IsGardenScene(SceneManager.GetActiveScene()) ||
             FindFirstObjectByType<GardenGrabSetup>(FindObjectsInactive.Include) != null)
         {
@@ -80,6 +89,8 @@ public sealed class GardenGrabSetup : MonoBehaviour
             {
                 GameObject target = candidate.gameObject;
                 if (!target.activeInHierarchy || configuredObjects.Contains(target)) continue;
+                // Fruit owns its attached and collected physics states.
+                if (target.GetComponentInParent<TomatoFruit>() != null) continue;
                 // A seed planted inside a pot must keep following the pot, including its visuals.
                 SeedItem seed = target.GetComponentInParent<SeedItem>();
                 if (seed != null && seed.IsPlanted) continue;

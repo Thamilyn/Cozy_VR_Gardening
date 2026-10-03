@@ -19,6 +19,7 @@ public sealed class SeedItem : MonoBehaviour
     private GameObject _sproutVisual;
     private GameObject _matureVisual;
     private readonly GameObject[] _tomatoStageInstances = new GameObject[6];
+    private bool _ripeFruitPrepared;
 
     public SeedCrop Crop => crop;
     public string SeedId => seedId;
@@ -94,6 +95,19 @@ public sealed class SeedItem : MonoBehaviour
                 if (_tomatoStageInstances[i] != null) _tomatoStageInstances[i].SetActive(i == active);
             }
             if (seedRenderer != null) seedRenderer.enabled = active == 0 && _tomatoStageInstances[0] == null;
+            if (Application.isPlaying && active == 5 && !_ripeFruitPrepared && _tomatoStageInstances[5] != null)
+            {
+                // Use the existing ripe visual; green fruits never receive grab components.
+                Transform fruit = _tomatoStageInstances[5].transform.Find("Tomato_PLACEHOLDER_0");
+                if (fruit != null)
+                {
+                    Vector3 parentScale = fruit.parent.lossyScale;
+                    fruit.localScale = new Vector3(0.065f / Mathf.Abs(parentScale.x),
+                        0.065f / Mathf.Abs(parentScale.y), 0.065f / Mathf.Abs(parentScale.z));
+                    fruit.gameObject.AddComponent<TomatoFruit>().Initialize(this);
+                    _ripeFruitPrepared = true;
+                }
+            }
             return;
         }
         if (_sproutVisual == null) _sproutVisual = BuildPlant(false);

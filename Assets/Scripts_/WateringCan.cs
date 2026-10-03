@@ -18,7 +18,7 @@ public sealed class WateringCan : MonoBehaviour
 
     [Header("Water supply")]
     [SerializeField, Min(0.01f)] private float capacityLitres = 2f;
-    [SerializeField, Min(0.001f)] private float litresPerSecond = 0.2f;
+    [SerializeField, Min(0.001f)] private float litresPerSecond = 0.02f;
     [SerializeField] private bool startFull = true;
 
     [Header("Pouring")]
@@ -39,6 +39,8 @@ public sealed class WateringCan : MonoBehaviour
     [Header("Optional references")]
     [SerializeField] private Transform spout;
     [SerializeField] private LineRenderer waterStream;
+    [SerializeField, Tooltip("Optional override; otherwise uses Resources/GardenWater/WaterStream.")]
+    private Material streamMaterial;
 
     [Header("Events")]
     [SerializeField] private UnityEvent<float> onWaterLevelChanged = new();
@@ -52,14 +54,21 @@ public sealed class WateringCan : MonoBehaviour
     private GameObject _lastWateredPlant;
     private readonly Dictionary<GameObject, int> _restingColliderLayers = new();
     private bool _usingHeldLayer;
+    private bool _awaitingRecoveryGrab;
+    private Quaternion _initialRotation;
+    private CalendarSystem _calendar;
 
     public float CurrentWaterLitres => _currentWaterLitres;
     public float CapacityLitres => capacityLitres;
     public float WaterNormalized => capacityLitres > 0f ? _currentWaterLitres / capacityLitres : 0f;
     public bool IsPouring { get; private set; }
+    public bool IsHeld => _grabbable != null && _grabbable.SelectingPointsCount > 0;
+    public float LastReleasedAt { get; private set; } = float.NegativeInfinity;
 
     private void Awake()
     {
+        _initialRotation = transform.rotation;
+        _calendar = FindFirstObjectByType<CalendarSystem>();
         EnsureGardenCanColliders();
         // Set the resting state before Meta saves it when the can is first grabbed.
         GardenGrabSetup.ConfigureGrabbable(gameObject);
@@ -80,8 +89,9 @@ public sealed class WateringCan : MonoBehaviour
 
     private void Update()
     {
-        bool isHeld = _grabbable != null && _grabbable.SelectingPointsCount > 0;
-        UpdateHeldCollisionState(isHeld);
+        bool isHeld = IsHeld;
+        if (isHeld) _awaitingRecoveryGrab = false;
+        UpdateHeldCollisionState(isHeld || _awaitingRecoveryGrab);
 
         if (OVRInput.GetDown(refillButton, OVRInput.Controller.RTouch) &&
             (!requireCanToBeHeldForRefill || isHeld))
@@ -90,7 +100,8 @@ public sealed class WateringCan : MonoBehaviour
         }
 
         bool tiltedToPour = Vector3.Dot(transform.up, Vector3.up) <= pourTiltThreshold;
-        IsPouring = isHeld && tiltedToPour && _currentWaterLitres > 0f;
+        IsPouring = isHeld && tiltedToPour && _currentWaterLitres > 0f &&
+                    (_calendar == null || !_calendar.IsAdvancing);
 
         if (!IsPouring)
         {
@@ -108,7 +119,7 @@ public sealed class WateringCan : MonoBehaviour
         if (TryGetFirstExternalHit(streamStart, out RaycastHit hit))
         {
             streamEnd = hit.point;
-            DeliverWater(hit.collider, pouredLitres);
+            DeliverWater(hit.collider, pouredLitres, hit.point);
         }
         else
         {
@@ -129,14 +140,22 @@ public sealed class WateringCan : MonoBehaviour
         if (_grabbable != null)
             _grabbable.WhenPointerEventRaised -= HandleGrabEvent;
         UpdateHeldCollisionState(false);
+        if (_awaitingRecoveryGrab)
+        {
+            _awaitingRecoveryGrab = false;
+            Rigidbody body = GetComponent<Rigidbody>();
+            if (body != null) body.isKinematic = false;
+        }
         SetStreamVisible(false);
     }
 
     private void HandleGrabEvent(PointerEvent evt)
     {
+        if (evt.Type == PointerEventType.Select) _awaitingRecoveryGrab = false;
+        if (evt.Type == PointerEventType.Unselect && !IsHeld) LastReleasedAt = Time.unscaledTime;
         if (evt.Type == PointerEventType.Select || evt.Type == PointerEventType.Unselect ||
             evt.Type == PointerEventType.Cancel)
-            UpdateHeldCollisionState(_grabbable.SelectingPointsCount > 0);
+            UpdateHeldCollisionState(IsHeld || _awaitingRecoveryGrab);
     }
 
     private void UpdateHeldCollisionState(bool isHeld)
@@ -193,6 +212,36 @@ public sealed class WateringCan : MonoBehaviour
         onRefilled.Invoke();
     }
 
+    /// <summary>Returns a dropped can within reach, without refilling it or forcing a Meta grab.</summary>
+    public void RecoverToHand(Vector3 position)
+    {
+        if (IsHeld) return;
+        Rigidbody body = GetComponent<Rigidbody>();
+        if (body == null) return;
+        if (!body.isKinematic)
+        {
+            body.linearVelocity = Vector3.zero;
+            body.angularVelocity = Vector3.zero;
+        }
+        // Suspend it until a real grab; Meta restores dynamic physics on release.
+        _awaitingRecoveryGrab = true;
+        UpdateHeldCollisionState(true);
+        body.isKinematic = true;
+        Transform handle = transform.Find("Handle");
+        Renderer handleRenderer = handle != null ? handle.GetComponentInChildren<Renderer>() : null;
+        Collider canCollider = GetComponent<Collider>();
+        Vector3 grabPoint = handleRenderer != null ? handleRenderer.bounds.center :
+            canCollider != null ? canCollider.bounds.center : transform.position;
+        Vector3 localGrabPoint = transform.InverseTransformPoint(grabPoint);
+        transform.rotation = _initialRotation;
+        transform.position = position - transform.TransformVector(localGrabPoint);
+        body.position = transform.position;
+        body.rotation = transform.rotation;
+        IsPouring = false;
+        _lastWateredPlant = null;
+        SetStreamVisible(false);
+    }
+
     private bool TryGetFirstExternalHit(Vector3 origin, out RaycastHit closestHit)
     {
         int hitCount = Physics.SphereCastNonAlloc(
@@ -227,9 +276,14 @@ public sealed class WateringCan : MonoBehaviour
         return foundHit;
     }
 
-    private void DeliverWater(Collider hitCollider, float amountLitres)
+    private void DeliverWater(Collider hitCollider, float amountLitres, Vector3 hitPoint)
     {
         GardenPot pot = hitCollider.GetComponentInParent<GardenPot>();
+        if (pot != null && !pot.CanReceiveWaterAt(hitPoint))
+        {
+            _lastWateredPlant = null;
+            return;
+        }
         GameObject plant = pot != null ? pot.gameObject : FindTaggedParent(hitCollider.transform, PlantTag);
         PlantWaterReceiver receiver = pot != null
             ? pot.GetComponent<PlantWaterReceiver>()
@@ -365,6 +419,8 @@ public sealed class WateringCan : MonoBehaviour
         }
 
         waterStream.useWorldSpace = true;
+        waterStream.textureMode = LineTextureMode.Tile;
+        waterStream.alignment = LineAlignment.View;
         waterStream.positionCount = 2;
         waterStream.startWidth = streamWidth;
         waterStream.endWidth = streamWidth * 0.65f;
@@ -372,17 +428,28 @@ public sealed class WateringCan : MonoBehaviour
         waterStream.endColor = new Color(streamColor.r, streamColor.g, streamColor.b, 0.35f);
         waterStream.numCapVertices = 4;
 
+        if (streamMaterial != null) waterStream.sharedMaterial = streamMaterial;
+
         if (waterStream.sharedMaterial == null)
         {
-            Shader shader = Shader.Find("Universal Render Pipeline/Unlit") ?? Shader.Find("Sprites/Default");
-            if (shader != null)
+            Material material = Resources.Load<Material>("GardenWater/WaterStream");
+            if (material != null)
             {
-                _runtimeStreamMaterial = new Material(shader)
+                waterStream.sharedMaterial = material;
+            }
+            else
+            {
+                Debug.LogWarning("Garden water stream material is missing; using the default line shader.", this);
+                Shader shader = Shader.Find("Sprites/Default");
+                if (shader != null)
                 {
-                    name = "Water Stream (Runtime)",
-                    hideFlags = HideFlags.DontSave
-                };
-                waterStream.sharedMaterial = _runtimeStreamMaterial;
+                    _runtimeStreamMaterial = new Material(shader)
+                    {
+                        name = "Water Stream (Runtime)",
+                        hideFlags = HideFlags.DontSave
+                    };
+                    waterStream.sharedMaterial = _runtimeStreamMaterial;
+                }
             }
         }
     }

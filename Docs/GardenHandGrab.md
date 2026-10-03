@@ -57,3 +57,7 @@ el componente, se restauran las capas originales de cada collider.
    sembrada y avance el crecimiento: la planta debe continuar anclada.
 5. Suelte una herramienta sobre una mesa y en el suelo: debe apoyarse y poder
    recogerse de nuevo. Vuelva a probar con el botón Grip de los mandos.
+
+## Tomate del prototipo
+
+En Garden_Moves solo Tomato_PLACEHOLDER_0 de la fase madura recibe TomatoFruit y los agarres Meta. Sigue unido a la maceta hasta la primera selección; al agarrarlo se separa manteniendo su tamaño mundial. Los frutos verdes y los otros dos frutos rojos son visuales. La cosecha exige soltar el fruto preparado dentro de la bandeja COSECHA. Tras entregarlo, sus agarres se desactivan. GardenGrabSetup respeta estos estados y vuelve a instalarse al reiniciar la escena.

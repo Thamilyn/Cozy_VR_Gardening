@@ -23,10 +23,10 @@ public sealed class GardenerMixamoGreeting : MonoBehaviour
     private float lookAwayToReset = 0.5f;
     [SerializeField, Min(0.01f)] private float crossFadeDuration = 0.25f;
 
-    [Header("Parpadeo VRM")]
-    [SerializeField, Min(0.1f), Tooltip("Tiempo minimo entre parpadeos, en segundos.")]
+    [Header("VRM blinking")]
+    [SerializeField, Min(0.1f), Tooltip("Minimum time between blinks, in seconds.")]
     private float minimumBlinkInterval = 2.5f;
-    [SerializeField, Min(0.1f), Tooltip("Tiempo maximo entre parpadeos, en segundos.")]
+    [SerializeField, Min(0.1f), Tooltip("Maximum time between blinks, in seconds.")]
     private float maximumBlinkInterval = 5.5f;
     [SerializeField, Min(0.01f)] private float blinkCloseDuration = 0.08f;
     [SerializeField, Min(0f)] private float blinkHoldDuration = 0.03f;

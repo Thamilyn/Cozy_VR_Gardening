@@ -1,0 +1,6 @@
+Unity 6000.3.23f1
+UTC: 2026-10-01T22:24:37.0381296Z
+PASS: Garden_Moves entry scene and serialized references
+PASS: existing Meta ray/pinch calendar checks
+PASS: soil area, water gates, all phases, accounting, harvest and empty session
+NOT TESTED: physical hands/controllers, runtime scene reload, APK and Quest 3

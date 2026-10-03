@@ -33,7 +33,19 @@ ray/button references and the pinch latch. On the Quest, also check:
 4. Briefly hide a pinched hand from the headset, then bring it back: no toggle
    until you release and pinch again.
 5. Press **Y** with controllers while hands are untracked: toggle normally.
-6. Advance to the final phase: **Cycle complete** stays disabled for hand input.
+6. Advance to the final phase after meeting every water goal: **Cosecha** stays disabled; **Reiniciar** and **Recargar agua** remain available.
 7. Pick up, tilt and release the watering can with each hand: the calendar must
    remain unchanged. Release the left pinch, then pinch away from props to toggle
    the calendar normally.
+
+## Tomato prototype controls
+
+Garden_Moves adds **Avanzar fase**, **Recargar agua**, **Traer regadera** and **Reiniciar** to the existing bottom row at runtime. All four use the existing Meta ray surface and PointableCanvas, within the same collider footprint. An unmet water goal leaves Advance enabled so a click can explain the missing water, but CalendarSystem blocks time and growth. Stop pouring for at least 0.5 seconds before advancing. Excess requires a 5-second pause for accelerated prototype drainage.
+
+Restart reloads Garden_Moves after every held prop has been released. Verify twice on the headset that pinch toggling, both hand rays and controller grips still work after reload. Refill is available through a calendar ray click for hand users; it does not change the calendar, journal or plant water totals. Detailed reproduction steps and hardware checks are in GardenGrowth.md.
+
+## Recover a dropped watering can
+
+Open the calendar and click **Traer regadera** with the Meta ray and pinch (or controller). Keep the right hand visible and free; the left hand is used if the right is unavailable. The most recently released, unheld can returns upright with its handle about 15 cm in front of that hand; before any release, the nearest unheld can is used. It stays suspended until a normal Meta grab, then release restores gravity. This preserves its remaining water and all plant/calendar counters. A held can is never moved, and missing tracking or busy hands produces guidance instead. The suspended can uses the existing held-object layer so it cannot become the locomotor floor.
+
+On Quest, drop a can on the floor, recover it, grab, pour and release it again. Repeat after teleporting, with either free hand and with controllers. Also confirm that recovery does not refill water or move a held can, and that the four calendar labels remain readable. Recovery has only been statically reviewed; headset validation is pending.
