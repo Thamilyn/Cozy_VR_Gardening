@@ -1,0 +1,55 @@
+Unity 6000.3.23f1
+PASS: Verification timeout
+PASS: Guide automatically starts audio tutorial
+PASS: Verification timeout
+PASS: Guide automatically starts audio tutorial
+PASS: Voice begins with matching visual
+PASS: Verification timeout
+PASS: Guide automatically starts audio tutorial
+PASS: Excess water interrupts lower priority voice
+PASS: Verification timeout
+PASS: Guide automatically starts audio tutorial
+PASS: Obsolete active and pending instructions cancelled
+PASS: Visual present
+PASS: Demo cannot block interactions
+PASS: Demo has no tracking/interactor behaviour
+PASS: Mode change removes incompatible demo
+PASS: Visual present
+PASS: Demo cannot block interactions
+PASS: Demo has no tracking/interactor behaviour
+PASS: Verification timeout
+PASS: Guide automatically starts audio tutorial
+PASS: Completed action hides demo while relevant voice can finish
+PASS: Mode change cancels control voice
+PASS: Disabling playback hides demonstration
+PASS: Real planting event
+PASS: Verification timeout
+PASS: Guide automatically starts audio tutorial
+PASS: Playing help records assisted action in existing journal
+PASS: Verification timeout
+PASS: Guide automatically starts audio tutorial
+PASS: Real excess warning
+PASS: Verification timeout
+PASS: Guide automatically starts audio tutorial
+PASS: Existing drainage still works
+PASS: Verification timeout
+PASS: Guide automatically starts audio tutorial
+PASS: Existing drainage still works
+PASS: Verification timeout
+PASS: Guide automatically starts audio tutorial
+PASS: Existing drainage still works
+PASS: Verification timeout
+PASS: Guide automatically starts audio tutorial
+PASS: Existing drainage still works
+PASS: Verification timeout
+PASS: Guide automatically starts audio tutorial
+PASS: Existing drainage still works
+PASS: Verification timeout
+PASS: Guide automatically starts audio tutorial
+PASS: Existing drainage still works
+PASS: All tomato phase events observed
+PASS: Verification timeout
+PASS: Guide automatically starts audio tutorial
+PASS: Harvest completes and unsubscribes tutorial
+PASS: Subscriptions released after completion
+PASS

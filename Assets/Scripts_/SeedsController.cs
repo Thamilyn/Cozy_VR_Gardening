@@ -67,6 +67,7 @@ public sealed class SeedsController : MonoBehaviour
     private readonly Dictionary<PlantWaterReceiver, Action<float>> receivers = new();
 
     public event Action<string> Guidance;
+    public event Action<SeedItem> PlantingRejected;
     public IReadOnlyList<PlantedSeed> PlantedSeeds => plantedSeeds;
     public CalendarSystem Calendar => calendar;
     public PlantedSeed PrototypeTomato => plantedSeeds.Find(p => p.crop == SeedCrop.Tomato && p.seed != null);
@@ -249,6 +250,7 @@ public sealed class SeedsController : MonoBehaviour
             return true;
         }
         Guidance?.Invoke("Drop the seed onto the center of an empty small pot.");
+        PlantingRejected?.Invoke(seed);
         return false;
     }
 

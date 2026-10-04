@@ -1,0 +1,13 @@
+{
+  "unityVersion": "6000.3.23f1",
+  "cliVersion": "1.0.0-beta.12",
+  "command": "unity recompile --project-path C:\\Users\\Trole\\Cozy_VR_Gardening --timeout 120 --format json",
+  "status": "completed",
+  "compilationFailed": false,
+  "errors": 0,
+  "warnings": 0,
+  "runtimeReport": "Docs/Validation/GronnyRuntime.txt",
+  "xrLimitation": "MetaXRFeature reported ErrorFormFactorUnavailable xrGetSystem during Editor Play checks. Quest 3 hardware validation remains pending.",
+  "editorReturnedToEditMode": true,
+  "sceneDirtyAfterVerification": false
+}

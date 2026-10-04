@@ -30,12 +30,14 @@ public sealed class CalendarVisibilityController : MonoBehaviour
     private float nextInteractorSearch;
 
     public bool IsVisible { get; private set; }
+    public event System.Action<bool> VisibilityChanged;
+    public event System.Action CloseSelected;
 
     private void Awake()
     {
         // A world-space, pointable Canvas must not inherit a screen-space Canvas scale.
         if (transform.parent != null) transform.SetParent(null, false);
-        if (closeButton != null) closeButton.onClick.AddListener(Close);
+        if (closeButton != null) closeButton.onClick.AddListener(SelectClose);
         SetVisible(startVisible);
     }
 
@@ -111,9 +113,17 @@ public sealed class CalendarVisibilityController : MonoBehaviour
     public void Open() => SetVisible(true);
     public void Close() => SetVisible(false);
 
+    private void SelectClose()
+    {
+        CloseSelected?.Invoke();
+        Close();
+    }
+
     public void SetVisible(bool visible)
     {
+        bool changed = IsVisible != visible;
         IsVisible = visible;
+        if (changed) VisibilityChanged?.Invoke(visible);
         if (!visible)
         {
             if (rayCollider != null) rayCollider.enabled = false;
@@ -149,6 +159,6 @@ public sealed class CalendarVisibilityController : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (closeButton != null) closeButton.onClick.RemoveListener(Close);
+        if (closeButton != null) closeButton.onClick.RemoveListener(SelectClose);
     }
 }

@@ -160,6 +160,12 @@ public sealed class CalendarSystem : MonoBehaviour
 
     public void NotifyChanged() => Changed?.Invoke();
 
+    public void RecordTutorialHelp(string audioId)
+    {
+        if (string.IsNullOrEmpty(audioId)) return;
+        journal.Add(new JournalEntry { day = CurrentDay, action = "Assisted: " + audioId });
+    }
+
     public PlantSave FindPlant(string seedId) => plants.Find(p => p.seedId == seedId);
 
     public void RecordPlanting(PlantSave plant)

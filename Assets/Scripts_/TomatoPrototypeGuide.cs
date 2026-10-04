@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>Short visual coaching and measured water feedback without a dialogue system.</summary>
+/// <summary>Short visual coaching and measured water feedback for the tomato activity.</summary>
 [DisallowMultipleComponent]
 public sealed class TomatoPrototypeGuide : MonoBehaviour
 {
@@ -29,6 +29,7 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
     private int lastPhase = -1;
     private bool successShown;
     private float nextRefresh;
+    private GronnyTutorial audioTutorial;
 
     private void Start()
     {
@@ -44,6 +45,8 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
         calendar = seeds.Calendar;
         seeds.Guidance += Say;
         calendar.AdvanceBlocked += Say;
+        if (gameObject.scene.name == "Garden_Moves")
+            audioTutorial = GetComponent<GronnyTutorial>() ?? gameObject.AddComponent<GronnyTutorial>();
         GameObject eye = GameObject.Find("CenterEyeAnchor");
         viewer = eye != null ? eye.transform : Camera.main != null ? Camera.main.transform : null;
         Say(welcomeInstruction);
@@ -152,5 +155,15 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
     {
         if (seeds != null) seeds.Guidance -= Say;
         if (calendar != null) calendar.AdvanceBlocked -= Say;
+    }
+
+    private void OnEnable()
+    {
+        if (audioTutorial != null) audioTutorial.enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        if (audioTutorial != null) audioTutorial.enabled = false;
     }
 }

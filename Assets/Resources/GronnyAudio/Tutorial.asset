@@ -1,0 +1,582 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2882a81d87b6e264bb9d15e2c4d06792, type: 3}
+  m_Name: Tutorial
+  m_EditorClassIdentifier: Assembly-CSharp::GronnyAudioCatalogue
+  cues:
+  - id: 01_welcome
+    clip: {fileID: 8300000, guid: e4976e1c1644c9548bae1e00739b9e74, type: 3}
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    steps: []
+  - id: 02_tomato_intro
+    clip: {fileID: 8300000, guid: d8d4013993163cc41988da9ba3788d91, type: 3}
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    steps: []
+  - id: 03_plant_seed
+    clip: {fileID: 8300000, guid: 5d67d3334f8dec545bbb061f40d2892a, type: 3}
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    steps: []
+  - id: 04_first_watering
+    clip: {fileID: 8300000, guid: 9d20ae23b4bb1064a8658c2a231966e2, type: 3}
+    mode: 0
+    demo: 5
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    steps:
+    - at: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Pick up the watering can
+      press: 0
+    - at: 2.6
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Hold the can
+      press: 0
+    - at: 4.6
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: -65}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Tilt over the soil
+      press: 0
+    - at: 7
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: -65}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Aim near the roots
+      press: 0
+  - id: 05_water_target
+    clip: {fileID: 8300000, guid: 0ae7d4fa2b51e484bb1318f3c54fd68c, type: 3}
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    steps: []
+  - id: 06_enough_water
+    clip: {fileID: 8300000, guid: 97247ca445bd2f940bf8775bbb41a638, type: 3}
+    mode: 0
+    demo: 6
+    priority: 50
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    steps:
+    - at: 0
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: -65}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Stop pouring
+      press: 0
+    - at: 1.2
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Hold the can upright
+      press: 0
+  - id: 07_first_advance
+    clip: {fileID: 8300000, guid: d61a71e014d1714438a9163ad0fb7d0c, type: 3}
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    steps: []
+  - id: 08_sprout
+    clip: {fileID: 8300000, guid: f346ac16b47983e419c61b30983581ea, type: 3}
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    steps: []
+  - id: 09_young_plant
+    clip: {fileID: 8300000, guid: e2fb016e44034ba47b810cd6d47a05d0, type: 3}
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    steps: []
+  - id: 10_flowering
+    clip: {fileID: 8300000, guid: 48d88f21f3d08134ba3246a3008acc89, type: 3}
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    steps: []
+  - id: 11_green_fruit
+    clip: {fileID: 8300000, guid: 1374af72a5d98eb4ea9811de2c29f2be, type: 3}
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    steps: []
+  - id: 12_harvest
+    clip: {fileID: 8300000, guid: 06ae04c90ee349f468415c03e7abda35, type: 3}
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    steps: []
+  - id: 13_complete
+    clip: {fileID: 8300000, guid: 54c7f83a764c6dc47b4357288c90321d, type: 3}
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    steps: []
+  - id: help_planting
+    clip: {fileID: 8300000, guid: 3264c86be39b6714cafa501014d25597, type: 3}
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 35
+    assisted: 1
+    controllerTarget: 
+    steps: []
+  - id: help_low_water
+    clip: {fileID: 8300000, guid: 771d038fc1da571449ee13383b17dffe, type: 3}
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 35
+    assisted: 1
+    controllerTarget: 
+    steps: []
+  - id: help_excess_water
+    clip: {fileID: 8300000, guid: d228f995cfe6a864086e2a304829502b, type: 3}
+    mode: 0
+    demo: 6
+    priority: 100
+    volume: 1
+    cooldown: 8
+    assisted: 1
+    controllerTarget: 
+    steps:
+    - at: 0
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: -65}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Stop pouring
+      press: 0
+    - at: 1.2
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Hold the can upright
+      press: 0
+  - id: help_drained
+    clip: {fileID: 8300000, guid: 421af7edfe1dbf746a206e36264d30c7, type: 3}
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 35
+    assisted: 1
+    controllerTarget: 
+    steps: []
+  - id: help_calendar
+    clip: {fileID: 8300000, guid: 0f313500e34faa94bb1fcf56f234f8ad, type: 3}
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 35
+    assisted: 1
+    controllerTarget: 
+    steps: []
+  - id: help_refill
+    clip: {fileID: 8300000, guid: 5f467754821cf754ba55c331b0646623, type: 3}
+    mode: 0
+    demo: 0
+    priority: 20
+    volume: 1
+    cooldown: 35
+    assisted: 1
+    controllerTarget: 
+    steps: []
+  - id: controls_move_hands
+    clip: {fileID: 8300000, guid: b4a5e918175487c4cb7cc2d4c0ce8202, type: 3}
+    mode: 1
+    demo: 1
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    steps:
+    - at: 0
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Curl the index; keep the thumb free
+      press: 0
+    - at: 3.2
+      pose: 2
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Tap the index with the thumb
+      press: 0
+    - at: 4.5
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Movement active
+      press: 0
+    - at: 5.8
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 18}
+      label: Swipe forward to step
+      press: 0
+    - at: 7
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: -18}
+      label: Swipe forward to step
+      press: 0
+    - at: 8.3
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: -18}
+      label: Swipe back to step back
+      press: 0
+    - at: 9.5
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 18}
+      label: Swipe back to step back
+      press: 0
+    - at: 10.5
+      pose: 3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Straighten the index to exit
+      press: 0
+  - id: controls_grab_hands
+    clip: {fileID: 8300000, guid: 7dd9626ddc5ab9c48a716d0fa0bcfd46, type: 3}
+    mode: 1
+    demo: 2
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    steps:
+    - at: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Move close to the object
+      press: 0
+    - at: 2.3
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Pinch and hold
+      press: 1
+    - at: 4.2
+      pose: 1
+      position: {x: 0.08, y: 0.05, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Keep holding while moving
+      press: 1
+    - at: 6.5
+      pose: 0
+      position: {x: 0.08, y: 0.05, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Release to let go
+      press: 0
+  - id: controls_calendar_hands
+    clip: {fileID: 8300000, guid: 6606da26871532c418ffa4bc1b0b667c, type: 3}
+    mode: 1
+    demo: 3
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    steps:
+    - at: 0
+      pose: 0
+      position: {x: -0.08, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Left hand away from objects
+      press: 0
+    - at: 3.4
+      pose: 1
+      position: {x: -0.08, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Pinch
+      press: 0
+    - at: 6
+      pose: 0
+      position: {x: -0.08, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Release
+      press: 0
+  - id: controls_calendar_select_hands
+    clip: {fileID: 8300000, guid: e9b80cf998950b94c8735630229f23d4, type: 3}
+    mode: 1
+    demo: 4
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    steps:
+    - at: 0
+      pose: 3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Point at the button
+      press: 0
+    - at: 2.5
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Pinch
+      press: 1
+    - at: 5
+      pose: 3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Release to select
+      press: 0
+  - id: controls_move_controllers
+    clip: {fileID: 8300000, guid: da0061683bc119145aaa479de911c50a, type: 3}
+    mode: 2
+    demo: 1
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: left_oculus_controller_world/left_b_thumbstick
+    steps:
+    - at: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Move the joystick
+      press: 1
+    - at: 3
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Release to stop
+      press: 0
+  - id: controls_grab_controllers
+    clip: {fileID: 8300000, guid: c51dfc5c322a1c84d92bd2107037abe7, type: 3}
+    mode: 2
+    demo: 2
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: right_oculus_controller_world/right_b_trigger_grip
+    steps:
+    - at: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Move close to the object
+      press: 0
+    - at: 2.3
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Hold the grip button
+      press: 1
+    - at: 4.2
+      pose: 1
+      position: {x: 0.08, y: 0.05, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Keep holding while moving
+      press: 1
+    - at: 6.5
+      pose: 0
+      position: {x: 0.08, y: 0.05, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Release to let go
+      press: 0
+  - id: controls_calendar_controllers
+    clip: {fileID: 8300000, guid: 2ab5e5ecd241cce4ea343682d4006a86, type: 3}
+    mode: 2
+    demo: 3
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: left_oculus_controller_world/b_button_y
+    steps:
+    - at: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: 'Left controller: Y'
+      press: 0
+    - at: 1.2
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Press Y
+      press: 1
+    - at: 3
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Release Y
+      press: 0
+  - id: controls_calendar_select_controllers
+    clip: {fileID: 8300000, guid: d2f5e8bdc7c39bd459ef4462e480641c, type: 3}
+    mode: 2
+    demo: 4
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: right_oculus_controller_world/right_b_trigger_front
+    steps:
+    - at: 0
+      pose: 3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Point the controller
+      press: 0
+    - at: 2.5
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Press the index trigger
+      press: 1
+    - at: 5
+      pose: 3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      label: Release to select
+      press: 0
+  leftHand:
+    prefab: {fileID: 8007592865782270689, guid: aca0706bac5a68a4394ac02275753161, type: 3}
+    animationRoot: OculusHand_L
+    pinch: {fileID: 7400000, guid: 55cdf5be56300094a98bf59c19c746b1, type: 2}
+    curled: {fileID: 7400000, guid: 2a62eebed83b25b4b8f2c21b3281f62c, type: 2}
+    point: {fileID: 7400000, guid: 81850be3722257141a962f87f08bd7d7, type: 2}
+    thumbFree: {fileID: 7400000, guid: d383e35b8d2f63f4f8258d5eadab871e, type: 2}
+  rightHand:
+    prefab: {fileID: 4320616554957641676, guid: 4170d4d20a9b6034a88d89a71c2e0828, type: 3}
+    animationRoot: OculusHand_R
+    pinch: {fileID: 7400000, guid: 26aed7841cb5c9640aedf3cf82ed052e, type: 2}
+    curled: {fileID: 7400000, guid: 239acd9cecc4aaf4f98ec5420ef26571, type: 2}
+    point: {fileID: 7400000, guid: 86a31394bfe0b3e4b871676d471ef8c6, type: 2}
+    thumbFree: {fileID: 7400000, guid: 06e5790983e91714d83eb62bd6d24071, type: 2}
+  leftController: {fileID: 919132149155446097, guid: 2b1aaafc31655024394d83dc00911c1c, type: 3}
+  rightController: {fileID: 919132149155446097, guid: deed68a7fd2e9234899298cf80fae7ad, type: 3}
+  controllerStick: {fileID: -3733069272168932517, guid: 2b1aaafc31655024394d83dc00911c1c, type: 3}
+  controllerGrip: {fileID: -7415750269733489216, guid: deed68a7fd2e9234899298cf80fae7ad, type: 3}
+  controllerY: {fileID: -6048466920149098984, guid: 2b1aaafc31655024394d83dc00911c1c, type: 3}
+  controllerTrigger: {fileID: -6338187929255524150, guid: deed68a7fd2e9234899298cf80fae7ad, type: 3}
+  demonstrationMaterial: {fileID: 2100000, guid: 575f1a14acfa4b3409a2104843b085ff, type: 2}
+  voiceVolume: 0.85
+  pitch: 1
+  gapSeconds: 0.35
+  idleHelpSeconds: 30
+  independentHelpSeconds: 55
+  viewOffset: {x: 0.34, y: -0.18, z: 0.85}
+  handEulerAngles: {x: 0, y: 90, z: -75}
+  controllerEulerAngles: {x: 65, y: 180, z: 0}
+  visualScale: 1.15
+  blendSeconds: 0.35

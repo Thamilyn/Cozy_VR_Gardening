@@ -44,6 +44,7 @@ public sealed class CalendarPanel : MonoBehaviour
     private Button restartButton;
     private Button refillButton;
     private bool restarting;
+    public event Action ButtonSelected;
 
     private void Awake()
     {
@@ -70,6 +71,7 @@ public sealed class CalendarPanel : MonoBehaviour
 
     public void AdvancePhase()
     {
+        ButtonSelected?.Invoke();
         if (calendar != null) calendar.AdvancePhase();
     }
 
@@ -112,12 +114,14 @@ public sealed class CalendarPanel : MonoBehaviour
 
     public void RefillCans()
     {
+        ButtonSelected?.Invoke();
         foreach (WateringCan can in FindObjectsByType<WateringCan>(FindObjectsSortMode.None)) can.Refill();
         FindFirstObjectByType<TomatoPrototypeGuide>()?.Say("Watering cans refilled. Refilling does not count as water applied to the soil.");
     }
 
     public void RecoverCan()
     {
+        ButtonSelected?.Invoke();
         TomatoPrototypeGuide guide = FindFirstObjectByType<TomatoPrototypeGuide>();
         if (!TryGetRecoveryHand(Handedness.Right, out Vector3 position) &&
             !TryGetRecoveryHand(Handedness.Left, out position))
