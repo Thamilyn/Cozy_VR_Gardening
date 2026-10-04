@@ -145,16 +145,18 @@ public static class GronnyAudioSetup
     private static GronnyAudioCatalogue.Step[] ControlSteps(string control, GardenInputMode mode)
     {
         bool hands = mode == GardenInputMode.Hands;
+        // Show the thumb side of the fist with the thumb upright, rather than the back of the hand.
+        Vector3 movementRotation = new(2.74f, 262.35f, 143.91f);
         return control switch {
             "move" when hands => new[] {
-                Step(0, GardenDemoPose.ThumbFree, "Curl the index; keep the thumb free"),
-                Step(3.2f, GardenDemoPose.Curled, "Tap the index with the thumb"),
-                Step(4.5f, GardenDemoPose.ThumbFree, "Movement active"),
-                Step(5.8f, GardenDemoPose.ThumbFree, "Swipe forward to step", thumbRotation: new Vector3(0, 0, 18)),
-                Step(7.0f, GardenDemoPose.ThumbFree, "Swipe forward to step", thumbRotation: new Vector3(0, 0, -18)),
-                Step(8.3f, GardenDemoPose.ThumbFree, "Swipe back to step back", thumbRotation: new Vector3(0, 0, -18)),
-                Step(9.5f, GardenDemoPose.ThumbFree, "Swipe back to step back", thumbRotation: new Vector3(0, 0, 18)),
-                Step(10.5f, GardenDemoPose.Point, "Straighten the index to exit") },
+                Step(0, GardenDemoPose.ThumbFree, "Curl the index; keep the thumb free", rotation: movementRotation),
+                Step(3.2f, GardenDemoPose.Curled, "Tap the index with the thumb", rotation: movementRotation),
+                Step(4.5f, GardenDemoPose.ThumbFree, "Movement active", rotation: movementRotation),
+                Step(5.8f, GardenDemoPose.ThumbFree, "Swipe forward to step", rotation: movementRotation, thumbRotation: new Vector3(0, 0, 18)),
+                Step(7.0f, GardenDemoPose.ThumbFree, "Swipe forward to step", rotation: movementRotation, thumbRotation: new Vector3(0, 0, -18)),
+                Step(8.3f, GardenDemoPose.ThumbFree, "Swipe back to step back", rotation: movementRotation, thumbRotation: new Vector3(0, 0, -18)),
+                Step(9.5f, GardenDemoPose.ThumbFree, "Swipe back to step back", rotation: movementRotation, thumbRotation: new Vector3(0, 0, 18)),
+                Step(10.5f, GardenDemoPose.Point, "Straighten the index to exit", rotation: movementRotation) },
             "move" => new[] { Step(0, GardenDemoPose.Open, "Move the joystick", press: 1),
                 Step(3f, GardenDemoPose.Open, "Release to stop") },
             "grab" => new[] {

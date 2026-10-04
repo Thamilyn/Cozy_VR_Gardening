@@ -56,7 +56,11 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         Quaternion facing = Quaternion.LookRotation(forward, Vector3.up);
         Vector3 offset = catalogue.viewOffset;
         if (left) offset.x = -Mathf.Abs(offset.x);
-        anchor.transform.SetPositionAndRotation(viewer.position + facing * offset, facing);
+        Vector3 position = viewer.position + facing * offset;
+        // The movement gesture must read in profile from the eye, including its side offset.
+        if (mode == GardenInputMode.Hands && cue.demo == GardenControlDemo.Move)
+            facing = Quaternion.LookRotation(position - viewer.position, Vector3.up);
+        anchor.transform.SetPositionAndRotation(position, facing);
         GameObject moving = new("Motion");
         motion = moving.transform;
         motion.SetParent(anchor.transform, false);
@@ -148,6 +152,13 @@ public sealed class GardenControlDemonstration : MonoBehaviour
             if (clips[p] != null) clips[p].SampleAnimation(animationRoot.gameObject, 0f);
             poses[p] = new Quaternion[joints.Length];
             for (int j = 0; j < joints.Length; j++) poses[p][j] = joints[j].localRotation;
+        }
+        if (cue.demo == GardenControlDemo.Move)
+        {
+            // Meta's mid-fist pose opens the fingers; the activation tap only moves the thumb.
+            for (int j = 0; j < joints.Length; j++)
+                if (!joints[j].name.Contains("_thumb"))
+                    poses[(int)GardenDemoPose.Curled][j] = poses[(int)GardenDemoPose.ThumbFree][j];
         }
     }
 

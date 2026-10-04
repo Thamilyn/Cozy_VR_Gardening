@@ -1,0 +1,13 @@
+Unity 6000.3.23f1
+PASS: step 0 wrist below fingers; upward=0.955
+PASS: step 1 wrist below fingers; upward=0.955
+PASS: step 2 wrist below fingers; upward=0.955
+PASS: step 3 wrist below fingers; upward=0.955
+PASS: step 4 wrist below fingers; upward=0.955
+PASS: step 5 wrist below fingers; upward=0.955
+PASS: step 6 wrist below fingers; upward=0.955
+PASS: step 7 wrist below fingers; upward=0.955
+CAPTURE: Docs/Validation/Gronny-movement-orientation-thumb-free.png
+CAPTURE: Docs/Validation/Gronny-movement-orientation-thumb-tap.png
+CAPTURE: Docs/Validation/Gronny-movement-orientation-index-exit.png
+PASS: unity recompile; compilationFailed=false; 0 errors; 0 warnings. Captures use baked meshes to refresh sampled poses within the same Editor frame. Quest 3 visual verification remains pending.

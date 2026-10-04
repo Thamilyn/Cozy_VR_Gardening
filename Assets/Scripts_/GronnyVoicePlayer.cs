@@ -35,6 +35,8 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
         source.spatialBlend = 0f;
         source.dopplerLevel = 0f;
         source.pitch = catalogue.pitch;
+        var gestures = FindFirstObjectByType<GardenerMixamoGreeting>();
+        if (gestures != null) gestures.BindVoiceSource(source);
     }
 
     public void Enqueue(string id, string key, Func<bool> relevant, Action started = null, bool once = true,

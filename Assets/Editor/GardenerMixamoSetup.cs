@@ -11,12 +11,17 @@ internal static class GardenerMixamoSetup
     private const string ScenePath = "Assets/Scenes/Garden_Moves.unity";
     private const string ControllerName = "Gardener Kawaii Greeting";
     private const string IdlePath = "Assets/Vroid/Animations/Happy Idle.fbx";
-    private const string ClapPath = "Assets/Vroid/Animations/Clapping.fbx";
+    private const string ClapPath = "Assets/Vroid/Animations/Clapping (1).fbx";
+    private const string GreetingPath = "Assets/Vroid/Animations/Standing Greeting.fbx";
+    private const string TalkingFirstPath = "Assets/Vroid/Animations/Talking (1).fbx";
+    private const string TalkingSecondPath = "Assets/Vroid/Animations/Talking (2).fbx";
     private const string AnimatorPath = "Assets/Vroid/Animations/GronnyHarvest.controller";
     private static readonly string[] AnimationPaths =
     {
         ClapPath,
-        "Assets/Vroid/Animations/Standing Greeting.fbx"
+        GreetingPath,
+        TalkingFirstPath,
+        TalkingSecondPath
     };
     private static bool configuring;
 
@@ -55,7 +60,7 @@ internal static class GardenerMixamoSetup
 
                 foreach (var clip in clips)
                 {
-                    bool loop = path != ClapPath;
+                    bool loop = path == IdlePath || path == GreetingPath;
                     if (clip.loopTime != loop) needsUpdate = true;
                     clip.loopTime = loop;
                     string name = Path.GetFileNameWithoutExtension(path);
@@ -84,7 +89,9 @@ internal static class GardenerMixamoSetup
             {
                 string path = child.state.name == "Happy Idle" ? IdlePath :
                     child.state.name == "Clapping" ? ClapPath :
-                    child.state.name == "Standing Greeting" ? AnimationPaths[1] : null;
+                    child.state.name == "Standing Greeting" ? GreetingPath :
+                    child.state.name == "Talking (1)" ? TalkingFirstPath :
+                    child.state.name == "Talking (2)" ? TalkingSecondPath : null;
                 var clip = path != null ? FindClip(path) : null;
                 if (clip == null)
                 {
@@ -120,7 +127,7 @@ internal static class GardenerMixamoSetup
                 serialized.ApplyModifiedProperties();
                 EditorSceneManager.MarkSceneDirty(scene);
                 EditorSceneManager.SaveScene(scene);
-                Debug.Log("Gardener Happy Idle, gaze greeting and one-shot Clapping are configured in Garden_Moves.");
+                Debug.Log("Gardener idle, greeting, alternating Talking and new Clapping clips are configured in Garden_Moves.");
             }
             finally
             {

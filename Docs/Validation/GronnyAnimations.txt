@@ -1,0 +1,36 @@
+Unity 6000.3.23f1
+PASS
+0.010s: Happy Idle
+0.016s: Talking (1)
+10.282s: Talking (2)
+15.448s: Talking (1)
+17.004s: Clapping
+18.172s: Talking (1)
+19.505s: Happy Idle
+20.003s: Talking (2)
+20.804s: Happy Idle
+
+Full cycle: True
+New clap and resume: True
+Short phrases alternate: True
+Overlap: False
+Mouth max: 0.85
+Mouth min during speech: 0
+Closed after stop: True
+Idle after speech: True
+Root drift: 0
+
+Actual voice queue and face: PASS
+Automatically bound voice: True
+Both gestures across short phrases: True
+Rendered mouth max: 85
+Rendered mouth min: 0
+Blendshape: Fcl_MTH_A
+0.007s: silent / Idle/Greeting
+0.285s: 01_welcome / Talking (2)
+5.454s: 01_welcome / Talking (1)
+8.311s: silent / Talking (1)
+8.314s: silent / Idle/Greeting
+8.667s: 02_tomato_intro / Talking (2)
+12.876s: silent / Talking (2)
+12.879s: silent / Idle/Greeting

@@ -1,0 +1,16 @@
+Unity 6000.3.23f1
+PASS: compilation; 0 errors; 0 warnings.
+PASS: index and other fingers stay curled during activation tap.
+PASS: step 0 thumb upward=0.945
+PASS: step 2 thumb upward=0.945
+PASS: step 3 thumb upward=0.852
+PASS: step 4 thumb upward=0.949
+PASS: step 5 thumb upward=0.949
+PASS: step 6 thumb upward=0.852
+CAPTURE from viewer position: Docs/Validation/Gronny-movement-profile-thumb-free.png
+CAPTURE from viewer position: Docs/Validation/Gronny-movement-profile-thumb-tap.png
+CAPTURE from viewer position: Docs/Validation/Gronny-movement-profile-swipe-forward-a.png
+CAPTURE from viewer position: Docs/Validation/Gronny-movement-profile-swipe-forward-b.png
+CAPTURE from viewer position: Docs/Validation/Gronny-movement-profile-swipe-back.png
+CAPTURE from viewer position: Docs/Validation/Gronny-movement-profile-index-exit.png
+Quest 3 verification remains pending. Temporary preview scene only; no scene saved.

@@ -272,56 +272,56 @@ MonoBehaviour:
     - at: 0
       pose: 4
       position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
       thumbRotation: {x: 0, y: 0, z: 0}
       label: Curl the index; keep the thumb free
       press: 0
     - at: 3.2
       pose: 2
       position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
       thumbRotation: {x: 0, y: 0, z: 0}
       label: Tap the index with the thumb
       press: 0
     - at: 4.5
       pose: 4
       position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
       thumbRotation: {x: 0, y: 0, z: 0}
       label: Movement active
       press: 0
     - at: 5.8
       pose: 4
       position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
       thumbRotation: {x: 0, y: 0, z: 18}
       label: Swipe forward to step
       press: 0
     - at: 7
       pose: 4
       position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
       thumbRotation: {x: 0, y: 0, z: -18}
       label: Swipe forward to step
       press: 0
     - at: 8.3
       pose: 4
       position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
       thumbRotation: {x: 0, y: 0, z: -18}
       label: Swipe back to step back
       press: 0
     - at: 9.5
       pose: 4
       position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
       thumbRotation: {x: 0, y: 0, z: 18}
       label: Swipe back to step back
       press: 0
     - at: 10.5
       pose: 3
       position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
       thumbRotation: {x: 0, y: 0, z: 0}
       label: Straighten the index to exit
       press: 0

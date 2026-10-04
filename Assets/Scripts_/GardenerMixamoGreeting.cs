@@ -1,8 +1,9 @@
 using UnityEngine;
 using UniVRM10;
 
-/// <summary>Runs the teacher's idle, gaze greeting and one-shot harvest celebration through the Animator.</summary>
+/// <summary>Coordinates the teacher's gestures, voice-driven mouth and blinking.</summary>
 [DisallowMultipleComponent]
+[DefaultExecutionOrder(10)]
 public sealed class GardenerMixamoGreeting : MonoBehaviour
 {
     private const string TeacherName = "Gardener Kawaii - Profesor de jardineria";
@@ -10,7 +11,11 @@ public sealed class GardenerMixamoGreeting : MonoBehaviour
 
     private static readonly int ClapHash = Animator.StringToHash("Clap");
     private static readonly int GreetHash = Animator.StringToHash("Greet");
+    private static readonly int SpeakingHash = Animator.StringToHash("Speaking");
+    private static readonly int TalkVariantHash = Animator.StringToHash("TalkVariant");
     private static readonly int ClappingStateHash = Animator.StringToHash("Base Layer.Clapping");
+    private static readonly int TalkingFirstStateHash = Animator.StringToHash("Base Layer.Talking (1)");
+    private static readonly int TalkingSecondStateHash = Animator.StringToHash("Base Layer.Talking (2)");
 
     [Header("Mixamo Animator (Humanoid)")]
     [SerializeField] private RuntimeAnimatorController animationController;
@@ -32,6 +37,12 @@ public sealed class GardenerMixamoGreeting : MonoBehaviour
     [SerializeField, Min(0f)] private float blinkHoldDuration = 0.03f;
     [SerializeField, Min(0.01f)] private float blinkOpenDuration = 0.14f;
 
+    [Header("Voice-driven mouth")]
+    [SerializeField, Min(0f)] private float mouthGain = 12f;
+    [SerializeField, Range(0f, 0.1f)] private float mouthNoiseThreshold = 0.002f;
+    [SerializeField, Range(0f, 1f)] private float maximumMouthWeight = 0.85f;
+    [SerializeField, Min(0.1f)] private float mouthResponseSpeed = 12f;
+
     private readonly RaycastHit[] occlusionHits = new RaycastHit[16];
     private Transform teacher;
     private Transform viewer;
@@ -48,6 +59,15 @@ public sealed class GardenerMixamoGreeting : MonoBehaviour
     private bool rootMotionChanged;
     private float nextBlinkAt;
     private float blinkStartedAt = -1f;
+    private readonly float[] voiceSamples = new float[256];
+    private AudioSource voiceSource;
+    private float mouthWeight;
+    private bool canBlink;
+    private bool canMoveMouth;
+    private bool wasSpeaking;
+    private int nextTalkVariant;
+
+    public void BindVoiceSource(AudioSource source) => voiceSource = source;
 
     private void Start()
     {
@@ -57,11 +77,12 @@ public sealed class GardenerMixamoGreeting : MonoBehaviour
         viewer = eyeObject != null ? eyeObject.transform : Camera.main != null ? Camera.main.transform : null;
         animator = teacher != null ? teacher.GetComponentInChildren<Animator>(true) : null;
         vrmInstance = teacher != null ? teacher.GetComponentInChildren<Vrm10Instance>(true) : null;
-        if (vrmInstance != null && vrmInstance.Vrm != null &&
-            vrmInstance.Vrm.Expression != null && vrmInstance.Vrm.Expression.Blink != null)
-            ScheduleNextBlink(Time.time);
-        else
-            vrmInstance = null;
+        if (vrmInstance != null && vrmInstance.Vrm != null && vrmInstance.Vrm.Expression != null)
+        {
+            canBlink = vrmInstance.Vrm.Expression.Blink != null;
+            canMoveMouth = vrmInstance.Vrm.Expression.Aa != null;
+        }
+        if (canBlink) ScheduleNextBlink(Time.time);
 
         if (animator == null || animator.avatar == null || !animator.avatar.isHuman ||
             animationController == null)
@@ -86,15 +107,21 @@ public sealed class GardenerMixamoGreeting : MonoBehaviour
         animator.runtimeAnimatorController = animationController;
         if (!HasParameter(ClapHash, AnimatorControllerParameterType.Trigger) ||
             !HasParameter(GreetHash, AnimatorControllerParameterType.Bool) ||
-            !animator.HasState(0, ClappingStateHash))
+            !HasParameter(SpeakingHash, AnimatorControllerParameterType.Bool) ||
+            !HasParameter(TalkVariantHash, AnimatorControllerParameterType.Int) ||
+            !animator.HasState(0, ClappingStateHash) ||
+            !animator.HasState(0, TalkingFirstStateHash) ||
+            !animator.HasState(0, TalkingSecondStateHash))
         {
-            Debug.LogWarning("Gardener Animator needs Clap (Trigger), Greet (Bool) and a Clapping state.", this);
+            Debug.LogWarning("Gardener Animator needs Clap (Trigger), Greet/Speaking (Bool), TalkVariant (Int), Clapping and both Talking states.", this);
             animator.runtimeAnimatorController = originalController;
             enabled = false;
             return;
         }
         animatorConfigured = true;
         animator.SetBool(GreetHash, false);
+        animator.SetBool(SpeakingHash, false);
+        animator.SetInteger(TalkVariantHash, 0);
         animator.ResetTrigger(ClapHash);
     }
 
@@ -130,10 +157,25 @@ public sealed class GardenerMixamoGreeting : MonoBehaviour
     private void Update()
     {
         UpdateBlink();
+        bool speaking = voiceSource != null && voiceSource.isActiveAndEnabled && voiceSource.isPlaying;
+        UpdateMouth(speaking);
         if (!animatorConfigured || animator == null) return;
+        if (speaking && !wasSpeaking) animator.SetInteger(TalkVariantHash, nextTalkVariant);
+        wasSpeaking = speaking;
+        animator.SetBool(SpeakingHash, speaking);
+        // Short phrases also alternate: the next phrase starts with the other gesture.
+        int currentState = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+        if (currentState == TalkingFirstStateHash) nextTalkVariant = 1;
+        else if (currentState == TalkingSecondStateHash) nextTalkVariant = 0;
         bool clapping = IsClapping();
         if (clapping) clapRequested = false;
-        if (clapRequested || clapping) return;
+        if (clapRequested || clapping || speaking)
+        {
+            // Speech and celebration own the body; looking cannot start another gesture.
+            animator.SetBool(GreetHash, false);
+            gazeHeld = 0f;
+            return;
+        }
         if (viewer == null && Camera.main != null) viewer = Camera.main.transform;
 
         bool looking = viewer != null && IsLookingAtTeacher();
@@ -167,7 +209,7 @@ public sealed class GardenerMixamoGreeting : MonoBehaviour
 
     private void UpdateBlink()
     {
-        if (vrmInstance == null) return;
+        if (!canBlink || vrmInstance == null) return;
 
         float now = Time.time;
         if (blinkStartedAt < 0f)
@@ -195,6 +237,26 @@ public sealed class GardenerMixamoGreeting : MonoBehaviour
         }
 
         vrmInstance.Runtime.Expression.SetWeight(ExpressionKey.Blink, weight);
+    }
+
+    private void UpdateMouth(bool speaking)
+    {
+        if (!canMoveMouth || vrmInstance == null) return;
+
+        float target = 0f;
+        if (speaking)
+        {
+            // Sample only the dedicated voice, so music and effects cannot move the mouth.
+            voiceSource.GetOutputData(voiceSamples, 0);
+            float sum = 0f;
+            foreach (float sample in voiceSamples) sum += sample * sample;
+            float amplitude = Mathf.Sqrt(sum / voiceSamples.Length);
+            target = Mathf.Clamp((amplitude - mouthNoiseThreshold) * mouthGain, 0f, maximumMouthWeight);
+        }
+        mouthWeight = speaking
+            ? Mathf.MoveTowards(mouthWeight, target, mouthResponseSpeed * Time.unscaledDeltaTime)
+            : 0f;
+        vrmInstance.Runtime.Expression.SetWeight(ExpressionKey.Aa, mouthWeight);
     }
 
     private bool IsLookingAtTeacher()
@@ -226,8 +288,17 @@ public sealed class GardenerMixamoGreeting : MonoBehaviour
 
     private void OnDisable()
     {
+        mouthWeight = 0f;
+        if (vrmInstance != null)
+        {
+            if (canMoveMouth) vrmInstance.Runtime.Expression.SetWeight(ExpressionKey.Aa, 0f);
+            if (canBlink) vrmInstance.Runtime.Expression.SetWeight(ExpressionKey.Blink, 0f);
+        }
+        blinkStartedAt = -1f;
+        wasSpeaking = false;
         if (!animatorConfigured || animator == null) return;
         animator.SetBool(GreetHash, false);
+        animator.SetBool(SpeakingHash, false);
         animator.ResetTrigger(ClapHash);
         clapRequested = false;
         gazeArmed = true;
