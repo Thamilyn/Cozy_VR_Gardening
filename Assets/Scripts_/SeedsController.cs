@@ -157,6 +157,7 @@ public sealed class SeedsController : MonoBehaviour
     public string GetAdvanceBlockReason()
     {
         if (calendar == null) return "Calendar unavailable.";
+        if (!GronnyTutorial.Allows(GardenTutorialAction.Advance)) return "Complete the current instruction first.";
         bool hasTomato = false;
         foreach (PlantedSeed plant in plantedSeeds)
         {
@@ -222,6 +223,7 @@ public sealed class SeedsController : MonoBehaviour
     public bool TryPlant(SeedItem seed)
     {
         if (seed == null || seed.IsPlanted || calendar == null) return false;
+        if (!GronnyTutorial.Allows(GardenTutorialAction.Plant)) return false;
         if (singleTomatoPrototype && (seed.Crop != SeedCrop.Tomato || PrototypeTomato != null))
         {
             Guidance?.Invoke("This activity uses one tomato seed.");
@@ -258,6 +260,7 @@ public sealed class SeedsController : MonoBehaviour
     {
         if (pot == null || amountLitres <= 0f || float.IsNaN(amountLitres) || float.IsInfinity(amountLitres) || calendar == null) return;
         if (calendar.IsAdvancing) return;
+        if (!GronnyTutorial.Allows(GardenTutorialAction.Pour)) return;
         PlantedSeed plant = FindByPot(pot);
         CalendarSystem.PlantSave saved = GetState(plant);
         if (saved == null) return;

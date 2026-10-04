@@ -21,6 +21,11 @@ a grabbable prop, or either hand holding an object, consumes the calendar pinch.
 Afterwards, release the pinch fully before making a fresh calendar gesture.
 The Y button remains available while holding a tool.
 
+Each time the calendar opens, it is placed in the player's horizontal viewing
+direction at eye height. It uses world up so headset pitch and roll do not tilt
+the panel. When looking straight up or down, it keeps its previous horizontal
+direction. The panel stays fixed in the world while open for stable ray selection.
+
 ## Verification
 
 Use **Garden > Verify calendar hand input** in Unity to check the prefab's
@@ -37,6 +42,9 @@ ray/button references and the pinch latch. On the Quest, also check:
 7. Pick up, tilt and release the watering can with each hand: the calendar must
    remain unchanged. Release the left pinch, then pinch away from props to toggle
    the calendar normally.
+8. Open the calendar with the headset tilted sideways, looking up and looking
+   down: the panel should remain upright at eye height. Turn around, close and
+   reopen it: it should appear in the new horizontal viewing direction.
 
 ## Tomato prototype controls
 

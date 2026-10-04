@@ -43,8 +43,10 @@ public sealed class CalendarPanel : MonoBehaviour
     [SerializeField] private Color buttonDisabledColor = new(0.35f, 0.37f, 0.35f, 1f);
     private Button restartButton;
     private Button refillButton;
+    private Button recoverButton;
     private bool restarting;
     public event Action ButtonSelected;
+    public event Action<GardenTutorialAction> ActionCompleted;
 
     private void Awake()
     {
@@ -71,8 +73,10 @@ public sealed class CalendarPanel : MonoBehaviour
 
     public void AdvancePhase()
     {
-        ButtonSelected?.Invoke();
-        if (calendar != null) calendar.AdvancePhase();
+        if (calendar == null || calendar.IsAdvancing || !GronnyTutorial.Allows(GardenTutorialAction.Advance)) return;
+        int previousDay = calendar.CurrentDay;
+        calendar.AdvancePhase();
+        if (calendar.IsAdvancing || calendar.CurrentDay != previousDay) CompleteAction(GardenTutorialAction.Advance);
     }
 
     private void AddPrototypeControls()
@@ -81,7 +85,7 @@ public sealed class CalendarPanel : MonoBehaviour
         restartButton.onClick.AddListener(RestartPrototype);
         refillButton = MakeButton("Refill", "Refill water", -95f);
         refillButton.onClick.AddListener(RefillCans);
-        Button recoverButton = MakeButton("RecoverCan", "Recall can", 95f);
+        recoverButton = MakeButton("RecoverCan", "Recall can", 95f);
         recoverButton.onClick.AddListener(RecoverCan);
         RectTransform rect = advanceButton.GetComponent<RectTransform>();
         rect.anchoredPosition = new Vector2(-285f, -315f);
@@ -114,14 +118,20 @@ public sealed class CalendarPanel : MonoBehaviour
 
     public void RefillCans()
     {
-        ButtonSelected?.Invoke();
-        foreach (WateringCan can in FindObjectsByType<WateringCan>(FindObjectsSortMode.None)) can.Refill();
+        if (!GronnyTutorial.Allows(GardenTutorialAction.Refill)) return;
+        bool refilled = false;
+        foreach (WateringCan can in FindObjectsByType<WateringCan>(FindObjectsSortMode.None))
+        {
+            refilled |= can.CurrentWaterLitres < can.CapacityLitres;
+            can.Refill();
+        }
+        if (refilled) CompleteAction(GardenTutorialAction.Refill);
         FindFirstObjectByType<TomatoPrototypeGuide>()?.Say("Watering cans refilled. Refilling does not count as water applied to the soil.");
     }
 
     public void RecoverCan()
     {
-        ButtonSelected?.Invoke();
+        if (!GronnyTutorial.Allows(GardenTutorialAction.Recover)) return;
         TomatoPrototypeGuide guide = FindFirstObjectByType<TomatoPrototypeGuide>();
         if (!TryGetRecoveryHand(Handedness.Right, out Vector3 position) &&
             !TryGetRecoveryHand(Handedness.Left, out position))
@@ -153,6 +163,7 @@ public sealed class CalendarPanel : MonoBehaviour
         forward = Vector3.ProjectOnPlane(forward, Vector3.up).normalized;
         if (forward.sqrMagnitude < 0.01f) forward = Vector3.forward;
         closest.RecoverToHand(position + forward * 0.15f);
+        CompleteAction(GardenTutorialAction.Recover);
         guide?.Say("The watering can is beside your hand. Grab it to continue; its water is unchanged.");
     }
 
@@ -195,7 +206,7 @@ public sealed class CalendarPanel : MonoBehaviour
 
     public void RestartPrototype()
     {
-        if (restarting) return;
+        if (restarting || !GronnyTutorial.Allows(GardenTutorialAction.Restart)) return;
         foreach (Grabbable grab in FindObjectsByType<Grabbable>(FindObjectsSortMode.None))
         {
             if (grab.SelectingPointsCount == 0) continue;
@@ -209,6 +220,7 @@ public sealed class CalendarPanel : MonoBehaviour
             return;
         }
         restarting = true;
+        CompleteAction(GardenTutorialAction.Restart);
         if (restartButton != null) restartButton.interactable = false;
         SceneManager.LoadSceneAsync(scene.path, LoadSceneMode.Single);
     }
@@ -222,12 +234,14 @@ public sealed class CalendarPanel : MonoBehaviour
         if (currentPhaseText != null && milestones.Count > 0)
             currentPhaseText.text = milestones[Mathf.Clamp(phase, 0, milestones.Count - 1)].displayName;
         if (approximateDatesText != null) approximateDatesText.text = approximateDatesLabel;
-        if (advanceButton != null) advanceButton.interactable = !calendar.IsCycleComplete && !calendar.IsAdvancing;
+        bool canAdvance = !calendar.IsCycleComplete && !calendar.IsAdvancing &&
+            GronnyTutorial.Allows(GardenTutorialAction.Advance);
+        if (advanceButton != null) advanceButton.interactable = canAdvance;
         if (buttonText != null) buttonText.text = calendar.IsAdvancing ? "Time passing" : restartButton != null
             ? calendar.IsCycleComplete ? "Harvest" : "Advance phase"
             : calendar.IsCycleComplete ? completeLabel : advanceLabel;
         if (buttonBackground != null) buttonBackground.color =
-            calendar.IsCycleComplete || calendar.IsAdvancing ? buttonDisabledColor : buttonEnabledColor;
+            canAdvance ? buttonEnabledColor : buttonDisabledColor;
 
         for (int i = 0; i < milestoneViews.Length; i++)
         {
@@ -256,6 +270,15 @@ public sealed class CalendarPanel : MonoBehaviour
             foreach (CalendarSystem.PlantSave plant in calendar.Plants) total += plant.waterMillilitres;
             waterSummaryText.text = waterPrefix + total.ToString("0") + " ml";
         }
-        if (restartButton != null) restartButton.interactable = !restarting;
+        if (restartButton != null) restartButton.interactable = !restarting && GronnyTutorial.Allows(GardenTutorialAction.Restart);
+        if (refillButton != null) refillButton.interactable = GronnyTutorial.Allows(GardenTutorialAction.Refill);
+        if (recoverButton != null) recoverButton.interactable = GronnyTutorial.Allows(GardenTutorialAction.Recover);
+    }
+
+    private void CompleteAction(GardenTutorialAction action)
+    {
+        ActionCompleted?.Invoke(action);
+        ButtonSelected?.Invoke();
+        Refresh();
     }
 }

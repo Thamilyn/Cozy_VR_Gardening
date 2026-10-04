@@ -43,6 +43,7 @@ public sealed class CalendarVisibilityController : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (closeButton != null) closeButton.interactable = GronnyTutorial.Allows(GardenTutorialAction.CloseCalendar);
         // Read grab state after the Meta interactors have processed this frame.
         bool validHand = leftHand != null && leftHand.IsDataValid && leftHand.IsTracked &&
             leftHand.HandConfidence == OVRHand.TrackingConfidence.High &&
@@ -115,12 +116,14 @@ public sealed class CalendarVisibilityController : MonoBehaviour
 
     private void SelectClose()
     {
+        if (!GronnyTutorial.Allows(GardenTutorialAction.CloseCalendar)) return;
         CloseSelected?.Invoke();
         Close();
     }
 
     public void SetVisible(bool visible)
     {
+        if (!GronnyTutorial.Allows(visible ? GardenTutorialAction.OpenCalendar : GardenTutorialAction.CloseCalendar)) return;
         bool changed = IsVisible != visible;
         IsVisible = visible;
         if (changed) VisibilityChanged?.Invoke(visible);
@@ -147,10 +150,17 @@ public sealed class CalendarVisibilityController : MonoBehaviour
             return;
         }
 
+        // Keep the panel upright at eye height instead of copying the headset's pitch and roll.
+        Vector3 forward = Vector3.ProjectOnPlane(viewer.forward, Vector3.up);
+        if (forward.sqrMagnitude < 0.0001f)
+            forward = Vector3.ProjectOnPlane(transform.forward, Vector3.up);
+        if (forward.sqrMagnitude < 0.0001f) forward = Vector3.forward;
+        forward.Normalize();
+
         // Unity world-space UI faces along its local -Z axis.
         transform.SetPositionAndRotation(
-          viewer.position + viewer.forward * distanceFromView,
-         Quaternion.LookRotation(viewer.forward, viewer.up));
+            viewer.position + forward * distanceFromView,
+            Quaternion.LookRotation(forward, Vector3.up));
 
         Canvas worldCanvas = GetComponent<Canvas>();
         if (worldCanvas != null)

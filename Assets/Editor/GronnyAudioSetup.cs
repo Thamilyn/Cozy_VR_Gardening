@@ -147,6 +147,10 @@ public static class GronnyAudioSetup
         bool hands = mode == GardenInputMode.Hands;
         // Show the thumb side of the fist with the thumb upright, rather than the back of the hand.
         Vector3 movementRotation = new(2.74f, 262.35f, 143.91f);
+        // Show more of the upright left hand's back so the gesture is easier to imitate.
+        Vector3 calendarRotation = new(0f, 155f, 180f);
+        // The left index points forward at the example button, with the back of the hand facing up.
+        Vector3 calendarSelectionRotation = new(-105f, 0f, 0f);
         return control switch {
             "move" when hands => new[] {
                 Step(0, GardenDemoPose.ThumbFree, "Curl the index; keep the thumb free", rotation: movementRotation),
@@ -165,11 +169,15 @@ public static class GronnyAudioSetup
                 Step(4.2f, GardenDemoPose.Pinch, "Keep holding while moving", new Vector3(0.08f, 0.05f, 0), press: 1),
                 Step(6.5f, GardenDemoPose.Open, "Release to let go", new Vector3(0.08f, 0.05f, 0)) },
             "calendar" when hands => new[] {
-                Step(0, GardenDemoPose.Open, "Left hand away from objects", new Vector3(-0.08f, 0, 0)),
-                Step(3.4f, GardenDemoPose.Pinch, "Pinch", new Vector3(-0.08f, 0, 0)),
-                Step(6f, GardenDemoPose.Open, "Release", new Vector3(-0.08f, 0, 0)) },
+                Step(0, GardenDemoPose.Open, "Left hand away from objects", new Vector3(-0.08f, 0, 0), calendarRotation),
+                Step(3.4f, GardenDemoPose.Pinch, "Pinch", new Vector3(-0.08f, 0, 0), calendarRotation),
+                Step(6f, GardenDemoPose.Open, "Release", new Vector3(-0.08f, 0, 0), calendarRotation) },
             "calendar" => new[] { Step(0, GardenDemoPose.Open, "Left controller: Y"),
                 Step(1.2f, GardenDemoPose.Open, "Press Y", press: 1), Step(3f, GardenDemoPose.Open, "Release Y") },
+            "calendar_select" when hands => new[] {
+                Step(0, GardenDemoPose.Point, "Point at the button", rotation: calendarSelectionRotation),
+                Step(2.5f, GardenDemoPose.Pinch, "Pinch", rotation: calendarSelectionRotation, press: 1),
+                Step(5f, GardenDemoPose.Point, "Release to select", rotation: calendarSelectionRotation) },
             _ => new[] { Step(0, GardenDemoPose.Point, hands ? "Point at the button" : "Point the controller"),
                 Step(2.5f, GardenDemoPose.Pinch, hands ? "Pinch" : "Press the index trigger", press: 1),
                 Step(5f, GardenDemoPose.Point, "Release to select") }

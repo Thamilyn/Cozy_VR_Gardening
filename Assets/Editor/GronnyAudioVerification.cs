@@ -161,14 +161,27 @@ public static class GronnyAudioVerification
                     "Completed action hides demo while relevant voice can finish");
                 voice.CancelControls();
                 Require(!fixture.GetComponent<AudioSource>().isPlaying, "Mode change cancels control voice");
+                relevant = true;
+                voice.Enqueue("controls_grab_hands", "wait-for-grab", () => relevant, waitForAction: true);
+                SetField(voice, "nextVoiceAt", 0f);
+                Method(voice, "Update").Invoke(voice, null);
+                fixture.GetComponent<AudioSource>().Stop();
+                Method(voice, "Update").Invoke(voice, null);
+                Require(Field(demo, "anchor") != null, "Control demonstration remains after audio until action succeeds");
+                relevant = false;
+                Method(voice, "Update").Invoke(voice, null);
+                Require(Field(demo, "anchor") == null, "Successful action removes waiting demonstration");
                 voice.enabled = false;
                 Require(Field(demo, "anchor") == null, "Disabling playback hides demonstration");
                 GardenPot pot = UnityEngine.Object.FindObjectsByType<GardenPot>(FindObjectsSortMode.None)
                     .First(p => p.AcceptsTomato && p.SubstrateAreaSquareMetres > 0);
                 SeedItem seed = UnityEngine.Object.FindObjectsByType<SeedItem>(FindObjectsSortMode.None)
                     .First(s => s.Crop == SeedCrop.Tomato);
+                VerifyInstructionLocks(tutorial, seeds, seed);
                 seed.transform.position = pot.PlantingPoint;
                 Require(seeds.TryPlant(seed), "Real planting event");
+                Require(InstructionContains(tutorial, "Step 4/6") && !GronnyTutorial.Allows(GardenTutorialAction.OpenCalendar),
+                    "Planting unlocks watering while calendar remains blocked");
                 step++;
             }
             else if (step == 5)
@@ -189,6 +202,7 @@ public static class GronnyAudioVerification
                 Require(seeds.GetState(seeds.PrototypeTomato).retainedWaterMillilitres <= seeds.ExcessLimit(seeds.PrototypeTomato),
                     "Existing drainage still works");
                 var state = seeds.GetState(seeds.PrototypeTomato);
+                if (phase == 0) VerifyRefillProgression(tutorial, seeds);
                 if (phase < 5)
                 {
                     seeds.ReceiveWater(seeds.PrototypeTomato.pot, seeds.TargetMillilitres(seeds.PrototypeTomato) / 1000f);
@@ -212,6 +226,62 @@ public static class GronnyAudioVerification
             nextAt = EditorApplication.timeSinceStartup + 0.65;
         }
         catch (Exception exception) { Finish("FAIL: " + exception); }
+    }
+
+    private static void VerifyInstructionLocks(GronnyTutorial tutorial, SeedsController seeds, SeedItem seed)
+    {
+        Require(InstructionContains(tutorial, "Step 1/6"), "Progress starts at movement");
+        Require(!seeds.TryPlant(seed) && !GronnyTutorial.Allows(GardenTutorialAction.Pour) &&
+            !GronnyTutorial.Allows(GardenTutorialAction.OpenCalendar), "Future actions cannot skip movement");
+        GronnyTutorial.RecordSeedRelease(seed);
+        Require(InstructionContains(tutorial, "Step 1/6"), "Out-of-order release cannot complete the grab step");
+        SetControllerMode(tutorial);
+        // Synthetic completion exercises progression; actual tracking remains a device check.
+        Method(tutorial, "Learn").Invoke(tutorial, new object[] { "move" });
+        Require(InstructionContains(tutorial, "Step 2/6") && !seeds.TryPlant(seed), "Movement unlocks grab before planting");
+        GronnyTutorial.RecordSeedRelease(seed);
+        Require(InstructionContains(tutorial, "Step 3/6") && GronnyTutorial.Allows(GardenTutorialAction.Plant),
+            "Seed release unlocks planting in the same frame");
+    }
+
+    private static void VerifyRefillProgression(GronnyTutorial tutorial, SeedsController seeds)
+    {
+        WateringCan can = UnityEngine.Object.FindFirstObjectByType<WateringCan>();
+        CalendarVisibilityController visibility = UnityEngine.Object.FindFirstObjectByType<CalendarVisibilityController>();
+        CalendarPanel panel = UnityEngine.Object.FindFirstObjectByType<CalendarPanel>(FindObjectsInactive.Include);
+        SetControllerMode(tutorial);
+        SetField(can, "_currentWaterLitres", 0f);
+        SetField(tutorial, "refillCan", can);
+        Require(InstructionContains(tutorial, "Step 5/6"), "Empty released can keeps calendar refill instruction available");
+        visibility.Open();
+        Require(InstructionContains(tutorial, "Step 6/6") && !GronnyTutorial.Allows(GardenTutorialAction.Advance) &&
+            !GronnyTutorial.Allows(GardenTutorialAction.CloseCalendar) &&
+            !GronnyTutorial.Allows(GardenTutorialAction.RefillWithController), "Refill lesson only permits its indicated button");
+        panel.RecoverCan();
+        Require(!((System.Collections.Generic.HashSet<string>)Field(tutorial, "learned")).Contains("calendar_select"),
+            "Unrelated calendar action cannot complete selection");
+        var state = seeds.GetState(seeds.PrototypeTomato);
+        state.retainedWaterMillilitres = 0f;
+        float appliedBefore = state.waterMillilitres;
+        panel.RefillCans();
+        Require(can.CurrentWaterLitres > 0f && state.waterMillilitres == appliedBefore &&
+            InstructionContains(tutorial, "Step 4/6"), "Successful refill returns to unfinished watering without applying water");
+        seeds.ReceiveWater(seeds.PrototypeTomato.pot, seeds.TargetMillilitres(seeds.PrototypeTomato) / 1000f);
+        state.lastWaterAt = Time.unscaledTime - 1f;
+        Require(!tutorial.TryGetInstruction(out _, out _) && GronnyTutorial.Allows(GardenTutorialAction.Restart),
+            "Completed controls and watering release normal interactions");
+        Method(tutorial, "RefreshInteractionLocks").Invoke(tutorial, null);
+        Require(((System.Collections.Generic.HashSet<Behaviour>)Field(tutorial, "blockedInteractions")).Count == 0,
+            "Tutorial releases its Meta interaction locks");
+    }
+
+    private static bool InstructionContains(GronnyTutorial tutorial, string expected) =>
+        tutorial.TryGetInstruction(out string instruction, out _) && instruction.Contains(expected);
+
+    private static void SetControllerMode(GronnyTutorial tutorial)
+    {
+        SetField(tutorial, "mode", GardenInputMode.Controllers);
+        SetField(tutorial, "modeChangedAt", Time.unscaledTime);
     }
 
     private static void VerifyVisual()
@@ -260,6 +330,8 @@ public static class GronnyAudioVerification
 
     private static object Field(object target, string name) => target.GetType()
         .GetField(name, BindingFlags.NonPublic | BindingFlags.Instance).GetValue(target);
+    private static void SetField(object target, string name, object value) => target.GetType()
+        .GetField(name, BindingFlags.NonPublic | BindingFlags.Instance).SetValue(target, value);
     private static MethodInfo Method(object target, string name) => target.GetType()
         .GetMethod(name, BindingFlags.NonPublic | BindingFlags.Instance);
     private static void Require(bool condition, string label)

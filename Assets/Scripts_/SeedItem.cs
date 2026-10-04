@@ -46,6 +46,7 @@ public sealed class SeedItem : MonoBehaviour
         if (held) _everHeld = true;
         if (_wasHeld && !held && _everHeld)
         {
+            GronnyTutorial.RecordSeedRelease(this);
             SeedsController controller = FindFirstObjectByType<SeedsController>();
             if (controller != null) controller.TryPlant(this);
         }

@@ -4,7 +4,7 @@
 
 `TomatoPrototypeGuide` inicia `GronnyTutorial` en `Garden_Moves`. El catálogo se carga desde `Assets/Resources/GronnyAudio/Tutorial.asset`. Ya contiene referencias a los archivos originales: no se han movido audios, sustituido paquetes ni editado escenas o prefabs. `GronnyAudioSetup` crea el catálogo una sola vez y conserva las ediciones posteriores del Inspector.
 
-La voz (`GronnyVoicePlayer`) gestiona una única fuente de audio y una cola con condiciones de pertinencia. `GronnyTutorial` observa el estado real de `SeedsController`, las acciones del calendario y `FirstPersonLocomotor`; no modifica objetivos de agua, fases, agarres ni locomoción. `GardenControlDemonstration` crea objetos independientes con modelos de Meta y desactiva sus comportamientos de seguimiento, colliders y física.
+La voz (`GronnyVoicePlayer`) gestiona una única fuente de audio y una cola con condiciones de pertinencia. `GronnyTutorial` observa el estado real de `SeedsController`, las acciones del calendario y `FirstPersonLocomotor`, y desbloquea los controles progresivamente. Conserva los objetivos de agua y las fases existentes. `GardenControlDemonstration` crea objetos independientes con modelos de Meta y desactiva sus comportamientos de seguimiento, colliders y física.
 
 Referencia revisada: conversación **Crear diálogos para el profesor**, especialmente las últimas correcciones del movimiento con índice doblado y las cuatro instrucciones separadas de calendario. Los diálogos generales y la introducción al tomate conservan sus identificadores separados.
 
@@ -33,22 +33,26 @@ Audio | Evento y condición de pertinencia | Entrada | Visual
 `help_drained` | El exceso retenido desaparece, conservándose el exceso aplicado en el registro | Ambas | Panel y charco existentes
 `help_calendar` | Inactividad con agua suficiente y vertido detenido | Ambas | Calendario existente
 `help_refill` | Regadera sostenida vacía mientras la planta necesita agua | Ambas | Calendario existente y botón Refill water
-`controls_move_hands` | Primera plantación pendiente y movimiento aún no aprendido | Manos | Ghost-HandLeft, ThumbUp, HandMidFist, IndexPoint; toque y deslizamiento propios
+`controls_move_hands` | Paso 1: movimiento aún no completado | Manos | Ghost-HandLeft, ThumbUp, HandMidFist, IndexPoint; toque y deslizamiento propios
 `controls_move_controllers` | Mismo contexto | Mandos | MetaQuestTouchPlus_Left y clip de joystick stickN
-`controls_grab_hands` | Primera plantación pendiente; aún no se ha observado agarre y liberación | Manos | Ghost-HandRight, HandPinch y pose abierta, desplazamiento propio
+`controls_grab_hands` | Paso 2: movimiento completado; agarre y liberación pendientes | Manos | Ghost-HandRight, HandPinch y pose abierta, desplazamiento propio
 `controls_grab_controllers` | Mismo contexto | Mandos | MetaQuestTouchPlus_Right y clip grip
-`controls_calendar_hands` | Primer cuidado listo para avanzar o regadera vacía; calendario cerrado | Manos | Ghost-HandLeft: alejar, pinza y apertura
+`controls_calendar_hands` | Paso 5: primer riego completado y regadera vertical, o rellenado necesario | Manos | Ghost-HandLeft: alejar, pinza y apertura
 `controls_calendar_controllers` | Mismo contexto | Mandos | MetaQuestTouchPlus_Left y clip button02 (Y)
-`controls_calendar_select_hands` | Calendario abierto durante el primer cuidado | Manos | Ghost-HandRight, IndexPoint y HandPinch; rayo y botón de ejemplo propios
+`controls_calendar_select_hands` | Paso 6: apertura completada; seleccionar Advance phase o Refill water | Manos | Ghost-HandLeft, IndexPoint y HandPinch izquierdos; rayo y botón de ejemplo propios
 `controls_calendar_select_controllers` | Mismo contexto | Mandos | MetaQuestTouchPlus_Right y clip trigger; rayo y botón de ejemplo propios
 
 Los avisos y fases se observan cada 0,15 s. Durante el salto temporal se limpia la cola. Cada instrucción se cancela también si su acción ya ocurrió o cambió la fase. Las referencias a la planta se consultan de nuevo, por lo que una petición pendiente no conserva un estado de agua antiguo.
 
 ## Entrada y aprendizaje
 
-Se usa `OVRInput.GetActiveController()` y se estabiliza un cambio durante 0,35 s. Sin entrada conocida se espera para explicar controles. Al cambiar a manos o mandos se descartan las instrucciones del modo anterior y se oculta cualquier demostración incompatible. Se solicita solo la variante que corresponde al modo activo; las instrucciones ya iniciadas no se repiten automáticamente para el mismo modo.
+Se usa `OVRInput.GetActiveController()` y se estabiliza un cambio durante 0,35 s. Sin entrada conocida se espera para explicar controles. Al cambiar a manos o mandos se descartan las instrucciones del modo anterior y se oculta cualquier demostración incompatible. Se conserva el progreso de la sesión y se explica el paso pendiente con la variante del nuevo modo.
 
-Movimiento se aprende al recibir un evento de traslación de `FirstPersonLocomotor`; no se usa el movimiento físico de la cabeza. Agarre se aprende tras observar selección y liberación de semilla o regadera. Apertura se aprende al abrir el calendario y selección al activar un botón de avanzar, rellenar, recuperar o cerrar. Estas marcas son de sesión y por modo de entrada. Las explicaciones completas de controles quedan limitadas a la primera plantación/cuidado.
+El panel muestra una sola acción y su número de paso: movimiento → agarre y liberación → plantación → riego y posición vertical → apertura del calendario → selección. Movimiento requiere un evento de traslación relativa o velocidad de `FirstPersonLocomotor` y al menos 10 cm de desplazamiento horizontal del origen del rig; mover físicamente la cabeza o girar no completa el paso. Agarre requiere seleccionar y liberar una semilla de tomate. `SeedItem` notifica la liberación antes de intentar plantar, de modo que soltar sobre tierra válida puede completar ambas acciones en el mismo gesto. Plantación y riego se verifican con el estado real de la planta y los objetivos existentes. El calendario se habilita después de detener el vertido con la regadera vertical y sin exceso.
+
+Durante los primeros pasos se deshabilitan temporalmente los interactables Meta de objetos ajenos, giros artificiales y teletransporte. La locomoción enseñada sigue disponible para acercarse a los objetos. La regadera se puede agarrar después de plantar. Plantación, vertido, apertura y botones del calendario comprueban permisos en sus puntos de entrada. Mientras se enseña selección, únicamente se permite el botón indicado: Advance phase, o Refill water si la regadera se vació. Cerrar, recuperar, reiniciar y rellenar con B no completan ni evitan ese paso. Selección solo se aprende tras un avance aceptado o un rellenado efectivo; un clic rechazado no cuenta.
+
+La necesidad de rellenar se conserva al soltar una regadera vacía para poder realizar la pinza de apertura. Después de rellenar se vuelve al riego pendiente. Las marcas son de sesión, compartidas entre manos y mandos. Al completar los controles y el primer riego se restauran los interactables deshabilitados por el tutorial. También se restauran al desactivar el guía, sin reactivar las semillas ya plantadas.
 
 Los primeros diálogos enseñan acciones completas. Desde planta joven aumenta el tiempo antes de ofrecer ayuda (55 s frente a 30 s), y no se vuelven a explicar controles automáticamente. Los avisos de exceso siguen disponibles. Cada audio marcado `assisted` crea una entrada `Assisted: <id>` en el journal existente **cuando comienza su reproducción**, nunca cuando solo se encola. Una ayuda interrumpida por prioridad no registra dos veces el mismo inicio al reanudarse. Los mensajes de autonomía de fases 2–4 no marcan por sí solos asistencia.
 
@@ -62,7 +66,7 @@ Las poses de manos son muestras estáticas: el proyecto interpola sus huesos y a
 
 También se inspeccionaron `HandGhost`, las variantes OpenXR y `MicrogestureSwipe`/`MicrogestureTeleport` de los ejemplos de Meta. Las variantes OpenXR tienen otra jerarquía y los clips de ejemplo no representan todos los pasos del guion corregido; se eligieron los fantasmas OVR con bindings verificados. `HandMidFist_r_` incluye cinco rutas de marcadores de depuración nombrados con `l_`; no son huesos deformantes y la demostración ignora esas rutas inexistentes. No se modificó el paquete.
 
-Las demos conservan los materiales originales de manos fantasma y mandos de Meta y la escala de importación de sus modelos. Se colocan en el mundo al iniciar el audio, aproximadamente a 0,85 m delante y 0,34 m al lado de la vista, ligeramente por debajo. No siguen cada giro de la cabeza. Modelos y rayo usan Ignore Raycast y carecen de colliders activos. Se ocultan al terminar/cancelar la voz, completar la acción, cambiar de fase, cambiar de entrada o abandonar la actividad.
+Las demos conservan los materiales originales de manos fantasma y mandos de Meta y la escala de importación de sus modelos. Se colocan en el mundo al iniciar el audio, aproximadamente a 0,85 m delante y 0,34 m al lado de la vista, ligeramente por debajo. No siguen cada giro de la cabeza. Modelos y rayo usan Ignore Raycast y carecen de colliders activos. Las demostraciones de controles repiten su secuencia visual en silencio después del audio hasta completar la acción; no se encola el control siguiente por haber terminado el WAV. Se ocultan al completar la acción, cambiar de fase, cambiar de entrada o abandonar la actividad. Las demás demos mantienen su duración vinculada a la voz.
 
 ## Configuración
 
@@ -80,11 +84,13 @@ El audio utiliza una fuente dedicada 2D sin Doppler para mantener una voz compre
 
 Se encontraron los 27 WAV previstos, sin nombres faltantes ni variantes adicionales ni contenido binario duplicado (SHA-256). El inventario conserva sus nombres reales. La estructura actual no contiene un registro de dominio persistente: se usa el journal de sesión para indicar asistencia.
 
-En `CalendarVisibilityController`, la apertura actual ocurre al iniciar la pinza tras una liberación estable de 0,1 s; el guion indica pinzar y liberar. La demo muestra el gesto completo, pero no altera el instante real de apertura ni la protección frente a objetos cercanos. Seleccionar botones sigue el PointableCanvas de Meta. La regadera admite también el botón B para rellenar si está sostenida, además del botón Refill water del calendario; la ayuda enseña este último.
+En `CalendarVisibilityController`, la apertura actual ocurre al iniciar la pinza tras una liberación estable de 0,1 s; el guion indica pinzar y liberar. La demo muestra el gesto completo, pero no altera el instante real de apertura ni la protección frente a objetos cercanos. Seleccionar botones sigue el PointableCanvas de Meta. La regadera admite también el botón B para rellenar si está sostenida una vez terminada la secuencia guiada; durante el aprendizaje se usa el botón Refill water del calendario.
 
 La lógica instalada de microgestos confirma índice doblado para entrar, toque del pulgar para activar y deslizamientos para dar pasos; índice extendido es el gesto de salida (`ExitMicroGesture`, OpenIndex). No se usa el guion antiguo de índice extendido para entrar. El archivo WAV está identificado por su nombre; la comprobación física incluye escuchar que la grabación diga el guion corregido.
 
 ## Validación
+
+Los cambios de avance progresivo del 4 de octubre de 2026 tienen revisión estática. La comprobación existente de Play se ha ampliado para cubrir acciones fuera de orden, persistencia visual tras el audio, liberación antes de plantar, permisos del calendario, rellenado y restauración de interactables; no se ha ejecutado esta ampliación. `unity --help` no pudo ejecutarse porque `unity` no está disponible en el PATH de esta sesión. La compilación y la ejecución en Unity y Meta Quest 3 quedan pendientes. Los resultados descritos a continuación corresponden a la versión anterior del tutorial y no validan estos cambios.
 
 Las comprobaciones automatizadas se ejecutan mediante Unity CLI y el Editor conectado por Pipeline, con informes en `Docs/Validation`. El menú `Garden/Gronny/Verify audio and tomato events in Play` permite repetir la comprobación; modifica únicamente el estado temporal de Play y vuelve a Edit sin guardar la escena.
 

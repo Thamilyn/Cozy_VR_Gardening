@@ -13,7 +13,11 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
         public Func<bool> relevant;
         public Func<bool> demonstrationRelevant;
         public Action started;
+        public bool waitForAction;
+        public bool audioFinished;
     }
+
+    public event Action<string> AudioFinished;
 
     private readonly List<Request> pending = new();
     private readonly HashSet<string> delivered = new();
@@ -23,6 +27,7 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
     private GronnyAudioCatalogue catalogue;
     private GardenControlDemonstration demonstration;
     private float nextVoiceAt;
+    private float visualStartedAt;
 
     public void Configure(GronnyAudioCatalogue settings, GardenControlDemonstration visuals)
     {
@@ -40,7 +45,7 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
     }
 
     public void Enqueue(string id, string key, Func<bool> relevant, Action started = null, bool once = true,
-        Func<bool> demonstrationRelevant = null)
+        Func<bool> demonstrationRelevant = null, bool waitForAction = false)
     {
         GronnyAudioCatalogue.Cue cue = catalogue.Find(id);
         if (cue == null || cue.clip == null)
@@ -51,10 +56,10 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
         if (!isActiveAndEnabled || relevant == null || !relevant() ||
             (once && delivered.Contains(key)) || (current != null && current.key == key) ||
             pending.Exists(request => request.key == key) ||
-            (lastPlayed.TryGetValue(id, out float last) && Time.unscaledTime - last < cue.cooldown)) return;
+            (!waitForAction && lastPlayed.TryGetValue(id, out float last) && Time.unscaledTime - last < cue.cooldown)) return;
 
         var request = new Request { cue = cue, key = key, relevant = relevant, started = started,
-            demonstrationRelevant = demonstrationRelevant };
+            demonstrationRelevant = demonstrationRelevant, waitForAction = waitForAction };
         if (current != null && cue.priority > current.cue.priority)
         {
             // An interrupted, still relevant instruction can resume after the urgent warning.
@@ -83,12 +88,23 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
         pending.RemoveAll(request => !request.relevant());
         if (current != null)
         {
-            if (!current.relevant() || !source.isPlaying) StopCurrent();
+            if (!current.relevant()) StopCurrent();
             else
             {
-                if (current.demonstrationRelevant != null && !current.demonstrationRelevant()) demonstration.Hide();
-                else demonstration.Tick(source.time);
-                return;
+                // The audio can finish while the demonstration still waits for the player's action.
+                if (!source.isPlaying && !current.audioFinished)
+                {
+                    current.audioFinished = true;
+                    AudioFinished?.Invoke(current.cue.id);
+                }
+                if (!source.isPlaying && !current.waitForAction) StopCurrent();
+                else
+                {
+                    if (current.demonstrationRelevant != null && !current.demonstrationRelevant()) demonstration.Hide();
+                    else demonstration.Tick(source.isPlaying ? source.time :
+                        Mathf.Repeat(Time.unscaledTime - visualStartedAt, current.cue.clip.length / catalogue.pitch) * catalogue.pitch);
+                    return;
+                }
             }
         }
         if (Time.unscaledTime < nextVoiceAt || pending.Count == 0) return;
@@ -102,7 +118,9 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
         source.clip = current.cue.clip;
         source.volume = catalogue.voiceVolume * current.cue.volume;
         source.pitch = catalogue.pitch;
+        current.audioFinished = false;
         source.Play();
+        visualStartedAt = Time.unscaledTime;
         if (current.demonstrationRelevant == null || current.demonstrationRelevant()) demonstration.Show(current.cue);
         current.started?.Invoke();
         current.started = null;

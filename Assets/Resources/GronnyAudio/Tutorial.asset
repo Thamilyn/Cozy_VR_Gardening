@@ -376,21 +376,21 @@ MonoBehaviour:
     - at: 0
       pose: 0
       position: {x: -0.08, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 155, z: 180}
       thumbRotation: {x: 0, y: 0, z: 0}
       label: Left hand away from objects
       press: 0
     - at: 3.4
       pose: 1
       position: {x: -0.08, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 155, z: 180}
       thumbRotation: {x: 0, y: 0, z: 0}
       label: Pinch
       press: 0
     - at: 6
       pose: 0
       position: {x: -0.08, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 155, z: 180}
       thumbRotation: {x: 0, y: 0, z: 0}
       label: Release
       press: 0
@@ -407,21 +407,21 @@ MonoBehaviour:
     - at: 0
       pose: 3
       position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
+      rotation: {x: -105, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
       label: Point at the button
       press: 0
     - at: 2.5
       pose: 1
       position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
+      rotation: {x: -105, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
       label: Pinch
       press: 1
     - at: 5
       pose: 3
       position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
+      rotation: {x: -105, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
       label: Release to select
       press: 0

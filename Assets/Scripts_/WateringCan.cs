@@ -63,6 +63,7 @@ public sealed class WateringCan : MonoBehaviour
     public float WaterNormalized => capacityLitres > 0f ? _currentWaterLitres / capacityLitres : 0f;
     public bool IsPouring { get; private set; }
     public bool IsHeld => _grabbable != null && _grabbable.SelectingPointsCount > 0;
+    public bool IsTiltedToPour => Vector3.Dot(transform.up, Vector3.up) <= pourTiltThreshold;
     public float LastReleasedAt { get; private set; } = float.NegativeInfinity;
 
     private void Awake()
@@ -94,13 +95,14 @@ public sealed class WateringCan : MonoBehaviour
         UpdateHeldCollisionState(isHeld || _awaitingRecoveryGrab);
 
         if (OVRInput.GetDown(refillButton, OVRInput.Controller.RTouch) &&
+            GronnyTutorial.Allows(GardenTutorialAction.RefillWithController) &&
             (!requireCanToBeHeldForRefill || isHeld))
         {
             Refill();
         }
 
-        bool tiltedToPour = Vector3.Dot(transform.up, Vector3.up) <= pourTiltThreshold;
-        IsPouring = isHeld && tiltedToPour && _currentWaterLitres > 0f &&
+        IsPouring = isHeld && IsTiltedToPour && _currentWaterLitres > 0f &&
+                    GronnyTutorial.Allows(GardenTutorialAction.Pour) &&
                     (_calendar == null || !_calendar.IsAdvancing);
 
         if (!IsPouring)
@@ -207,6 +209,7 @@ public sealed class WateringCan : MonoBehaviour
     /// </summary>
     public void Refill()
     {
+        // Input callers check tutorial permissions before resetting the supply of all cans.
         _currentWaterLitres = capacityLitres;
         onWaterLevelChanged.Invoke(WaterNormalized);
         onRefilled.Invoke();

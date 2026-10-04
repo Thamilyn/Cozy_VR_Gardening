@@ -763,6 +763,7 @@ MonoBehaviour:
   requireCanToBeHeldForRefill: 1
   spout: {fileID: 0}
   waterStream: {fileID: 0}
+  streamMaterial: {fileID: 0}
   onWaterLevelChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4968,15 +4969,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5159078012444724336, guid: c758e44ed6af95c4aa50fa3e608b95e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.79
+      value: 1.881
       objectReference: {fileID: 0}
     - target: {fileID: 5159078012444724336, guid: c758e44ed6af95c4aa50fa3e608b95e0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.003
+      value: 0.024
       objectReference: {fileID: 0}
     - target: {fileID: 5159078012444724336, guid: c758e44ed6af95c4aa50fa3e608b95e0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.77
+      value: -1.861
       objectReference: {fileID: 0}
     - target: {fileID: 5159078012444724336, guid: c758e44ed6af95c4aa50fa3e608b95e0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6930,6 +6931,7 @@ MonoBehaviour:
   requireCanToBeHeldForRefill: 1
   spout: {fileID: 0}
   waterStream: {fileID: 0}
+  streamMaterial: {fileID: 0}
   onWaterLevelChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -7653,9 +7655,20 @@ MonoBehaviour:
   facePlayer: 1
   followPlantedPot: 0
   potPanelOffset: {x: 0.25, y: 0.46, z: 0}
-  welcomeInstruction: "Pick up the red tomato seed.\nDrop it onto the soil in an empty small pot."
-  initialWaterInformation: "One seed per pot.\nGrab: pinch or press Grip.\nCalendar: left-hand pinch away from objects, or Y."
+  welcomeInstruction: 'Pick up the red tomato seed.
+
+    Drop it onto the soil in
+    an empty small pot.'
+  initialWaterInformation: 'One seed per pot.
+
+    Grab: pinch or press Grip.
+
+    Calendar:
+    left-hand pinch away from objects, or Y.'
   idleHintSeconds: 25
+  excessWaterColor: {r: 1, g: 0.55, b: 0.5, a: 1}
+  drainedExcessColor: {r: 1, g: 0.75, b: 0.4, a: 1}
+  withinTargetColor: {r: 0.55, g: 1, b: 0.65, a: 1}
 --- !u!1001 &3000000300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7797,6 +7810,10 @@ MonoBehaviour:
   blinkCloseDuration: 0.08
   blinkHoldDuration: 0.03
   blinkOpenDuration: 0.14
+  mouthGain: 12
+  mouthNoiseThreshold: 0.002
+  maximumMouthWeight: 0.85
+  mouthResponseSpeed: 12
 --- !u!1 &4100000000
 GameObject:
   m_ObjectHideFlags: 0
@@ -7864,7 +7881,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4100000100}
   m_LocalRotation: {x: -0, y: 0.34351236, z: -0, w: 0.9391481}
-  m_LocalPosition: {x: 0, y: 0, z: -1.791}
+  m_LocalPosition: {x: 0, y: 0, z: -1.92}
   m_LocalScale: {x: 0.001, y: 0.001, z: 0.001}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7874,7 +7891,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 40.182, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.783, y: 1.757}
+  m_AnchoredPosition: {x: 1.936, y: 1.797}
   m_SizeDelta: {x: 720, y: 440}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4100000102
@@ -8016,7 +8033,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Pick up the red tomato seed.\nDrop it onto the soil in an empty small pot."
+  m_Text: 'Pick up the red tomato seed.
+
+    Drop it onto the soil in an empty small
+    pot.'
 --- !u!1 &4100000120
 GameObject:
   m_ObjectHideFlags: 0
@@ -8095,7 +8115,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "One seed per pot.\nGrab: pinch or press Grip.\nCalendar: left-hand pinch away from objects, or Y."
+  m_Text: 'One seed per pot.
+
+    Grab: pinch or press Grip.
+
+    Calendar: left-hand
+    pinch away from objects, or Y.'
 --- !u!1 &4100000200
 GameObject:
   m_ObjectHideFlags: 0
@@ -8847,7 +8872,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "HARVEST"
+  m_Text: HARVEST
 --- !u!114 &4200000000
 MonoBehaviour:
   m_ObjectHideFlags: 0

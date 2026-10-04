@@ -42,7 +42,8 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         }
         if (viewer == null) return;
         cue = instruction;
-        bool left = cue.demo == GardenControlDemo.Calendar || cue.demo == GardenControlDemo.Move;
+        bool left = cue.demo == GardenControlDemo.Calendar || cue.demo == GardenControlDemo.Move ||
+            (mode == GardenInputMode.Hands && cue.demo == GardenControlDemo.CalendarSelect);
         var hand = left ? catalogue.leftHand : catalogue.rightHand;
         GameObject prefab = mode == GardenInputMode.Hands ? hand.prefab :
             left ? catalogue.leftController : catalogue.rightController;
@@ -57,8 +58,9 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         Vector3 offset = catalogue.viewOffset;
         if (left) offset.x = -Mathf.Abs(offset.x);
         Vector3 position = viewer.position + facing * offset;
-        // The movement gesture must read in profile from the eye, including its side offset.
-        if (mode == GardenInputMode.Hands && cue.demo == GardenControlDemo.Move)
+        // Account for the side offset so the intended hand angle is measured from the player's eye.
+        if (mode == GardenInputMode.Hands &&
+            (cue.demo == GardenControlDemo.Move || cue.demo == GardenControlDemo.Calendar))
             facing = Quaternion.LookRotation(position - viewer.position, Vector3.up);
         anchor.transform.SetPositionAndRotation(position, facing);
         GameObject moving = new("Motion");

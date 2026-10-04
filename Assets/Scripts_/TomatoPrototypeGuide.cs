@@ -88,8 +88,11 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
         if (plant == null)
         {
             water.color = neutralWaterColor;
-            instruction.text = message;
-            water.text = initialWaterInformation;
+            string step = null;
+            string detail = null;
+            bool guided = audioTutorial != null && audioTutorial.TryGetInstruction(out step, out detail);
+            instruction.text = guided ? step : message;
+            water.text = guided ? detail : initialWaterInformation;
             return;
         }
         CalendarSystem.PlantSave saved = seeds.GetState(plant);
@@ -120,7 +123,8 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
         if (!pouring && Time.unscaledTime < messageUntil && !excess) prompt = message;
         if (!pouring && Time.unscaledTime - lastActionAt > idleHintSeconds && !saved.harvested)
             prompt += "\nCalendar: left-hand pinch away from objects, or Y.";
-        instruction.text = prompt;
+        instruction.text = audioTutorial != null && audioTutorial.TryGetInstruction(out string currentStep, out string control)
+            ? currentStep + "\n" + control : prompt;
         float target = seeds.TargetMillilitres(plant);
         string status = WaterFeedbackStatus(plant, saved, target, excess);
         water.text = status + "\nPour: " + saved.currentPourMillilitres.ToString("0.0") + " ml | Stage: " + saved.phaseWaterMillilitres.ToString("0.0") + " ml\n" +
