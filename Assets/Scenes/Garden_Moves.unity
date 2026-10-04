@@ -7634,6 +7634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TomatoHarvestBasket
   collectionVolume: {fileID: 4100000302}
+  gardener: {fileID: 4000001003}
 --- !u!114 &3000000205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7786,15 +7787,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ef3785e1b5e4f55a4a2663ee048e52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GardenerMixamoGreeting
-  idleClip: {fileID: -203655887218126122, guid: ed5841a00881c4b478066a81af74215a, type: 3}
-  greetingClips:
-  - {fileID: -203655887218126122, guid: e256d31a9d9d6dc45a5e48976be86a38, type: 3}
-  - {fileID: -203655887218126122, guid: 4cfa997eeb1d50748907a61388895ccd, type: 3}
+  animationController: {fileID: 9100000, guid: 2870141d0d7c4d3c9c4beef9c2d04e7c, type: 2}
   gazeAngleDegrees: 12
   gazeDuration: 0.8
   maximumDistance: 4
   lookAwayToReset: 0.5
-  crossFadeDuration: 0.25
   minimumBlinkInterval: 2.5
   maximumBlinkInterval: 5.5
   blinkCloseDuration: 0.08

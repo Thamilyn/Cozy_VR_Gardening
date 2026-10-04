@@ -1,18 +1,19 @@
 using UnityEngine;
-using UnityEngine.Animations;
-using UnityEngine.Playables;
 using UniVRM10;
 
-/// <summary>Cycles through looping Humanoid FBX motions when the player looks at the teacher.</summary>
+/// <summary>Runs the teacher's idle, gaze greeting and one-shot harvest celebration through the Animator.</summary>
 [DisallowMultipleComponent]
 public sealed class GardenerMixamoGreeting : MonoBehaviour
 {
     private const string TeacherName = "Gardener Kawaii - Profesor de jardineria";
     private const string EyeAnchorName = "CenterEyeAnchor";
 
-    [Header("Mixamo clips (Humanoid)")]
-    [SerializeField] private AnimationClip idleClip;
-    [SerializeField] private AnimationClip[] greetingClips = new AnimationClip[2];
+    private static readonly int ClapHash = Animator.StringToHash("Clap");
+    private static readonly int GreetHash = Animator.StringToHash("Greet");
+    private static readonly int ClappingStateHash = Animator.StringToHash("Base Layer.Clapping");
+
+    [Header("Mixamo Animator (Humanoid)")]
+    [SerializeField] private RuntimeAnimatorController animationController;
 
     [Header("Gaze")]
     [SerializeField, Range(3f, 30f)] private float gazeAngleDegrees = 12f;
@@ -21,7 +22,6 @@ public sealed class GardenerMixamoGreeting : MonoBehaviour
     [SerializeField, Min(0.5f)] private float maximumDistance = 4f;
     [SerializeField, Min(0.1f), Tooltip("Seconds looking away before another greeting can be triggered.")]
     private float lookAwayToReset = 0.5f;
-    [SerializeField, Min(0.01f)] private float crossFadeDuration = 0.25f;
 
     [Header("VRM blinking")]
     [SerializeField, Min(0.1f), Tooltip("Minimum time between blinks, in seconds.")]
@@ -38,15 +38,12 @@ public sealed class GardenerMixamoGreeting : MonoBehaviour
     private Transform head;
     private Animator animator;
     private Vrm10Instance vrmInstance;
-    private PlayableGraph graph;
-    private AnimationMixerPlayable mixer;
-    private AnimationClipPlayable greetingPlayable;
+    private RuntimeAnimatorController originalController;
     private float gazeHeld;
     private float gazeLost;
-    private float greetingWeight;
-    private float targetGreetingWeight;
-    private int lastGreetingIndex = -1;
     private bool gazeArmed = true;
+    private bool animatorConfigured;
+    private bool clapRequested;
     private bool originalApplyRootMotion;
     private bool rootMotionChanged;
     private float nextBlinkAt;
@@ -67,17 +64,9 @@ public sealed class GardenerMixamoGreeting : MonoBehaviour
             vrmInstance = null;
 
         if (animator == null || animator.avatar == null || !animator.avatar.isHuman ||
-            idleClip == null || greetingClips == null || greetingClips.Length == 0)
+            animationController == null)
         {
-            Debug.LogWarning("Gardener greeting needs a humanoid VRM, one idle clip and at least one Mixamo greeting.", this);
-            enabled = false;
-            return;
-        }
-
-        for (int i = 0; i < greetingClips.Length; i++)
-        {
-            if (greetingClips[i] != null) continue;
-            Debug.LogWarning("Gardener greeting is missing a Mixamo clip at index " + i + ".", this);
+            Debug.LogWarning("Gardener needs a humanoid VRM and its harvest Animator Controller.", this);
             enabled = false;
             return;
         }
@@ -93,23 +82,58 @@ public sealed class GardenerMixamoGreeting : MonoBehaviour
         originalApplyRootMotion = animator.applyRootMotion;
         animator.applyRootMotion = false;
         rootMotionChanged = true;
-        graph = PlayableGraph.Create("Gardener Kawaii Mixamo Greetings");
-        graph.SetTimeUpdateMode(DirectorUpdateMode.GameTime);
-        mixer = AnimationMixerPlayable.Create(graph, 2);
-        var idlePlayable = AnimationClipPlayable.Create(graph, idleClip);
-        idlePlayable.SetApplyFootIK(true);
-        graph.Connect(idlePlayable, 0, mixer, 0);
-        mixer.SetInputWeight(0, 1f);
-        mixer.SetInputWeight(1, 0f);
-        var output = AnimationPlayableOutput.Create(graph, "Gardener animation", animator);
-        output.SetSourcePlayable(mixer);
-        graph.Play();
+        originalController = animator.runtimeAnimatorController;
+        animator.runtimeAnimatorController = animationController;
+        if (!HasParameter(ClapHash, AnimatorControllerParameterType.Trigger) ||
+            !HasParameter(GreetHash, AnimatorControllerParameterType.Bool) ||
+            !animator.HasState(0, ClappingStateHash))
+        {
+            Debug.LogWarning("Gardener Animator needs Clap (Trigger), Greet (Bool) and a Clapping state.", this);
+            animator.runtimeAnimatorController = originalController;
+            enabled = false;
+            return;
+        }
+        animatorConfigured = true;
+        animator.SetBool(GreetHash, false);
+        animator.ResetTrigger(ClapHash);
+    }
+
+    private bool HasParameter(int hash, AnimatorControllerParameterType type)
+    {
+        foreach (var parameter in animator.parameters)
+            if (parameter.nameHash == hash && parameter.type == type) return true;
+        return false;
+    }
+
+    private bool IsClapping()
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).fullPathHash == ClappingStateHash ||
+            (animator.IsInTransition(0) &&
+             animator.GetNextAnimatorStateInfo(0).fullPathHash == ClappingStateHash);
+    }
+
+    public void CelebrateHarvest()
+    {
+        if (!isActiveAndEnabled || !animatorConfigured || animator == null ||
+            clapRequested || IsClapping()) return;
+
+        // Suspend gaze greetings until the player looks away, including during the return to idle.
+        animator.SetBool(GreetHash, false);
+        animator.ResetTrigger(ClapHash);
+        animator.SetTrigger(ClapHash);
+        clapRequested = true;
+        gazeArmed = false;
+        gazeHeld = 0f;
+        gazeLost = 0f;
     }
 
     private void Update()
     {
         UpdateBlink();
-        if (!graph.IsValid()) return;
+        if (!animatorConfigured || animator == null) return;
+        bool clapping = IsClapping();
+        if (clapping) clapRequested = false;
+        if (clapRequested || clapping) return;
         if (viewer == null && Camera.main != null) viewer = Camera.main.transform;
 
         bool looking = viewer != null && IsLookingAtTeacher();
@@ -119,7 +143,7 @@ public sealed class GardenerMixamoGreeting : MonoBehaviour
             gazeHeld += Time.deltaTime;
             if (gazeArmed && gazeHeld >= gazeDuration)
             {
-                PlayNextGreeting();
+                animator.SetBool(GreetHash, true);
                 gazeArmed = false;
             }
         }
@@ -130,14 +154,9 @@ public sealed class GardenerMixamoGreeting : MonoBehaviour
             if (gazeLost >= lookAwayToReset)
             {
                 gazeArmed = true;
-                targetGreetingWeight = 0f;
+                animator.SetBool(GreetHash, false);
             }
         }
-
-        greetingWeight = Mathf.MoveTowards(greetingWeight, targetGreetingWeight,
-            Time.deltaTime / crossFadeDuration);
-        mixer.SetInputWeight(0, 1f - greetingWeight);
-        mixer.SetInputWeight(1, greetingWeight);
     }
 
     private void ScheduleNextBlink(float now)
@@ -199,32 +218,26 @@ public sealed class GardenerMixamoGreeting : MonoBehaviour
         return true;
     }
 
-    private void PlayNextGreeting()
+    [ContextMenu("Test harvest clapping in Play mode")]
+    private void TestClapping()
     {
-        lastGreetingIndex = (lastGreetingIndex + 1) % greetingClips.Length;
-        if (greetingPlayable.IsValid())
-        {
-            mixer.DisconnectInput(1);
-            graph.DestroyPlayable(greetingPlayable);
-        }
-
-        greetingPlayable = AnimationClipPlayable.Create(graph, greetingClips[lastGreetingIndex]);
-        greetingPlayable.SetApplyFootIK(true);
-        graph.Connect(greetingPlayable, 0, mixer, 1);
-        greetingPlayable.SetTime(0);
-        mixer.SetInputWeight(1, greetingWeight);
-        targetGreetingWeight = 1f;
+        if (Application.isPlaying) CelebrateHarvest();
     }
 
-    [ContextMenu("Test next greeting in Play mode")]
-    private void TestGreeting()
+    private void OnDisable()
     {
-        if (Application.isPlaying && graph.IsValid()) PlayNextGreeting();
+        if (!animatorConfigured || animator == null) return;
+        animator.SetBool(GreetHash, false);
+        animator.ResetTrigger(ClapHash);
+        clapRequested = false;
+        gazeArmed = true;
+        gazeHeld = gazeLost = 0f;
     }
 
     private void OnDestroy()
     {
-        if (graph.IsValid()) graph.Destroy();
+        if (animatorConfigured && animator != null)
+            animator.runtimeAnimatorController = originalController;
         if (rootMotionChanged && animator != null) animator.applyRootMotion = originalApplyRootMotion;
     }
 }

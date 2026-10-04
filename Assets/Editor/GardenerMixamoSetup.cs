@@ -1,18 +1,21 @@
 using System.IO;
 using UnityEditor;
+using UnityEditor.Animations;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/// <summary>Restores the teacher's default Humanoid clips and scene references.</summary>
+/// <summary>Restores the teacher's harvest Animator, Humanoid clip settings and scene references.</summary>
 internal static class GardenerMixamoSetup
 {
     private const string ScenePath = "Assets/Scenes/Garden_Moves.unity";
     private const string ControllerName = "Gardener Kawaii Greeting";
-    private const string IdlePath = "Assets/Vroid/Animations/Idle (1).fbx";
-    private static readonly string[] GreetingPaths =
+    private const string IdlePath = "Assets/Vroid/Animations/Happy Idle.fbx";
+    private const string ClapPath = "Assets/Vroid/Animations/Clapping.fbx";
+    private const string AnimatorPath = "Assets/Vroid/Animations/GronnyHarvest.controller";
+    private static readonly string[] AnimationPaths =
     {
-        "Assets/Vroid/Animations/Quick Formal Bow.fbx",
+        ClapPath,
         "Assets/Vroid/Animations/Standing Greeting.fbx"
     };
     private static bool configuring;
@@ -27,9 +30,9 @@ internal static class GardenerMixamoSetup
         configuring = true;
         try
         {
-            var paths = new string[GreetingPaths.Length + 1];
+            var paths = new string[AnimationPaths.Length + 1];
             paths[0] = IdlePath;
-            GreetingPaths.CopyTo(paths, 1);
+            AnimationPaths.CopyTo(paths, 1);
             foreach (string path in paths)
             {
                 var importer = AssetImporter.GetAtPath(path) as ModelImporter;
@@ -52,8 +55,9 @@ internal static class GardenerMixamoSetup
 
                 foreach (var clip in clips)
                 {
-                    if (!clip.loopTime) needsUpdate = true;
-                    clip.loopTime = true;
+                    bool loop = path != ClapPath;
+                    if (clip.loopTime != loop) needsUpdate = true;
+                    clip.loopTime = loop;
                     string name = Path.GetFileNameWithoutExtension(path);
                     if (clip.name != name) needsUpdate = true;
                     clip.name = name;
@@ -69,22 +73,29 @@ internal static class GardenerMixamoSetup
                 }
             }
 
-            var idle = FindClip(IdlePath);
-            if (idle == null)
+            var harvestAnimator = AssetDatabase.LoadAssetAtPath<AnimatorController>(AnimatorPath);
+            if (harvestAnimator == null)
             {
-                Debug.LogError("Gardener idle clip could not be loaded: " + IdlePath);
+                Debug.LogError("Gardener Animator Controller is missing: " + AnimatorPath);
                 return;
             }
-            var greetings = new AnimationClip[GreetingPaths.Length];
-            for (int i = 0; i < greetings.Length; i++)
+            var states = harvestAnimator.layers[0].stateMachine.states;
+            foreach (var child in states)
             {
-                greetings[i] = FindClip(GreetingPaths[i]);
-                if (greetings[i] == null)
+                string path = child.state.name == "Happy Idle" ? IdlePath :
+                    child.state.name == "Clapping" ? ClapPath :
+                    child.state.name == "Standing Greeting" ? AnimationPaths[1] : null;
+                var clip = path != null ? FindClip(path) : null;
+                if (clip == null)
                 {
-                    Debug.LogError("Gardener greeting clip could not be loaded: " + GreetingPaths[i]);
+                    Debug.LogError("Gardener Animator clip is missing for state: " + child.state.name);
                     return;
                 }
+                child.state.motion = clip;
             }
+            EditorUtility.SetDirty(harvestAnimator);
+            AssetDatabase.SaveAssets();
+
             var scene = SceneManager.GetSceneByPath(ScenePath);
             bool openedHere = !scene.IsValid() || !scene.isLoaded;
             try
@@ -103,24 +114,13 @@ internal static class GardenerMixamoSetup
                 }
 
                 var serialized = new SerializedObject(controller);
-                var idleProperty = serialized.FindProperty("idleClip");
-                var greetingProperty = serialized.FindProperty("greetingClips");
-                bool changed = idleProperty.objectReferenceValue != idle ||
-                    greetingProperty.arraySize != greetings.Length;
-                if (!changed)
-                    for (int i = 0; i < greetings.Length; i++)
-                        if (greetingProperty.GetArrayElementAtIndex(i).objectReferenceValue != greetings[i])
-                            changed = true;
-                if (!changed) return;
-
-                idleProperty.objectReferenceValue = idle;
-                greetingProperty.arraySize = greetings.Length;
-                for (int i = 0; i < greetings.Length; i++)
-                    greetingProperty.GetArrayElementAtIndex(i).objectReferenceValue = greetings[i];
+                var animatorProperty = serialized.FindProperty("animationController");
+                if (animatorProperty.objectReferenceValue == harvestAnimator) return;
+                animatorProperty.objectReferenceValue = harvestAnimator;
                 serialized.ApplyModifiedProperties();
                 EditorSceneManager.MarkSceneDirty(scene);
                 EditorSceneManager.SaveScene(scene);
-                Debug.Log("Gardener Kawaii FBX animation loop is configured in Garden_Moves.");
+                Debug.Log("Gardener Happy Idle, gaze greeting and one-shot Clapping are configured in Garden_Moves.");
             }
             finally
             {

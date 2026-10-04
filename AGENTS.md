@@ -26,11 +26,22 @@ Estas instrucciones se aplican a todo el proyecto y a sus subdirectorios.
 
 ## Herramientas y permiso
 
-- No ejecutes herramientas externas sin permiso explícito del usuario.
+- No ejecutes herramientas externas sin permiso explícito del usuario, salvo el uso de Unity CLI autorizado en la sección siguiente.
 - Solicita permiso antes de iniciar aplicaciones, Unity, compilaciones, pruebas automatizadas, instaladores, gestores de paquetes, scripts externos o servicios externos.
 - Antes de solicitar permiso, explica qué herramienta quieres ejecutar, para qué y qué efectos tendrá.
 - Puedes utilizar las herramientas integradas del entorno de asistencia para leer y editar archivos dentro del proyecto, siempre que no inicien herramientas externas.
 - Si una validación requiere una herramienta externa y no tienes permiso, realiza la revisión estática posible e indica claramente qué comprobaciones quedaron pendientes. No afirmes que se ejecutaron pruebas que no realizaste.
+
+## Unity CLI
+
+- El usuario ha instalado Unity CLI (`unity`) y ha autorizado su uso a partir de ahora. Prioriza esta herramienta para las operaciones de Unity que correspondan a la tarea.
+- Puedes consultar ayuda, versiones, estado y diagnósticos mediante el CLI sin volver a pedir permiso por la herramienta. Las acciones que inicien Unity, compilaciones, pruebas, instaladores o servicios externos siguen requiriendo autorización previa; no la solicites de nuevo si ya está concedida para la tarea.
+- Referencia oficial: [Unity CLI reference](https://docs.unity.com/en-us/unity-cli/unity-cli-reference). Es experimental: comprueba los comandos y opciones de la versión instalada con `unity --help` y `unity <command> --help`; consulta la versión con `unity version --format json`.
+- Ejecuta los comandos desde la raíz de este proyecto. Cuando el comando lo admita, indica explícitamente `--project-path "C:\Users\Trole\Cozy_VR_Gardening"`. Respeta la versión de `ProjectSettings/ProjectVersion.txt`.
+- Para controlar un Editor conectado se necesita Unity Pipeline. Comprueba la conexión con `unity status` y descubre las herramientas y sus parámetros con `unity list` o `unity command --help`. No presupongas que Pipeline está instalado ni lo instales o actualices sin autorización.
+- Para validar cambios, utiliza según corresponda `unity recompile`, `unity test` o `unity build`, tras comprobar su ayuda y contar con la autorización necesaria. Guarda informes y resultados dentro del proyecto.
+- Prefiere `--format json` para interpretar resultados. Revisa el código de salida, los errores y las advertencias antes de afirmar que una operación tuvo éxito.
+- La disponibilidad del CLI no autoriza actualizar Unity, paquetes, módulos o el propio CLI, cerrar el Editor descartando trabajo, ni modificar archivos fuera del proyecto.
 
 ## Entrega de cambios
 
