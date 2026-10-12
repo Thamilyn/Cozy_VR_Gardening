@@ -245,9 +245,16 @@ public sealed class SeedsController : MonoBehaviour
                 plantedAtGameDay = calendar.ElapsedGameDays, stage = GrowthStage.Seed.ToString()
             };
             seed.PlantIn(pot);
-            plantedSeeds.Add(new PlantedSeed { seed = seed, pot = pot, crop = seed.Crop, stage = GrowthStage.Seed });
+            PlantedSeed plant = new() { seed = seed, pot = pot, crop = seed.Crop, stage = GrowthStage.Seed };
+            plantedSeeds.Add(plant);
             calendar.RecordPlanting(saved);
             seed.ShowStage(GrowthStage.Seed);
+            if (seed.Crop == SeedCrop.Tomato)
+            {
+                PlantWaterProgress progress = seed.GetComponent<PlantWaterProgress>() ??
+                    seed.gameObject.AddComponent<PlantWaterProgress>();
+                progress.Initialize(this, plant);
+            }
             Guidance?.Invoke("Seed planted!\nTilt the watering can over the soil.");
             return true;
         }
