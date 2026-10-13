@@ -20,7 +20,7 @@ Al recibir el estado de exceso desde SeedsController, GardenSoil crea una superf
 
 La tierra conserva el color húmedo. El color Waterlogged color se aplica al agua acumulada. El offset de 1,5 mm se convierte a unidades locales porque Ground tiene una escala vertical muy pequeña.
 
-El charco aparece al superar el límite de la fase. El modelo existente drena tras cinco segundos sin aportes; cuando comunica que ha drenado, el charco se desvanece en 0,8 segundos. El aviso del panel conserva el exceso ocurrido hasta cambiar de fase. Al avanzar o reiniciar se limpia el estado visual de exceso.
+El charco aparece al superar el límite de la fase. El modelo existente drena tras cinco segundos sin aportes; cuando comunica que ha drenado, el charco se desvanece en 0,8 segundos. El aviso de la barra sobre la planta conserva el exceso ocurrido hasta cambiar de fase. Al avanzar o reiniciar se limpia el estado visual de exceso.
 
 Los materiales están en Resources y referencian sus shaders para incluirlos como recursos de la aplicación. Se comparten los materiales; los parámetros del charco se aplican por renderer con MaterialPropertyBlock. Ambos shaders tienen una sola pasada transparente y usan las macros de instancing y estéreo de Unity. Son efectos estilizados, sin refracción ni reflejos de pantalla.
 

@@ -171,6 +171,30 @@ public static class GronnyAudioVerification
                 relevant = false;
                 Method(voice, "Update").Invoke(voice, null);
                 Require(Field(demo, "anchor") == null, "Successful action removes waiting demonstration");
+                relevant = true;
+                voice.SetBackgroundDemonstration("04_first_watering", () => relevant);
+                voice.Enqueue("04_first_watering", "watering-persistence", () => relevant);
+                SetField(voice, "nextVoiceAt", 0f);
+                Method(voice, "Update").Invoke(voice, null);
+                fixture.GetComponent<AudioSource>().Stop();
+                Method(voice, "Update").Invoke(voice, null);
+                Require(demo.IsShowing(catalogue.Find("04_first_watering")),
+                    "Watering visual remains after its spoken instruction finishes");
+                voice.Enqueue("05_water_target", "target-with-watering", () => relevant);
+                SetField(voice, "nextVoiceAt", 0f);
+                Method(voice, "Update").Invoke(voice, null);
+                Require(fixture.GetComponent<AudioSource>().clip == catalogue.Find("05_water_target").clip &&
+                    demo.IsShowing(catalogue.Find("04_first_watering")),
+                    "Water target audio plays without removing the watering demonstration");
+                fixture.GetComponent<AudioSource>().Stop();
+                Method(voice, "Update").Invoke(voice, null);
+                demo.SetInputMode(GardenInputMode.Hands);
+                Method(voice, "Update").Invoke(voice, null);
+                Require(demo.IsShowing(catalogue.Find("04_first_watering")),
+                    "Watering demonstration returns after an input mode change");
+                relevant = false;
+                Method(voice, "Update").Invoke(voice, null);
+                Require(Field(demo, "anchor") == null, "Watering visual ends when watering is no longer needed");
                 voice.enabled = false;
                 Require(Field(demo, "anchor") == null, "Disabling playback hides demonstration");
                 GardenPot pot = UnityEngine.Object.FindObjectsByType<GardenPot>(FindObjectsSortMode.None)

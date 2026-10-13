@@ -1,24 +1,25 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>Short visual coaching and measured water feedback for the tomato activity.</summary>
+/// <summary>Short visual coaching; measured water feedback lives above each planted tomato.</summary>
 [DisallowMultipleComponent]
 public sealed class TomatoPrototypeGuide : MonoBehaviour
 {
     [SerializeField] private SeedsController seeds;
     [Header("Editable scene panel")]
     [SerializeField] private Text instruction;
+    [Tooltip("Secondary instructions on Gronny's panel. Water measurements appear above the plant.")]
     [SerializeField] private Text water;
+    [SerializeField, Tooltip("Fixed scene position for gardening demonstrations beside Gronny. Movement keeps its existing placement.")]
+    private Transform gardeningDemonstrationAnchor;
+    [SerializeField, Tooltip("Keep the board visible at its authored scene position, independent of tracking and watering.")]
+    private bool keepPanelStatic = true;
     [SerializeField] private bool facePlayer = true;
     [SerializeField] private bool followPlantedPot;
     [SerializeField] private Vector3 potPanelOffset = new(0.25f, 0.46f, 0f);
     [SerializeField, TextArea] private string welcomeInstruction = "Pick up the red tomato seed.\nDrop it onto the soil in an empty small pot.";
     [SerializeField, TextArea] private string initialWaterInformation = "One seed per pot.\nGrab: pinch or press Grip.\nCalendar: left-hand pinch away from objects, or Y.";
     [SerializeField, Min(5f)] private float idleHintSeconds = 25f;
-    [Header("Water feedback colors")]
-    [SerializeField] private Color excessWaterColor = new(1f, 0.55f, 0.5f, 1f);
-    [SerializeField] private Color drainedExcessColor = new(1f, 0.75f, 0.4f, 1f);
-    [SerializeField] private Color withinTargetColor = new(0.55f, 1f, 0.65f, 1f);
     private Color neutralWaterColor;
     private CalendarSystem calendar;
     private Transform viewer;
@@ -30,6 +31,8 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
     private bool successShown;
     private float nextRefresh;
     private GronnyTutorial audioTutorial;
+
+    public Transform GardeningDemonstrationAnchor => gardeningDemonstrationAnchor;
 
     private void Start()
     {
@@ -44,11 +47,13 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
         neutralWaterColor = water.color;
         calendar = seeds.Calendar;
         seeds.Guidance += Say;
-        calendar.AdvanceBlocked += Say;
+        calendar.AdvanceBlocked += OnAdvanceBlocked;
         if (gameObject.scene.name == "Garden_Moves")
             audioTutorial = GetComponent<GronnyTutorial>() ?? gameObject.AddComponent<GronnyTutorial>();
         GameObject eye = GameObject.Find("CenterEyeAnchor");
         viewer = eye != null ? eye.transform : Camera.main != null ? Camera.main.transform : null;
+        GardenPresentationPlacement placement = gameObject.AddComponent<GardenPresentationPlacement>();
+        placement.Configure(transform, viewer, keepStatic: keepPanelStatic);
         Say(welcomeInstruction);
     }
 
@@ -59,13 +64,20 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
         lastActionAt = Time.unscaledTime;
     }
 
+    private void OnAdvanceBlocked(string reason)
+    {
+        // The calendar may include a numeric deficit; keep measurements at the plant.
+        Say(reason != null && reason.StartsWith("Still needs ")
+            ? "Check the water bar above your plant.\nWater the soil before advancing." : reason);
+    }
+
     private void LateUpdate()
     {
         SeedsController.PlantedSeed plant = seeds.PrototypeTomato;
-        if (followPlantedPot && plant != null && plant.pot != null)
+        if (!keepPanelStatic && followPlantedPot && plant != null && plant.pot != null)
             transform.position = plant.pot.PlantingPoint + potPanelOffset;
         if (viewer == null && Camera.main != null) viewer = Camera.main.transform;
-        if (facePlayer && viewer != null)
+        if (!keepPanelStatic && facePlayer && viewer != null)
         {
             Vector3 direction = transform.position - viewer.position;
             direction.y = 0f;
@@ -123,42 +135,23 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
         if (!pouring && Time.unscaledTime < messageUntil && !excess) prompt = message;
         if (!pouring && Time.unscaledTime - lastActionAt > idleHintSeconds && !saved.harvested)
             prompt += "\nCalendar: left-hand pinch away from objects, or Y.";
-        instruction.text = audioTutorial != null && audioTutorial.TryGetInstruction(out string currentStep, out string control)
-            ? currentStep + "\n" + control : prompt;
-        float target = seeds.TargetMillilitres(plant);
-        string status = WaterFeedbackStatus(plant, saved, target, excess);
-        water.text = status + "\nPour: " + saved.currentPourMillilitres.ToString("0.0") + " ml | Stage: " + saved.phaseWaterMillilitres.ToString("0.0") + " ml\n" +
-            (saved.tomatoPhase < 5 ? "Target: " + target.ToString("0.0") + " ml | Limit: " + seeds.ExcessLimit(plant).ToString("0.0") + " ml\n" : "") +
-            "Total: " + saved.waterMillilitres.ToString("0.0") + " ml";
-    }
-
-    private string WaterFeedbackStatus(SeedsController.PlantedSeed plant, CalendarSystem.PlantSave saved,
-        float target, bool excess)
-    {
         water.color = neutralWaterColor;
-        if (saved.harvested) return "HARVEST COMPLETE";
-        if (saved.tomatoPhase >= 5) return "READY TO HARVEST";
-        if (target <= 0f) return seeds.WaterStatus(plant);
-        if (excess)
+        if (audioTutorial != null && audioTutorial.TryGetInstruction(out string currentStep, out string control))
         {
-            water.color = excessWaterColor;
-            return "TOO MUCH WATER";
+            instruction.text = currentStep;
+            water.text = control;
+            return;
         }
-        // Keep the excess visible after drainage; recovery must not erase the watering mistake.
-        if (saved.phaseWaterMillilitres > seeds.ExcessLimit(plant))
-        {
-            water.color = drainedExcessColor;
-            return "EXCESS WATER DRAINED";
-        }
-        if (saved.retainedWaterMillilitres < target) return "WATER BELOW TARGET";
-        water.color = withinTargetColor;
-        return "WATER IN RANGE";
+        instruction.text = prompt;
+        water.text = saved.harvested ? "Calendar: Restart to play again."
+            : saved.tomatoPhase >= 5 ? "Place the red tomato in the harvest tray."
+            : "Check the water bar above your plant.\nCalendar: left-hand pinch away from objects, or Y.";
     }
 
     private void OnDestroy()
     {
         if (seeds != null) seeds.Guidance -= Say;
-        if (calendar != null) calendar.AdvanceBlocked -= Say;
+        if (calendar != null) calendar.AdvanceBlocked -= OnAdvanceBlocked;
     }
 
     private void OnEnable()

@@ -28,6 +28,7 @@ public sealed class CalendarVisibilityController : MonoBehaviour
     private bool pinchArmed;
     private float releaseStartedAt = float.NaN;
     private float nextInteractorSearch;
+    private GardenPresentationPlacement placement;
 
     public bool IsVisible { get; private set; }
     public event System.Action<bool> VisibilityChanged;
@@ -35,10 +36,18 @@ public sealed class CalendarVisibilityController : MonoBehaviour
 
     private void Awake()
     {
+        // Meta ray selection uses Collider.Raycast directly, so the target can be a trigger.
+        // A solid panel can become the locomotor's ground and lift the player as it moves.
+        if (rayCollider != null) rayCollider.isTrigger = true;
         // A world-space, pointable Canvas must not inherit a screen-space Canvas scale.
         if (transform.parent != null) transform.SetParent(null, false);
         if (closeButton != null) closeButton.onClick.AddListener(SelectClose);
         SetVisible(startVisible);
+        if (panelContent != null)
+        {
+            placement = gameObject.AddComponent<GardenPresentationPlacement>();
+            placement.Configure(panelContent.transform, viewTransform, rayCollider);
+        }
     }
 
     private void LateUpdate()
@@ -138,6 +147,11 @@ public sealed class CalendarVisibilityController : MonoBehaviour
         if (panelContent != null) panelContent.SetActive(true);
         if (rayCollider != null) rayCollider.enabled = true;
         if (calendarPanel != null) calendarPanel.Refresh();
+        if (placement != null)
+        {
+            placement.ResetReferencePose();
+            placement.ResolveNow();
+        }
     }
 
     private void PlaceInFrontOfView()

@@ -28,6 +28,9 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
     private GardenControlDemonstration demonstration;
     private float nextVoiceAt;
     private float visualStartedAt;
+    private GronnyAudioCatalogue.Cue backgroundDemonstration;
+    private Func<bool> backgroundRelevant;
+    private float backgroundStartedAt;
 
     public void Configure(GronnyAudioCatalogue settings, GardenControlDemonstration visuals)
     {
@@ -42,6 +45,12 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
         source.pitch = catalogue.pitch;
         var gestures = FindFirstObjectByType<GardenerMixamoGreeting>();
         if (gestures != null) gestures.BindVoiceSource(source);
+    }
+
+    public void SetBackgroundDemonstration(string id, Func<bool> relevant)
+    {
+        backgroundDemonstration = catalogue.Find(id);
+        backgroundRelevant = relevant;
     }
 
     public void Enqueue(string id, string key, Func<bool> relevant, Action started = null, bool once = true,
@@ -100,14 +109,23 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
                 if (!source.isPlaying && !current.waitForAction) StopCurrent();
                 else
                 {
-                    if (current.demonstrationRelevant != null && !current.demonstrationRelevant()) demonstration.Hide();
-                    else demonstration.Tick(source.isPlaying ? source.time :
-                        Mathf.Repeat(Time.unscaledTime - visualStartedAt, current.cue.clip.length / catalogue.pitch) * catalogue.pitch);
+                    if (current.cue.demo == GardenControlDemo.None) UpdateBackgroundDemonstration();
+                    else if (current.demonstrationRelevant != null && !current.demonstrationRelevant()) demonstration.Hide();
+                    else
+                    {
+                        if (!demonstration.IsShowing(current.cue)) demonstration.Show(current.cue);
+                        demonstration.Tick(source.isPlaying ? source.time :
+                            Mathf.Repeat(Time.unscaledTime - visualStartedAt, current.cue.clip.length / catalogue.pitch) * catalogue.pitch);
+                    }
                     return;
                 }
             }
         }
-        if (Time.unscaledTime < nextVoiceAt || pending.Count == 0) return;
+        if (Time.unscaledTime < nextVoiceAt || pending.Count == 0)
+        {
+            UpdateBackgroundDemonstration();
+            return;
+        }
         int selected = 0;
         for (int i = 1; i < pending.Count; i++)
             if (pending[i].cue.priority > pending[selected].cue.priority) selected = i;
@@ -121,9 +139,28 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
         current.audioFinished = false;
         source.Play();
         visualStartedAt = Time.unscaledTime;
-        if (current.demonstrationRelevant == null || current.demonstrationRelevant()) demonstration.Show(current.cue);
+        if (current.cue.demo == GardenControlDemo.None) UpdateBackgroundDemonstration();
+        else if (current.demonstrationRelevant == null || current.demonstrationRelevant()) demonstration.Show(current.cue);
         current.started?.Invoke();
         current.started = null;
+    }
+
+    private void UpdateBackgroundDemonstration()
+    {
+        if (backgroundDemonstration == null || backgroundDemonstration.clip == null ||
+            backgroundRelevant == null || !backgroundRelevant())
+        {
+            demonstration.Hide();
+            return;
+        }
+        // Continue the visual while later spoken instructions play, without replaying its audio.
+        if (!demonstration.IsShowing(backgroundDemonstration))
+        {
+            demonstration.Show(backgroundDemonstration);
+            backgroundStartedAt = Time.unscaledTime;
+        }
+        float duration = Mathf.Max(0.01f, backgroundDemonstration.clip.length / catalogue.pitch);
+        demonstration.Tick(Mathf.Repeat(Time.unscaledTime - backgroundStartedAt, duration) * catalogue.pitch);
     }
 
     private void StopCurrent()

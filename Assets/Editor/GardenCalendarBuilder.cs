@@ -297,6 +297,8 @@ public static class GardenCalendarBuilder
     private static void ConfigureToggle(GameObject root)
     {
         root.name = "GardenCalendarCanvas";
+        BoxCollider rayCollider = root.GetComponent<BoxCollider>();
+        if (rayCollider != null) rayCollider.isTrigger = true;
         RectTransform canvasRect = root.GetComponent<RectTransform>();
         Transform content = root.transform.Find("GardenCalendarVR");
         if (content == null)

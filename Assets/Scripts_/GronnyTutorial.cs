@@ -124,6 +124,8 @@ public sealed class GronnyTutorial : MonoBehaviour
         !System.Array.Exists(cans, can => can != null && can.IsHeld && can.IsTiltedToPour);
     private bool CanEmpty => cans != null && System.Array.Exists(cans,
         can => can != null && can.isActiveAndEnabled && (can.IsHeld || can == refillCan) && can.CurrentWaterLitres <= 0f);
+    private bool ShowWateringDemonstration => Caring && phase == 0 && Step == GuideStep.Water &&
+        NeedsWater && !Excess && !CanEmpty;
 
     private void Start()
     {
@@ -150,9 +152,11 @@ public sealed class GronnyTutorial : MonoBehaviour
             return;
         }
         demonstration = gameObject.AddComponent<GardenControlDemonstration>();
-        demonstration.Configure(catalogue);
+        Transform gardeningAnchor = GetComponent<TomatoPrototypeGuide>()?.GardeningDemonstrationAnchor;
+        demonstration.Configure(catalogue, gardeningAnchor);
         voice = gameObject.AddComponent<GronnyVoicePlayer>();
         voice.Configure(catalogue, demonstration);
+        voice.SetBackgroundDemonstration("04_first_watering", () => ShowWateringDemonstration);
         initialized = true;
         active = this;
         playerOrigin = rig.transform;
@@ -396,8 +400,12 @@ public sealed class GronnyTutorial : MonoBehaviour
 
     private void Say(string id, string key, System.Func<bool> relevant, bool once = true, bool waitForAction = false)
     {
-        System.Func<bool> demoRelevant = catalogue.Find(id)?.demo == GardenControlDemo.Upright
-            ? () => System.Array.Exists(cans, can => can != null && can.IsPouring) : null;
+        System.Func<bool> demoRelevant = catalogue.Find(id)?.demo switch
+        {
+            GardenControlDemo.Water => () => ShowWateringDemonstration,
+            GardenControlDemo.Upright => () => System.Array.Exists(cans, can => can != null && can.IsPouring),
+            _ => null
+        };
         voice.Enqueue(id, key, relevant, () =>
         {
             if (catalogue.Find(id).assisted) calendar.RecordTutorialHelp(id);

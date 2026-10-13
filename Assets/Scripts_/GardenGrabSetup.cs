@@ -43,8 +43,13 @@ public sealed class GardenGrabSetup : MonoBehaviour
 
     private static void InstallForGardenScene()
     {
-        if (!IsGardenScene(SceneManager.GetActiveScene()) ||
-            FindFirstObjectByType<GardenGrabSetup>(FindObjectsInactive.Include) != null)
+        Scene scene = SceneManager.GetActiveScene();
+        if (!IsGardenScene(scene)) return;
+
+        // Garden_Moves contains disabled prop-setup objects. They must not prevent the
+        // player's floor and collision setup from running before the locomotor starts.
+        InitializePlayer(scene);
+        if (FindFirstObjectByType<GardenGrabSetup>(FindObjectsInactive.Include) != null)
         {
             return;
         }
@@ -62,6 +67,86 @@ public sealed class GardenGrabSetup : MonoBehaviour
     private void Awake()
     {
         EnsureInteractionRig();
+        InitializePlayer(gameObject.scene);
+    }
+
+    private static void InitializePlayer(Scene scene)
+    {
+        foreach (OVRCameraRig rig in FindObjectsByType<OVRCameraRig>(FindObjectsSortMode.None))
+        {
+            if (rig.gameObject.scene != scene) continue;
+            ConfigurePlayerCollisionLayers(rig.transform);
+            if (scene.name == "Garden_Moves" && rig.GetComponent<GardenPlayerHeightCalibration>() == null)
+                rig.gameObject.AddComponent<GardenPlayerHeightCalibration>();
+        }
+        InitializePlayerFloor(scene);
+    }
+
+    public static void ConfigurePlayerCollisionLayers(Transform rig)
+    {
+        int playerLayer = LayerMask.NameToLayer("GardenPlayer");
+        if (rig == null || playerLayer < 0) return;
+        // Meta's casts do not filter their own collider by identity. During resizing or rig
+        // movement, an unsynchronised body/hand collider can otherwise become its own floor.
+        foreach (Collider collider in rig.GetComponentsInChildren<Collider>(true))
+            collider.gameObject.layer = playerLayer;
+        foreach (HandPhysicsCapsules hands in rig.GetComponentsInChildren<HandPhysicsCapsules>(true))
+            hands.InjectUseLayer(playerLayer);
+
+        int environmentMask = ~(1 << playerLayer);
+        foreach (Oculus.Interaction.Locomotion.CharacterController controller in
+                 rig.GetComponentsInChildren<Oculus.Interaction.Locomotion.CharacterController>(true))
+            controller.LayerMask = controller.LayerMask.value & environmentMask;
+        foreach (Oculus.Interaction.Locomotion.WallPenetrationTunneling walls in
+                 rig.GetComponentsInChildren<Oculus.Interaction.Locomotion.WallPenetrationTunneling>(true))
+            walls.LayerMask = walls.LayerMask.value & environmentMask;
+    }
+
+    private static void InitializePlayerFloor(Scene scene)
+    {
+        if (scene.name != "Garden_Moves") return;
+        Collider floor = null;
+        foreach (Collider candidate in FindObjectsByType<Collider>(FindObjectsSortMode.None))
+        {
+            if (candidate.gameObject.scene == scene && candidate.name == "Floor" &&
+                candidate.enabled && !candidate.isTrigger)
+            {
+                floor = candidate;
+                break;
+            }
+        }
+        if (floor == null) return;
+
+        // Run before the locomotor's Start/first frame. It drives the rig from capsule feet,
+        // so correcting the camera root alone does not establish the player's starting floor.
+        Physics.SyncTransforms();
+        foreach (Oculus.Interaction.Locomotion.CharacterController controller in
+                 FindObjectsByType<Oculus.Interaction.Locomotion.CharacterController>(FindObjectsSortMode.None))
+        {
+            if (controller.gameObject.scene != scene) continue;
+            OVRCameraRig rig = controller.GetComponentInParent<OVRCameraRig>();
+            if (rig != null) PlacePlayerOnFloor(rig.transform, controller, floor);
+        }
+        Physics.SyncTransforms();
+    }
+
+    public static bool PlacePlayerOnFloor(Transform playerOrigin,
+        Oculus.Interaction.Locomotion.CharacterController controller, Collider floor)
+    {
+        if (playerOrigin == null || controller == null || floor == null) return false;
+        Vector3 rayOrigin = playerOrigin.position;
+        rayOrigin.y = floor.bounds.max.y + 1f;
+        // Query the real floor directly; nearby tables and props are not spawn surfaces.
+        if (!floor.Raycast(new Ray(rayOrigin, Vector3.down), out RaycastHit hit, floor.bounds.size.y + 2f))
+            return false;
+
+        Vector3 origin = playerOrigin.position;
+        origin.y = hit.point.y;
+        playerOrigin.position = origin;
+        Vector3 capsulePosition = controller.Pose.position;
+        capsulePosition.y = hit.point.y + controller.Height * 0.5f + controller.SkinWidth;
+        controller.SetPosition(capsulePosition);
+        return true;
     }
 
     private IEnumerator Start()
