@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 public sealed class GardenControlDemonstration : MonoBehaviour
 {
     private GronnyAudioCatalogue catalogue;
+    private Transform gardeningAnchor;
     private GardenInputMode mode;
     private GameObject anchor;
     private GameObject model;
@@ -20,8 +21,15 @@ public sealed class GardenControlDemonstration : MonoBehaviour
     private GronnyAudioCatalogue.Cue cue;
     private AnimationClip pressClip;
     private GameObject buttonHighlight;
+    private bool fixedGardeningPosition;
 
-    public void Configure(GronnyAudioCatalogue settings) => catalogue = settings;
+    public bool IsShowing(GronnyAudioCatalogue.Cue instruction) => anchor != null && cue == instruction;
+
+    public void Configure(GronnyAudioCatalogue settings, Transform gardeningAnchor = null)
+    {
+        catalogue = settings;
+        this.gardeningAnchor = gardeningAnchor;
+    }
 
     public void SetInputMode(GardenInputMode inputMode)
     {
@@ -51,18 +59,27 @@ public sealed class GardenControlDemonstration : MonoBehaviour
 
         anchor = new GameObject("Gronny control demonstration");
         anchor.SetActive(false);
-        // World-fixed placement avoids a hand model following every head turn.
-        Vector3 forward = Vector3.ProjectOnPlane(viewer.forward, Vector3.up).normalized;
-        if (forward.sqrMagnitude < 0.01f) forward = Vector3.forward;
-        Quaternion facing = Quaternion.LookRotation(forward, Vector3.up);
-        Vector3 offset = catalogue.viewOffset;
-        if (left) offset.x = -Mathf.Abs(offset.x);
-        Vector3 position = viewer.position + facing * offset;
-        // Account for the side offset so the intended hand angle is measured from the player's eye.
-        if (mode == GardenInputMode.Hands &&
-            (cue.demo == GardenControlDemo.Move || cue.demo == GardenControlDemo.Calendar))
-            facing = Quaternion.LookRotation(position - viewer.position, Vector3.up);
-        anchor.transform.SetPositionAndRotation(position, facing);
+        fixedGardeningPosition = gardeningAnchor != null && cue.demo != GardenControlDemo.Move;
+        if (fixedGardeningPosition)
+        {
+            // Use the scene's clear demonstration area, independent of the player's pose or watering.
+            anchor.transform.SetPositionAndRotation(gardeningAnchor.position, gardeningAnchor.rotation);
+            anchor.transform.localScale = Vector3.one * 1.5f;
+        }
+        else
+        {
+            // Preserve the existing movement instruction placement and hand angle.
+            Vector3 forward = Vector3.ProjectOnPlane(viewer.forward, Vector3.up).normalized;
+            if (forward.sqrMagnitude < 0.01f) forward = Vector3.forward;
+            Quaternion facing = Quaternion.LookRotation(forward, Vector3.up);
+            Vector3 offset = catalogue.viewOffset;
+            if (left) offset.x = -Mathf.Abs(offset.x);
+            Vector3 position = viewer.position + facing * offset;
+            if (mode == GardenInputMode.Hands &&
+                (cue.demo == GardenControlDemo.Move || cue.demo == GardenControlDemo.Calendar))
+                facing = Quaternion.LookRotation(position - viewer.position, Vector3.up);
+            anchor.transform.SetPositionAndRotation(position, facing);
+        }
         GameObject moving = new("Motion");
         motion = moving.transform;
         motion.SetParent(anchor.transform, false);
@@ -127,13 +144,15 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         caption.anchor = TextAnchor.MiddleCenter;
         caption.alignment = TextAlignment.Center;
         caption.characterSize = 0.008f;
-        caption.fontSize = 48;
+        caption.fontSize = fixedGardeningPosition ? 64 : 48;
         caption.color = Color.white;
         if (cue.demo == GardenControlDemo.CalendarSelect) CreatePointer();
         if (cue.demo == GardenControlDemo.Water || cue.demo == GardenControlDemo.Upright) CreateCanSymbol();
         foreach (Transform child in anchor.GetComponentsInChildren<Transform>(true)) child.gameObject.layer = 2;
         anchor.SetActive(true);
         Tick(0f);
+        GardenPresentationPlacement placement = anchor.AddComponent<GardenPresentationPlacement>();
+        placement.Configure(anchor.transform, viewer, keepStatic: fixedGardeningPosition);
     }
 
     private void CachePoses(GronnyAudioCatalogue.HandVisual hand)
@@ -175,7 +194,7 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01((audioSeconds - step.at) / catalogue.blendSeconds));
         motion.localPosition = Vector3.Lerp(previous.position, step.position, t);
         motion.localRotation = Quaternion.Slerp(Quaternion.Euler(previous.rotation), Quaternion.Euler(step.rotation), t);
-        caption.text = step.label;
+        caption.text = fixedGardeningPosition ? ReadableCaption(step.label) : step.label;
         if (mode == GardenInputMode.Hands && poses != null)
         {
             for (int j = 0; j < joints.Length; j++)
@@ -200,6 +219,13 @@ public sealed class GardenControlDemonstration : MonoBehaviour
             pointer.SetPosition(1, motion.localPosition + Vector3.forward * 0.35f);
         }
         if (buttonHighlight != null) buttonHighlight.SetActive(step.press > 0f);
+    }
+
+    private static string ReadableCaption(string text)
+    {
+        if (string.IsNullOrEmpty(text) || text.Length <= 26 || text.Contains("\n")) return text;
+        int split = text.LastIndexOf(' ', 26);
+        return split > 0 ? text.Substring(0, split) + "\n" + text.Substring(split + 1) : text;
     }
 
     private void CreatePointer()
@@ -253,6 +279,7 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         buttonHighlight = null;
         poses = null;
         joints = null;
+        fixedGardeningPosition = false;
     }
 
     private void OnDisable() => Hide();

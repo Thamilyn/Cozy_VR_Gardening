@@ -10,6 +10,10 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
     [SerializeField] private Text instruction;
     [Tooltip("Secondary instructions on Gronny's panel. Water measurements appear above the plant.")]
     [SerializeField] private Text water;
+    [SerializeField, Tooltip("Fixed scene position for gardening demonstrations beside Gronny. Movement keeps its existing placement.")]
+    private Transform gardeningDemonstrationAnchor;
+    [SerializeField, Tooltip("Keep the board visible at its authored scene position, independent of tracking and watering.")]
+    private bool keepPanelStatic = true;
     [SerializeField] private bool facePlayer = true;
     [SerializeField] private bool followPlantedPot;
     [SerializeField] private Vector3 potPanelOffset = new(0.25f, 0.46f, 0f);
@@ -27,6 +31,8 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
     private bool successShown;
     private float nextRefresh;
     private GronnyTutorial audioTutorial;
+
+    public Transform GardeningDemonstrationAnchor => gardeningDemonstrationAnchor;
 
     private void Start()
     {
@@ -46,6 +52,8 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
             audioTutorial = GetComponent<GronnyTutorial>() ?? gameObject.AddComponent<GronnyTutorial>();
         GameObject eye = GameObject.Find("CenterEyeAnchor");
         viewer = eye != null ? eye.transform : Camera.main != null ? Camera.main.transform : null;
+        GardenPresentationPlacement placement = gameObject.AddComponent<GardenPresentationPlacement>();
+        placement.Configure(transform, viewer, keepStatic: keepPanelStatic);
         Say(welcomeInstruction);
     }
 
@@ -66,10 +74,10 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
     private void LateUpdate()
     {
         SeedsController.PlantedSeed plant = seeds.PrototypeTomato;
-        if (followPlantedPot && plant != null && plant.pot != null)
+        if (!keepPanelStatic && followPlantedPot && plant != null && plant.pot != null)
             transform.position = plant.pot.PlantingPoint + potPanelOffset;
         if (viewer == null && Camera.main != null) viewer = Camera.main.transform;
-        if (facePlayer && viewer != null)
+        if (!keepPanelStatic && facePlayer && viewer != null)
         {
             Vector3 direction = transform.position - viewer.position;
             direction.y = 0f;
