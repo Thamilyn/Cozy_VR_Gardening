@@ -19,6 +19,8 @@ public sealed class GardenSoil : MonoBehaviour
     private Mesh puddleMesh;
     private MeshRenderer puddleRenderer;
     private MaterialPropertyBlock soilProperties;
+    private Renderer visualRenderer;
+    private int visualMaterialIndex = -1;
     private MaterialPropertyBlock puddleProperties;
     private float visiblePuddle;
     private bool puddleCreationAttempted;
@@ -38,6 +40,13 @@ public sealed class GardenSoil : MonoBehaviour
     public void SetReceivedMillilitres(float millilitres)
     {
         SetWaterFeedback(millilitres, false);
+    }
+
+    public void SetVisualSurface(Renderer renderer, int materialIndex)
+    {
+        visualRenderer = renderer;
+        visualMaterialIndex = materialIndex;
+        ApplyColor();
     }
 
     public void SetWaterFeedback(float millilitres, bool waterlogged)
@@ -114,13 +123,17 @@ public sealed class GardenSoil : MonoBehaviour
 
     private void ApplyColor()
     {
-        if (groundRenderer == null) return;
+        Renderer renderer = visualRenderer != null ? visualRenderer : groundRenderer;
+        if (renderer == null) return;
         Color color = isWaterlogged && puddleRenderer == null ? waterloggedColor : IsWet ? wetColor : dryColor;
         soilProperties ??= new MaterialPropertyBlock();
-        groundRenderer.GetPropertyBlock(soilProperties);
+        soilProperties.Clear();
+        if (visualRenderer != null) renderer.GetPropertyBlock(soilProperties, visualMaterialIndex);
+        else renderer.GetPropertyBlock(soilProperties);
         soilProperties.SetColor(BaseColorId, color);
         soilProperties.SetColor("_Color", color);
-        groundRenderer.SetPropertyBlock(soilProperties);
+        if (visualRenderer != null) renderer.SetPropertyBlock(soilProperties, visualMaterialIndex);
+        else renderer.SetPropertyBlock(soilProperties);
     }
 
     private void OnDisable()

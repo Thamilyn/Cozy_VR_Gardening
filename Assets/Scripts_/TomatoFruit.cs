@@ -20,6 +20,13 @@ public sealed class TomatoFruit : MonoBehaviour
         SphereCollider collider = GetComponent<SphereCollider>();
         if (collider == null) collider = gameObject.AddComponent<SphereCollider>();
         collider.radius = 0.5f;
+        MeshFilter mesh = GetComponent<MeshFilter>();
+        if (mesh != null && mesh.sharedMesh != null)
+        {
+            Bounds bounds = mesh.sharedMesh.bounds;
+            collider.center = bounds.center;
+            collider.radius = Mathf.Max(bounds.extents.x, bounds.extents.y, bounds.extents.z);
+        }
         GardenGrabSetup.ConfigureGrabbable(gameObject);
         grabbable = GetComponent<Grabbable>();
         body = GetComponent<Rigidbody>();

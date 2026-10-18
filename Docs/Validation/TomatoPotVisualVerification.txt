@@ -1,0 +1,8 @@
+Unity 6000.3.23f1
+PASS: Tomate0: one empty pot, fixed base and soil alignment before planting
+PASS: Tomatev1.4: one pot, fixed base, soil alignment and moving parent
+PASS: TomatPhase2: one pot, fixed base, soil alignment and moving parent
+PASS: TomatPhase3: one pot, fixed base, soil alignment and moving parent
+PASS: TomatPhase4: one pot, fixed base, soil alignment and moving parent
+PASS: TomatPhase5: one pot, fixed base, soil alignment and moving parent
+PASS: TomatPhasefinal: one pot, fixed base, soil alignment and moving parent

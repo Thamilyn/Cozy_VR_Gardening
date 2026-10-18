@@ -20,10 +20,13 @@ public sealed class SeedItem : MonoBehaviour
     private GameObject _matureVisual;
     private readonly GameObject[] _tomatoStageInstances = new GameObject[6];
     private bool _ripeFruitPrepared;
+    private TomatoPotStages _potStages;
+    private GameObject _stageVisual;
 
     public SeedCrop Crop => crop;
     public string SeedId => seedId;
     public bool IsPlanted { get; private set; }
+    public GameObject StageVisual => _stageVisual;
 
     private void Awake()
     {
@@ -62,6 +65,7 @@ public sealed class SeedItem : MonoBehaviour
         transform.SetParent(pot.transform, false);
         transform.localPosition = pot.LocalPlantingPoint;
         transform.localRotation = Quaternion.identity;
+        if (crop == SeedCrop.Tomato) _potStages = pot.GetComponent<TomatoPotStages>();
         Rigidbody body = GetComponent<Rigidbody>();
         if (body != null) { body.linearVelocity = Vector3.zero; body.angularVelocity = Vector3.zero; body.isKinematic = true; }
         if (_grabbable != null) _grabbable.enabled = false;
@@ -74,13 +78,23 @@ public sealed class SeedItem : MonoBehaviour
     {
         if (crop == SeedCrop.Tomato)
         {
+            Debug.Log("SeedItem.ShowStage: " + stage + " for " + seedId + " in " + gameObject.name);
+            if (_potStages != null)
+            {
+                bool shown = _potStages.TryShowStage(stage, out GameObject potVisual);
+                _stageVisual = shown ? potVisual : _potStages.CurrentVisual;
+                if (seedRenderer != null) seedRenderer.enabled = _stageVisual == null;
+                // A failed replacement keeps the last pot; never stack a fallback pot inside it.
+                if (shown && Application.isPlaying && stage == GrowthStage.Mature) PrepareRipeFruit(potVisual);
+                return;
+            }
             int active = stage switch
             {
                 GrowthStage.Sprout => 1,
                 GrowthStage.YoungPlant => 2,
-                GrowthStage.Flowering => 3,
-                GrowthStage.GreenFruit => 4,
-                GrowthStage.Mature => 5,
+                GrowthStage.Flowering => 4,
+                GrowthStage.GreenFruit => 5,
+                GrowthStage.Mature => 6,
                 _ => 0
             };
             for (int i = 0; i < _tomatoStageInstances.Length; i++)
@@ -95,19 +109,11 @@ public sealed class SeedItem : MonoBehaviour
                 }
                 if (_tomatoStageInstances[i] != null) _tomatoStageInstances[i].SetActive(i == active);
             }
+            _stageVisual = _tomatoStageInstances[active];
             if (seedRenderer != null) seedRenderer.enabled = active == 0 && _tomatoStageInstances[0] == null;
             if (Application.isPlaying && active == 5 && !_ripeFruitPrepared && _tomatoStageInstances[5] != null)
             {
-                // Use the existing ripe visual; green fruits never receive grab components.
-                Transform fruit = _tomatoStageInstances[5].transform.Find("Tomato_PLACEHOLDER_0");
-                if (fruit != null)
-                {
-                    Vector3 parentScale = fruit.parent.lossyScale;
-                    fruit.localScale = new Vector3(0.065f / Mathf.Abs(parentScale.x),
-                        0.065f / Mathf.Abs(parentScale.y), 0.065f / Mathf.Abs(parentScale.z));
-                    fruit.gameObject.AddComponent<TomatoFruit>().Initialize(this);
-                    _ripeFruitPrepared = true;
-                }
+                PrepareRipeFruit(_tomatoStageInstances[5]);
             }
             return;
         }
@@ -116,6 +122,22 @@ public sealed class SeedItem : MonoBehaviour
         if (seedRenderer != null) seedRenderer.enabled = stage == GrowthStage.Seed;
         _sproutVisual.SetActive(stage == GrowthStage.Sprout);
         _matureVisual.SetActive(stage == GrowthStage.Mature);
+    }
+
+    private void PrepareRipeFruit(GameObject visual)
+    {
+        if (_ripeFruitPrepared) return;
+        Transform fruit = visual.transform.Find("Tomato_PLACEHOLDER_0");
+        if (fruit != null)
+        {
+            Vector3 parentScale = fruit.parent.lossyScale;
+            fruit.localScale = new Vector3(0.065f / Mathf.Abs(parentScale.x),
+                0.065f / Mathf.Abs(parentScale.y), 0.065f / Mathf.Abs(parentScale.z));
+        }
+        else fruit = TomatoPotStages.FindRipeFruit(visual);
+        if (fruit == null) return;
+        fruit.gameObject.AddComponent<TomatoFruit>().Initialize(this);
+        _ripeFruitPrepared = true;
     }
 
     private GameObject BuildPlant(bool mature)

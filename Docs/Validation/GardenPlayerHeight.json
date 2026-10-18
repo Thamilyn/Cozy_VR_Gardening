@@ -1,14 +1,14 @@
 {
-    "utc": "2026-10-13T02:32:45.9686923Z",
-    "playSeconds": 242.80743408203126,
+    "utc": "2026-10-18T00:43:56.6157784Z",
+    "playSeconds": 84.5411376953125,
     "headsetPresent": true,
     "headsetWorn": true,
     "positionTracked": true,
     "trackingOrigin": "FloorLevel",
     "originPosition": {
-        "x": 0.40734827518463137,
-        "y": 0.1143268346786499,
-        "z": -2.8758251667022707
+        "x": 0.47940200567245486,
+        "y": -0.002499997615814209,
+        "z": -3.0157864093780519
     },
     "originScale": {
         "x": 1.0,
@@ -17,7 +17,7 @@
     },
     "trackingSpaceLocalPosition": {
         "x": 0.0,
-        "y": -0.2546861171722412,
+        "y": 0.0327606201171875,
         "z": 0.0
     },
     "trackingSpaceScale": {
@@ -26,14 +26,14 @@
         "z": 1.0
     },
     "eyeLocalPosition": {
-        "x": -0.1353789120912552,
-        "y": 1.568932056427002,
-        "z": -0.13668587803840638
+        "x": -0.01913374476134777,
+        "y": 1.3072441816329957,
+        "z": -0.1038302555680275
     },
     "eyeWorldPosition": {
-        "x": 0.27196937799453738,
-        "y": 1.4285727739334107,
-        "z": -3.0125110149383547
+        "x": 0.539291501045227,
+        "y": 1.3375048637390137,
+        "z": -3.1027350425720217
     },
     "headPoseOffset": {
         "x": 0.0,
@@ -42,17 +42,17 @@
     },
     "heightCalibrated": true,
     "initialEyeHeight": 1.2999999523162842,
-    "calibrationOffset": -0.2546861171722412,
+    "calibrationOffset": 0.0327606201171875,
     "hasCharacter": true,
     "capsulePosition": {
-        "x": 0.2915799617767334,
-        "y": 0.8190872073173523,
-        "z": -3.105288505554199
+        "x": 0.5669305920600891,
+        "y": 0.7085362076759338,
+        "z": -3.189316749572754
     },
-    "capsuleHeight": 1.399520754814148,
-    "capsuleFeetY": 0.1143268272280693,
+    "capsuleHeight": 1.4120724201202393,
+    "capsuleFeetY": -0.002500002272427082,
     "grounded": true,
-    "groundCollider": "Watering",
+    "groundCollider": "Floor",
     "groundLayer": "Default",
     "collisionMask": 23,
     "floorFound": true,

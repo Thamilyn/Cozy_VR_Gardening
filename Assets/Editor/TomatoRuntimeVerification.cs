@@ -131,7 +131,7 @@ public static class TomatoRuntimeVerification
                     step = 10;
                     return;
                 }
-                TomatoFruit fruit = seeds.PrototypeTomato.seed.GetComponentInChildren<TomatoFruit>();
+                TomatoFruit fruit = seeds.PrototypeTomato.seed.StageVisual.GetComponentInChildren<TomatoFruit>();
                 Require(fruit != null && fruit.GetComponent<Grabbable>() != null &&
                     fruit.GetComponentInChildren<HandGrabInteractable>() != null &&
                     fruit.GetComponentInChildren<GrabInteractable>() != null, "Ripe Meta grab components");

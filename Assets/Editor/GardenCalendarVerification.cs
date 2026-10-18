@@ -138,8 +138,9 @@ public static class GardenCalendarVerification
                     "Phase counters reset " + phase);
                 Assert(Mathf.Abs(saved.waterMillilitres - accumulated) < 0.1f, "Cumulative water retained " + phase);
             }
-            var visuals = (GameObject[])typeof(SeedItem).GetField("_tomatoStageInstances", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(seed);
-            Assert(visuals[5] != null && visuals[5].activeSelf, "Mature visual is available; physical grabbing is tested in Play");
+            GameObject matureVisual = seed.StageVisual;
+            Assert(matureVisual != null && matureVisual.name == "TomatPhasefinal" && matureVisual.activeSelf,
+                "Configured final tomato visual is available; physical grabbing is tested in Play");
             clock.RecordHarvest(saved);
             clock.RecordHarvest(saved);
             Assert(saved.harvested, "Mature harvest recorded");
@@ -165,6 +166,139 @@ public static class GardenCalendarVerification
     }
 
     private static void SettlePour(CalendarSystem.PlantSave saved) => saved.lastWaterAt = Time.unscaledTime - 1f;
+
+    [MenuItem("Garden/Verify tomato pot visual replacement")]
+    public static void VerifyPotStages()
+    {
+        if (EditorApplication.isPlayingOrWillChangePlaymode)
+            throw new Exception("Run the pot visual check outside Play.");
+
+        var preview = UnityEditor.SceneManagement.EditorSceneManager.NewPreviewScene();
+        const string potPath = "Assets/MamkinEnthusiast/3D Mini Garden Props/Prefabs/PotSmall.prefab";
+        string[] names = { "Tomate0", "Tomatev1.4", "TomatPhase2", "TomatPhase3",
+            "TomatPhase4", "TomatPhase5", "TomatPhasefinal" };
+        GrowthStage[] phases = { GrowthStage.Seed, GrowthStage.Sprout, GrowthStage.YoungPlant,
+            GrowthStage.Flowering, GrowthStage.GreenFruit, GrowthStage.Mature };
+        string report = "Unity " + Application.unityVersion + Environment.NewLine;
+        try
+        {
+            GameObject root = (GameObject)PrefabUtility.InstantiatePrefab(
+                AssetDatabase.LoadAssetAtPath<GameObject>(potPath), preview);
+            root.transform.SetPositionAndRotation(new Vector3(0.2f, 1f, -0.3f), Quaternion.Euler(0f, 25f, 0f));
+            root.transform.localScale = Vector3.one * 0.6f;
+            TomatoPotStages stages = root.GetComponent<TomatoPotStages>();
+            Assert(stages != null, "PotSmall stage script reference resolves");
+            SerializedObject settings = new(stages);
+            SerializedProperty slots = settings.FindProperty("stagePrefabs");
+            Assert(slots.arraySize == names.Length, "Seven configured appearances");
+            for (int i = 0; i < names.Length; i++)
+                Assert(slots.GetArrayElementAtIndex(i).objectReferenceValue != null &&
+                    slots.GetArrayElementAtIndex(i).objectReferenceValue.name == names[i], "Appearance slot " + i);
+
+            GameObject initial = (GameObject)settings.FindProperty("emptyPotVisual").objectReferenceValue;
+            Assert(initial != null && initial.name == names[0], "Empty pot is visible before planting");
+            AssertSinglePot(root, initial, names);
+            BoxCollider body = (BoxCollider)settings.FindProperty("potCollider").objectReferenceValue;
+            MeshFilter surface = (MeshFilter)settings.FindProperty("substrateSurface").objectReferenceValue;
+            Assert(body != null && body.transform == root.transform && !body.isTrigger, "Pot physics has one fixed root");
+            Assert(surface != null && surface.sharedMesh != null, "Watering surface is retained");
+            Invoke(stages, "Awake");
+            initial = stages.CurrentVisual;
+            Assert(initial != null && initial.name == names[0], "Empty appearance initializes without a seed");
+            AssertSinglePot(root, initial, names);
+            AssertPotAlignment(root, initial, body, surface);
+            report += "PASS: Tomate0: one empty pot, fixed base and soil alignment before planting" + Environment.NewLine;
+
+            GardenPot pot = root.AddComponent<GardenPot>();
+            Set(pot, "localPlantingPoint", new Vector3(0f, 0.23f, 0f));
+            GameObject seedObject = (GameObject)PrefabUtility.InstantiatePrefab(
+                AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/SeedsPrefab/TomatoSeed.prefab"), preview);
+            SeedItem seed = seedObject.GetComponent<SeedItem>();
+            seed.PlantIn(pot);
+            foreach (GrowthStage phase in phases)
+            {
+                seed.ShowStage(phase);
+                GameObject visual = seed.StageVisual;
+                int slot = Array.IndexOf(phases, phase) + 1;
+                Assert(visual != null && visual.name == names[slot], "Requested model for " + phase);
+                Assert(visual.transform.parent == root.transform, "Whole pot belongs to the pot, not the seed Rigidbody");
+                AssertSinglePot(root, visual, names);
+                AssertPotAlignment(root, visual, body, surface);
+
+                Vector3 localPosition = visual.transform.localPosition;
+                root.transform.position += new Vector3(0.3f, 0.2f, -0.15f);
+                root.transform.rotation *= Quaternion.Euler(0f, 15f, 0f);
+                Assert(visual.transform.localPosition == localPosition, "Moving the pot preserves phase placement");
+                AssertPotAlignment(root, visual, body, surface);
+                report += "PASS: " + visual.name + ": one pot, fixed base, soil alignment and moving parent" + Environment.NewLine;
+            }
+            Debug.Log(report);
+        }
+        catch (Exception exception)
+        {
+            report += "FAIL: " + exception + Environment.NewLine;
+            throw;
+        }
+        finally
+        {
+            UnityEditor.SceneManagement.EditorSceneManager.ClosePreviewScene(preview);
+            System.IO.Directory.CreateDirectory("Docs/Validation");
+            System.IO.File.WriteAllText("Docs/Validation/TomatoPotVisualVerification.txt", report);
+        }
+    }
+
+    private static void AssertSinglePot(GameObject root, GameObject visual, string[] names)
+    {
+        int count = 0;
+        foreach (Transform child in root.transform)
+            if (child.gameObject.activeSelf && Array.IndexOf(names, child.name) >= 0) count++;
+        Assert(count == 1, "Only one active phase pot");
+        foreach (MeshRenderer renderer in root.GetComponentsInChildren<MeshRenderer>())
+        {
+            if (renderer.enabled)
+                Assert(renderer.transform.IsChildOf(visual.transform) ||
+                    renderer.GetComponentInParent<SeedItem>() != null, "Legacy pot and soil renderers stay hidden");
+        }
+    }
+
+    private static void AssertPotAlignment(GameObject root, GameObject visual, BoxCollider body, MeshFilter surface)
+    {
+        float bottom = float.PositiveInfinity;
+        bool foundSoil = false;
+        Bounds target = BoundsInRoot(root.transform, surface.transform, surface.sharedMesh.bounds);
+        foreach (MeshFilter filter in visual.GetComponentsInChildren<MeshFilter>())
+        {
+            bottom = Mathf.Min(bottom, BoundsInRoot(root.transform, filter.transform, filter.sharedMesh.bounds).min.y);
+            MeshRenderer renderer = filter.GetComponent<MeshRenderer>();
+            if (renderer == null) continue;
+            Material[] materials = renderer.sharedMaterials;
+            for (int i = 0; i < materials.Length && i < filter.sharedMesh.subMeshCount; i++)
+            {
+                if (materials[i] == null || !materials[i].name.StartsWith("Soil", StringComparison.OrdinalIgnoreCase)) continue;
+                Bounds dirt = BoundsInRoot(root.transform, filter.transform, filter.sharedMesh.GetSubMesh(i).bounds);
+                Assert(Mathf.Abs(dirt.max.y - target.max.y) < 0.001f, "Soil stays at the watering height");
+                Assert(Mathf.Abs(dirt.center.x - target.center.x) < 0.001f &&
+                    Mathf.Abs(dirt.center.z - target.center.z) < 0.001f, "Soil stays centered on planting area");
+                Assert(Mathf.Abs(dirt.size.x - target.size.x) < 0.005f &&
+                    Mathf.Abs(dirt.size.z - target.size.z) < 0.005f, "Soil footprint matches planting area");
+                foundSoil = true;
+            }
+        }
+        Assert(foundSoil, "Phase contains a soil surface");
+        Assert(Mathf.Abs(bottom - (body.center.y - body.size.y * 0.5f)) < 0.001f,
+            "Visible pot bottom meets its support collider");
+    }
+
+    private static Bounds BoundsInRoot(Transform root, Transform source, Bounds local)
+    {
+        Bounds result = new(root.InverseTransformPoint(source.TransformPoint(local.center)), Vector3.zero);
+        for (int x = -1; x <= 1; x += 2)
+            for (int y = -1; y <= 1; y += 2)
+                for (int z = -1; z <= 1; z += 2)
+                    result.Encapsulate(root.InverseTransformPoint(source.TransformPoint(local.center +
+                        Vector3.Scale(local.extents, new Vector3(x, y, z)))));
+        return result;
+    }
 
     private static void Invoke(object target, string method) =>
         target.GetType().GetMethod(method, BindingFlags.NonPublic | BindingFlags.Instance).Invoke(target, null);

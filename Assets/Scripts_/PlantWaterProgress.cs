@@ -23,6 +23,7 @@ public sealed class PlantWaterProgress : MonoBehaviour
     private Text accounting;
     private Transform viewer;
     private GrowthStage visibleStage;
+    private GameObject visibleVisual;
     private readonly List<Renderer> plantRenderers = new();
 
     public void Initialize(SeedsController controller, SeedsController.PlantedSeed plantedSeed)
@@ -40,7 +41,7 @@ public sealed class PlantWaterProgress : MonoBehaviour
         OVRCameraRig rig = FindFirstObjectByType<OVRCameraRig>();
         viewer = rig != null ? rig.centerEyeAnchor : Camera.main != null ? Camera.main.transform : null;
         visibleStage = plant.stage;
-        plant.seed.GetComponentsInChildren(false, plantRenderers);
+        CachePlantRenderers();
         enabled = true;
         // Remove first because enabling an initialized component also subscribes in OnEnable.
         calendar.Changed -= Refresh;
@@ -102,10 +103,10 @@ public sealed class PlantWaterProgress : MonoBehaviour
         CalendarSystem.PlantSave saved = seeds != null ? seeds.GetState(plant) : null;
         canvas.enabled = isActiveAndEnabled && saved != null && !saved.harvested;
         if (!canvas.enabled) return;
-        if (visibleStage != plant.stage)
+        if (visibleStage != plant.stage || visibleVisual != plant.seed.StageVisual)
         {
             visibleStage = plant.stage;
-            plant.seed.GetComponentsInChildren(false, plantRenderers);
+            CachePlantRenderers();
         }
         float target = seeds.TargetMillilitres(plant);
         float limit = seeds.ExcessLimit(plant);
@@ -139,9 +140,10 @@ public sealed class PlantWaterProgress : MonoBehaviour
         }
         Vector3 position = plant.pot.PlantingPoint;
         float top = position.y;
+        Transform visualRoot = plant.seed.StageVisual != null ? plant.seed.StageVisual.transform : plant.seed.transform;
         foreach (Renderer renderer in plantRenderers)
             if (renderer != null && renderer.enabled && renderer.gameObject.activeInHierarchy &&
-                renderer.transform.IsChildOf(plant.seed.transform))
+                renderer.transform.IsChildOf(visualRoot))
                 top = Mathf.Max(top, renderer.bounds.max.y);
         position.y = top + heightAbovePlant;
         content.position = position;
@@ -155,6 +157,13 @@ public sealed class PlantWaterProgress : MonoBehaviour
         Vector3 direction = position - viewer.position;
         direction.y = 0f;
         if (direction.sqrMagnitude > 0.001f) content.rotation = Quaternion.LookRotation(direction, Vector3.up);
+    }
+
+    private void CachePlantRenderers()
+    {
+        visibleVisual = plant.seed.StageVisual;
+        GameObject visual = visibleVisual != null ? visibleVisual : plant.seed.gameObject;
+        visual.GetComponentsInChildren(false, plantRenderers);
     }
 
     private void OnEnable()
