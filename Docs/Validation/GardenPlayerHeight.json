@@ -1,14 +1,14 @@
 {
-    "utc": "2026-10-18T00:43:56.6157784Z",
-    "playSeconds": 84.5411376953125,
+    "utc": "2026-10-19T00:11:58.1357264Z",
+    "playSeconds": 341.4832763671875,
     "headsetPresent": true,
     "headsetWorn": true,
     "positionTracked": true,
     "trackingOrigin": "FloorLevel",
     "originPosition": {
-        "x": 0.47940200567245486,
-        "y": -0.002499997615814209,
-        "z": -3.0157864093780519
+        "x": 0.215891033411026,
+        "y": 0.0,
+        "z": -3.2995147705078127
     },
     "originScale": {
         "x": 1.0,
@@ -17,7 +17,7 @@
     },
     "trackingSpaceLocalPosition": {
         "x": 0.0,
-        "y": 0.0327606201171875,
+        "y": 0.0,
         "z": 0.0
     },
     "trackingSpaceScale": {
@@ -26,31 +26,31 @@
         "z": 1.0
     },
     "eyeLocalPosition": {
-        "x": -0.01913374476134777,
-        "y": 1.3072441816329957,
-        "z": -0.1038302555680275
+        "x": 0.20490415394306184,
+        "y": 1.5397508144378663,
+        "z": -0.06404632329940796
     },
     "eyeWorldPosition": {
-        "x": 0.539291501045227,
-        "y": 1.3375048637390137,
-        "z": -3.1027350425720217
+        "x": 0.40606772899627688,
+        "y": 1.5397508144378663,
+        "z": -3.199913263320923
     },
     "headPoseOffset": {
         "x": 0.0,
         "y": 0.0,
         "z": 0.0
     },
-    "heightCalibrated": true,
-    "initialEyeHeight": 1.2999999523162842,
-    "calibrationOffset": 0.0327606201171875,
+    "heightCalibrated": false,
+    "initialEyeHeight": 0.0,
+    "calibrationOffset": 0.0,
     "hasCharacter": true,
     "capsulePosition": {
-        "x": 0.5669305920600891,
-        "y": 0.7085362076759338,
-        "z": -3.189316749572754
+        "x": 0.44111451506614687,
+        "y": 0.8342797160148621,
+        "z": -3.28934907913208
     },
-    "capsuleHeight": 1.4120724201202393,
-    "capsuleFeetY": -0.002500002272427082,
+    "capsuleHeight": 1.6585594415664673,
+    "capsuleFeetY": -4.6566128730773929e-9,
     "grounded": true,
     "groundCollider": "Floor",
     "groundLayer": "Default",

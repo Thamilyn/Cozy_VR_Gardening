@@ -76,14 +76,15 @@ public sealed class GardenGrabSetup : MonoBehaviour
         {
             if (rig.gameObject.scene != scene) continue;
             ConfigurePlayerCollisionLayers(rig.transform);
-            if (scene.name == "Garden_Moves" && rig.GetComponent<GardenPlayerHeightCalibration>() == null)
-                rig.gameObject.AddComponent<GardenPlayerHeightCalibration>();
+            //if (scene.name == "Garden_Moves" && rig.GetComponent<GardenPlayerHeightCalibration>() == null)
+            //    rig.gameObject.AddComponent<GardenPlayerHeightCalibration>();
         }
         InitializePlayerFloor(scene);
     }
 
     public static void ConfigurePlayerCollisionLayers(Transform rig)
     {
+        //Debug.Log("GardenGrabSetup.ConfigurePlayerCollisionLayers: " + rig.name);
         int playerLayer = LayerMask.NameToLayer("GardenPlayer");
         if (rig == null || playerLayer < 0) return;
         // Meta's casts do not filter their own collider by identity. During resizing or rig

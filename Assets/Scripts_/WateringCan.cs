@@ -74,7 +74,7 @@ public sealed class WateringCan : MonoBehaviour
         // Set the resting state before Meta saves it when the can is first grabbed.
         GardenGrabSetup.ConfigureGrabbable(gameObject);
         _grabbable = GetComponent<Grabbable>();
-        _grabbable.ForceKinematicDisabled = true;
+        //_grabbable.ForceKinematicDisabled = true;
         foreach (HandGrabInteractable handGrab in GetComponentsInChildren<HandGrabInteractable>(true))
         {
             // Keep a pinch held when one finger relaxes while another still holds.
@@ -386,11 +386,11 @@ public sealed class WateringCan : MonoBehaviour
 
         // A single hull over the whole model fills the space between the body,
         // handles and nozzle. Use separate shapes so it rests on visible geometry.
-        BoxCollider bodyCollider = GetComponent<BoxCollider>();
-        if (bodyCollider == null) bodyCollider = gameObject.AddComponent<BoxCollider>();
-        bodyCollider.center = new Vector3(0f, 0.1885f, 0f) * modelScale;
-        bodyCollider.size = new Vector3(0.3645f, 0.377f, 0.4347f) * modelScale;
-        bodyCollider.isTrigger = false;
+        // BoxCollider bodyCollider = GetComponent<BoxCollider>();
+        // if (bodyCollider == null) bodyCollider = gameObject.AddComponent<BoxCollider>();
+        // bodyCollider.center = new Vector3(0f, 0.1885f, 0f) * modelScale;
+        // bodyCollider.size = new Vector3(0.3645f, 0.377f, 0.4347f) * modelScale;
+        // bodyCollider.isTrigger = false;
 
         if (transform.Find("Spout Physics") != null) return;
         GameObject nozzle = new("Spout Physics");
