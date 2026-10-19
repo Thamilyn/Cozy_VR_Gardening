@@ -1,0 +1,5 @@
+Unity 6000.3.23f1
+UTC: 2026-10-19T12:42:37.6294141Z
+PASS: RootswithTomatoes.036 retains its stalk, mesh and materials; all ripe fruit models are at most 6.5 cm; harvest fruit has its own collider and Meta hand/controller interactables
+PASS: harvest outline visible on plant, Select detaches fruit immediately and hides outline, release outside tray does not harvest, re-grab and tray delivery succeed
+NOT TESTED: physical hands/controllers, shader appearance in headset, watering/growth sequence, scene restart, APK and Quest 3 performance

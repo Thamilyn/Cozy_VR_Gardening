@@ -1,0 +1,5 @@
+Unity 6000.3.23f1
+UTC: 2026-10-19T12:19:36.8403543Z
+FAIL: System.Exception: Tomato runtime verification: Meta setup installed
+  at TomatoRuntimeVerification.Require (System.Boolean condition, System.String label) [0x00014] in C:\Users\Trole\Cozy_VR_Gardening\Assets\Editor\TomatoRuntimeVerification.cs:239 
+  at TomatoRuntimeVerification.Tick () [0x000d1] in C:\Users\Trole\Cozy_VR_Gardening\Assets\Editor\TomatoRuntimeVerification.cs:87 

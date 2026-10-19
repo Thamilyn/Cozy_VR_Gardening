@@ -20,6 +20,7 @@ public static class TomatoRuntimeVerification
     private static int runtimePhase;
     private static int phaseStartDay;
     private static bool sawNight;
+    private static bool harvestOnly;
 
     static TomatoRuntimeVerification()
     {
@@ -40,12 +41,18 @@ public static class TomatoRuntimeVerification
     }
 
     [MenuItem("Garden/Verify tomato runtime and restart")]
-    public static void Begin()
+    public static void Begin() => BeginCheck(false);
+
+    [MenuItem("Garden/Verify ripe tomato harvest")]
+    public static void BeginHarvestCheck() => BeginCheck(true);
+
+    private static void BeginCheck(bool onlyHarvest)
     {
         if (EditorApplication.isPlayingOrWillChangePlaymode) throw new Exception("Run this check outside Play.");
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Garden_Moves")
             throw new Exception("Open Garden_Moves before running this check.");
         SessionState.SetBool(SessionKey, true);
+        SessionState.SetBool(SessionKey + ".HarvestOnly", onlyHarvest);
         EditorApplication.isPlaying = true;
     }
 
@@ -54,7 +61,8 @@ public static class TomatoRuntimeVerification
         if (!SessionState.GetBool(SessionKey, false)) return;
         if (state == PlayModeStateChange.EnteredPlayMode)
         {
-            step = 0;
+            harvestOnly = SessionState.GetBool(SessionKey + ".HarvestOnly", false);
+            step = harvestOnly ? 100 : 0;
             runtimePhase = 0;
             startedAt = EditorApplication.timeSinceStartup;
             nextStepAt = startedAt + 1.5;
@@ -80,7 +88,29 @@ public static class TomatoRuntimeVerification
             SeedsController seeds = UnityEngine.Object.FindFirstObjectByType<SeedsController>();
             CalendarPanel panel = UnityEngine.Object.FindFirstObjectByType<CalendarPanel>();
             Require(seeds != null && panel != null, "Runtime components");
-            if (step == 0)
+            if (step == 100)
+            {
+                // Isolate harvesting from locomotion lessons, watering and disabled scene
+                // setup helpers. These changes exist only during this Play session.
+                foreach (GronnyTutorial tutorial in UnityEngine.Object.FindObjectsByType<GronnyTutorial>(FindObjectsSortMode.None))
+                    tutorial.enabled = false;
+                GardenPot pot = Array.Find(UnityEngine.Object.FindObjectsByType<GardenPot>(FindObjectsSortMode.None),
+                    p => p.AcceptsTomato && p.GetComponent<TomatoPotStages>() != null);
+                SeedItem seed = Array.Find(UnityEngine.Object.FindObjectsByType<SeedItem>(FindObjectsSortMode.None),
+                    s => s.Crop == SeedCrop.Tomato && !s.IsPlanted);
+                Require(pot != null && seed != null, "Seed and pot for focused harvest check");
+                seed.transform.position = pot.PlantingPoint;
+                Require(seeds.TryPlant(seed), "Planting for focused harvest check");
+                var plant = seeds.PrototypeTomato;
+                plant.stage = GrowthStage.Mature;
+                seeds.GetState(plant).tomatoPhase = 5;
+                seeds.GetState(plant).stage = GrowthStage.Mature.ToString();
+                seed.ShowStage(GrowthStage.Mature);
+                Require(seed.StageVisual.GetComponentInChildren<TomatoFruit>() != null, "Final model yields a harvestable fruit");
+                step = 1;
+                nextStepAt = EditorApplication.timeSinceStartup + 1;
+            }
+            else if (step == 0)
             {
                 Require(seeds.Calendar.CurrentDay == 0 && seeds.PlantedSeeds.Count == 0, "Clean startup");
                 Require(UnityEngine.Object.FindFirstObjectByType<TomatoPrototypeGuide>() != null, "Guide installed");
@@ -144,11 +174,15 @@ public static class TomatoRuntimeVerification
             {
                 TomatoFruit fruit = UnityEngine.Object.FindFirstObjectByType<TomatoFruit>();
                 Require(fruit != null && fruit.GetComponent<Rigidbody>().isKinematic, "Fruit remains attached after Meta Start and scene scan");
+                VerifyHarvestFruit(fruit);
                 Grabbable grab = fruit.GetComponent<Grabbable>();
                 Pose pose = new(fruit.transform.position, fruit.transform.rotation);
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Hover, pose));
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Select, pose));
                 Require(grab.SelectingPointsCount == 1, "Simulated Meta selection");
+                Require(fruit.transform.parent == null, "Selection detaches before the grab transform begins");
+                Require(!HarvestOutline(fruit).enabled,
+                    "Harvest outline disappears on selection");
                 step = 2;
                 nextStepAt = EditorApplication.timeSinceStartup + 0.5;
             }
@@ -156,6 +190,30 @@ public static class TomatoRuntimeVerification
             {
                 TomatoFruit fruit = UnityEngine.Object.FindFirstObjectByType<TomatoFruit>();
                 Require(fruit.transform.parent == null, "Grab detaches fruit from plant");
+                Pose pose = new(fruit.transform.position + Vector3.up * 0.12f, fruit.transform.rotation);
+                Grabbable grab = fruit.GetComponent<Grabbable>();
+                grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Move, pose));
+                grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Unselect, pose));
+                grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Unhover, pose));
+                step = 20;
+                nextStepAt = EditorApplication.timeSinceStartup + 0.1;
+            }
+            else if (step == 20)
+            {
+                TomatoFruit fruit = UnityEngine.Object.FindFirstObjectByType<TomatoFruit>();
+                Require(!seeds.HarvestComplete && !fruit.GetComponent<Rigidbody>().isKinematic,
+                    "Release outside tray enables physics without recording harvest");
+                Grabbable grab = fruit.GetComponent<Grabbable>();
+                Pose pose = new(fruit.transform.position, fruit.transform.rotation);
+                grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Hover, pose));
+                grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Select, pose));
+                Require(grab.SelectingPointsCount == 1, "Released fruit can be picked up again");
+                step = 21;
+                nextStepAt = EditorApplication.timeSinceStartup + 0.1;
+            }
+            else if (step == 21)
+            {
+                TomatoFruit fruit = UnityEngine.Object.FindFirstObjectByType<TomatoFruit>();
                 Transform tray = GameObject.Find("Bandeja Cosecha").transform;
                 Pose pose = new(tray.position + Vector3.up * 0.06f, Quaternion.identity);
                 Grabbable grab = fruit.GetComponent<Grabbable>();
@@ -169,12 +227,20 @@ public static class TomatoRuntimeVerification
             {
                 TomatoFruit fruit = UnityEngine.Object.FindFirstObjectByType<TomatoFruit>();
                 Require(seeds.HarvestComplete && !fruit.GetComponent<Grabbable>().enabled, "Release inside tray records harvest and disables grab");
+                if (harvestOnly)
+                {
+                    result += "PASS: RootswithTomatoes.036 retains its stalk, mesh and materials; all ripe fruit models are at most 6.5 cm; harvest fruit has its own collider and Meta hand/controller interactables" + Environment.NewLine;
+                    result += "PASS: harvest outline visible on plant, Select detaches fruit immediately and hides outline, release outside tray does not harvest, re-grab and tray delivery succeed" + Environment.NewLine;
+                    result += "NOT TESTED: physical hands/controllers, shader appearance in headset, watering/growth sequence, scene restart, APK and Quest 3 performance" + Environment.NewLine;
+                    Finish();
+                    return;
+                }
                 panel.RefillCans();
                 foreach (WateringCan can in UnityEngine.Object.FindObjectsByType<WateringCan>(FindObjectsSortMode.None))
                     Require(Mathf.Approximately(can.CurrentWaterLitres, can.CapacityLitres), "Can refilled");
                 foreach (Text text in UnityEngine.Object.FindFirstObjectByType<TomatoPrototypeGuide>().GetComponentsInChildren<Text>())
                     Require(text.preferredHeight <= text.rectTransform.rect.height + 1, "Guide text fits its panel");
-                result += "PASS: simulated Meta grab detaches fruit, release in tray completes harvest, refill and text layout" + Environment.NewLine;
+                result += "PASS: isolated 6.5 cm fruit, harvest outline, simulated Meta detach, release and re-grab, tray delivery, refill and text layout" + Environment.NewLine;
                 panel.RestartPrototype();
                 step = 4;
                 nextStepAt = EditorApplication.timeSinceStartup + 2;
@@ -200,7 +266,7 @@ public static class TomatoRuntimeVerification
     private static void Finish()
     {
         Directory.CreateDirectory("Docs/Validation");
-        File.WriteAllText(ReportPath, result);
+        File.WriteAllText(harvestOnly ? "Docs/Validation/TomatoHarvestVerification.txt" : ReportPath, result);
         EditorApplication.update -= Tick;
         EditorApplication.isPlaying = false;
     }
@@ -209,5 +275,39 @@ public static class TomatoRuntimeVerification
     {
         if (!condition) throw new Exception("Tomato runtime verification: " + label);
     }
+
+    private static void VerifyHarvestFruit(TomatoFruit fruit)
+    {
+        MeshFilter filter = fruit.GetComponentInChildren<MeshFilter>();
+        Require(filter != null && filter.sharedMesh != null && filter.name == TomatoFruitMesh.HarvestModelName &&
+            filter.sharedMesh.name == TomatoFruitMesh.HarvestModelName && filter.sharedMesh.subMeshCount == 2,
+            "Harvest uses the original RootswithTomatoes.036 model with its stalk");
+        Require(TomatoFruitMesh.TryGetFruitBounds(filter, filter.GetComponent<MeshRenderer>(), out Bounds bounds),
+            "Harvest model has a tomato surface");
+        Vector3 size = Vector3.Scale(bounds.size, filter.transform.lossyScale);
+        float diameter = Mathf.Max(Mathf.Abs(size.x), Mathf.Abs(size.y), Mathf.Abs(size.z));
+        Require(Mathf.Abs(diameter - TomatoFruit.DiameterMetres) < 0.001f, "Fruit diameter is 6.5 cm");
+        SphereCollider collider = fruit.GetComponent<SphereCollider>();
+        Require(collider != null && collider.enabled && !collider.isTrigger &&
+            collider.attachedRigidbody == fruit.GetComponent<Rigidbody>(), "Fruit has its own active solid collider");
+        foreach (Collider candidate in fruit.GetComponentInChildren<HandGrabInteractable>().Colliders)
+            Require(candidate == collider, "Hand grab targets only the fruit collider");
+        MeshRenderer shell = HarvestOutline(fruit);
+        Require(shell != null && shell.enabled &&
+            shell.sharedMaterial.shader.name == "Cozy Garden/Tomato Harvest Outline" &&
+            shell.GetComponent<MeshFilter>().sharedMesh.subMeshCount == 1 &&
+            shell.GetComponent<Collider>() == null, "Outline follows only the tomato surface without a grab collider");
+        foreach (MeshFilter model in fruit.transform.parent.GetComponentsInChildren<MeshFilter>())
+        {
+            if (!model.name.StartsWith("RootswithTomatoes", StringComparison.Ordinal) ||
+                !TomatoFruitMesh.TryGetFruitBounds(model, model.GetComponent<MeshRenderer>(), out Bounds modelBounds)) continue;
+            Vector3 modelSize = Vector3.Scale(modelBounds.size, model.transform.lossyScale);
+            Require(Mathf.Max(Mathf.Abs(modelSize.x), Mathf.Abs(modelSize.y), Mathf.Abs(modelSize.z)) <=
+                TomatoFruit.DiameterMetres + 0.001f, "Every ripe tomato is at most 6.5 cm");
+        }
+    }
+
+    private static MeshRenderer HarvestOutline(TomatoFruit fruit) =>
+        Array.Find(fruit.GetComponentsInChildren<MeshRenderer>(true), renderer => renderer.name == "Harvest outline");
 }
 

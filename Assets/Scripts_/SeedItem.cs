@@ -92,9 +92,9 @@ public sealed class SeedItem : MonoBehaviour
             {
                 GrowthStage.Sprout => 1,
                 GrowthStage.YoungPlant => 2,
-                GrowthStage.Flowering => 4,
-                GrowthStage.GreenFruit => 5,
-                GrowthStage.Mature => 6,
+                GrowthStage.Flowering => 3,
+                GrowthStage.GreenFruit => 4,
+                GrowthStage.Mature => 5,
                 _ => 0
             };
             for (int i = 0; i < _tomatoStageInstances.Length; i++)
@@ -128,13 +128,7 @@ public sealed class SeedItem : MonoBehaviour
     {
         if (_ripeFruitPrepared) return;
         Transform fruit = visual.transform.Find("Tomato_PLACEHOLDER_0");
-        if (fruit != null)
-        {
-            Vector3 parentScale = fruit.parent.lossyScale;
-            fruit.localScale = new Vector3(0.065f / Mathf.Abs(parentScale.x),
-                0.065f / Mathf.Abs(parentScale.y), 0.065f / Mathf.Abs(parentScale.z));
-        }
-        else fruit = TomatoPotStages.FindRipeFruit(visual);
+        if (fruit == null) fruit = TomatoFruitMesh.PrepareHarvestModel(visual);
         if (fruit == null) return;
         fruit.gameObject.AddComponent<TomatoFruit>().Initialize(this);
         _ripeFruitPrepared = true;

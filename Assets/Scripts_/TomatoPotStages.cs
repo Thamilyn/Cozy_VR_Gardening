@@ -78,6 +78,7 @@ public  class TomatoPotStages : MonoBehaviour
         }
 
         AlignSoil(next.transform, soilRenderer.transform, soilBounds);
+        if (index == 6) TomatoFruitMesh.NormalizeFruitModels(next);
         if (index == 0) FitPotCollider(next);
         // The original pot retains its planting surface and physics. Stage models are visual only.
         foreach (Collider collider in next.GetComponentsInChildren<Collider>(true)) collider.enabled = false;
@@ -184,25 +185,4 @@ public  class TomatoPotStages : MonoBehaviour
         return result;
     }
 
-    public static Transform FindRipeFruit(GameObject visual)
-    {
-        Transform largest = null;
-        float largestVolume = 0f;
-        foreach (MeshRenderer renderer in visual.GetComponentsInChildren<MeshRenderer>())
-        {
-            foreach (Material material in renderer.sharedMaterials)
-            {
-                if (material == null || material.name.IndexOf("Tomato", StringComparison.OrdinalIgnoreCase) < 0) continue;
-                Vector3 size = renderer.bounds.size;
-                float volume = size.x * size.y * size.z;
-                if (volume > largestVolume)
-                {
-                    largest = renderer.transform;
-                    largestVolume = volume;
-                }
-                break;
-            }
-        }
-        return largest;
-    }
 }
