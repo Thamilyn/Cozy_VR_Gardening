@@ -194,7 +194,10 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01((audioSeconds - step.at) / catalogue.blendSeconds));
         motion.localPosition = Vector3.Lerp(previous.position, step.position, t);
         motion.localRotation = Quaternion.Slerp(Quaternion.Euler(previous.rotation), Quaternion.Euler(step.rotation), t);
-        caption.text = fixedGardeningPosition ? ReadableCaption(step.label) : step.label;
+        if (mode == GardenInputMode.Hands && cue.demo == GardenControlDemo.Calendar)
+            caption.text = "Pinch with your left hand\nto open and close\nthe calendar.";
+        else
+            caption.text = fixedGardeningPosition ? ReadableCaption(step.label) : step.label;
         if (mode == GardenInputMode.Hands && poses != null)
         {
             for (int j = 0; j < joints.Length; j++)

@@ -1,3 +1,4 @@
+using Oculus.Interaction;
 using Oculus.Interaction.HandGrab;
 using Oculus.Interaction.Input;
 using UnityEngine;
@@ -18,6 +19,8 @@ public sealed class CalendarVisibilityController : MonoBehaviour
     [SerializeField, Tooltip("Assign CenterEyeAnchor in the scene. Uses the Main Camera if left empty.")]
     private Transform viewTransform;
     [SerializeField, Min(0.25f)] private float distanceFromView = 1.3f;
+    [SerializeField, Tooltip("Table and prop visuals to avoid even without colliders. Uses TableSet if left empty.")]
+    private Transform tableContents;
 
     [Header("Hand gestures")]
     [Tooltip("Left tracked hand. Pinch away from the calendar to toggle it; point at it to use its buttons.")]
@@ -25,6 +28,8 @@ public sealed class CalendarVisibilityController : MonoBehaviour
     [SerializeField, Min(0.01f)] private float pinchReleaseDuration = 0.1f;
 
     private HandGrabInteractor[] handGrabInteractors;
+    private RayInteractor[] handRayInteractors;
+    private float nextRaySearch;
     private bool pinchArmed;
     private float releaseStartedAt = float.NaN;
     private float nextInteractorSearch;
@@ -45,8 +50,14 @@ public sealed class CalendarVisibilityController : MonoBehaviour
         SetVisible(startVisible);
         if (panelContent != null)
         {
+            if (tableContents == null)
+            {
+                GameObject table = GameObject.Find("TableSet");
+                if (table != null) tableContents = table.transform;
+            }
             placement = gameObject.AddComponent<GardenPresentationPlacement>();
-            placement.Configure(panelContent.transform, viewTransform, rayCollider);
+            placement.Configure(panelContent.transform, viewTransform, rayCollider,
+                checkFullSightline: true, visualObstacleRoot: tableContents);
         }
     }
 
@@ -59,13 +70,16 @@ public sealed class CalendarVisibilityController : MonoBehaviour
             leftHand.GetFingerConfidence(OVRHand.HandFinger.Index) == OVRHand.TrackingConfidence.High &&
             !leftHand.IsSystemGestureInProgress;
         bool busy = IsHandInteractionBusy();
+        bool pointingAtCalendar = IsVisible && IsPointingAtCalendar();
         bool pinching = validHand && leftHand.GetFingerIsPinching(OVRHand.HandFinger.Index);
         float strength = validHand ? leftHand.GetFingerPinchStrength(OVRHand.HandFinger.Index) : 0f;
-        bool pinchStarted = UpdatePinchState(validHand && !busy, pinching, strength, Time.unscaledTime);
+        // Disarm while using the UI, so moving off a button mid-pinch cannot close the panel.
+        bool pinchStarted = UpdatePinchState(validHand && !busy && !pointingAtCalendar,
+            pinching, strength, Time.unscaledTime);
 
         // UI ray pinches go to the calendar buttons; object grabs consume the gesture.
         if (OVRInput.GetDown(OVRInput.RawButton.Y, OVRInput.Controller.LTouch) ||
-            (pinchStarted && (!IsVisible || !IsPointingAtCalendar())))
+            pinchStarted)
             Toggle();
     }
 
@@ -113,8 +127,29 @@ public sealed class CalendarVisibilityController : MonoBehaviour
 
     private bool IsPointingAtCalendar()
     {
-        if (leftHand == null || !leftHand.IsPointerPoseValid || rayCollider == null || !rayCollider.enabled)
-            return false;
+        if (rayCollider == null || !rayCollider.enabled) return false;
+        if (Time.unscaledTime >= nextRaySearch)
+        {
+            handRayInteractors = FindObjectsByType<RayInteractor>(FindObjectsSortMode.None);
+            nextRaySearch = Time.unscaledTime + 1f;
+        }
+
+        bool hasLeftRay = false;
+        if (handRayInteractors != null)
+        {
+            foreach (RayInteractor interactor in handRayInteractors)
+            {
+                if (interactor == null || !interactor.isActiveAndEnabled ||
+                    interactor.State == InteractorState.Disabled) continue;
+                HandRef hand = interactor.GetComponentInParent<HandRef>();
+                if (hand == null || hand.Hand == null || hand.Handedness != Handedness.Left) continue;
+                hasLeftRay = true;
+                // Use the same processed ray as PointableCanvas, including Meta's pose adjustments.
+                if (rayCollider.Raycast(interactor.Ray, out _, interactor.MaxRayLength)) return true;
+            }
+        }
+
+        if (hasLeftRay || leftHand == null || !leftHand.IsPointerPoseValid) return false;
         Transform pointer = leftHand.PointerPose;
         return pointer != null && rayCollider.Raycast(new Ray(pointer.position, pointer.forward),
             out _, 10f);

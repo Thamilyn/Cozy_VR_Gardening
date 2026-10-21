@@ -17,6 +17,36 @@ public sealed class TomatoHarvestBasket : MonoBehaviour
                Mathf.Abs(point.y) <= halfSize.y;
     }
 
+    public bool TryGetRestingPoint(out Vector3 worldPoint)
+    {
+        worldPoint = default;
+        if (collectionVolume == null) return false;
+
+        // The root can be offset from the box. Cast through the actual interior,
+        // using only the box's solid colliders so tables and triggers cannot win.
+        Physics.SyncTransforms();
+        Collider[] surfaces = GetComponentsInChildren<Collider>();
+        Vector3 origin = collectionVolume.transform.TransformPoint(collectionVolume.center);
+        float top = collectionVolume.bounds.max.y;
+        foreach (Collider surface in surfaces)
+            if (IsRestingSurface(surface)) top = Mathf.Max(top, surface.bounds.max.y);
+        origin.y = top + TomatoFruit.DiameterMetres;
+
+        Ray ray = new(origin, Vector3.down);
+        float nearest = float.PositiveInfinity;
+        foreach (Collider surface in surfaces)
+        {
+            if (!IsRestingSurface(surface) ||
+                !surface.Raycast(ray, out RaycastHit hit, Mathf.Infinity) || hit.distance >= nearest) continue;
+            nearest = hit.distance;
+            worldPoint = hit.point;
+        }
+        return !float.IsPositiveInfinity(nearest);
+    }
+
+    private static bool IsRestingSurface(Collider surface) =>
+        surface.enabled && !surface.isTrigger && surface.GetComponentInParent<TomatoFruit>() == null;
+
     public void Collect(TomatoFruit fruit, SeedItem source)
     {
         if (fruit == null || source == null || source.Crop != SeedCrop.Tomato || !Contains(fruit.transform.position)) return;

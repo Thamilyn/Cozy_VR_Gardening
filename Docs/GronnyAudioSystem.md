@@ -70,6 +70,12 @@ Las demos conservan los materiales originales de manos fantasma y mandos de Meta
 
 ## Configuración
 
+La demostración de pinza para abrir el calendario muestra una sola instrucción
+junto a la mano: "Pinch with your left hand to open and close the calendar."
+Permanece durante toda esa demostración y sustituye los rótulos de cada paso
+para evitar repetir qué mano usar. Conserva el tamaño del texto existente.
+Revisión estática completada; legibilidad en Unity y Quest 3 pendiente.
+
 Abre `Assets/Resources/GronnyAudio/Tutorial.asset` en el Inspector:
 
 - `voiceVolume`, `pitch` y `gapSeconds`: volumen global, velocidad y pausa entre voces. Cada cue tiene volumen adicional, prioridad y cooldown.

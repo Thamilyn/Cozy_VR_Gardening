@@ -21,10 +21,32 @@ a grabbable prop, or either hand holding an object, consumes the calendar pinch.
 Afterwards, release the pinch fully before making a fresh calendar gesture.
 The Y button remains available while holding a tool.
 
+The visibility gesture checks the left Meta `RayInteractor`'s processed ray,
+matching the ray used to select buttons. While that ray points at the panel,
+the visibility pinch is disarmed. Moving away during a UI pinch cannot close
+the calendar; release fully away from the panel before making a new toggle
+gesture. The raw `OVRHand.PointerPose` is only a fallback when no active left
+Meta ray is available. Both hands continue to click through `PointableCanvas`.
+
 Each time the calendar opens, it is placed in the player's horizontal viewing
 direction at eye height. It uses world up so headset pitch and roll do not tilt
 the panel. When looking straight up or down, it keeps its previous horizontal
-direction. The panel stays fixed in the world while open for stable ray selection.
+direction. The panel stays fixed in the world while unobstructed for stable ray selection.
+
+Calendar placement checks a corridor as wide and tall as the whole panel between
+the UI and the viewer, including its clearance margin. A table or solid prop in
+front of an edge blocks that position even when the centre ray passes above or
+beside it. Placement tries a bounded lift, nearer positions and side slots; if
+none is clear, both the calendar and its ray target stay hidden until space is
+available. Fixed instruction boards keep their authored placement.
+
+The calendar also checks the live `Renderer.bounds` of mesh visuals under
+`TableSet`, including `SeedBox`, so those objects do not need colliders. The
+optional `tableContents` reference can select a different table hierarchy.
+The renderer list refreshes when opening and once a second while active to
+include newly created children; positions and enabled states are checked on
+every placement check. Disabled or inactive visuals are ignored. This visual
+check uses conservative bounds and does not add physics colliders to props.
 
 ## Verification
 
@@ -45,6 +67,25 @@ ray/button references and the pinch latch. On the Quest, also check:
 8. Open the calendar with the headset tilted sideways, looking up and looking
    down: the panel should remain upright at eye height. Turn around, close and
    reopen it: it should appear in the new horizontal viewing direction.
+9. With the left ray over a button, pinch and move away before releasing:
+   the calendar must stay open. Repeat normally with each hand and confirm one
+   click per pinch/release. After **Close**, a held pinch must not reopen it.
+10. Open the calendar facing the table with a pot or watering can in front of
+    one of its edges. It must find clear space without intersecting the table or
+    its props. Repeat seated, standing and after moving a prop while it is open.
+    When no slot is free, the hidden panel must not accept ray clicks; clearing
+    the space must restore it. **Garden > Verify presentation clearance** adds
+    isolated checks for a tabletop and a side prop missed by the centre ray.
+11. Face the seed box with its colliders absent: the calendar must avoid both
+    intersecting it and placing an edge behind it. Repeat with a disabled mesh:
+    that invisible mesh must no longer block placement. The presentation check
+    includes colliderless visual placement and hide/recovery cases.
+
+The full-surface clearance change and its added editor checks have only been
+statically reviewed; Unity execution and physical Quest 3 validation are pending.
+
+The left-ray visibility fix and added regression checks have been statically
+reviewed; Unity execution and physical Quest 3 validation are pending.
 
 ## Tomato prototype controls
 

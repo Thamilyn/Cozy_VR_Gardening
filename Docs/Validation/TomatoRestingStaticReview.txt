@@ -1,0 +1,17 @@
+Tomato box resting adjustment — static review only
+Project Editor version: 6000.3.23f1
+
+Reviewed saved Garden_Moves scene:
+- Bandeja Cosecha has a solid Base BoxCollider, offset from the root.
+- The box root is at y = 0.9 m; Base is 0.02 m tall, so its top is y = 0.91 m.
+- The collection volume center is at y = 1.012 m, above the floor.
+
+Changed behavior:
+- Find support by raycasting down through the collection volume center against the box's own solid colliders.
+- Exclude triggers and other stored fruit from support detection.
+- Align the actual lowest model vertex to the support point plus 0.0005 m.
+- Preserve visibility and size; retain disabled grabs, colliders and gravity.
+
+Prepared Play-mode assertions for floor contact, visibility, size and disabled interaction.
+NOT RUN: compilation, Play-mode verification, headset appearance or Quest 3 input.
+Unity CLI status returned STATUS_NO_INSTANCES. No Editor was launched or packages changed.

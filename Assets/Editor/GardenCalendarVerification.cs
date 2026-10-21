@@ -9,7 +9,7 @@ public static class GardenCalendarVerification
     [MenuItem("Garden/Verify calendar hand input")]
     public static void VerifyHandInput()
     {
-        GameObject prefab = PrefabUtility.LoadPrefabContents("Assets/Prefabs/GardenCalendarVR.prefab");
+        GameObject prefab = PrefabUtility.LoadPrefabContents("Assets/OurAss/GardenCalendarVR.prefab");
         try
         {
             CalendarVisibilityController visibility = prefab.GetComponent<CalendarVisibilityController>();
@@ -51,7 +51,15 @@ public static class GardenCalendarVerification
             CheckPinch(visibility, sample, true, false, 0f, 8.5f, false, "Release after grabbing");
             CheckPinch(visibility, sample, true, false, 0f, 8.61f, false, "Stable release after grabbing");
             CheckPinch(visibility, sample, true, true, 1f, 8.7f, true, "Fresh calendar gesture after grabbing");
-            Debug.Log("Garden calendar hand input verification passed: ray/button wiring, held pinches, release debounce, tracking recovery and consumed object gestures.");
+            CheckPinch(visibility, sample, true, false, 0f, 9f, false, "Release before pointing at UI");
+            CheckPinch(visibility, sample, true, false, 0f, 9.11f, false, "Arm before pointing at UI");
+            CheckPinch(visibility, sample, false, false, 0f, 9.2f, false, "UI hover disarms toggle");
+            CheckPinch(visibility, sample, false, true, 1f, 9.3f, false, "UI selection consumes pinch");
+            CheckPinch(visibility, sample, true, true, 1f, 9.4f, false, "Leaving UI while pinching must not toggle");
+            CheckPinch(visibility, sample, true, false, 0f, 10f, false, "Release after UI selection");
+            CheckPinch(visibility, sample, true, false, 0f, 10.11f, false, "Stable release after UI selection");
+            CheckPinch(visibility, sample, true, true, 1f, 10.2f, true, "Fresh gesture away from UI toggles normally");
+            Debug.Log("Garden calendar hand input verification passed: ray/button wiring, held pinches, release debounce, tracking recovery and consumed object/UI gestures.");
         }
         finally { PrefabUtility.UnloadPrefabContents(prefab); }
     }

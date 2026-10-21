@@ -228,6 +228,18 @@ public static class TomatoRuntimeVerification
                 Grabbable grab = fruit.GetComponent<Grabbable>();
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Move, pose));
                 VerifyFruitDiameter(fruit, "moved to tray");
+                Require(tray.Contains(fruit.transform.position), "Held fruit reaches the tray volume");
+                // Let the held pose settle so the simulated cross-scene movement
+                // does not turn delivery into a high-speed throw on release.
+                step = 22;
+                nextStepAt = EditorApplication.timeSinceStartup + 0.3;
+            }
+            else if (step == 22)
+            {
+                TomatoFruit fruit = UnityEngine.Object.FindFirstObjectByType<TomatoFruit>();
+                Grabbable grab = fruit.GetComponent<Grabbable>();
+                Pose pose = new(fruit.transform.position, fruit.transform.rotation);
+                grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Move, pose));
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Unselect, pose));
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Unhover, pose));
                 step = 3;
@@ -236,12 +248,44 @@ public static class TomatoRuntimeVerification
             else if (step == 3)
             {
                 TomatoFruit fruit = UnityEngine.Object.FindFirstObjectByType<TomatoFruit>();
+                result += "DELIVERY: position " + fruit.transform.position.ToString("F4") +
+                    ", held " + fruit.GetComponent<Grabbable>().SelectingPointsCount +
+                    ", inside " + UnityEngine.Object.FindFirstObjectByType<TomatoHarvestBasket>().Contains(fruit.transform.position) +
+                    Environment.NewLine;
                 Require(seeds.HarvestComplete && !fruit.GetComponent<Grabbable>().enabled, "Release inside tray records harvest and disables grab");
                 VerifyFruitDiameter(fruit, "stored in tray");
+                TomatoHarvestBasket tray = UnityEngine.Object.FindFirstObjectByType<TomatoHarvestBasket>();
+                Require(fruit.transform.parent == tray.transform,
+                    "Stored fruit follows the tray instead of jumping to its root");
+                MeshRenderer model = fruit.GetComponentInChildren<MeshFilter>().GetComponent<MeshRenderer>();
+                Require(fruit.gameObject.activeInHierarchy && model.enabled && model.gameObject.activeInHierarchy,
+                    "Delivered tomato model remains visible");
+                BoxCollider floor = Array.Find(tray.GetComponentsInChildren<BoxCollider>(),
+                    collider => collider.name == "Base" && collider.enabled && !collider.isTrigger);
+                Require(floor != null, "Current scene has a solid box floor");
+                MeshFilter filter = model.GetComponent<MeshFilter>();
+                float lowestVertex = float.PositiveInfinity;
+                foreach (Vector3 vertex in filter.sharedMesh.vertices)
+                    lowestVertex = Mathf.Min(lowestVertex, filter.transform.TransformPoint(vertex).y);
+                float floorGap = lowestVertex - floor.bounds.max.y;
+                result += "RESTING: model-to-floor gap = " + floorGap.ToString("F6") + " m" + Environment.NewLine;
+                Require(floorGap >= -0.001f && floorGap <= 0.001f,
+                    "Delivered tomato rests on the box floor without floating or sinking");
+                Vector3 floorPoint = new(fruit.transform.position.x, floor.bounds.center.y, fruit.transform.position.z);
+                Require(floor.bounds.Contains(floorPoint), "Stored tomato is over the visible box floor");
+                foreach (GrabInteractable interactable in fruit.GetComponentsInChildren<GrabInteractable>(true))
+                    Require(!interactable.enabled, "Stored fruit cannot be controller-grabbed");
+                foreach (HandGrabInteractable interactable in fruit.GetComponentsInChildren<HandGrabInteractable>(true))
+                    Require(!interactable.enabled, "Stored fruit cannot be hand-grabbed");
+                foreach (Collider collider in fruit.GetComponentsInChildren<Collider>(true))
+                    Require(!collider.enabled, "Stored fruit is decorative without interaction colliders");
+                Require(fruit.GetComponent<Rigidbody>().isKinematic && !fruit.GetComponent<Rigidbody>().useGravity,
+                    "Delivered fruit stays still in the tray");
                 if (harvestOnly)
                 {
                     result += "PASS: RootswithTomatoes.036 retains its stalk, mesh and materials; all ripe fruit models are at most 6.5 cm; harvest fruit has its own collider and Meta hand/controller interactables" + Environment.NewLine;
                     result += "PASS: harvest outline visible on plant, Select detaches fruit immediately and hides outline, release outside tray does not harvest, re-grab and tray delivery succeed" + Environment.NewLine;
+                    result += "PASS: delivered tomato remains visible on the box floor, with gravity, colliders and all Meta grabs disabled" + Environment.NewLine;
                     result += "NOT TESTED: physical hands/controllers, shader appearance in headset, watering/growth sequence, scene restart, APK and Quest 3 performance" + Environment.NewLine;
                     Finish();
                     return;

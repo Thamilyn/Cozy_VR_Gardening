@@ -14,6 +14,10 @@ public static class GardenPresentationVerification
         try
         {
             Check("Calendar edges clear a mesh table", CalendarEdges, report);
+            Check("Calendar bottom clears a table between the viewer and panel", CalendarTableSightline, report);
+            Check("Calendar side clears a prop missed by the centre ray", CalendarPropSightline, report);
+            Check("Calendar avoids a seed box visual without colliders", CalendarVisualSightline, report);
+            Check("A colliderless visual hides blocked UI and allows recovery", CalendarVisualBlocking, report);
             Check("Animated demonstration and caption move together", AnimatedCaption, report);
             Check("A tall wall selects nearer free space", NearerSpace, report);
             Check("Blocked UI hides and recovers its interaction collider", BlockedPanel, report);
@@ -71,6 +75,78 @@ public static class GardenPresentationVerification
         float settledHeight = panel.transform.position.y;
         Assert(panel.ResolveNow() && Mathf.Abs(panel.transform.position.y - settledHeight) < 0.001f,
             "An unobstructed panel must remain stable.");
+    }
+
+    private static void CalendarTableSightline(Transform fixture, Transform eye)
+    {
+        // The panel itself is beyond the table, and its centre ray passes above it.
+        Collider table = Solid(fixture, new Vector3(0f, 0.8f, 0.55f), new Vector3(2f, 0.5f, 0.15f));
+        GardenPresentationPlacement panel = Panel(fixture, eye, out RectTransform content, out BoxCollider target);
+        panel.transform.localPosition = new Vector3(0f, 1.3f, 1.3f);
+        panel.Configure(content, eye, target, checkFullSightline: true);
+        Assert(panel.ResolveNow() && panel.GetComponent<Canvas>().enabled,
+            "The calendar must find clear space above or beside the intervening table.");
+        AssertClearSightline(content, eye, table);
+        Vector3 settled = panel.transform.position;
+        Assert(panel.ResolveNow() && Vector3.Distance(panel.transform.position, settled) < 0.001f,
+            "The calendar must remain stable after clearing the table.");
+    }
+
+    private static void CalendarPropSightline(Transform fixture, Transform eye)
+    {
+        Collider prop = Solid(fixture, new Vector3(0.2f, 1.3f, 0.65f), new Vector3(0.12f, 0.5f, 0.1f));
+        GardenPresentationPlacement panel = Panel(fixture, eye, out RectTransform content, out BoxCollider target);
+        Vector3 sight = content.position - eye.position;
+        Assert(!prop.Raycast(new Ray(eye.position, sight.normalized), out _, sight.magnitude),
+            "The prop must reproduce an obstruction missed by the centre ray.");
+        panel.Configure(content, eye, target, checkFullSightline: true);
+        Assert(panel.ResolveNow() && panel.GetComponent<Canvas>().enabled && target.enabled,
+            "The calendar and its interaction target must find a clear slot beside the prop.");
+        AssertClearSightline(content, eye, prop);
+    }
+
+    private static void CalendarVisualSightline(Transform fixture, Transform eye)
+    {
+        GameObject table = new("TableSet");
+        table.transform.SetParent(fixture, false);
+        Collider box = Solid(table.transform, new Vector3(0.2f, 1.3f, 0.65f), new Vector3(0.12f, 0.5f, 0.1f));
+        box.name = "SeedBox without colliders";
+        Renderer visual = box.GetComponent<Renderer>();
+        UnityEngine.Object.DestroyImmediate(box);
+        Assert(table.GetComponentsInChildren<Collider>().Length == 0, "The table fixture must have no colliders.");
+        GardenPresentationPlacement panel = Panel(fixture, eye, out RectTransform content, out BoxCollider target);
+        Vector3 original = panel.transform.position;
+        panel.Configure(content, eye, target, checkFullSightline: true, visualObstacleRoot: table.transform);
+        Assert(panel.ResolveNow() && panel.GetComponent<Canvas>().enabled && target.enabled &&
+            Vector3.Distance(panel.transform.position, original) > 0.1f &&
+            Mathf.Abs(panel.transform.localPosition.x) > 0.3f && !RectBounds(content).Intersects(visual.bounds),
+            "The colliderless box in front of a panel edge must move the calendar to a clear side slot.");
+    }
+
+    private static void CalendarVisualBlocking(Transform fixture, Transform eye)
+    {
+        Collider box = Solid(fixture, new Vector3(0f, 1.4f, 1.3f), Vector3.one * 8f);
+        Renderer visual = box.GetComponent<Renderer>();
+        UnityEngine.Object.DestroyImmediate(box);
+        GardenPresentationPlacement panel = Panel(fixture, eye, out RectTransform content, out BoxCollider target);
+        panel.Configure(content, eye, target, checkFullSightline: true, visualObstacleRoot: visual.transform);
+        Canvas canvas = panel.GetComponent<Canvas>();
+        Assert(!canvas.enabled && !target.enabled,
+            "A visual without colliders that blocks every slot must hide both UI and interaction.");
+        visual.enabled = false;
+        Assert(panel.ResolveNow() && canvas.enabled && target.enabled,
+            "Disabling the blocking visual must restore both UI and interaction.");
+    }
+
+    private static void AssertClearSightline(RectTransform content, Transform eye, Collider obstacle)
+    {
+        Bounds bounds = RectBounds(content);
+        bounds.Expand(0.08f);
+        Assert(!bounds.Intersects(obstacle.bounds), "The calendar edges must not intersect the obstacle.");
+        Vector3 sight = eye.position - bounds.center;
+        foreach (RaycastHit hit in Physics.BoxCastAll(bounds.center, bounds.extents, sight.normalized,
+            Quaternion.identity, sight.magnitude, ~0, QueryTriggerInteraction.Ignore))
+            Assert(hit.collider != obstacle, "The whole calendar surface must have a clear sightline.");
     }
 
     private static void AnimatedCaption(Transform fixture, Transform eye)
@@ -253,7 +329,7 @@ public static class GardenPresentationVerification
 
     private static void PlayerGrounding(Transform fixture, Transform eye)
     {
-        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/GardenCalendarVR.prefab");
+        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/OurAss/GardenCalendarVR.prefab");
         Assert(prefab != null && prefab.GetComponent<BoxCollider>().isTrigger,
             "The saved calendar must be non-solid even before its runtime setup.");
         GardenPresentationPlacement panel = Panel(fixture, eye, out _, out BoxCollider target);

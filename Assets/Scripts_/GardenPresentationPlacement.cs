@@ -16,6 +16,9 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
     private readonly Collider[] overlaps = new Collider[64];
     private readonly RaycastHit[] sightHits = new RaycastHit[64];
     private readonly Vector3[] corners = new Vector3[4];
+    private readonly List<Renderer> visualObstacles = new();
+    private Transform visualObstacleRoot;
+    private float nextVisualRefreshAt;
     private Transform content;
     private Transform viewer;
     private Transform playerRig;
@@ -32,12 +35,13 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
     private float maximumCenterHeight;
     private bool hasViewHeight;
     private bool keepStatic;
+    private bool checkFullSightline;
     private bool positionLocked;
     private Vector3 lockedPosition;
     private Quaternion lockedRotation;
 
     public void Configure(Transform presentation, Transform view, Collider targetCollider = null,
-        bool keepStatic = false)
+        bool keepStatic = false, bool checkFullSightline = false, Transform visualObstacleRoot = null)
     {
         // Restore the saved visual state before replacing the cached components/states.
         SetSuppressed(false);
@@ -47,6 +51,9 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
         // Interaction targets must never turn a relocating visual into a physical platform.
         if (interactionCollider != null) interactionCollider.isTrigger = true;
         this.keepStatic = keepStatic;
+        this.checkFullSightline = checkFullSightline;
+        this.visualObstacleRoot = visualObstacleRoot;
+        visualObstacles.Clear();
         // The calendar Canvas is on this root, while its hideable content is a child.
         canvases = GetComponentsInChildren<Canvas>(true);
         renderers = content.GetComponentsInChildren<Renderer>(true);
@@ -62,6 +69,7 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
     {
         if (viewer == null && Camera.main != null) viewer = Camera.main.transform;
         referencePosition = transform.position;
+        nextVisualRefreshAt = 0f;
         hasViewHeight = viewer != null;
         maximumCenterHeight = hasViewHeight ? viewer.position.y + maximumHeightAboveView : float.PositiveInfinity;
         // Authored instruction boards already have a scene position. They must not use an
@@ -117,6 +125,13 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
         }
         if (playerRig == null && viewer != null)
             playerRig = viewer.GetComponentInParent<OVRCameraRig>()?.transform;
+        if (visualObstacleRoot != null && Time.unscaledTime >= nextVisualRefreshAt)
+        {
+            // Cache only the table hierarchy, without a scene-wide scan or per-frame allocations.
+            // Refresh occasionally to include props or plant meshes created while the UI is open.
+            visualObstacleRoot.GetComponentsInChildren<Renderer>(true, visualObstacles);
+            nextVisualRefreshAt = Time.unscaledTime + 1f;
+        }
         if (!ReadBounds(out Bounds bounds)) return false;
 
         Vector3 originalPosition = transform.position;
@@ -242,6 +257,17 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
             blocked = true;
             lift = Mathf.Max(lift, obstacle.bounds.max.y - candidate.min.y + clearance);
         }
+        foreach (Renderer visual in visualObstacles)
+        {
+            if (visual == null || !visual.enabled || !visual.gameObject.activeInHierarchy ||
+                (visual is not MeshRenderer && visual is not SkinnedMeshRenderer) ||
+                (obstacleLayers.value & (1 << visual.gameObject.layer)) == 0 ||
+                Ignore(visual.transform)) continue;
+            Bounds obstacle = visual.bounds;
+            if (!IntersectsVisualObstacle(candidate, obstacle)) continue;
+            blocked = true;
+            lift = Mathf.Max(lift, obstacle.max.y - candidate.min.y + clearance);
+        }
         foreach (GardenPresentationPlacement other in presentations)
         {
             if (other == null || other == this || other.suppressed ||
@@ -256,8 +282,13 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
                 blocked = true;
             // Do not relocate the presentation to an empty space behind a wall or the table.
             Vector3 sight = candidate.center - viewer.position;
-            int hits = Physics.RaycastNonAlloc(viewer.position, sight.normalized, sightHits,
-                sight.magnitude, obstacleLayers, QueryTriggerInteraction.Ignore);
+            // The calendar needs a clear corridor for its whole surface. A centre ray misses
+            // the tabletop and props in front of the bottom edge or either side of the UI.
+            int hits = checkFullSightline
+                ? Physics.BoxCastNonAlloc(candidate.center, candidate.extents, -sight.normalized,
+                    sightHits, Quaternion.identity, sight.magnitude, obstacleLayers, QueryTriggerInteraction.Ignore)
+                : Physics.RaycastNonAlloc(viewer.position, sight.normalized, sightHits,
+                    sight.magnitude, obstacleLayers, QueryTriggerInteraction.Ignore);
             if (hits == sightHits.Length) { lift = maximumLift + 1f; return false; }
             for (int i = 0; i < hits; i++)
             {
@@ -269,11 +300,24 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
         return !blocked;
     }
 
-    private bool Ignore(Collider obstacle) => obstacle == null ||
-        obstacle.transform.IsChildOf(transform) ||
+    private bool IntersectsVisualObstacle(Bounds candidate, Bounds obstacle)
+    {
+        if (candidate.Intersects(obstacle)) return true;
+        if (!checkFullSightline || viewer == null) return false;
+        // Expanding the obstacle by the panel size is a box sweep against visual bounds.
+        // This also catches the seed box when it has no physics collider at all.
+        obstacle.Expand(candidate.size);
+        Vector3 sight = viewer.position - candidate.center;
+        return obstacle.IntersectRay(new Ray(candidate.center, sight.normalized), out float distance) &&
+            distance <= sight.magnitude;
+    }
+
+    private bool Ignore(Collider obstacle) => obstacle == null || Ignore(obstacle.transform);
+
+    private bool Ignore(Transform obstacle) => obstacle.IsChildOf(transform) ||
         // Other presentations use their current visual bounds, independent of physics sync timing.
         obstacle.GetComponentInParent<GardenPresentationPlacement>() != null ||
-        (playerRig != null && obstacle.transform.IsChildOf(playerRig));
+        (playerRig != null && obstacle.IsChildOf(playerRig));
 
     private void SetSuppressed(bool value)
     {

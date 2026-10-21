@@ -121,6 +121,7 @@ public sealed class TomatoFruit : MonoBehaviour
         grabbable.enabled = false;
         foreach (GrabInteractable grab in GetComponentsInChildren<GrabInteractable>()) grab.enabled = false;
         foreach (HandGrabInteractable grab in GetComponentsInChildren<HandGrabInteractable>()) grab.enabled = false;
+        foreach (Collider collider in GetComponentsInChildren<Collider>()) collider.enabled = false;
         if (!body.isKinematic)
         {
             body.linearVelocity = Vector3.zero;
@@ -128,8 +129,30 @@ public sealed class TomatoFruit : MonoBehaviour
         }
         body.useGravity = false;
         body.isKinematic = true;
+        // The visible tray can be offset from its root. Follow the tray, then seat
+        // the model on its real floor rather than freezing it at the release height.
         transform.SetParent(tray, true);
-        transform.position = tray.position + Vector3.up * 0.045f;
+        TomatoHarvestBasket harvestTray = tray.GetComponent<TomatoHarvestBasket>();
+        if (harvestTray != null && harvestTray.TryGetRestingPoint(out Vector3 support)) RestOn(support);
+    }
+
+    private void RestOn(Vector3 support)
+    {
+        MeshFilter model = GetComponentInChildren<MeshFilter>();
+        if (model == null || model.sharedMesh == null) return;
+        float bottom = model.GetComponent<MeshRenderer>().bounds.min.y;
+        if (model.sharedMesh.isReadable)
+        {
+            // Actual vertices avoid a gap caused by the rotated renderer bounds.
+            bottom = float.PositiveInfinity;
+            foreach (Vector3 vertex in model.sharedMesh.vertices)
+                bottom = Mathf.Min(bottom, model.transform.TransformPoint(vertex).y);
+        }
+        Vector3 position = transform.position;
+        position.x = support.x;
+        position.z = support.z;
+        position.y += support.y - bottom + 0.0005f;
+        transform.position = position;
     }
 
     private void OnDestroy()
