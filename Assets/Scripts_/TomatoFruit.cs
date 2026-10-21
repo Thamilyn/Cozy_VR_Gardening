@@ -94,6 +94,9 @@ public sealed class TomatoFruit : MonoBehaviour
         // Detach before Meta begins its grab transform, so its initial pose uses the
         // fruit's independent hierarchy rather than the scaled plant hierarchy.
         transform.SetParent(null, true);
+        // Meta cached a local-scale lock under the plant. Rebase that lock after
+        // detaching, or the next Move restores the old local scale and enlarges the fruit.
+        GetComponent<GrabFreeTransformer>()?.Initialize(grabbable);
         body.useGravity = true;
         if (outline != null) outline.enabled = false;
     }

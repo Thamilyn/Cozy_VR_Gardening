@@ -175,12 +175,14 @@ public static class TomatoRuntimeVerification
                 TomatoFruit fruit = UnityEngine.Object.FindFirstObjectByType<TomatoFruit>();
                 Require(fruit != null && fruit.GetComponent<Rigidbody>().isKinematic, "Fruit remains attached after Meta Start and scene scan");
                 VerifyHarvestFruit(fruit);
+                VerifyFruitDiameter(fruit, "attached");
                 Grabbable grab = fruit.GetComponent<Grabbable>();
                 Pose pose = new(fruit.transform.position, fruit.transform.rotation);
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Hover, pose));
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Select, pose));
                 Require(grab.SelectingPointsCount == 1, "Simulated Meta selection");
                 Require(fruit.transform.parent == null, "Selection detaches before the grab transform begins");
+                VerifyFruitDiameter(fruit, "just selected");
                 Require(!HarvestOutline(fruit).enabled,
                     "Harvest outline disappears on selection");
                 step = 2;
@@ -193,7 +195,9 @@ public static class TomatoRuntimeVerification
                 Pose pose = new(fruit.transform.position + Vector3.up * 0.12f, fruit.transform.rotation);
                 Grabbable grab = fruit.GetComponent<Grabbable>();
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Move, pose));
+                VerifyFruitDiameter(fruit, "held after Move");
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Unselect, pose));
+                VerifyFruitDiameter(fruit, "released outside tray");
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Unhover, pose));
                 step = 20;
                 nextStepAt = EditorApplication.timeSinceStartup + 0.1;
@@ -208,16 +212,22 @@ public static class TomatoRuntimeVerification
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Hover, pose));
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Select, pose));
                 Require(grab.SelectingPointsCount == 1, "Released fruit can be picked up again");
+                VerifyFruitDiameter(fruit, "picked up again");
                 step = 21;
                 nextStepAt = EditorApplication.timeSinceStartup + 0.1;
             }
             else if (step == 21)
             {
                 TomatoFruit fruit = UnityEngine.Object.FindFirstObjectByType<TomatoFruit>();
-                Transform tray = GameObject.Find("Bandeja Cosecha").transform;
-                Pose pose = new(tray.position + Vector3.up * 0.06f, Quaternion.identity);
+                TomatoHarvestBasket tray = UnityEngine.Object.FindFirstObjectByType<TomatoHarvestBasket>();
+                BoxCollider volume = new SerializedObject(tray).FindProperty("collectionVolume").objectReferenceValue as BoxCollider;
+                Require(volume != null, "Tray collection volume");
+                Vector3 deliveryPoint = volume.transform.TransformPoint(volume.center);
+                Require(tray.Contains(deliveryPoint), "Simulated delivery targets the current tray volume");
+                Pose pose = new(deliveryPoint, Quaternion.identity);
                 Grabbable grab = fruit.GetComponent<Grabbable>();
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Move, pose));
+                VerifyFruitDiameter(fruit, "moved to tray");
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Unselect, pose));
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Unhover, pose));
                 step = 3;
@@ -227,6 +237,7 @@ public static class TomatoRuntimeVerification
             {
                 TomatoFruit fruit = UnityEngine.Object.FindFirstObjectByType<TomatoFruit>();
                 Require(seeds.HarvestComplete && !fruit.GetComponent<Grabbable>().enabled, "Release inside tray records harvest and disables grab");
+                VerifyFruitDiameter(fruit, "stored in tray");
                 if (harvestOnly)
                 {
                     result += "PASS: RootswithTomatoes.036 retains its stalk, mesh and materials; all ripe fruit models are at most 6.5 cm; harvest fruit has its own collider and Meta hand/controller interactables" + Environment.NewLine;
@@ -309,5 +320,18 @@ public static class TomatoRuntimeVerification
 
     private static MeshRenderer HarvestOutline(TomatoFruit fruit) =>
         Array.Find(fruit.GetComponentsInChildren<MeshRenderer>(true), renderer => renderer.name == "Harvest outline");
+
+    private static void VerifyFruitDiameter(TomatoFruit fruit, string state)
+    {
+        MeshFilter model = fruit.GetComponentInChildren<MeshFilter>();
+        Require(TomatoFruitMesh.TryGetFruitBounds(model, model.GetComponent<MeshRenderer>(), out Bounds bounds),
+            "Fruit bounds during " + state);
+        float diameter = Mathf.Max(
+            model.transform.TransformVector(Vector3.right * bounds.size.x).magnitude,
+            model.transform.TransformVector(Vector3.up * bounds.size.y).magnitude,
+            model.transform.TransformVector(Vector3.forward * bounds.size.z).magnitude);
+        result += "MEASURE: " + state + " = " + diameter.ToString("F6") + " m" + Environment.NewLine;
+        Require(Mathf.Abs(diameter - TomatoFruit.DiameterMetres) < 0.001f, "Fruit keeps its diameter during " + state);
+    }
 }
 
