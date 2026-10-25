@@ -10843,6 +10843,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 865237137838068052, guid: 49f87ddcea52a864786eee98ff1a36e0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ba025bb9f67eed46bc6ed69ffa91d0a, type: 2}
     - target: {fileID: 3234505509051945648, guid: 49f87ddcea52a864786eee98ff1a36e0, type: 3}
       propertyPath: m_Name
       value: Shelf
