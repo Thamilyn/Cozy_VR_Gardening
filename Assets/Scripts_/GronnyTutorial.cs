@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Oculus.Interaction;
 using Oculus.Interaction.Grab;
@@ -66,6 +67,7 @@ public sealed class GronnyTutorial : MonoBehaviour
 
     public static bool Allows(GardenTutorialAction action)
     {
+        if (GardenMenuController.GardenSuspended) return false;
         if (active == null || !active.Running) return true;
         GuideStep step = active.Step;
         if (step == GuideStep.Free) return true;
@@ -83,6 +85,7 @@ public sealed class GronnyTutorial : MonoBehaviour
     // SeedItem detects release before its planting attempt, including grabs shorter than the polling interval.
     public static void RecordSeedRelease(SeedItem seed)
     {
+        if (GardenMenuController.GardenSuspended) return;
         if (active != null && active.Running && active.Step == GuideStep.Grab &&
             seed != null && seed.Crop == SeedCrop.Tomato) active.Learn("grab");
     }
@@ -127,8 +130,10 @@ public sealed class GronnyTutorial : MonoBehaviour
     private bool ShowWateringDemonstration => Caring && phase == 0 && Step == GuideStep.Water &&
         NeedsWater && !Excess && !CanEmpty;
 
-    private void Start()
+    private IEnumerator Start()
     {
+        // The welcome and progressive locks start only after Play and a released UI selection.
+        while (!GardenMenuController.HasStarted || GardenMenuController.GardenSuspended) yield return null;
         if (catalogue == null) catalogue = Resources.Load<GronnyAudioCatalogue>("GronnyAudio/Tutorial");
         seeds = FindFirstObjectByType<SeedsController>();
         calendar = seeds != null ? seeds.Calendar : null;
@@ -136,7 +141,7 @@ public sealed class GronnyTutorial : MonoBehaviour
         {
             Debug.LogError("Gronny tutorial needs its audio catalogue and the existing tomato calendar.", this);
             enabled = false;
-            return;
+            yield break;
         }
         visibility = FindFirstObjectByType<CalendarVisibilityController>();
         if (visibility != null) visibility.Close();
@@ -149,7 +154,7 @@ public sealed class GronnyTutorial : MonoBehaviour
         {
             Debug.LogError("Gronny's progressive tutorial needs the Meta camera rig, locomotion and calendar controls.", this);
             enabled = false;
-            return;
+            yield break;
         }
         demonstration = gameObject.AddComponent<GardenControlDemonstration>();
         Transform gardeningAnchor = GetComponent<TomatoPrototypeGuide>()?.GardeningDemonstrationAnchor;
@@ -215,6 +220,14 @@ public sealed class GronnyTutorial : MonoBehaviour
 
     private void Update()
     {
+        if (GardenMenuController.GardenSuspended)
+        {
+            lastActionAt = Time.unscaledTime;
+            heldObjects.Clear();
+            movementRequested = false;
+            if (playerOrigin != null) movementStart = playerOrigin.position;
+            return;
+        }
         if (!Running)
         {
             if (initialized && !completed) voice.Clear();
@@ -271,7 +284,7 @@ public sealed class GronnyTutorial : MonoBehaviour
     private void LateUpdate()
     {
         SeedItem target = null;
-        if (Running && grabInstructionFinished && State == null && !calendar.IsAdvancing)
+        if (!GardenMenuController.GardenSuspended && Running && grabInstructionFinished && State == null && !calendar.IsAdvancing)
         {
             foreach (SeedItem seed in seedItems)
             {
@@ -367,6 +380,7 @@ public sealed class GronnyTutorial : MonoBehaviour
     private bool Learned(string control) => learned.Contains(control);
     private void Learn(string control)
     {
+        if (GardenMenuController.GardenSuspended) return;
         if (!Running || !learned.Add(control)) return;
         lastActionAt = Time.unscaledTime;
         RefreshInteractionLocks();

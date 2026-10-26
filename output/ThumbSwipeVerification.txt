@@ -1,0 +1,39 @@
+Unity 6000.3.23f1
+UTC 2026-10-26T22:15:55.5773536Z
+PASS: OculusHand_L: dedicated swipe clip binds only existing thumb joints
+PASS: OculusHand_R: dedicated swipe clip binds only existing thumb joints
+PASS: Hand mesh remains visible through the normal placement path at eye height
+PASS: Thumb pad makes a short 12–30 mm stroke along the curled index
+PASS: Thumb visibly moves within the instruction interval, not only at a pose boundary
+PASS: Index stays curled and the whole hand does not substitute for thumb motion
+PASS: Backward stroke reverses the same thumb trajectory
+PASS: Seeking and repeating do not accumulate bone rotations
+PASS: Movement demonstration has no direction arrow or overlaid trajectory
+PASS: Thumb pad stays at the index surface: sample 0
+PASS: Thumb pad stays at the index surface: sample 1
+PASS: Thumb pad stays at the index surface: sample 2
+PASS: Thumb pad stays at the index surface: sample 3
+PASS: Thumb pad stays at the index surface: sample 4
+PASS: Thumb pad stays at the index surface: sample 5
+PASS: Thumb pad stays at the index surface: sample 6
+PASS: Thumb pad stays at the index surface: sample 7
+PASS: Thumb pad stays at the index surface: sample 8
+PASS: Thumb pad stays at the index surface: sample 9
+PASS: Thumb pad stays at the index surface: sample 10
+PASS: Thumb pad stays at the index surface: sample 11
+PASS: Thumb pad stays at the index surface: sample 12
+PASS: Thumb pad stays at the index surface: sample 13
+PASS: Thumb pad stays at the index surface: sample 14
+PASS: Thumb pad stays at the index surface: sample 15
+PASS: Thumb pad stays at the index surface: sample 16
+PASS: Thumb pad stays at the index surface: sample 17
+PASS: Thumb pad stays at the index surface: sample 18
+PASS: Thumb pad stays at the index surface: sample 19
+PASS: Thumb pad stays at the index surface: sample 20
+PASS: Final contact pose pauses before the return stroke
+PASS: Existing voice covers all authored gesture steps
+PASS: The skinned hand mesh deforms with the thumb
+PREVIEW: output/ThumbSwipePreview.mp4 (5 seconds, 30 fps, no audio)
+PASS: Preview changes no crop history, tutorial progress or session start
+Forward travel (metres): 0.02343
+RESULT: PASS

@@ -1,0 +1,159 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var c=UnityEngine.Resources.Load<GronnyAudioCatalogue>(\"GronnyAudio/Tutorial\"); var h=UnityEngine.Object.Instantiate(c.rightHand.prefab); try { var root=h.transform.Find(c.rightHand.animationRoot); var clip=UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.AnimationClip>(\"Packages/com.meta.xr.sdk.interaction.ovr/Runtime/Sample/Animations/MicrogestureSwipe.anim\"); var thumb=root.GetComponentsInChildren<UnityEngine.Transform>(true).Single(t=>t.name==\"b_r_thumb3\"); var index=root.GetComponentsInChildren<UnityEngine.Transform>(true).Single(t=>t.name==\"b_r_index1\"); var frames=new System.Collections.Generic.List<object>(); for(float t=0;t<=clip.length;t+=0.25f){clip.SampleAnimation(root.gameObject,t); frames.Add(new{time=t,tip=root.InverseTransformPoint(thumb.position).ToString(\"F5\"),indexEuler=index.localEulerAngles.ToString(\"F1\")});} return frames;} finally {UnityEngine.Object.DestroyImmediate(h);}"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": [
+        {
+          "time": 0,
+          "tip": "(-0.08176, -0.01980, -0.07607)",
+          "indexEuler": "(4.1, 10.8, 354.0)"
+        },
+        {
+          "time": 0.25,
+          "tip": "(-0.08702, -0.01850, -0.07032)",
+          "indexEuler": "(4.1, 10.8, 331.5)"
+        },
+        {
+          "time": 0.5,
+          "tip": "(-0.09071, -0.01501, -0.06528)",
+          "indexEuler": "(4.1, 10.8, 294.2)"
+        },
+        {
+          "time": 0.75,
+          "tip": "(-0.09234, -0.01533, -0.06260)",
+          "indexEuler": "(4.1, 10.8, 292.9)"
+        },
+        {
+          "time": 1,
+          "tip": "(-0.09395, -0.01918, -0.05965)",
+          "indexEuler": "(4.1, 10.7, 294.2)"
+        },
+        {
+          "time": 1.25,
+          "tip": "(-0.09578, -0.02648, -0.05477)",
+          "indexEuler": "(4.1, 10.7, 295.6)"
+        },
+        {
+          "time": 1.5,
+          "tip": "(-0.09794, -0.03144, -0.04904)",
+          "indexEuler": "(4.1, 10.6, 298.4)"
+        },
+        {
+          "time": 1.75,
+          "tip": "(-0.09228, -0.01678, -0.06292)",
+          "indexEuler": "(4.1, 10.6, 297.5)"
+        },
+        {
+          "time": 2,
+          "tip": "(-0.09654, -0.02327, -0.05436)",
+          "indexEuler": "(4.1, 10.5, 296.3)"
+        },
+        {
+          "time": 2.25,
+          "tip": "(-0.09955, -0.02992, -0.04143)",
+          "indexEuler": "(4.1, 10.4, 295.0)"
+        },
+        {
+          "time": 2.5,
+          "tip": "(-0.09918, -0.03368, -0.03852)",
+          "indexEuler": "(4.1, 10.3, 294.2)"
+        },
+        {
+          "time": 2.75,
+          "tip": "(-0.08531, -0.05731, -0.04760)",
+          "indexEuler": "(4.1, 10.3, 298.3)"
+        },
+        {
+          "time": 3,
+          "tip": "(-0.07908, -0.06535, -0.04672)",
+          "indexEuler": "(4.1, 10.2, 301.3)"
+        },
+        {
+          "time": 3.25,
+          "tip": "(-0.08142, -0.06032, -0.05269)",
+          "indexEuler": "(4.1, 10.1, 298.6)"
+        },
+        {
+          "time": 3.5,
+          "tip": "(-0.09040, -0.03482, -0.06196)",
+          "indexEuler": "(4.1, 10.0, 294.4)"
+        },
+        {
+          "time": 3.75,
+          "tip": "(-0.09109, -0.03063, -0.06245)",
+          "indexEuler": "(4.1, 9.9, 292.6)"
+        },
+        {
+          "time": 4,
+          "tip": "(-0.09710, -0.04344, -0.04082)",
+          "indexEuler": "(4.1, 9.8, 291.5)"
+        },
+        {
+          "time": 4.25,
+          "tip": "(-0.09929, -0.03822, -0.03981)",
+          "indexEuler": "(4.1, 9.7, 290.6)"
+        },
+        {
+          "time": 4.5,
+          "tip": "(-0.10136, -0.02905, -0.03978)",
+          "indexEuler": "(4.1, 9.5, 290.0)"
+        },
+        {
+          "time": 4.75,
+          "tip": "(-0.09922, -0.02407, -0.04750)",
+          "indexEuler": "(4.1, 9.4, 289.3)"
+        },
+        {
+          "time": 5,
+          "tip": "(-0.09330, -0.01465, -0.06026)",
+          "indexEuler": "(4.1, 9.3, 289.1)"
+        },
+        {
+          "time": 5.25,
+          "tip": "(-0.08275, -0.00522, -0.07420)",
+          "indexEuler": "(4.1, 9.2, 296.5)"
+        },
+        {
+          "time": 5.5,
+          "tip": "(-0.08241, -0.01018, -0.07527)",
+          "indexEuler": "(4.1, 9.1, 298.6)"
+        },
+        {
+          "time": 5.75,
+          "tip": "(-0.08225, -0.01428, -0.07566)",
+          "indexEuler": "(4.1, 8.8, 318.3)"
+        },
+        {
+          "time": 6,
+          "tip": "(-0.08158, -0.01385, -0.07654)",
+          "indexEuler": "(4.1, 7.2, 3.7)"
+        },
+        {
+          "time": 6.25,
+          "tip": "(-0.08320, -0.01488, -0.07485)",
+          "indexEuler": "(4.1, 5.5, 6.3)"
+        },
+        {
+          "time": 6.5,
+          "tip": "(-0.08341, -0.01394, -0.07460)",
+          "indexEuler": "(4.1, 5.5, 1.4)"
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

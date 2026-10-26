@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "command": "command console",
+  "data": {
+    "command": "console",
+    "parameters": {
+      "tail": "25",
+      "level": "warn"
+    },
+    "result": {
+      "entries": [
+        {
+          "seq": 2,
+          "timestampUtc": "2026-10-26T16:52:25.8455923Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "Missing types referenced from component UniversalRenderPipelineGlobalSettings on game object UniversalRenderPipelineGlobalSettings:\n\tUnityEngine.PathTracing.Core.WorldRenderPipelineResources, Unity.PathTracing.Runtime (1 object)\n",
+          "stackTrace": "\n",
+          "seeded": true
+        }
+      ],
+      "cursor": 17,
+      "session": "a403c2a8fa174e648e257ebab9d00a6b",
+      "returned": 1,
+      "dropped": false,
+      "reset": false,
+      "counts": {
+        "error": 0,
+        "warn": 1,
+        "log": 16
+      },
+      "groundTruth": null
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

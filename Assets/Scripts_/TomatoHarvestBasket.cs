@@ -49,6 +49,7 @@ public sealed class TomatoHarvestBasket : MonoBehaviour
 
     public void Collect(TomatoFruit fruit, SeedItem source)
     {
+        if (GardenMenuController.GardenSuspended) return;
         if (fruit == null || source == null || source.Crop != SeedCrop.Tomato || !Contains(fruit.transform.position)) return;
         SeedsController controller = FindFirstObjectByType<SeedsController>();
         if (controller == null || controller.Calendar == null) return;

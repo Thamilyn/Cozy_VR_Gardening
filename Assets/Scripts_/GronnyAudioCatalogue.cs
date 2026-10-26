@@ -32,6 +32,8 @@ public sealed class GronnyAudioCatalogue : ScriptableObject
         public Vector3 position;
         public Vector3 rotation;
         public Vector3 thumbRotation;
+        [Range(0f, 1f)] public float thumbSwipeProgress;
+        [Range(0f, 1f)] public float thumbSwipeWeight;
         public string label;
         [Range(0f, 1f)] public float press;
     }
@@ -45,6 +47,8 @@ public sealed class GronnyAudioCatalogue : ScriptableObject
         public AnimationClip curled;
         public AnimationClip point;
         public AnimationClip thumbFree;
+        [Tooltip("Thumb pad slides along the curled index. Clip start is back; clip end is forward.")]
+        public AnimationClip thumbSwipe;
     }
 
     public Cue[] cues = Array.Empty<Cue>();

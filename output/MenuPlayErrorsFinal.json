@@ -1,0 +1,78 @@
+{
+  "success": true,
+  "command": "command console",
+  "data": {
+    "command": "console",
+    "parameters": {
+      "tail": "20",
+      "level": "error"
+    },
+    "result": {
+      "entries": [
+        {
+          "seq": 20,
+          "timestampUtc": "2026-10-26T17:48:45.7235365Z",
+          "level": "error",
+          "logType": "Error",
+          "message": "Failed to handle /api/exec request: Main thread operation timed out after 5000ms",
+          "stackTrace": "UnityEngine.Debug:LogError (object)\nUnity.Pipeline.BasePipelineServer/<HandleExecRequest>d__119:MoveNext () (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Common/BasePipelineServer.cs:2257)\nSystem.Runtime.CompilerServices.AsyncTaskMethodBuilder:SetException (System.Exception)\nUnity.Pipeline.BasePipelineServer/<ExecuteGated>d__109:MoveNext () (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Common/BasePipelineServer.cs:1589)\nSystem.Runtime.CompilerServices.AsyncTaskMethodBuilder:SetException (System.Exception)\nUnity.Pipeline.BasePipelineServer/<>c__DisplayClass119_0/<<HandleExecRequest>b__0>d:MoveNext () (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Common/BasePipelineServer.cs:2218)\nSystem.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<object>:SetException (System.Exception)\nUnity.Pipeline.BasePipelineServer/<ExecuteCommandByName>d__137:MoveNext () (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Common/BasePipelineServer.cs:2664)\nSystem.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<object>:SetException (System.Exception)\nUnity.Pipeline.BasePipelineServer/<ExecuteCommand>d__138:MoveNext () (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Common/BasePipelineServer.cs:2703)\nSystem.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 22,
+          "timestampUtc": "2026-10-26T17:48:46.4538045Z",
+          "level": "error",
+          "logType": "Error",
+          "message": "[MetaXRFeature]: ErrorFormFactorUnavailable xrGetSystem",
+          "stackTrace": "UnityEngine.Debug:LogErrorFormat (string,object[])\nMeta.XR.Extensions:LogErrorFormat (string,object) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/XrResult.cs:205)\nMeta.XR.Extensions:OrLogFormat (Meta.XR.XrResult,string) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/XrResult.cs:269)\nMeta.XR.MetaXRFeature:BindFunctionPointers () (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaXRFeature.cs:423)\nMeta.XR.MetaFeatureBase`1<Meta.XR.MetaXRFeature>:OnInstanceCreate (ulong) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaFeatureBase.cs:134)\nMeta.XR.MetaXRFeature:OnInstanceCreate (ulong) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaXRFeature.cs:321)\nUnityEngine.XR.Management.XRGeneralSettings:AttemptInitializeXRSDKOnLoad () (at ./Library/PackageCache/com.unity.xr.management@df145a5bc89e/Runtime/XRGeneralSettings.cs:99)\n",
+          "seeded": false
+        },
+        {
+          "seq": 53,
+          "timestampUtc": "2026-10-26T17:53:29.1615011Z",
+          "level": "error",
+          "logType": "Error",
+          "message": "[MetaXRFeature]: ErrorFormFactorUnavailable xrGetSystem",
+          "stackTrace": "UnityEngine.Debug:LogErrorFormat (string,object[])\nMeta.XR.Extensions:LogErrorFormat (string,object) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/XrResult.cs:205)\nMeta.XR.Extensions:OrLogFormat (Meta.XR.XrResult,string) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/XrResult.cs:269)\nMeta.XR.MetaXRFeature:BindFunctionPointers () (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaXRFeature.cs:423)\nMeta.XR.MetaFeatureBase`1<Meta.XR.MetaXRFeature>:OnInstanceCreate (ulong) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaFeatureBase.cs:134)\nMeta.XR.MetaXRFeature:OnInstanceCreate (ulong) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaXRFeature.cs:321)\nUnityEngine.XR.Management.XRGeneralSettings:AttemptInitializeXRSDKOnLoad () (at ./Library/PackageCache/com.unity.xr.management@df145a5bc89e/Runtime/XRGeneralSettings.cs:99)\n",
+          "seeded": false
+        },
+        {
+          "seq": 87,
+          "timestampUtc": "2026-10-26T17:55:39.4378642Z",
+          "level": "error",
+          "logType": "Error",
+          "message": "[MetaXRFeature]: ErrorFormFactorUnavailable xrGetSystem",
+          "stackTrace": "UnityEngine.Debug:LogErrorFormat (string,object[])\nMeta.XR.Extensions:LogErrorFormat (string,object) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/XrResult.cs:205)\nMeta.XR.Extensions:OrLogFormat (Meta.XR.XrResult,string) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/XrResult.cs:269)\nMeta.XR.MetaXRFeature:BindFunctionPointers () (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaXRFeature.cs:423)\nMeta.XR.MetaFeatureBase`1<Meta.XR.MetaXRFeature>:OnInstanceCreate (ulong) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaFeatureBase.cs:134)\nMeta.XR.MetaXRFeature:OnInstanceCreate (ulong) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaXRFeature.cs:321)\nUnityEngine.XR.Management.XRGeneralSettings:AttemptInitializeXRSDKOnLoad () (at ./Library/PackageCache/com.unity.xr.management@df145a5bc89e/Runtime/XRGeneralSettings.cs:99)\n",
+          "seeded": false
+        }
+      ],
+      "cursor": 112,
+      "session": "a403c2a8fa174e648e257ebab9d00a6b",
+      "returned": 4,
+      "dropped": false,
+      "reset": false,
+      "counts": {
+        "error": 4,
+        "warn": 10,
+        "log": 98
+      },
+      "groundTruth": {
+        "sampledUtc": "2026-10-26T17:56:21.7144241Z",
+        "ageMs": 242,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 1,
+        "consoleWarnings": 4,
+        "consoleLogs": 28,
+        "seeded": true
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

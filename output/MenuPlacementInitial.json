@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var m=UnityEngine.Object.FindFirstObjectByType<GardenMenuController>(); var f=typeof(GardenMenuController).GetField(\"menu\", System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic); var v=(GardenMenuView)f.GetValue(m); return new { camera=UnityEngine.Camera.main?.name, cameraPosition=UnityEngine.Camera.main?.transform.position, menuPosition=v.Root.transform.position, active=v.Root.activeInHierarchy, canvas=v.Root.GetComponent<UnityEngine.Canvas>().enabled, collider=v.Collider.enabled, view=((UnityEngine.Transform)typeof(GardenMenuController).GetField(\"viewer\", System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).GetValue(m))?.position, children=v.Content.childCount };"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "{ camera = CenterEyeAnchor, cameraPosition = (0.00, 0.00, -7.88), menuPosition = (0.00, 0.00, -6.58), active = True, canvas = False, collider = False, view = (0.00, 0.00, -7.88), children = 7 }"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

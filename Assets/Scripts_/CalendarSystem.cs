@@ -87,6 +87,7 @@ public sealed class CalendarSystem : MonoBehaviour
     /// <summary>Called by the VR button. Repeated presses at the last milestone do nothing.</summary>
     public void AdvancePhase()
     {
+        if (GardenMenuController.GardenSuspended) return;
         if (milestones == null || IsAdvancing || IsCycleComplete) return;
         string reason = AdvanceBlockReason != null ? AdvanceBlockReason() : "Plant a tomato seed first.";
         if (!string.IsNullOrEmpty(reason))
@@ -117,6 +118,7 @@ public sealed class CalendarSystem : MonoBehaviour
     private IEnumerator AdvanceAfterCycle(int targetDay)
     {
         yield return timeCycle.PlayCycle();
+        while (GardenMenuController.GardenSuspended) yield return null;
         phaseTransition = null;
         IsAdvancing = false;
         string reason;

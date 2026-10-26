@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command menu",
+  "data": {
+    "command": "menu",
+    "parameters": {
+      "path": "Garden/Gronny/Add visible thumb swipe"
+    },
+    "result": {
+      "success": true,
+      "path": "Garden/Gronny/Add visible thumb swipe",
+      "items": null,
+      "message": "Executed menu item 'Garden/Gronny/Add visible thumb swipe'"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

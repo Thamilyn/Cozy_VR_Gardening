@@ -57,6 +57,7 @@ public sealed class WateringCan : MonoBehaviour
     private bool _awaitingRecoveryGrab;
     private Quaternion _initialRotation;
     private CalendarSystem _calendar;
+    private bool _requireUpright;
 
     public float CurrentWaterLitres => _currentWaterLitres;
     public float CapacityLitres => capacityLitres;
@@ -94,6 +95,13 @@ public sealed class WateringCan : MonoBehaviour
         if (isHeld) _awaitingRecoveryGrab = false;
         UpdateHeldCollisionState(isHeld || _awaitingRecoveryGrab);
 
+        if (GardenMenuController.GardenSuspended)
+        {
+            SuspendPouring();
+            return;
+        }
+        if (!IsTiltedToPour) _requireUpright = false;
+
         if (OVRInput.GetDown(refillButton, OVRInput.Controller.RTouch) &&
             GronnyTutorial.Allows(GardenTutorialAction.RefillWithController) &&
             (!requireCanToBeHeldForRefill || isHeld))
@@ -101,7 +109,7 @@ public sealed class WateringCan : MonoBehaviour
             Refill();
         }
 
-        IsPouring = isHeld && IsTiltedToPour && _currentWaterLitres > 0f &&
+        IsPouring = !_requireUpright && isHeld && IsTiltedToPour && _currentWaterLitres > 0f &&
                     GronnyTutorial.Allows(GardenTutorialAction.Pour) &&
                     (_calendar == null || !_calendar.IsAdvancing);
 
@@ -135,6 +143,14 @@ public sealed class WateringCan : MonoBehaviour
     {
         if (_grabbable != null)
             _grabbable.WhenPointerEventRaised += HandleGrabEvent;
+    }
+
+    public void SuspendPouring()
+    {
+        _requireUpright = true;
+        IsPouring = false;
+        _lastWateredPlant = null;
+        SetStreamVisible(false);
     }
 
     private void OnDisable()

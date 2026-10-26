@@ -90,6 +90,14 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
 
     private void Refresh(SeedsController.PlantedSeed plant)
     {
+        if (GardenMenuController.GardenSuspended)
+        {
+            instruction.text = GardenMenuController.HasStarted ? "Garden menu is open." : "Welcome to Cozy Garden.";
+            water.text = GardenMenuController.HasStarted
+                ? "Adjust sound or review the controls above.\nSelect Return to garden when ready."
+                : "The launch menu is at the garden entrance.\nSelect Play when ready.";
+            return;
+        }
         if (calendar.IsAdvancing)
         {
             water.color = neutralWaterColor;

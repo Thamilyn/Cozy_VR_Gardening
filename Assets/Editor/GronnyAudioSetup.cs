@@ -111,7 +111,8 @@ public static class GronnyAudioSetup
             pinch = Require<AnimationClip>(animations + "HandPinch_" + suffix + "_.anim"),
             curled = Require<AnimationClip>(animations + "HandMidFist_" + suffix + "_.anim"),
             point = Require<AnimationClip>(animations + "IndexPoint_" + suffix + "_.anim"),
-            thumbFree = Require<AnimationClip>(animations + "ThumbUp_" + suffix + "_.anim") };
+            thumbFree = Require<AnimationClip>(animations + "ThumbUp_" + suffix + "_.anim"),
+            thumbSwipe = Require<AnimationClip>("Assets/Resources/GronnyAudio/ThumbSwipe" + side + ".anim") };
     }
 
     private static AnimationClip Clip(string path, string name) =>
@@ -135,9 +136,10 @@ public static class GronnyAudioSetup
         AssetDatabase.LoadAssetAtPath<T>(path) ?? throw new InvalidOperationException("Missing asset: " + path);
 
     private static GronnyAudioCatalogue.Step Step(float at, GardenDemoPose pose, string label,
-        Vector3 position = default, Vector3 rotation = default, float press = 0f, Vector3 thumbRotation = default) =>
+        Vector3 position = default, Vector3 rotation = default, float press = 0f, Vector3 thumbRotation = default,
+        float thumbSwipeProgress = 0f, float thumbSwipeWeight = 0f) =>
         new() { at = at, pose = pose, label = label, position = position, rotation = rotation, press = press,
-            thumbRotation = thumbRotation };
+            thumbRotation = thumbRotation, thumbSwipeProgress = thumbSwipeProgress, thumbSwipeWeight = thumbSwipeWeight };
 
     public static void ConfigureHandMovement(GronnyAudioCatalogue catalogue) =>
         catalogue.Find("controls_move_hands").steps = ControlSteps("move", GardenInputMode.Hands);
@@ -156,10 +158,10 @@ public static class GronnyAudioSetup
                 Step(0, GardenDemoPose.ThumbFree, "Curl the index; keep the thumb free", rotation: movementRotation),
                 Step(3.2f, GardenDemoPose.Curled, "Tap the index with the thumb", rotation: movementRotation),
                 Step(4.5f, GardenDemoPose.ThumbFree, "Movement active", rotation: movementRotation),
-                Step(5.8f, GardenDemoPose.ThumbFree, "Swipe forward to step", rotation: movementRotation, thumbRotation: new Vector3(0, 0, 18)),
-                Step(7.0f, GardenDemoPose.ThumbFree, "Swipe forward to step", rotation: movementRotation, thumbRotation: new Vector3(0, 0, -18)),
-                Step(8.3f, GardenDemoPose.ThumbFree, "Swipe back to step back", rotation: movementRotation, thumbRotation: new Vector3(0, 0, -18)),
-                Step(9.5f, GardenDemoPose.ThumbFree, "Swipe back to step back", rotation: movementRotation, thumbRotation: new Vector3(0, 0, 18)),
+                Step(5.8f, GardenDemoPose.ThumbFree, "Swipe forward to step", rotation: movementRotation, thumbSwipeWeight: 1f),
+                Step(7.0f, GardenDemoPose.ThumbFree, "Swipe forward to step", rotation: movementRotation, thumbSwipeProgress: 1f, thumbSwipeWeight: 1f),
+                Step(8.3f, GardenDemoPose.ThumbFree, "Swipe back to step back", rotation: movementRotation, thumbSwipeProgress: 1f, thumbSwipeWeight: 1f),
+                Step(9.5f, GardenDemoPose.ThumbFree, "Swipe back to step back", rotation: movementRotation, thumbSwipeWeight: 1f),
                 Step(10.5f, GardenDemoPose.Point, "Straighten the index to exit", rotation: movementRotation) },
             "move" => new[] { Step(0, GardenDemoPose.Open, "Move the joystick", press: 1),
                 Step(3f, GardenDemoPose.Open, "Release to stop") },

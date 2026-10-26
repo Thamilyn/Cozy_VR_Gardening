@@ -97,6 +97,7 @@ public sealed class SeedsController : MonoBehaviour
 
     private void Update()
     {
+        if (GardenMenuController.GardenSuspended) return;
         if (calendar == null) return;
         foreach (PlantedSeed plant in plantedSeeds)
         {

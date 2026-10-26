@@ -1,0 +1,50 @@
+Unity 6000.3.23f1
+UTC 2026-10-26T22:57:58.7988180Z
+Synthetic Play checks: camera pose, release decisions and pointer events; physical XR input not tested.
+PASS: Initial menu suspends the garden before Play
+PASS: Welcome voice waits for Play
+PASS: Opening menu does not create crop progress
+PASS: Launch menu remains visible and a non-solid ray target
+PASS: Launch menu appears in front of the player's entry point
+PASS: Pause menu button is hidden until Play
+PASS: Launch panel occupies clear space in Garden_Moves
+PASS: Runtime Meta canvas and ray dependencies are bound
+PASS: Menu target consumes a ray before calendar pinches
+PASS: Launch menu stays fixed at entry when the player moves or turns
+PASS: Text fits its rectangles on page Cozy Garden
+PASS: Text fits its rectangles on page Controls
+PASS: Text fits its rectangles on page Sound settings
+PASS: Sound defaults preserve independent image and handedness preferences
+PASS: Preferences survive an in-process reload and never modify crop history
+PASS: Changing menu pages preserves the station position and orientation
+PASS: Play waits for selection release before starting garden actions
+PASS: First Play relocates the menu from entry to Gronny
+PASS: Pause panel sits 8 cm above the guide without covering its instructions
+PASS: Pause menu button sits 8 cm above the guide
+PASS: Pause panel occupies clear space beside Gronny
+PASS: Holding an input cannot resume the garden
+PASS: Brief release cannot resume the garden
+PASS: Stable release resumes through the same production decision
+PASS: Closed menu leaves its Menu button fixed above the guide
+PASS: Menu button stays fixed after moving and looking away
+PASS: Play initializes the welcome voice
+PASS: Opening pause from another player position keeps the station beside Gronny
+PASS: Pause menu offers Return to garden instead of starting a new game
+PASS: Text fits its rectangles on page Controls
+PASS: Text fits its rectangles on page Sound settings
+PASS: Pause controls and sound settings keep the menu beside Gronny
+PASS: Opening menu pauses the existing voice without losing its position
+PASS: Menu navigation records neither learning nor original tutorial assistance
+PASS: Returning from pause does not move the menu back to entry
+PASS: Returning resumes the same voice rather than replaying the welcome
+PASS: Synthetic held can pours before menu suspension
+PASS: Menu preserves an existing grab and stops water consumption
+PASS: Calendar refill is blocked while menu is open
+PASS: Returning with a tilted can cannot resume pouring
+PASS: Upright then tilted rearms intentional pouring
+PASS: Cultivation fixture plants a tomato after leaving the menu
+PASS: Real phase cycle begins before the suspension fixture
+PASS: Opening menu freezes phase lighting and prevents committing the day
+PASS: Menu blocks additional crop watering and phase requests
+PASS: Returning completes the interrupted phase exactly once
+RESULT: PASS

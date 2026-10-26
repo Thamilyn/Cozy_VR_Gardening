@@ -16,6 +16,7 @@ public sealed class TomatoFruit : MonoBehaviour
     private bool stored;
     private float nextBasketSearch;
     private MeshRenderer outline;
+    private bool requireNewGrab;
 
     public void Initialize(SeedItem seed)
     {
@@ -105,6 +106,13 @@ public sealed class TomatoFruit : MonoBehaviour
     {
         if (stored || grabbable == null) return;
         bool held = grabbable.SelectingPointsCount > 0;
+        if (GardenMenuController.GardenSuspended)
+        {
+            if (picked && !held) requireNewGrab = true;
+            return;
+        }
+        if (held) requireNewGrab = false;
+        if (requireNewGrab) return;
         if (!picked || held) return;
         if (basket == null && Time.unscaledTime >= nextBasketSearch)
         {

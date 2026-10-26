@@ -22,6 +22,9 @@ public sealed class GardenControlDemonstration : MonoBehaviour
     private AnimationClip pressClip;
     private GameObject buttonHighlight;
     private bool fixedGardeningPosition;
+    private AnimationClip thumbSwipeClip;
+    private Transform[] thumbJoints;
+    private Quaternion[] thumbBaseRotations;
 
     public bool IsShowing(GronnyAudioCatalogue.Cue instruction) => anchor != null && cue == instruction;
 
@@ -118,6 +121,8 @@ public sealed class GardenControlDemonstration : MonoBehaviour
                 return;
             }
             CachePoses(hand);
+            thumbSwipeClip = hand.thumbSwipe;
+            if (cue.demo == GardenControlDemo.Move && thumbSwipeClip != null) PrepareThumbSwipe();
         }
         else
         {
@@ -210,6 +215,7 @@ public sealed class GardenControlDemonstration : MonoBehaviour
                 foreach (Transform joint in joints)
                     if (joint.name.EndsWith("thumb1"))
                         joint.localRotation *= Quaternion.Euler(Vector3.Lerp(previous.thumbRotation, step.thumbRotation, t));
+            ApplyThumbSwipe(index, audioSeconds);
         }
         else if (pressClip != null)
         {
@@ -222,6 +228,37 @@ public sealed class GardenControlDemonstration : MonoBehaviour
             pointer.SetPosition(1, motion.localPosition + Vector3.forward * 0.35f);
         }
         if (buttonHighlight != null) buttonHighlight.SetActive(step.press > 0f);
+    }
+
+    private void PrepareThumbSwipe()
+    {
+        var animatedThumb = new System.Collections.Generic.List<Transform>();
+        foreach (Transform joint in joints)
+        {
+            if (joint.name.StartsWith("b_") && joint.name.Contains("_thumb")) animatedThumb.Add(joint);
+        }
+        thumbJoints = animatedThumb.ToArray();
+        thumbBaseRotations = new Quaternion[thumbJoints.Length];
+    }
+
+    private void ApplyThumbSwipe(int index, float audioSeconds)
+    {
+        if (cue.demo != GardenControlDemo.Move || thumbSwipeClip == null || thumbJoints == null) return;
+        GronnyAudioCatalogue.Step from = cue.steps[index];
+        GronnyAudioCatalogue.Step to = index + 1 < cue.steps.Length ? cue.steps[index + 1] : from;
+        // Interpolate across the entire authored swipe interval, not just blendSeconds
+        // after the next pose. This keeps the visible stroke under its spoken instruction.
+        float progress = to.at > from.at ? Mathf.SmoothStep(0f, 1f,
+            Mathf.InverseLerp(from.at, to.at, audioSeconds)) : 1f;
+        float weight = Mathf.Lerp(from.thumbSwipeWeight, to.thumbSwipeWeight, progress);
+        if (weight > 0f)
+        {
+            for (int j = 0; j < thumbJoints.Length; j++) thumbBaseRotations[j] = thumbJoints[j].localRotation;
+            thumbSwipeClip.SampleAnimation(animationRoot.gameObject,
+                Mathf.Lerp(from.thumbSwipeProgress, to.thumbSwipeProgress, progress) * thumbSwipeClip.length);
+            for (int j = 0; j < thumbJoints.Length; j++)
+                thumbJoints[j].localRotation = Quaternion.Slerp(thumbBaseRotations[j], thumbJoints[j].localRotation, weight);
+        }
     }
 
     private static string ReadableCaption(string text)
@@ -283,6 +320,9 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         poses = null;
         joints = null;
         fixedGardeningPosition = false;
+        thumbSwipeClip = null;
+        thumbJoints = null;
+        thumbBaseRotations = null;
     }
 
     private void OnDisable() => Hide();

@@ -101,11 +101,11 @@ public sealed class GardenPhaseTimeCycle : MonoBehaviour
     public IEnumerator PlayCycle()
     {
         ResetToDay();
-        yield return new WaitForSecondsRealtime(Mathf.Max(0f, dayHoldSeconds));
+        yield return WaitInGarden(dayHoldSeconds);
         yield return Fade(day, afternoon);
-        yield return new WaitForSecondsRealtime(Mathf.Max(0f, afternoonHoldSeconds));
+        yield return WaitInGarden(afternoonHoldSeconds);
         yield return Fade(afternoon, night);
-        yield return new WaitForSecondsRealtime(Mathf.Max(0f, nightHoldSeconds));
+        yield return WaitInGarden(nightHoldSeconds);
         yield return Fade(night, day);
         ResetToDay();
     }
@@ -116,12 +116,23 @@ public sealed class GardenPhaseTimeCycle : MonoBehaviour
         float duration = Mathf.Max(0.1f, transitionSeconds);
         while (elapsed < duration && runtimeSkybox != null && sun != null && isActiveAndEnabled)
         {
+            if (GardenMenuController.GardenSuspended) { yield return null; continue; }
             // Do not skip the whole transition after a headset/application pause.
             elapsed += Mathf.Min(Time.unscaledDeltaTime, 0.1f);
             Apply(from, to, Mathf.SmoothStep(0f, 1f, elapsed / duration));
             yield return null;
         }
         if (runtimeSkybox != null && sun != null && isActiveAndEnabled) Apply(to, to, 1f);
+    }
+
+    private IEnumerator WaitInGarden(float seconds)
+    {
+        float elapsed = 0f;
+        while (elapsed < Mathf.Max(0f, seconds))
+        {
+            if (!GardenMenuController.GardenSuspended) elapsed += Mathf.Min(Time.unscaledDeltaTime, 0.1f);
+            yield return null;
+        }
     }
 
     public void ResetToDay()

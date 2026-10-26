@@ -1,0 +1,29 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "return new { playing=UnityEditor.EditorApplication.isPlaying, menu=UnityEngine.Object.FindFirstObjectByType<GardenMenuController>() != null, started=GardenMenuController.HasStarted, suspended=GardenMenuController.GardenSuspended, voices=UnityEngine.Object.FindObjectsByType<GronnyVoicePlayer>(UnityEngine.FindObjectsSortMode.None).Length };"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "playing": true,
+        "menu": true,
+        "started": false,
+        "suspended": true,
+        "voices": 0
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

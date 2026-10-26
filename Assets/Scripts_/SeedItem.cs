@@ -46,6 +46,12 @@ public sealed class SeedItem : MonoBehaviour
     {
         if (IsPlanted || _grabbable == null) return;
         bool held = _grabbable.SelectingPointsCount > 0;
+        if (GardenMenuController.GardenSuspended)
+        {
+            // A release while operating the menu is not a tutorial or planting action.
+            _wasHeld = held;
+            return;
+        }
         if (held) _everHeld = true;
         if (_wasHeld && !held && _everHeld)
         {

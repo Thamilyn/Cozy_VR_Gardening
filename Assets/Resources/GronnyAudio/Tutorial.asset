@@ -58,6 +58,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Pick up the watering can
       press: 0
     - at: 2.6
@@ -65,6 +67,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Hold the can
       press: 0
     - at: 4.6
@@ -72,6 +76,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: -65}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Tilt over the soil
       press: 0
     - at: 7
@@ -79,6 +85,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: -65}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Aim near the roots
       press: 0
   - id: 05_water_target
@@ -106,6 +114,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: -65}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Stop pouring
       press: 0
     - at: 1.2
@@ -113,6 +123,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Hold the can upright
       press: 0
   - id: 07_first_advance
@@ -220,6 +232,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: -65}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Stop pouring
       press: 0
     - at: 1.2
@@ -227,6 +241,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Hold the can upright
       press: 0
   - id: help_drained
@@ -274,6 +290,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 2.74, y: 262.35, z: 143.91}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Curl the index; keep the thumb free
       press: 0
     - at: 3.2
@@ -281,6 +299,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 2.74, y: 262.35, z: 143.91}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Tap the index with the thumb
       press: 0
     - at: 4.5
@@ -288,34 +308,44 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 2.74, y: 262.35, z: 143.91}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Movement active
       press: 0
     - at: 5.8
       pose: 4
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 2.74, y: 262.35, z: 143.91}
-      thumbRotation: {x: 0, y: 0, z: 18}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 1
       label: Swipe forward to step
       press: 0
     - at: 7
       pose: 4
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 2.74, y: 262.35, z: 143.91}
-      thumbRotation: {x: 0, y: 0, z: -18}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 1
+      thumbSwipeWeight: 1
       label: Swipe forward to step
       press: 0
     - at: 8.3
       pose: 4
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 2.74, y: 262.35, z: 143.91}
-      thumbRotation: {x: 0, y: 0, z: -18}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 1
+      thumbSwipeWeight: 1
       label: Swipe back to step back
       press: 0
     - at: 9.5
       pose: 4
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 2.74, y: 262.35, z: 143.91}
-      thumbRotation: {x: 0, y: 0, z: 18}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 1
       label: Swipe back to step back
       press: 0
     - at: 10.5
@@ -323,6 +353,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 2.74, y: 262.35, z: 143.91}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Straighten the index to exit
       press: 0
   - id: controls_grab_hands
@@ -340,6 +372,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Move close to the object
       press: 0
     - at: 2.3
@@ -347,6 +381,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Pinch and hold
       press: 1
     - at: 4.2
@@ -354,6 +390,8 @@ MonoBehaviour:
       position: {x: 0.08, y: 0.05, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Keep holding while moving
       press: 1
     - at: 6.5
@@ -361,6 +399,8 @@ MonoBehaviour:
       position: {x: 0.08, y: 0.05, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Release to let go
       press: 0
   - id: controls_calendar_hands
@@ -378,6 +418,8 @@ MonoBehaviour:
       position: {x: -0.08, y: 0, z: 0}
       rotation: {x: 0, y: 155, z: 180}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Left hand away from objects
       press: 0
     - at: 3.4
@@ -385,6 +427,8 @@ MonoBehaviour:
       position: {x: -0.08, y: 0, z: 0}
       rotation: {x: 0, y: 155, z: 180}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Pinch
       press: 0
     - at: 6
@@ -392,6 +436,8 @@ MonoBehaviour:
       position: {x: -0.08, y: 0, z: 0}
       rotation: {x: 0, y: 155, z: 180}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Release
       press: 0
   - id: controls_calendar_select_hands
@@ -409,6 +455,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -105, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Point at the button
       press: 0
     - at: 2.5
@@ -416,6 +464,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -105, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Pinch
       press: 1
     - at: 5
@@ -423,6 +473,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -105, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Release to select
       press: 0
   - id: controls_move_controllers
@@ -440,6 +492,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Move the joystick
       press: 1
     - at: 3
@@ -447,6 +501,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Release to stop
       press: 0
   - id: controls_grab_controllers
@@ -464,6 +520,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Move close to the object
       press: 0
     - at: 2.3
@@ -471,6 +529,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Hold the grip button
       press: 1
     - at: 4.2
@@ -478,6 +538,8 @@ MonoBehaviour:
       position: {x: 0.08, y: 0.05, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Keep holding while moving
       press: 1
     - at: 6.5
@@ -485,6 +547,8 @@ MonoBehaviour:
       position: {x: 0.08, y: 0.05, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Release to let go
       press: 0
   - id: controls_calendar_controllers
@@ -502,6 +566,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: 'Left controller: Y'
       press: 0
     - at: 1.2
@@ -509,6 +575,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Press Y
       press: 1
     - at: 3
@@ -516,6 +584,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Release Y
       press: 0
   - id: controls_calendar_select_controllers
@@ -533,6 +603,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Point the controller
       press: 0
     - at: 2.5
@@ -540,6 +612,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Press the index trigger
       press: 1
     - at: 5
@@ -547,6 +621,8 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
       thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
       label: Release to select
       press: 0
   leftHand:
@@ -556,6 +632,7 @@ MonoBehaviour:
     curled: {fileID: 7400000, guid: 2a62eebed83b25b4b8f2c21b3281f62c, type: 2}
     point: {fileID: 7400000, guid: 81850be3722257141a962f87f08bd7d7, type: 2}
     thumbFree: {fileID: 7400000, guid: d383e35b8d2f63f4f8258d5eadab871e, type: 2}
+    thumbSwipe: {fileID: 7400000, guid: 482c31a2f58c38542ba3a4b2b1538a62, type: 2}
   rightHand:
     prefab: {fileID: 4320616554957641676, guid: 4170d4d20a9b6034a88d89a71c2e0828, type: 3}
     animationRoot: OculusHand_R
@@ -563,6 +640,7 @@ MonoBehaviour:
     curled: {fileID: 7400000, guid: 239acd9cecc4aaf4f98ec5420ef26571, type: 2}
     point: {fileID: 7400000, guid: 86a31394bfe0b3e4b871676d471ef8c6, type: 2}
     thumbFree: {fileID: 7400000, guid: 06e5790983e91714d83eb62bd6d24071, type: 2}
+    thumbSwipe: {fileID: 7400000, guid: eb7b67d787098ec41a67d85e0dd1b238, type: 2}
   leftController: {fileID: 919132149155446097, guid: 2b1aaafc31655024394d83dc00911c1c, type: 3}
   rightController: {fileID: 919132149155446097, guid: deed68a7fd2e9234899298cf80fae7ad, type: 3}
   controllerStick: {fileID: -3733069272168932517, guid: 2b1aaafc31655024394d83dc00911c1c, type: 3}

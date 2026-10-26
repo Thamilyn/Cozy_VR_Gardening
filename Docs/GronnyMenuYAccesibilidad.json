@@ -1,0 +1,67 @@
+[
+  {
+    "id": "controls_move_hands_left",
+    "optional": false,
+    "text": "With your left hand, curl your index finger and keep your thumb free. Tap your thumb against your curled index finger to activate movement. Swipe your thumb forward to step forward, or backward to step back. Straighten your index finger to exit movement mode."
+  },
+  {
+    "id": "controls_move_hands_right",
+    "optional": false,
+    "text": "With your right hand, curl your index finger and keep your thumb free. Tap your thumb against your curled index finger to activate movement. Swipe your thumb forward to step forward, or backward to step back. Straighten your index finger to exit movement mode."
+  },
+  {
+    "id": "controls_move_controllers_left",
+    "optional": false,
+    "text": "Use the joystick on your left controller to move. Let the joystick return to the centre to stop."
+  },
+  {
+    "id": "controls_move_controllers_right",
+    "optional": false,
+    "text": "Use the joystick on your right controller to move. Let the joystick return to the centre to stop."
+  },
+  {
+    "id": "controls_calendar_hands_left",
+    "optional": false,
+    "text": "Keep your left hand free and away from objects. Pinch your thumb and index finger together to open the calendar, then release. Repeat the gesture to close it."
+  },
+  {
+    "id": "controls_calendar_hands_right",
+    "optional": false,
+    "text": "Keep your right hand free and away from objects. Pinch your thumb and index finger together to open the calendar, then release. Repeat the gesture to close it."
+  },
+  {
+    "id": "controls_calendar_controllers_left",
+    "optional": false,
+    "text": "Press the Y button on your left controller to open the calendar. Press it again to close it."
+  },
+  {
+    "id": "controls_calendar_controllers_right",
+    "optional": false,
+    "text": "Press the B button on your right controller to open the calendar. Press it again to close it."
+  },
+  {
+    "id": "03_plant_seed_accessible",
+    "optional": false,
+    "text": "Pick up the seed labelled Tomato and gently drop it onto the soil in an empty small pot."
+  },
+  {
+    "id": "12_harvest_accessible",
+    "optional": false,
+    "text": "Our tomato is ripe! Pick the fruit marked ready to harvest and gently place it in the harvest tray."
+  },
+  {
+    "id": "menu_intro",
+    "optional": true,
+    "text": "Ready to spend some time in the garden? Select Play to begin. You can also review the controls or adjust your settings before you start."
+  },
+  {
+    "id": "menu_tutorial_intro",
+    "optional": true,
+    "text": "Choose hand tracking or controllers to review the controls. You can replay any demonstration and return to the garden whenever you're ready."
+  },
+  {
+    "id": "settings_voice_sample",
+    "optional": true,
+    "text": "Hello again! This is how loud my voice will sound. Adjust the volume until you can hear me comfortably."
+  }
+]

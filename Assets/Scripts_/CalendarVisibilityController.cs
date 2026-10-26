@@ -63,6 +63,12 @@ public sealed class CalendarVisibilityController : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (GardenMenuController.GardenSuspended)
+        {
+            pinchArmed = false;
+            releaseStartedAt = float.NaN;
+            return;
+        }
         if (closeButton != null) closeButton.interactable = GronnyTutorial.Allows(GardenTutorialAction.CloseCalendar);
         // Read grab state after the Meta interactors have processed this frame.
         bool validHand = leftHand != null && leftHand.IsDataValid && leftHand.IsTracked &&
@@ -70,11 +76,11 @@ public sealed class CalendarVisibilityController : MonoBehaviour
             leftHand.GetFingerConfidence(OVRHand.HandFinger.Index) == OVRHand.TrackingConfidence.High &&
             !leftHand.IsSystemGestureInProgress;
         bool busy = IsHandInteractionBusy();
-        bool pointingAtCalendar = IsVisible && IsPointingAtCalendar();
+        bool pointingAtUI = IsPointingAtPanel();
         bool pinching = validHand && leftHand.GetFingerIsPinching(OVRHand.HandFinger.Index);
         float strength = validHand ? leftHand.GetFingerPinchStrength(OVRHand.HandFinger.Index) : 0f;
         // Disarm while using the UI, so moving off a button mid-pinch cannot close the panel.
-        bool pinchStarted = UpdatePinchState(validHand && !busy && !pointingAtCalendar,
+        bool pinchStarted = UpdatePinchState(validHand && !busy && !pointingAtUI,
             pinching, strength, Time.unscaledTime);
 
         // UI ray pinches go to the calendar buttons; object grabs consume the gesture.
@@ -125,9 +131,9 @@ public sealed class CalendarVisibilityController : MonoBehaviour
         return false;
     }
 
-    private bool IsPointingAtCalendar()
+    private bool IsPointingAtPanel()
     {
-        if (rayCollider == null || !rayCollider.enabled) return false;
+        bool calendarTarget = IsVisible && rayCollider != null && rayCollider.enabled;
         if (Time.unscaledTime >= nextRaySearch)
         {
             handRayInteractors = FindObjectsByType<RayInteractor>(FindObjectsSortMode.None);
@@ -145,14 +151,17 @@ public sealed class CalendarVisibilityController : MonoBehaviour
                 if (hand == null || hand.Hand == null || hand.Handedness != Handedness.Left) continue;
                 hasLeftRay = true;
                 // Use the same processed ray as PointableCanvas, including Meta's pose adjustments.
-                if (rayCollider.Raycast(interactor.Ray, out _, interactor.MaxRayLength)) return true;
+                if (GardenMenuController.RayHitsMenu(interactor.Ray, interactor.MaxRayLength) ||
+                    (calendarTarget && rayCollider.Raycast(interactor.Ray, out _, interactor.MaxRayLength))) return true;
             }
         }
 
         if (hasLeftRay || leftHand == null || !leftHand.IsPointerPoseValid) return false;
         Transform pointer = leftHand.PointerPose;
-        return pointer != null && rayCollider.Raycast(new Ray(pointer.position, pointer.forward),
-            out _, 10f);
+        if (pointer == null) return false;
+        Ray pointerRay = new(pointer.position, pointer.forward);
+        return GardenMenuController.RayHitsMenu(pointerRay, 10f) ||
+            (calendarTarget && rayCollider.Raycast(pointerRay, out _, 10f));
     }
     public void Toggle() => SetVisible(!IsVisible);
     public void Open() => SetVisible(true);
@@ -168,6 +177,14 @@ public sealed class CalendarVisibilityController : MonoBehaviour
     public void SetVisible(bool visible)
     {
         if (!GronnyTutorial.Allows(visible ? GardenTutorialAction.OpenCalendar : GardenTutorialAction.CloseCalendar)) return;
+        ApplyVisible(visible);
+    }
+
+    // Menu suspension must hide this panel even when the tutorial forbids its Close action.
+    public void HideForMenu() => ApplyVisible(false);
+
+    private void ApplyVisible(bool visible)
+    {
         bool changed = IsVisible != visible;
         IsVisible = visible;
         if (changed) VisibilityChanged?.Invoke(visible);

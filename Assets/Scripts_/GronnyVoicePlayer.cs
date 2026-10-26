@@ -31,6 +31,8 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
     private GronnyAudioCatalogue.Cue backgroundDemonstration;
     private Func<bool> backgroundRelevant;
     private float backgroundStartedAt;
+    private bool suspended;
+    private float suspendedAt;
 
     public void Configure(GronnyAudioCatalogue settings, GardenControlDemonstration visuals)
     {
@@ -91,9 +93,34 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
         StopCurrent();
     }
 
+    public void SuspendForMenu()
+    {
+        if (source == null || suspended) return;
+        suspended = true;
+        suspendedAt = Time.unscaledTime;
+        source.Pause();
+        demonstration.Hide();
+    }
+
     private void Update()
     {
         if (source == null) return;
+        // Apply on every frame so changing a preference also changes an utterance already playing.
+        if (current != null) source.volume = catalogue.voiceVolume * current.cue.volume * GardenPreferences.VoiceVolume;
+        if (GardenMenuController.GardenSuspended)
+        {
+            SuspendForMenu();
+            return;
+        }
+        if (suspended)
+        {
+            float duration = Time.unscaledTime - suspendedAt;
+            visualStartedAt += duration;
+            backgroundStartedAt += duration;
+            nextVoiceAt += duration;
+            suspended = false;
+            if (current != null && !current.audioFinished) source.UnPause();
+        }
         pending.RemoveAll(request => !request.relevant());
         if (current != null)
         {
@@ -134,7 +161,7 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
         delivered.Add(current.key);
         lastPlayed[current.cue.id] = Time.unscaledTime;
         source.clip = current.cue.clip;
-        source.volume = catalogue.voiceVolume * current.cue.volume;
+        source.volume = catalogue.voiceVolume * current.cue.volume * GardenPreferences.VoiceVolume;
         source.pitch = catalogue.pitch;
         current.audioFinished = false;
         source.Play();
