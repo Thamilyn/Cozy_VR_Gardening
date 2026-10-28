@@ -12,6 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Garden_Moves.unity
     guid: 79f36963b7371d849a9b5f4f0379c856
   m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 6a0dadb63bffbb042b24cce3e1a8af08, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 5cf55bb4e58455645a5ee978bba7a969, type: 2}
