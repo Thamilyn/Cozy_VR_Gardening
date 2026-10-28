@@ -1,0 +1,21 @@
+{
+  "recognition_model": "openai/whisper-base.en",
+  "note": "La transcripción automática puede equivocarse; las diferencias requieren revisión.",
+  "files": [
+    {
+      "filename": "01_welcome.wav",
+      "expected": "Hello! Come over to the gardening table, and let's get started.",
+      "transcript": "Hello, come over to the gardening table and let's get started.",
+      "words_match": true,
+      "differences": [],
+      "duration_seconds": 3.96,
+      "sample_rate": 24000,
+      "peak": 0.666229248046875,
+      "clipped_sample_fraction": 0.0,
+      "leading_silence_seconds": 0.026,
+      "trailing_silence_seconds": 0.279,
+      "duplicate_of": null,
+      "sha256": "792bb5a14de1c3a7869ba8824a5d2eb1d4a16c282c455c636d077da868901cc3"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "recognition_model": "openai/whisper-base.en",
+  "note": "La transcripción automática puede equivocarse; las diferencias requieren revisión.",
+  "files": [
+    {
+      "filename": "controls_grab_hands.wav",
+      "expected": "Find the seed with the Tomato label. Pinch it between your thumb and index finger to pick it up. Open your fingers to let go.",
+      "transcript": "Find the seed with the tomato label. Pinch it between your thumb and index finger to pick it up. Open your fingers to let go.",
+      "words_match": true,
+      "differences": [],
+      "duration_seconds": 7.4,
+      "sample_rate": 24000,
+      "peak": 0.755035400390625,
+      "clipped_sample_fraction": 0.0,
+      "leading_silence_seconds": 0.059,
+      "trailing_silence_seconds": 0.249,
+      "duplicate_of": null,
+      "sha256": "69532077f9c4b75b4d57811021125457dc1153ad89e047faec60726945cc5b7f"
+    },
+    {
+      "filename": "controls_grab_controllers.wav",
+      "expected": "Find the seed with the Tomato label. Hold the Grip button to pick it up. Release the button to let go.",
+      "transcript": "Find the seed with the tomato label. Hold the grip button to pick it up. Release the button to let go.",
+      "words_match": true,
+      "differences": [],
+      "duration_seconds": 6.36,
+      "sample_rate": 24000,
+      "peak": 0.65826416015625,
+      "clipped_sample_fraction": 0.0,
+      "leading_silence_seconds": 0.074,
+      "trailing_silence_seconds": 0.332,
+      "duplicate_of": null,
+      "sha256": "04e494a907d923f4178125433b22b65a3ab2663126ce239f1d5d01ed37900b88"
+    },
+    {
+      "filename": "03_plant_seed.wav",
+      "expected": "Hold the seed with the Tomato label over the soil in the centre of an empty small pot, then let go.",
+      "transcript": "Hold the seed with the tomato label over the soil in the center of an empty small pot. Then let go.",
+      "words_match": true,
+      "differences": [],
+      "duration_seconds": 6.44,
+      "sample_rate": 24000,
+      "peak": 0.779083251953125,
+      "clipped_sample_fraction": 0.0,
+      "leading_silence_seconds": 0.023,
+      "trailing_silence_seconds": 0.239,
+      "duplicate_of": null,
+      "sha256": "e87941156b7f16a78b901c2e02d8fe6248503b1740447c82f415bc24350ede50"
+    }
+  ]
+}

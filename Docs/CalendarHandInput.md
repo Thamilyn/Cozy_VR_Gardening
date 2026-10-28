@@ -34,7 +34,7 @@ the panel. When looking straight up or down, it keeps its previous horizontal
 direction. The panel stays fixed in the world while unobstructed for stable ray selection.
 
 Calendar placement checks a corridor as wide and tall as the whole panel between
-the UI and the viewer, including its clearance margin. A table or solid prop in
+the UI and the viewer, including its clearance margin. A table or fixed prop in
 front of an edge blocks that position even when the centre ray passes above or
 beside it. Placement tries a bounded lift, nearer positions and side slots; if
 none is clear, both the calendar and its ray target stay hidden until space is
@@ -47,6 +47,15 @@ The renderer list refreshes when opening and once a second while active to
 include newly created children; positions and enabled states are checked on
 every placement check. Disabled or inactive visuals are ignored. This visual
 check uses conservative bounds and does not add physics colliders to props.
+
+The calendar enables `ignorePlayerAndGrabbables` on its placement component.
+Watering cans, seeds, tomatoes and other Meta `Grabbable` hierarchies are excluded
+from both physics checks and visual bounds checks, whether held or released.
+`GardenPlayer`, `GardenHeldObject`, the camera rig and headset children are also
+excluded. Approaching the panel with the headset no longer relocates or hides it.
+The ray target remains a trigger, so it cannot push props or the player and still
+accepts Meta ray selection. Fixed tables, walls and the seed box continue to block
+placement. Other presentations retain their existing placement rules.
 
 ## Verification
 
@@ -70,9 +79,9 @@ ray/button references and the pinch latch. On the Quest, also check:
 9. With the left ray over a button, pinch and move away before releasing:
    the calendar must stay open. Repeat normally with each hand and confirm one
    click per pinch/release. After **Close**, a held pinch must not reopen it.
-10. Open the calendar facing the table with a pot or watering can in front of
-    one of its edges. It must find clear space without intersecting the table or
-    its props. Repeat seated, standing and after moving a prop while it is open.
+10. Open the calendar facing the table with a fixed prop in front of one of its
+    edges. It must find clear space without intersecting the table or fixed
+    props. Repeat seated and standing.
     When no slot is free, the hidden panel must not accept ray clicks; clearing
     the space must restore it. **Garden > Verify presentation clearance** adds
     isolated checks for a tabletop and a side prop missed by the centre ray.
@@ -80,6 +89,16 @@ ray/button references and the pinch latch. On the Quest, also check:
     intersecting it and placing an edge behind it. Repeat with a disabled mesh:
     that invisible mesh must no longer block placement. The presentation check
     includes colliderless visual placement and hide/recovery cases.
+12. Open with **Y** while holding the watering can, a seed or a tomato. Pass each
+    prop and both hands through the panel and its sightline, then release the
+    props and reopen. The calendar must not move or hide because of them. Move
+    the headset close to the panel: it must stay in place without pushing the
+    player. Confirm both hand rays still click its buttons. The presentation
+    verifier includes ignored prop colliders/visuals, hands, headset proximity,
+    ray selection and retained fixed-obstacle blocking.
+
+The movable-object exclusion and its editor checks have only been statically
+reviewed; Unity execution and physical Quest 3 validation are pending.
 
 The full-surface clearance change and its added editor checks have only been
 statically reviewed; Unity execution and physical Quest 3 validation are pending.

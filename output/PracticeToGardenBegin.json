@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command menu",
+  "data": {
+    "command": "menu",
+    "parameters": {
+      "path": "Garden/Verify practice to gardening in Play"
+    },
+    "result": {
+      "success": true,
+      "path": "Garden/Verify practice to gardening in Play",
+      "items": null,
+      "message": "Executed menu item 'Garden/Verify practice to gardening in Play'"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "canonical_welcome_scripts_synchronized": 3,
+  "lesson_audio_hashes_verified": 45,
+  "catalogue_only_welcome_transcript_changed": true,
+  "table_invitation_count_in_catalogue": 1,
+  "other_audio_scenes_and_meta_unchanged": true,
+  "unity_validation": "Pending: Pipeline eval and recompile timed out; Play not run.",
+  "quest_validation": "Pending physical device listening and hand tracking."
+}

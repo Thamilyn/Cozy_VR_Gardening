@@ -1,0 +1,9 @@
+{
+  "PracticeScene": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Scenes\\Garden_Practice.unity",
+  "SceneCopiedFrom": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Scenes\\Garden_Moves.unity",
+  "IndependentSceneGuid": "5310ae5ebbe108a41b563dc86d94d315",
+  "PracticeWelcome": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Resources\\GronnyAudio\\PracticeWelcome.wav",
+  "WelcomeHash": "FF3B5EAFCB23F54C6B2E623E59A063EBB9917C4C34FD040C5DCAE19A6F3AFAD2",
+  "SourceVerification": "output/PracticeSeparationAudioVerification.json",
+  "MainWelcomePreserved": true
+}

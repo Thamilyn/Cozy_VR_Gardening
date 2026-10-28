@@ -1,0 +1,26 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "UnityEditor.AssetDatabase.ImportAsset(\"Assets/Audio/dialogues_cozy_gardening/01_welcome.wav\", UnityEditor.ImportAssetOptions.ForceUpdate); GronnyWaterSavingAudioSetup.Connect(); return new { validation = GronnyAudioVerification.VerifyCatalogue(), welcome = UnityEngine.Resources.Load<GronnyAudioCatalogue>(\"GronnyAudio/Tutorial\").Find(\"01_welcome\").transcript };"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "validation": "PASS: catalogue and installed Meta references",
+        "welcome": "Hello! Come over to the gardening table, and let's get started."
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

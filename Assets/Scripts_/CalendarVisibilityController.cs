@@ -57,7 +57,8 @@ public sealed class CalendarVisibilityController : MonoBehaviour
             }
             placement = gameObject.AddComponent<GardenPresentationPlacement>();
             placement.Configure(panelContent.transform, viewTransform, rayCollider,
-                checkFullSightline: true, visualObstacleRoot: tableContents);
+                checkFullSightline: true, visualObstacleRoot: tableContents,
+                ignorePlayerAndGrabbables: true);
         }
     }
 

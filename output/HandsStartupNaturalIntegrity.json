@@ -1,0 +1,14 @@
+{
+  "changed_audio_and_scenes": [
+    "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\01_welcome.wav"
+  ],
+  "meta_unchanged": true,
+  "previous_take_backup": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Docs\\AudioBackups\\HandsStartupNatural_20261028_003621",
+  "original_backup": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Docs\\AudioBackups\\HandsStartup_20261028_002640",
+  "duration_seconds": 20.48,
+  "sha256": "0D92333F758E598484FE83141F6486DA794A7E60021D34BC88329F3EA568D352",
+  "other_audio_and_scenes_unchanged": true,
+  "lesson_hashes_verified": 45,
+  "script_unchanged": true,
+  "audio_qa": "output/HandsStartupNaturalAudioQA.json"
+}

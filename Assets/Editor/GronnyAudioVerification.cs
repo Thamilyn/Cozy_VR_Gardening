@@ -26,16 +26,19 @@ public static class GronnyAudioVerification
     public static string VerifyCatalogue()
     {
         var catalogue = Resources.Load<GronnyAudioCatalogue>("GronnyAudio/Tutorial");
-        Require(catalogue != null && catalogue.cues.Length == 27, "27 cues");
-        Require(catalogue.cues.Select(c => c.id).Distinct().Count() == 27, "Unique audio identifiers");
-        string[] files = new[] { "Assets/Audio/controls_", "Assets/Audio/dialogues_cozy_gardening" }
+        Require(catalogue != null && catalogue.cues.Length == 58, "45 lesson cues and 13 menu/accessibility cues");
+        Require(catalogue.cues.Select(c => c.id).Distinct().Count() == catalogue.cues.Length, "Unique audio identifiers");
+        string[] files = new[] { "Assets/Audio/controls_", "Assets/Audio/dialogues_cozy_gardening", "Assets/Audio/menu_accessibility", "Assets/Audio/water_saving" }
             .SelectMany(folder => Directory.GetFiles(folder, "*", SearchOption.AllDirectories))
             .Where(file => Path.GetExtension(file) != ".meta").Select(file => file.Replace('\\', '/')).ToArray();
-        Require(files.Length == 27 && files.All(file => catalogue.cues.Any(c => AssetDatabase.GetAssetPath(c.clip) == file)),
+        Require(files.Length == 58 && files.All(file => catalogue.cues.Any(c => AssetDatabase.GetAssetPath(c.clip) == file)),
             "Every existing audio file referenced, including subdirectories");
         foreach (var cue in catalogue.cues)
         {
             Require(cue.clip != null && cue.clip.length > 0, cue.id + " imported");
+            if (cue.rightHand && cue.mode == GardenInputMode.Controllers)
+                Require(cue.controllerAnimation != null && catalogue.rightController.transform.Find(cue.controllerTarget) != null,
+                    cue.id + " right controller animation and target");
             if (cue.demo == GardenControlDemo.None) continue;
             Require(cue.steps.Length > 1 && cue.steps[0].at == 0 &&
                 cue.steps.Zip(cue.steps.Skip(1), (a, b) => a.at <= b.at).All(sorted => sorted), cue.id + " ordered timing");
@@ -59,7 +62,10 @@ public static class GronnyAudioVerification
         Require(UnityEngine.Object.FindObjectsByType<Oculus.Interaction.Locomotion.FirstPersonLocomotor>(
             FindObjectsInactive.Include, FindObjectsSortMode.None).Length > 0, "Scene locomotion event source");
         Directory.CreateDirectory("Docs/Validation");
-        File.WriteAllText("Docs/Validation/GronnyCatalogue.txt", "PASS: 27 audios; coverage; identifiers; durations; step timings; Meta bone bindings; Touch Plus references; locomotion source.\nUnity " + Application.unityVersion);
+        Require(catalogue.FindTutorialCue("controls_move_hands").id == "controls_move_hands" &&
+            catalogue.FindTutorialCue("12_harvest").id == "12_harvest", "Updated lesson recordings take precedence over earlier variants");
+        string suppliedFiles = GronnyWaterSavingAudioSetup.VerifyImportedFiles(catalogue);
+        File.WriteAllText("Docs/Validation/GronnyCatalogue.txt", "PASS: 58 audios; coverage; identifiers; durations; step timings; Meta bone bindings; Touch Plus references.\n" + suppliedFiles + "\nUnity " + Application.unityVersion);
         return "PASS: catalogue and installed Meta references";
     }
 
@@ -133,8 +139,9 @@ public static class GronnyAudioVerification
             }
             else if (step == 3)
             {
-                Require(!fixture.GetComponent<AudioSource>().isPlaying && Field(demo, "anchor") == null,
-                    "Obsolete active and pending instructions cancelled");
+                Require(fixture.GetComponent<AudioSource>().isPlaying && Field(demo, "anchor") == null,
+                    "An obsolete active sentence finishes while its visual and queued help are removed");
+                voice.Clear();
                 demo.SetInputMode(GardenInputMode.Hands);
                 demo.Show(catalogue.Find("controls_move_hands"));
                 demo.Tick(6.5f);
@@ -160,7 +167,9 @@ public static class GronnyAudioVerification
                 Require(fixture.GetComponent<AudioSource>().isPlaying && Field(demo, "anchor") == null,
                     "Completed action hides demo while relevant voice can finish");
                 voice.CancelControls();
-                Require(!fixture.GetComponent<AudioSource>().isPlaying, "Mode change cancels control voice");
+                Require(fixture.GetComponent<AudioSource>().isPlaying && Field(demo, "anchor") == null,
+                    "Mode change finishes control speech while hiding its previous visual");
+                voice.Clear();
                 relevant = true;
                 voice.Enqueue("controls_grab_hands", "wait-for-grab", () => relevant, waitForAction: true);
                 SetField(voice, "nextVoiceAt", 0f);
@@ -204,6 +213,11 @@ public static class GronnyAudioVerification
                 VerifyInstructionLocks(tutorial, seeds, seed);
                 seed.transform.position = pot.PlantingPoint;
                 Require(seeds.TryPlant(seed), "Real planting event");
+                int plantedDay = seeds.Calendar.CurrentDay;
+                seeds.Calendar.AdvancePhase();
+                Require(seeds.Calendar.CurrentDay == plantedDay && !seeds.Calendar.IsAdvancing &&
+                    seed.StageVisual != null && seed.StageVisual.name == "Tomate0",
+                    "Planting alone keeps bare soil; an unwatered seed cannot advance or show a sprout");
                 Require(InstructionContains(tutorial, "Step 4/6") && !GronnyTutorial.Allows(GardenTutorialAction.OpenCalendar),
                     "Planting unlocks watering while calendar remains blocked");
                 step++;

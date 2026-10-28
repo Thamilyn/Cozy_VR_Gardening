@@ -1,0 +1,18 @@
+[
+  {
+    "id": "01_welcome",
+    "text": "Hi! I'm Gronny, and today I'll help you grow your own tomato. We'll learn about sustainable gardening by giving our plants just the water they need. We'll practise together first, then use a limited water supply to finish growing our tomato. Come over to the gardening table, and let's begin!"
+  },
+  {
+    "id": "controls_move_hands",
+    "text": "Let's practise moving. Watch the hand demonstration. Curl your index finger, touch it with your thumb, then swipe your thumb to take a step. Give it a try."
+  },
+  {
+    "id": "controls_move_controllers",
+    "text": "Let's practise moving. Gently push the left joystick to walk. Give it a try."
+  },
+  {
+    "id": "movement_success",
+    "text": "That's it! Now come over to the gardening table."
+  }
+]

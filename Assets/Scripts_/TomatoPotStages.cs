@@ -22,8 +22,6 @@ public  class TomatoPotStages : MonoBehaviour
     {
         TryShowVisual(0, out _);
     }
-    // public enum GrowthStage { Seed = 0, Sprout = 1, Mature = 2, YoungPlant = 3, Flowering = 4, GreenFruit = 5 }
-
     public bool TryShowStage(GrowthStage stage, out GameObject visual)
     {
         int index = stage switch

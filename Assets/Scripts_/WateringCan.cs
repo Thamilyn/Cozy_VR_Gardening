@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using Oculus.Interaction;
+using Oculus.Interaction.Grab;
 using Oculus.Interaction.GrabAPI;
 using Oculus.Interaction.HandGrab;
+using Oculus.Interaction.Input;
 using Oculus.Interaction.Locomotion;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,7 +20,7 @@ public sealed class WateringCan : MonoBehaviour
 
     [Header("Water supply")]
     [SerializeField, Min(0.01f)] private float capacityLitres = 2f;
-    [SerializeField, Min(0.001f)] private float litresPerSecond = 0.02f;
+    [SerializeField, Min(0.001f)] private float litresPerSecond = 0.01f;
     [SerializeField] private bool startFull = true;
 
     [Header("Pouring")]
@@ -58,6 +60,11 @@ public sealed class WateringCan : MonoBehaviour
     private Quaternion _initialRotation;
     private CalendarSystem _calendar;
     private bool _requireUpright;
+    private SeedsController _seeds;
+    private Rigidbody _body;
+    private HandGrabInteractor[] _hands;
+    private GrabInteractor[] _controllers;
+    private float _nextTrackingSearch;
 
     public float CurrentWaterLitres => _currentWaterLitres;
     public float CapacityLitres => capacityLitres;
@@ -71,10 +78,12 @@ public sealed class WateringCan : MonoBehaviour
     {
         _initialRotation = transform.rotation;
         _calendar = FindFirstObjectByType<CalendarSystem>();
+        _seeds = FindFirstObjectByType<SeedsController>();
         EnsureGardenCanColliders();
         // Set the resting state before Meta saves it when the can is first grabbed.
         GardenGrabSetup.ConfigureGrabbable(gameObject);
         _grabbable = GetComponent<Grabbable>();
+        _body = GetComponent<Rigidbody>();
         //_grabbable.ForceKinematicDisabled = true;
         foreach (HandGrabInteractable handGrab in GetComponentsInChildren<HandGrabInteractable>(true))
         {
@@ -89,6 +98,13 @@ public sealed class WateringCan : MonoBehaviour
         SetStreamVisible(false);
     }
 
+    private void Start()
+    {
+        GardenWaterSupply.Active?.RegisterCan(this);
+        if (GetComponent<WateringCanWaterDisplay>() == null)
+            gameObject.AddComponent<WateringCanWaterDisplay>();
+    }
+
     private void Update()
     {
         bool isHeld = IsHeld;
@@ -100,7 +116,16 @@ public sealed class WateringCan : MonoBehaviour
             SuspendPouring();
             return;
         }
+        GardenWaterSupply supply = GardenWaterSupply.Active;
+        if ((supply != null && (supply.Exhausted || supply.Completed)) || (isHeld && !HasReliableTracking()))
+        {
+            // Do not charge water while a tracked hand/controller or the wearer is lost.
+            // A fresh upright pose is required before pouring can intentionally resume.
+            SuspendPouring();
+            return;
+        }
         if (!IsTiltedToPour) _requireUpright = false;
+        if (supply != null && supply.IsPractice && isHeld && _currentWaterLitres <= 0f) Refill();
 
         if (OVRInput.GetDown(refillButton, OVRInput.Controller.RTouch) &&
             GronnyTutorial.Allows(GardenTutorialAction.RefillWithController) &&
@@ -126,16 +151,20 @@ public sealed class WateringCan : MonoBehaviour
 
         Vector3 streamStart = spout.position;
         Vector3 streamEnd = streamStart + Vector3.down * maximumPourDistance;
+        float usefulLitres = 0f;
+        bool reachedTargetSoil = false;
         if (TryGetFirstExternalHit(streamStart, out RaycastHit hit))
         {
             streamEnd = hit.point;
-            DeliverWater(hit.collider, pouredLitres, hit.point);
+            usefulLitres = DeliverWater(hit.collider, pouredLitres, hit.point, out reachedTargetSoil);
         }
+
         else
         {
             _lastWateredPlant = null;
         }
 
+        supply?.RecordPour(pouredLitres, usefulLitres, reachedTargetSoil);
         DrawWaterStream(streamStart, streamEnd);
     }
 
@@ -225,10 +254,50 @@ public sealed class WateringCan : MonoBehaviour
     /// </summary>
     public void Refill()
     {
-        // Input callers check tutorial permissions before resetting the supply of all cans.
-        _currentWaterLitres = capacityLitres;
+        if (!isActiveAndEnabled || GardenMenuController.GardenSuspended) return;
+        float missing = Mathf.Max(0f, capacityLitres - _currentWaterLitres);
+        GardenWaterSupply supply = GardenWaterSupply.Active;
+        float added = supply != null ? supply.TakeForRefill(missing) : missing;
+        if (added <= 0f) return;
+        _currentWaterLitres = Mathf.Min(capacityLitres, _currentWaterLitres + added);
         onWaterLevelChanged.Invoke(WaterNormalized);
         onRefilled.Invoke();
+    }
+
+    internal void SetSessionWater(float capacity, float amount)
+    {
+        capacityLitres = Mathf.Max(0.001f, capacity);
+        _currentWaterLitres = Mathf.Clamp(amount, 0f, capacityLitres);
+        SuspendPouring();
+        onWaterLevelChanged.Invoke(WaterNormalized);
+    }
+
+    private bool HasReliableTracking()
+    {
+#if UNITY_EDITOR
+        // Desktop Play fixtures have no XR sensor; device tracking is validated on Quest.
+        if (!OVRManager.isHmdPresent) return true;
+#endif
+        OVRManager manager = OVRManager.instance;
+        if (manager == null || !manager.isUserPresent) return false;
+        if (_hands == null || Time.unscaledTime >= _nextTrackingSearch)
+        {
+            _hands = FindObjectsByType<HandGrabInteractor>(FindObjectsSortMode.None);
+            _controllers = FindObjectsByType<GrabInteractor>(FindObjectsSortMode.None);
+            _nextTrackingSearch = Time.unscaledTime + 0.5f;
+        }
+        foreach (HandGrabInteractor interactor in _hands)
+            if (interactor != null && interactor.isActiveAndEnabled && interactor.HasSelectedInteractable &&
+                interactor.SelectedInteractable.Rigidbody == _body && interactor.Hand != null)
+                return interactor.Hand.IsConnected && interactor.Hand.IsTrackedDataValid && interactor.Hand.IsHighConfidence;
+        foreach (GrabInteractor interactor in _controllers)
+        {
+            if (interactor == null || !interactor.isActiveAndEnabled || !interactor.HasSelectedInteractable ||
+                interactor.SelectedInteractable.Rigidbody != _body) continue;
+            ControllerRef controller = interactor.GetComponentInParent<ControllerRef>();
+            return controller != null && controller.IsConnected && controller.IsPoseValid;
+        }
+        return false;
     }
 
     /// <summary>Returns a dropped can within reach, without refilling it or forcing a Meta grab.</summary>
@@ -279,7 +348,9 @@ public sealed class WateringCan : MonoBehaviour
         for (int i = 0; i < hitCount; i++)
         {
             RaycastHit candidate = _raycastHits[i];
-            if (candidate.collider == null || candidate.collider.transform.IsChildOf(transform))
+            if (candidate.collider == null || candidate.collider.transform.IsChildOf(transform) ||
+                candidate.collider.GetComponent<RayInteractable>() != null ||
+                candidate.collider.GetComponentInParent<OVRCameraRig>() != null)
             {
                 continue;
             }
@@ -295,13 +366,14 @@ public sealed class WateringCan : MonoBehaviour
         return foundHit;
     }
 
-    private void DeliverWater(Collider hitCollider, float amountLitres, Vector3 hitPoint)
+    private float DeliverWater(Collider hitCollider, float amountLitres, Vector3 hitPoint, out bool reachedTargetSoil)
     {
+        reachedTargetSoil = false;
         GardenPot pot = hitCollider.GetComponentInParent<GardenPot>();
         if (pot != null && !pot.CanReceiveWaterAt(hitPoint))
         {
             _lastWateredPlant = null;
-            return;
+            return 0f;
         }
         GameObject plant = pot != null ? pot.gameObject : FindTaggedParent(hitCollider.transform, PlantTag);
         PlantWaterReceiver receiver = pot != null
@@ -310,16 +382,22 @@ public sealed class WateringCan : MonoBehaviour
         if (plant == null || receiver == null)
         {
             _lastWateredPlant = null;
-            return;
+            return 0f;
         }
 
+        SeedsController.PlantedSeed planted = _seeds != null && pot != null ? _seeds.FindByPot(pot) : null;
+        CalendarSystem.PlantSave saved = _seeds != null ? _seeds.GetState(planted) : null;
+        float beforeApplied = saved != null ? saved.waterMillilitres : 0f;
+        float needed = saved != null ? Mathf.Max(0f, _seeds.TargetMillilitres(planted) - saved.retainedWaterMillilitres) : 0f;
         receiver.ReceiveWater(amountLitres);
+        reachedTargetSoil = saved != null && saved.waterMillilitres > beforeApplied;
 
         if (_lastWateredPlant != plant)
         {
             _lastWateredPlant = plant;
             onPlantWatered.Invoke(plant);
         }
+        return saved != null ? Mathf.Min(needed, Mathf.Max(0f, saved.waterMillilitres - beforeApplied)) / 1000f : 0f;
     }
 
     private static GameObject FindTaggedParent(Transform candidate, string requiredTag)

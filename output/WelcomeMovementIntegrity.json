@@ -1,0 +1,11 @@
+{
+  "ChangedExistingFiles": [
+    "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_\\controls_move_controllers.wav",
+    "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_\\controls_move_hands.wav",
+    "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\01_welcome.wav"
+  ],
+  "ChangedMetaFiles": [],
+  "NewAudio": "Assets/Audio/water_saving/movement_success.wav",
+  "ExpectedChangesOnly": true,
+  "MovementChecks": 15
+}

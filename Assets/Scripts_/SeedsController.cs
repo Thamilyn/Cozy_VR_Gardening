@@ -158,6 +158,8 @@ public sealed class SeedsController : MonoBehaviour
     public string GetAdvanceBlockReason()
     {
         if (calendar == null) return "Calendar unavailable.";
+        if (GardenWaterSupply.Active != null && GardenWaterSupply.Active.Exhausted)
+            return "Not enough water remains to finish. Select Try again to plant a new seed.";
         if (!GronnyTutorial.Allows(GardenTutorialAction.Advance)) return "Complete the current instruction first.";
         bool hasTomato = false;
         foreach (PlantedSeed plant in plantedSeeds)
@@ -305,5 +307,22 @@ public sealed class SeedsController : MonoBehaviour
         4 => GrowthStage.GreenFruit, 5 => GrowthStage.Mature, _ => GrowthStage.Seed
     };
 
-    private PlantedSeed FindByPot(GardenPot pot) => plantedSeeds.Find(p => p.pot == pot);
+    public PlantedSeed FindByPot(GardenPot pot) => plantedSeeds.Find(p => p.pot == pot);
+
+    public float RemainingTomatoWaterMillilitres()
+    {
+        PlantedSeed plant = PrototypeTomato;
+        CalendarSystem.PlantSave saved = GetState(plant);
+        if (saved == null || plant.pot == null || saved.harvested || saved.tomatoPhase >= 5 || tomatoWaterPhases == null) return 0f;
+        float total = 0f;
+        for (int phase = saved.tomatoPhase; phase < tomatoWaterPhases.Length; phase++)
+        {
+            TomatoWaterPhase demand = tomatoWaterPhases[phase];
+            if (demand == null) continue;
+            float target = referenceMillimetresPerWeek / 7f * representativeCareDays *
+                demand.demandMultiplier * plant.pot.SubstrateAreaSquareMetres * 1000f;
+            total += Mathf.Max(0f, target - (phase == saved.tomatoPhase ? saved.retainedWaterMillilitres : 0f));
+        }
+        return total;
+    }
 }

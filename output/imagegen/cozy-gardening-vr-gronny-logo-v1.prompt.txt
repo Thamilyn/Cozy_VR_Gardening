@@ -1,0 +1,12 @@
+Tool: built-in image_gen, transparent_background=true.
+Reference: output/imagegen/gronny-reference.png, thumbnail extracted from Assets/Vroid/Gardenerkawaii.vrm.
+Project context reviewed: garden menu screenshots, tomato plant screenshot, Docs/GuionVozGronny.md, Docs/GardenPanelStyle.md.
+
+Use case: logo-brand
+Asset type: polished logo concept for the existing cozy VR gardening game, grounded in its actual character Gronny and garden assets.
+Input images: Image 1 is the character identity reference extracted from the project's actual Gronny VRM model. Use it to preserve the character's recognizable features while drawing a simplified original logo illustration. It is not an edit target.
+Primary request: Create one beautiful cohesive mascot-and-wordmark logo reading exactly "Cozy Gardening VR". Above the title show a compact friendly illustrated portrait of Gronny, the game's gentle gardening guide: short dark sage green bob hair with bangs, warm golden amber eyes, fair skin, and the TWO tall green leaf-like tufts visible above the head in the reference. Retain the leaf silhouette, do not reinterpret them as animal ears or add a hat. A little olive green gardening shirt collar can show. Warm subtle smile. Frame the portrait lightly with just a few garden leaves and one ripe red tomato, recalling the game's tomato growing and harvesting activity. Make a logo, not a full character scene.
+Typography and composition: expertly balanced compact badge silhouette. Large rounded friendly custom lettering "Cozy" above "Gardening", small clearly legible "VR" centered below. Title must remain the dominant readable element, portrait integrated above it. Muted sage and forest green, creamy warm lettering, golden accents echoing Gronny's eyes, small tomato red accent. Gentle hand-painted game illustration with crisp defined shapes and very restrained soft shading, clean professional indie cozy game identity. Use broad simple forms suitable for a menu title. Thin cream keyline helps separation on green garden backgrounds.
+Text (verbatim): "Cozy Gardening VR"
+Background: genuinely transparent, isolated logo with comfortable margins. No white square or opaque backdrop.
+Constraints: preserve Gronny's recognizable hair, leaf tufts and eye colors; do not cover the face with a VR headset. No extra text, no slogans, no watermarks, no photorealism, no mockup, no detailed landscape, no busy floral wreath. One single finished logo. If controllable save inside C:\Users\Trole\Cozy_VR_Gardening.

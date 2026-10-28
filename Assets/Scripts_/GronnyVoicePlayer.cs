@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>One voice, with contextual cancellation, deduplication and priority interruption.</summary>
+/// <summary>One voice: finish spoken phrases, discard stale queued help, and preserve urgent resume positions.</summary>
 [DisallowMultipleComponent]
 public sealed class GronnyVoicePlayer : MonoBehaviour
 {
@@ -15,6 +15,10 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
         public Action started;
         public bool waitForAction;
         public bool audioFinished;
+        public bool playbackStarted;
+        public bool contextExpired;
+        public int resumeSample;
+        public float visualElapsed;
     }
 
     public event Action<string> AudioFinished;
@@ -33,11 +37,15 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
     private float backgroundStartedAt;
     private bool suspended;
     private float suspendedAt;
+    private bool menuPlayback;
 
-    public void Configure(GronnyAudioCatalogue settings, GardenControlDemonstration visuals)
+    public string CurrentCueId => current != null ? current.cue.id : null;
+
+    public void Configure(GronnyAudioCatalogue settings, GardenControlDemonstration visuals, bool menuPlayback = false)
     {
         catalogue = settings;
         demonstration = visuals;
+        this.menuPlayback = menuPlayback;
         // A dedicated source keeps tutorial voice independent of ambient audio.
         source = gameObject.AddComponent<AudioSource>();
         source.playOnAwake = false;
@@ -46,7 +54,7 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
         source.dopplerLevel = 0f;
         source.pitch = catalogue.pitch;
         var gestures = FindFirstObjectByType<GardenerMixamoGreeting>();
-        if (gestures != null) gestures.BindVoiceSource(source);
+        if (gestures != null && !menuPlayback) gestures.BindVoiceSource(source);
     }
 
     public void SetBackgroundDemonstration(string id, Func<bool> relevant)
@@ -58,7 +66,7 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
     public void Enqueue(string id, string key, Func<bool> relevant, Action started = null, bool once = true,
         Func<bool> demonstrationRelevant = null, bool waitForAction = false)
     {
-        GronnyAudioCatalogue.Cue cue = catalogue.Find(id);
+        GronnyAudioCatalogue.Cue cue = menuPlayback ? catalogue.Find(id) : catalogue.FindTutorialCue(id);
         if (cue == null || cue.clip == null)
         {
             Debug.LogWarning("Gronny audio is missing: " + id, this);
@@ -71,12 +79,14 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
 
         var request = new Request { cue = cue, key = key, relevant = relevant, started = started,
             demonstrationRelevant = demonstrationRelevant, waitForAction = waitForAction };
-        if (current != null && cue.priority > current.cue.priority)
+        if (current != null && cue.priority >= 100 && cue.priority > current.cue.priority)
         {
-            // An interrupted, still relevant instruction can resume after the urgent warning.
+            // Only urgent warnings interrupt. Resume at the sample, never at the first word.
             Request interrupted = current;
+            interrupted.resumeSample = interrupted.audioFinished ? 0 : source.timeSamples;
+            interrupted.visualElapsed = Time.unscaledTime - visualStartedAt;
             StopCurrent();
-            if (interrupted.relevant()) pending.Insert(0, interrupted);
+            if (!interrupted.contextExpired && interrupted.relevant()) pending.Insert(0, interrupted);
         }
         pending.Add(request);
     }
@@ -84,7 +94,21 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
     public void CancelControls()
     {
         pending.RemoveAll(request => request.cue.mode != GardenInputMode.Unknown);
-        if (current != null && current.cue.mode != GardenInputMode.Unknown) StopCurrent();
+        if (current != null && current.cue.mode != GardenInputMode.Unknown) ExpireCurrentContext();
+    }
+
+    public void FinishCurrent()
+    {
+        pending.Clear();
+        ExpireCurrentContext();
+    }
+
+    private void ExpireCurrentContext()
+    {
+        if (current == null) return;
+        current.contextExpired = true;
+        current.waitForAction = false;
+        demonstration.Hide();
     }
 
     public void Clear()
@@ -95,7 +119,7 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
 
     public void SuspendForMenu()
     {
-        if (source == null || suspended) return;
+        if (source == null || suspended || menuPlayback) return;
         suspended = true;
         suspendedAt = Time.unscaledTime;
         source.Pause();
@@ -107,7 +131,7 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
         if (source == null) return;
         // Apply on every frame so changing a preference also changes an utterance already playing.
         if (current != null) source.volume = catalogue.voiceVolume * current.cue.volume * GardenPreferences.VoiceVolume;
-        if (GardenMenuController.GardenSuspended)
+        if (!menuPlayback && GardenMenuController.GardenSuspended)
         {
             SuspendForMenu();
             return;
@@ -124,28 +148,30 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
         pending.RemoveAll(request => !request.relevant());
         if (current != null)
         {
-            if (!current.relevant()) StopCurrent();
+            if (!current.contextExpired && !current.relevant()) ExpireCurrentContext();
+            Request playing = current;
+            // Completing an action ends the demo immediately but lets the sentence finish.
+            if (!source.isPlaying && !playing.audioFinished)
+            {
+                playing.audioFinished = true;
+                AudioFinished?.Invoke(playing.cue.id);
+                if (current != playing) return;
+            }
+            if (!source.isPlaying && !playing.waitForAction) StopCurrent();
             else
             {
-                // The audio can finish while the demonstration still waits for the player's action.
-                if (!source.isPlaying && !current.audioFinished)
-                {
-                    current.audioFinished = true;
-                    AudioFinished?.Invoke(current.cue.id);
-                }
-                if (!source.isPlaying && !current.waitForAction) StopCurrent();
+                if (playing.contextExpired) demonstration.Hide();
+                else if (playing.cue.demo == GardenControlDemo.None) UpdateBackgroundDemonstration();
+                else if (playing.demonstrationRelevant != null && !playing.demonstrationRelevant()) demonstration.Hide();
                 else
                 {
-                    if (current.cue.demo == GardenControlDemo.None) UpdateBackgroundDemonstration();
-                    else if (current.demonstrationRelevant != null && !current.demonstrationRelevant()) demonstration.Hide();
-                    else
-                    {
-                        if (!demonstration.IsShowing(current.cue)) demonstration.Show(current.cue);
-                        demonstration.Tick(source.isPlaying ? source.time :
-                            Mathf.Repeat(Time.unscaledTime - visualStartedAt, current.cue.clip.length / catalogue.pitch) * catalogue.pitch);
-                    }
-                    return;
+                    if (!demonstration.IsShowing(playing.cue)) demonstration.Show(playing.cue);
+                    if (demonstration.UsesHandTeachingTiming)
+                        demonstration.TickTeaching(Mathf.Repeat(Time.unscaledTime - visualStartedAt, demonstration.CycleDurationSeconds));
+                    else demonstration.Tick(source.isPlaying ? source.time :
+                        Mathf.Repeat(Time.unscaledTime - visualStartedAt, playing.cue.clip.length / catalogue.pitch) * catalogue.pitch);
                 }
+                return;
             }
         }
         if (Time.unscaledTime < nextVoiceAt || pending.Count == 0)
@@ -158,18 +184,26 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
             if (pending[i].cue.priority > pending[selected].cue.priority) selected = i;
         current = pending[selected];
         pending.RemoveAt(selected);
-        delivered.Add(current.key);
-        lastPlayed[current.cue.id] = Time.unscaledTime;
+        if (!current.playbackStarted)
+        {
+            delivered.Add(current.key);
+            lastPlayed[current.cue.id] = Time.unscaledTime;
+        }
         source.clip = current.cue.clip;
         source.volume = catalogue.voiceVolume * current.cue.volume * GardenPreferences.VoiceVolume;
         source.pitch = catalogue.pitch;
-        current.audioFinished = false;
-        source.Play();
-        visualStartedAt = Time.unscaledTime;
+        if (!current.audioFinished)
+        {
+            source.Play();
+            if (current.resumeSample > 0) source.timeSamples = Mathf.Min(current.resumeSample, current.cue.clip.samples - 1);
+        }
+        visualStartedAt = Time.unscaledTime - current.visualElapsed;
         if (current.cue.demo == GardenControlDemo.None) UpdateBackgroundDemonstration();
         else if (current.demonstrationRelevant == null || current.demonstrationRelevant()) demonstration.Show(current.cue);
-        current.started?.Invoke();
+        current.playbackStarted = true;
+        Action onStarted = current.started;
         current.started = null;
+        onStarted?.Invoke();
     }
 
     private void UpdateBackgroundDemonstration()

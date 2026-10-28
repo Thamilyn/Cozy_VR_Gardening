@@ -53,6 +53,7 @@ public sealed class CalendarPanel : MonoBehaviour
         if (calendar == null) calendar = FindFirstObjectByType<CalendarSystem>();
         if (advanceButton != null) advanceButton.onClick.AddListener(AdvancePhase);
         if (gameObject.scene.name == "Garden_Moves" && advanceButton != null) AddPrototypeControls();
+        GardenRoundedPanel.ApplyToHierarchy(transform);
     }
 
     private void OnEnable()
@@ -122,11 +123,14 @@ public sealed class CalendarPanel : MonoBehaviour
         bool refilled = false;
         foreach (WateringCan can in FindObjectsByType<WateringCan>(FindObjectsSortMode.None))
         {
-            refilled |= can.CurrentWaterLitres < can.CapacityLitres;
+            float before = can.CurrentWaterLitres;
             can.Refill();
+            refilled |= can.CurrentWaterLitres > before;
         }
         if (refilled) CompleteAction(GardenTutorialAction.Refill);
-        FindFirstObjectByType<TomatoPrototypeGuide>()?.Say("Watering cans refilled. Refilling does not count as water applied to the soil.");
+        FindFirstObjectByType<TomatoPrototypeGuide>()?.Say(refilled
+            ? "Water transferred to the can. Refilling is not water applied to the soil."
+            : "No water transferred. Check the reserve and the water already in your can.");
     }
 
     public void RecoverCan()
@@ -207,6 +211,15 @@ public sealed class CalendarPanel : MonoBehaviour
     public void RestartPrototype()
     {
         if (restarting || !GronnyTutorial.Allows(GardenTutorialAction.Restart)) return;
+        if (GardenWaterSupply.Active != null && GardenWaterSupply.Active.Exhausted)
+        {
+            if (GardenWaterSupply.Active.Retry())
+            {
+                restarting = true;
+                if (restartButton != null) restartButton.interactable = false;
+            }
+            return;
+        }
         foreach (Grabbable grab in FindObjectsByType<Grabbable>(FindObjectsSortMode.None))
         {
             if (grab.SelectingPointsCount == 0) continue;
@@ -271,6 +284,11 @@ public sealed class CalendarPanel : MonoBehaviour
             waterSummaryText.text = waterPrefix + total.ToString("0") + " ml";
         }
         if (restartButton != null) restartButton.interactable = !restarting && GronnyTutorial.Allows(GardenTutorialAction.Restart);
+        if (restartButton != null)
+        {
+            Text label = restartButton.GetComponentInChildren<Text>();
+            if (label != null) label.text = GardenWaterSupply.Active != null && GardenWaterSupply.Active.Exhausted ? "Try again" : "Restart";
+        }
         if (refillButton != null) refillButton.interactable = GronnyTutorial.Allows(GardenTutorialAction.Refill);
         if (recoverButton != null) recoverButton.interactable = GronnyTutorial.Allows(GardenTutorialAction.Recover);
     }

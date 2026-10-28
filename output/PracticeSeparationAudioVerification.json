@@ -1,0 +1,57 @@
+{
+  "recognition_model": "openai/whisper-base.en",
+  "note": "La transcripción automática puede equivocarse; las diferencias requieren revisión.",
+  "files": [
+    {
+      "filename": "01_welcome.wav",
+      "expected": "Hello! I'm Gronny. Welcome to our sustainable garden. Our goal is to grow a tomato while saving water, so our water reserve is limited. Come over to the table, and let's begin.",
+      "transcript": "Hello, I'm Granny. Welcome to our sustainable garden. Our goal is to grow a tomato while saving water, so our water reserve is limited. Come over to the table and let's begin.",
+      "words_match": false,
+      "differences": [
+        {
+          "operation": "replace",
+          "expected": "gronny",
+          "transcript": "granny"
+        }
+      ],
+      "duration_seconds": 11.4,
+      "sample_rate": 24000,
+      "peak": 0.989990234375,
+      "clipped_sample_fraction": 0.0,
+      "leading_silence_seconds": 0.097,
+      "trailing_silence_seconds": 0.414,
+      "duplicate_of": null,
+      "sha256": "ff3b5eafcb23f54c6b2e623e59a063ebb9917c4c34fd040c5dcae19a6f3afad2"
+    },
+    {
+      "filename": "02_tomato_intro.wav",
+      "expected": "Welcome to the practice garden. Learn to move, plant, water, refill your can and use the calendar here. Water refills freely during practice. Then we'll enter the sustainable garden.",
+      "transcript": "Welcome to the practice garden. Learn to move, plant, water refill your can and use the calendar here. Water refills freely during practice. Then we'll enter the sustainable garden.",
+      "words_match": true,
+      "differences": [],
+      "duration_seconds": 11.16,
+      "sample_rate": 24000,
+      "peak": 0.851165771484375,
+      "clipped_sample_fraction": 0.0,
+      "leading_silence_seconds": 0.454,
+      "trailing_silence_seconds": 0.192,
+      "duplicate_of": null,
+      "sha256": "021ec2a8485904559272751a452c95cfc529c5c6af3dc9c6ddd7b3f3ce5eb566"
+    },
+    {
+      "filename": "help_refill.wav",
+      "expected": "Your watering can is empty. Open the calendar and select Refill water.",
+      "transcript": "Your watering can is empty. Open the calendar and select Refill Water.",
+      "words_match": true,
+      "differences": [],
+      "duration_seconds": 5.44,
+      "sample_rate": 24000,
+      "peak": 0.796875,
+      "clipped_sample_fraction": 0.0,
+      "leading_silence_seconds": 0.075,
+      "trailing_silence_seconds": 0.372,
+      "duplicate_of": null,
+      "sha256": "94b15d5e6db08fa8fcd8ddf10922c48068e52ce2beb14edfaa60632bcec58280"
+    }
+  ]
+}

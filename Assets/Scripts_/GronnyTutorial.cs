@@ -44,10 +44,12 @@ public sealed class GronnyTutorial : MonoBehaviour
     private Transform playerOrigin;
     private Vector3 movementStart;
     private bool movementRequested;
+    private bool movementPracticeStarted;
     private WateringCan refillCan;
     private Transform viewer;
     private TextMesh seedPlantingCaption;
     private bool grabInstructionFinished;
+    private int announcedWaterAttempt;
 
     private GuideStep Step
     {
@@ -68,6 +70,9 @@ public sealed class GronnyTutorial : MonoBehaviour
     public static bool Allows(GardenTutorialAction action)
     {
         if (GardenMenuController.GardenSuspended) return false;
+        if (GardenWaterSupply.Active != null && GardenWaterSupply.Active.Exhausted)
+            return action == GardenTutorialAction.OpenCalendar || action == GardenTutorialAction.CloseCalendar ||
+                action == GardenTutorialAction.Restart || action == GardenTutorialAction.Recover;
         if (active == null || !active.Running) return true;
         GuideStep step = active.Step;
         if (step == GuideStep.Free) return true;
@@ -100,9 +105,9 @@ public sealed class GronnyTutorial : MonoBehaviour
             GuideStep.Move => ("Step 1/6: Practice moving.", mode == GardenInputMode.Unknown
                 ? "Use your tracked hands or Touch controllers to begin."
                 : hands ? "Curl your index finger, tap your thumb, then swipe to step." : "Move with the left joystick."),
-            GuideStep.Grab => ("Step 2/6: Pick up and release the red tomato seed.",
+            GuideStep.Grab => ("Step 2/6: Pick up and release the seed labelled Tomato.",
                 hands ? "Pinch to grab. Open your fingers to release." : "Hold Grip to grab. Release Grip to let go."),
-            GuideStep.Plant => ("Step 3/6: Plant the red tomato seed.", "Drop it onto the soil in an empty small pot."),
+            GuideStep.Plant => ("Step 3/6: Plant the seed labelled Tomato.", "Drop it onto the soil in an empty small pot."),
             GuideStep.Water => (Excess ? "Step 4/6: Stop watering and wait for drainage."
                 : !NeedsWater ? "Step 4/6: Hold the watering can upright."
                 : "Step 4/6: Water the soil near the roots.", "Reach the water target, then stop pouring."),
@@ -118,7 +123,8 @@ public sealed class GronnyTutorial : MonoBehaviour
     private CalendarSystem.PlantSave State => seeds != null ? seeds.GetState(Plant) : null;
     private bool Running => initialized && isActiveAndEnabled && !completed &&
         seeds != null && seeds.isActiveAndEnabled && calendar != null;
-    private bool Caring => Running && State != null && State.tomatoPhase < 5 && !calendar.IsAdvancing;
+    private bool Caring => Running && State != null && State.tomatoPhase < 5 && !calendar.IsAdvancing &&
+        (GardenWaterSupply.Active == null || !GardenWaterSupply.Active.Exhausted);
     private bool Excess => Caring && State.retainedWaterMillilitres > seeds.ExcessLimit(Plant);
     private bool NeedsWater => Caring && seeds.TargetMillilitres(Plant) > 0f &&
         State.retainedWaterMillilitres < seeds.TargetMillilitres(Plant);
@@ -167,11 +173,17 @@ public sealed class GronnyTutorial : MonoBehaviour
         playerOrigin = rig.transform;
         viewer = rig.centerEyeAnchor;
         movementStart = playerOrigin.position;
+        if (GardenMenuController.StartsAtPlanting)
+        {
+            learned.Add("move");
+            learned.Add("grab");
+            grabInstructionFinished = true;
+        }
         RefreshInteractionLocks();
         lastActionAt = Time.unscaledTime;
         Subscribe();
-        Say("01_welcome", "welcome", () => Running);
-        Say("02_tomato_intro", "intro", () => Running && State == null);
+        if (!GardenMenuController.StartsAtPlanting)
+            Say("01_welcome", "welcome-start", () => Running);
         RefreshPhase();
     }
 
@@ -237,8 +249,9 @@ public sealed class GronnyTutorial : MonoBehaviour
         UpdateMode();
         foreach (WateringCan can in cans)
             if (can != null && can.IsHeld && can.CurrentWaterLitres <= 0f) refillCan = can;
+        if (Step == GuideStep.Water && System.Array.Exists(cans, can => can != null && can.IsHeld)) Learn("watering_grab");
         ObserveGrabs();
-        if (Step == GuideStep.Move && movementRequested && playerOrigin != null &&
+        if (Step == GuideStep.Move && movementPracticeStarted && movementRequested && playerOrigin != null &&
             Vector3.ProjectOnPlane(playerOrigin.position - movementStart, Vector3.up).sqrMagnitude >= 0.01f)
             Learn("move");
         if (Time.unscaledTime >= nextInteractionRefresh)
@@ -250,17 +263,36 @@ public sealed class GronnyTutorial : MonoBehaviour
         nextRefresh = Time.unscaledTime + 0.15f;
         RefreshPhase();
         if (State == null) { QueueControls(); IdleHelp(); return; }
+        GardenWaterSupply supply = GardenWaterSupply.Active;
+        if (supply != null && supply.Exhausted)
+        {
+            // The visible game-over panel owns these announcements even if this guide is disabled.
+            voice.Clear();
+            return;
+        }
+        if (supply != null && !supply.IsPractice && announcedWaterAttempt != supply.Attempt)
+        {
+            announcedWaterAttempt = supply.Attempt;
+            voice.FinishCurrent();
+            int attempt = supply.Attempt;
+            // Name the visible sprout before explaining the newly limited water supply.
+            if (phase == 1) Say("08_sprout", "phase-1", () => Running && phase == 1);
+            foreach (string id in new[] { "water_reserve_intro", "water_reserve_rules" })
+                Say(id, id + "-" + attempt, () => Running && supply.Attempt == attempt && State.tomatoPhase < 5);
+        }
         if (State.harvested)
         {
-            voice.Clear();
+            voice.FinishCurrent();
             completed = true;
             ReleaseInteractionLocks();
             Unsubscribe();
             // The closing line is the only request allowed after tutorial completion.
             voice.Enqueue("13_complete", "complete", () => isActiveAndEnabled && State?.harvested == true);
+            if (supply != null && supply.HasNoMeasuredWaste)
+                voice.Enqueue("water_no_waste_complete", "no-waste", () => isActiveAndEnabled && State?.harvested == true && supply.HasNoMeasuredWaste);
             return;
         }
-        if (calendar.IsAdvancing) { voice.Clear(); return; }
+        if (calendar.IsAdvancing) { voice.FinishCurrent(); return; }
         if (State.waterMillilitres != lastWater)
         {
             lastWater = State.waterMillilitres;
@@ -276,7 +308,32 @@ public sealed class GronnyTutorial : MonoBehaviour
             Say("06_enough_water", "enough", () => Caring && phase == 0 && !NeedsWater && !Excess);
         if (phase == 0 && Ready)
             Say("07_first_advance", "advance", () => Ready && phase == 0);
-        if (CanEmpty && NeedsWater) Help("help_refill", () => CanEmpty && NeedsWater);
+        if (CanEmpty && NeedsWater)
+        {
+            Help("help_refill", () => CanEmpty && NeedsWater);
+            if (supply != null && !supply.IsPractice)
+                Say("water_reserve_explanation", "reserve-refill-explanation", () => Caring && CanEmpty && NeedsWater);
+        }
+        if (supply != null)
+        {
+            if (supply.IsMissingSoil) Help("help_missed_pot", () => Caring && supply.IsMissingSoil);
+            if (!NeedsWater && !Excess && System.Array.Exists(cans, can => can != null && can.IsPouring))
+                Help("help_stop_watering", () => Caring && !NeedsWater && !Excess && System.Array.Exists(cans, can => can != null && can.IsPouring));
+            if (!supply.IsPractice)
+            {
+                int attempt = supply.Attempt;
+                Say("help_reserve_low", "low-reserve-" + attempt, () => Caring && supply.Attempt == attempt &&
+                    supply.ReserveMillilitres > 0.001f && supply.ReserveMillilitres <= supply.InitialReserveMillilitres * 0.25f);
+                Say("help_reserve_empty", "empty-reserve-" + attempt, () => Caring && supply.Attempt == attempt &&
+                    supply.ReserveMillilitres <= 0.001f && supply.WaterInCansMillilitres > 0.001f);
+                int readyPhase = phase;
+                if (Ready)
+                {
+                    Say("water_stopped_success", "stopped-" + phase, () => Ready && phase == readyPhase);
+                    Say("water_ready_next_phase", "ready-" + phase, () => Ready && phase == readyPhase);
+                }
+            }
+        }
         QueueControls();
         IdleHelp();
     }
@@ -333,14 +390,13 @@ public sealed class GronnyTutorial : MonoBehaviour
         wasExcess = false;
         lastWater = State != null ? State.waterMillilitres : 0f;
         lastActionAt = Time.unscaledTime;
-        if (!first) voice.Clear();
+        if (!first) voice.FinishCurrent();
         int captured = phase;
         if (phase < 0)
             Say("03_plant_seed", "plant", () => Running && Step == GuideStep.Plant);
         else if (phase == 0)
         {
-            Say("04_first_watering", "watering", () => Caring && phase == 0 && NeedsWater);
-            Say("05_water_target", "target", () => Caring && phase == 0 && NeedsWater);
+            Say("water_practice_intro", "water-practice", () => Caring && phase == 0 && NeedsWater);
         }
         else
         {
@@ -373,6 +429,7 @@ public sealed class GronnyTutorial : MonoBehaviour
         demonstration.SetInputMode(mode);
         heldObjects.Clear();
         movementRequested = false;
+        movementPracticeStarted = false;
         if (playerOrigin != null) movementStart = playerOrigin.position;
         QueueControls();
     }
@@ -383,6 +440,8 @@ public sealed class GronnyTutorial : MonoBehaviour
         if (GardenMenuController.GardenSuspended) return;
         if (!Running || !learned.Add(control)) return;
         lastActionAt = Time.unscaledTime;
+        if (control == "move")
+            Say("movement_success", "movement-success", () => Running && State == null);
         RefreshInteractionLocks();
         QueueControls();
     }
@@ -397,12 +456,21 @@ public sealed class GronnyTutorial : MonoBehaviour
         {
             Say("03_plant_seed", "plant", () => Running && Step == GuideStep.Plant);
         }
+        else if (step == GuideStep.Water && phase == 0)
+        {
+            if (!Learned("watering_grab")) Control("watering", () => Step == GuideStep.Water && !Learned("watering_grab"));
+            else
+            {
+                Say("04_first_watering", "watering", () => Caring && phase == 0 && NeedsWater);
+                Say("05_water_target", "target", () => Caring && phase == 0 && NeedsWater);
+            }
+        }
         else if (step == GuideStep.Calendar)
         {
             Control("calendar", () => Step == GuideStep.Calendar);
         }
         else if (step == GuideStep.CalendarSelect)
-            Control("calendar_select", () => Step == GuideStep.CalendarSelect);
+            Control(CanEmpty ? "refill_select" : "calendar_select", () => Step == GuideStep.CalendarSelect);
     }
 
     private void Control(string name, System.Func<bool> relevant)
@@ -414,15 +482,22 @@ public sealed class GronnyTutorial : MonoBehaviour
 
     private void Say(string id, string key, System.Func<bool> relevant, bool once = true, bool waitForAction = false)
     {
-        System.Func<bool> demoRelevant = catalogue.Find(id)?.demo switch
+        System.Func<bool> demoRelevant = catalogue.FindTutorialCue(id)?.demo switch
         {
             GardenControlDemo.Water => () => ShowWateringDemonstration,
             GardenControlDemo.Upright => () => System.Array.Exists(cans, can => can != null && can.IsPouring),
             _ => null
         };
-        voice.Enqueue(id, key, relevant, () =>
+        voice.Enqueue(id, key, () => (GardenWaterSupply.Active == null || !GardenWaterSupply.Active.Exhausted) && relevant(), () =>
         {
-            if (catalogue.Find(id).assisted) calendar.RecordTutorialHelp(id);
+            // Movement before its own lesson must not skip the demonstration.
+            if ((id == "controls_move_hands" || id == "controls_move_controllers") && Step == GuideStep.Move)
+            {
+                movementPracticeStarted = true;
+                movementRequested = false;
+                if (playerOrigin != null) movementStart = playerOrigin.position;
+            }
+            if (catalogue.FindTutorialCue(id).assisted) calendar.RecordTutorialHelp(id);
         }, once, demoRelevant, waitForAction);
     }
 
@@ -474,9 +549,10 @@ public sealed class GronnyTutorial : MonoBehaviour
 
     private void OnMoved(LocomotionEvent evt, Pose delta)
     {
-        if (Running && Step == GuideStep.Move &&
+        if (!GardenMenuController.GardenSuspended && Running && movementPracticeStarted && Step == GuideStep.Move &&
             (evt.Translation == LocomotionEvent.TranslationType.Relative ||
-             evt.Translation == LocomotionEvent.TranslationType.Velocity) && delta.position.sqrMagnitude > 0.0001f)
+             evt.Translation == LocomotionEvent.TranslationType.Velocity) &&
+            Vector3.ProjectOnPlane(delta.position, Vector3.up).sqrMagnitude > 0.00000001f)
             movementRequested = true;
     }
 

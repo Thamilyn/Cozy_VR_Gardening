@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public enum GardenInputMode { Unknown, Hands, Controllers }
-public enum GardenControlDemo { None, Move, Grab, Calendar, CalendarSelect, Water, Upright }
+public enum GardenControlDemo { None, Move, Grab, Calendar, CalendarSelect, Water, Upright, WateringGrab }
 public enum GardenDemoPose { Open, Pinch, Curled, Point, ThumbFree }
 
 /// <summary>References the original audio and Meta visual assets without moving or duplicating them.</summary>
@@ -21,6 +21,9 @@ public sealed class GronnyAudioCatalogue : ScriptableObject
         [Min(0f)] public float cooldown = 30f;
         public bool assisted;
         public string controllerTarget;
+        public bool rightHand;
+        public AnimationClip controllerAnimation;
+        [TextArea] public string transcript;
         public Step[] steps = Array.Empty<Step>();
     }
 
@@ -52,6 +55,7 @@ public sealed class GronnyAudioCatalogue : ScriptableObject
     }
 
     public Cue[] cues = Array.Empty<Cue>();
+    [HideInInspector] public int waterSavingAudioVersion;
     public HandVisual leftHand = new();
     public HandVisual rightHand = new();
     public GameObject leftController;
@@ -74,6 +78,12 @@ public sealed class GronnyAudioCatalogue : ScriptableObject
     public Vector3 controllerEulerAngles = new(65f, 180f, 0f);
     [Range(0.5f, 2f)] public float visualScale = 1.15f;
     [Min(0.01f)] public float blendSeconds = 0.35f;
+    [Header("Hand teaching pace")]
+    [Min(1f)] public float handPoseHoldSeconds = 2.5f;
+    [Min(0.1f)] public float handPoseBlendSeconds = 0.7f;
 
     public Cue Find(string id) => Array.Find(cues, cue => cue != null && cue.id == id);
+
+    // Original IDs now point to the replacement WAVs supplied for the water-saving lesson.
+    public Cue FindTutorialCue(string id) => Find(id);
 }

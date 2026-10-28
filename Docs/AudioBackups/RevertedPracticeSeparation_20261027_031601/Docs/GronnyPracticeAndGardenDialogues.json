@@ -1,0 +1,14 @@
+[
+  {
+    "id": "01_welcome",
+    "text": "Hello! I'm Gronny. Welcome to our sustainable garden. Our goal is to grow a tomato while saving water, so our water reserve is limited. Come over to the table, and let's begin."
+  },
+  {
+    "id": "02_tomato_intro",
+    "text": "Welcome to the practice garden. Learn to move, plant, water, refill your can and use the calendar here. Water refills freely during practice. Then we'll enter the sustainable garden."
+  },
+  {
+    "id": "help_refill",
+    "text": "Your watering can is empty. Open the calendar and select Refill water."
+  }
+]

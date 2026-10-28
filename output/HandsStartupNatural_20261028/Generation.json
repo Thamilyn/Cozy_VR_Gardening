@@ -1,0 +1,32 @@
+{
+  "text": "Hi! I'm Gronny. If you're using hand tracking, hold both hands comfortably in front of you where you can see them. Today I'll help you grow your own tomato. We'll learn about sustainable gardening by giving our plants just the water they need. We'll practise together first, then use a limited water supply to finish growing our tomato.",
+  "voice": "Kiki",
+  "model_revision": "v2",
+  "preset": "expressive",
+  "temperature": 0.9,
+  "expression": "tender",
+  "gap_seconds": 0.4,
+  "pitch_and_speed_processing": false,
+  "parts": [
+    {
+      "part": 1,
+      "text": "Hi! I'm Gronny. If you're using hand tracking, hold both hands comfortably in front of you where you can see them.",
+      "seed": 281,
+      "seconds": 6.88
+    },
+    {
+      "part": 2,
+      "text": "Today I'll help you grow your own tomato. We'll learn about sustainable gardening by giving our plants just the water they need.",
+      "seed": 282,
+      "seconds": 7.2
+    },
+    {
+      "part": 3,
+      "text": "We'll practise together first, then use a limited water supply to finish growing our tomato.",
+      "seed": 283,
+      "seconds": 5.6
+    }
+  ],
+  "duration_seconds": 20.48,
+  "sha256": "0D92333F758E598484FE83141F6486DA794A7E60021D34BC88329F3EA568D352"
+}

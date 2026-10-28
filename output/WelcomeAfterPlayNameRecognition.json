@@ -1,0 +1,27 @@
+{
+  "recognition_model": "openai/whisper-base.en",
+  "note": "La transcripción automática puede equivocarse; las diferencias requieren revisión.",
+  "files": [
+    {
+      "filename": "01_welcome.wav",
+      "expected": "Hello! I'm Gronny. Come over to the gardening table, and let's get started.",
+      "transcript": "Hello, I'm Granny. Come over to the gardening table and let's get started.",
+      "words_match": false,
+      "differences": [
+        {
+          "operation": "replace",
+          "expected": "gronny",
+          "transcript": "granny"
+        }
+      ],
+      "duration_seconds": 4.84,
+      "sample_rate": 24000,
+      "peak": 0.98974609375,
+      "clipped_sample_fraction": 0.0,
+      "leading_silence_seconds": 0.073,
+      "trailing_silence_seconds": 0.156,
+      "duplicate_of": null,
+      "sha256": "82e9019386d6cf8357f216f5e82f90758b3c0d70036311166273e2d6f8f3d33f"
+    }
+  ]
+}

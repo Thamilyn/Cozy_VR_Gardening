@@ -22,6 +22,7 @@ public sealed class SeedItem : MonoBehaviour
     private bool _ripeFruitPrepared;
     private TomatoPotStages _potStages;
     private GameObject _stageVisual;
+    private GardenObjectLabel _nameLabel;
 
     public SeedCrop Crop => crop;
     public string SeedId => seedId;
@@ -40,6 +41,8 @@ public sealed class SeedItem : MonoBehaviour
             SeedCrop.Radish => new Color(0.8f, 0.18f, 0.45f),
             _ => new Color(0.65f, 0.8f, 0.24f)
         });
+        if (crop == SeedCrop.Tomato)
+            _nameLabel = GardenObjectLabel.Create(gameObject, "Tomato", Vector3.up * 0.08f);
     }
 
     private void Update()
@@ -68,6 +71,7 @@ public sealed class SeedItem : MonoBehaviour
     {
         if (IsPlanted || pot == null) return;
         IsPlanted = true;
+        if (_nameLabel != null) _nameLabel.enabled = false;
         transform.SetParent(pot.transform, false);
         transform.localPosition = pot.LocalPlantingPoint;
         transform.localRotation = Quaternion.identity;

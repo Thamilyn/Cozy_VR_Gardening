@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command menu",
+  "data": {
+    "command": "menu",
+    "parameters": {
+      "path": "Garden/Gronny/Connect water-saving lesson"
+    },
+    "result": {
+      "success": true,
+      "path": "Garden/Gronny/Connect water-saving lesson",
+      "items": null,
+      "message": "Executed menu item 'Garden/Gronny/Connect water-saving lesson'"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

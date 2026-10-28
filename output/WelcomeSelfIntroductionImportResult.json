@@ -1,0 +1,9 @@
+{
+  "ChangedWav": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\01_welcome.wav",
+  "MetaFilesUnchanged": true,
+  "OtherAudioFilesUnchanged": true,
+  "Backup": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Docs\\AudioBackups\\WelcomeSelfIntroduction_20261027_023629\\01_welcome.wav",
+  "Sha256": "82E9019386D6CF8357F216F5E82F90758B3C0D70036311166273E2D6F8F3D33F",
+  "SourceVerification": "output/WelcomeAfterPlayNameRecognition.json",
+  "RecognitionNote": "Transcript matches except Gronny recognized as Granny; human review of name pending."
+}

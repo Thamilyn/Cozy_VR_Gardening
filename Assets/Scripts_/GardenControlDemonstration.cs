@@ -25,6 +25,12 @@ public sealed class GardenControlDemonstration : MonoBehaviour
     private AnimationClip thumbSwipeClip;
     private Transform[] thumbJoints;
     private Quaternion[] thumbBaseRotations;
+    private float[] handStepTimes;
+
+    public bool UsesHandTeachingTiming => handStepTimes != null;
+    public float CycleDurationSeconds => handStepTimes != null
+        ? Mathf.Max(cue.clip.length / catalogue.pitch, handStepTimes[handStepTimes.Length - 1] + catalogue.handPoseHoldSeconds)
+        : cue != null ? cue.clip.length / catalogue.pitch : 0f;
 
     public bool IsShowing(GronnyAudioCatalogue.Cue instruction) => anchor != null && cue == instruction;
 
@@ -53,12 +59,21 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         }
         if (viewer == null) return;
         cue = instruction;
+        if (mode == GardenInputMode.Hands && cue.mode == GardenInputMode.Hands && cue.steps != null && cue.steps.Length > 0)
+        {
+            // Keep short replacement WAVs from compressing each teaching pose into a flash.
+            handStepTimes = new float[cue.steps.Length];
+            for (int i = 1; i < handStepTimes.Length; i++)
+                handStepTimes[i] = Mathf.Max(cue.steps[i].at / catalogue.pitch,
+                    handStepTimes[i - 1] + catalogue.handPoseHoldSeconds);
+        }
         bool left = cue.demo == GardenControlDemo.Calendar || cue.demo == GardenControlDemo.Move ||
             (mode == GardenInputMode.Hands && cue.demo == GardenControlDemo.CalendarSelect);
+        if (cue.rightHand) left = false;
         var hand = left ? catalogue.leftHand : catalogue.rightHand;
         GameObject prefab = mode == GardenInputMode.Hands ? hand.prefab :
             left ? catalogue.leftController : catalogue.rightController;
-        if (prefab == null) { cue = null; return; }
+        if (prefab == null) { Hide(); return; }
 
         anchor = new GameObject("Gronny control demonstration");
         anchor.SetActive(false);
@@ -90,6 +105,8 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         model.transform.localPosition = Vector3.zero;
         model.transform.localRotation = Quaternion.Euler(mode == GardenInputMode.Hands
             ? catalogue.handEulerAngles : catalogue.controllerEulerAngles);
+        if (cue.rightHand && mode == GardenInputMode.Hands)
+            model.transform.localRotation = MirrorRotation(model.transform.localRotation);
         // Imported FBX roots include the centimetres-to-metres conversion.
         model.transform.localScale = prefab.transform.localScale * catalogue.visualScale;
         foreach (MonoBehaviour behaviour in model.GetComponentsInChildren<MonoBehaviour>(true))
@@ -127,10 +144,10 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         else
         {
             animationRoot = model.transform;
-            pressClip = cue.demo switch
+            pressClip = cue.controllerAnimation != null ? cue.controllerAnimation : cue.demo switch
             {
                 GardenControlDemo.Move => catalogue.controllerStick,
-                GardenControlDemo.Grab => catalogue.controllerGrip,
+                GardenControlDemo.Grab or GardenControlDemo.WateringGrab => catalogue.controllerGrip,
                 GardenControlDemo.Calendar => catalogue.controllerY,
                 GardenControlDemo.CalendarSelect => catalogue.controllerTrigger,
                 _ => null
@@ -152,7 +169,7 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         caption.fontSize = fixedGardeningPosition ? 64 : 48;
         caption.color = Color.white;
         if (cue.demo == GardenControlDemo.CalendarSelect) CreatePointer();
-        if (cue.demo == GardenControlDemo.Water || cue.demo == GardenControlDemo.Upright) CreateCanSymbol();
+        if (cue.demo == GardenControlDemo.Water || cue.demo == GardenControlDemo.Upright || cue.demo == GardenControlDemo.WateringGrab) CreateCanSymbol();
         foreach (Transform child in anchor.GetComponentsInChildren<Transform>(true)) child.gameObject.layer = 2;
         anchor.SetActive(true);
         Tick(0f);
@@ -188,19 +205,31 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         }
     }
 
-    public void Tick(float audioSeconds)
+    public void Tick(float audioSeconds) => TickAt(audioSeconds, false);
+
+    public void TickTeaching(float elapsedSeconds) => TickAt(elapsedSeconds, UsesHandTeachingTiming);
+
+    private void TickAt(float audioSeconds, bool handClock)
     {
         if (anchor == null || cue == null || cue.steps == null || cue.steps.Length == 0) return;
         int index = 0;
         for (int i = 1; i < cue.steps.Length; i++)
-            if (audioSeconds >= cue.steps[i].at) index = i;
+            if (audioSeconds >= StepTime(i, handClock)) index = i;
         GronnyAudioCatalogue.Step step = cue.steps[index];
         GronnyAudioCatalogue.Step previous = index > 0 ? cue.steps[index - 1] : step;
-        float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01((audioSeconds - step.at) / catalogue.blendSeconds));
+        float blend = handClock ? Mathf.Max(catalogue.blendSeconds, catalogue.handPoseBlendSeconds) : catalogue.blendSeconds;
+        float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01((audioSeconds - StepTime(index, handClock)) / blend));
         motion.localPosition = Vector3.Lerp(previous.position, step.position, t);
         motion.localRotation = Quaternion.Slerp(Quaternion.Euler(previous.rotation), Quaternion.Euler(step.rotation), t);
+        if (cue.rightHand)
+        {
+            Vector3 position = motion.localPosition;
+            position.x = -position.x;
+            motion.localPosition = position;
+            motion.localRotation = MirrorRotation(motion.localRotation);
+        }
         if (mode == GardenInputMode.Hands && cue.demo == GardenControlDemo.Calendar)
-            caption.text = "Pinch with your left hand\nto open and close\nthe calendar.";
+            caption.text = "Pinch with your " + (cue.rightHand ? "right" : "left") + " hand\nto open and close\nthe calendar.";
         else
             caption.text = fixedGardeningPosition ? ReadableCaption(step.label) : step.label;
         if (mode == GardenInputMode.Hands && poses != null)
@@ -215,7 +244,7 @@ public sealed class GardenControlDemonstration : MonoBehaviour
                 foreach (Transform joint in joints)
                     if (joint.name.EndsWith("thumb1"))
                         joint.localRotation *= Quaternion.Euler(Vector3.Lerp(previous.thumbRotation, step.thumbRotation, t));
-            ApplyThumbSwipe(index, audioSeconds);
+            ApplyThumbSwipe(index, audioSeconds, handClock);
         }
         else if (pressClip != null)
         {
@@ -230,6 +259,11 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         if (buttonHighlight != null) buttonHighlight.SetActive(step.press > 0f);
     }
 
+    private static Quaternion MirrorRotation(Quaternion rotation) =>
+        new(rotation.x, -rotation.y, -rotation.z, rotation.w);
+
+    private float StepTime(int index, bool handClock) => handClock ? handStepTimes[index] : cue.steps[index].at;
+
     private void PrepareThumbSwipe()
     {
         var animatedThumb = new System.Collections.Generic.List<Transform>();
@@ -241,15 +275,17 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         thumbBaseRotations = new Quaternion[thumbJoints.Length];
     }
 
-    private void ApplyThumbSwipe(int index, float audioSeconds)
+    private void ApplyThumbSwipe(int index, float audioSeconds, bool handClock)
     {
         if (cue.demo != GardenControlDemo.Move || thumbSwipeClip == null || thumbJoints == null) return;
         GronnyAudioCatalogue.Step from = cue.steps[index];
         GronnyAudioCatalogue.Step to = index + 1 < cue.steps.Length ? cue.steps[index + 1] : from;
         // Interpolate across the entire authored swipe interval, not just blendSeconds
         // after the next pose. This keeps the visible stroke under its spoken instruction.
-        float progress = to.at > from.at ? Mathf.SmoothStep(0f, 1f,
-            Mathf.InverseLerp(from.at, to.at, audioSeconds)) : 1f;
+        float fromTime = StepTime(index, handClock);
+        float toTime = StepTime(Mathf.Min(index + 1, cue.steps.Length - 1), handClock);
+        float progress = toTime > fromTime ? Mathf.SmoothStep(0f, 1f,
+            Mathf.InverseLerp(fromTime, toTime, audioSeconds)) : 1f;
         float weight = Mathf.Lerp(from.thumbSwipeWeight, to.thumbSwipeWeight, progress);
         if (weight > 0f)
         {
@@ -323,6 +359,7 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         thumbSwipeClip = null;
         thumbJoints = null;
         thumbBaseRotations = null;
+        handStepTimes = null;
     }
 
     private void OnDisable() => Hide();

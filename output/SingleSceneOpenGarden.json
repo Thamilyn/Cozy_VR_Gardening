@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "if (UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode) throw new System.InvalidOperationException(\"The Editor must be outside Play before changing scenes.\"); for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCount; i++) if (UnityEngine.SceneManagement.SceneManager.GetSceneAt(i).isDirty) throw new System.InvalidOperationException(\"Preserve pending scene changes before switching.\"); var scene = UnityEditor.SceneManagement.EditorSceneManager.OpenScene(\"Assets/Scenes/Garden_Moves.unity\", UnityEditor.SceneManagement.OpenSceneMode.Single); return new { scene.name, scene.path, scene.isDirty };"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "name": "Garden_Moves",
+        "path": "Assets/Scenes/Garden_Moves.unity",
+        "isDirty": false
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

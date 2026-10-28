@@ -1,0 +1,60 @@
+{
+  "recognition_model": "openai/whisper-base.en",
+  "note": "Revisión automática; no sustituye escucha humana.",
+  "files": [
+    {
+      "id": "01_welcome",
+      "expected": "Hi! I'm Gronny, and today I'll help you grow your own tomato. We'll learn about sustainable gardening by giving our plants just the water they need. We'll practise together first, then use a limited water supply to finish growing our tomato. Come over to the gardening table, and let's begin!",
+      "transcript": "Hi, I'm Granny and today I'll help you grow your own tomato. We'll learn about sustainable gardening by giving our plants just the water they need. We'll practice together first. Then use a limited water supply to finish growing our tomato. Come over to the gardening table and let's begin.",
+      "differences": [
+        {
+          "operation": "replace",
+          "expected": "gronny",
+          "transcript": "granny"
+        }
+      ],
+      "words_match": false,
+      "duration_seconds": 18.08,
+      "sample_rate": 24000,
+      "peak": 0.972137451171875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "714373DAD0B0DBA3DA324D904FD855666F8BD395BD35DB8EE4ADBA271264592D"
+    },
+    {
+      "id": "controls_move_hands",
+      "expected": "Let's practise moving. Watch the hand demonstration. Curl your index finger, touch it with your thumb, then swipe your thumb to take a step. Give it a try.",
+      "transcript": "Let's practice moving. Watch the hand demonstration. Curl your index finger. Touch it with your thumb. Then swipe your thumb to take a step. Give it a try.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 10.16,
+      "sample_rate": 24000,
+      "peak": 0.988037109375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "9990C8EB408E201CC290C00C0255BA165DE324479968DD1E748F7584FC48A57A"
+    },
+    {
+      "id": "controls_move_controllers",
+      "expected": "Let's practise moving. Gently push the left joystick to walk. Give it a try.",
+      "transcript": "Let's practice moving. Gently push the left joystick to walk. Give it a try.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 4.84,
+      "sample_rate": 24000,
+      "peak": 0.94342041015625,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "F15D79F00F1AF9AAD08717743C72DAC5069143D35CB5CEFC903F54FA348C487D"
+    },
+    {
+      "id": "movement_success",
+      "expected": "That's it! Now come over to the gardening table.",
+      "transcript": "That's it. Now come over to the gardening table.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 3.16,
+      "sample_rate": 24000,
+      "peak": 0.903533935546875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "9C911A09E515F857C4A690DF21B3022837E8F8246BB1E0B676F4C9089B252365"
+    }
+  ]
+}

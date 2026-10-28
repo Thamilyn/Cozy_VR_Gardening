@@ -36,6 +36,7 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
 
     private void Start()
     {
+        GardenRoundedPanel.ApplyToHierarchy(transform);
         if (instruction == null || water == null)
         {
             Debug.LogError("Assign both scene text labels to the tomato guide.", this);
@@ -92,6 +93,12 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
     {
         if (GardenMenuController.GardenSuspended)
         {
+            if (GardenWaterSupply.Active != null && GardenWaterSupply.Active.Exhausted)
+            {
+                instruction.text = "Game over: not enough water to finish.";
+                water.text = "Select Try again on the panel in front of you.\nStart again by planting a new seed with Gronny.";
+                return;
+            }
             instruction.text = GardenMenuController.HasStarted ? "Garden menu is open." : "Welcome to Cozy Garden.";
             water.text = GardenMenuController.HasStarted
                 ? "Adjust sound or review the controls above.\nSelect Return to garden when ready."
@@ -117,6 +124,19 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
         }
         CalendarSystem.PlantSave saved = seeds.GetState(plant);
         if (saved == null) return;
+        GardenWaterSupply supply = GardenWaterSupply.Active;
+        if (supply != null && supply.Exhausted)
+        {
+            instruction.text = "Game over: not enough water to finish.\nYour tomato still needs water.";
+            water.text = "Calendar: select Try again.\nStart again by planting a new seed with Gronny.";
+            return;
+        }
+        if (saved.harvested && supply != null)
+        {
+            instruction.text = "Well done! You grew and harvested a tomato.";
+            water.text = supply.SummaryText;
+            return;
+        }
         if (saved.waterMillilitres != lastTotalWater || saved.tomatoPhase != lastPhase)
         {
             // A planting or blocked-advance hint must not ask for more water after watering succeeds.

@@ -1,0 +1,9 @@
+{
+  "SavedEditorSceneSetup": "sceneSetups:\n- path: Assets/Scenes/Garden_Practice.unity\n  isLoaded: 1\n  isActive: 1\n  isSubScene: 0",
+  "PracticeAssetExists": false,
+  "IntendedSceneExists": true,
+  "AudioCatalogueExists": true,
+  "WelcomeHashVerified": true,
+  "RequiredAction": "Exit Unity Play, open Assets/Scenes/Garden_Moves.unity, enter Play, then select Play in the game menu.",
+  "LiveEditorVerification": "Unavailable after the previously reported automatic approval usage limit."
+}

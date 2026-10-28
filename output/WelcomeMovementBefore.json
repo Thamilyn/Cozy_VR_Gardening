@@ -1,0 +1,474 @@
+[
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_.meta",
+    "sha256": "BEA61726576B5541E134FF402EB03BEF633A864DE49B9448A6C026717CB9D2DC"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening.meta",
+    "sha256": "40EA9494F853D050F3EDA01CA1D5F336B0E3B1F44F5E7ED5142F5CB03A4708D3"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility.meta",
+    "sha256": "F18D8330714D63F364010126C2FD7465E07A19CCB743A5631A4290D9FC76E47C"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving.meta",
+    "sha256": "880670239332593E24AEDF909CD468A623247A6E1E2E6F9385F18358FDC80694"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_\\controls_calendar_controllers.wav",
+    "sha256": "46783FA79648D25E11992339F8B211D2719F2BA9A28E8A821555ADE558C442C1"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_\\controls_calendar_controllers.wav.meta",
+    "sha256": "876898F0097C011062E2B01741B1AD0D37DADB369725DFBA48EA1CB51B6B3B91"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_\\controls_calendar_hands.wav",
+    "sha256": "D33F1EF0E2A8C57DD7F038C92A558E779E719D0680E758682261353A4867D777"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_\\controls_calendar_hands.wav.meta",
+    "sha256": "1BFDCB9F952763B47C7D1F8CD77488388DFBC925A9A63D744672624D9EA2F073"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_\\controls_calendar_select_controllers.wav",
+    "sha256": "18DBFB7650DCEE60C3BABE8D9CC18024408BE32DCDB3DC3FFCB0B0AC2FBA85A4"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_\\controls_calendar_select_controllers.wav.meta",
+    "sha256": "BFD460DF9262F71864261FA43C2326169E0765F30337633D72F234D190B17291"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_\\controls_calendar_select_hands.wav",
+    "sha256": "B6219A4B5C46B8ADABE7080ABDDF737AC2B3D8DDF7C201D3A8E3FE28F9802D79"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_\\controls_calendar_select_hands.wav.meta",
+    "sha256": "31C6E5AD8C005ADF2A7F3D6E2AD983DDF22ABDCBFC876C9A3D3D8F55C9598AC1"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_\\controls_grab_controllers.wav",
+    "sha256": "04E494A907D923F4178125433B22B65A3AB2663126CE239F1D5D01ED37900B88"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_\\controls_grab_controllers.wav.meta",
+    "sha256": "53D87B77DB0CEB9FA8D4C8008C6E26769784CEB32D97205EE212A2FF717EE5F8"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_\\controls_grab_hands.wav",
+    "sha256": "69532077F9C4B75B4D57811021125457DC1153AD89E047FAEC60726945CC5B7F"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_\\controls_grab_hands.wav.meta",
+    "sha256": "C479D842424CFD13BC407E40BAE7BDEDFDFE537D6BE726C6F605BFFCC153EEE3"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_\\controls_move_controllers.wav",
+    "sha256": "FC83E27A2126905E1FD7E7AE8D0B4198D377EC7A874B53A7C33DC706AD45DA93"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_\\controls_move_controllers.wav.meta",
+    "sha256": "945C9738B1F9B1F9DBC05E77DFB0895CD7902542FA3EDE0519E5E99F8A4BD037"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_\\controls_move_hands.wav",
+    "sha256": "9C1C9D1770A947036894F538FF8F3A9CF1B221AF35BF2D7A7339F72D710C831B"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\controls_\\controls_move_hands.wav.meta",
+    "sha256": "6EA2ABCF8AF9E1B5028E038501668EC1288D8E56DDFE8789E391958586D50787"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\01_welcome.wav",
+    "sha256": "82E9019386D6CF8357F216F5E82F90758B3C0D70036311166273E2D6F8F3D33F"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\01_welcome.wav.meta",
+    "sha256": "969B85DF31BE288B2DC653A9A93B08483F312EF4F0EF963C231042ADDD9AAC4C"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\02_tomato_intro.wav",
+    "sha256": "6C9220487730619859896C27F93D6DB73EF7F34E2370A398693CAEB96777022F"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\02_tomato_intro.wav.meta",
+    "sha256": "4AB757ADE6665F26795CDC28EDF376EAB117B7A237AB0897FB29A0E7826C0003"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\03_plant_seed.wav",
+    "sha256": "26B26C62CC2874AA184EB0E6C32B45538D9E21405C0716574D0073B836DB9555"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\03_plant_seed.wav.meta",
+    "sha256": "CD1438F83C3F03EE09E24CDCD5FECA1ADBB6B6B5C381F7DA17D4417C7B8E2A96"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\04_first_watering.wav",
+    "sha256": "FC021161F683319282709FEB402D63A5AB7007C9C7CA2CB29E24710CDD9C38A2"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\04_first_watering.wav.meta",
+    "sha256": "240219B53D0ED437AFBFC0544FEBEDBC5BB98F809DB84658D4207FEDC9FFCBB1"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\05_water_target.wav",
+    "sha256": "D45CAC0B70F9F28DCB7E49AAD39B4C144E183C97A40DC0AC4F88570A695C0164"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\05_water_target.wav.meta",
+    "sha256": "29856FBA4FD268BFF50768B267DF9084F512ABF15632DF4796AD2FEFEA7AAA1D"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\06_enough_water.wav",
+    "sha256": "123DFBF6E07ED060AC94123507283E473177039227FA4911D9366D421FEC21C4"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\06_enough_water.wav.meta",
+    "sha256": "E4055541F1BE03963E3278FC685EF3CD53855D91270BBA1DAA227E048FEACBE0"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\07_first_advance.wav",
+    "sha256": "329DFB00E5F66E4762B86002B7769192FC2D78E1C97B809C13177DFC2349D006"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\07_first_advance.wav.meta",
+    "sha256": "A0CEF2D0199272575B6D5B73DC8F7C1E66F60D86EA4E85F6B1D62D56CCF563BD"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\08_sprout.wav",
+    "sha256": "0CF09A4974A6A980A7D9C83E285F288CF29E8D38D1AD2956C8B61814C3CD443C"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\08_sprout.wav.meta",
+    "sha256": "22D8EFA97C0943E0A8793188F7A7D0561DFFAACE1046B4BA24F35E58C9492F3D"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\09_young_plant.wav",
+    "sha256": "5675611A40FFE25B6BD067845BFB9B22E84F459EA661187C2166855D5298B0F9"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\09_young_plant.wav.meta",
+    "sha256": "7DE90326DA215A4E9ABC0F064DF94C2B9260594AF5A395F6EF945861176F3C2B"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\10_flowering.wav",
+    "sha256": "68576A83DCD0A8F7582B86DA2560FD498283EAE3117C495018E9908DC79E33B9"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\10_flowering.wav.meta",
+    "sha256": "CCABC0612011FA8520B12179405C40C67724E08B53D13BAC0ACAA880B0FAA58A"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\11_green_fruit.wav",
+    "sha256": "190FA67488432B6C7595DA1EA62B2BFE2D12F8D38F8485535D6ED57EB0A569D5"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\11_green_fruit.wav.meta",
+    "sha256": "F8048FC44C3479B6F9B1C99E345CE08E8AAF34FD24FB9866C8120D72EF932AAA"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\12_harvest.wav",
+    "sha256": "B6B1820023C6105D368CBA166FE70E9345B90FF3FC063CCE7D88479240432F40"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\12_harvest.wav.meta",
+    "sha256": "8767304759285D657BF84542432911596A03039C3EE4FA7CECCD991EF1C2E48A"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\13_complete.wav",
+    "sha256": "AD29FBAE3D61DB31BB9786E1ED6333643E389B7BC2DF95B6DA2C7942B945D154"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\13_complete.wav.meta",
+    "sha256": "BFE205EC2F552A37B38DC9785B26188F1424C3ADB000FB7FB3F7615BAF72AC85"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\help_calendar.wav",
+    "sha256": "C1C558E5E9B9228A4E19036B1ABCF57E421AC4C9C2C85C6737E196154D190BD2"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\help_calendar.wav.meta",
+    "sha256": "E93A900ED7F04C2F2480361FCA9D45F6516186F3549A21324BC36D26AE5496C4"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\help_drained.wav",
+    "sha256": "9FFAA426A770956112861FCFE21F136978067F57CDB5B972D50FA6293591BABC"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\help_drained.wav.meta",
+    "sha256": "5110E1F85B54314029212672364DEA6CBEB08A41B53822000354F8D941107054"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\help_excess_water.wav",
+    "sha256": "30915E95442DA2129E2418FBF48477765A2457A8CB680AB036D010264BD1E835"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\help_excess_water.wav.meta",
+    "sha256": "6138191F213305AF9772AB40262898680AEA0105CCF6C6D62D8E39E13B90123F"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\help_low_water.wav",
+    "sha256": "3C949B7B1993C09BD8E4ADE3B0C094206CB2187AD8334424410D2F4E2EA896DD"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\help_low_water.wav.meta",
+    "sha256": "FD689E89F2384DFEAA50F2B1FCDB391F2ED9B4E4F764598F6825740997A01E2F"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\help_planting.wav",
+    "sha256": "AFC3A83FCC5656BDC177D609C1695A5CCF4C885316A920CF2C9EEAF4AA7D0707"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\help_planting.wav.meta",
+    "sha256": "17B9C46AA01A149FDC23C9F9AA8D20CB46BE3ECD995D28577D20265BEE3132D3"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\help_refill.wav",
+    "sha256": "B611A9A8E7F87DCF5922F0662F1D040C9DF4C4F8BC57CC1E5F45313A48B774DC"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\help_refill.wav.meta",
+    "sha256": "07E3D6695F2A8B21341B40F509FDFA07FDBF570796AAE1A05E054FA09444E050"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\03_plant_seed_accessible.wav",
+    "sha256": "2ADC5C6E68E4D6CCA80CB219E32F69965EA6EBC56B141331F17194F50B869F3F"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\03_plant_seed_accessible.wav.meta",
+    "sha256": "0C2D5A17B82D24292128BAFA263454D24DB1E16CFC6AD04742D311EB90A5BA7A"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\12_harvest_accessible.wav",
+    "sha256": "48A1C17AE58C231C4BE081F3585E1D3B6A3A87946E24D085AC0D7871C391C2F9"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\12_harvest_accessible.wav.meta",
+    "sha256": "D44D1EF44731D5BF15275836F984A8B95B0A3E48C5D584837D65E98EB9FA5D5F"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\controls_calendar_controllers_left.wav",
+    "sha256": "C1BCA48F2A8442863504CE882A58AF0E6B432517ECC816F57F48085C273BD330"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\controls_calendar_controllers_left.wav.meta",
+    "sha256": "7C826E771EA285E30A7CA11E5B7C58029339767E67425FEDA6676904CC8F31F5"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\controls_calendar_controllers_right.wav",
+    "sha256": "74F400ABA2B0FDBB3B69F634F31AC50F37123C6CB7A6CA37E93D59933086A323"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\controls_calendar_controllers_right.wav.meta",
+    "sha256": "CCDAC9AEBE853625235F69F9760844AAD4088B380DD715B7D255419649494A35"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\controls_calendar_hands_left.wav",
+    "sha256": "27A6B3E9D7977E49D69F819D4B1E869BA06210964C666228FEF456B1D1CF6112"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\controls_calendar_hands_left.wav.meta",
+    "sha256": "C1558CDF9C4F51C2C75E2355AA8B0D6C1CE1FE9E89B3CDEEA098A215C421B124"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\controls_calendar_hands_right.wav",
+    "sha256": "44777F67D8C3DA3BD406F2C3E9E7AE2E6B595888425F25D80E192C8598566114"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\controls_calendar_hands_right.wav.meta",
+    "sha256": "AE578B4931E6DE975C9C359F6DE7AF477B56C517C4D932F64C1C3CCF42552BC4"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\controls_move_controllers_left.wav",
+    "sha256": "652EC5EC99EBA07EAABC4BC15770DDE119A60AE55B9A13F011407431D21E60E3"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\controls_move_controllers_left.wav.meta",
+    "sha256": "AAAF9EABFE9AC92C47E98B938E57E1B08FDC75EB4469787398CB7B975E0976C8"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\controls_move_controllers_right.wav",
+    "sha256": "9E16E420B2A330491ABACBEAFCE8540214C0673DAE224EA0D6EA393A63AD3B9A"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\controls_move_controllers_right.wav.meta",
+    "sha256": "C94264EC128C9FECB120422F048CBE7FAAE2C29E6DEDD7DA6FA306440B7B06FF"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\controls_move_hands_left.wav",
+    "sha256": "B254AF2C5F865D87113DA5B634BCE20F6A4106A828AA8E50A0D88D4A7010863D"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\controls_move_hands_left.wav.meta",
+    "sha256": "2467DC7CB3FE4832A34FE590A497AAA10E59AE7D2BEA30680927CF26E28AD730"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\controls_move_hands_right.wav",
+    "sha256": "3BEA44BE960B174485DED2CD63F2478FDE07B6EECC0E4D59C6054B381CA3D5FC"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\controls_move_hands_right.wav.meta",
+    "sha256": "2CDDA0B49DD4EE2AB30090321C397102C324ADFB8E6E888FE8BA8EECB9F5C5C0"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\menu_intro.wav",
+    "sha256": "9366F7D93FE2EA4CCDA800ED74997474DAAFB0BFEAB2D0425C17D3F9ACA43DE0"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\menu_intro.wav.meta",
+    "sha256": "65399D9BA591BDBFAD93FB99C3896A3D60EE419BF564807F393E3870F1D3FFAE"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\menu_tutorial_intro.wav",
+    "sha256": "39A8265795DDC9B00F21039E19C4230F35CAA082FCB66C11614EE9CCBC3A1249"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\menu_tutorial_intro.wav.meta",
+    "sha256": "3CB4F0AA03E59FD3937326F7DAB7F74AA923BC236B2CF64CD3A909C02BF89D19"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\settings_voice_sample.wav",
+    "sha256": "CFF8E8D5A37F65367BFCF2F69BA98BC937C1505BC22C3AE05797671069570B07"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\menu_accessibility\\settings_voice_sample.wav.meta",
+    "sha256": "E617CF6E1C1E526AAB7887C24DDF45F9D3D8B24673C2B96957E7EE00CAFF5CA8"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\controls_refill_select_controllers.wav",
+    "sha256": "93F2C2C44B214F31DD74738227D75F4E746F821E845139A022D6CE916DE25B28"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\controls_refill_select_controllers.wav.meta",
+    "sha256": "3FDD50F60062755CFC73D752DB8BDAC78585DABBC2E0B4B0D08842C0DD631935"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\controls_refill_select_hands.wav",
+    "sha256": "CF14C820FE183CC29144551308CB406EE02248A63985408C83E4967493E197BE"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\controls_refill_select_hands.wav.meta",
+    "sha256": "097CA1A3AA531D074644E8C9FF7DE8CC7244591AF03EB95AE76FBEA4479E1887"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\controls_watering_controllers.wav",
+    "sha256": "87F9470D500FFF233522F2529141618A35F675352197455565A571E0BCC97831"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\controls_watering_controllers.wav.meta",
+    "sha256": "6F906F25B019B8BF23B288EEDFDE4191CB1C47176450E398739BD711A23C461B"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\controls_watering_hands.wav",
+    "sha256": "851B2FB5824A3A9FA41D0EDD6F1CEB5218ED4530079991D51D013FE8FC0C3749"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\controls_watering_hands.wav.meta",
+    "sha256": "0FA5ABB1E6F3F7889F342266B90BB5986AB5AA3F1A924367850F0B2C963EA820"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\help_missed_pot.wav",
+    "sha256": "F1AFB50DE8F1187AA12A7A70DB6F1D4A6DCF17AD6360274D65CAC835308232AC"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\help_missed_pot.wav.meta",
+    "sha256": "07540C7962478A111A5AD7ED666C2F6B847A5C516E6ECE9B73B9F54F3CA01385"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\help_reserve_empty.wav",
+    "sha256": "970F9300FE4266133989872146962E06C1D8D8FBF7E5A335DA27FE10EE5B0982"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\help_reserve_empty.wav.meta",
+    "sha256": "6DE4C7EF7D8FC763D60A984BDF2707CF01FE0FF35116D141916A3F264D39ACC8"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\help_reserve_low.wav",
+    "sha256": "ABD02B0837598848792579F9E53E16B81DCE61D4FBE50112BFE3336A5B73887F"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\help_reserve_low.wav.meta",
+    "sha256": "65FADD04755E9EA46B0A9C726354E49B5802C04D90868A7C32ADB4FE0DA4C36A"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\help_stop_watering.wav",
+    "sha256": "71F9283B6398EBEF14D67A66A4B79FD81758DB5491759F7A9B7A9416E4659B35"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\help_stop_watering.wav.meta",
+    "sha256": "70254212FC3E9C838A3DFD8820EDBCEF81E29F670BE1D25685ED1CCD9D4A607A"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\water_no_waste_complete.wav",
+    "sha256": "AA6992137B182D4B9A5C7DF3AE7A47213A6909A9F436EC4A6B73D09CC92E2499"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\water_no_waste_complete.wav.meta",
+    "sha256": "AE3128DC966E745FDDEC92D36A4DEBAECABA84645AF9858200A1C0D11D7054DE"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\water_practice_intro.wav",
+    "sha256": "7338525E7CC51D07E0873CC18A000467E529A58A5832934FE8ABFF2C69556407"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\water_practice_intro.wav.meta",
+    "sha256": "0B8526D99A2537AD26CA5CF35F2C20C8D57B17A81D93A88F02B58E9144954033"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\water_ready_next_phase.wav",
+    "sha256": "14A2BCB65E924D354767BD6FD55965A6BBB4A1F1C2518474EA097D2AE155E953"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\water_ready_next_phase.wav.meta",
+    "sha256": "56776646DE289E9670292F8893ED6D60A0845FB432FB6C693906033EDDA9557C"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\water_reserve_explanation.wav",
+    "sha256": "4795606E62F2BF5F4302C7C0408E0CFBD22896B76770B42717AA290114E87DB5"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\water_reserve_explanation.wav.meta",
+    "sha256": "5425F226DDB8941E8B4E1F76BC8253BB9848F3ECE1C7FEDD8949606FBBF962EE"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\water_reserve_intro.wav",
+    "sha256": "46FBB460399CF30B322669225A0FE2347BF96DFDBCDB5215760242F99E36DF38"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\water_reserve_intro.wav.meta",
+    "sha256": "E87EB68E4F5ABD56051715D240F65218FC7F23B037317436EF8EC50B5A66C1E6"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\water_reserve_rules.wav",
+    "sha256": "4427ED2B39E12BEC76BAC16AC1985DFFA95DE57C257A0AD6B1CC8B603EE59FF7"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\water_reserve_rules.wav.meta",
+    "sha256": "9E2457493E3EAED46CD9ACE7E94CBDB330E185066BB41BBCBE50E512F2E6DDBB"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\water_retry.wav",
+    "sha256": "DC7F78B679CCFE4DEDB3C802848F0AB31EA4DE183D2DAF92FF322483ADBE11FB"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\water_retry.wav.meta",
+    "sha256": "140F88EE6C16BF8E46535E081FDD981B0109D327CB90DC80ED1BFE747E72C307"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\water_stopped_success.wav",
+    "sha256": "C843095A7503D09D0F69EB986D0EABE16BBA80AB3D22ABB52D5441146A0FA73B"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\water_stopped_success.wav.meta",
+    "sha256": "04C86769F50DD421ED039D55245D34554AABA4329A26CB4A1644DF2086E053C4"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\water_supply_exhausted.wav",
+    "sha256": "A4AEFC343AB432960C323CBA8E0FD82082C5CC793CEA8B0D907C3323E0982096"
+  },
+  {
+    "path": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\water_saving\\water_supply_exhausted.wav.meta",
+    "sha256": "32AC940F820B70A63AD726FB4B4C0A006CFEC34230464FECBCDE94DDB15EF304"
+  }
+]

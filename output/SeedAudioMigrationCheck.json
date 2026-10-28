@@ -1,0 +1,26 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var c = UnityEngine.Resources.Load<GronnyAudioCatalogue>(\"GronnyAudio/Tutorial\"); var before = UnityEngine.JsonUtility.ToJson(c); GronnyWaterSavingAudioSetup.Connect(); var after = UnityEngine.JsonUtility.ToJson(c); if (before != after) throw new System.InvalidOperationException(\"Reconnecting changed authored data.\"); return new { revision = c.waterSavingAudioVersion, result = \"PASS: reconnect preserves timings\" };"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "revision": 2,
+        "result": "PASS: reconnect preserves timings"
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

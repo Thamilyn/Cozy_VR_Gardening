@@ -1,0 +1,25 @@
+Unity 6000.3.23f1
+UTC 2026-10-27T03:54:19.4066262Z
+Real AudioSource with synthetic relevance changes and sample seeks. Physical headset audio not tested.
+PASS: A control instruction starts normally
+PASS: Completing an action preserves the playing sentence instead of cutting it
+PASS: Completed action hides its obsolete hand demonstration immediately
+PASS: Next instruction waits for the previous sentence and never restarts it
+PASS: Ordinary higher-priority feedback does not cut the welcome
+PASS: Obsolete pending instructions are discarded before playback
+PASS: Changing phase finishes the spoken sentence while clearing old queued instructions
+PASS: The new phase starts after the sentence finishes
+PASS: Changing input mode does not sever the current phrase
+PASS: Input change hides the previous mode's visual immediately
+PASS: The new input instructions follow the completed phrase
+PASS: An urgent excess-water warning can interrupt
+PASS: A still-relevant interrupted instruction resumes from its saved audio position
+PASS: Resuming an urgent interruption does not log another instruction start
+PASS: Explicit Stop still stops playback immediately
+PASS: The real tutorial begins its welcome after Play
+PASS: Integration fixture plants through the real tutorial permissions
+PASS: The real planting phase change preserves the welcome sentence
+PASS: Reaching the actual water target queues feedback without cutting the welcome
+PASS: Real watering feedback follows the finished sentence
+PASS: Starting the real day transition does not repeatedly clear the current audio
+RESULT: PASS

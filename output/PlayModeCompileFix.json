@@ -1,0 +1,6 @@
+{
+  "File": "Assets/Editor/GardenCalendarVerification.cs",
+  "Cause": "CS0128 duplicate slots variable and CS0021 indexing SerializedProperty",
+  "Change": "Renamed the expected stage index array to expectedStageSlots",
+  "Verification": "Source reviewed; Unity recompilation and Play confirmation pending"
+}

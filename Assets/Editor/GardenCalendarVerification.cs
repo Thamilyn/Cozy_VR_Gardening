@@ -223,11 +223,13 @@ public static class GardenCalendarVerification
                 AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/SeedsPrefab/TomatoSeed.prefab"), preview);
             SeedItem seed = seedObject.GetComponent<SeedItem>();
             seed.PlantIn(pot);
+            // Planting keeps the bare soil. The first visible sprout follows watering and advance.
+            int[] expectedStageSlots = { 0, 1, 2, 4, 5, 6 };
             foreach (GrowthStage phase in phases)
             {
                 seed.ShowStage(phase);
                 GameObject visual = seed.StageVisual;
-                int slot = Array.IndexOf(phases, phase) + 1;
+                int slot = expectedStageSlots[Array.IndexOf(phases, phase)];
                 Assert(visual != null && visual.name == names[slot], "Requested model for " + phase);
                 Assert(visual.transform.parent == root.transform, "Whole pot belongs to the pot, not the seed Rigidbody");
                 AssertSinglePot(root, visual, names);

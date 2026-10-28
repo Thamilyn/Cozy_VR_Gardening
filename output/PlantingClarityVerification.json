@@ -1,0 +1,21 @@
+{
+  "recognition_model": "openai/whisper-base.en",
+  "note": "La transcripción automática puede equivocarse; las diferencias requieren revisión.",
+  "files": [
+    {
+      "filename": "03_plant_seed.wav",
+      "expected": "Move the seed with the Tomato label over the soil in the centre of an empty small pot. Release the seed into the pot to plant it.",
+      "transcript": "Move the seed with the tomato label over the soil in the center of an empty small pot. Release the seed into the pot to plant it.",
+      "words_match": true,
+      "differences": [],
+      "duration_seconds": 7.76,
+      "sample_rate": 24000,
+      "peak": 0.708984375,
+      "clipped_sample_fraction": 0.0,
+      "leading_silence_seconds": 0.065,
+      "trailing_silence_seconds": 0.216,
+      "duplicate_of": null,
+      "sha256": "26b26c62cc2874aa184eb0e6c32b45538d9e21405c0716574d0073b836db9555"
+    }
+  ]
+}

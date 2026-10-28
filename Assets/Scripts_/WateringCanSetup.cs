@@ -3,13 +3,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Finds the current placeholder watering can model and installs its runtime behaviour.
+/// Finds the garden watering can and installs its runtime behaviour.
 /// This keeps imported model assets untouched and works if the object is loaded a few frames late.
 /// </summary>
 public sealed class WateringCanSetup : MonoBehaviour
 {
     private const string TargetSceneName = "Garden_Moves";
-    private const string WateringCanName = "bottle-oil";
+    private const string WateringCanName = "Watering";
     private const float SearchDuration = 10f;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]

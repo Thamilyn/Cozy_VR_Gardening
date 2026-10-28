@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "UnityEditor.AssetDatabase.Refresh(); foreach (var id in new[] { \"01_welcome\", \"02_tomato_intro\", \"help_refill\" }) UnityEditor.AssetDatabase.ImportAsset(\"Assets/Audio/dialogues_cozy_gardening/\" + id + \".wav\", UnityEditor.ImportAssetOptions.ForceUpdate); GronnyWaterSavingAudioSetup.Connect(); var validation = GronnyAudioVerification.VerifyCatalogue(); UnityEditor.SceneManagement.EditorSceneManager.OpenScene(GardenPracticeSetup.PracticePath); return validation;"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "PASS: catalogue and installed Meta references"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

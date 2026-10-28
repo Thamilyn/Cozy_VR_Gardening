@@ -1,0 +1,39 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "GardenPracticeSetup.Create(); GardenCalendarVerification.VerifyPotStages(); return new { practiceScene = GardenPracticeSetup.PracticePath, scenes = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select(UnityEditor.EditorBuildSettings.scenes, s => new { s.path, s.enabled })) };"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "practiceScene": "Assets/Scenes/Garden_Practice.unity",
+        "scenes": [
+          {
+            "path": "Assets/Scenes/Garden_Practice.unity",
+            "enabled": true
+          },
+          {
+            "path": "Assets/Scenes/Garden_Moves.unity",
+            "enabled": true
+          },
+          {
+            "path": "Assets/Scenes/SampleScene.unity",
+            "enabled": false
+          }
+        ]
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

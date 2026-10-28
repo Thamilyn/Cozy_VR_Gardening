@@ -1,0 +1,20 @@
+Unity 6000.3.23f1
+UTC 2026-10-27T01:59:08.1362090Z
+Synthetic learning and release samples; actual scenes, planting, water, calendar and voice playback. Physical XR input not tested.
+PASS: Practice has its own free water supply
+PASS: Practice waits for Play without starting the lesson
+PASS: Practice uses the separate practice welcome
+PASS: Practice requires movement before planting
+PASS: Practice uses real seed planting after synthetic learning samples
+PASS: Planting shows the seed model, not the empty pot
+PASS: Practice teaches refill before advancing time
+PASS: Practice refill is real and does not consume a reserve
+PASS: Successful refill unlocks the practice calendar advance
+PASS: Practice uses the real day and night transition
+PASS: The sprout model appears in the same committed day change
+PASS: Sprout voice starts promptly without queued reserve announcements
+PASS: Practice stops growing after the first sprout
+PASS: Completed practice offers an explicit Enter garden button
+PASS: Practice completion text fits the panel
+RESULT: FAIL
+System.InvalidOperationException: Headless fixture needs an explicit release sample for the scene transition.

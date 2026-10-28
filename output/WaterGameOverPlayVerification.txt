@@ -1,0 +1,89 @@
+Unity 6000.3.23f1
+UTC 2026-10-27T01:06:57.6289686Z
+Synthetic Play checks: camera pose, release decisions and pointer events; physical XR input not tested.
+PASS: Initial menu suspends the garden before Play
+PASS: Cultivation voice waits for Play
+PASS: Only the shorter welcome plays at launch
+PASS: Opening menu does not create crop progress
+PASS: Launch menu remains visible and a non-solid ray target
+PASS: Launch menu appears in front of the player's entry point
+PASS: Pause menu button is hidden until Play
+PASS: Launch panel occupies clear space in Garden_Moves
+PASS: Runtime Meta canvas and ray dependencies are bound
+PASS: Menu target consumes a ray before calendar pinches
+PASS: Launch menu stays fixed at entry when the player moves or turns
+PASS: Text fits its rectangles on page Cozy Garden
+PASS: Text fits its rectangles on page Controls
+PASS: Text fits its rectangles on page Sound settings
+PASS: Sound defaults preserve independent image and handedness preferences
+PASS: Preferences survive an in-process reload and never modify crop history
+PASS: Changing menu pages preserves the station position and orientation
+PASS: Play waits for selection release before starting garden actions
+PASS: First Play relocates the menu from entry to Gronny
+PASS: Pause panel sits 8 cm above the guide without covering its instructions
+PASS: Pause menu button sits 8 cm above the guide
+PASS: Pause panel occupies clear space beside Gronny
+PASS: Holding an input cannot resume the garden
+PASS: Brief release cannot resume the garden
+PASS: Stable release resumes through the same production decision
+PASS: Closed menu leaves its Menu button fixed above the guide
+PASS: Menu button stays fixed after moving and looking away
+PASS: Play immediately explains the reserve instead of replaying welcome and tomato introductions
+PASS: Opening pause from another player position keeps the station beside Gronny
+PASS: Pause menu offers Return to garden instead of starting a new game
+PASS: Text fits its rectangles on page Controls
+PASS: Text fits its rectangles on page Movement
+PASS: Menu plays the recorded hands demonstration while the tutorial voice stays paused
+PASS: Review shows its independent hand model
+PASS: Text fits its rectangles on page Movement
+PASS: Right-hand preview uses its own voice and clearly identifies the current live controls
+PASS: Stop clears both preview voice and model
+PASS: Replay works without recording tutorial learning
+PASS: B-button preview pairs the right controller model and recording
+PASS: Text fits its rectangles on page Sound settings
+PASS: Voice sample plays during pause without resuming the tutorial
+PASS: Voice sample can be stopped
+PASS: Pause controls and sound settings keep the menu beside Gronny
+PASS: Opening menu pauses the existing voice without losing its position
+PASS: Menu navigation records neither learning nor original tutorial assistance
+PASS: Returning from pause does not move the menu back to entry
+PASS: Returning resumes the same voice rather than replaying the welcome
+PASS: Synthetic held can pours before menu suspension
+PASS: Menu preserves an existing grab and stops water consumption
+PASS: Calendar refill is blocked while menu is open
+PASS: Returning with a tilted can cannot resume pouring
+PASS: Upright then tilted rearms intentional pouring
+PASS: Practice automatically refills a held empty can without consuming a limited budget
+PASS: Cultivation fixture plants a tomato after leaving the menu
+PASS: Real phase cycle begins before the suspension fixture
+PASS: Opening menu freezes phase lighting and prevents committing the day
+PASS: Menu blocks additional crop watering and phase requests
+PASS: Returning completes the interrupted phase exactly once
+PASS: First completed care phase switches from free practice to a finite reserve
+PASS: Finite supply covers remaining targets with a bounded mistake margin
+PASS: Refilling a full can cannot debit or create water
+PASS: A newly spawned can starts empty in the limited lesson instead of creating free water
+PASS: Direct can refill transfers water from the shared reserve without changing the available total
+PASS: A real held tilted-can soil cast records useful water and waters the planted tomato
+PASS: Measured discharge equals the actual decrease in can water
+PASS: Pouring away from pots records missed water without crediting the plant
+PASS: Pour crossing the target splits useful water from surplus in the same stream (poured=5.041348, useful=0.9999776, surplus=3.97112, retained=65.68541, target=61.71429)
+PASS: Water balance closes and wasted water cannot earn the no-waste narration
+PASS: Calendar refill also preserves the shared finite budget: sample 1
+PASS: Reserve reaching zero produces an explicit warning while water in cans remains usable
+PASS: Calendar refill also preserves the shared finite budget: sample 2
+PASS: Exhaustion pauses watering and growth but leaves the recovery UI accessible
+PASS: Empty-reserve direct refill and advance cannot bypass exhaustion
+PASS: Total exhaustion automatically opens a visible interactive game-over panel without needing the tutorial
+PASS: Game-over panel clearly names the outcome and offers Try again
+PASS: Text fits its rectangles on page Game over
+PASS: Game-over announcement plays through menu audio while cultivation is paused
+PASS: Guide board agrees with the game-over panel rather than offering a missing Return button
+PASS: Meta rays can select the game-over panel in front of the player
+PASS: Try again restores a fresh budget while keeping the existing crop and phase
+PASS: Retry closes game over and its narration, then resumes only after input release
+PASS: Retry preserves measured waste and cannot grant repeated budgets while water remains
+PASS: Retry budget covers all remaining targets, including a partially watered current phase
+PASS: After harvest, refills and outflow cannot change the completed balance
+PASS: Meeting the last target with no water left does not trigger an unfair retry
+RESULT: PASS

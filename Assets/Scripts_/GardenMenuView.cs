@@ -109,6 +109,7 @@ public sealed class GardenMenuView
         rect.sizeDelta = dimensions;
         Image image = go.GetComponent<Image>();
         image.color = color;
+        GardenRoundedPanel.Apply(image);
         return image;
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Oculus.Interaction;
 using UnityEngine;
 
 /// <summary>Moves tutorial visuals into free space instead of drawing them through the garden.</summary>
@@ -36,12 +37,15 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
     private bool hasViewHeight;
     private bool keepStatic;
     private bool checkFullSightline;
+    private bool ignorePlayerAndGrabbables;
+    private int ignoredLayers;
     private bool positionLocked;
     private Vector3 lockedPosition;
     private Quaternion lockedRotation;
 
     public void Configure(Transform presentation, Transform view, Collider targetCollider = null,
-        bool keepStatic = false, bool checkFullSightline = false, Transform visualObstacleRoot = null)
+        bool keepStatic = false, bool checkFullSightline = false, Transform visualObstacleRoot = null,
+        bool ignorePlayerAndGrabbables = false)
     {
         // Restore the saved visual state before replacing the cached components/states.
         SetSuppressed(false);
@@ -52,6 +56,9 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
         if (interactionCollider != null) interactionCollider.isTrigger = true;
         this.keepStatic = keepStatic;
         this.checkFullSightline = checkFullSightline;
+        this.ignorePlayerAndGrabbables = ignorePlayerAndGrabbables;
+        ignoredLayers = ignorePlayerAndGrabbables
+            ? LayerMask.GetMask("GardenPlayer", "GardenHeldObject") : 0;
         this.visualObstacleRoot = visualObstacleRoot;
         visualObstacles.Clear();
         // The calendar Canvas is on this root, while its hideable content is a child.
@@ -245,8 +252,9 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
     private bool IsFree(Bounds candidate, out float lift)
     {
         lift = 0f;
+        int queryLayers = obstacleLayers.value & ~ignoredLayers;
         int count = Physics.OverlapBoxNonAlloc(candidate.center, candidate.extents, overlaps,
-            Quaternion.identity, obstacleLayers, QueryTriggerInteraction.Ignore);
+            Quaternion.identity, queryLayers, QueryTriggerInteraction.Ignore);
         // A full buffer cannot prove that the candidate is free.
         if (count == overlaps.Length) { lift = maximumLift + 1f; return false; }
         bool blocked = false;
@@ -261,7 +269,7 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
         {
             if (visual == null || !visual.enabled || !visual.gameObject.activeInHierarchy ||
                 (visual is not MeshRenderer && visual is not SkinnedMeshRenderer) ||
-                (obstacleLayers.value & (1 << visual.gameObject.layer)) == 0 ||
+                (queryLayers & (1 << visual.gameObject.layer)) == 0 ||
                 Ignore(visual.transform)) continue;
             Bounds obstacle = visual.bounds;
             if (!IntersectsVisualObstacle(candidate, obstacle)) continue;
@@ -278,7 +286,8 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
         }
         if (viewer != null)
         {
-            if (Vector3.Distance(candidate.ClosestPoint(viewer.position), viewer.position) < 0.4f)
+            if (!ignorePlayerAndGrabbables &&
+                Vector3.Distance(candidate.ClosestPoint(viewer.position), viewer.position) < 0.4f)
                 blocked = true;
             // Do not relocate the presentation to an empty space behind a wall or the table.
             Vector3 sight = candidate.center - viewer.position;
@@ -286,9 +295,9 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
             // the tabletop and props in front of the bottom edge or either side of the UI.
             int hits = checkFullSightline
                 ? Physics.BoxCastNonAlloc(candidate.center, candidate.extents, -sight.normalized,
-                    sightHits, Quaternion.identity, sight.magnitude, obstacleLayers, QueryTriggerInteraction.Ignore)
+                    sightHits, Quaternion.identity, sight.magnitude, queryLayers, QueryTriggerInteraction.Ignore)
                 : Physics.RaycastNonAlloc(viewer.position, sight.normalized, sightHits,
-                    sight.magnitude, obstacleLayers, QueryTriggerInteraction.Ignore);
+                    sight.magnitude, queryLayers, QueryTriggerInteraction.Ignore);
             if (hits == sightHits.Length) { lift = maximumLift + 1f; return false; }
             for (int i = 0; i < hits; i++)
             {
@@ -317,7 +326,19 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
     private bool Ignore(Transform obstacle) => obstacle.IsChildOf(transform) ||
         // Other presentations use their current visual bounds, independent of physics sync timing.
         obstacle.GetComponentInParent<GardenPresentationPlacement>() != null ||
-        (playerRig != null && obstacle.IsChildOf(playerRig));
+        (playerRig != null && obstacle.IsChildOf(playerRig)) ||
+        (ignorePlayerAndGrabbables && IgnorePlayerOrProp(obstacle));
+
+    private bool IgnorePlayerOrProp(Transform obstacle) =>
+        (ignoredLayers & (1 << obstacle.gameObject.layer)) != 0 ||
+        (viewer != null && obstacle.IsChildOf(viewer)) ||
+        obstacle.GetComponentInParent<OVRCameraRig>() != null ||
+        // Check the owning prop for both child colliders and colliderless table visuals.
+        // Explicit garden components also cover the frame before Meta grab setup runs.
+        obstacle.GetComponentInParent<WateringCan>() != null ||
+        obstacle.GetComponentInParent<SeedItem>() != null ||
+        obstacle.GetComponentInParent<TomatoFruit>() != null ||
+        obstacle.GetComponentInParent<Grabbable>() != null;
 
     private void SetSuppressed(bool value)
     {

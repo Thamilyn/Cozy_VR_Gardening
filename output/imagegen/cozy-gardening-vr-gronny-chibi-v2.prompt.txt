@@ -1,0 +1,15 @@
+Tool: built-in image_gen. transparent_background=true.
+Edit target: output/imagegen/cozy-gardening-vr-gronny-chibi-v1.png
+Reference: user-provided gameplay screenshot, Captura de pantalla 2026-10-04 211326.png.
+Correction: Gronny has asymmetric rabbit ears, not leaves.
+
+Use case: precise-object-edit / logo-brand.
+Image 1: edit target, previous chibi Cozy Gardening VR logo.
+Image 2: authoritative reference screenshot of actual Gronny in the game, especially the asymmetrical RABBIT EARS and outfit. Do not recreate the screenshot scene.
+
+Edit the logo with TWO deliberate changes:
+1. Correct Gronny's ears. The previous leaf interpretation is WRONG. Replace both leaf shapes on the head with soft long oval RABBIT EARS, matching Image 2. From the VIEWER'S perspective, the LEFT ear is significantly taller, slim, nearly upright with a rounded tip; the RIGHT ear is shorter and gently bent/curved outward with a soft rounded tip. Make asymmetry unmistakable. Dark olive green outside, lighter muted olive interior. No leaf veins, no pointed botanical tips, no symmetric V shaped leaves. Keep both ears fully visible with clear space above.
+2. Completely redesign the lettering. The user dislikes the existing swollen italic storybook lettering. Replace ALL the lettering with clean upright rounded sans-serif display typography, carefully spaced, smooth simple strokes, contemporary cozy indie game branding. Flat warm ivory fill with a clean dark forest green outline; no bevel, no extrusion, no yellow gradient, no italic, no script, no swashes, no serifs, no balloon-like bulges. Set exact wording "Cozy Gardening VR": "Cozy" as a compact top line, "Gardening" as the wide second line, "VR" small centered below with slightly spaced letters. Beautiful professional readable wordmark, dominant in lower half. The change in typeface must be immediately obvious.
+
+Preserve the cute CHIBI mascot: oversized round head, tiny body, short sage green bob with bangs, huge amber golden eyes, round blushing cheeks, little happy mouth, hands by cheeks. Preserve the recognizable green/cream palette, red tomato and restrained garden foliage. Reflect the reference outfit in simplified chibi form: olive and cream vest with a small dark neck bow. Keep mascot drawing clean and cute, with minimal cel shading and cohesive outlines. Do not add full garden scenery.
+One finished cohesive logo on a truly transparent background, cream outer keyline, all elements fully inside frame with generous clear margins. No extra words or watermark.

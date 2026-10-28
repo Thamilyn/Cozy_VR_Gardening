@@ -83,10 +83,12 @@ public static class GronnyAudioSetup
         material.SetColor("_BaseColor", new Color(0.4f, 0.85f, 0.9f, 1f));
         AssetDatabase.CreateAsset(material, "Assets/Resources/GronnyAudio/Demonstration.mat");
         catalogue.demonstrationMaterial = material;
+        GronnyWaterSavingAudioSetup.Apply(catalogue);
+        GronnyMenuAudioSetup.AddCues(catalogue);
         AssetDatabase.CreateAsset(catalogue, CataloguePath);
         AssetDatabase.SaveAssets();
         WriteInventory(catalogue);
-        Debug.Log("Gronny: connected all " + cues.Count + " audio files.");
+        Debug.Log("Gronny: connected all " + catalogue.cues.Length + " audio files.");
     }
 
     private static GronnyAudioCatalogue.Cue MakeCue(string id, string folder, GardenInputMode mode)
@@ -123,9 +125,9 @@ public static class GronnyAudioSetup
     {
         foreach (var cue in catalogue.cues.Where(cue => cue.mode == GardenInputMode.Controllers))
         {
-            AnimationClip clip = cue.demo switch {
+            AnimationClip clip = cue.controllerAnimation != null ? cue.controllerAnimation : cue.demo switch {
                 GardenControlDemo.Move => catalogue.controllerStick,
-                GardenControlDemo.Grab => catalogue.controllerGrip,
+                GardenControlDemo.Grab or GardenControlDemo.WateringGrab => catalogue.controllerGrip,
                 GardenControlDemo.Calendar => catalogue.controllerY,
                 _ => catalogue.controllerTrigger };
             cue.controllerTarget = AnimationUtility.GetCurveBindings(clip).First().path;
@@ -186,7 +188,7 @@ public static class GronnyAudioSetup
         };
     }
 
-    private static void WriteInventory(GronnyAudioCatalogue catalogue)
+    internal static void WriteInventory(GronnyAudioCatalogue catalogue)
     {
         Directory.CreateDirectory("Docs");
         var report = new StringBuilder("# Inventario de audio de Gronny\n\n");

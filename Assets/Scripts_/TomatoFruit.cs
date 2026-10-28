@@ -17,6 +17,7 @@ public sealed class TomatoFruit : MonoBehaviour
     private float nextBasketSearch;
     private MeshRenderer outline;
     private bool requireNewGrab;
+    private GardenObjectLabel harvestLabel;
 
     public void Initialize(SeedItem seed)
     {
@@ -65,6 +66,7 @@ public sealed class TomatoFruit : MonoBehaviour
         body.isKinematic = true;
         grabbable.ForceKinematicDisabled = true;
         CreateOutline(mesh, renderer);
+        harvestLabel = GardenObjectLabel.Create(gameObject, "Ready to harvest", Vector3.up * 0.12f);
     }
 
     private void CreateOutline(MeshFilter mesh, MeshRenderer renderer)
@@ -100,6 +102,7 @@ public sealed class TomatoFruit : MonoBehaviour
         GetComponent<GrabFreeTransformer>()?.Initialize(grabbable);
         body.useGravity = true;
         if (outline != null) outline.enabled = false;
+        if (harvestLabel != null) harvestLabel.enabled = false;
     }
 
     private void Update()
@@ -125,6 +128,7 @@ public sealed class TomatoFruit : MonoBehaviour
     public void StoreIn(Transform tray)
     {
         stored = true;
+        if (harvestLabel != null) harvestLabel.enabled = false;
         if (outline != null) outline.enabled = false;
         grabbable.enabled = false;
         foreach (GrabInteractable grab in GetComponentsInChildren<GrabInteractable>()) grab.enabled = false;

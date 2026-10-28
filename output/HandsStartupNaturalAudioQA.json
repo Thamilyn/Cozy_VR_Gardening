@@ -1,0 +1,20 @@
+{
+  "recognition_model": "openai/whisper-base.en",
+  "expected": "Hi! I'm Gronny. If you're using hand tracking, hold both hands comfortably in front of you where you can see them. Today I'll help you grow your own tomato. We'll learn about sustainable gardening by giving our plants just the water they need. We'll practise together first, then use a limited water supply to finish growing our tomato.",
+  "transcript": "Hi, I'm Granny. If you're using hand tracking, hold both hands comfortably in front of you where you can see them. Today I'll help you grow your own tomato. We'll learn about sustainable gardening by giving our plants just the water they need. We'll practice together first, then use a limited water supply to finish growing our tomato.",
+  "differences": [
+    {
+      "operation": "replace",
+      "expected": "gronny",
+      "transcript": "granny"
+    }
+  ],
+  "words_match": false,
+  "name_only_difference": true,
+  "note": "Automatic transcription; any proper-name difference still needs human listening.",
+  "duration_seconds": 20.48,
+  "sample_rate": 24000,
+  "peak": 0.980010986328125,
+  "clipped_sample_fraction": 0.0,
+  "sha256": "0D92333F758E598484FE83141F6486DA794A7E60021D34BC88329F3EA568D352"
+}

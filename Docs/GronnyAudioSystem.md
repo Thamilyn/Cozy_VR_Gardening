@@ -1,5 +1,48 @@
 # Audio y demostraciones de Gronny
 
+Saludo vigente: presentación, indicación de poner ambas manos frente al usuario
+si utiliza hand tracking, jardinería sustentable y reserva limitada en una sola
+grabación; después se practica el movimiento y se felicita al completarlo.
+La invitación a acercarse a la mesa se oye únicamente después de esa práctica.
+El catálogo contiene ahora 58 audios. Véase `SaludoYMovimiento.md`; las cifras y
+la secuencia de bienvenida de las entregas anteriores son históricas.
+
+Continuidad al actuar: las frases empezadas terminan aunque se complete la
+acción; se descartan las ayudas pendientes obsoletas. Las interrupciones urgentes
+conservan el punto de reproducción. Véase `ContinuidadVoz.md` para comportamiento
+y validación en Play.
+
+La actividad vuelve a una sola escena, `Garden_Moves`, con tutorial y cultivo.
+La práctica separada fue retirada. Las voces conservan su tono y velocidad
+originales; las pausas añadidas afectan únicamente a las demostraciones visuales.
+
+Flujo vigente: tutorial progresivo en una sola escena, `Garden_Moves`. Se revirtió
+la separación en una escena de práctica. Se conservan el saludo con presentación
+de Gronny después de Play y los audios accesibles de semilla. Las indicaciones de
+manos conservan su voz original e intervalos visuales de al menos 2,5 segundos.
+Véase `ReversionTutorial.md` para el alcance y las comprobaciones pendientes.
+
+Lección actual de ahorro de agua: véase `AhorroAgua.md`. Se usan las 44 grabaciones
+de la lección (27 sustituidas y 17 añadidas), con las revisiones posteriores de
+semilla y bienvenida. Gronny saluda e invita a acercarse a la mesa después de
+Play; luego explica la reserva de agua. El menú inicial no reproduce el saludo.
+El catálogo contiene 57 cues, incluida la biblioteca de menú, con explicación
+inicial de la reserva y panel de Game over. La nota siguiente documenta la
+entrega de menú anterior a esta actualización de la lección.
+
+Corrección posterior de accesibilidad: tres grabaciones de agarre y plantación
+se regeneraron para decir «the seed with the Tomato label» en lugar de depender
+del color rojo. Se conservaron sus referencias y la voz Kiki; véanse el guion
+`GronnySeedAccessibleDialogues.json` y la validación en `AhorroAgua.md`.
+
+Actualización del 27 de octubre de 2026: el catálogo contiene los 27 audios
+originales más los 13 de menú y accesibilidad. La biblioteca de controles y la
+muestra de voz están conectadas; el tutorial resuelve las variantes izquierdas
+y las instrucciones accesibles. Véase `IntegracionAudiosMenu.md` para el uso,
+la separación de voz durante la pausa, las previsualizaciones derechas y la
+validación actual (57 comprobaciones de Play). Las secciones históricas de
+validación de 27 cues no describen esta última ampliación.
+
 ## Integración
 
 `TomatoPrototypeGuide` inicia `GronnyTutorial` en `Garden_Moves`. El catálogo se carga desde `Assets/Resources/GronnyAudio/Tutorial.asset`. Ya contiene referencias a los archivos originales: no se han movido audios, sustituido paquetes ni editado escenas o prefabs. `GronnyAudioSetup` crea el catálogo una sola vez y conserva las ediciones posteriores del Inspector.

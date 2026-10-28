@@ -2,7 +2,8 @@
 
 Estado: los 13 WAV de este lote están generados en
 `Assets/Audio/menu_accessibility/`, con KittenTTS 2, revisión `v2`, voz Kiki,
-preset `expressive` y temperatura `1.1`. No se han cambiado referencias del juego.
+preset `expressive` y temperatura `1.1`. Ya tienen referencias en el catálogo y
+reproducción en el menú/tutorial. Uso y límites en `IntegracionAudiosMenu.md`.
 Complementa las grabaciones originales.
 
 ## Lote de grabación
@@ -181,5 +182,7 @@ El informe conserva las transcripciones y la diferencia original en
 El usuario aprobó las dos pruebas de voz anteriores guardadas en
 `output/VocesMenuPrueba/`. El lote completo se generó con la misma configuración.
 La comprobación automática no sustituye la escucha del lote final, el ajuste de
-las demostraciones ni su validación en Unity y Meta Quest 3. La integración del
-menú, las entradas configurables y los marcadores accesibles sigue pendiente.
+las demostraciones ni su validación física en Meta Quest 3. El menú, la biblioteca
+de voz/demos y los marcadores accesibles están integrados; consulta
+`IntegracionAudiosMenu.md`. Las entradas de lateralidad configurables siguen
+pendientes; las variantes derechas solo se usan como previsualizaciones indicadas.

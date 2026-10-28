@@ -1,0 +1,17 @@
+[
+  {
+    "Report": "output/WelcomeMovementPlay.txt",
+    "Checks": 15,
+    "Result": "RESULT: PASS"
+  },
+  {
+    "Report": "output/WelcomeMovementContinuityPlay.txt",
+    "Checks": 21,
+    "Result": "RESULT: PASS"
+  },
+  {
+    "Report": "output/WelcomeMovementMenuPlay.txt",
+    "Checks": 89,
+    "Result": "RESULT: PASS"
+  }
+]

@@ -918,7 +918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WateringCan
   capacityLitres: 2
-  litresPerSecond: 0.02
+  litresPerSecond: 0.01
   startFull: 1
   pourTiltThreshold: 0.35
   maximumPourDistance: 2
@@ -4957,9 +4957,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8445bd65a5d427644961b9a9aa2110a8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1998937837}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8445bd65a5d427644961b9a9aa2110a8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1998937840}
   m_SourcePrefab: {fileID: 100100000, guid: 8445bd65a5d427644961b9a9aa2110a8, type: 3}
 --- !u!1 &1998937835 stripped
 GameObject:
@@ -5042,40 +5039,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1998937840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1998937835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17bec0f649d44ec78bb80351177d8b73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WateringCan
-  capacityLitres: 2
-  litresPerSecond: 0.02
-  startFull: 1
-  pourTiltThreshold: 0.35
-  maximumPourDistance: 2
-  streamRadius: 0.025
-  streamWidth: 0.015
-  streamColor: {r: 0.053894076, g: 0.43089402, b: 0.6855345, a: 0.85}
-  refillButton: 2
-  requireCanToBeHeldForRefill: 1
-  spout: {fileID: 0}
-  waterStream: {fileID: 0}
-  streamMaterial: {fileID: 0}
-  onWaterLevelChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  onPlantWatered:
-    m_PersistentCalls:
-      m_Calls: []
-  onRefilled:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &2008132293
 GameObject:
   m_ObjectHideFlags: 0
@@ -5753,7 +5716,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 27
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -5835,7 +5798,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 26
+    m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10

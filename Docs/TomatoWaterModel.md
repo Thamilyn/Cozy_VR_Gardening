@@ -26,13 +26,13 @@ Objetivo en ml = (25 mm/semana ÷ 7) × días de cuidado representados × multip
 
 ## Umbrales elegidos
 
-| Fase cuidada → fase siguiente | Multiplicador | Objetivo ml | Exceso si supera ml | Segundos hasta objetivo a 20 ml/s |
+| Fase cuidada → fase siguiente | Multiplicador | Objetivo ml | Exceso si supera ml | Segundos hasta objetivo a 10 ml/s |
 | --- | ---: | ---: | ---: | ---: |
-| Semilla → brote | 1,0 | 51,43 | 77,14 | 2,57 |
-| Brote → joven | 1,2 | 61,71 | 92,57 | 3,09 |
-| Joven → floración | 1,5 | 77,14 | 115,71 | 3,86 |
-| Floración → fruto verde | 1,7 | 87,43 | 131,14 | 4,37 |
-| Fruto verde → maduro | 1,5 | 77,14 | 115,71 | 3,86 |
+| Semilla → brote | 1,0 | 51,43 | 77,14 | 5,14 |
+| Brote → joven | 1,2 | 61,71 | 92,57 | 6,17 |
+| Joven → floración | 1,5 | 77,14 | 115,71 | 7,71 |
+| Floración → fruto verde | 1,7 | 87,43 | 131,14 | 8,74 |
+| Fruto verde → maduro | 1,5 | 77,14 | 115,71 | 7,71 |
 
 Los factores iniciales moderan el volumen para establecimiento, los siguientes elevan la demanda con crecimiento y flores, y el último baja ligeramente desde floración para ilustrar la reducción al aproximarse la maduración. Son una inferencia didáctica de tendencias, no cifras extraídas de las guías. El mismo factor inicial no implica que germinación tolere falta o exceso: toda transición exige cumplir el mínimo y evitar encharcar.
 

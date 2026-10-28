@@ -176,7 +176,8 @@ distancia o altura de los ojos. El flujo acordado tiene dos momentos:
    de pausa junto a Gronny aún está oculto. La posición se toma una sola vez del
    rig inicial, sin seguir la cabeza ni mover al jugador.
 2. Al primer Play, se oculta el panel de lanzamiento y se traslada la estación
-   junto a Gronny. Allí queda el botón Menu, sobre «Guía de cultivo y agua».
+   junto a Gronny. El botón Menu intercambia su posición con el indicador del
+   tanque: Menu queda a la derecha de la guía y el tanque sobre ella.
    Al seleccionarlo se abre «Garden paused», con Return to garden, controles y
    ajustes de sonido. Volver reanuda la misma sesión, conserva la posición junto
    a Gronny y no vuelve a ejecutar el traslado.
@@ -187,17 +188,24 @@ garden. La bienvenida no se reproduce de nuevo al volver de una pausa.
 
 Para la estación de pausa, el controlador toma el centro del borde superior del
 RectTransform de la guía y su orientación. Deja **8 cm** de espacio libre entre
-ese borde y la parte inferior tanto del panel abierto como del botón Menu.
+ese borde y la parte inferior del panel abierto.
 
-El panel abierto se extiende hacia arriba, sin tapar las instrucciones; el botón
-cerrado queda justo encima de la guía. En la escena actual los centros son
-`(1.15, 1.964, -0.834)` y `(1.15, 1.6865, -0.834)`, respectivamente. Girar, caminar,
+El panel abierto se extiende hacia arriba, sin tapar las instrucciones. Desde el
+intercambio del 28 de octubre, el botón cerrado queda donde estaba el tanque,
+a la derecha, y el tanque ocupa la posición anterior del botón sobre la guía.
+Se intercambian las poses una sola vez al primer Play, sin cambiar escalas,
+controles o cantidades de agua. Girar, caminar,
 cambiar de página o reabrir no modifica sus posiciones ni orientación. Los canvases
 conservan la cámara para la selección Meta, sin usarla para su colocación. Se
 eliminó GardenPresentationPlacement de ambos paneles para que tampoco el sistema
 de evitación de obstáculos pueda desplazarlos. La estación permanece fuera de la
 jerarquía del rig y de la guía. Si una escena no tiene guía, conserva la posición
 de lanzamiento respecto al origen inicial como alternativa.
+
+El intercambio se revisó estáticamente y se actualizaron las comprobaciones de
+posición existentes. No se ejecutaron recompilación ni pruebas para este cambio;
+los informes históricos siguientes no validan la distribución nueva. Lectura y
+selección del botón en Unity y Quest 3 pendientes.
 
 - Las validaciones anteriores de cada estación quedan en los archivos
   `output/MenuFixed*` y `output/MenuAboveGuide*`. El comprobador actual verifica
@@ -220,8 +228,12 @@ disponible y registra ErrorFormFactorUnavailable.
 
 ## Entregas pendientes
 
-Biblioteca independiente de voz/demos, muestra de voz, ambiente/efectos, brillo de
-la imagen con vista previa, lateralidad efectiva y solución B/calendario/relleno,
-marcadores Tomato/Ready to harvest, paletas y señales inclusivas. Los 13 WAV nuevos
-siguen intactos y sin referencias nuevas: no se activan voces que prometan entradas
-o identificadores aún no implementados.
+Ambiente/efectos, brillo de la imagen con vista previa, lateralidad efectiva y
+solución B/calendario/relleno, paletas y el resto de señales inclusivas.
+
+Actualización del 27 de octubre: la biblioteca independiente de voz/demos, la
+muestra de voz y los marcadores Tomato/Ready to harvest ya están integrados.
+Los 13 WAV nuevos conservan sus archivos originales y tienen referencias en el
+catálogo. Las variantes derechas están disponibles como previsualizaciones
+indicadas; no prometen una asignación derecha de entradas aún no implementada.
+Detalles y resultados de las 57 comprobaciones de Play en `IntegracionAudiosMenu.md`.

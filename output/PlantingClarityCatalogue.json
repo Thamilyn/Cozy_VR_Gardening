@@ -1,0 +1,29 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "UnityEditor.AssetDatabase.ImportAsset(\"Assets/Audio/dialogues_cozy_gardening/03_plant_seed.wav\", UnityEditor.ImportAssetOptions.ForceUpdate); GronnyWaterSavingAudioSetup.Connect(); var catalogue = UnityEngine.Resources.Load<GronnyAudioCatalogue>(\"GronnyAudio/Tutorial\"); var cue = catalogue.Find(\"03_plant_seed\"); if (cue.transcript != \"Move the seed with the Tomato label over the soil in the centre of an empty small pot. Release the seed into the pot to plant it.\") throw new System.InvalidOperationException(\"Unexpected planting transcript.\"); return new { validation = GronnyAudioVerification.VerifyCatalogue(), transcript = cue.transcript, duration = cue.clip.length, steps = cue.steps.Length, playMode = UnityEditor.EditorApplication.isPlaying };"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "validation": "PASS: catalogue and installed Meta references",
+        "transcript": "Move the seed with the Tomato label over the soil in the centre of an empty small pot. Release the seed into the pot to plant it.",
+        "duration": 7.76,
+        "steps": 0,
+        "playMode": false
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

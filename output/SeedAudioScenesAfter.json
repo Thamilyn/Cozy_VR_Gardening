@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "command": "command list_open_scenes",
+  "data": {
+    "command": "list_open_scenes",
+    "parameters": {},
+    "result": {
+      "count": 1,
+      "scenes": [
+        {
+          "name": "Garden_Moves",
+          "path": "Assets/Scenes/Garden_Moves.unity",
+          "isLoaded": true,
+          "isDirty": false,
+          "isActive": true,
+          "rootCount": 38
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

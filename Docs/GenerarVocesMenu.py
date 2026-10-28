@@ -23,6 +23,7 @@ def main():
         raise SystemExit("Ejecuta Python con -X utf8 antes de la ruta de este archivo.")
 
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--dialogues", type=Path, default=DIALOGUES_FILE, help="Guion JSON dentro del proyecto.")
     parser.add_argument("--limit", type=int, help="Generar solo las primeras N frases.")
     parser.add_argument(
         "--output-dir", type=Path, default=DEFAULT_OUTPUT,
@@ -38,7 +39,10 @@ def main():
     if not SOURCE_SCRIPT.is_file():
         parser.error(f"No se encuentra el generador existente: {SOURCE_SCRIPT}")
 
-    entries = json.loads(DIALOGUES_FILE.read_text(encoding="utf-8"))
+    dialogues_file = args.dialogues.resolve()
+    if not dialogues_file.is_relative_to(PROJECT_ROOT):
+        parser.error("El guion debe estar dentro de Cozy_VR_Gardening.")
+    entries = json.loads(dialogues_file.read_text(encoding="utf-8-sig"))
     ids = [entry["id"] for entry in entries]
     if len(ids) != len(set(ids)):
         parser.error("El JSON contiene identificadores repetidos.")
@@ -71,7 +75,7 @@ def main():
         {"filename": entry["id"] + ".wav", "text": entry["text"]}
         for entry in selected
     ]
-    print(f"Guion: {DIALOGUES_FILE}", flush=True)
+    print(f"Guion: {dialogues_file}", flush=True)
     print(f"Salida: {output_dir}", flush=True)
     # El generador existente conserva Kiki, expressive y temperature=1.1.
     sys.argv = [str(SOURCE_SCRIPT), "--output-dir", str(output_dir)]

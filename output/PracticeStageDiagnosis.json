@@ -1,0 +1,48 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var stages = UnityEngine.Object.FindObjectsByType<TomatoPotStages>(UnityEngine.FindObjectsInactive.Include, UnityEngine.FindObjectsSortMode.None); return System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select(stages, s => new { pot = s.name, slots = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select(System.Linq.Enumerable.Range(0, new UnityEditor.SerializedObject(s).FindProperty(\"stagePrefabs\").arraySize), i => new UnityEditor.SerializedObject(s).FindProperty(\"stagePrefabs\").GetArrayElementAtIndex(i).objectReferenceValue?.name)) }));"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": [
+        {
+          "pot": "PotSmall",
+          "slots": [
+            "Tomate0",
+            "Tomatev1.4",
+            "TomatPhase2",
+            "TomatPhase3",
+            "TomatPhase4",
+            "TomatPhase5",
+            "TomatPhasefinal"
+          ]
+        },
+        {
+          "pot": "PotSmall",
+          "slots": [
+            "Tomate0",
+            "Tomatev1.4",
+            "TomatPhase2",
+            "TomatPhase3",
+            "TomatPhase4",
+            "TomatPhase5",
+            "TomatPhasefinal"
+          ]
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

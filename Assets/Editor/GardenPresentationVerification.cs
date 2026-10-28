@@ -18,6 +18,8 @@ public static class GardenPresentationVerification
             Check("Calendar side clears a prop missed by the centre ray", CalendarPropSightline, report);
             Check("Calendar avoids a seed box visual without colliders", CalendarVisualSightline, report);
             Check("A colliderless visual hides blocked UI and allows recovery", CalendarVisualBlocking, report);
+            Check("Calendar ignores grabbable colliders and visuals while retaining fixed obstacles", CalendarMovableProps, report);
+            Check("Calendar ignores hands and the nearby headset without losing ray selection", CalendarPlayer, report);
             Check("Animated demonstration and caption move together", AnimatedCaption, report);
             Check("A tall wall selects nearer free space", NearerSpace, report);
             Check("Blocked UI hides and recovers its interaction collider", BlockedPanel, report);
@@ -136,6 +138,69 @@ public static class GardenPresentationVerification
         visual.enabled = false;
         Assert(panel.ResolveNow() && canvas.enabled && target.enabled,
             "Disabling the blocking visual must restore both UI and interaction.");
+    }
+
+    private static void CalendarMovableProps(Transform fixture, Transform eye)
+    {
+        GardenPresentationPlacement panel = Panel(fixture, eye, out RectTransform content, out BoxCollider target);
+        Vector3 position = panel.transform.position;
+        GameObject props = new("Movable table props");
+        props.transform.SetParent(fixture, false);
+        foreach (Type type in new[] { typeof(WateringCan), typeof(SeedItem), typeof(TomatoFruit),
+            typeof(Oculus.Interaction.Grabbable) })
+        {
+            GameObject prop = new(type.Name);
+            prop.transform.SetParent(props.transform, false);
+            prop.AddComponent(type);
+            Collider obstacle = Solid(prop.transform, Vector3.zero, Vector3.one * 0.2f);
+            panel.Configure(content, eye, target, checkFullSightline: true,
+                visualObstacleRoot: props.transform, ignorePlayerAndGrabbables: true);
+            foreach (float distance in new[] { 0.65f, 1.3f })
+            {
+                obstacle.transform.position = fixture.position + new Vector3(0f, 1.3f, distance);
+                Physics.SyncTransforms();
+                Assert(panel.ResolveNow() && panel.transform.position == position && target.enabled,
+                    type.Name + " must not move or hide the calendar in its sightline or volume.");
+            }
+            UnityEngine.Object.DestroyImmediate(obstacle);
+            Assert(panel.ResolveNow() && panel.transform.position == position && target.enabled,
+                type.Name + " visuals must stay ignored even without colliders.");
+            UnityEngine.Object.DestroyImmediate(prop);
+        }
+        // A fixed table/seed box must still block placement with this option enabled.
+        Collider fixedObstacle = Solid(props.transform, new Vector3(0f, 1.3f, 1.3f), Vector3.one * 8f);
+        panel.Configure(content, eye, target, checkFullSightline: true,
+            visualObstacleRoot: props.transform, ignorePlayerAndGrabbables: true);
+        Assert(!panel.GetComponent<Canvas>().enabled && !target.enabled,
+            "Fixed obstacles must still suppress a calendar with no free slot.");
+        UnityEngine.Object.DestroyImmediate(fixedObstacle);
+        Assert(!panel.ResolveNow(), "A fixed colliderless visual must still block the calendar.");
+    }
+
+    private static void CalendarPlayer(Transform fixture, Transform eye)
+    {
+        GardenPresentationPlacement panel = Panel(fixture, eye, out RectTransform content, out BoxCollider target);
+        Vector3 position = panel.transform.position;
+        Collider hand = Solid(fixture, new Vector3(0f, 1.3f, 0.65f), Vector3.one * 0.2f);
+        int playerLayer = LayerMask.NameToLayer("GardenPlayer");
+        Assert(playerLayer >= 0, "The player collision layer must exist.");
+        hand.gameObject.layer = playerLayer;
+        panel.Configure(content, eye, target, checkFullSightline: true,
+            visualObstacleRoot: hand.transform, ignorePlayerAndGrabbables: true);
+        foreach (float distance in new[] { 0.65f, 1.3f })
+        {
+            hand.transform.position = fixture.position + new Vector3(0f, 1.3f, distance);
+            Physics.SyncTransforms();
+            Assert(panel.ResolveNow() && panel.transform.position == position && target.enabled,
+                "Tracked hands must not displace or hide the calendar.");
+        }
+        hand.transform.SetParent(eye, true);
+        hand.gameObject.layer = 0;
+        eye.position = position - Vector3.forward * 0.1f;
+        Physics.SyncTransforms();
+        Assert(panel.ResolveNow() && panel.transform.position == position && target.enabled && target.isTrigger &&
+            target.Raycast(new Ray(eye.position, Vector3.forward), out _, 1f),
+            "A nearby headset must not displace the panel, which must remain non-solid and pointable.");
     }
 
     private static void AssertClearSightline(RectTransform content, Transform eye, Collider obstacle)

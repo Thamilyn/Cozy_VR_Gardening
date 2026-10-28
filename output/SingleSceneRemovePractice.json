@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != \"Garden_Moves\") throw new System.InvalidOperationException(\"Keep the main garden open before removing practice.\"); foreach (var path in new[] { \"Assets/Scenes/Garden_Practice.unity\", \"Assets/Resources/GronnyAudio/PracticeWelcome.wav\" }) if (!UnityEditor.AssetDatabase.DeleteAsset(path)) throw new System.InvalidOperationException(\"Could not remove archived asset: \" + path); UnityEditor.AssetDatabase.Refresh(); return \"Removed archived practice assets; main garden remains open.\";"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "Removed archived practice assets; main garden remains open."
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}
