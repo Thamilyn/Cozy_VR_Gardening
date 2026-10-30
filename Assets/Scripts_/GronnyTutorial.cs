@@ -6,7 +6,8 @@ using Oculus.Interaction.HandGrab;
 using Oculus.Interaction.Locomotion;
 using UnityEngine;
 
-public enum GardenTutorialAction { Plant, Pour, OpenCalendar, Advance, Refill, RefillWithController, Recover, Restart, CloseCalendar }
+// Keep the remaining action values stable after removing manual can recovery (6).
+public enum GardenTutorialAction { Plant, Pour, OpenCalendar, Advance, Refill, RefillWithController, Restart = 7, CloseCalendar }
 
 /// <summary>Unlocks the first tomato instructions after the player completes each action.</summary>
 [DisallowMultipleComponent]
@@ -14,18 +15,15 @@ public enum GardenTutorialAction { Plant, Pour, OpenCalendar, Advance, Refill, R
 public sealed class GronnyTutorial : MonoBehaviour
 {
     [SerializeField] private GronnyAudioCatalogue catalogue;
-    [SerializeField, TextArea] private string seedPlantingInstruction = "Pick me and plant me\non the plant pot";
     private SeedsController seeds;
     private CalendarSystem calendar;
     private CalendarVisibilityController visibility;
     private CalendarPanel panel;
     private FirstPersonLocomotor[] locomotors;
     private WateringCan[] cans;
-    private SeedItem[] seedItems;
     private GronnyVoicePlayer voice;
     private GardenControlDemonstration demonstration;
     private readonly HashSet<string> learned = new();
-    private readonly HashSet<int> heldObjects = new();
     private GardenInputMode mode;
     private GardenInputMode candidateMode;
     private float modeChangedAt;
@@ -46,9 +44,6 @@ public sealed class GronnyTutorial : MonoBehaviour
     private bool movementRequested;
     private bool movementPracticeStarted;
     private WateringCan refillCan;
-    private Transform viewer;
-    private TextMesh seedPlantingCaption;
-    private bool grabInstructionFinished;
     private int announcedWaterAttempt;
 
     private GuideStep Step
@@ -72,7 +67,7 @@ public sealed class GronnyTutorial : MonoBehaviour
         if (GardenMenuController.GardenSuspended) return false;
         if (GardenWaterSupply.Active != null && GardenWaterSupply.Active.Exhausted)
             return action == GardenTutorialAction.OpenCalendar || action == GardenTutorialAction.CloseCalendar ||
-                action == GardenTutorialAction.Restart || action == GardenTutorialAction.Recover;
+                action == GardenTutorialAction.Restart;
         if (active == null || !active.Running) return true;
         GuideStep step = active.Step;
         if (step == GuideStep.Free) return true;
@@ -87,12 +82,12 @@ public sealed class GronnyTutorial : MonoBehaviour
         };
     }
 
-    // SeedItem detects release before its planting attempt, including grabs shorter than the polling interval.
-    public static void RecordSeedRelease(SeedItem seed)
+    // Advance while the seed is held, so planting guidance precedes its release.
+    public static void RecordSeedGrab(SeedItem seed)
     {
         if (GardenMenuController.GardenSuspended) return;
         if (active != null && active.Running && active.Step == GuideStep.Grab &&
-            seed != null && seed.Crop == SeedCrop.Tomato) active.Learn("grab");
+            seed != null && !seed.IsPlanted && seed.Crop == SeedCrop.Tomato) active.Learn("grab");
     }
 
     public bool TryGetInstruction(out string text, out string detail)
@@ -102,21 +97,31 @@ public sealed class GronnyTutorial : MonoBehaviour
         bool hands = mode == GardenInputMode.Hands;
         (text, detail) = Step switch
         {
-            GuideStep.Move => ("Step 1/6: Practice moving.", mode == GardenInputMode.Unknown
+            GuideStep.Move => ("Step 1/6: Practise moving.", mode == GardenInputMode.Unknown
                 ? "Use your tracked hands or Touch controllers to begin."
                 : hands ? "Curl your index finger, tap your thumb, then swipe to step." : "Move with the left joystick."),
-            GuideStep.Grab => ("Step 2/6: Pick up and release the seed labelled Tomato.",
-                hands ? "Pinch to grab. Open your fingers to release." : "Hold Grip to grab. Release Grip to let go."),
-            GuideStep.Plant => ("Step 3/6: Plant the seed labelled Tomato.", "Drop it onto the soil in an empty small pot."),
-            GuideStep.Water => (Excess ? "Step 4/6: Stop watering and wait for drainage."
-                : !NeedsWater ? "Step 4/6: Hold the watering can upright."
-                : "Step 4/6: Water the soil near the roots.", "Reach the water target, then stop pouring."),
+            GuideStep.Grab => ("Step 2/6: Pick up Tomato.",
+                hands ? "Pinch to grab. Keep holding the seed." : "Hold Grip to grab. Keep holding the seed."),
+            GuideStep.Plant => ("Step 3/6: Plant Tomato.", "Release the seed over the soil in an empty small pot."),
+            GuideStep.Water => (Excess ? "Step 4/6: Stop watering."
+                : !NeedsWater ? "Step 4/6: Hold the can upright."
+                : "Step 4/6: Water the soil.", Excess ? "Let the extra water drain."
+                : !NeedsWater ? "Your plant has enough water." : "Stop pouring at the water target."),
             GuideStep.Calendar => ("Step 5/6: Open the calendar.",
                 hands ? "Pinch with your left hand away from objects." : "Press Y on the left controller."),
             _ => (CanEmpty ? "Step 6/6: Select Refill water." : "Step 6/6: Select Advance phase.",
                 hands ? "Point at the button and pinch." : "Aim at the button and press Trigger.")
         };
         return true;
+    }
+
+    public bool TryGetSpokenInstruction(out string text, out string detail)
+    {
+        text = detail = null;
+        if (!initialized || !isActiveAndEnabled || GardenMenuController.GardenSuspended || voice == null) return false;
+        // Water feedback must respond immediately even while an earlier sentence finishes.
+        if (Caring && (Excess || !NeedsWater || CanEmpty)) return false;
+        return voice.TryGetInstruction(out text, out detail);
     }
 
     private SeedsController.PlantedSeed Plant => seeds != null ? seeds.PrototypeTomato : null;
@@ -153,7 +158,6 @@ public sealed class GronnyTutorial : MonoBehaviour
         if (visibility != null) visibility.Close();
         panel = FindFirstObjectByType<CalendarPanel>(FindObjectsInactive.Include);
         cans = FindObjectsByType<WateringCan>(FindObjectsSortMode.None);
-        seedItems = FindObjectsByType<SeedItem>(FindObjectsSortMode.None);
         locomotors = FindObjectsByType<FirstPersonLocomotor>(FindObjectsSortMode.None);
         OVRCameraRig rig = FindFirstObjectByType<OVRCameraRig>();
         if (visibility == null || panel == null || rig == null || locomotors.Length == 0)
@@ -171,13 +175,11 @@ public sealed class GronnyTutorial : MonoBehaviour
         initialized = true;
         active = this;
         playerOrigin = rig.transform;
-        viewer = rig.centerEyeAnchor;
         movementStart = playerOrigin.position;
         if (GardenMenuController.StartsAtPlanting)
         {
             learned.Add("move");
             learned.Add("grab");
-            grabInstructionFinished = true;
         }
         RefreshInteractionLocks();
         lastActionAt = Time.unscaledTime;
@@ -201,7 +203,6 @@ public sealed class GronnyTutorial : MonoBehaviour
     private void Subscribe()
     {
         if (subscribed || completed) return;
-        voice.AudioFinished += OnAudioFinished;
         seeds.PlantingRejected += OnPlantingRejected;
         calendar.AdvanceBlocked += OnAdvanceBlocked;
         if (visibility != null)
@@ -217,7 +218,6 @@ public sealed class GronnyTutorial : MonoBehaviour
     private void Unsubscribe()
     {
         if (!subscribed) return;
-        if (voice != null) voice.AudioFinished -= OnAudioFinished;
         if (seeds != null) seeds.PlantingRejected -= OnPlantingRejected;
         if (calendar != null) calendar.AdvanceBlocked -= OnAdvanceBlocked;
         if (visibility != null)
@@ -235,7 +235,6 @@ public sealed class GronnyTutorial : MonoBehaviour
         if (GardenMenuController.GardenSuspended)
         {
             lastActionAt = Time.unscaledTime;
-            heldObjects.Clear();
             movementRequested = false;
             if (playerOrigin != null) movementStart = playerOrigin.position;
             return;
@@ -250,7 +249,6 @@ public sealed class GronnyTutorial : MonoBehaviour
         foreach (WateringCan can in cans)
             if (can != null && can.IsHeld && can.CurrentWaterLitres <= 0f) refillCan = can;
         if (Step == GuideStep.Water && System.Array.Exists(cans, can => can != null && can.IsHeld)) Learn("watering_grab");
-        ObserveGrabs();
         if (Step == GuideStep.Move && movementPracticeStarted && movementRequested && playerOrigin != null &&
             Vector3.ProjectOnPlane(playerOrigin.position - movementStart, Vector3.up).sqrMagnitude >= 0.01f)
             Learn("move");
@@ -338,49 +336,6 @@ public sealed class GronnyTutorial : MonoBehaviour
         IdleHelp();
     }
 
-    private void LateUpdate()
-    {
-        SeedItem target = null;
-        if (!GardenMenuController.GardenSuspended && Running && grabInstructionFinished && State == null && !calendar.IsAdvancing)
-        {
-            foreach (SeedItem seed in seedItems)
-            {
-                if (seed == null || seed.Crop != SeedCrop.Tomato || seed.IsPlanted ||
-                    !seed.isActiveAndEnabled || seed.gameObject.scene != gameObject.scene) continue;
-                target = seed;
-                break;
-            }
-        }
-        if (target == null || viewer == null)
-        {
-            if (seedPlantingCaption != null) seedPlantingCaption.gameObject.SetActive(false);
-            return;
-        }
-        if (seedPlantingCaption == null)
-        {
-            // Keep world scale independent of the seed and the guide's scaled canvas.
-            GameObject caption = new("Tomato seed planting instruction");
-            caption.layer = 2;
-            seedPlantingCaption = caption.AddComponent<TextMesh>();
-            seedPlantingCaption.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            MeshRenderer renderer = caption.GetComponent<MeshRenderer>();
-            renderer.sharedMaterial = seedPlantingCaption.font.material;
-            renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-            renderer.receiveShadows = false;
-            seedPlantingCaption.anchor = TextAnchor.MiddleCenter;
-            seedPlantingCaption.alignment = TextAlignment.Center;
-            seedPlantingCaption.characterSize = 0.006f;
-            seedPlantingCaption.fontSize = 48;
-            seedPlantingCaption.color = Color.white;
-        }
-        seedPlantingCaption.text = seedPlantingInstruction;
-        seedPlantingCaption.transform.position = target.transform.position + Vector3.up * 0.16f;
-        Vector3 direction = seedPlantingCaption.transform.position - viewer.position;
-        if (direction.sqrMagnitude > 0.0001f)
-            seedPlantingCaption.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
-        seedPlantingCaption.gameObject.SetActive(true);
-    }
-
     private void RefreshPhase()
     {
         int currentPhase = State != null ? State.tomatoPhase : -1;
@@ -411,12 +366,6 @@ public sealed class GronnyTutorial : MonoBehaviour
         QueueControls();
     }
 
-    private void OnAudioFinished(string id)
-    {
-        if (id == "controls_grab_hands" || id == "controls_grab_controllers")
-            grabInstructionFinished = true;
-    }
-
     private void UpdateMode()
     {
         OVRInput.Controller active = OVRInput.GetActiveController();
@@ -427,7 +376,6 @@ public sealed class GronnyTutorial : MonoBehaviour
         mode = detected;
         voice.CancelControls();
         demonstration.SetInputMode(mode);
-        heldObjects.Clear();
         movementRequested = false;
         movementPracticeStarted = false;
         if (playerOrigin != null) movementStart = playerOrigin.position;
@@ -556,25 +504,6 @@ public sealed class GronnyTutorial : MonoBehaviour
             movementRequested = true;
     }
 
-    private void ObserveGrabs()
-    {
-        if (Step != GuideStep.Grab) return;
-        foreach (SeedItem seed in seedItems)
-        {
-            if (seed == null || seed.Crop != SeedCrop.Tomato) continue;
-            Grabbable grabbable = seed.GetComponent<Grabbable>();
-            ObserveObject(seed.GetInstanceID(), grabbable != null && grabbable.SelectingPointsCount > 0);
-        }
-        foreach (WateringCan can in cans)
-            if (can != null) ObserveObject(can.GetInstanceID(), can.IsHeld);
-    }
-
-    private void ObserveObject(int id, bool held)
-    {
-        if (held) heldObjects.Add(id);
-        else if (heldObjects.Remove(id) && Step == GuideStep.Grab) Learn("grab");
-    }
-
     private void RefreshInteractionLocks()
     {
         bool free = !Running || Step == GuideStep.Free;
@@ -629,11 +558,5 @@ public sealed class GronnyTutorial : MonoBehaviour
         Unsubscribe();
         if (voice != null) { voice.Clear(); voice.enabled = false; }
         if (demonstration != null) demonstration.Hide();
-        if (seedPlantingCaption != null) seedPlantingCaption.gameObject.SetActive(false);
-    }
-
-    private void OnDestroy()
-    {
-        if (seedPlantingCaption != null) Destroy(seedPlantingCaption.gameObject);
     }
 }

@@ -1,0 +1,157 @@
+{
+  "recognition_model": "openai/whisper-base.en",
+  "note": "Revisión automática; no sustituye escucha humana.",
+  "files": [
+    {
+      "id": "help_missed_pot_02",
+      "expected": "Let's pause the pour. Move the spout over the soil before you tilt the can again.",
+      "transcript": "Let's pause the pour. Move the spout over the soil before you tilt the can again.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.04,
+      "sample_rate": 24000,
+      "peak": 0.74420166015625,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "1A05564F1D2CFAA9B552E7DA59309BD7E7CBDD62370AF572FDAA472F77D8FADA"
+    },
+    {
+      "id": "help_missed_pot_03",
+      "expected": "A little closer to the pot. Keep the can upright while you line up the spout with the soil.",
+      "transcript": "a little closer to the pot. Keep the can upright while you line up the spout with the soil.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.2,
+      "sample_rate": 24000,
+      "peak": 0.934173583984375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "2A5D9E373893E2EFF3CEBA16CE76A2B71AE2EAB0166F9BA8312FB117D8B2017C"
+    },
+    {
+      "id": "help_missed_pot_04",
+      "expected": "That water isn't reaching the roots. Stop pouring for a moment and aim over the soil.",
+      "transcript": "that water isn't reaching the roots, stop pouring for a moment and aim over the soil.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.36,
+      "sample_rate": 24000,
+      "peak": 0.990020751953125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "3B6D23EC375176830F0984D17B23B75535ADA6A8E009A839C772021001221D45"
+    },
+    {
+      "id": "help_stop_watering_02",
+      "expected": "We've reached the target. Turn the can upright and save the rest for later.",
+      "transcript": "We've reached the target, turn the can upright, and save the rest for later.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 4.44,
+      "sample_rate": 24000,
+      "peak": 0.849334716796875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "E0796B454C26612B5A6949FF3FC5F66F52148A99E7C92FC23BCBF184EDAF96BB"
+    },
+    {
+      "id": "help_stop_watering_03",
+      "expected": "That's plenty for this stage. Hold the can upright to stop the flow.",
+      "transcript": "That's plenty for this stage. Hold the can upright to stop the flow.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 4.56,
+      "sample_rate": 24000,
+      "peak": 0.846954345703125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "D0D48B9ECC856E8D790F1DAC3940833BFF2A6CCC185D86BF1E5BA0B289EE8E31"
+    },
+    {
+      "id": "help_stop_watering_04",
+      "expected": "Time to stop pouring. Your tomato has the water it needs for now.",
+      "transcript": "Time to stop pouring. Your tomato has the water it needs for now.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 4.44,
+      "sample_rate": 24000,
+      "peak": 0.775238037109375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "9B5DDA7C95B2F8567E4EDD2E977939699E3171E165A1C9EF1BB8DBD7C7AA450C"
+    },
+    {
+      "id": "help_excess_water_02",
+      "expected": "Turn the can upright. The pot is too full, so let's give the extra water time to drain.",
+      "transcript": "Turn the can up right. The pot is too full, so let's give the extra water time to drain.",
+      "differences": [
+        {
+          "operation": "replace",
+          "expected": "upright",
+          "transcript": "up right"
+        }
+      ],
+      "words_match": false,
+      "duration_seconds": 5.72,
+      "sample_rate": 24000,
+      "peak": 0.847686767578125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "11A89543DE17359DE51D339C6A6B549145FFC4A8C16AB28BD9F838F7AEFD0E75"
+    },
+    {
+      "id": "help_excess_water_03",
+      "expected": "Let's stop pouring here. There's extra water in the pot that needs to drain away.",
+      "transcript": "Let's stop pouring here. There's extra water in the pot that needs to drain away.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 4.72,
+      "sample_rate": 24000,
+      "peak": 0.874359130859375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "91E7E92A7934F4BEABDD94BC24F5826822BC3FDFCF17F8754180DF7CE0C8F151"
+    },
+    {
+      "id": "help_excess_water_04",
+      "expected": "Hold the can upright for a moment. We've gone past the target; let the pot drain before continuing.",
+      "transcript": "Hold the can upright for a moment. We've gone past the target. Let the pot drain before continuing.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 6.2,
+      "sample_rate": 24000,
+      "peak": 0.88983154296875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "B142528304D3659BA5B78140FE142753A1534DA9B2241CF016738C5C0CF64CDC"
+    },
+    {
+      "id": "help_drained_02",
+      "expected": "The pot has drained now. On the next pour, use the target to help you stop a little sooner.",
+      "transcript": "The pot has drained now. On the next pour, use the target to help you stop a little sooner.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.88,
+      "sample_rate": 24000,
+      "peak": 0.833831787109375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "74B4460EB10D0CFFF3A1EBD9E52F51D4E908A5742DB635F7057B3D6FB8299916"
+    },
+    {
+      "id": "help_drained_03",
+      "expected": "The extra water is gone. A gentler pour next time will make it easier to stop at the target.",
+      "transcript": "The extra water is gone. A gentler pour next time will make it easier to stop at the target.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.68,
+      "sample_rate": 24000,
+      "peak": 0.9276123046875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "581F5448C4792889BDBD23DB67BC4617B88435F12A84675F6476C75FEE712EDF"
+    },
+    {
+      "id": "help_drained_04",
+      "expected": "That's the excess drained away. Next time, turn the can upright as the bar reaches the target.",
+      "transcript": "That's the excess drained away. Next time, turn the can upright as the bar reaches the target.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 6.16,
+      "sample_rate": 24000,
+      "peak": 0.903961181640625,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "ACF9B296914EBED8ED03C0EDC4CB2F2A24CFD3F851957C4089EC5E2C178AB7A2"
+    }
+  ],
+  "review": "La toma help_missed_pot_03 se regeneró y coincide con el guion. En help_excess_water_02, Whisper separa upright como up right; se conserva el informe bruto sin alterar ese resultado. No se detectó saturación. Escucha humana pendiente."
+}

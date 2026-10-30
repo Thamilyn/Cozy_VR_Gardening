@@ -1,0 +1,16 @@
+Unity 6000.3.23f1
+UTC: 2026-10-29T23:51:39.4700199Z
+SETUP: resumed launch menu with deterministic release samples; tutorial disabled for focused harvest.
+MEASURE: attached = 0.065000 m
+MEASURE: just selected = 0.065000 m
+MEASURE: held after Move = 0.065000 m
+MEASURE: released outside tray = 0.065000 m
+MEASURE: picked up again = 0.065000 m
+MEASURE: moved to tray = 0.065000 m
+DELIVERY: position (0.7370, 0.9430, -2.3081), held 0, inside True
+MEASURE: stored in tray = 0.065000 m
+RESTING: model-to-floor gap = 0.000500 m
+PASS: RootswithTomatoes.036 retains its stalk, mesh and materials; all ripe fruit models are at most 6.5 cm; harvest fruit has its own collider and Meta hand/controller interactables
+PASS: harvest outline visible on plant, Select detaches fruit immediately and hides outline, release outside tray does not harvest, re-grab and tray delivery succeed
+PASS: delivered tomato remains visible on the box floor, with gravity, colliders and all Meta grabs disabled
+NOT TESTED: physical hands/controllers, shader appearance in headset, watering/growth sequence, scene restart, APK and Quest 3 performance

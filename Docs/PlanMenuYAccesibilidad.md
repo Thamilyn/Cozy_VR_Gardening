@@ -18,7 +18,7 @@ accesibilidad. Mantener Unity 6000.3.23f1 y las integraciones Meta existentes.
 - La interacción de objetos y la selección del calendario ya contemplan ambas manos.
 - `CalendarVisibilityController` fija la apertura a la pinza izquierda o Y del mando
   izquierdo. `WateringCan` fija el atajo de rellenado al mando derecho.
-- `CalendarPanel.RecoverCan` prioriza la mano derecha y después prueba la izquierda.
+- La jarra permanece donde se deja sobre la mesa y solo retorna tras caer por debajo del límite de recuperación durante dos segundos de juego activo; el calendario no ofrece recuperación manual.
 - `GronnyTutorial` enseña progresivamente y bloquea otras acciones. Su texto de
   movimiento indica joystick izquierdo; no se ha validado toda la configuración
   efectiva de locomoción del rig en ejecución.
@@ -156,7 +156,7 @@ cambiar de fase; coste de renderizado comprobado en Quest 3.
 
 ### 5. Lateralidad e inclusión motora
 
-- Ofrecer mano principal derecha o izquierda para herramientas y recuperación.
+- Ofrecer mano principal derecha o izquierda para herramientas.
 - Mantener selección y agarre disponibles con ambas manos.
 - Permitir configurar por separado la mano de movimiento y la de apertura de
   paneles; elegir mano principal no debe forzar a cambiar el joystick aprendido.

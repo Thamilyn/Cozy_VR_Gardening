@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-29",
+  "unity_version": "6000.3.23f1",
+  "compilation": {
+    "errors": 0,
+    "warnings": 0,
+    "report": "FinalCompile.json"
+  },
+  "play_checks": {
+    "voice_and_text": 35,
+    "menu_sound_and_water": 95,
+    "thumb_motion": 34,
+    "welcome_and_movement": 15,
+    "total": 179,
+    "all_passed": true
+  },
+  "audio": {
+    "files_verified": 58,
+    "exact_normalized_matches": 50,
+    "transcription_differences": 8,
+    "spelling_only": 1,
+    "ambiguities_requiring_human_listening": 7,
+    "max_peak": 0.990020751953125,
+    "max_clipped_fraction": 0,
+    "recordings_modified": 0
+  },
+  "demonstration_tracks_retimed": 23,
+  "short_instruction_pairs": 58,
+  "duplicate_seed_planting_text_removed": true,
+  "seed_planting_voice_confirmed": true,
+  "editor_final": {
+    "play_mode": false,
+    "scene": "Assets/Scenes/Garden_Moves.unity",
+    "scene_dirty": false
+  },
+  "limitation": "Physical Quest 3 not tested. Play logged MetaXRFeature ErrorFormFactorUnavailable xrGetSystem. Word alignment is automatic and approximate."
+}

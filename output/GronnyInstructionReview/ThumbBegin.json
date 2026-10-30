@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "GardenThumbSwipeVerification.Begin(); return \"Thumb trajectory verification started\";"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "Thumb trajectory verification started"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "water_stopped_success_02",
+    "cueId": "water_stopped_success",
+    "text": "Lovely, that's just the water your tomato needs. The rest is saved for later."
+  },
+  {
+    "id": "water_stopped_success_03",
+    "cueId": "water_stopped_success",
+    "text": "Well done! The plant has enough water for this stage, with some left for later."
+  },
+  {
+    "id": "water_stopped_success_04",
+    "cueId": "water_stopped_success",
+    "text": "Nicely done. You've met the water target and kept the rest for the next stage."
+  },
+  {
+    "id": "water_ready_next_phase_02",
+    "cueId": "water_ready_next_phase",
+    "text": "The roots have what they need. Open the calendar and select Advance phase when you're ready."
+  },
+  {
+    "id": "water_ready_next_phase_03",
+    "cueId": "water_ready_next_phase",
+    "text": "Let's see your tomato grow. Open the calendar and choose Advance phase."
+  },
+  {
+    "id": "water_ready_next_phase_04",
+    "cueId": "water_ready_next_phase",
+    "text": "This stage is watered. Open the calendar and select Advance phase to continue growing."
+  }
+]

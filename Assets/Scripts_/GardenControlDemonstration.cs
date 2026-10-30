@@ -10,6 +10,7 @@ public sealed class GardenControlDemonstration : MonoBehaviour
     private GardenInputMode mode;
     private GameObject anchor;
     private GameObject model;
+    private Transform visuals;
     private Transform motion;
     private Transform animationRoot;
     private Transform[] joints;
@@ -98,9 +99,11 @@ public sealed class GardenControlDemonstration : MonoBehaviour
                 facing = Quaternion.LookRotation(position - viewer.position, Vector3.up);
             anchor.transform.SetPositionAndRotation(position, facing);
         }
+        visuals = new GameObject("Visuals").transform;
+        visuals.SetParent(anchor.transform, false);
         GameObject moving = new("Motion");
         motion = moving.transform;
-        motion.SetParent(anchor.transform, false);
+        motion.SetParent(visuals, false);
         model = Instantiate(prefab, motion);
         model.transform.localPosition = Vector3.zero;
         model.transform.localRotation = Quaternion.Euler(mode == GardenInputMode.Hands
@@ -173,6 +176,7 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         foreach (Transform child in anchor.GetComponentsInChildren<Transform>(true)) child.gameObject.layer = 2;
         anchor.SetActive(true);
         Tick(0f);
+        AlignVisualsWithCaption();
         GardenPresentationPlacement placement = anchor.AddComponent<GardenPresentationPlacement>();
         placement.Configure(anchor.transform, viewer, keepStatic: fixedGardeningPosition);
     }
@@ -207,16 +211,20 @@ public sealed class GardenControlDemonstration : MonoBehaviour
 
     public void Tick(float audioSeconds) => TickAt(audioSeconds, false);
 
+    public void TickSpoken(float audioSeconds) => TickAt(audioSeconds, false, true);
+
     public void TickTeaching(float elapsedSeconds) => TickAt(elapsedSeconds, UsesHandTeachingTiming);
 
-    private void TickAt(float audioSeconds, bool handClock)
+    private void TickAt(float audioSeconds, bool handClock, bool spoken = false)
     {
         if (anchor == null || cue == null || cue.steps == null || cue.steps.Length == 0) return;
         int index = 0;
         for (int i = 1; i < cue.steps.Length; i++)
-            if (audioSeconds >= StepTime(i, handClock)) index = i;
+            if ((!spoken || !cue.steps[i].practiceOnly) && audioSeconds >= StepTime(i, handClock)) index = i;
         GronnyAudioCatalogue.Step step = cue.steps[index];
-        GronnyAudioCatalogue.Step previous = index > 0 ? cue.steps[index - 1] : step;
+        int previousIndex = Mathf.Max(0, index - 1);
+        while (spoken && previousIndex > 0 && cue.steps[previousIndex].practiceOnly) previousIndex--;
+        GronnyAudioCatalogue.Step previous = cue.steps[previousIndex];
         float blend = handClock ? Mathf.Max(catalogue.blendSeconds, catalogue.handPoseBlendSeconds) : catalogue.blendSeconds;
         float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01((audioSeconds - StepTime(index, handClock)) / blend));
         motion.localPosition = Vector3.Lerp(previous.position, step.position, t);
@@ -228,10 +236,7 @@ public sealed class GardenControlDemonstration : MonoBehaviour
             motion.localPosition = position;
             motion.localRotation = MirrorRotation(motion.localRotation);
         }
-        if (mode == GardenInputMode.Hands && cue.demo == GardenControlDemo.Calendar)
-            caption.text = "Pinch with your " + (cue.rightHand ? "right" : "left") + " hand\nto open and close\nthe calendar.";
-        else
-            caption.text = fixedGardeningPosition ? ReadableCaption(step.label) : step.label;
+        caption.text = ReadableCaption(step.label);
         if (mode == GardenInputMode.Hands && poses != null)
         {
             for (int j = 0; j < joints.Length; j++)
@@ -244,7 +249,7 @@ public sealed class GardenControlDemonstration : MonoBehaviour
                 foreach (Transform joint in joints)
                     if (joint.name.EndsWith("thumb1"))
                         joint.localRotation *= Quaternion.Euler(Vector3.Lerp(previous.thumbRotation, step.thumbRotation, t));
-            ApplyThumbSwipe(index, audioSeconds, handClock);
+            ApplyThumbSwipe(index, audioSeconds, handClock, spoken);
         }
         else if (pressClip != null)
         {
@@ -275,15 +280,18 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         thumbBaseRotations = new Quaternion[thumbJoints.Length];
     }
 
-    private void ApplyThumbSwipe(int index, float audioSeconds, bool handClock)
+    private void ApplyThumbSwipe(int index, float audioSeconds, bool handClock, bool spoken)
     {
         if (cue.demo != GardenControlDemo.Move || thumbSwipeClip == null || thumbJoints == null) return;
         GronnyAudioCatalogue.Step from = cue.steps[index];
-        GronnyAudioCatalogue.Step to = index + 1 < cue.steps.Length ? cue.steps[index + 1] : from;
+        int next = index + 1;
+        while (spoken && next < cue.steps.Length && cue.steps[next].practiceOnly) next++;
+        int nextIndex = next < cue.steps.Length ? next : index;
+        GronnyAudioCatalogue.Step to = cue.steps[nextIndex];
         // Interpolate across the entire authored swipe interval, not just blendSeconds
         // after the next pose. This keeps the visible stroke under its spoken instruction.
         float fromTime = StepTime(index, handClock);
-        float toTime = StepTime(Mathf.Min(index + 1, cue.steps.Length - 1), handClock);
+        float toTime = StepTime(nextIndex, handClock);
         float progress = toTime > fromTime ? Mathf.SmoothStep(0f, 1f,
             Mathf.InverseLerp(fromTime, toTime, audioSeconds)) : 1f;
         float weight = Mathf.Lerp(from.thumbSwipeWeight, to.thumbSwipeWeight, progress);
@@ -304,16 +312,53 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         return split > 0 ? text.Substring(0, split) + "\n" + text.Substring(split + 1) : text;
     }
 
+    private void AlignVisualsWithCaption()
+    {
+        Bounds bounds = default;
+        bool found = false;
+        Mesh baked = null;
+        foreach (Renderer renderer in visuals.GetComponentsInChildren<Renderer>())
+        {
+            if (!renderer.enabled || renderer is LineRenderer) continue;
+            Bounds localBounds;
+            if (renderer is SkinnedMeshRenderer skinned)
+            {
+                // Imported hand bounds do not describe the visible, posed fingers reliably.
+                if (baked == null) baked = new Mesh();
+                skinned.BakeMesh(baked);
+                localBounds = baked.bounds;
+            }
+            else localBounds = renderer.localBounds;
+
+            for (int corner = 0; corner < 8; corner++)
+            {
+                Vector3 point = localBounds.center + Vector3.Scale(localBounds.extents,
+                    new Vector3((corner & 1) == 0 ? -1f : 1f,
+                        (corner & 2) == 0 ? -1f : 1f, (corner & 4) == 0 ? -1f : 1f));
+                point = visuals.InverseTransformPoint(renderer.transform.TransformPoint(point));
+                if (!found) { bounds = new Bounds(point, Vector3.zero); found = true; }
+                else bounds.Encapsulate(point);
+            }
+        }
+        if (baked != null) Destroy(baked);
+        if (!found) return;
+
+        // Centre once in the caption's plane, so text stays still while the gesture moves.
+        // Keep rays and example props with the hand, and retain all authored motion offsets.
+        visuals.localPosition = new Vector3(-bounds.center.x, 0f, -bounds.center.z);
+        caption.transform.localPosition = new Vector3(0f, Mathf.Min(-0.20f, bounds.min.y - 0.08f), 0f);
+    }
+
     private void CreatePointer()
     {
         GameObject ray = new("Example selection ray");
-        ray.transform.SetParent(anchor.transform, false);
+        ray.transform.SetParent(visuals, false);
         pointer = ray.AddComponent<LineRenderer>();
         pointer.useWorldSpace = false;
         pointer.positionCount = 2;
         pointer.startWidth = pointer.endWidth = 0.003f;
         pointer.sharedMaterial = visualMaterial;
-        GameObject button = MakeSymbol(PrimitiveType.Cube, "Example button", anchor.transform,
+        GameObject button = MakeSymbol(PrimitiveType.Cube, "Example button", visuals,
             new Vector3(0f, 0f, 0.35f), new Vector3(0.13f, 0.07f, 0.01f));
         button.transform.localRotation = Quaternion.identity;
     }
@@ -349,6 +394,7 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         if (anchor != null) { anchor.SetActive(false); Destroy(anchor); }
         anchor = null;
         model = null;
+        visuals = null;
         cue = null;
         pointer = null;
         pressClip = null;

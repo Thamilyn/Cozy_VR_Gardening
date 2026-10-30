@@ -42,7 +42,9 @@ def main():
     ).eval()
     report = {"recognition_model": model_id, "note": "Revisión automática; no sustituye escucha humana.", "files": []}
     for entry in json.loads(args.dialogues.read_text(encoding="utf-8-sig")):
-        path = args.audio_dir / (entry["id"] + ".wav")
+        path = (args.audio_dir / entry.get("path", entry["id"] + ".wav")).resolve()
+        if not path.is_relative_to(ROOT):
+            raise ValueError(f"Audio fuera del proyecto: {path}")
         audio, rate = sf.read(path, dtype="float32", always_2d=True)
         if not audio.size or not np.isfinite(audio).all():
             raise ValueError(f"Audio vacío o inválido: {path}")

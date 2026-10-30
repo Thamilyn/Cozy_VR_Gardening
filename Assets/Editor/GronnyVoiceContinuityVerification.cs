@@ -99,16 +99,29 @@ public static class GronnyVoiceContinuityVerification
             voice.Enqueue("controls_grab_hands", "action", () => actionPending, () => actionStarts++, waitForAction: true);
             yield return 0.6f;
             Check(source.isPlaying && voice.CurrentCueId == "controls_grab_hands", "A control instruction starts normally");
+            Check(voice.TryGetInstruction(out string instruction, out string detail) &&
+                instruction == catalogue.Find("controls_grab_hands").instruction &&
+                detail == catalogue.Find("controls_grab_hands").instructionDetail,
+                "Short text belongs to the instruction actually playing");
+            source.time = 4.6f;
+            yield return 0.1f;
+            var caption = (TextMesh)typeof(GardenControlDemonstration)
+                .GetField("caption", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(demo);
+            Check(caption.text.Replace("\n", " ") == "Keep holding while moving",
+                "Spoken hand demonstration uses audio time instead of the slower practice clock");
             source.time = 1f;
             actionPending = false;
             yield return 0.25f;
             Check(source.isPlaying && voice.CurrentCueId == "controls_grab_hands" && source.time > 1f,
                 "Completing an action preserves the playing sentence instead of cutting it");
             Check(!demo.IsShowing(catalogue.Find("controls_grab_hands")), "Completed action hides its obsolete hand demonstration immediately");
+            Check(!voice.TryGetInstruction(out _, out _), "Completed action retires obsolete text while its sentence finishes");
             voice.Enqueue("03_plant_seed", "after-action", () => true);
             SeekToEnd(source);
             yield return 0.9f;
             Check(voice.CurrentCueId == "03_plant_seed" && actionStarts == 1, "Next instruction waits for the previous sentence and never restarts it");
+            Check(voice.TryGetInstruction(out instruction, out _) && instruction == catalogue.Find("03_plant_seed").instruction,
+                "Gronny explicitly asks to plant the Tomato seed with matching short text");
 
             voice.Clear();
             bool pendingRelevant = true;
@@ -132,6 +145,7 @@ public static class GronnyVoiceContinuityVerification
             voice.Enqueue("08_sprout", "new-phase", () => true);
             yield return 0.25f;
             Check(source.isPlaying && voice.CurrentCueId == "01_welcome", "Changing phase finishes the spoken sentence while clearing old queued instructions");
+            Check(!voice.TryGetInstruction(out _, out _), "A phase change clears the old instruction text immediately");
             SeekToEnd(source);
             yield return 0.9f;
             Check(voice.CurrentCueId == "08_sprout", "The new phase starts after the sentence finishes");
@@ -159,13 +173,31 @@ public static class GronnyVoiceContinuityVerification
             voice.Enqueue("help_excess_water", "urgent", () => true);
             yield return 0.6f;
             Check(voice.CurrentCueId == "help_excess_water", "An urgent excess-water warning can interrupt");
+            Check(voice.TryGetInstruction(out instruction, out _) && instruction == catalogue.Find("help_excess_water").instruction,
+                "Urgent interruption switches text to the warning");
             SeekToEnd(source);
             yield return 0.9f;
             Check(voice.CurrentCueId == "controls_grab_controllers" && source.time >= interruptedAt - 0.05f,
                 "A still-relevant interrupted instruction resumes from its saved audio position");
             Check(resumedStarts == 1, "Resuming an urgent interruption does not log another instruction start");
+            Check(voice.TryGetInstruction(out instruction, out _) && instruction == catalogue.Find("controls_grab_controllers").instruction,
+                "Resuming audio restores its matching instruction text");
             voice.Clear();
             Check(!source.isPlaying && voice.CurrentCueId == null, "Explicit Stop still stops playback immediately");
+            Check(!voice.TryGetInstruction(out _, out _), "Stop also clears the instruction text");
+
+            var walking = catalogue.Find("controls_move_hands");
+            demo.SetInputMode(GardenInputMode.Hands);
+            demo.Show(walking);
+            demo.TickSpoken(9.9f);
+            caption = (TextMesh)typeof(GardenControlDemonstration)
+                .GetField("caption", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(demo);
+            Check(caption.text.Replace("\n", " ") == "Swipe forward to step",
+                "Unspoken backward and exit steps wait until practice after the concise movement voice");
+            demo.TickTeaching(demo.CycleDurationSeconds - 0.1f);
+            Check(caption.text.Replace("\n", " ") == "Straighten the index to exit",
+                "The full slow practice still includes how to exit movement");
+            demo.Hide();
 
             // Exercise the actual tutorial callers as well as the isolated queue.
             var menu = UnityEngine.Object.FindFirstObjectByType<GardenMenuController>();
@@ -181,12 +213,21 @@ public static class GronnyVoiceContinuityVerification
             var tutorialAudio = tutorial.GetComponent<AudioSource>();
             tutorialAudio.mute = true;
             Check(tutorialVoice.CurrentCueId == "01_welcome", "The real tutorial begins its welcome after Play");
+            Check(tutorial.TryGetSpokenInstruction(out instruction, out _) && instruction == catalogue.Find("01_welcome").instruction,
+                "The real guide shows the welcome while Gronny welcomes the player");
+            var guide = tutorial.GetComponent<TomatoPrototypeGuide>();
+            var panelInstruction = (UnityEngine.UI.Text)typeof(TomatoPrototypeGuide)
+                .GetField("instruction", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(guide);
+            Check(panelInstruction.text == catalogue.Find("01_welcome").instruction,
+                "The actual scene panel displays the short welcome instead of the movement step");
             tutorialAudio.time = 1f;
             Call(tutorial, "Learn", "move");
             var seeds = UnityEngine.Object.FindFirstObjectByType<SeedsController>();
             var seed = UnityEngine.Object.FindObjectsByType<SeedItem>(FindObjectsSortMode.None).First(item => item.Crop == SeedCrop.Tomato);
             var pot = UnityEngine.Object.FindObjectsByType<GardenPot>(FindObjectsSortMode.None).First(item => item.AcceptsTomato);
-            GronnyTutorial.RecordSeedRelease(seed);
+            GronnyTutorial.RecordSeedGrab(seed);
+            Check(GameObject.Find("Tomato seed planting instruction") == null,
+                "Seed guidance has no duplicate floating planting text");
             seed.transform.position = pot.PlantingPoint;
             Check(seeds.TryPlant(seed), "Integration fixture plants through the real tutorial permissions");
             yield return 0.25f;
@@ -197,6 +238,8 @@ public static class GronnyVoiceContinuityVerification
             yield return 0.25f;
             Check(tutorialVoice.CurrentCueId == "01_welcome" && tutorialAudio.isPlaying,
                 "Reaching the actual water target queues feedback without cutting the welcome");
+            Check(!tutorial.TryGetSpokenInstruction(out _, out _),
+                "Live water feedback takes precedence over an earlier spoken instruction");
             SeekToEnd(tutorialAudio);
             yield return 0.9f;
             Check(tutorialVoice.CurrentCueId == "06_enough_water", "Real watering feedback follows the finished sentence");

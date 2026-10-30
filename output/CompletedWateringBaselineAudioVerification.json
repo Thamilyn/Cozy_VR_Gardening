@@ -1,0 +1,24 @@
+{
+  "recognition_model": "openai/whisper-base.en",
+  "note": "Revisión automática; no sustituye escucha humana.",
+  "files": [
+    {
+      "id": "water_ready_next_phase",
+      "expected": "The watering is done. Open the calendar and select Advance phase to keep growing.",
+      "transcript": "The watering is done. Open the calendar and select Advanced Phase to keep growing.",
+      "differences": [
+        {
+          "operation": "replace",
+          "expected": "advance",
+          "transcript": "advanced"
+        }
+      ],
+      "words_match": false,
+      "duration_seconds": 5.72,
+      "sample_rate": 24000,
+      "peak": 0.901214599609375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "14A2BCB65E924D354767BD6FD55965A6BBB4A1F1C2518474EA097D2AE155E953"
+    }
+  ]
+}

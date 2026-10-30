@@ -1,0 +1,137 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "if (UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)\n    throw new System.InvalidOperationException(\"Connect the recordings outside Play mode.\");\nUnityEditor.AssetDatabase.Refresh(UnityEditor.ImportAssetOptions.ForceSynchronousImport);\nGronnyWaterSavingAudioSetup.ConnectWarningVariations();\nstring verification = GronnyAudioVerification.VerifyCatalogue();\nvar catalogue = UnityEngine.Resources.Load<GronnyAudioCatalogue>(\"GronnyAudio/Tutorial\");\nvar warnings = new System.Collections.Generic.List<object>();\nforeach (var cue in catalogue.cues)\n{\n    if (cue.variations == null || cue.variations.Length == 0) continue;\n    var recordings = new System.Collections.Generic.List<object>();\n    recordings.Add(new { path = UnityEditor.AssetDatabase.GetAssetPath(cue.clip), duration = cue.clip.length, transcript = cue.transcript });\n    foreach (var variation in cue.variations)\n        recordings.Add(new { path = UnityEditor.AssetDatabase.GetAssetPath(variation.clip), duration = variation.clip.length, transcript = variation.transcript });\n    warnings.Add(new { id = cue.id, recordings, cooldown = cue.cooldown, priority = cue.priority });\n}\nreturn new { verification, unity = UnityEngine.Application.unityVersion, baseCueCount = catalogue.cues.Length, warnings };\n"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "verification": "PASS: catalogue and installed Meta references",
+        "unity": "6000.3.23f1",
+        "baseCueCount": 58,
+        "warnings": [
+          {
+            "id": "help_excess_water",
+            "recordings": [
+              {
+                "path": "Assets/Audio/dialogues_cozy_gardening/help_excess_water.wav",
+                "duration": 5.56,
+                "transcript": "There's too much water in the pot. Hold the can upright and let the extra water drain away."
+              },
+              {
+                "path": "Assets/Audio/water_saving/variations/help_excess_water_02.wav",
+                "duration": 5.72,
+                "transcript": "Turn the can upright. The pot is too full, so let's give the extra water time to drain."
+              },
+              {
+                "path": "Assets/Audio/water_saving/variations/help_excess_water_03.wav",
+                "duration": 4.72,
+                "transcript": "Let's stop pouring here. There's extra water in the pot that needs to drain away."
+              },
+              {
+                "path": "Assets/Audio/water_saving/variations/help_excess_water_04.wav",
+                "duration": 6.2,
+                "transcript": "Hold the can upright for a moment. We've gone past the target; let the pot drain before continuing."
+              }
+            ],
+            "cooldown": 8,
+            "priority": 100
+          },
+          {
+            "id": "help_drained",
+            "recordings": [
+              {
+                "path": "Assets/Audio/dialogues_cozy_gardening/help_drained.wav",
+                "duration": 7.44,
+                "transcript": "The extra water has drained away. That water wasn't needed. Next time, try stopping when you reach the target."
+              },
+              {
+                "path": "Assets/Audio/water_saving/variations/help_drained_02.wav",
+                "duration": 5.88,
+                "transcript": "The pot has drained now. On the next pour, use the target to help you stop a little sooner."
+              },
+              {
+                "path": "Assets/Audio/water_saving/variations/help_drained_03.wav",
+                "duration": 5.68,
+                "transcript": "The extra water is gone. A gentler pour next time will make it easier to stop at the target."
+              },
+              {
+                "path": "Assets/Audio/water_saving/variations/help_drained_04.wav",
+                "duration": 6.16,
+                "transcript": "That's the excess drained away. Next time, turn the can upright as the bar reaches the target."
+              }
+            ],
+            "cooldown": 35,
+            "priority": 0
+          },
+          {
+            "id": "help_missed_pot",
+            "recordings": [
+              {
+                "path": "Assets/Audio/water_saving/help_missed_pot.wav",
+                "duration": 5.96,
+                "transcript": "The water is missing the soil. Hold the can upright, move it over the pot, then try again."
+              },
+              {
+                "path": "Assets/Audio/water_saving/variations/help_missed_pot_02.wav",
+                "duration": 5.04,
+                "transcript": "Let's pause the pour. Move the spout over the soil before you tilt the can again."
+              },
+              {
+                "path": "Assets/Audio/water_saving/variations/help_missed_pot_03.wav",
+                "duration": 5.2,
+                "transcript": "A little closer to the pot. Keep the can upright while you line up the spout with the soil."
+              },
+              {
+                "path": "Assets/Audio/water_saving/variations/help_missed_pot_04.wav",
+                "duration": 5.36,
+                "transcript": "That water isn't reaching the roots. Stop pouring for a moment and aim over the soil."
+              }
+            ],
+            "cooldown": 12,
+            "priority": 20
+          },
+          {
+            "id": "help_stop_watering",
+            "recordings": [
+              {
+                "path": "Assets/Audio/water_saving/help_stop_watering.wav",
+                "duration": 5.84,
+                "transcript": "Your plant already has enough water. Hold the can upright to avoid wasting any more."
+              },
+              {
+                "path": "Assets/Audio/water_saving/variations/help_stop_watering_02.wav",
+                "duration": 4.44,
+                "transcript": "We've reached the target. Turn the can upright and save the rest for later."
+              },
+              {
+                "path": "Assets/Audio/water_saving/variations/help_stop_watering_03.wav",
+                "duration": 4.56,
+                "transcript": "That's plenty for this stage. Hold the can upright to stop the flow."
+              },
+              {
+                "path": "Assets/Audio/water_saving/variations/help_stop_watering_04.wav",
+                "duration": 4.44,
+                "transcript": "Time to stop pouring. Your tomato has the water it needs for now."
+              }
+            ],
+            "cooldown": 12,
+            "priority": 20
+          }
+        ]
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

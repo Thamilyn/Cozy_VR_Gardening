@@ -41,6 +41,7 @@ public static class GronnyMenuAudioSetup
                 ? JsonUtility.FromJson<GronnyAudioCatalogue.Cue>(JsonUtility.ToJson(template))
                 : new GronnyAudioCatalogue.Cue { cooldown = 0f };
             cue.id = entry.id;
+            cue.instruction = cue.instructionDetail = "";
             cue.transcript = entry.text;
             cue.clip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/menu_accessibility/" + entry.id + ".wav");
             if (cue.clip == null) throw new InvalidOperationException("Missing recorded audio: " + entry.id);
@@ -63,5 +64,6 @@ public static class GronnyMenuAudioSetup
             cues.Add(cue);
         }
         catalogue.cues = cues.ToArray();
+        GronnyAudioSetup.ApplyInstructionCaptions(catalogue);
     }
 }

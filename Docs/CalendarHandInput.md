@@ -5,10 +5,14 @@ pinch selection. The calendar's `RayInteractable`, `ColliderSurface` and
 `PointableCanvas` forward these selections to the existing Unity buttons.
 
 - Pinch with the left index finger to open the calendar.
-- With the calendar visible, aim either hand's ray at **Advance phase** or
-  **Close**, pinch, then release to click the button.
+- With the calendar visible, aim either hand's ray at **Advance phase**,
+  **Refill water** or **Restart**, pinch, then release to click the button.
 - A left-hand pinch pointing away from the calendar toggles its visibility.
 - The left Touch controller's **Y** button also toggles visibility.
+
+The unused **Close** button has been removed from the prefab and its builder.
+Close the calendar with the left-hand visibility gesture or the **Y** button.
+This removal has been statically reviewed; Unity and Quest 3 validation are pending.
 
 `CalendarVisibilityController.leftHand` is assigned in `Garden_Moves`. A held
 pinch triggers only once. Another toggle requires the pinch strength to drop to
@@ -65,7 +69,8 @@ ray/button references and the pinch latch. On the Quest, also check:
 1. Hold a left pinch for several seconds: the calendar opens once and stays still.
 2. Release, point at **Advance phase**, pinch and release: advance exactly one
    milestone and keep the calendar open. Repeat with the other hand.
-3. Point at **Close**, pinch and release: close once and keep it closed.
+3. Release the left pinch, point away from the calendar, then pinch again:
+   close once and keep it closed while holding the pinch.
 4. Briefly hide a pinched hand from the headset, then bring it back: no toggle
    until you release and pinch again.
 5. Press **Y** with controllers while hands are untracked: toggle normally.
@@ -78,7 +83,8 @@ ray/button references and the pinch latch. On the Quest, also check:
    reopen it: it should appear in the new horizontal viewing direction.
 9. With the left ray over a button, pinch and move away before releasing:
    the calendar must stay open. Repeat normally with each hand and confirm one
-   click per pinch/release. After **Close**, a held pinch must not reopen it.
+   click per pinch/release. After closing with the visibility gesture, a held
+   pinch must not reopen it.
 10. Open the calendar facing the table with a fixed prop in front of one of its
     edges. It must find clear space without intersecting the table or fixed
     props. Repeat seated and standing.
@@ -108,12 +114,12 @@ reviewed; Unity execution and physical Quest 3 validation are pending.
 
 ## Tomato prototype controls
 
-Garden_Moves adds **Avanzar fase**, **Recargar agua**, **Traer regadera** and **Reiniciar** to the existing bottom row at runtime. All four use the existing Meta ray surface and PointableCanvas, within the same collider footprint. An unmet water goal leaves Advance enabled so a click can explain the missing water, but CalendarSystem blocks time and growth. Stop pouring for at least 0.5 seconds before advancing. Excess requires a 5-second pause for accelerated prototype drainage.
+Garden_Moves shows **Avanzar fase**, **Recargar agua** and **Reiniciar** in a centered bottom row at runtime. All three use the existing Meta ray surface and PointableCanvas, within the same collider footprint. An unmet water goal leaves Advance enabled so a click can explain the missing water, but CalendarSystem blocks time and growth. Stop pouring for at least 0.5 seconds before advancing. Excess requires a 5-second pause for accelerated prototype drainage.
 
 Restart reloads Garden_Moves after every held prop has been released. Verify twice on the headset that pinch toggling, both hand rays and controller grips still work after reload. Refill is available through a calendar ray click for hand users; it does not change the calendar, journal or plant water totals. Detailed reproduction steps and hardware checks are in GardenGrowth.md.
 
 ## Recover a dropped watering can
 
-Open the calendar and click **Traer regadera** with the Meta ray and pinch (or controller). Keep the right hand visible and free; the left hand is used if the right is unavailable. The most recently released, unheld can returns upright with its handle about 15 cm in front of that hand; before any release, the nearest unheld can is used. It stays suspended until a normal Meta grab, then release restores gravity. This preserves its remaining water and all plant/calendar counters. A held can is never moved, and missing tracking or busy hands produces guidance instead. The suspended can uses the existing held-object layer so it cannot become the locomotor floor.
+The calendar no longer has a manual recall button. A can left elsewhere on the table stays there. Once it has been grabbed, recovery starts only while it is unheld and its centre of mass is at least 45 cm below its centre of mass at the return pose. After remaining below this height for two seconds of active gameplay, it returns to its starting pose or configured Recovery Point and waits for a normal Meta grab. Grabbing it or raising it above the limit cancels the timer; pausing the garden stops the countdown. This height check also detects a can that slides off the table later. Recovery preserves its remaining water and all plant/calendar counters. The waiting can uses the existing held-object layer so it cannot become the locomotor floor.
 
-On Quest, drop a can on the floor, recover it, grab, pour and release it again. Repeat after teleporting, with either free hand and with controllers. Also confirm that recovery does not refill water or move a held can, and that the four calendar labels remain readable. Recovery has only been statically reviewed; headset validation is pending.
+On Quest, leave the can at different positions on the table, upright and on its side: it must stay there after two seconds. Then drop it below the recovery height, wait for its return, grab and pour again. Repeat with either hand and with controllers, including grabbing it before the timer expires, a delayed slide off the table, and pausing during the countdown. Confirm that recovery does not refill water or move a held can, and that the three calendar labels remain readable. The height condition and removal of manual recall have only been statically reviewed; Unity and headset validation are pending.

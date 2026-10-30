@@ -19,7 +19,7 @@ Se añadieron objetivos y contadores de agua por fase, bloqueo central del calen
 7. En fruto verde, el guía pide observar la referencia y decidir el cuidado sin dar otra receta paso a paso. Riego suficiente confirma la acción; exceso y avance sin agua dan feedback de error. Después de 25 s sin actuar aparece una pista de recuperación.
 8. En día 110, agarrar el tomate rojo más grande, de 6,5 cm, y soltarlo dentro de la bandeja COSECHA delante de las macetas. Los tomates verdes son visuales y no se pueden cosechar. Solo un fruto rojo se prepara para la entrega del prototipo. Agarrarlo o soltarlo fuera no registra éxito; puede recogerse de nuevo.
 9. Al entregar, el fruto queda en la bandeja y el guía anuncia éxito. El diario registra una sola cosecha. Abrir el calendario, soltar todos los objetos y seleccionar Reiniciar. La escena se recarga: día 0, semilla, herramientas, macetas, agua y diario vuelven al estado inicial. Repetir el ciclo con la siguiente persona.
-10. Recargar agua rellena ambas regaderas desde el calendario y funciona con manos. B del mando derecho también rellena la regadera sostenida. Recargar no suma agua aplicada. Si una regadera cae al suelo, seleccionar Traer regadera: la última soltada aparece junto a una mano libre y queda suspendida hasta agarrarla. Conserva el agua que tenía.
+10. Recargar agua rellena ambas regaderas desde el calendario y funciona con manos. B del mando derecho también rellena la regadera sostenida. Recargar no suma agua aplicada. Una regadera apoyada en otro punto de la mesa permanece allí. Solo vuelve automáticamente si su centro de masa cae al menos 45 cm por debajo de su altura de retorno y permanece suelta por debajo del límite durante dos segundos de juego activo. Conserva el agua que tenía; el calendario no ofrece retorno manual.
 
 ## Estados de agua
 
@@ -60,7 +60,7 @@ Pendiente en Quest 3:
 - [ ] Agarrar/sueltar fruto varias veces fuera de la bandeja antes de entregarlo; no debe haber éxito prematuro.
 - [ ] Reiniciar dos veces, incluyendo una maceta movida y herramientas desplazadas: rig, interacciones y depósito deben recuperarse.
 - [ ] Verificar que sostener la regadera no abre el calendario ni mueve la cámara.
-- [ ] Dejar caer la regadera, recuperarla con Traer regadera y volver a agarrar, regar y soltar. Repetir con ambas manos, tras desplazarse y con mandos; comprobar que el agua no cambia y los cuatro botones se leen bien.
+- [ ] Dejar caer la regadera, esperar su retorno automático y volver a agarrar, regar y soltar. Repetir con ambas manos y con mandos; comprobar que el agua no cambia, que agarrarla antes cancela el retorno, que el menú pausa la espera y que los tres botones del calendario se leen bien.
 - [ ] Revisar tasa de cuadros y comodidad durante crecimiento y reinicio.
 - [ ] Realizar prueba con 2–3 principiantes; registrar duración, atascos y comprensión del exceso.
 

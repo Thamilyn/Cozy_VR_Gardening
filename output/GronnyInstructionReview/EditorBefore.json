@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "return new { playing = UnityEditor.EditorApplication.isPlaying, compiling = UnityEditor.EditorApplication.isCompiling, scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().path, dirty = UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty, cues = UnityEngine.Resources.Load<GronnyAudioCatalogue>(\"GronnyAudio/Tutorial\").cues.Length, captions = System.Linq.Enumerable.Count(UnityEngine.Resources.Load<GronnyAudioCatalogue>(\"GronnyAudio/Tutorial\").cues, c => !string.IsNullOrWhiteSpace(c.instruction) && !string.IsNullOrWhiteSpace(c.instructionDetail)) };"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "playing": false,
+        "compiling": false,
+        "scene": "Assets/Scenes/Garden_Moves.unity",
+        "dirty": false,
+        "cues": 58,
+        "captions": 58
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

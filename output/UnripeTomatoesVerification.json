@@ -1,0 +1,18 @@
+{
+  "recognition_model": "openai/whisper-base.en",
+  "note": "Revisión automática; no sustituye escucha humana.",
+  "files": [
+    {
+      "id": "11_green_fruit",
+      "expected": "Our tomatoes are slowly ripening. This time, you decide when to stop watering. Use the target to guide you.",
+      "transcript": "Our tomatoes are slowly ripening. This time, you decide when to stop watering. Use the target to guide you.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 7.48,
+      "sample_rate": 24000,
+      "peak": 0.875244140625,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "771CB136412C58C9E136EB029F78B55FCA676155CD679EBEEA9579348D959265"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "help_missed_pot_02",
+    "cueId": "help_missed_pot",
+    "text": "Let's pause the pour. Move the spout over the soil before you tilt the can again."
+  },
+  {
+    "id": "help_missed_pot_03",
+    "cueId": "help_missed_pot",
+    "text": "A little closer to the pot. Keep the can upright while you line up the spout with the soil."
+  },
+  {
+    "id": "help_missed_pot_04",
+    "cueId": "help_missed_pot",
+    "text": "That water isn't reaching the roots. Stop pouring for a moment and aim over the soil."
+  },
+  {
+    "id": "help_stop_watering_02",
+    "cueId": "help_stop_watering",
+    "text": "We've reached the target. Turn the can upright and save the rest for later."
+  },
+  {
+    "id": "help_stop_watering_03",
+    "cueId": "help_stop_watering",
+    "text": "That's plenty for this stage. Hold the can upright to stop the flow."
+  },
+  {
+    "id": "help_stop_watering_04",
+    "cueId": "help_stop_watering",
+    "text": "Time to stop pouring. Your tomato has the water it needs for now."
+  },
+  {
+    "id": "help_excess_water_02",
+    "cueId": "help_excess_water",
+    "text": "Turn the can upright. The pot is too full, so let's give the extra water time to drain."
+  },
+  {
+    "id": "help_excess_water_03",
+    "cueId": "help_excess_water",
+    "text": "Let's stop pouring here. There's extra water in the pot that needs to drain away."
+  },
+  {
+    "id": "help_excess_water_04",
+    "cueId": "help_excess_water",
+    "text": "Hold the can upright for a moment. We've gone past the target; let the pot drain before continuing."
+  },
+  {
+    "id": "help_drained_02",
+    "cueId": "help_drained",
+    "text": "The pot has drained now. On the next pour, use the target to help you stop a little sooner."
+  },
+  {
+    "id": "help_drained_03",
+    "cueId": "help_drained",
+    "text": "The extra water is gone. A gentler pour next time will make it easier to stop at the target."
+  },
+  {
+    "id": "help_drained_04",
+    "cueId": "help_drained",
+    "text": "That's the excess drained away. Next time, turn the can upright as the bar reaches the target."
+  }
+]

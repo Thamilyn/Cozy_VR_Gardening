@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var original = UnityEngine.Resources.Load<GronnyAudioCatalogue>(\"GronnyAudio/Tutorial\");\nvar copy = UnityEngine.Object.Instantiate(original);\ntry {\n foreach (var cue in copy.cues) { cue.instruction = cue.instructionDetail = \"\"; }\n typeof(GronnyAudioSetup).GetMethod(\"ApplyInstructionCaptions\", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static).Invoke(null, new object[] { copy });\n foreach (var cue in copy.cues) {\n  var expected = original.Find(cue.id);\n  if (cue.instruction != expected.instruction || cue.instructionDetail != expected.instructionDetail) throw new System.Exception(\"Caption mismatch: \" + cue.id);\n  for (int i=0;i<cue.steps.Length;i++) if (cue.steps[i].at != expected.steps[i].at || cue.steps[i].practiceOnly != expected.steps[i].practiceOnly) throw new System.Exception(\"Timing mismatch: \" + cue.id);\n }\n return new { cues = copy.cues.Length, captionsAndTimingsRecreated = true, originalAssetModified = false };\n} finally { UnityEngine.Object.DestroyImmediate(copy); }"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "cues": 58,
+        "captionsAndTimingsRecreated": true,
+        "originalAssetModified": false
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

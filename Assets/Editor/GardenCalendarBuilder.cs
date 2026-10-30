@@ -106,8 +106,8 @@ public static class GardenCalendarBuilder
         Debug.Log("Garden calendar, five tomato stage prefabs, and VR scene wiring built.");
     }
 
-    [MenuItem("Garden/Add Y toggle and close button")]
-    public static void AddToggleAndClose()
+    [MenuItem("Garden/Add calendar Y toggle")]
+    public static void AddToggle()
     {
         GameObject prefab = PrefabUtility.LoadPrefabContents(PanelPath);
         try
@@ -124,7 +124,7 @@ public static class GardenCalendarBuilder
         EditorSceneManager.MarkSceneDirty(scene);
         EditorSceneManager.SaveScene(scene);
         AssetDatabase.SaveAssets();
-        Debug.Log("Garden calendar now toggles with left controller Y and has a Close button.");
+        Debug.Log("Garden calendar now toggles with left controller Y.");
     }
 
     private static GameObject BuildTomatoStage(int phase, Material stem, Material leaf,
@@ -290,7 +290,7 @@ public static class GardenCalendarBuilder
         rect.sizeDelta = size;
         Image image = go.GetComponent<Image>();
         image.color = color;
-        image.raycastTarget = name.StartsWith("AdvancePhaseButton") || name.StartsWith("CloseButton");
+        image.raycastTarget = name.StartsWith("AdvancePhaseButton");
         return image;
     }
 
@@ -326,27 +326,12 @@ public static class GardenCalendarBuilder
             phaseRect.sizeDelta = new Vector2(390, 60);
         }
 
-        Transform closeTransform = content.Find("CloseButton_REPLACEABLE");
-        Button closeButton;
-        if (closeTransform == null)
-        {
-            Image closeImage = PanelImage(content, "CloseButton_REPLACEABLE",
-                new Vector2(341, 285), new Vector2(105, 55), new Color(0.48f, 0.20f, 0.18f));
-            closeImage.raycastTarget = true;
-            closeButton = closeImage.gameObject.AddComponent<Button>();
-            closeButton.targetGraphic = closeImage;
-            Label(closeImage.transform, "CloseLabel", Vector2.zero, new Vector2(100, 50),
-                24, TextAnchor.MiddleCenter, "Close", Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"));
-        }
-        else closeButton = closeTransform.GetComponent<Button>();
-
         CalendarVisibilityController visibility = root.GetComponent<CalendarVisibilityController>();
         if (visibility == null) visibility = root.AddComponent<CalendarVisibilityController>();
         SerializedObject settings = new SerializedObject(visibility);
         settings.FindProperty("panelContent").objectReferenceValue = content.gameObject;
         settings.FindProperty("rayCollider").objectReferenceValue = root.GetComponent<BoxCollider>();
         settings.FindProperty("calendarPanel").objectReferenceValue = root.GetComponent<CalendarPanel>();
-        settings.FindProperty("closeButton").objectReferenceValue = closeButton;
         settings.FindProperty("startVisible").boolValue = false;
         settings.ApplyModifiedPropertiesWithoutUndo();
     }

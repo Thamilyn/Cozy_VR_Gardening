@@ -1,0 +1,1894 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2882a81d87b6e264bb9d15e2c4d06792, type: 3}
+  m_Name: Tutorial
+  m_EditorClassIdentifier: Assembly-CSharp::GronnyAudioCatalogue
+  cues:
+  - id: 01_welcome
+    clip: {fileID: 8300000, guid: e4976e1c1644c9548bae1e00739b9e74, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Hi! I'm Gronny. If you're using hand tracking, hold both hands comfortably
+      in front of you where you can see them. Today I'll help you grow your own tomato.
+      We'll learn about sustainable gardening by giving our plants just the water
+      they need. We'll practise together first, then use a limited water supply to
+      finish growing our tomato.
+    instruction: Welcome! I'm Gronny.
+    instructionDetail: Hands visible. Let's grow a tomato and save water.
+    steps: []
+  - id: 02_tomato_intro
+    clip: {fileID: 8300000, guid: d8d4013993163cc41988da9ba3788d91, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Today, we'll grow a tomato and learn to use water wisely. First,
+      let's practise moving.
+    instruction: Let's grow a tomato.
+    instructionDetail: First, practise moving.
+    steps: []
+  - id: 03_plant_seed
+    clip: {fileID: 8300000, guid: 5d67d3334f8dec545bbb061f40d2892a, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Move the seed with the Tomato label over the soil in the centre of
+      an empty small pot. Release the seed into the pot to plant it.
+    instruction: Plant the Tomato seed.
+    instructionDetail: Release it onto the soil in an empty small pot.
+    steps: []
+  - id: 04_first_watering
+    clip: {fileID: 8300000, guid: 9d20ae23b4bb1064a8658c2a231966e2, type: 3}
+    variations: []
+    mode: 0
+    demo: 5
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Gently tilt the can over the soil, near the roots. Turn it upright
+      to stop pouring.
+    instruction: Tilt the can over the soil.
+    instructionDetail: Aim near the roots. Turn upright to stop.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 2
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: -65}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Tilt over the soil, near the roots
+      press: 0
+    - at: 3.86
+      practiceOnly: 0
+      pose: 2
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Turn upright to stop pouring
+      press: 0
+  - id: 05_water_target
+    clip: {fileID: 8300000, guid: 0ae7d4fa2b51e484bb1318f3c54fd68c, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Watch the water bar by your plant. The target shows how much it needs.
+      Stop pouring when you reach it to avoid wasting water.
+    instruction: Watch the plant's water bar.
+    instructionDetail: Stop pouring at the target.
+    steps: []
+  - id: 06_enough_water
+    clip: {fileID: 8300000, guid: 97247ca445bd2f940bf8775bbb41a638, type: 3}
+    variations: []
+    mode: 0
+    demo: 6
+    priority: 50
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: That's enough water. Turn the can upright now to stop pouring.
+    instruction: Enough water. Stop pouring.
+    instructionDetail: Hold the can upright.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: -65}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Stop pouring
+      press: 0
+    - at: 1.42
+      practiceOnly: 0
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Hold the can upright
+      press: 0
+  - id: 07_first_advance
+    clip: {fileID: 8300000, guid: d61a71e014d1714438a9163ad0fb7d0c, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Your plant has enough water to grow. Open the calendar and select
+      Advance phase.
+    instruction: Your plant is ready to grow.
+    instructionDetail: 'Calendar: select Advance phase.'
+    steps: []
+  - id: 08_sprout
+    clip: {fileID: 8300000, guid: f346ac16b47983e419c61b30983581ea, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Look, a little sprout! Water the soil until the bar reaches its target,
+      then stop pouring.
+    instruction: A little sprout!
+    instructionDetail: Water the soil. Stop at the target.
+    steps: []
+  - id: 09_young_plant
+    clip: {fileID: 8300000, guid: e2fb016e44034ba47b810cd6d47a05d0, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Your tomato plant is getting bigger. Give it the water it needs for
+      this stage, without going past the target.
+    instruction: Your tomato is growing.
+    instructionDetail: Water to this stage's target.
+    steps: []
+  - id: 10_flowering
+    clip: {fileID: 8300000, guid: 48d88f21f3d08134ba3246a3008acc89, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Your plant has flowers! Keep an eye on the water bar and save the
+      remaining water for the next stage.
+    instruction: Your plant has flowers!
+    instructionDetail: Watch the water bar. Save water for later.
+    steps: []
+  - id: 11_green_fruit
+    clip: {fileID: 8300000, guid: 1374af72a5d98eb4ea9811de2c29f2be, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: There's our green tomato! This time, you decide when to stop watering.
+      Use the target to guide you.
+    instruction: A green tomato!
+    instructionDetail: Use the water target to decide when to stop.
+    steps: []
+  - id: 12_harvest
+    clip: {fileID: 8300000, guid: 06ae04c90ee349f468415c03e7abda35, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Your tomato is ripe! No more watering is needed. Pick the largest
+      red tomato and place it in the harvest tray.
+    instruction: Your tomato is ripe!
+    instructionDetail: Put the largest red tomato in the harvest tray.
+    steps: []
+  - id: 13_complete
+    clip: {fileID: 8300000, guid: 54c7f83a764c6dc47b4357288c90321d, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: You did it! Your first tomato, grown with care. Giving plants just
+      the water they need helps us save water. Thanks for gardening with me!
+    instruction: You grew your first tomato!
+    instructionDetail: Thanks for gardening and saving water.
+    steps: []
+  - id: help_planting
+    clip: {fileID: 8300000, guid: 3264c86be39b6714cafa501014d25597, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 35
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Try dropping the seed onto the soil in the centre of an empty small
+      pot.
+    instruction: Release the seed over the soil.
+    instructionDetail: Aim for the centre of an empty small pot.
+    steps: []
+  - id: help_low_water
+    clip: {fileID: 8300000, guid: 771d038fc1da571449ee13383b17dffe, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 35
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: The plant needs a little more water. Pour gently and stop when the
+      water bar reaches the target.
+    instruction: Your plant needs more water.
+    instructionDetail: Pour gently. Stop at the target.
+    steps: []
+  - id: help_excess_water
+    clip: {fileID: 8300000, guid: d228f995cfe6a864086e2a304829502b, type: 3}
+    variations:
+    - clip: {fileID: 8300000, guid: 73f1151088b0c544bae568a7c36683a0, type: 3}
+      transcript: Turn the can upright. The pot is too full, so let's give the extra
+        water time to drain.
+    - clip: {fileID: 8300000, guid: 9e2c78ca2dc4c5c439538c607c76d142, type: 3}
+      transcript: Let's stop pouring here. There's extra water in the pot that needs
+        to drain away.
+    - clip: {fileID: 8300000, guid: f2bb098c2207b4f468f2f957036bc117, type: 3}
+      transcript: Hold the can upright for a moment. We've gone past the target;
+        let the pot drain before continuing.
+    mode: 0
+    demo: 6
+    priority: 100
+    volume: 1
+    cooldown: 8
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: There's too much water in the pot. Hold the can upright and let the
+      extra water drain away.
+    instruction: Too much water. Stop pouring.
+    instructionDetail: Hold the can upright. Let the extra water drain.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: -65}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Stop pouring
+      press: 0
+    - at: 1.9
+      practiceOnly: 0
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Hold the can upright
+      press: 0
+  - id: help_drained
+    clip: {fileID: 8300000, guid: 421af7edfe1dbf746a206e36264d30c7, type: 3}
+    variations:
+    - clip: {fileID: 8300000, guid: 52092004ce283ff44962bea116ecf86a, type: 3}
+      transcript: The pot has drained now. On the next pour, use the target to help
+        you stop a little sooner.
+    - clip: {fileID: 8300000, guid: 531174bd2ff9e5e4fa864ee6f8f208cd, type: 3}
+      transcript: The extra water is gone. A gentler pour next time will make it
+        easier to stop at the target.
+    - clip: {fileID: 8300000, guid: 177403313bae2ad449c3735ee6eae920, type: 3}
+      transcript: That's the excess drained away. Next time, turn the can upright
+        as the bar reaches the target.
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 35
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: The extra water has drained away. That water wasn't needed. Next
+      time, try stopping when you reach the target.
+    instruction: The extra water has drained.
+    instructionDetail: Next time, stop at the target.
+    steps: []
+  - id: help_calendar
+    clip: {fileID: 8300000, guid: 0f313500e34faa94bb1fcf56f234f8ad, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 35
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Your plant has enough water. Open your calendar and select Advance
+      phase.
+    instruction: Your plant has enough water.
+    instructionDetail: 'Calendar: select Advance phase.'
+    steps: []
+  - id: help_refill
+    clip: {fileID: 8300000, guid: 5f467754821cf754ba55c331b0646623, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 20
+    volume: 1
+    cooldown: 35
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Your watering can is empty. Open the calendar and select Refill water
+      to take water from the reserve.
+    instruction: Your watering can is empty.
+    instructionDetail: 'Calendar: Refill water uses the reserve.'
+    steps: []
+  - id: controls_move_hands
+    clip: {fileID: 8300000, guid: b4a5e918175487c4cb7cc2d4c0ce8202, type: 3}
+    variations: []
+    mode: 1
+    demo: 1
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Let's practise moving. Watch the hand demonstration. Curl your index
+      finger, touch it with your thumb, then swipe your thumb to take a step. Give
+      it a try.
+    instruction: Practise moving.
+    instructionDetail: Curl your index. Tap with your thumb, then swipe.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Curl the index; keep the thumb free
+      press: 0
+    - at: 5.26
+      practiceOnly: 0
+      pose: 2
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Tap the index with the thumb
+      press: 0
+    - at: 6.5
+      practiceOnly: 0
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Movement active
+      press: 0
+    - at: 6.86
+      practiceOnly: 0
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 1
+      label: Swipe forward to step
+      press: 0
+    - at: 8.7
+      practiceOnly: 0
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 1
+      thumbSwipeWeight: 1
+      label: Swipe forward to step
+      press: 0
+    - at: 9
+      practiceOnly: 1
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 1
+      thumbSwipeWeight: 1
+      label: Swipe back to step back
+      press: 0
+    - at: 9.4
+      practiceOnly: 1
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 1
+      label: Swipe back to step back
+      press: 0
+    - at: 9.8
+      practiceOnly: 1
+      pose: 3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Straighten the index to exit
+      press: 0
+  - id: controls_grab_hands
+    clip: {fileID: 8300000, guid: 7dd9626ddc5ab9c48a716d0fa0bcfd46, type: 3}
+    variations: []
+    mode: 1
+    demo: 2
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Find the seed with the Tomato label. Pinch it between your thumb
+      and index finger to pick it up. Open your fingers to let go.
+    instruction: Pick up the Tomato seed.
+    instructionDetail: Pinch to grab. Open your fingers to release.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Move close to the object
+      press: 0
+    - at: 2.28
+      practiceOnly: 0
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Pinch and hold
+      press: 1
+    - at: 4.32
+      practiceOnly: 0
+      pose: 1
+      position: {x: 0.08, y: 0.05, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Keep holding while moving
+      press: 1
+    - at: 5.8
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0.08, y: 0.05, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Release to let go
+      press: 0
+  - id: controls_calendar_hands
+    clip: {fileID: 8300000, guid: 6606da26871532c418ffa4bc1b0b667c, type: 3}
+    variations: []
+    mode: 1
+    demo: 3
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Move your left hand away from objects, then pinch your thumb and
+      index finger together to open the calendar.
+    instruction: Open the calendar.
+    instructionDetail: Left hand away from objects. Pinch, then release.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 0
+      position: {x: -0.08, y: 0, z: 0}
+      rotation: {x: 0, y: 155, z: 180}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Left hand away from objects
+      press: 0
+    - at: 2.88
+      practiceOnly: 0
+      pose: 1
+      position: {x: -0.08, y: 0, z: 0}
+      rotation: {x: 0, y: 155, z: 180}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Pinch
+      press: 0
+    - at: 6.6
+      practiceOnly: 0
+      pose: 0
+      position: {x: -0.08, y: 0, z: 0}
+      rotation: {x: 0, y: 155, z: 180}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Release
+      press: 0
+  - id: controls_calendar_select_hands
+    clip: {fileID: 8300000, guid: e9b80cf998950b94c8735630229f23d4, type: 3}
+    variations: []
+    mode: 1
+    demo: 4
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Point at Advance phase, then pinch your thumb and index finger together
+      to select it.
+    instruction: Select Advance phase.
+    instructionDetail: Point at the button, then pinch.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: -105, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Point at the button
+      press: 0
+    - at: 1.82
+      practiceOnly: 0
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: -105, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Pinch
+      press: 1
+    - at: 4.8
+      practiceOnly: 0
+      pose: 3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: -105, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Release to select
+      press: 0
+  - id: controls_move_controllers
+    clip: {fileID: 8300000, guid: da0061683bc119145aaa479de911c50a, type: 3}
+    variations: []
+    mode: 2
+    demo: 1
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: left_oculus_controller_world/left_b_thumbstick
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Let's practise moving. Gently push the left joystick to walk. Give
+      it a try.
+    instruction: Practise moving.
+    instructionDetail: Push the left joystick to walk.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Move the joystick
+      press: 1
+    - at: 3.82
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Release to stop
+      press: 0
+  - id: controls_grab_controllers
+    clip: {fileID: 8300000, guid: c51dfc5c322a1c84d92bd2107037abe7, type: 3}
+    variations: []
+    mode: 2
+    demo: 2
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: right_oculus_controller_world/right_b_trigger_grip
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Find the seed with the Tomato label. Hold the Grip button to pick
+      it up. Release the button to let go.
+    instruction: Pick up the Tomato seed.
+    instructionDetail: Hold Grip to grab. Release Grip to let go.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Move close to the object
+      press: 0
+    - at: 2.5
+      practiceOnly: 0
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Hold the grip button
+      press: 1
+    - at: 3.18
+      practiceOnly: 0
+      pose: 1
+      position: {x: 0.08, y: 0.05, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Keep holding while moving
+      press: 1
+    - at: 4.6
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0.08, y: 0.05, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Release to let go
+      press: 0
+  - id: controls_calendar_controllers
+    clip: {fileID: 8300000, guid: 2ab5e5ecd241cce4ea343682d4006a86, type: 3}
+    variations: []
+    mode: 2
+    demo: 3
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: left_oculus_controller_world/b_button_y
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Press Y on your left controller to open the calendar.
+    instruction: Open the calendar.
+    instructionDetail: Press Y on the left controller.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: 'Left controller: Y'
+      press: 0
+    - at: 0.14
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Press Y
+      press: 1
+    - at: 3.1
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Release Y
+      press: 0
+  - id: controls_calendar_select_controllers
+    clip: {fileID: 8300000, guid: d2f5e8bdc7c39bd459ef4462e480641c, type: 3}
+    variations: []
+    mode: 2
+    demo: 4
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: right_oculus_controller_world/right_b_trigger_front
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Aim at Advance phase, then press the Trigger to select it.
+    instruction: Select Advance phase.
+    instructionDetail: Aim at the button, then press Trigger.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Point the controller
+      press: 0
+    - at: 1.82
+      practiceOnly: 0
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Press the index trigger
+      press: 1
+    - at: 3.5
+      practiceOnly: 0
+      pose: 3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Release to select
+      press: 0
+  - id: controls_move_hands_left
+    clip: {fileID: 8300000, guid: 7fea7ff2387ca354496e6e9862a817f5, type: 3}
+    variations: []
+    mode: 1
+    demo: 1
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: With your left hand, curl your index finger and keep your thumb free.
+      Tap your thumb against your curled index finger to activate movement. Swipe
+      your thumb forward to step forward, or backward to step back. Straighten your
+      index finger to exit movement mode.
+    instruction: Move with your left hand.
+    instructionDetail: Curl your index. Tap with your thumb, then swipe.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Curl the index; keep the thumb free
+      press: 0
+    - at: 4.3
+      practiceOnly: 0
+      pose: 2
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Tap the index with the thumb
+      press: 0
+    - at: 6.48
+      practiceOnly: 0
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Movement active
+      press: 0
+    - at: 8.18
+      practiceOnly: 0
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 1
+      label: Swipe forward to step
+      press: 0
+    - at: 9.94
+      practiceOnly: 0
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 1
+      thumbSwipeWeight: 1
+      label: Swipe forward to step
+      press: 0
+    - at: 10.44
+      practiceOnly: 0
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 1
+      thumbSwipeWeight: 1
+      label: Swipe back to step back
+      press: 0
+    - at: 11.9
+      practiceOnly: 0
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 1
+      label: Swipe back to step back
+      press: 0
+    - at: 12.48
+      practiceOnly: 0
+      pose: 3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Straighten the index to exit
+      press: 0
+  - id: controls_move_hands_right
+    clip: {fileID: 8300000, guid: bb0395f49bdcf774b965a79493f6186d, type: 3}
+    variations: []
+    mode: 1
+    demo: 1
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 1
+    controllerAnimation: {fileID: 0}
+    transcript: With your right hand, curl your index finger and keep your thumb
+      free. Tap your thumb against your curled index finger to activate movement.
+      Swipe your thumb forward to step forward, or backward to step back. Straighten
+      your index finger to exit movement mode.
+    instruction: Move with your right hand.
+    instructionDetail: Curl your index. Tap with your thumb, then swipe.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Curl the index; keep the thumb free
+      press: 0
+    - at: 4.56
+      practiceOnly: 0
+      pose: 2
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Tap the index with the thumb
+      press: 0
+    - at: 6.72
+      practiceOnly: 0
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Movement active
+      press: 0
+    - at: 8.82
+      practiceOnly: 0
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 1
+      label: Swipe forward to step
+      press: 0
+    - at: 10.74
+      practiceOnly: 0
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 1
+      thumbSwipeWeight: 1
+      label: Swipe forward to step
+      press: 0
+    - at: 11.18
+      practiceOnly: 0
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 1
+      thumbSwipeWeight: 1
+      label: Swipe back to step back
+      press: 0
+    - at: 12.6
+      practiceOnly: 0
+      pose: 4
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 1
+      label: Swipe back to step back
+      press: 0
+    - at: 13.36
+      practiceOnly: 0
+      pose: 3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 2.74, y: 262.35, z: 143.91}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Straighten the index to exit
+      press: 0
+  - id: controls_move_controllers_left
+    clip: {fileID: 8300000, guid: 70c8b3b732699d641b3d1d0b7530230b, type: 3}
+    variations: []
+    mode: 2
+    demo: 1
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: left_oculus_controller_world/left_b_thumbstick
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Use the joystick on your left controller to move. Let the joystick
+      return to the centre to stop.
+    instruction: Move with the left joystick.
+    instructionDetail: Release the joystick to stop.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Move the joystick
+      press: 1
+    - at: 3.34
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Release to stop
+      press: 0
+  - id: controls_move_controllers_right
+    clip: {fileID: 8300000, guid: 82c1e0bdc8285c94aaed55987b1b2785, type: 3}
+    variations: []
+    mode: 2
+    demo: 1
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: right_oculus_controller_world/right_b_thumbstick
+    rightHand: 1
+    controllerAnimation: {fileID: 8983535773375949353, guid: deed68a7fd2e9234899298cf80fae7ad, type: 3}
+    transcript: Use the joystick on your right controller to move. Let the joystick
+      return to the centre to stop.
+    instruction: Move with the right joystick.
+    instructionDetail: Release the joystick to stop.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Move the joystick
+      press: 1
+    - at: 3.06
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Release to stop
+      press: 0
+  - id: controls_calendar_hands_left
+    clip: {fileID: 8300000, guid: 150ef30535df0964bbb3c64d0cc0cba8, type: 3}
+    variations: []
+    mode: 1
+    demo: 3
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Keep your left hand free and away from objects. Pinch your thumb
+      and index finger together to open the calendar, then release. Repeat the gesture
+      to close it.
+    instruction: 'Calendar: left hand.'
+    instructionDetail: 'Away from objects: pinch, then release.'
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 0
+      position: {x: -0.08, y: 0, z: 0}
+      rotation: {x: 0, y: 155, z: 180}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Left hand away from objects
+      press: 0
+    - at: 3.42
+      practiceOnly: 0
+      pose: 1
+      position: {x: -0.08, y: 0, z: 0}
+      rotation: {x: 0, y: 155, z: 180}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Pinch
+      press: 0
+    - at: 7.34
+      practiceOnly: 0
+      pose: 0
+      position: {x: -0.08, y: 0, z: 0}
+      rotation: {x: 0, y: 155, z: 180}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Release
+      press: 0
+  - id: controls_calendar_hands_right
+    clip: {fileID: 8300000, guid: be1f30644e2f1f7418e7ae711a60233b, type: 3}
+    variations: []
+    mode: 1
+    demo: 3
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 1
+    controllerAnimation: {fileID: 0}
+    transcript: Keep your right hand free and away from objects. Pinch your thumb
+      and index finger together to open the calendar, then release. Repeat the gesture
+      to close it.
+    instruction: 'Calendar: right hand.'
+    instructionDetail: 'Away from objects: pinch, then release.'
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 0
+      position: {x: -0.08, y: 0, z: 0}
+      rotation: {x: 0, y: 155, z: 180}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Right hand away from objects
+      press: 0
+    - at: 3.02
+      practiceOnly: 0
+      pose: 1
+      position: {x: -0.08, y: 0, z: 0}
+      rotation: {x: 0, y: 155, z: 180}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Pinch
+      press: 0
+    - at: 6.66
+      practiceOnly: 0
+      pose: 0
+      position: {x: -0.08, y: 0, z: 0}
+      rotation: {x: 0, y: 155, z: 180}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Release
+      press: 0
+  - id: controls_calendar_controllers_left
+    clip: {fileID: 8300000, guid: a5c2f0e778ecb884cbeeea162da3bfdb, type: 3}
+    variations: []
+    mode: 2
+    demo: 3
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: left_oculus_controller_world/b_button_y
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Press the Y button on your left controller to open the calendar.
+      Press it again to close it.
+    instruction: 'Calendar: left controller.'
+    instructionDetail: Press Y to open. Press again to close.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: 'Left controller: Y'
+      press: 0
+    - at: 0.4
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Press Y
+      press: 1
+    - at: 3.6
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Release Y
+      press: 0
+  - id: controls_calendar_controllers_right
+    clip: {fileID: 8300000, guid: 29dd3addf3a4e5047bdd8921122d582a, type: 3}
+    variations: []
+    mode: 2
+    demo: 3
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: right_oculus_controller_world/b_button_b
+    rightHand: 1
+    controllerAnimation: {fileID: 2509944413163972655, guid: deed68a7fd2e9234899298cf80fae7ad, type: 3}
+    transcript: Press the B button on your right controller to open the calendar.
+      Press it again to close it.
+    instruction: 'Calendar: right controller.'
+    instructionDetail: Press B to open. Press again to close.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: 'Right controller: B'
+      press: 0
+    - at: 0.32
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Press B
+      press: 1
+    - at: 3.2
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Release B
+      press: 0
+  - id: 03_plant_seed_accessible
+    clip: {fileID: 8300000, guid: 518b8bb5c0ee4584ba83b0cb3f241dfd, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Pick up the seed labelled Tomato and gently drop it onto the soil
+      in an empty small pot.
+    instruction: Plant the seed labelled Tomato.
+    instructionDetail: Release it onto the soil in an empty small pot.
+    steps: []
+  - id: 12_harvest_accessible
+    clip: {fileID: 8300000, guid: 18bb0d370b469f04ebd210471228bb49, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Our tomato is ripe! Pick the fruit marked ready to harvest and gently
+      place it in the harvest tray.
+    instruction: Your tomato is ripe!
+    instructionDetail: Put the fruit marked ready in the harvest tray.
+    steps: []
+  - id: menu_intro
+    clip: {fileID: 8300000, guid: 9c47c1a5e9f831844a7b00ade59eeef0, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Ready to spend some time in the garden? Select Play to begin. You
+      can also review the controls or adjust your settings before you start.
+    instruction: Ready to garden?
+    instructionDetail: Select Play. Controls and sound settings are also available.
+    steps: []
+  - id: menu_tutorial_intro
+    clip: {fileID: 8300000, guid: a1d89f3c2ba7ffd409da16c402f6f3a8, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Choose hand tracking or controllers to review the controls. You can
+      replay any demonstration and return to the garden whenever you're ready.
+    instruction: Review the controls.
+    instructionDetail: Choose Hands or Controllers, then a demonstration.
+    steps: []
+  - id: settings_voice_sample
+    clip: {fileID: 8300000, guid: b9f644916b596a647b50cc810e4823a5, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Hello again! This is how loud my voice will sound. Adjust the volume
+      until you can hear me comfortably.
+    instruction: Set Gronny's volume.
+    instructionDetail: Adjust until you can hear comfortably.
+    steps: []
+  - id: controls_watering_hands
+    clip: {fileID: 8300000, guid: ff6aeec5835c4b5f8391e13b0f8d896d, type: 3}
+    variations: []
+    mode: 1
+    demo: 7
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Move your open hand close to the watering can. Close your fingers
+      around it to pick it up, and keep them closed while you hold it.
+    instruction: Pick up the watering can.
+    instructionDetail: Move close. Close your fingers and keep holding.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Move your open hand close
+      press: 0
+    - at: 3.22
+      practiceOnly: 0
+      pose: 2
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Close your fingers around the can
+      press: 1
+    - at: 5.46
+      practiceOnly: 0
+      pose: 2
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Keep your fingers closed
+      press: 1
+  - id: controls_watering_controllers
+    clip: {fileID: 8300000, guid: abe6e28bd47241beaa3dcab3c41670ec, type: 3}
+    variations: []
+    mode: 2
+    demo: 7
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: right_oculus_controller_world/right_b_trigger_grip
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Move your controller close to the watering can. Hold the Grip button
+      to pick it up, and keep holding the button.
+    instruction: Pick up the watering can.
+    instructionDetail: Move close. Hold Grip and keep holding.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Move the controller close
+      press: 0
+    - at: 3.1
+      practiceOnly: 0
+      pose: 2
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Hold Grip
+      press: 1
+    - at: 5.02
+      practiceOnly: 0
+      pose: 2
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Keep holding Grip
+      press: 1
+  - id: water_practice_intro
+    clip: {fileID: 8300000, guid: 4a0eb1b502fc495ca1daebc898700ab3, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Let's practise watering first. During this practice, you can learn
+      without worrying about running out of water.
+    instruction: Practise watering first.
+    instructionDetail: Water is unlimited during practice.
+    steps: []
+  - id: water_reserve_intro
+    clip: {fileID: 8300000, guid: 12c0f650524342759053027646b0fdaa, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Now we'll use a limited water supply. There's enough to grow your
+      tomato, with a little room for mistakes.
+    instruction: Your water supply is now limited.
+    instructionDetail: Use only what the tomato needs.
+    steps: []
+  - id: water_reserve_explanation
+    clip: {fileID: 8300000, guid: e4323ade18974fbca8670c89dd668fb1, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Refilling your can takes water from the garden's reserve. It doesn't
+      create more water, so every refill uses part of our supply.
+    instruction: Refilling uses the garden's reserve.
+    instructionDetail: Each refill leaves less water for later.
+    steps: []
+  - id: water_reserve_rules
+    clip: {fileID: 8300000, guid: 14c3b9165c59410384ff98694711df6e, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: If both the reserve and your can run out before the plant has enough
+      water, we'll need to try again.
+    instruction: Make the water last.
+    instructionDetail: If the can and reserve run out early, try again.
+    steps: []
+  - id: water_stopped_success
+    clip: {fileID: 8300000, guid: e72291d46f6f4dedb397ec5173ee96de, type: 3}
+    variations:
+    - clip: {fileID: 8300000, guid: dbd8a73430d90bd44a227eeaf094f34b, type: 3}
+      transcript: Lovely, that's just the water your tomato needs. The rest is saved
+        for later.
+    - clip: {fileID: 8300000, guid: 5275779007e7fdb4f8fa6830178e12a0, type: 3}
+      transcript: Well done! The plant has enough water for this stage, with some
+        left for later.
+    - clip: {fileID: 8300000, guid: eb975aeb9d3664948ad99f23814ecfeb, type: 3}
+      transcript: Nicely done. You've met the water target and kept the rest for
+        the next stage.
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: You've stopped at the target. Your plant has what it needs, and you've
+      saved the remaining water for later.
+    instruction: You stopped at the target!
+    instructionDetail: The remaining water is saved for later.
+    steps: []
+  - id: water_ready_next_phase
+    clip: {fileID: 8300000, guid: 2bf6316f69994b3b83e05dbea49485be, type: 3}
+    variations:
+    - clip: {fileID: 8300000, guid: ccc7cceebe16c9e4eab0761cb0d8a23e, type: 3}
+      transcript: The roots have what they need. Open the calendar and select Advance
+        phase when you're ready.
+    - clip: {fileID: 8300000, guid: 8cad27c1e1e77264693a84851627c73f, type: 3}
+      transcript: Let's see your tomato grow. Open the calendar and choose Advance
+        phase.
+    - clip: {fileID: 8300000, guid: 134e15e48280f2543b509b94b2eb4c65, type: 3}
+      transcript: This stage is watered. Open the calendar and select Advance phase
+        to continue growing.
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: The watering is done. Open the calendar and select Advance phase
+      to keep growing.
+    instruction: Watering is done.
+    instructionDetail: 'Calendar: select Advance phase.'
+    steps: []
+  - id: help_missed_pot
+    clip: {fileID: 8300000, guid: 75953c6e616b4f59883adf37e83ea75e, type: 3}
+    variations:
+    - clip: {fileID: 8300000, guid: 5a42df02f4ab8374e89f3bdb7f8c802f, type: 3}
+      transcript: Let's pause the pour. Move the spout over the soil before you tilt
+        the can again.
+    - clip: {fileID: 8300000, guid: 20c10f778085963489fff43f9dc75935, type: 3}
+      transcript: A little closer to the pot. Keep the can upright while you line
+        up the spout with the soil.
+    - clip: {fileID: 8300000, guid: cc097a2233aa47a439180d05a27fddaf, type: 3}
+      transcript: That water isn't reaching the roots. Stop pouring for a moment
+        and aim over the soil.
+    mode: 0
+    demo: 0
+    priority: 20
+    volume: 1
+    cooldown: 12
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: The water is missing the soil. Hold the can upright, move it over
+      the pot, then try again.
+    instruction: The water is missing the soil.
+    instructionDetail: Hold upright. Move over the pot, then pour.
+    steps: []
+  - id: help_stop_watering
+    clip: {fileID: 8300000, guid: baa1365ef9ff41579e58ee4fd5800d7e, type: 3}
+    variations:
+    - clip: {fileID: 8300000, guid: 986edad552334a34f94dce562ebc5bfd, type: 3}
+      transcript: We've reached the target. Turn the can upright and save the rest
+        for later.
+    - clip: {fileID: 8300000, guid: bfd11884c195ad24294bc14bf56dbfe0, type: 3}
+      transcript: That's plenty for this stage. Hold the can upright to stop the
+        flow.
+    - clip: {fileID: 8300000, guid: 422b657c28557ee4d9a569fe058c2b32, type: 3}
+      transcript: Time to stop pouring. Your tomato has the water it needs for now.
+    mode: 0
+    demo: 0
+    priority: 20
+    volume: 1
+    cooldown: 12
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Your plant already has enough water. Hold the can upright to avoid
+      wasting any more.
+    instruction: Enough water. Stop pouring.
+    instructionDetail: Hold the can upright to save water.
+    steps: []
+  - id: controls_refill_select_hands
+    clip: {fileID: 8300000, guid: 872173ec1589437c96d1d8ff1a3e35e8, type: 3}
+    variations: []
+    mode: 1
+    demo: 4
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Point at Refill water, then pinch your thumb and index finger together
+      to select it.
+    instruction: Select Refill water.
+    instructionDetail: Point at the button, then pinch.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: -105, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Point at the button
+      press: 0
+    - at: 1.8
+      practiceOnly: 0
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: -105, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Pinch
+      press: 1
+    - at: 4.7
+      practiceOnly: 0
+      pose: 3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: -105, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Release to select
+      press: 0
+  - id: controls_refill_select_controllers
+    clip: {fileID: 8300000, guid: 514d0d9f322a4c9380a5f63ac07aad95, type: 3}
+    variations: []
+    mode: 2
+    demo: 4
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: right_oculus_controller_world/right_b_trigger_front
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Aim at Refill water, then press the Trigger to select it.
+    instruction: Select Refill water.
+    instructionDetail: Aim at the button, then press Trigger.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Point the controller
+      press: 0
+    - at: 2.12
+      practiceOnly: 0
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Press the index trigger
+      press: 1
+    - at: 3.9
+      practiceOnly: 0
+      pose: 3
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Release to select
+      press: 0
+  - id: help_reserve_low
+    clip: {fileID: 8300000, guid: acdae5eb5df94e1aabc5288b1ace34d9, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 20
+    volume: 1
+    cooldown: 12
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: The water reserve is getting low. Pour carefully and stop when your
+      plant has enough.
+    instruction: The water reserve is low.
+    instructionDetail: Pour carefully. Stop at the target.
+    steps: []
+  - id: help_reserve_empty
+    clip: {fileID: 8300000, guid: 41617728345d4ba9817fbf9de8b143a3, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 20
+    volume: 1
+    cooldown: 12
+    assisted: 1
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: The reserve is empty, but there's still water in your can. Use the
+      target to help you make it last.
+    instruction: The reserve is empty.
+    instructionDetail: Use the water in your can carefully.
+    steps: []
+  - id: water_supply_exhausted
+    clip: {fileID: 8300000, guid: c09c997ba29844d2b4ed8207479c5636, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 100
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: We've run out of water before the plant had enough. Let's try again
+      and practise stopping at the target.
+    instruction: Not enough water to finish.
+    instructionDetail: Try again. Practise stopping at the target.
+    steps: []
+  - id: water_retry
+    clip: {fileID: 8300000, guid: e623b64f51f14be4aec6b9565fbdfd4e, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Select Try again to start with a fresh water supply.
+    instruction: Select Try again.
+    instructionDetail: Start with a fresh water supply.
+    steps: []
+  - id: water_no_waste_complete
+    clip: {fileID: 8300000, guid: 54cb277223e84924a16fa1d9b027367a, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Your tomato is ready, and no water was wasted. You gave your plant
+      just what it needed!
+    instruction: You grew a tomato without waste!
+    instructionDetail: You gave the plant just what it needed.
+    steps: []
+  - id: movement_success
+    clip: {fileID: 8300000, guid: 1467d3e9077a10a47b6ad8622a357ac9, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: That's it! Now come over to the gardening table.
+    instruction: You've got it!
+    instructionDetail: Come over to the gardening table.
+    steps: []
+  waterSavingAudioVersion: 3
+  leftHand:
+    prefab: {fileID: 8007592865782270689, guid: aca0706bac5a68a4394ac02275753161, type: 3}
+    animationRoot: OculusHand_L
+    pinch: {fileID: 7400000, guid: 55cdf5be56300094a98bf59c19c746b1, type: 2}
+    curled: {fileID: 7400000, guid: 2a62eebed83b25b4b8f2c21b3281f62c, type: 2}
+    point: {fileID: 7400000, guid: 81850be3722257141a962f87f08bd7d7, type: 2}
+    thumbFree: {fileID: 7400000, guid: d383e35b8d2f63f4f8258d5eadab871e, type: 2}
+    thumbSwipe: {fileID: 7400000, guid: 482c31a2f58c38542ba3a4b2b1538a62, type: 2}
+  rightHand:
+    prefab: {fileID: 4320616554957641676, guid: 4170d4d20a9b6034a88d89a71c2e0828, type: 3}
+    animationRoot: OculusHand_R
+    pinch: {fileID: 7400000, guid: 26aed7841cb5c9640aedf3cf82ed052e, type: 2}
+    curled: {fileID: 7400000, guid: 239acd9cecc4aaf4f98ec5420ef26571, type: 2}
+    point: {fileID: 7400000, guid: 86a31394bfe0b3e4b871676d471ef8c6, type: 2}
+    thumbFree: {fileID: 7400000, guid: 06e5790983e91714d83eb62bd6d24071, type: 2}
+    thumbSwipe: {fileID: 7400000, guid: eb7b67d787098ec41a67d85e0dd1b238, type: 2}
+  leftController: {fileID: 919132149155446097, guid: 2b1aaafc31655024394d83dc00911c1c, type: 3}
+  rightController: {fileID: 919132149155446097, guid: deed68a7fd2e9234899298cf80fae7ad, type: 3}
+  controllerStick: {fileID: -3733069272168932517, guid: 2b1aaafc31655024394d83dc00911c1c, type: 3}
+  controllerGrip: {fileID: -7415750269733489216, guid: deed68a7fd2e9234899298cf80fae7ad, type: 3}
+  controllerY: {fileID: -6048466920149098984, guid: 2b1aaafc31655024394d83dc00911c1c, type: 3}
+  controllerTrigger: {fileID: -6338187929255524150, guid: deed68a7fd2e9234899298cf80fae7ad, type: 3}
+  demonstrationMaterial: {fileID: 2100000, guid: 575f1a14acfa4b3409a2104843b085ff, type: 2}
+  voiceVolume: 0.85
+  pitch: 1
+  gapSeconds: 0.35
+  idleHelpSeconds: 30
+  independentHelpSeconds: 55
+  viewOffset: {x: 0.34, y: -0.18, z: 0.85}
+  handEulerAngles: {x: 0, y: 90, z: -75}
+  controllerEulerAngles: {x: 65, y: 180, z: 0}
+  visualScale: 1.15
+  blendSeconds: 0.35
+  handPoseHoldSeconds: 2.5
+  handPoseBlendSeconds: 0.7

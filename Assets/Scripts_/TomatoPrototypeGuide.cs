@@ -117,7 +117,8 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
             water.color = neutralWaterColor;
             string step = null;
             string detail = null;
-            bool guided = audioTutorial != null && audioTutorial.TryGetInstruction(out step, out detail);
+            bool guided = audioTutorial != null && (audioTutorial.TryGetSpokenInstruction(out step, out detail) ||
+                audioTutorial.TryGetInstruction(out step, out detail));
             instruction.text = guided ? step : message;
             water.text = guided ? detail : initialWaterInformation;
             return;
@@ -164,7 +165,8 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
         if (!pouring && Time.unscaledTime - lastActionAt > idleHintSeconds && !saved.harvested)
             prompt += "\nCalendar: left-hand pinch away from objects, or Y.";
         water.color = neutralWaterColor;
-        if (audioTutorial != null && audioTutorial.TryGetInstruction(out string currentStep, out string control))
+        if (audioTutorial != null && (audioTutorial.TryGetSpokenInstruction(out string currentStep, out string control) ||
+            audioTutorial.TryGetInstruction(out currentStep, out control)))
         {
             instruction.text = currentStep;
             water.text = control;

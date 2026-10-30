@@ -1,0 +1,346 @@
+[
+  {
+    "id": "04_first_watering",
+    "before": [
+      0.0,
+      3.408
+    ],
+    "after": [
+      0,
+      3.86
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "06_enough_water",
+    "before": [
+      0.0,
+      1.2727273
+    ],
+    "after": [
+      0,
+      1.42
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "help_excess_water",
+    "before": [
+      0.0,
+      1.1346939
+    ],
+    "after": [
+      0,
+      1.9
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_move_hands",
+    "before": [
+      0.0,
+      2.4481928,
+      3.4427712,
+      4.4373493,
+      5.3554215,
+      6.3500004,
+      7.268072,
+      8.033133
+    ],
+    "after": [
+      0,
+      5.26,
+      6.5,
+      6.86,
+      8.7,
+      9.0,
+      9.4,
+      9.8
+    ],
+    "practice_only_from": 5
+  },
+  {
+    "id": "controls_grab_hands",
+    "before": [
+      0.0,
+      1.7582644,
+      3.2107434,
+      4.9690084
+    ],
+    "after": [
+      0,
+      2.28,
+      4.32,
+      5.8
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_calendar_hands",
+    "before": [
+      0.0,
+      2.8468902,
+      5.023924
+    ],
+    "after": [
+      0,
+      2.88,
+      6.6
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_calendar_select_hands",
+    "before": [
+      0.0,
+      1.9631902,
+      3.9263804
+    ],
+    "after": [
+      0,
+      1.82,
+      4.8
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_move_controllers",
+    "before": [
+      0.0,
+      2.9512196
+    ],
+    "after": [
+      0,
+      3.82
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_grab_controllers",
+    "before": [
+      0.0,
+      1.8753846,
+      3.4246151,
+      5.3
+    ],
+    "after": [
+      0,
+      2.5,
+      3.18,
+      4.6
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_calendar_controllers",
+    "before": [
+      0.0,
+      0.91826093,
+      2.2956522
+    ],
+    "after": [
+      0,
+      0.14,
+      3.1
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_calendar_select_controllers",
+    "before": [
+      0.0,
+      1.2698412,
+      2.5396824
+    ],
+    "after": [
+      0,
+      1.82,
+      3.5
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_move_hands_left",
+    "before": [
+      0.0,
+      3.681928,
+      5.177711,
+      6.673494,
+      8.054217,
+      9.55,
+      10.930723,
+      12.081325
+    ],
+    "after": [
+      0,
+      4.3,
+      6.48,
+      8.18,
+      9.94,
+      10.44,
+      11.9,
+      12.48
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_move_hands_right",
+    "before": [
+      0.0,
+      3.903614,
+      5.489458,
+      7.075301,
+      8.539157,
+      10.125,
+      11.588855,
+      12.808735
+    ],
+    "after": [
+      0,
+      4.56,
+      6.72,
+      8.82,
+      10.74,
+      11.18,
+      12.6,
+      13.36
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_move_controllers_left",
+    "before": [
+      0.0,
+      3.902439
+    ],
+    "after": [
+      0,
+      3.34
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_move_controllers_right",
+    "before": [
+      0.0,
+      3.609756
+    ],
+    "after": [
+      0,
+      3.06
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_calendar_hands_left",
+    "before": [
+      0.0,
+      4.164593,
+      7.349282
+    ],
+    "after": [
+      0,
+      3.42,
+      7.34
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_calendar_hands_right",
+    "before": [
+      0.0,
+      3.87177,
+      6.832536
+    ],
+    "after": [
+      0,
+      3.02,
+      6.66
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_calendar_controllers_left",
+    "before": [
+      0.0,
+      1.471304,
+      3.678261
+    ],
+    "after": [
+      0,
+      0.4,
+      3.6
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_calendar_controllers_right",
+    "before": [
+      0.0,
+      1.356522,
+      3.391304
+    ],
+    "after": [
+      0,
+      0.32,
+      3.2
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_watering_hands",
+    "before": [
+      0.0,
+      2.3040001,
+      5.376
+    ],
+    "after": [
+      0,
+      3.22,
+      5.46
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_watering_controllers",
+    "before": [
+      0.0,
+      1.9560001,
+      4.564
+    ],
+    "after": [
+      0,
+      3.1,
+      5.02
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_refill_select_hands",
+    "before": [
+      0.0,
+      1.9325154,
+      3.8650308
+    ],
+    "after": [
+      0,
+      1.8,
+      4.7
+    ],
+    "practice_only_from": -1
+  },
+  {
+    "id": "controls_refill_select_controllers",
+    "before": [
+      0.0,
+      1.4153439,
+      2.8306878
+    ],
+    "after": [
+      0,
+      2.12,
+      3.9
+    ],
+    "practice_only_from": -1
+  }
+]

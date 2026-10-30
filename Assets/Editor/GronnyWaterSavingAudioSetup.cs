@@ -8,7 +8,7 @@ using UnityEngine;
 /// <summary>Connects the supplied water-saving lesson without changing Meta assets.</summary>
 public static class GronnyWaterSavingAudioSetup
 {
-    [Serializable] private sealed class Line { public string id = ""; public string text = ""; }
+    [Serializable] private sealed class Line { public string id = ""; public string cueId = ""; public string text = ""; }
     [Serializable] private sealed class Script { public Line[] entries = Array.Empty<Line>(); }
     [Serializable] private sealed class Import
     {
@@ -30,6 +30,43 @@ public static class GronnyWaterSavingAudioSetup
         var catalogue = AssetDatabase.LoadAssetAtPath<GronnyAudioCatalogue>("Assets/Resources/GronnyAudio/Tutorial.asset");
         if (catalogue == null) throw new InvalidOperationException("The existing Gronny catalogue is missing.");
         Apply(catalogue);
+        EditorUtility.SetDirty(catalogue);
+        AssetDatabase.SaveAssetIfDirty(catalogue);
+        GronnyAudioSetup.WriteInventory(catalogue);
+    }
+
+    [MenuItem("Garden/Gronny/Connect water warning variations")]
+    public static void ConnectWarningVariations() =>
+        ConnectVariations("Docs/GronnyWaterWarningVariations.json", "Connect Gronny water warning variations");
+
+    [MenuItem("Garden/Gronny/Connect completed watering variations")]
+    public static void ConnectCompletedWateringVariations() =>
+        ConnectVariations("Docs/GronnyCompletedWateringVariations.json", "Connect Gronny completed watering variations");
+
+    private static void ConnectVariations(string scriptPath, string undoLabel)
+    {
+        var catalogue = AssetDatabase.LoadAssetAtPath<GronnyAudioCatalogue>("Assets/Resources/GronnyAudio/Tutorial.asset");
+        if (catalogue == null) throw new InvalidOperationException("The existing Gronny catalogue is missing.");
+        var script = JsonUtility.FromJson<Script>("{\"entries\":" + File.ReadAllText(scriptPath) + "}");
+        if (script.entries.Length == 0 || script.entries.Select(line => line.id).Distinct().Count() != script.entries.Length)
+            throw new InvalidOperationException("Voice variations need a non-empty script with unique IDs.");
+        var assignments = new Dictionary<GronnyAudioCatalogue.Cue, GronnyAudioCatalogue.VoiceVariation[]>();
+        foreach (var group in script.entries.GroupBy(line => line.cueId))
+        {
+            var cue = catalogue.Find(group.Key);
+            if (cue == null) throw new InvalidOperationException("Missing voice cue: " + group.Key);
+            assignments.Add(cue, group.Select(line =>
+            {
+                if (string.IsNullOrWhiteSpace(line.text)) throw new InvalidOperationException("Missing transcript: " + line.id);
+                var clip = LoadClip(line.id);
+                if (clip == cue.clip || clip.length <= 0f || cue.steps.Any(step => step.at >= clip.length))
+                    throw new InvalidOperationException("Voice variation must be a new recording long enough for its demonstration: " + line.id);
+                return new GronnyAudioCatalogue.VoiceVariation { clip = clip, transcript = line.text };
+            }).ToArray());
+        }
+        // Validate the complete batch before changing any catalogue references.
+        Undo.RecordObject(catalogue, undoLabel);
+        foreach (var assignment in assignments) assignment.Key.variations = assignment.Value;
         EditorUtility.SetDirty(catalogue);
         AssetDatabase.SaveAssetIfDirty(catalogue);
         GronnyAudioSetup.WriteInventory(catalogue);
@@ -88,6 +125,7 @@ public static class GronnyWaterSavingAudioSetup
             }
             else cue = new GronnyAudioCatalogue.Cue { cooldown = line.id.StartsWith("help_") ? 12f : 0f };
             cue.id = line.id;
+            cue.instruction = cue.instructionDetail = "";
             cue.clip = LoadClip(line.id);
             cue.transcript = line.text;
             cue.assisted = line.id.StartsWith("help_") || line.id.StartsWith("controls_");
@@ -109,6 +147,7 @@ public static class GronnyWaterSavingAudioSetup
         catalogue.waterSavingAudioVersion = Mathf.Max(catalogue.waterSavingAudioVersion,
             import.files.Any(file => file.id == "controls_move_hands" && !string.IsNullOrEmpty(file.override_sha256)) ? 3 :
             import.files.Any(file => !string.IsNullOrEmpty(file.override_sha256)) ? 2 : 1);
+        GronnyAudioSetup.ApplyInstructionCaptions(catalogue);
     }
 
     private static GronnyAudioCatalogue.Step Step(float at, GardenDemoPose pose, string caption, float press = 0f) =>

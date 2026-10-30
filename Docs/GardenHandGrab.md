@@ -47,6 +47,73 @@ al cuerpo, lo que provocaba saltos de cámara. Las colisiones con mesas, suelo y
 macetas siguen activas. Al liberar la última mano, cancelar el agarre o desactivar
 el componente, se restauran las capas originales de cada collider.
 
+## Recuperación automática de la jarra
+
+`WateringCan` deja la jarra donde el jugador la apoya sobre la mesa. Después de
+haberla agarrado, solo inicia la recuperación si está suelta y su centro de masa
+queda al menos 45 cm por debajo del centro de masa en la pose de retorno. Si
+permanece por debajo durante dos segundos de juego activo, vuelve al origen y
+queda inmóvil hasta recogerla; entonces recupera sus restricciones físicas
+originales. Volver a agarrarla o subirla por encima del límite cancela la espera.
+El temporizador se detiene mientras el jardín está pausado.
+
+`Recovery Delay Seconds` ajusta la espera, `Minimum Recovery Drop` define la
+caída mínima y un `Recovery Point` independiente permite elegir otra pose de
+retorno accesible a la altura de la mesa. La detección usa la altura del centro
+de masa, no una colisión con el suelo ni la distancia horizontal al origen. Se
+comprueba continuamente para detectar una jarra que se desliza del borde después
+de haber descansado sobre la mesa. Las semillas conservan su retorno anterior.
+La recuperación conserva el agua de la jarra y la reserva de la sesión. No
+vierte agua mientras espera un nuevo agarre. El calendario ya no ofrece
+recuperación manual. El retorno automático usa la capa `GardenHeldObject`
+mientras la jarra espera, para que no se convierta en un apoyo del jugador.
+
+Revisión estática realizada; quedan pendientes la compilación y la comprobación
+en Play y Quest 3 de estos casos:
+
+1. Apoyarla en distintos puntos de la mesa, de pie y de lado, y esperar más de
+   dos segundos: permanece allí sin retornar.
+2. Dejarla caer de la mesa: al superar la caída mínima, empieza la espera de dos
+   segundos y después vuelve conservando su agua. Recogerla antes cancela el retorno.
+3. Recogerla después del retorno, regar y soltarla de nuevo: recupera la física,
+   el riego responde al agarre y la inclinación; solo retorna si vuelve a caer.
+4. Pausar durante la espera o soltarla con el menú abierto: el tiempo solo
+   avanza al volver al jardín.
+5. Abrir el calendario: solo aparecen los controles de avance, relleno y
+   reinicio; la recuperación automática sigue funcionando sin cambiar el agua.
+6. Transferirla entre manos: no se programa el retorno mientras alguna la sostiene.
+7. Dejarla en el borde y permitir que se deslice después: se detecta la caída
+   aunque hayan pasado más de dos segundos desde la suelta.
+
+## Recuperación de semillas sueltas
+
+`SeedItem` intenta plantar al soltar la semilla, como antes. Si no se planta,
+espera dos segundos de juego activo y la devuelve a su posición y orientación
+iniciales, anulando la velocidad lineal y angular. Allí permanece inmóvil hasta
+un nuevo agarre real de Meta, que restaura sus restricciones físicas originales.
+Volver a agarrarla antes del retorno cancela la recuperación. Una semilla
+plantada no se recupera ni se separa de su maceta.
+
+El Inspector permite ajustar `Recovery Delay Seconds` y asignar un
+`Recovery Point` independiente de la semilla, colocado en una zona accesible.
+Sin referencia se utiliza la pose al comenzar la partida. El retorno reutiliza
+la misma semilla y su identificador; no crea copias ni reinicia el tutorial.
+El temporizador se detiene durante el menú. Una suelta durante la pausa solo
+programa la recuperación al volver al jardín y no intenta plantar.
+
+Revisión estática realizada; quedan pendientes la compilación y la comprobación
+en Play y Quest 3 de estos casos:
+
+1. Soltar fuera de la maceta y dejar que ruede: vuelve a los dos segundos y
+   permanece disponible para ambas manos y los mandos.
+2. Recogerla antes del retorno: continúa en la mano sin saltar al origen.
+3. Recogerla después del retorno y soltarla otra vez: recupera la física y
+   vuelve a ejecutar el mismo ciclo de recuperación.
+4. Soltar sobre tierra válida: se planta y permanece unida a la maceta después
+   de esperar más de dos segundos.
+5. Pausar durante la espera o soltarla con el menú abierto: no retorna durante
+   la pausa ni se planta al reanudar; después vuelve a su punto de recuperación.
+
 ## Comprobación en Quest
 
 1. Abra `Garden_Moves`, entre en Play y active el seguimiento de manos.

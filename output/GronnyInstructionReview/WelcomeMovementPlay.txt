@@ -1,0 +1,19 @@
+Unity 6000.3.23f1
+UTC 2026-10-29T17:30:59.7618287Z
+Real lesson and AudioSource; synthetic locomotion events and audio seeks; no physical Quest test.
+PASS: Welcome begins after Play
+PASS: Movement during the greeting cannot skip the walking lesson
+PASS: Walking follows the combined welcome without an extra reserve speech
+PASS: Walking detection starts with the actual instruction playback
+PASS: Waiting alone does not complete the lesson
+PASS: Moving the headset alone does not complete walking
+PASS: A rotation event does not count as a step
+PASS: Vertical motion does not count as walking
+PASS: A small joystick displacement does not yet complete walking
+PASS: Joystick movement accumulates until the minimum distance
+PASS: At least ten centimetres of controlled movement completes walking
+PASS: Successful movement lets the current spoken instruction finish
+PASS: Movement success plays after the instruction finishes
+PASS: Seed instructions follow the movement acknowledgement
+PASS: Movement success is delivered only once
+RESULT: PASS

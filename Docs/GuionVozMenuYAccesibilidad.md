@@ -146,9 +146,10 @@ Hello again! This is how loud my voice will sound. Adjust the volume until you c
   antes de certificar que no nombran una mano fija. Si la nombran, necesitarán
   una versión neutral; no se ha supuesto que su contenido sea independiente.
 
-La mención descriptiva a green tomatoes en `11_green_fruit` se puede conservar:
-no es la única señal para identificar un objeto ni ordena elegirlo por su color.
-La fase y el cuidado seguirán mostrándose mediante texto e iconos.
+La grabación `11_green_fruit` se revisó el 29 de octubre de 2026 para decir
+«Our tomatoes are slowly ripening.»: los frutos inmaduros del modelo tienen
+distintos colores. El texto del panel coincide con la nueva frase; se conserva
+el identificador del recurso. La fase y el cuidado se muestran mediante texto e iconos.
 
 ## Comprobación al recibir los WAV
 

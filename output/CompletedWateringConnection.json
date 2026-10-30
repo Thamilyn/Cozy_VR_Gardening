@@ -1,0 +1,83 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "if (UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)\n    throw new System.InvalidOperationException(\"Connect the recordings outside Play mode.\");\nUnityEditor.AssetDatabase.Refresh(UnityEditor.ImportAssetOptions.ForceSynchronousImport);\nGronnyWaterSavingAudioSetup.ConnectCompletedWateringVariations();\nstring verification = GronnyAudioVerification.VerifyCatalogue();\nvar catalogue = UnityEngine.Resources.Load<GronnyAudioCatalogue>(\"GronnyAudio/Tutorial\");\nvar confirmations = new System.Collections.Generic.List<object>();\nforeach (string id in new[] { \"water_stopped_success\", \"water_ready_next_phase\" })\n{\n    var cue = catalogue.Find(id);\n    if (cue.variations.Length != 3)\n        throw new System.InvalidOperationException(\"Expected three variations: \" + id);\n    var recordings = new System.Collections.Generic.List<object>();\n    recordings.Add(new { path = UnityEditor.AssetDatabase.GetAssetPath(cue.clip), duration = cue.clip.length, transcript = cue.transcript });\n    foreach (var variation in cue.variations)\n        recordings.Add(new { path = UnityEditor.AssetDatabase.GetAssetPath(variation.clip), duration = variation.clip.length, transcript = variation.transcript });\n    confirmations.Add(new { id, recordings, cooldown = cue.cooldown, priority = cue.priority });\n}\nreturn new { verification, unity = UnityEngine.Application.unityVersion, baseCueCount = catalogue.cues.Length, confirmations };\n"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "verification": "PASS: catalogue and installed Meta references",
+        "unity": "6000.3.23f1",
+        "baseCueCount": 58,
+        "confirmations": [
+          {
+            "id": "water_stopped_success",
+            "recordings": [
+              {
+                "path": "Assets/Audio/water_saving/water_stopped_success.wav",
+                "duration": 6.2,
+                "transcript": "You've stopped at the target. Your plant has what it needs, and you've saved the remaining water for later."
+              },
+              {
+                "path": "Assets/Audio/water_saving/variations/water_stopped_success_02.wav",
+                "duration": 5.2,
+                "transcript": "Lovely, that's just the water your tomato needs. The rest is saved for later."
+              },
+              {
+                "path": "Assets/Audio/water_saving/variations/water_stopped_success_03.wav",
+                "duration": 5.12,
+                "transcript": "Well done! The plant has enough water for this stage, with some left for later."
+              },
+              {
+                "path": "Assets/Audio/water_saving/variations/water_stopped_success_04.wav",
+                "duration": 5.48,
+                "transcript": "Nicely done. You've met the water target and kept the rest for the next stage."
+              }
+            ],
+            "cooldown": 0,
+            "priority": 0
+          },
+          {
+            "id": "water_ready_next_phase",
+            "recordings": [
+              {
+                "path": "Assets/Audio/water_saving/water_ready_next_phase.wav",
+                "duration": 5.72,
+                "transcript": "The watering is done. Open the calendar and select Advance phase to keep growing."
+              },
+              {
+                "path": "Assets/Audio/water_saving/variations/water_ready_next_phase_02.wav",
+                "duration": 5.36,
+                "transcript": "The roots have what they need. Open the calendar and select Advance phase when you're ready."
+              },
+              {
+                "path": "Assets/Audio/water_saving/variations/water_ready_next_phase_03.wav",
+                "duration": 4.48,
+                "transcript": "Let's see your tomato grow. Open the calendar and choose Advance phase."
+              },
+              {
+                "path": "Assets/Audio/water_saving/variations/water_ready_next_phase_04.wav",
+                "duration": 5.84,
+                "transcript": "This stage is watered. Open the calendar and select Advance phase to continue growing."
+              }
+            ],
+            "cooldown": 0,
+            "priority": 0
+          }
+        ]
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

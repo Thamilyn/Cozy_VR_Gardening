@@ -38,6 +38,13 @@ public sealed class WateringCan : MonoBehaviour
     private OVRInput.Button refillButton = OVRInput.Button.Two;
     [SerializeField] private bool requireCanToBeHeldForRefill = true;
 
+    [Header("Dropped can recovery")]
+    [Tooltip("Optional return location. Otherwise the can returns to its starting pose.")]
+    [SerializeField] private Transform recoveryPoint;
+    [Tooltip("The can's centre of mass must fall this far below its return pose before the recovery timer starts. Leaving it elsewhere on the table does not recall it.")]
+    [SerializeField, Min(0.1f)] private float minimumRecoveryDrop = 0.45f;
+    [SerializeField, Min(0.1f)] private float recoveryDelaySeconds = 2f;
+
     [Header("Optional references")]
     [SerializeField] private Transform spout;
     [SerializeField] private LineRenderer waterStream;
@@ -57,7 +64,12 @@ public sealed class WateringCan : MonoBehaviour
     private readonly Dictionary<GameObject, int> _restingColliderLayers = new();
     private bool _usingHeldLayer;
     private bool _awaitingRecoveryGrab;
+    private Vector3 _initialPosition;
     private Quaternion _initialRotation;
+    private Vector3 _recoveryCenterOffset;
+    private bool _hasBeenHeld;
+    private RigidbodyConstraints _restingConstraints;
+    private float _recoveryRemaining = -1f;
     private CalendarSystem _calendar;
     private bool _requireUpright;
     private SeedsController _seeds;
@@ -72,7 +84,6 @@ public sealed class WateringCan : MonoBehaviour
     public bool IsPouring { get; private set; }
     public bool IsHeld => _grabbable != null && _grabbable.SelectingPointsCount > 0;
     public bool IsTiltedToPour => Vector3.Dot(transform.up, Vector3.up) <= pourTiltThreshold;
-    public float LastReleasedAt { get; private set; } = float.NegativeInfinity;
 
     private void Awake()
     {
@@ -84,6 +95,7 @@ public sealed class WateringCan : MonoBehaviour
         GardenGrabSetup.ConfigureGrabbable(gameObject);
         _grabbable = GetComponent<Grabbable>();
         _body = GetComponent<Rigidbody>();
+        _restingConstraints = _body.constraints;
         //_grabbable.ForceKinematicDisabled = true;
         foreach (HandGrabInteractable handGrab in GetComponentsInChildren<HandGrabInteractable>(true))
         {
@@ -100,6 +112,10 @@ public sealed class WateringCan : MonoBehaviour
 
     private void Start()
     {
+        _initialPosition = transform.position;
+        _initialRotation = transform.rotation;
+        _recoveryCenterOffset = Quaternion.Inverse(_initialRotation) *
+            (_body.worldCenterOfMass - _initialPosition);
         GardenWaterSupply.Active?.RegisterCan(this);
         if (GetComponent<WateringCanWaterDisplay>() == null)
             gameObject.AddComponent<WateringCanWaterDisplay>();
@@ -108,7 +124,11 @@ public sealed class WateringCan : MonoBehaviour
     private void Update()
     {
         bool isHeld = IsHeld;
-        if (isHeld) _awaitingRecoveryGrab = false;
+        if (isHeld)
+        {
+            _hasBeenHeld = true;
+            CancelRecovery();
+        }
         UpdateHeldCollisionState(isHeld || _awaitingRecoveryGrab);
 
         if (GardenMenuController.GardenSuspended)
@@ -116,6 +136,7 @@ public sealed class WateringCan : MonoBehaviour
             SuspendPouring();
             return;
         }
+        if (!isHeld) UpdateRecovery();
         GardenWaterSupply supply = GardenWaterSupply.Active;
         if ((supply != null && (supply.Exhausted || supply.Completed)) || (isHeld && !HasReliableTracking()))
         {
@@ -186,20 +207,18 @@ public sealed class WateringCan : MonoBehaviour
     {
         if (_grabbable != null)
             _grabbable.WhenPointerEventRaised -= HandleGrabEvent;
+        CancelRecovery();
         UpdateHeldCollisionState(false);
-        if (_awaitingRecoveryGrab)
-        {
-            _awaitingRecoveryGrab = false;
-            Rigidbody body = GetComponent<Rigidbody>();
-            if (body != null) body.isKinematic = false;
-        }
         SetStreamVisible(false);
     }
 
     private void HandleGrabEvent(PointerEvent evt)
     {
-        if (evt.Type == PointerEventType.Select) _awaitingRecoveryGrab = false;
-        if (evt.Type == PointerEventType.Unselect && !IsHeld) LastReleasedAt = Time.unscaledTime;
+        if (evt.Type == PointerEventType.Select)
+        {
+            _hasBeenHeld = true;
+            CancelRecovery();
+        }
         if (evt.Type == PointerEventType.Select || evt.Type == PointerEventType.Unselect ||
             evt.Type == PointerEventType.Cancel)
             UpdateHeldCollisionState(IsHeld || _awaitingRecoveryGrab);
@@ -300,34 +319,49 @@ public sealed class WateringCan : MonoBehaviour
         return false;
     }
 
-    /// <summary>Returns a dropped can within reach, without refilling it or forcing a Meta grab.</summary>
-    public void RecoverToHand(Vector3 position)
+    private void UpdateRecovery()
     {
-        if (IsHeld) return;
-        Rigidbody body = GetComponent<Rigidbody>();
-        if (body == null) return;
-        if (!body.isKinematic)
+        if (!_hasBeenHeld || _awaitingRecoveryGrab) return;
+        Vector3 position = recoveryPoint != null ? recoveryPoint.position : _initialPosition;
+        Quaternion rotation = recoveryPoint != null ? recoveryPoint.rotation : _initialRotation;
+        float referenceHeight = position.y + (rotation * _recoveryCenterOffset).y;
+        // Monitor the height continuously: a can can rest on the table before sliding off.
+        // Using its physical centre also tolerates laying it on its side on the table.
+        if (_body.worldCenterOfMass.y >= referenceHeight - Mathf.Max(0.1f, minimumRecoveryDrop))
         {
-            body.linearVelocity = Vector3.zero;
-            body.angularVelocity = Vector3.zero;
+            _recoveryRemaining = -1f;
+            return;
         }
-        // Suspend it until a real grab; Meta restores dynamic physics on release.
+        if (_recoveryRemaining < 0f) _recoveryRemaining = Mathf.Max(0.1f, recoveryDelaySeconds);
+        _recoveryRemaining -= Time.deltaTime;
+        if (_recoveryRemaining <= 0f) RecoverToPose(position, rotation);
+    }
+
+    private void CancelRecovery()
+    {
+        _recoveryRemaining = -1f;
+        if (!_awaitingRecoveryGrab) return;
+        _body.constraints = _restingConstraints;
+        _awaitingRecoveryGrab = false;
+    }
+
+    private void RecoverToPose(Vector3 position, Quaternion rotation)
+    {
+        if (IsHeld || _body == null) return;
+        _recoveryRemaining = -1f;
+        if (!_body.isKinematic)
+        {
+            _body.linearVelocity = Vector3.zero;
+            _body.angularVelocity = Vector3.zero;
+        }
+        transform.SetPositionAndRotation(position, rotation);
+        _body.position = position;
+        _body.rotation = rotation;
+        // Keep it still without changing the kinematic state saved by Meta on grab.
+        _body.constraints = RigidbodyConstraints.FreezeAll;
         _awaitingRecoveryGrab = true;
         UpdateHeldCollisionState(true);
-        body.isKinematic = true;
-        Transform handle = transform.Find("Handle");
-        Renderer handleRenderer = handle != null ? handle.GetComponentInChildren<Renderer>() : null;
-        Collider canCollider = GetComponent<Collider>();
-        Vector3 grabPoint = handleRenderer != null ? handleRenderer.bounds.center :
-            canCollider != null ? canCollider.bounds.center : transform.position;
-        Vector3 localGrabPoint = transform.InverseTransformPoint(grabPoint);
-        transform.rotation = _initialRotation;
-        transform.position = position - transform.TransformVector(localGrabPoint);
-        body.position = transform.position;
-        body.rotation = transform.rotation;
-        IsPouring = false;
-        _lastWateredPlant = null;
-        SetStreamVisible(false);
+        SuspendPouring();
     }
 
     private bool TryGetFirstExternalHit(Vector3 origin, out RaycastHit closestHit)
@@ -581,6 +615,8 @@ public sealed class WateringCan : MonoBehaviour
         maximumPourDistance = Mathf.Max(0.1f, maximumPourDistance);
         streamRadius = Mathf.Max(0.001f, streamRadius);
         streamWidth = Mathf.Max(0.001f, streamWidth);
+        recoveryDelaySeconds = Mathf.Max(0.1f, recoveryDelaySeconds);
+        minimumRecoveryDrop = Mathf.Max(0.1f, minimumRecoveryDrop);
         _currentWaterLitres = Mathf.Clamp(_currentWaterLitres, 0f, capacityLitres);
     }
 }

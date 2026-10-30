@@ -2,7 +2,6 @@ using Oculus.Interaction;
 using Oculus.Interaction.HandGrab;
 using Oculus.Interaction.Input;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>Keeps the Canvas root listening for Y and left-hand pinches while the panel is hidden.</summary>
 [DisallowMultipleComponent]
@@ -12,7 +11,6 @@ public sealed class CalendarVisibilityController : MonoBehaviour
     [SerializeField] private GameObject panelContent;
     [SerializeField] private Collider rayCollider;
     [SerializeField] private CalendarPanel calendarPanel;
-    [SerializeField] private Button closeButton;
     [SerializeField] private bool startVisible;
 
     [Header("Placement when opened")]
@@ -37,7 +35,6 @@ public sealed class CalendarVisibilityController : MonoBehaviour
 
     public bool IsVisible { get; private set; }
     public event System.Action<bool> VisibilityChanged;
-    public event System.Action CloseSelected;
 
     private void Awake()
     {
@@ -46,7 +43,6 @@ public sealed class CalendarVisibilityController : MonoBehaviour
         if (rayCollider != null) rayCollider.isTrigger = true;
         // A world-space, pointable Canvas must not inherit a screen-space Canvas scale.
         if (transform.parent != null) transform.SetParent(null, false);
-        if (closeButton != null) closeButton.onClick.AddListener(SelectClose);
         SetVisible(startVisible);
         if (panelContent != null)
         {
@@ -70,7 +66,6 @@ public sealed class CalendarVisibilityController : MonoBehaviour
             releaseStartedAt = float.NaN;
             return;
         }
-        if (closeButton != null) closeButton.interactable = GronnyTutorial.Allows(GardenTutorialAction.CloseCalendar);
         // Read grab state after the Meta interactors have processed this frame.
         bool validHand = leftHand != null && leftHand.IsDataValid && leftHand.IsTracked &&
             leftHand.HandConfidence == OVRHand.TrackingConfidence.High &&
@@ -168,13 +163,6 @@ public sealed class CalendarVisibilityController : MonoBehaviour
     public void Open() => SetVisible(true);
     public void Close() => SetVisible(false);
 
-    private void SelectClose()
-    {
-        if (!GronnyTutorial.Allows(GardenTutorialAction.CloseCalendar)) return;
-        CloseSelected?.Invoke();
-        Close();
-    }
-
     public void SetVisible(bool visible)
     {
         if (!GronnyTutorial.Allows(visible ? GardenTutorialAction.OpenCalendar : GardenTutorialAction.CloseCalendar)) return;
@@ -234,8 +222,4 @@ public sealed class CalendarVisibilityController : MonoBehaviour
             worldCanvas.worldCamera = viewer.GetComponent<Camera>() ?? Camera.main;
     }
 
-    private void OnDestroy()
-    {
-        if (closeButton != null) closeButton.onClick.RemoveListener(SelectClose);
-    }
 }

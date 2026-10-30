@@ -1,0 +1,19 @@
+if (UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
+    throw new System.InvalidOperationException("Connect the recordings outside Play mode.");
+UnityEditor.AssetDatabase.Refresh(UnityEditor.ImportAssetOptions.ForceSynchronousImport);
+GronnyWaterSavingAudioSetup.ConnectCompletedWateringVariations();
+string verification = GronnyAudioVerification.VerifyCatalogue();
+var catalogue = UnityEngine.Resources.Load<GronnyAudioCatalogue>("GronnyAudio/Tutorial");
+var confirmations = new System.Collections.Generic.List<object>();
+foreach (string id in new[] { "water_stopped_success", "water_ready_next_phase" })
+{
+    var cue = catalogue.Find(id);
+    if (cue.variations.Length != 3)
+        throw new System.InvalidOperationException("Expected three variations: " + id);
+    var recordings = new System.Collections.Generic.List<object>();
+    recordings.Add(new { path = UnityEditor.AssetDatabase.GetAssetPath(cue.clip), duration = cue.clip.length, transcript = cue.transcript });
+    foreach (var variation in cue.variations)
+        recordings.Add(new { path = UnityEditor.AssetDatabase.GetAssetPath(variation.clip), duration = variation.clip.length, transcript = variation.transcript });
+    confirmations.Add(new { id, recordings, cooldown = cue.cooldown, priority = cue.priority });
+}
+return new { verification, unity = UnityEngine.Application.unityVersion, baseCueCount = catalogue.cues.Length, confirmations };

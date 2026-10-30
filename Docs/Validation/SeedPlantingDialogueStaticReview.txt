@@ -1,0 +1,10 @@
+Seed planting dialogue - static review
+Date: 2026-10-29
+Cause: grab lesson previously completed on release, immediately before TryPlant; planting could invalidate the queued planting cue before playback.
+Change: the Meta Select event completes the tomato seed grab lesson while held; held-state polling also covers tutorial/menu resume.
+Release still owns planting. Movement order, menu suspension, unplanted tomato guards and existing voice sentence continuity are preserved.
+Removed redundant release polling in GronnyTutorial; watering-can release can no longer complete the seed lesson.
+Updated existing verification callers to RecordSeedGrab and extended the real lesson check to cover Select, held seed, next spoken cue and matching text.
+Static review: no obsolete release-driven references remain in the five changed scripts; event subscription and cleanup are paired.
+No audio clips, catalogue entries, scenes, prefabs, package versions or .meta files changed for this correction.
+NOT RUN: compilation, Play-mode verification or physical hand/controller input on Quest 3.

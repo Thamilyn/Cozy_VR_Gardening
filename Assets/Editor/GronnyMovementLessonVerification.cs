@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Oculus.Interaction;
 using Oculus.Interaction.Locomotion;
 using UnityEditor;
 using UnityEngine;
@@ -137,9 +138,29 @@ public static class GronnyMovementLessonVerification
         yield return 0.9f;
         Check(voice.CurrentCueId == "controls_grab_hands", "Seed instructions follow the movement acknowledgement");
         Call(tutorial, "Learn", "move");
+        var seed = UnityEngine.Object.FindObjectsByType<SeedItem>(FindObjectsSortMode.None)
+            .First(item => item.Crop == SeedCrop.Tomato && !item.IsPlanted);
+        var grab = seed.GetComponent<Grabbable>();
+        var pose = new Pose(seed.transform.position, seed.transform.rotation);
+        grab.ProcessPointerEvent(new PointerEvent(9895, PointerEventType.Hover, pose));
+        grab.ProcessPointerEvent(new PointerEvent(9895, PointerEventType.Select, pose));
+        Check(grab.SelectingPointsCount == 1 && learned.Contains("grab") &&
+            tutorial.TryGetInstruction(out string instruction, out _) && instruction.Contains("Step 3/6"),
+            "The real seed Select event advances to planting while the seed is still held");
+        Check(!seed.IsPlanted && GronnyTutorial.Allows(GardenTutorialAction.Plant),
+            "Picking up a seed prepares planting without planting it or requiring a practice drop");
+        yield return 0.2f;
+        Check(voice.CurrentCueId == "controls_grab_hands" && source.isPlaying,
+            "Picking up the seed lets the current grab sentence finish");
         source.time = source.clip.length - 0.1f;
         yield return 0.9f;
-        Check(voice.CurrentCueId != "movement_success", "Movement success is delivered only once");
+        Check(voice.CurrentCueId == "03_plant_seed" && grab.SelectingPointsCount == 1 && !seed.IsPlanted,
+            "Planting speech follows the grab sentence while the seed is still held");
+        Check(tutorial.TryGetSpokenInstruction(out instruction, out _) &&
+            instruction == Resources.Load<GronnyAudioCatalogue>("GronnyAudio/Tutorial").Find("03_plant_seed").instruction,
+            "Planting text matches the spoken instruction before release");
+        grab.ProcessPointerEvent(new PointerEvent(9895, PointerEventType.Unselect, pose));
+        grab.ProcessPointerEvent(new PointerEvent(9895, PointerEventType.Unhover, pose));
     }
 
     private static void Move(GronnyTutorial tutorial, OVRCameraRig rig, Vector3 delta, LocomotionEvent.TranslationType type)

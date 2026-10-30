@@ -1,0 +1,90 @@
+[
+  {
+    "id": "01_welcome",
+    "differences": [
+      {
+        "operation": "replace",
+        "expected": "gronny",
+        "transcript": "granny"
+      }
+    ],
+    "review": "Name recognised as Granny; pronunciation needs human listening."
+  },
+  {
+    "id": "07_first_advance",
+    "differences": [
+      {
+        "operation": "replace",
+        "expected": "advance",
+        "transcript": "advanced"
+      }
+    ],
+    "review": "Advance/Advanced recognition ambiguity; keep the actual button label Advance phase."
+  },
+  {
+    "id": "help_calendar",
+    "differences": [
+      {
+        "operation": "replace",
+        "expected": "advance",
+        "transcript": "advanced"
+      }
+    ],
+    "review": "Advance/Advanced recognition ambiguity; keep the actual button label Advance phase."
+  },
+  {
+    "id": "controls_calendar_select_hands",
+    "differences": [
+      {
+        "operation": "replace",
+        "expected": "advance",
+        "transcript": "advanced"
+      }
+    ],
+    "review": "Advance/Advanced recognition ambiguity; keep the actual button label Advance phase."
+  },
+  {
+    "id": "controls_calendar_select_controllers",
+    "differences": [
+      {
+        "operation": "replace",
+        "expected": "advance",
+        "transcript": "advanced"
+      }
+    ],
+    "review": "Advance/Advanced recognition ambiguity; keep the actual button label Advance phase."
+  },
+  {
+    "id": "03_plant_seed_accessible",
+    "differences": [
+      {
+        "operation": "replace",
+        "expected": "labelled",
+        "transcript": "labeled"
+      }
+    ],
+    "review": "British/US spelling only; same word."
+  },
+  {
+    "id": "water_ready_next_phase",
+    "differences": [
+      {
+        "operation": "replace",
+        "expected": "advance",
+        "transcript": "advanced"
+      }
+    ],
+    "review": "Advance/Advanced recognition ambiguity; keep the actual button label Advance phase."
+  },
+  {
+    "id": "water_supply_exhausted",
+    "differences": [
+      {
+        "operation": "replace",
+        "expected": "and",
+        "transcript": "in"
+      }
+    ],
+    "review": "and practise/in practice ambiguity; needs human listening."
+  }
+]

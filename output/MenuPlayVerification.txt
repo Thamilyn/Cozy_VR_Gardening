@@ -1,5 +1,5 @@
 Unity 6000.3.23f1
-UTC 2026-10-27T03:53:15.0847447Z
+UTC 2026-10-29T17:30:09.5908368Z
 Synthetic Play checks: camera pose, release decisions and pointer events; physical XR input not tested.
 PASS: Initial menu suspends the garden before Play
 PASS: Cultivation voice waits for Play
@@ -22,12 +22,13 @@ PASS: Play waits for selection release before starting garden actions
 PASS: Greeting waits for the Play selection to be released
 PASS: First Play relocates the menu from entry to Gronny
 PASS: Pause panel sits 8 cm above the guide without covering its instructions
-PASS: Pause menu button sits 8 cm above the guide
+PASS: Pause menu button takes the tank's former station beside the guide
+PASS: Tank takes the Menu button's former station above the guide
 PASS: Pause panel occupies clear space beside Gronny
 PASS: Holding an input cannot resume the garden
 PASS: Brief release cannot resume the garden
 PASS: Stable release resumes through the same production decision
-PASS: Closed menu leaves its Menu button fixed above the guide
+PASS: Closed menu leaves its Menu button fixed beside the guide
 PASS: Menu button stays fixed after moving and looking away
 PASS: Gronny greets and invites the player to the table after Play
 PASS: The greeting itself explains the limited water reserve
@@ -64,30 +65,35 @@ PASS: Opening menu freezes phase lighting and prevents committing the day
 PASS: Menu blocks additional crop watering and phase requests
 PASS: Returning completes the interrupted phase exactly once
 PASS: First completed care phase switches from free practice to a finite reserve
-PASS: Finite supply covers remaining targets with a bounded mistake margin
+PASS: Finite supply includes a 100 percent margin for all remaining stages
+PASS: A full can lasts 24 seconds at the slower beginner watering rate
 PASS: Refilling a full can cannot debit or create water
 PASS: A newly spawned can starts empty in the limited lesson instead of creating free water
 PASS: Direct can refill transfers water from the shared reserve without changing the available total
 PASS: A real held tilted-can soil cast records useful water and waters the planted tomato
 PASS: Measured discharge equals the actual decrease in can water
 PASS: Pouring away from pots records missed water without crediting the plant
-PASS: Pour crossing the target splits useful water from surplus in the same stream (poured=5.028814, useful=0.9999909, surplus=3.779691, retained=65.49396, target=61.71429)
+PASS: Pour crossing the target splits useful water from surplus in the same stream (poured=2.519857, useful=0.9999821, surplus=1.388836, retained=63.10311, target=61.71429)
 PASS: Water balance closes and wasted water cannot earn the no-waste narration
 PASS: Calendar refill also preserves the shared finite budget: sample 1
-PASS: Reserve reaching zero produces an explicit warning while water in cans remains usable
 PASS: Calendar refill also preserves the shared finite budget: sample 2
+PASS: Meeting the last target with no water left does not trigger an unfair retry
+PASS: After harvest, refills and outflow cannot change the completed balance
+PASS: Exactly enough water for all remaining targets keeps the attempt playable
+PASS: Insufficient water triggers a clear failure before the player empties every can
 PASS: Exhaustion pauses watering and growth but leaves the recovery UI accessible
 PASS: Empty-reserve direct refill and advance cannot bypass exhaustion
-PASS: Total exhaustion automatically opens a visible interactive game-over panel without needing the tutorial
+PASS: Insufficient supply automatically opens a visible interactive game-over panel without needing the tutorial
 PASS: Game-over panel clearly names the outcome and offers Try again
 PASS: Text fits its rectangles on page Game over
-PASS: Game-over announcement plays through menu audio while cultivation is paused
+PASS: Game over explains the insufficient supply and announces Try again while cultivation is paused
 PASS: Guide board agrees with the game-over panel rather than offering a missing Return button
 PASS: Meta rays can select the game-over panel in front of the player
-PASS: Try again restores a fresh budget while keeping the existing crop and phase
-PASS: Retry closes game over and its narration, then resumes only after input release
-PASS: Retry preserves measured waste and cannot grant repeated budgets while water remains
-PASS: Retry budget covers all remaining targets, including a partially watered current phase
-PASS: After harvest, refills and outflow cannot change the completed balance
-PASS: Meeting the last target with no water left does not trigger an unfair retry
+PASS: Repeated retry clicks cannot queue multiple scene reloads
+PASS: Try again unloads the previous crop, menu and voice player
+PASS: Retry starts the planting session directly without another Play selection
+PASS: Retry resets crop, day, journal and all water counters to the planting session
+PASS: Retry preserves the player's sound settings
+PASS: The planting restart waits for the retry selection to be released before speaking
+PASS: Gronny restarts at the planting dialogue with planting unlocked and later lessons reset
 RESULT: PASS

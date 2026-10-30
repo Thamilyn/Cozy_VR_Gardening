@@ -78,9 +78,9 @@ The flowers are here! You've had some practice now. Take a look at the panel and
 
 ### 11_green_fruit
 
-**Cuándo reproducirlo:** Al aparecer los frutos verdes. Último riego con autonomía.
+**Cuándo reproducirlo:** Al aparecer los frutos inmaduros. Último riego con autonomía.
 
-Look, green tomatoes! This time, you're in charge. Check what the plant needs and take care of it.
+Our tomatoes are slowly ripening. This time, you decide when to stop watering. Use the target to guide you.
 
 ### 12_harvest
 

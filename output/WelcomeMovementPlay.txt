@@ -1,5 +1,5 @@
 Unity 6000.3.23f1
-UTC 2026-10-27T03:51:16.6297499Z
+UTC 2026-10-29T17:30:59.7618287Z
 Real lesson and AudioSource; synthetic locomotion events and audio seeks; no physical Quest test.
 PASS: Welcome begins after Play
 PASS: Movement during the greeting cannot skip the walking lesson

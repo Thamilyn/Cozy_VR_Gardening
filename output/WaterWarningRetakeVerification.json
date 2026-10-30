@@ -1,0 +1,18 @@
+{
+  "recognition_model": "openai/whisper-base.en",
+  "note": "Revisión automática; no sustituye escucha humana.",
+  "files": [
+    {
+      "id": "help_missed_pot_03",
+      "expected": "A little closer to the pot. Keep the can upright while you line up the spout with the soil.",
+      "transcript": "a little closer to the pot. Keep the can upright while you line up the spout with the soil.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.2,
+      "sample_rate": 24000,
+      "peak": 0.934173583984375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "2A5D9E373893E2EFF3CEBA16CE76A2B71AE2EAB0166F9BA8312FB117D8B2017C"
+    }
+  ]
+}

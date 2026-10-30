@@ -1,0 +1,227 @@
+[
+  {
+    "id": "01_welcome",
+    "filename": "01_welcome.wav",
+    "text": "Hi! I'm Gronny. If you're using hand tracking, hold both hands comfortably in front of you where you can see them. Today I'll help you grow your own tomato. We'll learn about sustainable gardening by giving our plants just the water they need. We'll practise together first, then use a limited water supply to finish growing our tomato."
+  },
+  {
+    "id": "02_tomato_intro",
+    "filename": "02_tomato_intro.wav",
+    "text": "Today, we'll grow a tomato and learn to use water wisely. First, let's practise moving."
+  },
+  {
+    "id": "controls_move_hands",
+    "filename": "controls_move_hands.wav",
+    "text": "Let's practise moving. Watch the hand demonstration. Curl your index finger, touch it with your thumb, then swipe your thumb to take a step. Give it a try."
+  },
+  {
+    "id": "controls_move_controllers",
+    "filename": "controls_move_controllers.wav",
+    "text": "Let's practise moving. Gently push the left joystick to walk. Give it a try."
+  },
+  {
+    "id": "controls_grab_hands",
+    "filename": "controls_grab_hands.wav",
+    "text": "Find the seed with the Tomato label. Pinch it between your thumb and index finger to pick it up. Open your fingers to let go."
+  },
+  {
+    "id": "controls_grab_controllers",
+    "filename": "controls_grab_controllers.wav",
+    "text": "Find the seed with the Tomato label. Hold the Grip button to pick it up. Release the button to let go."
+  },
+  {
+    "id": "03_plant_seed",
+    "filename": "03_plant_seed.wav",
+    "text": "Move the seed with the Tomato label over the soil in the centre of an empty small pot. Release the seed into the pot to plant it."
+  },
+  {
+    "id": "controls_watering_hands",
+    "filename": "controls_watering_hands.wav",
+    "text": "Move your open hand close to the watering can. Close your fingers around it to pick it up, and keep them closed while you hold it."
+  },
+  {
+    "id": "controls_watering_controllers",
+    "filename": "controls_watering_controllers.wav",
+    "text": "Move your controller close to the watering can. Hold the Grip button to pick it up, and keep holding the button."
+  },
+  {
+    "id": "04_first_watering",
+    "filename": "04_first_watering.wav",
+    "text": "Gently tilt the can over the soil, near the roots. Turn it upright to stop pouring."
+  },
+  {
+    "id": "05_water_target",
+    "filename": "05_water_target.wav",
+    "text": "Watch the water bar by your plant. The target shows how much it needs. Stop pouring when you reach it to avoid wasting water."
+  },
+  {
+    "id": "06_enough_water",
+    "filename": "06_enough_water.wav",
+    "text": "That's enough water. Turn the can upright now to stop pouring."
+  },
+  {
+    "id": "07_first_advance",
+    "filename": "07_first_advance.wav",
+    "text": "Your plant has enough water to grow. Open the calendar and select Advance phase."
+  },
+  {
+    "id": "controls_calendar_hands",
+    "filename": "controls_calendar_hands.wav",
+    "text": "Move your left hand away from objects, then pinch your thumb and index finger together to open the calendar."
+  },
+  {
+    "id": "controls_calendar_controllers",
+    "filename": "controls_calendar_controllers.wav",
+    "text": "Press Y on your left controller to open the calendar."
+  },
+  {
+    "id": "controls_calendar_select_hands",
+    "filename": "controls_calendar_select_hands.wav",
+    "text": "Point at Advance phase, then pinch your thumb and index finger together to select it."
+  },
+  {
+    "id": "controls_calendar_select_controllers",
+    "filename": "controls_calendar_select_controllers.wav",
+    "text": "Aim at Advance phase, then press the Trigger to select it."
+  },
+  {
+    "id": "08_sprout",
+    "filename": "08_sprout.wav",
+    "text": "Look, a little sprout! Water the soil until the bar reaches its target, then stop pouring."
+  },
+  {
+    "id": "09_young_plant",
+    "filename": "09_young_plant.wav",
+    "text": "Your tomato plant is getting bigger. Give it the water it needs for this stage, without going past the target."
+  },
+  {
+    "id": "10_flowering",
+    "filename": "10_flowering.wav",
+    "text": "Your plant has flowers! Keep an eye on the water bar and save the remaining water for the next stage."
+  },
+  {
+    "id": "11_green_fruit",
+    "filename": "11_green_fruit.wav",
+    "text": "There's our green tomato! This time, you decide when to stop watering. Use the target to guide you."
+  },
+  {
+    "id": "12_harvest",
+    "filename": "12_harvest.wav",
+    "text": "Your tomato is ripe! No more watering is needed. Pick the largest red tomato and place it in the harvest tray."
+  },
+  {
+    "id": "13_complete",
+    "filename": "13_complete.wav",
+    "text": "You did it! Your first tomato, grown with care. Giving plants just the water they need helps us save water. Thanks for gardening with me!"
+  },
+  {
+    "id": "water_practice_intro",
+    "filename": "water_practice_intro.wav",
+    "text": "Let's practise watering first. During this practice, you can learn without worrying about running out of water."
+  },
+  {
+    "id": "water_reserve_intro",
+    "filename": "water_reserve_intro.wav",
+    "text": "Now we'll use a limited water supply. There's enough to grow your tomato, with a little room for mistakes."
+  },
+  {
+    "id": "water_reserve_explanation",
+    "filename": "water_reserve_explanation.wav",
+    "text": "Refilling your can takes water from the garden's reserve. It doesn't create more water, so every refill uses part of our supply."
+  },
+  {
+    "id": "water_reserve_rules",
+    "filename": "water_reserve_rules.wav",
+    "text": "If both the reserve and your can run out before the plant has enough water, we'll need to try again."
+  },
+  {
+    "id": "water_stopped_success",
+    "filename": "water_stopped_success.wav",
+    "text": "You've stopped at the target. Your plant has what it needs, and you've saved the remaining water for later."
+  },
+  {
+    "id": "water_ready_next_phase",
+    "filename": "water_ready_next_phase.wav",
+    "text": "The watering is done. Open the calendar and select Advance phase to keep growing."
+  },
+  {
+    "id": "help_planting",
+    "filename": "help_planting.wav",
+    "text": "Try dropping the seed onto the soil in the centre of an empty small pot."
+  },
+  {
+    "id": "help_low_water",
+    "filename": "help_low_water.wav",
+    "text": "The plant needs a little more water. Pour gently and stop when the water bar reaches the target."
+  },
+  {
+    "id": "help_missed_pot",
+    "filename": "help_missed_pot.wav",
+    "text": "The water is missing the soil. Hold the can upright, move it over the pot, then try again."
+  },
+  {
+    "id": "help_stop_watering",
+    "filename": "help_stop_watering.wav",
+    "text": "Your plant already has enough water. Hold the can upright to avoid wasting any more."
+  },
+  {
+    "id": "help_excess_water",
+    "filename": "help_excess_water.wav",
+    "text": "There's too much water in the pot. Hold the can upright and let the extra water drain away."
+  },
+  {
+    "id": "help_drained",
+    "filename": "help_drained.wav",
+    "text": "The extra water has drained away. That water wasn't needed. Next time, try stopping when you reach the target."
+  },
+  {
+    "id": "help_calendar",
+    "filename": "help_calendar.wav",
+    "text": "Your plant has enough water. Open your calendar and select Advance phase."
+  },
+  {
+    "id": "help_refill",
+    "filename": "help_refill.wav",
+    "text": "Your watering can is empty. Open the calendar and select Refill water to take water from the reserve."
+  },
+  {
+    "id": "controls_refill_select_hands",
+    "filename": "controls_refill_select_hands.wav",
+    "text": "Point at Refill water, then pinch your thumb and index finger together to select it."
+  },
+  {
+    "id": "controls_refill_select_controllers",
+    "filename": "controls_refill_select_controllers.wav",
+    "text": "Aim at Refill water, then press the Trigger to select it."
+  },
+  {
+    "id": "help_reserve_low",
+    "filename": "help_reserve_low.wav",
+    "text": "The water reserve is getting low. Pour carefully and stop when your plant has enough."
+  },
+  {
+    "id": "help_reserve_empty",
+    "filename": "help_reserve_empty.wav",
+    "text": "The reserve is empty, but there's still water in your can. Use the target to help you make it last."
+  },
+  {
+    "id": "water_supply_exhausted",
+    "filename": "water_supply_exhausted.wav",
+    "text": "We've run out of water before the plant had enough. Let's try again and practise stopping at the target."
+  },
+  {
+    "id": "water_retry",
+    "filename": "water_retry.wav",
+    "text": "Select Try again to start with a fresh water supply."
+  },
+  {
+    "id": "water_no_waste_complete",
+    "filename": "water_no_waste_complete.wav",
+    "text": "Your tomato is ready, and no water was wasted. You gave your plant just what it needed!"
+  },
+  {
+    "id": "movement_success",
+    "filename": "movement_success.wav",
+    "text": "That's it! Now come over to the gardening table."
+  }
+]

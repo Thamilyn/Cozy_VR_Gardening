@@ -1,0 +1,4460 @@
+[
+  {
+    "id": "01_welcome",
+    "text": " Hi, I'm Granny. If you're using hand tracking, hold both hands comfortably in front of you where you can see them. Today I'll help you grow your own tomato. We'll learn about sustainable gardening by giving our plants just the water they need. We'll practice together first, then use a limited water supply to finish growing our tomato.",
+    "words": [
+      {
+        "text": " Hi,",
+        "timestamp": [
+          0.0,
+          0.54
+        ]
+      },
+      {
+        "text": " I'm",
+        "timestamp": [
+          0.54,
+          0.78
+        ]
+      },
+      {
+        "text": " Granny.",
+        "timestamp": [
+          0.78,
+          1.6
+        ]
+      },
+      {
+        "text": " If",
+        "timestamp": [
+          1.9,
+          1.9
+        ]
+      },
+      {
+        "text": " you're",
+        "timestamp": [
+          1.9,
+          2.06
+        ]
+      },
+      {
+        "text": " using",
+        "timestamp": [
+          2.06,
+          2.36
+        ]
+      },
+      {
+        "text": " hand",
+        "timestamp": [
+          2.36,
+          2.66
+        ]
+      },
+      {
+        "text": " tracking,",
+        "timestamp": [
+          2.66,
+          3.44
+        ]
+      },
+      {
+        "text": " hold",
+        "timestamp": [
+          3.44,
+          3.72
+        ]
+      },
+      {
+        "text": " both",
+        "timestamp": [
+          3.72,
+          3.96
+        ]
+      },
+      {
+        "text": " hands",
+        "timestamp": [
+          3.96,
+          4.32
+        ]
+      },
+      {
+        "text": " comfortably",
+        "timestamp": [
+          4.32,
+          4.88
+        ]
+      },
+      {
+        "text": " in",
+        "timestamp": [
+          4.88,
+          5.14
+        ]
+      },
+      {
+        "text": " front",
+        "timestamp": [
+          5.14,
+          5.32
+        ]
+      },
+      {
+        "text": " of",
+        "timestamp": [
+          5.32,
+          5.5
+        ]
+      },
+      {
+        "text": " you",
+        "timestamp": [
+          5.5,
+          5.62
+        ]
+      },
+      {
+        "text": " where",
+        "timestamp": [
+          5.62,
+          5.82
+        ]
+      },
+      {
+        "text": " you",
+        "timestamp": [
+          5.82,
+          5.98
+        ]
+      },
+      {
+        "text": " can",
+        "timestamp": [
+          5.98,
+          6.1
+        ]
+      },
+      {
+        "text": " see",
+        "timestamp": [
+          6.1,
+          6.3
+        ]
+      },
+      {
+        "text": " them.",
+        "timestamp": [
+          6.3,
+          7.0
+        ]
+      },
+      {
+        "text": " Today",
+        "timestamp": [
+          7.58,
+          7.58
+        ]
+      },
+      {
+        "text": " I'll",
+        "timestamp": [
+          7.58,
+          7.86
+        ]
+      },
+      {
+        "text": " help",
+        "timestamp": [
+          7.86,
+          8.06
+        ]
+      },
+      {
+        "text": " you",
+        "timestamp": [
+          8.06,
+          8.2
+        ]
+      },
+      {
+        "text": " grow",
+        "timestamp": [
+          8.2,
+          8.4
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          8.4,
+          8.64
+        ]
+      },
+      {
+        "text": " own",
+        "timestamp": [
+          8.64,
+          8.88
+        ]
+      },
+      {
+        "text": " tomato.",
+        "timestamp": [
+          8.88,
+          9.82
+        ]
+      },
+      {
+        "text": " We'll",
+        "timestamp": [
+          9.96,
+          10.06
+        ]
+      },
+      {
+        "text": " learn",
+        "timestamp": [
+          10.06,
+          10.24
+        ]
+      },
+      {
+        "text": " about",
+        "timestamp": [
+          10.24,
+          10.48
+        ]
+      },
+      {
+        "text": " sustainable",
+        "timestamp": [
+          10.48,
+          10.8
+        ]
+      },
+      {
+        "text": " gardening",
+        "timestamp": [
+          10.8,
+          11.46
+        ]
+      },
+      {
+        "text": " by",
+        "timestamp": [
+          11.46,
+          11.86
+        ]
+      },
+      {
+        "text": " giving",
+        "timestamp": [
+          11.86,
+          12.08
+        ]
+      },
+      {
+        "text": " our",
+        "timestamp": [
+          12.08,
+          12.3
+        ]
+      },
+      {
+        "text": " plants",
+        "timestamp": [
+          12.3,
+          12.56
+        ]
+      },
+      {
+        "text": " just",
+        "timestamp": [
+          12.56,
+          13.02
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          13.02,
+          13.3
+        ]
+      },
+      {
+        "text": " water",
+        "timestamp": [
+          13.3,
+          13.5
+        ]
+      },
+      {
+        "text": " they",
+        "timestamp": [
+          13.5,
+          13.8
+        ]
+      },
+      {
+        "text": " need.",
+        "timestamp": [
+          13.8,
+          14.7
+        ]
+      },
+      {
+        "text": " We'll",
+        "timestamp": [
+          14.9,
+          15.06
+        ]
+      },
+      {
+        "text": " practice",
+        "timestamp": [
+          15.06,
+          15.42
+        ]
+      },
+      {
+        "text": " together",
+        "timestamp": [
+          15.42,
+          15.76
+        ]
+      },
+      {
+        "text": " first,",
+        "timestamp": [
+          15.76,
+          16.74
+        ]
+      },
+      {
+        "text": " then",
+        "timestamp": [
+          16.74,
+          16.96
+        ]
+      },
+      {
+        "text": " use",
+        "timestamp": [
+          16.96,
+          17.2
+        ]
+      },
+      {
+        "text": " a",
+        "timestamp": [
+          17.2,
+          17.36
+        ]
+      },
+      {
+        "text": " limited",
+        "timestamp": [
+          17.36,
+          17.64
+        ]
+      },
+      {
+        "text": " water",
+        "timestamp": [
+          17.64,
+          17.94
+        ]
+      },
+      {
+        "text": " supply",
+        "timestamp": [
+          17.94,
+          18.4
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          18.4,
+          18.68
+        ]
+      },
+      {
+        "text": " finish",
+        "timestamp": [
+          18.68,
+          18.9
+        ]
+      },
+      {
+        "text": " growing",
+        "timestamp": [
+          18.9,
+          19.26
+        ]
+      },
+      {
+        "text": " our",
+        "timestamp": [
+          19.26,
+          19.56
+        ]
+      },
+      {
+        "text": " tomato.",
+        "timestamp": [
+          19.56,
+          20.46
+        ]
+      }
+    ]
+  },
+  {
+    "id": "04_first_watering",
+    "text": " Gently tilt the can over the soil near the roots. Turn it upright to stop pouring.",
+    "words": [
+      {
+        "text": " Gently",
+        "timestamp": [
+          0.0,
+          0.5
+        ]
+      },
+      {
+        "text": " tilt",
+        "timestamp": [
+          0.5,
+          0.72
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          0.72,
+          0.98
+        ]
+      },
+      {
+        "text": " can",
+        "timestamp": [
+          0.98,
+          1.16
+        ]
+      },
+      {
+        "text": " over",
+        "timestamp": [
+          1.16,
+          1.5
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          1.5,
+          1.66
+        ]
+      },
+      {
+        "text": " soil",
+        "timestamp": [
+          1.66,
+          2.0
+        ]
+      },
+      {
+        "text": " near",
+        "timestamp": [
+          2.0,
+          2.58
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          2.58,
+          2.8
+        ]
+      },
+      {
+        "text": " roots.",
+        "timestamp": [
+          2.8,
+          3.56
+        ]
+      },
+      {
+        "text": " Turn",
+        "timestamp": [
+          3.86,
+          3.94
+        ]
+      },
+      {
+        "text": " it",
+        "timestamp": [
+          3.94,
+          4.06
+        ]
+      },
+      {
+        "text": " upright",
+        "timestamp": [
+          4.06,
+          4.28
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          4.28,
+          4.66
+        ]
+      },
+      {
+        "text": " stop",
+        "timestamp": [
+          4.66,
+          4.92
+        ]
+      },
+      {
+        "text": " pouring.",
+        "timestamp": [
+          4.92,
+          5.66
+        ]
+      }
+    ]
+  },
+  {
+    "id": "06_enough_water",
+    "text": " That's enough water. Turn the can upright now to stop pouring.",
+    "words": [
+      {
+        "text": " That's",
+        "timestamp": [
+          0.0,
+          0.42
+        ]
+      },
+      {
+        "text": " enough",
+        "timestamp": [
+          0.42,
+          0.56
+        ]
+      },
+      {
+        "text": " water.",
+        "timestamp": [
+          0.56,
+          1.42
+        ]
+      },
+      {
+        "text": " Turn",
+        "timestamp": [
+          1.42,
+          1.7
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          1.7,
+          1.88
+        ]
+      },
+      {
+        "text": " can",
+        "timestamp": [
+          1.88,
+          2.08
+        ]
+      },
+      {
+        "text": " upright",
+        "timestamp": [
+          2.08,
+          2.44
+        ]
+      },
+      {
+        "text": " now",
+        "timestamp": [
+          2.44,
+          2.84
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          2.84,
+          3.08
+        ]
+      },
+      {
+        "text": " stop",
+        "timestamp": [
+          3.08,
+          3.32
+        ]
+      },
+      {
+        "text": " pouring.",
+        "timestamp": [
+          3.32,
+          4.12
+        ]
+      }
+    ]
+  },
+  {
+    "id": "07_first_advance",
+    "text": " Your plant has enough water to grow. Open the calendar and select Advanced Phase.",
+    "words": [
+      {
+        "text": " Your",
+        "timestamp": [
+          0.0,
+          0.2
+        ]
+      },
+      {
+        "text": " plant",
+        "timestamp": [
+          0.2,
+          0.5
+        ]
+      },
+      {
+        "text": " has",
+        "timestamp": [
+          0.5,
+          0.84
+        ]
+      },
+      {
+        "text": " enough",
+        "timestamp": [
+          0.84,
+          1.1
+        ]
+      },
+      {
+        "text": " water",
+        "timestamp": [
+          1.1,
+          1.4
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          1.4,
+          1.66
+        ]
+      },
+      {
+        "text": " grow.",
+        "timestamp": [
+          1.66,
+          2.58
+        ]
+      },
+      {
+        "text": " Open",
+        "timestamp": [
+          2.96,
+          2.96
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          2.96,
+          3.1
+        ]
+      },
+      {
+        "text": " calendar",
+        "timestamp": [
+          3.1,
+          3.42
+        ]
+      },
+      {
+        "text": " and",
+        "timestamp": [
+          3.42,
+          3.88
+        ]
+      },
+      {
+        "text": " select",
+        "timestamp": [
+          3.88,
+          4.24
+        ]
+      },
+      {
+        "text": " Advanced",
+        "timestamp": [
+          4.24,
+          4.68
+        ]
+      },
+      {
+        "text": " Phase.",
+        "timestamp": [
+          4.68,
+          5.66
+        ]
+      }
+    ]
+  },
+  {
+    "id": "help_excess_water",
+    "text": " There's too much water in the pot. Hold the can upright and let the extra water drain away.",
+    "words": [
+      {
+        "text": " There's",
+        "timestamp": [
+          0.0,
+          0.24
+        ]
+      },
+      {
+        "text": " too",
+        "timestamp": [
+          0.24,
+          0.44
+        ]
+      },
+      {
+        "text": " much",
+        "timestamp": [
+          0.44,
+          0.66
+        ]
+      },
+      {
+        "text": " water",
+        "timestamp": [
+          0.66,
+          0.98
+        ]
+      },
+      {
+        "text": " in",
+        "timestamp": [
+          0.98,
+          1.24
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          1.24,
+          1.34
+        ]
+      },
+      {
+        "text": " pot.",
+        "timestamp": [
+          1.34,
+          1.9
+        ]
+      },
+      {
+        "text": " Hold",
+        "timestamp": [
+          1.9,
+          2.18
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          2.18,
+          2.38
+        ]
+      },
+      {
+        "text": " can",
+        "timestamp": [
+          2.38,
+          2.6
+        ]
+      },
+      {
+        "text": " upright",
+        "timestamp": [
+          2.6,
+          2.98
+        ]
+      },
+      {
+        "text": " and",
+        "timestamp": [
+          2.98,
+          3.4
+        ]
+      },
+      {
+        "text": " let",
+        "timestamp": [
+          3.4,
+          3.56
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          3.56,
+          3.72
+        ]
+      },
+      {
+        "text": " extra",
+        "timestamp": [
+          3.72,
+          4.04
+        ]
+      },
+      {
+        "text": " water",
+        "timestamp": [
+          4.04,
+          4.42
+        ]
+      },
+      {
+        "text": " drain",
+        "timestamp": [
+          4.42,
+          4.82
+        ]
+      },
+      {
+        "text": " away.",
+        "timestamp": [
+          4.82,
+          5.54
+        ]
+      }
+    ]
+  },
+  {
+    "id": "help_calendar",
+    "text": " Your plant has enough water. Open your calendar and select Advanced Phase.",
+    "words": [
+      {
+        "text": " Your",
+        "timestamp": [
+          0.0,
+          0.18
+        ]
+      },
+      {
+        "text": " plant",
+        "timestamp": [
+          0.18,
+          0.5
+        ]
+      },
+      {
+        "text": " has",
+        "timestamp": [
+          0.5,
+          0.86
+        ]
+      },
+      {
+        "text": " enough",
+        "timestamp": [
+          0.86,
+          1.12
+        ]
+      },
+      {
+        "text": " water.",
+        "timestamp": [
+          1.12,
+          2.02
+        ]
+      },
+      {
+        "text": " Open",
+        "timestamp": [
+          2.34,
+          2.34
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          2.34,
+          2.52
+        ]
+      },
+      {
+        "text": " calendar",
+        "timestamp": [
+          2.52,
+          2.88
+        ]
+      },
+      {
+        "text": " and",
+        "timestamp": [
+          2.88,
+          3.3
+        ]
+      },
+      {
+        "text": " select",
+        "timestamp": [
+          3.3,
+          3.64
+        ]
+      },
+      {
+        "text": " Advanced",
+        "timestamp": [
+          3.64,
+          4.22
+        ]
+      },
+      {
+        "text": " Phase.",
+        "timestamp": [
+          4.22,
+          5.14
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_move_hands",
+    "text": " Let's practice moving. Watch the hand demonstration. Curl your index finger. Touch it with your thumb. Then swipe your thumb to take a step. Give it a try.",
+    "words": [
+      {
+        "text": " Let's",
+        "timestamp": [
+          0.0,
+          0.28
+        ]
+      },
+      {
+        "text": " practice",
+        "timestamp": [
+          0.28,
+          0.48
+        ]
+      },
+      {
+        "text": " moving.",
+        "timestamp": [
+          0.48,
+          1.48
+        ]
+      },
+      {
+        "text": " Watch",
+        "timestamp": [
+          1.48,
+          1.78
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          1.78,
+          2.02
+        ]
+      },
+      {
+        "text": " hand",
+        "timestamp": [
+          2.02,
+          2.22
+        ]
+      },
+      {
+        "text": " demonstration.",
+        "timestamp": [
+          2.22,
+          3.42
+        ]
+      },
+      {
+        "text": " Curl",
+        "timestamp": [
+          3.7,
+          3.92
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          3.92,
+          4.02
+        ]
+      },
+      {
+        "text": " index",
+        "timestamp": [
+          4.02,
+          4.3
+        ]
+      },
+      {
+        "text": " finger.",
+        "timestamp": [
+          4.3,
+          5.26
+        ]
+      },
+      {
+        "text": " Touch",
+        "timestamp": [
+          5.26,
+          5.46
+        ]
+      },
+      {
+        "text": " it",
+        "timestamp": [
+          5.46,
+          5.64
+        ]
+      },
+      {
+        "text": " with",
+        "timestamp": [
+          5.64,
+          5.76
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          5.76,
+          5.92
+        ]
+      },
+      {
+        "text": " thumb.",
+        "timestamp": [
+          5.92,
+          6.58
+        ]
+      },
+      {
+        "text": " Then",
+        "timestamp": [
+          6.86,
+          6.86
+        ]
+      },
+      {
+        "text": " swipe",
+        "timestamp": [
+          6.86,
+          7.1
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          7.1,
+          7.38
+        ]
+      },
+      {
+        "text": " thumb",
+        "timestamp": [
+          7.38,
+          7.64
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          7.64,
+          7.84
+        ]
+      },
+      {
+        "text": " take",
+        "timestamp": [
+          7.84,
+          8.04
+        ]
+      },
+      {
+        "text": " a",
+        "timestamp": [
+          8.04,
+          8.18
+        ]
+      },
+      {
+        "text": " step.",
+        "timestamp": [
+          8.18,
+          8.9
+        ]
+      },
+      {
+        "text": " Give",
+        "timestamp": [
+          9.04,
+          9.12
+        ]
+      },
+      {
+        "text": " it",
+        "timestamp": [
+          9.12,
+          9.24
+        ]
+      },
+      {
+        "text": " a",
+        "timestamp": [
+          9.24,
+          9.32
+        ]
+      },
+      {
+        "text": " try.",
+        "timestamp": [
+          9.32,
+          10.08
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_grab_hands",
+    "text": " Find the seed with the tomato label. Pinch it between your thumb and index finger to pick it up. Open your fingers to let go.",
+    "words": [
+      {
+        "text": " Find",
+        "timestamp": [
+          0.0,
+          0.18
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          0.18,
+          0.38
+        ]
+      },
+      {
+        "text": " seed",
+        "timestamp": [
+          0.38,
+          0.6
+        ]
+      },
+      {
+        "text": " with",
+        "timestamp": [
+          0.6,
+          0.8
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          0.8,
+          0.96
+        ]
+      },
+      {
+        "text": " tomato",
+        "timestamp": [
+          0.96,
+          1.1
+        ]
+      },
+      {
+        "text": " label.",
+        "timestamp": [
+          1.1,
+          2.1
+        ]
+      },
+      {
+        "text": " Pinch",
+        "timestamp": [
+          2.28,
+          2.38
+        ]
+      },
+      {
+        "text": " it",
+        "timestamp": [
+          2.38,
+          2.52
+        ]
+      },
+      {
+        "text": " between",
+        "timestamp": [
+          2.52,
+          2.76
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          2.76,
+          3.04
+        ]
+      },
+      {
+        "text": " thumb",
+        "timestamp": [
+          3.04,
+          3.32
+        ]
+      },
+      {
+        "text": " and",
+        "timestamp": [
+          3.32,
+          3.54
+        ]
+      },
+      {
+        "text": " index",
+        "timestamp": [
+          3.54,
+          3.9
+        ]
+      },
+      {
+        "text": " finger",
+        "timestamp": [
+          3.9,
+          4.32
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          4.32,
+          4.54
+        ]
+      },
+      {
+        "text": " pick",
+        "timestamp": [
+          4.54,
+          4.72
+        ]
+      },
+      {
+        "text": " it",
+        "timestamp": [
+          4.72,
+          4.9
+        ]
+      },
+      {
+        "text": " up.",
+        "timestamp": [
+          4.9,
+          5.46
+        ]
+      },
+      {
+        "text": " Open",
+        "timestamp": [
+          5.8,
+          5.8
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          5.8,
+          5.96
+        ]
+      },
+      {
+        "text": " fingers",
+        "timestamp": [
+          5.96,
+          6.3
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          6.3,
+          6.56
+        ]
+      },
+      {
+        "text": " let",
+        "timestamp": [
+          6.56,
+          6.7
+        ]
+      },
+      {
+        "text": " go.",
+        "timestamp": [
+          6.7,
+          7.38
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_calendar_hands",
+    "text": " Move your left hand away from objects. Then pinch your thumb and index finger together to open the calendar.",
+    "words": [
+      {
+        "text": " Move",
+        "timestamp": [
+          0.0,
+          0.2
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          0.2,
+          0.42
+        ]
+      },
+      {
+        "text": " left",
+        "timestamp": [
+          0.42,
+          0.66
+        ]
+      },
+      {
+        "text": " hand",
+        "timestamp": [
+          0.66,
+          1.02
+        ]
+      },
+      {
+        "text": " away",
+        "timestamp": [
+          1.02,
+          1.32
+        ]
+      },
+      {
+        "text": " from",
+        "timestamp": [
+          1.32,
+          1.6
+        ]
+      },
+      {
+        "text": " objects.",
+        "timestamp": [
+          1.6,
+          2.58
+        ]
+      },
+      {
+        "text": " Then",
+        "timestamp": [
+          2.88,
+          2.88
+        ]
+      },
+      {
+        "text": " pinch",
+        "timestamp": [
+          2.88,
+          3.08
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          3.08,
+          3.38
+        ]
+      },
+      {
+        "text": " thumb",
+        "timestamp": [
+          3.38,
+          3.66
+        ]
+      },
+      {
+        "text": " and",
+        "timestamp": [
+          3.66,
+          3.94
+        ]
+      },
+      {
+        "text": " index",
+        "timestamp": [
+          3.94,
+          4.32
+        ]
+      },
+      {
+        "text": " finger",
+        "timestamp": [
+          4.32,
+          4.78
+        ]
+      },
+      {
+        "text": " together",
+        "timestamp": [
+          4.78,
+          5.12
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          5.48,
+          5.52
+        ]
+      },
+      {
+        "text": " open",
+        "timestamp": [
+          5.52,
+          5.78
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          5.78,
+          6.04
+        ]
+      },
+      {
+        "text": " calendar.",
+        "timestamp": [
+          6.04,
+          6.98
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_calendar_select_hands",
+    "text": " Point at advanced phase, then pinch your thumb and index finger together to select it.",
+    "words": [
+      {
+        "text": " Point",
+        "timestamp": [
+          0.0,
+          0.24
+        ]
+      },
+      {
+        "text": " at",
+        "timestamp": [
+          0.24,
+          0.42
+        ]
+      },
+      {
+        "text": " advanced",
+        "timestamp": [
+          0.42,
+          0.58
+        ]
+      },
+      {
+        "text": " phase,",
+        "timestamp": [
+          0.58,
+          1.6
+        ]
+      },
+      {
+        "text": " then",
+        "timestamp": [
+          1.6,
+          1.82
+        ]
+      },
+      {
+        "text": " pinch",
+        "timestamp": [
+          1.82,
+          2.04
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          2.04,
+          2.32
+        ]
+      },
+      {
+        "text": " thumb",
+        "timestamp": [
+          2.32,
+          2.58
+        ]
+      },
+      {
+        "text": " and",
+        "timestamp": [
+          2.58,
+          2.76
+        ]
+      },
+      {
+        "text": " index",
+        "timestamp": [
+          2.76,
+          3.08
+        ]
+      },
+      {
+        "text": " finger",
+        "timestamp": [
+          3.08,
+          3.4
+        ]
+      },
+      {
+        "text": " together",
+        "timestamp": [
+          3.4,
+          3.82
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          3.82,
+          4.18
+        ]
+      },
+      {
+        "text": " select",
+        "timestamp": [
+          4.18,
+          4.46
+        ]
+      },
+      {
+        "text": " it.",
+        "timestamp": [
+          4.46,
+          5.1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_move_controllers",
+    "text": " Let's practice moving. Gently push the left joystick to walk. Give it a try.",
+    "words": [
+      {
+        "text": " Let's",
+        "timestamp": [
+          0.0,
+          0.28
+        ]
+      },
+      {
+        "text": " practice",
+        "timestamp": [
+          0.28,
+          0.44
+        ]
+      },
+      {
+        "text": " moving.",
+        "timestamp": [
+          0.44,
+          1.38
+        ]
+      },
+      {
+        "text": " Gently",
+        "timestamp": [
+          1.38,
+          1.7
+        ]
+      },
+      {
+        "text": " push",
+        "timestamp": [
+          1.7,
+          2.02
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          2.02,
+          2.26
+        ]
+      },
+      {
+        "text": " left",
+        "timestamp": [
+          2.26,
+          2.48
+        ]
+      },
+      {
+        "text": " joystick",
+        "timestamp": [
+          2.48,
+          2.72
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          2.72,
+          3.14
+        ]
+      },
+      {
+        "text": " walk.",
+        "timestamp": [
+          3.14,
+          3.82
+        ]
+      },
+      {
+        "text": " Give",
+        "timestamp": [
+          3.82,
+          4.0
+        ]
+      },
+      {
+        "text": " it",
+        "timestamp": [
+          4.0,
+          4.14
+        ]
+      },
+      {
+        "text": " a",
+        "timestamp": [
+          4.14,
+          4.2
+        ]
+      },
+      {
+        "text": " try.",
+        "timestamp": [
+          4.2,
+          4.82
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_grab_controllers",
+    "text": " Find the seed with the tomato label. Hold the grip button to pick it up. Release the button to let go.",
+    "words": [
+      {
+        "text": " Find",
+        "timestamp": [
+          0.0,
+          0.2
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          0.2,
+          0.4
+        ]
+      },
+      {
+        "text": " seed",
+        "timestamp": [
+          0.4,
+          0.68
+        ]
+      },
+      {
+        "text": " with",
+        "timestamp": [
+          0.68,
+          0.92
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          0.92,
+          1.08
+        ]
+      },
+      {
+        "text": " tomato",
+        "timestamp": [
+          1.08,
+          1.28
+        ]
+      },
+      {
+        "text": " label.",
+        "timestamp": [
+          1.28,
+          2.24
+        ]
+      },
+      {
+        "text": " Hold",
+        "timestamp": [
+          2.5,
+          2.5
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          2.5,
+          2.68
+        ]
+      },
+      {
+        "text": " grip",
+        "timestamp": [
+          2.68,
+          2.86
+        ]
+      },
+      {
+        "text": " button",
+        "timestamp": [
+          2.86,
+          3.18
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          3.18,
+          3.38
+        ]
+      },
+      {
+        "text": " pick",
+        "timestamp": [
+          3.38,
+          3.56
+        ]
+      },
+      {
+        "text": " it",
+        "timestamp": [
+          3.56,
+          3.7
+        ]
+      },
+      {
+        "text": " up.",
+        "timestamp": [
+          3.7,
+          4.28
+        ]
+      },
+      {
+        "text": " Release",
+        "timestamp": [
+          4.6,
+          4.6
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          4.6,
+          4.86
+        ]
+      },
+      {
+        "text": " button",
+        "timestamp": [
+          4.86,
+          5.1
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          5.1,
+          5.4
+        ]
+      },
+      {
+        "text": " let",
+        "timestamp": [
+          5.4,
+          5.58
+        ]
+      },
+      {
+        "text": " go.",
+        "timestamp": [
+          5.58,
+          6.34
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_calendar_controllers",
+    "text": " Press Y on your left controller to open the calendar.",
+    "words": [
+      {
+        "text": " Press",
+        "timestamp": [
+          0.0,
+          0.14
+        ]
+      },
+      {
+        "text": " Y",
+        "timestamp": [
+          0.14,
+          0.5
+        ]
+      },
+      {
+        "text": " on",
+        "timestamp": [
+          0.5,
+          0.98
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          0.98,
+          1.12
+        ]
+      },
+      {
+        "text": " left",
+        "timestamp": [
+          1.12,
+          1.3
+        ]
+      },
+      {
+        "text": " controller",
+        "timestamp": [
+          1.3,
+          1.78
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          1.78,
+          2.18
+        ]
+      },
+      {
+        "text": " open",
+        "timestamp": [
+          2.18,
+          2.42
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          2.42,
+          2.58
+        ]
+      },
+      {
+        "text": " calendar.",
+        "timestamp": [
+          2.58,
+          3.42
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_calendar_select_controllers",
+    "text": " Aim at Advanced Phase, then press the trigger to select it.",
+    "words": [
+      {
+        "text": " Aim",
+        "timestamp": [
+          0.0,
+          0.22
+        ]
+      },
+      {
+        "text": " at",
+        "timestamp": [
+          0.22,
+          0.4
+        ]
+      },
+      {
+        "text": " Advanced",
+        "timestamp": [
+          0.4,
+          0.54
+        ]
+      },
+      {
+        "text": " Phase,",
+        "timestamp": [
+          0.54,
+          1.6
+        ]
+      },
+      {
+        "text": " then",
+        "timestamp": [
+          1.6,
+          1.82
+        ]
+      },
+      {
+        "text": " press",
+        "timestamp": [
+          1.82,
+          2.04
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          2.04,
+          2.32
+        ]
+      },
+      {
+        "text": " trigger",
+        "timestamp": [
+          2.32,
+          2.54
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          2.54,
+          2.9
+        ]
+      },
+      {
+        "text": " select",
+        "timestamp": [
+          2.9,
+          3.16
+        ]
+      },
+      {
+        "text": " it.",
+        "timestamp": [
+          3.16,
+          3.74
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_move_hands_left",
+    "text": " With your left hand, curl your index finger and keep your thumb free. Tap your thumb against your curled index finger to activate movement. Swipe your thumb forward to step forward or backward to step back. Straighten your index finger to exit movement mode.",
+    "words": [
+      {
+        "text": " With",
+        "timestamp": [
+          0.0,
+          0.12
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          0.12,
+          0.28
+        ]
+      },
+      {
+        "text": " left",
+        "timestamp": [
+          0.28,
+          0.48
+        ]
+      },
+      {
+        "text": " hand,",
+        "timestamp": [
+          0.48,
+          1.12
+        ]
+      },
+      {
+        "text": " curl",
+        "timestamp": [
+          1.12,
+          1.36
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          1.36,
+          1.58
+        ]
+      },
+      {
+        "text": " index",
+        "timestamp": [
+          1.58,
+          1.86
+        ]
+      },
+      {
+        "text": " finger",
+        "timestamp": [
+          1.86,
+          2.26
+        ]
+      },
+      {
+        "text": " and",
+        "timestamp": [
+          2.26,
+          2.6
+        ]
+      },
+      {
+        "text": " keep",
+        "timestamp": [
+          2.6,
+          2.84
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          2.84,
+          3.02
+        ]
+      },
+      {
+        "text": " thumb",
+        "timestamp": [
+          3.02,
+          3.26
+        ]
+      },
+      {
+        "text": " free.",
+        "timestamp": [
+          3.26,
+          4.0
+        ]
+      },
+      {
+        "text": " Tap",
+        "timestamp": [
+          4.3,
+          4.32
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          4.32,
+          4.5
+        ]
+      },
+      {
+        "text": " thumb",
+        "timestamp": [
+          4.5,
+          4.74
+        ]
+      },
+      {
+        "text": " against",
+        "timestamp": [
+          4.74,
+          5.02
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          5.02,
+          5.3
+        ]
+      },
+      {
+        "text": " curled",
+        "timestamp": [
+          5.3,
+          5.52
+        ]
+      },
+      {
+        "text": " index",
+        "timestamp": [
+          5.52,
+          5.88
+        ]
+      },
+      {
+        "text": " finger",
+        "timestamp": [
+          5.88,
+          6.48
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          6.48,
+          6.68
+        ]
+      },
+      {
+        "text": " activate",
+        "timestamp": [
+          6.68,
+          6.94
+        ]
+      },
+      {
+        "text": " movement.",
+        "timestamp": [
+          6.94,
+          7.9
+        ]
+      },
+      {
+        "text": " Swipe",
+        "timestamp": [
+          8.18,
+          8.38
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          8.38,
+          8.52
+        ]
+      },
+      {
+        "text": " thumb",
+        "timestamp": [
+          8.52,
+          8.76
+        ]
+      },
+      {
+        "text": " forward",
+        "timestamp": [
+          8.76,
+          9.04
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          9.04,
+          9.36
+        ]
+      },
+      {
+        "text": " step",
+        "timestamp": [
+          9.36,
+          9.56
+        ]
+      },
+      {
+        "text": " forward",
+        "timestamp": [
+          9.56,
+          9.94
+        ]
+      },
+      {
+        "text": " or",
+        "timestamp": [
+          9.94,
+          10.44
+        ]
+      },
+      {
+        "text": " backward",
+        "timestamp": [
+          10.44,
+          10.74
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          10.74,
+          11.1
+        ]
+      },
+      {
+        "text": " step",
+        "timestamp": [
+          11.1,
+          11.34
+        ]
+      },
+      {
+        "text": " back.",
+        "timestamp": [
+          11.34,
+          12.02
+        ]
+      },
+      {
+        "text": " Straighten",
+        "timestamp": [
+          12.48,
+          12.62
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          12.62,
+          12.74
+        ]
+      },
+      {
+        "text": " index",
+        "timestamp": [
+          12.74,
+          13.02
+        ]
+      },
+      {
+        "text": " finger",
+        "timestamp": [
+          13.02,
+          13.38
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          13.38,
+          13.72
+        ]
+      },
+      {
+        "text": " exit",
+        "timestamp": [
+          13.72,
+          13.9
+        ]
+      },
+      {
+        "text": " movement",
+        "timestamp": [
+          13.9,
+          14.26
+        ]
+      },
+      {
+        "text": " mode.",
+        "timestamp": [
+          14.26,
+          15.26
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_move_hands_right",
+    "text": " With your right hand, curl your index finger and keep your thumb free. Tap your thumb against your curled index finger to activate movement. Swipe your thumb forward to step forward or backward to step back. Straighten your index finger to exit movement mode.",
+    "words": [
+      {
+        "text": " With",
+        "timestamp": [
+          0.0,
+          0.14
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          0.14,
+          0.3
+        ]
+      },
+      {
+        "text": " right",
+        "timestamp": [
+          0.3,
+          0.54
+        ]
+      },
+      {
+        "text": " hand,",
+        "timestamp": [
+          0.54,
+          1.2
+        ]
+      },
+      {
+        "text": " curl",
+        "timestamp": [
+          1.2,
+          1.46
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          1.46,
+          1.7
+        ]
+      },
+      {
+        "text": " index",
+        "timestamp": [
+          1.7,
+          1.98
+        ]
+      },
+      {
+        "text": " finger",
+        "timestamp": [
+          1.98,
+          2.38
+        ]
+      },
+      {
+        "text": " and",
+        "timestamp": [
+          2.38,
+          2.78
+        ]
+      },
+      {
+        "text": " keep",
+        "timestamp": [
+          2.78,
+          3.02
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          3.02,
+          3.2
+        ]
+      },
+      {
+        "text": " thumb",
+        "timestamp": [
+          3.2,
+          3.44
+        ]
+      },
+      {
+        "text": " free.",
+        "timestamp": [
+          3.44,
+          4.18
+        ]
+      },
+      {
+        "text": " Tap",
+        "timestamp": [
+          4.56,
+          4.56
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          4.56,
+          4.74
+        ]
+      },
+      {
+        "text": " thumb",
+        "timestamp": [
+          4.74,
+          4.98
+        ]
+      },
+      {
+        "text": " against",
+        "timestamp": [
+          4.98,
+          5.28
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          5.28,
+          5.54
+        ]
+      },
+      {
+        "text": " curled",
+        "timestamp": [
+          5.54,
+          5.76
+        ]
+      },
+      {
+        "text": " index",
+        "timestamp": [
+          5.76,
+          6.14
+        ]
+      },
+      {
+        "text": " finger",
+        "timestamp": [
+          6.14,
+          6.72
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          6.72,
+          7.12
+        ]
+      },
+      {
+        "text": " activate",
+        "timestamp": [
+          7.12,
+          7.42
+        ]
+      },
+      {
+        "text": " movement.",
+        "timestamp": [
+          7.42,
+          8.46
+        ]
+      },
+      {
+        "text": " Swipe",
+        "timestamp": [
+          8.82,
+          9.0
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          9.0,
+          9.12
+        ]
+      },
+      {
+        "text": " thumb",
+        "timestamp": [
+          9.12,
+          9.4
+        ]
+      },
+      {
+        "text": " forward",
+        "timestamp": [
+          9.4,
+          9.8
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          9.8,
+          10.06
+        ]
+      },
+      {
+        "text": " step",
+        "timestamp": [
+          10.06,
+          10.26
+        ]
+      },
+      {
+        "text": " forward",
+        "timestamp": [
+          10.26,
+          10.74
+        ]
+      },
+      {
+        "text": " or",
+        "timestamp": [
+          10.74,
+          11.18
+        ]
+      },
+      {
+        "text": " backward",
+        "timestamp": [
+          11.18,
+          11.52
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          11.52,
+          11.88
+        ]
+      },
+      {
+        "text": " step",
+        "timestamp": [
+          11.88,
+          12.1
+        ]
+      },
+      {
+        "text": " back.",
+        "timestamp": [
+          12.1,
+          12.88
+        ]
+      },
+      {
+        "text": " Straighten",
+        "timestamp": [
+          13.36,
+          13.5
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          13.5,
+          13.62
+        ]
+      },
+      {
+        "text": " index",
+        "timestamp": [
+          13.62,
+          13.9
+        ]
+      },
+      {
+        "text": " finger",
+        "timestamp": [
+          13.9,
+          14.28
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          14.28,
+          14.64
+        ]
+      },
+      {
+        "text": " exit",
+        "timestamp": [
+          14.64,
+          14.86
+        ]
+      },
+      {
+        "text": " movement",
+        "timestamp": [
+          14.86,
+          15.24
+        ]
+      },
+      {
+        "text": " mode.",
+        "timestamp": [
+          15.24,
+          16.18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_move_controllers_left",
+    "text": " Use the joystick on your left controller to move. Let the joystick return to the center to stop.",
+    "words": [
+      {
+        "text": " Use",
+        "timestamp": [
+          0.0,
+          0.2
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          0.2,
+          0.42
+        ]
+      },
+      {
+        "text": " joystick",
+        "timestamp": [
+          0.42,
+          0.74
+        ]
+      },
+      {
+        "text": " on",
+        "timestamp": [
+          0.74,
+          1.18
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          1.18,
+          1.34
+        ]
+      },
+      {
+        "text": " left",
+        "timestamp": [
+          1.34,
+          1.56
+        ]
+      },
+      {
+        "text": " controller",
+        "timestamp": [
+          1.56,
+          2.0
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          2.0,
+          2.38
+        ]
+      },
+      {
+        "text": " move.",
+        "timestamp": [
+          2.38,
+          3.12
+        ]
+      },
+      {
+        "text": " Let",
+        "timestamp": [
+          3.34,
+          3.34
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          3.34,
+          3.52
+        ]
+      },
+      {
+        "text": " joystick",
+        "timestamp": [
+          3.52,
+          3.84
+        ]
+      },
+      {
+        "text": " return",
+        "timestamp": [
+          3.84,
+          4.4
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          4.4,
+          4.72
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          4.72,
+          4.84
+        ]
+      },
+      {
+        "text": " center",
+        "timestamp": [
+          4.84,
+          5.2
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          5.2,
+          5.56
+        ]
+      },
+      {
+        "text": " stop.",
+        "timestamp": [
+          5.56,
+          6.26
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_move_controllers_right",
+    "text": " Use the joystick on your right controller to move. Let the joystick return to the center to stop.",
+    "words": [
+      {
+        "text": " Use",
+        "timestamp": [
+          0.0,
+          0.26
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          0.26,
+          0.42
+        ]
+      },
+      {
+        "text": " joystick",
+        "timestamp": [
+          0.42,
+          0.68
+        ]
+      },
+      {
+        "text": " on",
+        "timestamp": [
+          0.68,
+          1.14
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          1.14,
+          1.26
+        ]
+      },
+      {
+        "text": " right",
+        "timestamp": [
+          1.26,
+          1.46
+        ]
+      },
+      {
+        "text": " controller",
+        "timestamp": [
+          1.46,
+          1.88
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          1.88,
+          2.22
+        ]
+      },
+      {
+        "text": " move.",
+        "timestamp": [
+          2.22,
+          2.9
+        ]
+      },
+      {
+        "text": " Let",
+        "timestamp": [
+          3.06,
+          3.08
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          3.08,
+          3.26
+        ]
+      },
+      {
+        "text": " joystick",
+        "timestamp": [
+          3.26,
+          3.56
+        ]
+      },
+      {
+        "text": " return",
+        "timestamp": [
+          3.56,
+          4.12
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          4.12,
+          4.38
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          4.38,
+          4.5
+        ]
+      },
+      {
+        "text": " center",
+        "timestamp": [
+          4.5,
+          4.72
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          4.72,
+          5.04
+        ]
+      },
+      {
+        "text": " stop.",
+        "timestamp": [
+          5.04,
+          5.9
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_calendar_hands_left",
+    "text": " Keep your left hand free and away from objects. Pinch your thumb and index finger together to open the calendar. Then release. Repeat the gesture to close it.",
+    "words": [
+      {
+        "text": " Keep",
+        "timestamp": [
+          0.0,
+          0.16
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          0.16,
+          0.36
+        ]
+      },
+      {
+        "text": " left",
+        "timestamp": [
+          0.36,
+          0.56
+        ]
+      },
+      {
+        "text": " hand",
+        "timestamp": [
+          0.56,
+          0.9
+        ]
+      },
+      {
+        "text": " free",
+        "timestamp": [
+          0.9,
+          1.32
+        ]
+      },
+      {
+        "text": " and",
+        "timestamp": [
+          1.32,
+          1.62
+        ]
+      },
+      {
+        "text": " away",
+        "timestamp": [
+          1.62,
+          1.8
+        ]
+      },
+      {
+        "text": " from",
+        "timestamp": [
+          1.8,
+          2.16
+        ]
+      },
+      {
+        "text": " objects.",
+        "timestamp": [
+          2.16,
+          3.22
+        ]
+      },
+      {
+        "text": " Pinch",
+        "timestamp": [
+          3.42,
+          3.52
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          3.52,
+          3.72
+        ]
+      },
+      {
+        "text": " thumb",
+        "timestamp": [
+          3.72,
+          4.0
+        ]
+      },
+      {
+        "text": " and",
+        "timestamp": [
+          4.0,
+          4.3
+        ]
+      },
+      {
+        "text": " index",
+        "timestamp": [
+          4.3,
+          4.58
+        ]
+      },
+      {
+        "text": " finger",
+        "timestamp": [
+          4.58,
+          4.98
+        ]
+      },
+      {
+        "text": " together",
+        "timestamp": [
+          4.98,
+          5.52
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          5.78,
+          5.8
+        ]
+      },
+      {
+        "text": " open",
+        "timestamp": [
+          5.8,
+          6.1
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          6.1,
+          6.26
+        ]
+      },
+      {
+        "text": " calendar.",
+        "timestamp": [
+          6.26,
+          7.1
+        ]
+      },
+      {
+        "text": " Then",
+        "timestamp": [
+          7.22,
+          7.34
+        ]
+      },
+      {
+        "text": " release.",
+        "timestamp": [
+          7.34,
+          8.2
+        ]
+      },
+      {
+        "text": " Repeat",
+        "timestamp": [
+          8.6,
+          8.6
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          8.6,
+          8.84
+        ]
+      },
+      {
+        "text": " gesture",
+        "timestamp": [
+          8.84,
+          9.08
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          9.08,
+          9.48
+        ]
+      },
+      {
+        "text": " close",
+        "timestamp": [
+          9.48,
+          9.68
+        ]
+      },
+      {
+        "text": " it.",
+        "timestamp": [
+          9.68,
+          10.22
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_calendar_hands_right",
+    "text": " Keep your right hand free and away from objects. Pinch your thumb and index finger together to open the calendar, then release. Repeat the gesture to close it.",
+    "words": [
+      {
+        "text": " Keep",
+        "timestamp": [
+          0.0,
+          0.22
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          0.22,
+          0.4
+        ]
+      },
+      {
+        "text": " right",
+        "timestamp": [
+          0.4,
+          0.62
+        ]
+      },
+      {
+        "text": " hand",
+        "timestamp": [
+          0.62,
+          0.92
+        ]
+      },
+      {
+        "text": " free",
+        "timestamp": [
+          0.92,
+          1.22
+        ]
+      },
+      {
+        "text": " and",
+        "timestamp": [
+          1.22,
+          1.5
+        ]
+      },
+      {
+        "text": " away",
+        "timestamp": [
+          1.5,
+          1.64
+        ]
+      },
+      {
+        "text": " from",
+        "timestamp": [
+          1.64,
+          1.94
+        ]
+      },
+      {
+        "text": " objects.",
+        "timestamp": [
+          1.94,
+          2.86
+        ]
+      },
+      {
+        "text": " Pinch",
+        "timestamp": [
+          3.02,
+          3.12
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          3.12,
+          3.3
+        ]
+      },
+      {
+        "text": " thumb",
+        "timestamp": [
+          3.3,
+          3.56
+        ]
+      },
+      {
+        "text": " and",
+        "timestamp": [
+          3.56,
+          3.88
+        ]
+      },
+      {
+        "text": " index",
+        "timestamp": [
+          3.88,
+          4.18
+        ]
+      },
+      {
+        "text": " finger",
+        "timestamp": [
+          4.18,
+          4.6
+        ]
+      },
+      {
+        "text": " together",
+        "timestamp": [
+          4.6,
+          4.98
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          4.98,
+          5.32
+        ]
+      },
+      {
+        "text": " open",
+        "timestamp": [
+          5.32,
+          5.56
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          5.56,
+          5.74
+        ]
+      },
+      {
+        "text": " calendar,",
+        "timestamp": [
+          5.74,
+          6.46
+        ]
+      },
+      {
+        "text": " then",
+        "timestamp": [
+          6.46,
+          6.66
+        ]
+      },
+      {
+        "text": " release.",
+        "timestamp": [
+          6.66,
+          7.54
+        ]
+      },
+      {
+        "text": " Repeat",
+        "timestamp": [
+          7.92,
+          7.92
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          7.92,
+          8.16
+        ]
+      },
+      {
+        "text": " gesture",
+        "timestamp": [
+          8.16,
+          8.4
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          8.4,
+          8.78
+        ]
+      },
+      {
+        "text": " close",
+        "timestamp": [
+          8.78,
+          8.96
+        ]
+      },
+      {
+        "text": " it.",
+        "timestamp": [
+          8.96,
+          9.5
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_calendar_controllers_left",
+    "text": " Press the Y button on your left controller to open the calendar. Press it again to close it.",
+    "words": [
+      {
+        "text": " Press",
+        "timestamp": [
+          0.0,
+          0.16
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          0.16,
+          0.4
+        ]
+      },
+      {
+        "text": " Y",
+        "timestamp": [
+          0.4,
+          0.56
+        ]
+      },
+      {
+        "text": " button",
+        "timestamp": [
+          0.56,
+          0.88
+        ]
+      },
+      {
+        "text": " on",
+        "timestamp": [
+          0.88,
+          1.24
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          1.24,
+          1.42
+        ]
+      },
+      {
+        "text": " left",
+        "timestamp": [
+          1.42,
+          1.62
+        ]
+      },
+      {
+        "text": " controller",
+        "timestamp": [
+          1.62,
+          2.12
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          2.12,
+          2.48
+        ]
+      },
+      {
+        "text": " open",
+        "timestamp": [
+          2.48,
+          2.76
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          2.76,
+          2.94
+        ]
+      },
+      {
+        "text": " calendar.",
+        "timestamp": [
+          2.94,
+          3.82
+        ]
+      },
+      {
+        "text": " Press",
+        "timestamp": [
+          4.16,
+          4.16
+        ]
+      },
+      {
+        "text": " it",
+        "timestamp": [
+          4.16,
+          4.36
+        ]
+      },
+      {
+        "text": " again",
+        "timestamp": [
+          4.36,
+          4.56
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          4.56,
+          4.86
+        ]
+      },
+      {
+        "text": " close",
+        "timestamp": [
+          4.86,
+          5.08
+        ]
+      },
+      {
+        "text": " it.",
+        "timestamp": [
+          5.08,
+          5.62
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_calendar_controllers_right",
+    "text": " Press the B button on your right controller to open the calendar. Press it again to close it.",
+    "words": [
+      {
+        "text": " Press",
+        "timestamp": [
+          0.0,
+          0.14
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          0.14,
+          0.32
+        ]
+      },
+      {
+        "text": " B",
+        "timestamp": [
+          0.32,
+          0.46
+        ]
+      },
+      {
+        "text": " button",
+        "timestamp": [
+          0.46,
+          0.72
+        ]
+      },
+      {
+        "text": " on",
+        "timestamp": [
+          0.72,
+          1.08
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          1.08,
+          1.24
+        ]
+      },
+      {
+        "text": " right",
+        "timestamp": [
+          1.24,
+          1.44
+        ]
+      },
+      {
+        "text": " controller",
+        "timestamp": [
+          1.44,
+          1.86
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          1.86,
+          2.2
+        ]
+      },
+      {
+        "text": " open",
+        "timestamp": [
+          2.2,
+          2.48
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          2.48,
+          2.66
+        ]
+      },
+      {
+        "text": " calendar.",
+        "timestamp": [
+          2.66,
+          3.52
+        ]
+      },
+      {
+        "text": " Press",
+        "timestamp": [
+          3.8,
+          3.8
+        ]
+      },
+      {
+        "text": " it",
+        "timestamp": [
+          3.8,
+          3.98
+        ]
+      },
+      {
+        "text": " again",
+        "timestamp": [
+          3.98,
+          4.18
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          4.18,
+          4.44
+        ]
+      },
+      {
+        "text": " close",
+        "timestamp": [
+          4.44,
+          4.68
+        ]
+      },
+      {
+        "text": " it.",
+        "timestamp": [
+          4.68,
+          5.18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "03_plant_seed_accessible",
+    "text": " Pick up the seed-labeled tomato and gently drop it onto the soil in an empty small pot.",
+    "words": [
+      {
+        "text": " Pick",
+        "timestamp": [
+          0.0,
+          0.1
+        ]
+      },
+      {
+        "text": " up",
+        "timestamp": [
+          0.1,
+          0.24
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          0.24,
+          0.42
+        ]
+      },
+      {
+        "text": " seed",
+        "timestamp": [
+          0.42,
+          0.64
+        ]
+      },
+      {
+        "text": "-labeled",
+        "timestamp": [
+          0.64,
+          1.14
+        ]
+      },
+      {
+        "text": " tomato",
+        "timestamp": [
+          1.14,
+          1.38
+        ]
+      },
+      {
+        "text": " and",
+        "timestamp": [
+          1.38,
+          1.9
+        ]
+      },
+      {
+        "text": " gently",
+        "timestamp": [
+          1.9,
+          2.22
+        ]
+      },
+      {
+        "text": " drop",
+        "timestamp": [
+          2.22,
+          2.58
+        ]
+      },
+      {
+        "text": " it",
+        "timestamp": [
+          2.58,
+          2.78
+        ]
+      },
+      {
+        "text": " onto",
+        "timestamp": [
+          2.78,
+          2.96
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          2.96,
+          3.2
+        ]
+      },
+      {
+        "text": " soil",
+        "timestamp": [
+          3.2,
+          3.5
+        ]
+      },
+      {
+        "text": " in",
+        "timestamp": [
+          3.5,
+          3.82
+        ]
+      },
+      {
+        "text": " an",
+        "timestamp": [
+          3.82,
+          3.92
+        ]
+      },
+      {
+        "text": " empty",
+        "timestamp": [
+          3.92,
+          4.24
+        ]
+      },
+      {
+        "text": " small",
+        "timestamp": [
+          4.24,
+          4.6
+        ]
+      },
+      {
+        "text": " pot.",
+        "timestamp": [
+          4.6,
+          5.38
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_watering_hands",
+    "text": " Move your open hand close to the watering can. Close your fingers around it to pick it up, and keep them closed while you hold it.",
+    "words": [
+      {
+        "text": " Move",
+        "timestamp": [
+          0.0,
+          0.22
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          0.22,
+          0.44
+        ]
+      },
+      {
+        "text": " open",
+        "timestamp": [
+          0.44,
+          0.68
+        ]
+      },
+      {
+        "text": " hand",
+        "timestamp": [
+          0.68,
+          1.02
+        ]
+      },
+      {
+        "text": " close",
+        "timestamp": [
+          1.02,
+          1.4
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          1.4,
+          1.72
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          1.72,
+          1.82
+        ]
+      },
+      {
+        "text": " watering",
+        "timestamp": [
+          1.82,
+          2.12
+        ]
+      },
+      {
+        "text": " can.",
+        "timestamp": [
+          2.12,
+          2.88
+        ]
+      },
+      {
+        "text": " Close",
+        "timestamp": [
+          3.22,
+          3.22
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          3.22,
+          3.44
+        ]
+      },
+      {
+        "text": " fingers",
+        "timestamp": [
+          3.44,
+          3.72
+        ]
+      },
+      {
+        "text": " around",
+        "timestamp": [
+          3.72,
+          4.1
+        ]
+      },
+      {
+        "text": " it",
+        "timestamp": [
+          4.1,
+          4.34
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          4.34,
+          4.46
+        ]
+      },
+      {
+        "text": " pick",
+        "timestamp": [
+          4.46,
+          4.62
+        ]
+      },
+      {
+        "text": " it",
+        "timestamp": [
+          4.62,
+          4.78
+        ]
+      },
+      {
+        "text": " up,",
+        "timestamp": [
+          4.78,
+          5.22
+        ]
+      },
+      {
+        "text": " and",
+        "timestamp": [
+          5.36,
+          5.46
+        ]
+      },
+      {
+        "text": " keep",
+        "timestamp": [
+          5.46,
+          5.7
+        ]
+      },
+      {
+        "text": " them",
+        "timestamp": [
+          5.7,
+          5.92
+        ]
+      },
+      {
+        "text": " closed",
+        "timestamp": [
+          5.92,
+          6.16
+        ]
+      },
+      {
+        "text": " while",
+        "timestamp": [
+          6.16,
+          6.68
+        ]
+      },
+      {
+        "text": " you",
+        "timestamp": [
+          6.68,
+          6.86
+        ]
+      },
+      {
+        "text": " hold",
+        "timestamp": [
+          6.86,
+          7.06
+        ]
+      },
+      {
+        "text": " it.",
+        "timestamp": [
+          7.06,
+          7.66
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_watering_controllers",
+    "text": " Move your controller close to the watering can. Hold the grip button to pick it up and keep holding the button.",
+    "words": [
+      {
+        "text": " Move",
+        "timestamp": [
+          0.0,
+          0.2
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          0.2,
+          0.4
+        ]
+      },
+      {
+        "text": " controller",
+        "timestamp": [
+          0.4,
+          0.8
+        ]
+      },
+      {
+        "text": " close",
+        "timestamp": [
+          0.8,
+          1.26
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          1.26,
+          1.54
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          1.54,
+          1.64
+        ]
+      },
+      {
+        "text": " watering",
+        "timestamp": [
+          1.64,
+          1.96
+        ]
+      },
+      {
+        "text": " can.",
+        "timestamp": [
+          1.96,
+          2.78
+        ]
+      },
+      {
+        "text": " Hold",
+        "timestamp": [
+          3.1,
+          3.1
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          3.1,
+          3.28
+        ]
+      },
+      {
+        "text": " grip",
+        "timestamp": [
+          3.28,
+          3.44
+        ]
+      },
+      {
+        "text": " button",
+        "timestamp": [
+          3.44,
+          3.74
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          3.74,
+          4.0
+        ]
+      },
+      {
+        "text": " pick",
+        "timestamp": [
+          4.0,
+          4.16
+        ]
+      },
+      {
+        "text": " it",
+        "timestamp": [
+          4.16,
+          4.34
+        ]
+      },
+      {
+        "text": " up",
+        "timestamp": [
+          4.34,
+          4.52
+        ]
+      },
+      {
+        "text": " and",
+        "timestamp": [
+          4.52,
+          5.02
+        ]
+      },
+      {
+        "text": " keep",
+        "timestamp": [
+          5.02,
+          5.28
+        ]
+      },
+      {
+        "text": " holding",
+        "timestamp": [
+          5.28,
+          5.6
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          5.6,
+          5.84
+        ]
+      },
+      {
+        "text": " button.",
+        "timestamp": [
+          5.84,
+          6.5
+        ]
+      }
+    ]
+  },
+  {
+    "id": "water_ready_next_phase",
+    "text": " The watering is done. Open the calendar and select Advanced Phase to keep growing.",
+    "words": [
+      {
+        "text": " The",
+        "timestamp": [
+          0.0,
+          0.12
+        ]
+      },
+      {
+        "text": " watering",
+        "timestamp": [
+          0.12,
+          0.4
+        ]
+      },
+      {
+        "text": " is",
+        "timestamp": [
+          0.4,
+          0.74
+        ]
+      },
+      {
+        "text": " done.",
+        "timestamp": [
+          0.74,
+          1.62
+        ]
+      },
+      {
+        "text": " Open",
+        "timestamp": [
+          2.08,
+          2.1
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          2.1,
+          2.24
+        ]
+      },
+      {
+        "text": " calendar",
+        "timestamp": [
+          2.24,
+          2.52
+        ]
+      },
+      {
+        "text": " and",
+        "timestamp": [
+          2.52,
+          2.98
+        ]
+      },
+      {
+        "text": " select",
+        "timestamp": [
+          2.98,
+          3.28
+        ]
+      },
+      {
+        "text": " Advanced",
+        "timestamp": [
+          3.28,
+          3.78
+        ]
+      },
+      {
+        "text": " Phase",
+        "timestamp": [
+          3.78,
+          4.08
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          4.08,
+          4.36
+        ]
+      },
+      {
+        "text": " keep",
+        "timestamp": [
+          4.36,
+          4.56
+        ]
+      },
+      {
+        "text": " growing.",
+        "timestamp": [
+          4.56,
+          5.7
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_refill_select_hands",
+    "text": " Point at refill water, then pinch your thumb and index finger together to select it.",
+    "words": [
+      {
+        "text": " Point",
+        "timestamp": [
+          0.0,
+          0.3
+        ]
+      },
+      {
+        "text": " at",
+        "timestamp": [
+          0.3,
+          0.48
+        ]
+      },
+      {
+        "text": " refill",
+        "timestamp": [
+          0.48,
+          0.64
+        ]
+      },
+      {
+        "text": " water,",
+        "timestamp": [
+          0.64,
+          1.6
+        ]
+      },
+      {
+        "text": " then",
+        "timestamp": [
+          1.6,
+          1.8
+        ]
+      },
+      {
+        "text": " pinch",
+        "timestamp": [
+          1.8,
+          2.02
+        ]
+      },
+      {
+        "text": " your",
+        "timestamp": [
+          2.02,
+          2.3
+        ]
+      },
+      {
+        "text": " thumb",
+        "timestamp": [
+          2.3,
+          2.58
+        ]
+      },
+      {
+        "text": " and",
+        "timestamp": [
+          2.58,
+          2.76
+        ]
+      },
+      {
+        "text": " index",
+        "timestamp": [
+          2.76,
+          3.06
+        ]
+      },
+      {
+        "text": " finger",
+        "timestamp": [
+          3.06,
+          3.42
+        ]
+      },
+      {
+        "text": " together",
+        "timestamp": [
+          3.42,
+          3.84
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          3.84,
+          4.14
+        ]
+      },
+      {
+        "text": " select",
+        "timestamp": [
+          4.14,
+          4.4
+        ]
+      },
+      {
+        "text": " it.",
+        "timestamp": [
+          4.4,
+          5.02
+        ]
+      }
+    ]
+  },
+  {
+    "id": "controls_refill_select_controllers",
+    "text": " Aim at refill water, then press the trigger to select it.",
+    "words": [
+      {
+        "text": " Aim",
+        "timestamp": [
+          0.0,
+          0.24
+        ]
+      },
+      {
+        "text": " at",
+        "timestamp": [
+          0.24,
+          0.64
+        ]
+      },
+      {
+        "text": " refill",
+        "timestamp": [
+          0.64,
+          0.78
+        ]
+      },
+      {
+        "text": " water,",
+        "timestamp": [
+          0.78,
+          1.9
+        ]
+      },
+      {
+        "text": " then",
+        "timestamp": [
+          1.9,
+          2.12
+        ]
+      },
+      {
+        "text": " press",
+        "timestamp": [
+          2.12,
+          2.42
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          2.42,
+          2.68
+        ]
+      },
+      {
+        "text": " trigger",
+        "timestamp": [
+          2.68,
+          3.04
+        ]
+      },
+      {
+        "text": " to",
+        "timestamp": [
+          3.04,
+          3.32
+        ]
+      },
+      {
+        "text": " select",
+        "timestamp": [
+          3.32,
+          3.6
+        ]
+      },
+      {
+        "text": " it.",
+        "timestamp": [
+          3.6,
+          4.22
+        ]
+      }
+    ]
+  },
+  {
+    "id": "water_supply_exhausted",
+    "text": " We've run out of water before the plant had enough. Let's try again in practice stopping at the target.",
+    "words": [
+      {
+        "text": " We've",
+        "timestamp": [
+          0.0,
+          0.26
+        ]
+      },
+      {
+        "text": " run",
+        "timestamp": [
+          0.26,
+          0.38
+        ]
+      },
+      {
+        "text": " out",
+        "timestamp": [
+          0.38,
+          0.58
+        ]
+      },
+      {
+        "text": " of",
+        "timestamp": [
+          0.58,
+          0.68
+        ]
+      },
+      {
+        "text": " water",
+        "timestamp": [
+          0.68,
+          0.9
+        ]
+      },
+      {
+        "text": " before",
+        "timestamp": [
+          0.9,
+          1.26
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          1.26,
+          1.46
+        ]
+      },
+      {
+        "text": " plant",
+        "timestamp": [
+          1.46,
+          1.64
+        ]
+      },
+      {
+        "text": " had",
+        "timestamp": [
+          1.64,
+          1.94
+        ]
+      },
+      {
+        "text": " enough.",
+        "timestamp": [
+          1.94,
+          2.56
+        ]
+      },
+      {
+        "text": " Let's",
+        "timestamp": [
+          2.74,
+          2.84
+        ]
+      },
+      {
+        "text": " try",
+        "timestamp": [
+          2.84,
+          3.0
+        ]
+      },
+      {
+        "text": " again",
+        "timestamp": [
+          3.0,
+          3.26
+        ]
+      },
+      {
+        "text": " in",
+        "timestamp": [
+          3.26,
+          3.52
+        ]
+      },
+      {
+        "text": " practice",
+        "timestamp": [
+          3.52,
+          3.72
+        ]
+      },
+      {
+        "text": " stopping",
+        "timestamp": [
+          3.72,
+          4.24
+        ]
+      },
+      {
+        "text": " at",
+        "timestamp": [
+          4.24,
+          4.5
+        ]
+      },
+      {
+        "text": " the",
+        "timestamp": [
+          4.5,
+          4.62
+        ]
+      },
+      {
+        "text": " target.",
+        "timestamp": [
+          4.62,
+          5.38
+        ]
+      }
+    ]
+  }
+]

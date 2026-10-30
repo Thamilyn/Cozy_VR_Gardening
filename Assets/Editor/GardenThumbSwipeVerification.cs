@@ -67,14 +67,18 @@ public static class GardenThumbSwipeVerification
             Transform tip = model.GetComponentsInChildren<Transform>(true).Single(t => t.name == "l_thumb_finger_tip_marker");
             Transform pad = model.GetComponentsInChildren<Transform>(true).Single(t => t.name == "l_thumb_finger_pad_marker");
             Transform[] index = model.GetComponentsInChildren<Transform>(true).Where(t => t.name.StartsWith("b_l_index")).ToArray();
-            demo.Tick(5.8f);
+            float forwardStart = cue.steps[3].at;
+            float forwardEnd = cue.steps[4].at;
+            float forwardMiddle = (forwardStart + forwardEnd) * 0.5f;
+            float backwardEnd = cue.steps[6].at;
+            demo.Tick(forwardStart);
             Vector3 start = tip.position;
             Vector3 padStart = pad.position;
             Quaternion[] indexPose = index.Select(t => t.localRotation).ToArray();
             Vector3 handPosition = model.position;
-            demo.Tick(6.4f);
+            demo.Tick(forwardMiddle);
             Vector3 middle = tip.position;
-            demo.Tick(7f);
+            demo.Tick(forwardEnd);
             Vector3 end = tip.position;
             float padTravel = Vector3.Distance(padStart, pad.position);
             Check(padTravel > 0.012f && padTravel < 0.03f, "Thumb pad makes a short 12–30 mm stroke along the curled index", report);
@@ -83,9 +87,9 @@ public static class GardenThumbSwipeVerification
             Check(index.Select((t, i) => Quaternion.Angle(t.localRotation, indexPose[i]) < 0.01f).All(same => same) &&
                 Vector3.Distance(model.position, handPosition) < 0.00001f,
                 "Index stays curled and the whole hand does not substitute for thumb motion", report);
-            demo.Tick(9.5f);
+            demo.Tick(backwardEnd);
             Check(Vector3.Distance(tip.position, start) < 0.0001f, "Backward stroke reverses the same thumb trajectory", report);
-            demo.Tick(6.4f);
+            demo.Tick(forwardMiddle);
             Check(Vector3.Distance(tip.position, middle) < 0.0001f, "Seeking and repeating do not accumulate bone rotations", report);
             Check(((GameObject)Field(demo, "anchor")).GetComponentsInChildren<LineRenderer>(true).Length == 0,
                 "Movement demonstration has no direction arrow or overlaid trajectory", report);
@@ -93,18 +97,18 @@ public static class GardenThumbSwipeVerification
             Transform knuckle = index.Single(t => t.name == "b_l_index2");
             for (int frame = 0; frame <= 20; frame++)
             {
-                demo.Tick(Mathf.Lerp(5.8f, 7f, frame / 20f));
+                demo.Tick(Mathf.Lerp(forwardStart, forwardEnd, frame / 20f));
                 Vector3 axis = knuckle.position - proximal.position;
                 Vector3 closest = proximal.position + axis * Mathf.Clamp01(Vector3.Dot(pad.position - proximal.position, axis) / axis.sqrMagnitude);
                 float gap = Vector3.Distance(pad.position, closest);
                 Check(gap > 0.005f && gap < 0.016f, "Thumb pad stays at the index surface: sample " + frame, report);
             }
-            demo.Tick(7f);
+            demo.Tick(forwardEnd);
             Vector3 pausedPad = pad.position;
-            demo.Tick(8f);
+            demo.Tick((forwardEnd + cue.steps[5].at) * 0.5f);
             Check(Vector3.Distance(pad.position, pausedPad) < 0.0001f, "Final contact pose pauses before the return stroke", report);
             Check(cue.steps.Last().at < cue.clip.length, "Existing voice covers all authored gesture steps", report);
-            Capture(demo, model, report);
+            Capture(demo, model, cue, report);
             var seeds = UnityEngine.Object.FindFirstObjectByType<SeedsController>();
             Check(seeds.Calendar.Journal.Count == 0 && !GardenMenuController.HasStarted,
                 "Preview changes no crop history, tutorial progress or session start", report);
@@ -134,7 +138,7 @@ public static class GardenThumbSwipeVerification
             hand.animationRoot + ": dedicated swipe clip binds only existing thumb joints", report);
     }
 
-    private static void Capture(GardenControlDemonstration demo, Transform model, List<string> report)
+    private static void Capture(GardenControlDemonstration demo, Transform model, GronnyAudioCatalogue.Cue cue, List<string> report)
     {
         const int size = 480;
         var atlas = new Texture2D(size * 4, size, TextureFormat.RGB24, false);
@@ -152,7 +156,7 @@ public static class GardenThumbSwipeVerification
         camera.farClipPlane = 1.5f;
         camera.targetTexture = target;
         var anchor = (GameObject)Field(demo, "anchor");
-        demo.Tick(6.4f);
+        demo.Tick((cue.steps[3].at + cue.steps[4].at) * 0.5f);
         var skinned = model.GetComponentsInChildren<SkinnedMeshRenderer>().First();
         Bounds bounds = skinned.bounds;
         camera.transform.SetPositionAndRotation(bounds.center - anchor.transform.forward * 0.6f, anchor.transform.rotation);
@@ -160,7 +164,7 @@ public static class GardenThumbSwipeVerification
         caption.transform.position = bounds.center - camera.transform.up * 0.095f;
         caption.transform.rotation = camera.transform.rotation;
         caption.characterSize = 0.006f;
-        float[] times = { 5.8f, 6.4f, 7f, 9.5f };
+        float[] times = { cue.steps[3].at, (cue.steps[3].at + cue.steps[4].at) * 0.5f, cue.steps[4].at, cue.steps[6].at };
         string[] labels = { "Start", "Swiping", "End", "Back" };
         // Unity can reuse GPU skinning within a frame. Bake each sampled pose for this
         // contact sheet so the image records mesh motion as well as moving bone markers.
@@ -195,7 +199,7 @@ public static class GardenThumbSwipeVerification
             Directory.CreateDirectory("output");
             File.WriteAllBytes("output/ThumbSwipeFrames.png", atlas.EncodeToPNG());
             Check(meshTravel > 0.005f, "The skinned hand mesh deforms with the thumb", report);
-            CaptureVideo(demo, skinned, baked, camera, target, caption, report);
+            CaptureVideo(demo, skinned, baked, camera, target, caption, cue, report);
         }
         finally
         {
@@ -211,7 +215,7 @@ public static class GardenThumbSwipeVerification
     }
 
     private static void CaptureVideo(GardenControlDemonstration demo, SkinnedMeshRenderer skinned, Mesh baked,
-        Camera camera, RenderTexture target, TextMesh caption, List<string> report)
+        Camera camera, RenderTexture target, TextMesh caption, GronnyAudioCatalogue.Cue cue, List<string> report)
     {
         var frameImage = new Texture2D(target.width, target.height, TextureFormat.RGBA32, false);
         try
@@ -223,9 +227,9 @@ public static class GardenThumbSwipeVerification
             {
                 for (int frame = 0; frame < 150; frame++)
                 {
-                    float time = Mathf.Clamp(5.8f + frame / 30f - 0.5f, 5.8f, 9.5f);
+                    float time = Mathf.Lerp(cue.steps[3].at, cue.steps[6].at, Mathf.Clamp01((frame - 15f) / 120f));
                     demo.Tick(time);
-                    caption.text = time < 7f ? "Slide forward" : time < 8.3f ? "Pause" : "Slide back";
+                    caption.text = time < cue.steps[4].at ? "Slide forward" : time < cue.steps[5].at ? "Pause" : "Slide back";
                     skinned.BakeMesh(baked);
                     camera.Render();
                     RenderTexture.active = target;

@@ -1,0 +1,38 @@
+{
+  "oldAudioAndMetaCount": 145,
+  "oldAudioAndMetasUnchanged": true,
+  "changedOldFiles": [],
+  "onlyExpectedCatalogueVariationsChanged": true,
+  "addedWavs": [
+    {
+      "path": "Assets/Audio/water_saving/variations/water_stopped_success_02.wav",
+      "sha256": "6B12590A905DE73CF6194D4FE21C27E98E3FB241B919485C96E69F1B9CFB7425",
+      "metaExists": true
+    },
+    {
+      "path": "Assets/Audio/water_saving/variations/water_stopped_success_03.wav",
+      "sha256": "45B7B303659133C69FDAF4DE0DC41F4838CE7CA4C6056DC7105A6FBBA40A52B8",
+      "metaExists": true
+    },
+    {
+      "path": "Assets/Audio/water_saving/variations/water_stopped_success_04.wav",
+      "sha256": "3584B9F0EFCA549060810B40BF260584FCA43BE01B89D2783E929605B9B62AB1",
+      "metaExists": true
+    },
+    {
+      "path": "Assets/Audio/water_saving/variations/water_ready_next_phase_02.wav",
+      "sha256": "756D900AFDB181623B2C85557C63F0E8A12DE0ABE8DC990FD903047FC2E85E31",
+      "metaExists": true
+    },
+    {
+      "path": "Assets/Audio/water_saving/variations/water_ready_next_phase_03.wav",
+      "sha256": "3E1559E5BE095E247D51D8DBA96BDA1D687D8CC976607EA7002170A629612CB1",
+      "metaExists": true
+    },
+    {
+      "path": "Assets/Audio/water_saving/variations/water_ready_next_phase_04.wav",
+      "sha256": "F8A9549A95F48B8258F215BD08744C607A1C9324970F7367D119476E7EF1162F",
+      "metaExists": true
+    }
+  ]
+}

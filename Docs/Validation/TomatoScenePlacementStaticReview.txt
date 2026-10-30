@@ -1,0 +1,12 @@
+Tomato scene placement - static geometry review
+Date: 2026-10-29
+Scene: Assets/Scenes/Garden_Moves.unity
+Scene instance: Tomato (1084891057), source Tomato.gltf
+Changed only this instance's position: y 0.90999997 -> 0.9105; z -2.240075 -> -2.335. Original uniform scale 0.35182 restored at the user's request.
+PASS: source mesh bounds transformed by the saved scene position/scale fit between all four inner walls.
+PASS: mesh bottom is 0.000500 m above the floor.
+The original-size tomato extends approximately 0.00585 m above the rim while seated on the floor; its size is preserved.
+World mesh bounds: min (0.802653, 0.910500, -2.371871), max (0.876393, 0.980848, -2.298129).
+No scripts, package versions, prefab sources or .meta files changed.
+Unity CLI 1.0.0-beta.12: status and list found no connected Pipeline instance.
+NOT RUN: Unity compilation, Play-mode physics, rendered preview or Quest 3 verification.

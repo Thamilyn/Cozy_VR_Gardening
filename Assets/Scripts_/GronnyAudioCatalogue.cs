@@ -14,6 +14,8 @@ public sealed class GronnyAudioCatalogue : ScriptableObject
     {
         public string id;
         public AudioClip clip;
+        [Tooltip("Additional recordings, played in rotation with the original. They share its help timing and instructions.")]
+        public VoiceVariation[] variations = Array.Empty<VoiceVariation>();
         public GardenInputMode mode;
         public GardenControlDemo demo;
         [Min(0)] public int priority;
@@ -24,13 +26,25 @@ public sealed class GronnyAudioCatalogue : ScriptableObject
         public bool rightHand;
         public AnimationClip controllerAnimation;
         [TextArea] public string transcript;
+        [Tooltip("Short action summary for the guide and control previews; the transcript keeps the full spoken script.")]
+        [TextArea] public string instruction;
+        [TextArea] public string instructionDetail;
         public Step[] steps = Array.Empty<Step>();
+    }
+
+    [Serializable]
+    public sealed class VoiceVariation
+    {
+        public AudioClip clip;
+        [TextArea] public string transcript;
     }
 
     [Serializable]
     public sealed class Step
     {
         [Min(0f)] public float at;
+        [Tooltip("Show this extra step only during the slow practice cycle, after the spoken instruction.")]
+        public bool practiceOnly;
         public GardenDemoPose pose;
         public Vector3 position;
         public Vector3 rotation;

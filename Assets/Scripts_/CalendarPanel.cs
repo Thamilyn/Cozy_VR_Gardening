@@ -3,9 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Oculus.Interaction;
-using Oculus.Interaction.Grab;
-using Oculus.Interaction.HandGrab;
-using Oculus.Interaction.Input;
 
 /// <summary>Editable world-space calendar presentation. The UI Button is driven by Meta's PointableCanvas.</summary>
 [DisallowMultipleComponent]
@@ -43,7 +40,6 @@ public sealed class CalendarPanel : MonoBehaviour
     [SerializeField] private Color buttonDisabledColor = new(0.35f, 0.37f, 0.35f, 1f);
     private Button restartButton;
     private Button refillButton;
-    private Button recoverButton;
     private bool restarting;
     public event Action ButtonSelected;
     public event Action<GardenTutorialAction> ActionCompleted;
@@ -82,14 +78,12 @@ public sealed class CalendarPanel : MonoBehaviour
 
     private void AddPrototypeControls()
     {
-        restartButton = MakeButton("Restart", "Restart", 285f);
+        restartButton = MakeButton("Restart", "Restart", 190f);
         restartButton.onClick.AddListener(RestartPrototype);
-        refillButton = MakeButton("Refill", "Refill water", -95f);
+        refillButton = MakeButton("Refill", "Refill water", 0f);
         refillButton.onClick.AddListener(RefillCans);
-        recoverButton = MakeButton("RecoverCan", "Recall can", 95f);
-        recoverButton.onClick.AddListener(RecoverCan);
         RectTransform rect = advanceButton.GetComponent<RectTransform>();
-        rect.anchoredPosition = new Vector2(-285f, -315f);
+        rect.anchoredPosition = new Vector2(-190f, -315f);
         rect.sizeDelta = new Vector2(170f, 65f);
         ResizeButtonLabel(advanceButton);
     }
@@ -131,81 +125,6 @@ public sealed class CalendarPanel : MonoBehaviour
         FindFirstObjectByType<TomatoPrototypeGuide>()?.Say(refilled
             ? "Water transferred to the can. Refilling is not water applied to the soil."
             : "No water transferred. Check the reserve and the water already in your can.");
-    }
-
-    public void RecoverCan()
-    {
-        if (!GronnyTutorial.Allows(GardenTutorialAction.Recover)) return;
-        TomatoPrototypeGuide guide = FindFirstObjectByType<TomatoPrototypeGuide>();
-        if (!TryGetRecoveryHand(Handedness.Right, out Vector3 position) &&
-            !TryGetRecoveryHand(Handedness.Left, out position))
-        {
-            guide?.Say("Keep one hand free and visible to recall the watering can.");
-            return;
-        }
-
-        WateringCan closest = null;
-        float closestDistance = float.PositiveInfinity;
-        float lastReleasedAt = float.NegativeInfinity;
-        foreach (WateringCan can in FindObjectsByType<WateringCan>(FindObjectsSortMode.None))
-        {
-            if (can.IsHeld) continue;
-            float distance = (can.transform.position - position).sqrMagnitude;
-            if (can.LastReleasedAt < lastReleasedAt ||
-                (can.LastReleasedAt == lastReleasedAt && distance >= closestDistance)) continue;
-            closest = can;
-            closestDistance = distance;
-            lastReleasedAt = can.LastReleasedAt;
-        }
-        if (closest == null)
-        {
-            guide?.Say("There is no released watering can to recall.");
-            return;
-        }
-
-        Vector3 forward = Camera.main != null ? Camera.main.transform.forward : Vector3.forward;
-        forward = Vector3.ProjectOnPlane(forward, Vector3.up).normalized;
-        if (forward.sqrMagnitude < 0.01f) forward = Vector3.forward;
-        closest.RecoverToHand(position + forward * 0.15f);
-        CompleteAction(GardenTutorialAction.Recover);
-        guide?.Say("The watering can is beside your hand. Grab it to continue; its water is unchanged.");
-    }
-
-    private bool TryGetRecoveryHand(Handedness side, out Vector3 position)
-    {
-        position = default;
-        HandGrabInteractor[] hands = FindObjectsByType<HandGrabInteractor>(FindObjectsSortMode.None);
-        GrabInteractor[] controllers = FindObjectsByType<GrabInteractor>(FindObjectsSortMode.None);
-        // Several Meta interactors can share a hand; any selected one makes it busy.
-        foreach (HandGrabInteractor interactor in hands)
-            if (interactor.State == InteractorState.Select && interactor.Hand != null &&
-                interactor.Hand.Handedness == side) return false;
-        foreach (GrabInteractor interactor in controllers)
-        {
-            ControllerRef controller = interactor.GetComponentInParent<ControllerRef>();
-            if (interactor.State == InteractorState.Select && controller != null &&
-                controller.Handedness == side) return false;
-        }
-        foreach (HandGrabInteractor interactor in hands)
-        {
-            IHand hand = interactor.Hand;
-            if (!interactor.isActiveAndEnabled || interactor.State == InteractorState.Disabled ||
-                interactor.State == InteractorState.Select || hand == null || hand.Handedness != side ||
-                !hand.IsConnected || !hand.IsTrackedDataValid || !hand.IsHighConfidence ||
-                !hand.GetRootPose(out Pose pose)) continue;
-            position = pose.position;
-            return true;
-        }
-        foreach (GrabInteractor interactor in controllers)
-        {
-            ControllerRef controller = interactor.GetComponentInParent<ControllerRef>();
-            if (!interactor.isActiveAndEnabled || interactor.State == InteractorState.Disabled ||
-                interactor.State == InteractorState.Select || controller == null || controller.Handedness != side ||
-                !controller.IsConnected || !controller.IsPoseValid || !controller.TryGetPose(out Pose pose)) continue;
-            position = pose.position;
-            return true;
-        }
-        return false;
     }
 
     public void RestartPrototype()
@@ -290,7 +209,6 @@ public sealed class CalendarPanel : MonoBehaviour
             if (label != null) label.text = GardenWaterSupply.Active != null && GardenWaterSupply.Active.Exhausted ? "Try again" : "Restart";
         }
         if (refillButton != null) refillButton.interactable = GronnyTutorial.Allows(GardenTutorialAction.Refill);
-        if (recoverButton != null) recoverButton.interactable = GronnyTutorial.Allows(GardenTutorialAction.Recover);
     }
 
     private void CompleteAction(GardenTutorialAction action)

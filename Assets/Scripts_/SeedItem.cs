@@ -13,7 +13,18 @@ public sealed class SeedItem : MonoBehaviour
     [Tooltip("Six ordered prefab slots: seed, sprout, young plant, flowering, green fruit, ripe fruit. Slot 0 may be empty to use SeedVisual.")]
     [SerializeField] private GameObject[] tomatoStagePrefabs = new GameObject[6];
 
+    [Header("Dropped seed recovery")]
+    [Tooltip("Optional return location. Otherwise the seed returns to its starting pose.")]
+    [SerializeField] private Transform recoveryPoint;
+    [SerializeField, Min(0.1f)] private float recoveryDelaySeconds = 2f;
+
     private Grabbable _grabbable;
+    private Rigidbody _body;
+    private Vector3 _startingPosition;
+    private Quaternion _startingRotation;
+    private RigidbodyConstraints _restingConstraints;
+    private float _recoveryRemaining = -1f;
+    private bool _waitingAtRecoveryPoint;
     private bool _wasHeld;
     private bool _everHeld;
     private GameObject _sproutVisual;
@@ -34,6 +45,9 @@ public sealed class SeedItem : MonoBehaviour
         if (string.IsNullOrEmpty(seedId)) seedId = Guid.NewGuid().ToString("N");
         GardenGrabSetup.ConfigureGrabbable(gameObject);
         _grabbable = GetComponent<Grabbable>();
+        _body = GetComponent<Rigidbody>();
+        _restingConstraints = _body.constraints;
+        _grabbable.WhenPointerEventRaised += OnPointerEvent;
         if (seedRenderer == null) seedRenderer = GetComponent<Renderer>();
         SetColor(seedRenderer, crop switch
         {
@@ -45,6 +59,23 @@ public sealed class SeedItem : MonoBehaviour
             _nameLabel = GardenObjectLabel.Create(gameObject, "Tomato", Vector3.up * 0.08f);
     }
 
+    private void Start()
+    {
+        _startingPosition = transform.position;
+        _startingRotation = transform.rotation;
+    }
+
+    private void OnPointerEvent(PointerEvent pointerEvent)
+    {
+        if (IsPlanted || pointerEvent.Type != PointerEventType.Select) return;
+        CancelRecovery();
+        // Capture even a grab and release within one frame, before the planting check.
+        _wasHeld = true;
+        if (GardenMenuController.GardenSuspended) return;
+        _everHeld = true;
+        GronnyTutorial.RecordSeedGrab(this);
+    }
+
     private void Update()
     {
         if (IsPlanted || _grabbable == null) return;
@@ -52,24 +83,69 @@ public sealed class SeedItem : MonoBehaviour
         if (GardenMenuController.GardenSuspended)
         {
             // A release while operating the menu is not a tutorial or planting action.
+            // Recover it after resuming so that it cannot be lost during a pause.
+            if (_wasHeld && !held) _recoveryRemaining = Mathf.Max(0.1f, recoveryDelaySeconds);
             _wasHeld = held;
             return;
         }
-        if (held) _everHeld = true;
+        if (held)
+        {
+            CancelRecovery();
+            _everHeld = true;
+            // Also recognize a seed already held when the tutorial or menu resumes.
+            GronnyTutorial.RecordSeedGrab(this);
+        }
         if (_wasHeld && !held && _everHeld)
         {
-            GronnyTutorial.RecordSeedRelease(this);
             SeedsController controller = FindFirstObjectByType<SeedsController>();
             if (controller != null) controller.TryPlant(this);
+            if (!IsPlanted) _recoveryRemaining = Mathf.Max(0.1f, recoveryDelaySeconds);
+        }
+        if (!held && !IsPlanted && _recoveryRemaining >= 0f)
+        {
+            _recoveryRemaining -= Time.deltaTime;
+            if (_recoveryRemaining <= 0f) RecoverSeed();
         }
         _wasHeld = held;
     }
 
+    private void CancelRecovery()
+    {
+        _recoveryRemaining = -1f;
+        if (!_waitingAtRecoveryPoint) return;
+        _body.constraints = _restingConstraints;
+        _waitingAtRecoveryPoint = false;
+    }
+
+    private void RecoverSeed()
+    {
+        _recoveryRemaining = -1f;
+        if (!_body.isKinematic)
+        {
+            _body.linearVelocity = Vector3.zero;
+            _body.angularVelocity = Vector3.zero;
+        }
+        Vector3 position = recoveryPoint != null ? recoveryPoint.position : _startingPosition;
+        Quaternion rotation = recoveryPoint != null ? recoveryPoint.rotation : _startingRotation;
+        transform.SetPositionAndRotation(position, rotation);
+        _body.position = position;
+        _body.rotation = rotation;
+        // Keep it reachable without changing the kinematic state saved by Meta on grab.
+        _body.constraints = RigidbodyConstraints.FreezeAll;
+        _waitingAtRecoveryPoint = true;
+    }
+
     public void AssignId(string id) { if (!string.IsNullOrEmpty(id)) seedId = id; }
+
+    private void OnDestroy()
+    {
+        if (_grabbable != null) _grabbable.WhenPointerEventRaised -= OnPointerEvent;
+    }
 
     public void PlantIn(GardenPot pot)
     {
         if (IsPlanted || pot == null) return;
+        CancelRecovery();
         IsPlanted = true;
         if (_nameLabel != null) _nameLabel.enabled = false;
         transform.SetParent(pot.transform, false);

@@ -1,0 +1,96 @@
+{
+  "success": true,
+  "command": "command console",
+  "data": {
+    "command": "console",
+    "parameters": {
+      "level": "error",
+      "tail": "12"
+    },
+    "result": {
+      "entries": [
+        {
+          "seq": 8225,
+          "timestampUtc": "2026-10-29T17:22:11.1750442Z",
+          "level": "error",
+          "logType": "Error",
+          "message": "[MetaXRFeature]: ErrorFormFactorUnavailable xrGetSystem",
+          "stackTrace": "UnityEngine.Debug:LogErrorFormat (string,object[])\nMeta.XR.Extensions:LogErrorFormat (string,object) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/XrResult.cs:205)\nMeta.XR.Extensions:OrLogFormat (Meta.XR.XrResult,string) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/XrResult.cs:269)\nMeta.XR.MetaXRFeature:BindFunctionPointers () (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaXRFeature.cs:423)\nMeta.XR.MetaFeatureBase`1<Meta.XR.MetaXRFeature>:OnInstanceCreate (ulong) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaFeatureBase.cs:134)\nMeta.XR.MetaXRFeature:OnInstanceCreate (ulong) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaXRFeature.cs:321)\nUnityEngine.XR.Management.XRGeneralSettings:AttemptInitializeXRSDKOnLoad () (at ./Library/PackageCache/com.unity.xr.management@df145a5bc89e/Runtime/XRGeneralSettings.cs:99)\n",
+          "seeded": false
+        },
+        {
+          "seq": 8256,
+          "timestampUtc": "2026-10-29T17:23:48.3935827Z",
+          "level": "error",
+          "logType": "Error",
+          "message": "[MetaXRFeature]: ErrorFormFactorUnavailable xrGetSystem",
+          "stackTrace": "UnityEngine.Debug:LogErrorFormat (string,object[])\nMeta.XR.Extensions:LogErrorFormat (string,object) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/XrResult.cs:205)\nMeta.XR.Extensions:OrLogFormat (Meta.XR.XrResult,string) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/XrResult.cs:269)\nMeta.XR.MetaXRFeature:BindFunctionPointers () (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaXRFeature.cs:423)\nMeta.XR.MetaFeatureBase`1<Meta.XR.MetaXRFeature>:OnInstanceCreate (ulong) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaFeatureBase.cs:134)\nMeta.XR.MetaXRFeature:OnInstanceCreate (ulong) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaXRFeature.cs:321)\nUnityEngine.XR.Management.XRGeneralSettings:AttemptInitializeXRSDKOnLoad () (at ./Library/PackageCache/com.unity.xr.management@df145a5bc89e/Runtime/XRGeneralSettings.cs:99)\n",
+          "seeded": false
+        },
+        {
+          "seq": 8293,
+          "timestampUtc": "2026-10-29T17:27:49.5567913Z",
+          "level": "error",
+          "logType": "Error",
+          "message": "[MetaXRFeature]: ErrorFormFactorUnavailable xrGetSystem",
+          "stackTrace": "UnityEngine.Debug:LogErrorFormat (string,object[])\nMeta.XR.Extensions:LogErrorFormat (string,object) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/XrResult.cs:205)\nMeta.XR.Extensions:OrLogFormat (Meta.XR.XrResult,string) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/XrResult.cs:269)\nMeta.XR.MetaXRFeature:BindFunctionPointers () (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaXRFeature.cs:423)\nMeta.XR.MetaFeatureBase`1<Meta.XR.MetaXRFeature>:OnInstanceCreate (ulong) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaFeatureBase.cs:134)\nMeta.XR.MetaXRFeature:OnInstanceCreate (ulong) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaXRFeature.cs:321)\nUnityEngine.XR.Management.XRGeneralSettings:AttemptInitializeXRSDKOnLoad () (at ./Library/PackageCache/com.unity.xr.management@df145a5bc89e/Runtime/XRGeneralSettings.cs:99)\n",
+          "seeded": false
+        },
+        {
+          "seq": 8328,
+          "timestampUtc": "2026-10-29T17:29:07.8897892Z",
+          "level": "error",
+          "logType": "Error",
+          "message": "[MetaXRFeature]: ErrorFormFactorUnavailable xrGetSystem",
+          "stackTrace": "UnityEngine.Debug:LogErrorFormat (string,object[])\nMeta.XR.Extensions:LogErrorFormat (string,object) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/XrResult.cs:205)\nMeta.XR.Extensions:OrLogFormat (Meta.XR.XrResult,string) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/XrResult.cs:269)\nMeta.XR.MetaXRFeature:BindFunctionPointers () (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaXRFeature.cs:423)\nMeta.XR.MetaFeatureBase`1<Meta.XR.MetaXRFeature>:OnInstanceCreate (ulong) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaFeatureBase.cs:134)\nMeta.XR.MetaXRFeature:OnInstanceCreate (ulong) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaXRFeature.cs:321)\nUnityEngine.XR.Management.XRGeneralSettings:AttemptInitializeXRSDKOnLoad () (at ./Library/PackageCache/com.unity.xr.management@df145a5bc89e/Runtime/XRGeneralSettings.cs:99)\n",
+          "seeded": false
+        },
+        {
+          "seq": 8358,
+          "timestampUtc": "2026-10-29T17:29:45.2117516Z",
+          "level": "error",
+          "logType": "Error",
+          "message": "[MetaXRFeature]: ErrorFormFactorUnavailable xrGetSystem",
+          "stackTrace": "UnityEngine.Debug:LogErrorFormat (string,object[])\nMeta.XR.Extensions:LogErrorFormat (string,object) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/XrResult.cs:205)\nMeta.XR.Extensions:OrLogFormat (Meta.XR.XrResult,string) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/XrResult.cs:269)\nMeta.XR.MetaXRFeature:BindFunctionPointers () (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaXRFeature.cs:423)\nMeta.XR.MetaFeatureBase`1<Meta.XR.MetaXRFeature>:OnInstanceCreate (ulong) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaFeatureBase.cs:134)\nMeta.XR.MetaXRFeature:OnInstanceCreate (ulong) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaXRFeature.cs:321)\nUnityEngine.XR.Management.XRGeneralSettings:AttemptInitializeXRSDKOnLoad () (at ./Library/PackageCache/com.unity.xr.management@df145a5bc89e/Runtime/XRGeneralSettings.cs:99)\n",
+          "seeded": false
+        },
+        {
+          "seq": 8391,
+          "timestampUtc": "2026-10-29T17:30:46.7570366Z",
+          "level": "error",
+          "logType": "Error",
+          "message": "[MetaXRFeature]: ErrorFormFactorUnavailable xrGetSystem",
+          "stackTrace": "UnityEngine.Debug:LogErrorFormat (string,object[])\nMeta.XR.Extensions:LogErrorFormat (string,object) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/XrResult.cs:205)\nMeta.XR.Extensions:OrLogFormat (Meta.XR.XrResult,string) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/XrResult.cs:269)\nMeta.XR.MetaXRFeature:BindFunctionPointers () (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaXRFeature.cs:423)\nMeta.XR.MetaFeatureBase`1<Meta.XR.MetaXRFeature>:OnInstanceCreate (ulong) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaFeatureBase.cs:134)\nMeta.XR.MetaXRFeature:OnInstanceCreate (ulong) (at ./Library/PackageCache/com.meta.xr.sdk.core@c0efcbf2ba70/Scripts/OpenXRFeatures/MetaXRFeature.cs:321)\nUnityEngine.XR.Management.XRGeneralSettings:AttemptInitializeXRSDKOnLoad () (at ./Library/PackageCache/com.unity.xr.management@df145a5bc89e/Runtime/XRGeneralSettings.cs:99)\n",
+          "seeded": false
+        }
+      ],
+      "cursor": 8414,
+      "session": "58342cd7abfc481abd805279962560a5",
+      "returned": 6,
+      "dropped": false,
+      "reset": false,
+      "counts": {
+        "error": 6,
+        "warn": 1473,
+        "log": 521
+      },
+      "groundTruth": {
+        "sampledUtc": "2026-10-29T17:31:50.0753144Z",
+        "ageMs": 167,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 1,
+        "consoleWarnings": 4,
+        "consoleLogs": 26,
+        "seeded": true
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

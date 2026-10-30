@@ -186,7 +186,13 @@
       "backup": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Docs\\AudioBackups\\WaterSaving_20261026_235116\\11_green_fruit.wav",
       "before_sha256": "F483460F1350373FA8C57068D1BB3AEF4CA4A413542A26E7185BE3EF11A3A65F",
       "source_sha256": "190FA67488432B6C7595DA1EA62B2BFE2D12F8D38F8485535D6ED57EB0A569D5",
-      "after_sha256": "190FA67488432B6C7595DA1EA62B2BFE2D12F8D38F8485535D6ED57EB0A569D5"
+      "after_sha256": "190FA67488432B6C7595DA1EA62B2BFE2D12F8D38F8485535D6ED57EB0A569D5",
+      "prior_override_sha256": "190FA67488432B6C7595DA1EA62B2BFE2D12F8D38F8485535D6ED57EB0A569D5",
+      "previous_revision_backup": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Docs\\AudioBackups\\UnripeTomatoes_20261029_233614\\Assets\\Audio\\dialogues_cozy_gardening\\11_green_fruit.wav",
+      "override_sha256": "771CB136412C58C9E136EB029F78B55FCA676155CD679EBEEA9579348D959265",
+      "override_text": "Our tomatoes are slowly ripening. This time, you decide when to stop watering. Use the target to guide you.",
+      "replacement_reason": "Approved ripening description: the immature tomatoes have several colors.",
+      "verification_report": "output/UnripeTomatoesVerification.json"
     },
     {
       "id": "12_harvest",

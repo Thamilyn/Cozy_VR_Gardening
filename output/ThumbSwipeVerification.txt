@@ -1,5 +1,5 @@
 Unity 6000.3.23f1
-UTC 2026-10-26T22:15:55.5773536Z
+UTC 2026-10-29T17:29:14.4396013Z
 PASS: OculusHand_L: dedicated swipe clip binds only existing thumb joints
 PASS: OculusHand_R: dedicated swipe clip binds only existing thumb joints
 PASS: Hand mesh remains visible through the normal placement path at eye height

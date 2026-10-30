@@ -42,7 +42,7 @@ APIs de la versión ya instalada en `Library/PackageCache` (solo lectura).
 | Selección de UI | RayInteractor → RayInteractable/ColliderSurface → PointableCanvas → PointableCanvasModule → Button; manos con pinza, mandos con Trigger. El menú reutiliza este circuito con inyección pública del SDK instalado. |
 | Agarre | `GardenGrabSetup` configura Grabbable e interactables de manos/mandos; el mando usa Grip. No se desactiva el tracking ni el agarre que ya sostiene un objeto al abrir el menú. |
 | Rellenar | `WateringCan`: Button.Two/RTouch (B), condicionado a sostenerla y a permisos de Gronny. El calendario conserva Refill water. |
-| Recuperar | `CalendarPanel.RecoverCan` sigue priorizando derecha y después izquierda. Su adaptación a preferencias se hará con la entrega de lateralidad. |
+| Recuperar | La jarra permanece donde se deja sobre la mesa. Si su centro de masa cae 45 cm bajo su altura de retorno y sigue suelta bajo ese límite durante dos segundos de juego activo, vuelve al origen. Se ha eliminado la recuperación manual desde el calendario. |
 | Acceso al menú | Objetivo visible Menu, con pinza o Trigger. No se añade un botón físico ni un gesto de sistema. Se evita que la pinza sobre Menu también abra el calendario. |
 | Imagen | URP existente; `GardenPhaseTimeCycle` interpola un skybox privado, sol y ambiente Trilight. Esta entrega solo adapta sus esperas a la suspensión, sin implementar brillo ni cambiar materiales guardados. |
 

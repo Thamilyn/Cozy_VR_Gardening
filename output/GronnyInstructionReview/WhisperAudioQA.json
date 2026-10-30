@@ -1,0 +1,750 @@
+{
+  "recognition_model": "openai/whisper-base.en",
+  "note": "Revisión automática; no sustituye escucha humana.",
+  "files": [
+    {
+      "id": "01_welcome",
+      "expected": "Hi! I'm Gronny. If you're using hand tracking, hold both hands comfortably in front of you where you can see them. Today I'll help you grow your own tomato. We'll learn about sustainable gardening by giving our plants just the water they need. We'll practise together first, then use a limited water supply to finish growing our tomato.",
+      "transcript": "Hi, I'm Granny. If you're using hand tracking, hold both hands comfortably in front of you where you can see them. Today I'll help you grow your own tomato. We'll learn about sustainable gardening by giving our plants just the water they need. We'll practice together first, then use a limited water supply to finish growing our tomato.",
+      "differences": [
+        {
+          "operation": "replace",
+          "expected": "gronny",
+          "transcript": "granny"
+        }
+      ],
+      "words_match": false,
+      "duration_seconds": 20.48,
+      "sample_rate": 24000,
+      "peak": 0.980010986328125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "0D92333F758E598484FE83141F6486DA794A7E60021D34BC88329F3EA568D352"
+    },
+    {
+      "id": "02_tomato_intro",
+      "expected": "Today, we'll grow a tomato and learn to use water wisely. First, let's practise moving.",
+      "transcript": "Today, we'll grow a tomato and learn to use water wisely. First, let's practice moving.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 6.48,
+      "sample_rate": 24000,
+      "peak": 0.80670166015625,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "6C9220487730619859896C27F93D6DB73EF7F34E2370A398693CAEB96777022F"
+    },
+    {
+      "id": "03_plant_seed",
+      "expected": "Move the seed with the Tomato label over the soil in the centre of an empty small pot. Release the seed into the pot to plant it.",
+      "transcript": "Move the seed with the tomato label over the soil in the center of an empty small pot. Release the seed into the pot to plant it.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 7.76,
+      "sample_rate": 24000,
+      "peak": 0.708984375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "26B26C62CC2874AA184EB0E6C32B45538D9E21405C0716574D0073B836DB9555"
+    },
+    {
+      "id": "04_first_watering",
+      "expected": "Gently tilt the can over the soil, near the roots. Turn it upright to stop pouring.",
+      "transcript": "Gently tilt the can over the soil near the roots. Turn it upright to stop pouring.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.68,
+      "sample_rate": 24000,
+      "peak": 0.9107666015625,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "FC021161F683319282709FEB402D63A5AB7007C9C7CA2CB29E24710CDD9C38A2"
+    },
+    {
+      "id": "05_water_target",
+      "expected": "Watch the water bar by your plant. The target shows how much it needs. Stop pouring when you reach it to avoid wasting water.",
+      "transcript": "Watch the water bar by your plant. The target shows how much it needs. Stop pouring when you reach it to avoid wasting water.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 8.28,
+      "sample_rate": 24000,
+      "peak": 0.80029296875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "D45CAC0B70F9F28DCB7E49AAD39B4C144E183C97A40DC0AC4F88570A695C0164"
+    },
+    {
+      "id": "06_enough_water",
+      "expected": "That's enough water. Turn the can upright now to stop pouring.",
+      "transcript": "That's enough water. Turn the can upright now to stop pouring.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 4.2,
+      "sample_rate": 24000,
+      "peak": 0.970703125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "123DFBF6E07ED060AC94123507283E473177039227FA4911D9366D421FEC21C4"
+    },
+    {
+      "id": "07_first_advance",
+      "expected": "Your plant has enough water to grow. Open the calendar and select Advance phase.",
+      "transcript": "Your plant has enough water to grow. Open the calendar and select Advanced Phase.",
+      "differences": [
+        {
+          "operation": "replace",
+          "expected": "advance",
+          "transcript": "advanced"
+        }
+      ],
+      "words_match": false,
+      "duration_seconds": 5.68,
+      "sample_rate": 24000,
+      "peak": 0.832305908203125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "329DFB00E5F66E4762B86002B7769192FC2D78E1C97B809C13177DFC2349D006"
+    },
+    {
+      "id": "08_sprout",
+      "expected": "Look, a little sprout! Water the soil until the bar reaches its target, then stop pouring.",
+      "transcript": "Look, a little sprout. Water the soil until the bar reaches its target. Then stop pouring.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 6.12,
+      "sample_rate": 24000,
+      "peak": 0.841033935546875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "0CF09A4974A6A980A7D9C83E285F288CF29E8D38D1AD2956C8B61814C3CD443C"
+    },
+    {
+      "id": "09_young_plant",
+      "expected": "Your tomato plant is getting bigger. Give it the water it needs for this stage, without going past the target.",
+      "transcript": "Your tomato plant is getting bigger. Give it the water it needs for this stage without going past the target.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 6.76,
+      "sample_rate": 24000,
+      "peak": 0.990020751953125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "5675611A40FFE25B6BD067845BFB9B22E84F459EA661187C2166855D5298B0F9"
+    },
+    {
+      "id": "10_flowering",
+      "expected": "Your plant has flowers! Keep an eye on the water bar and save the remaining water for the next stage.",
+      "transcript": "Your plant has flowers. Keep an eye on the water bar and save the remaining water for the next stage.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 6.92,
+      "sample_rate": 24000,
+      "peak": 0.8489990234375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "68576A83DCD0A8F7582B86DA2560FD498283EAE3117C495018E9908DC79E33B9"
+    },
+    {
+      "id": "11_green_fruit",
+      "expected": "There's our green tomato! This time, you decide when to stop watering. Use the target to guide you.",
+      "transcript": "There's our green tomato. This time, you decide when to stop watering. Use the target to guide you.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 7.2,
+      "sample_rate": 24000,
+      "peak": 0.8292236328125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "190FA67488432B6C7595DA1EA62B2BFE2D12F8D38F8485535D6ED57EB0A569D5"
+    },
+    {
+      "id": "12_harvest",
+      "expected": "Your tomato is ripe! No more watering is needed. Pick the largest red tomato and place it in the harvest tray.",
+      "transcript": "Your tomato is ripe, no more watering is needed. Pick the largest red tomato and place it in the harvest tray.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 7.0,
+      "sample_rate": 24000,
+      "peak": 0.74334716796875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "B6B1820023C6105D368CBA166FE70E9345B90FF3FC063CCE7D88479240432F40"
+    },
+    {
+      "id": "13_complete",
+      "expected": "You did it! Your first tomato, grown with care. Giving plants just the water they need helps us save water. Thanks for gardening with me!",
+      "transcript": "You did it. Your first tomato, grown with care. Giving plants just the water they need helps us save water. Thanks for gardening with me.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 8.68,
+      "sample_rate": 24000,
+      "peak": 0.855316162109375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "AD29FBAE3D61DB31BB9786E1ED6333643E389B7BC2DF95B6DA2C7942B945D154"
+    },
+    {
+      "id": "help_planting",
+      "expected": "Try dropping the seed onto the soil in the centre of an empty small pot.",
+      "transcript": "Try dropping the seed onto the soil in the center of an empty small pot.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 4.68,
+      "sample_rate": 24000,
+      "peak": 0.716400146484375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "AFC3A83FCC5656BDC177D609C1695A5CCF4C885316A920CF2C9EEAF4AA7D0707"
+    },
+    {
+      "id": "help_low_water",
+      "expected": "The plant needs a little more water. Pour gently and stop when the water bar reaches the target.",
+      "transcript": "The plant needs a little more water, pour gently and stop when the water bar reaches the target.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.72,
+      "sample_rate": 24000,
+      "peak": 0.902557373046875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "3C949B7B1993C09BD8E4ADE3B0C094206CB2187AD8334424410D2F4E2EA896DD"
+    },
+    {
+      "id": "help_excess_water",
+      "expected": "There's too much water in the pot. Hold the can upright and let the extra water drain away.",
+      "transcript": "There's too much water in the pot. Hold the can upright and let the extra water drain away.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.56,
+      "sample_rate": 24000,
+      "peak": 0.989990234375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "30915E95442DA2129E2418FBF48477765A2457A8CB680AB036D010264BD1E835"
+    },
+    {
+      "id": "help_drained",
+      "expected": "The extra water has drained away. That water wasn't needed. Next time, try stopping when you reach the target.",
+      "transcript": "The extra water has drained away. That water wasn't needed. Next time, try stopping when you reach the target.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 7.44,
+      "sample_rate": 24000,
+      "peak": 0.989990234375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "9FFAA426A770956112861FCFE21F136978067F57CDB5B972D50FA6293591BABC"
+    },
+    {
+      "id": "help_calendar",
+      "expected": "Your plant has enough water. Open your calendar and select Advance phase.",
+      "transcript": "Your plant has enough water. Open your calendar and select Advanced Phase.",
+      "differences": [
+        {
+          "operation": "replace",
+          "expected": "advance",
+          "transcript": "advanced"
+        }
+      ],
+      "words_match": false,
+      "duration_seconds": 5.16,
+      "sample_rate": 24000,
+      "peak": 0.818115234375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "C1C558E5E9B9228A4E19036B1ABCF57E421AC4C9C2C85C6737E196154D190BD2"
+    },
+    {
+      "id": "help_refill",
+      "expected": "Your watering can is empty. Open the calendar and select Refill water to take water from the reserve.",
+      "transcript": "Your watering can is empty. Open the calendar and select refill water to take water from the reserve.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 6.44,
+      "sample_rate": 24000,
+      "peak": 0.876220703125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "B611A9A8E7F87DCF5922F0662F1D040C9DF4C4F8BC57CC1E5F45313A48B774DC"
+    },
+    {
+      "id": "controls_move_hands",
+      "expected": "Let's practise moving. Watch the hand demonstration. Curl your index finger, touch it with your thumb, then swipe your thumb to take a step. Give it a try.",
+      "transcript": "Let's practice moving. Watch the hand demonstration. Curl your index finger. Touch it with your thumb. Then swipe your thumb to take a step. Give it a try.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 10.16,
+      "sample_rate": 24000,
+      "peak": 0.988037109375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "9990C8EB408E201CC290C00C0255BA165DE324479968DD1E748F7584FC48A57A"
+    },
+    {
+      "id": "controls_grab_hands",
+      "expected": "Find the seed with the Tomato label. Pinch it between your thumb and index finger to pick it up. Open your fingers to let go.",
+      "transcript": "Find the seed with the tomato label. Pinch it between your thumb and index finger to pick it up. Open your fingers to let go.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 7.4,
+      "sample_rate": 24000,
+      "peak": 0.755035400390625,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "69532077F9C4B75B4D57811021125457DC1153AD89E047FAEC60726945CC5B7F"
+    },
+    {
+      "id": "controls_calendar_hands",
+      "expected": "Move your left hand away from objects, then pinch your thumb and index finger together to open the calendar.",
+      "transcript": "Move your left hand away from objects. Then pinch your thumb and index finger together to open the calendar.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 7.0,
+      "sample_rate": 24000,
+      "peak": 0.815185546875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "D33F1EF0E2A8C57DD7F038C92A558E779E719D0680E758682261353A4867D777"
+    },
+    {
+      "id": "controls_calendar_select_hands",
+      "expected": "Point at Advance phase, then pinch your thumb and index finger together to select it.",
+      "transcript": "Point at advanced phase, then pinch your thumb and index finger together to select it.",
+      "differences": [
+        {
+          "operation": "replace",
+          "expected": "advance",
+          "transcript": "advanced"
+        }
+      ],
+      "words_match": false,
+      "duration_seconds": 5.12,
+      "sample_rate": 24000,
+      "peak": 0.728118896484375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "B6219A4B5C46B8ADABE7080ABDDF737AC2B3D8DDF7C201D3A8E3FE28F9802D79"
+    },
+    {
+      "id": "controls_move_controllers",
+      "expected": "Let's practise moving. Gently push the left joystick to walk. Give it a try.",
+      "transcript": "Let's practice moving. Gently push the left joystick to walk. Give it a try.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 4.84,
+      "sample_rate": 24000,
+      "peak": 0.94342041015625,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "F15D79F00F1AF9AAD08717743C72DAC5069143D35CB5CEFC903F54FA348C487D"
+    },
+    {
+      "id": "controls_grab_controllers",
+      "expected": "Find the seed with the Tomato label. Hold the Grip button to pick it up. Release the button to let go.",
+      "transcript": "Find the seed with the tomato label. Hold the grip button to pick it up. Release the button to let go.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 6.36,
+      "sample_rate": 24000,
+      "peak": 0.65826416015625,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "04E494A907D923F4178125433B22B65A3AB2663126CE239F1D5D01ED37900B88"
+    },
+    {
+      "id": "controls_calendar_controllers",
+      "expected": "Press Y on your left controller to open the calendar.",
+      "transcript": "Press Y on your left controller to open the calendar.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 3.52,
+      "sample_rate": 24000,
+      "peak": 0.89764404296875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "46783FA79648D25E11992339F8B211D2719F2BA9A28E8A821555ADE558C442C1"
+    },
+    {
+      "id": "controls_calendar_select_controllers",
+      "expected": "Aim at Advance phase, then press the Trigger to select it.",
+      "transcript": "Aim at Advanced Phase, then press the trigger to select it.",
+      "differences": [
+        {
+          "operation": "replace",
+          "expected": "advance",
+          "transcript": "advanced"
+        }
+      ],
+      "words_match": false,
+      "duration_seconds": 3.84,
+      "sample_rate": 24000,
+      "peak": 0.77716064453125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "18DBFB7650DCEE60C3BABE8D9CC18024408BE32DCDB3DC3FFCB0B0AC2FBA85A4"
+    },
+    {
+      "id": "controls_move_hands_left",
+      "expected": "With your left hand, curl your index finger and keep your thumb free. Tap your thumb against your curled index finger to activate movement. Swipe your thumb forward to step forward, or backward to step back. Straighten your index finger to exit movement mode.",
+      "transcript": "With your left hand, curl your index finger and keep your thumb free. Tap your thumb against your curled index finger to activate movement. Swipe your thumb forward to step forward or backward to step back. Straighten your index finger to exit movement mode.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 15.28,
+      "sample_rate": 24000,
+      "peak": 0.989990234375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "B254AF2C5F865D87113DA5B634BCE20F6A4106A828AA8E50A0D88D4A7010863D"
+    },
+    {
+      "id": "controls_move_hands_right",
+      "expected": "With your right hand, curl your index finger and keep your thumb free. Tap your thumb against your curled index finger to activate movement. Swipe your thumb forward to step forward, or backward to step back. Straighten your index finger to exit movement mode.",
+      "transcript": "With your right hand, curl your index finger and keep your thumb free. Tap your thumb against your curled index finger to activate movement. Swipe your thumb forward to step forward or backward to step back. Straighten your index finger to exit movement mode.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 16.2,
+      "sample_rate": 24000,
+      "peak": 0.94287109375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "3BEA44BE960B174485DED2CD63F2478FDE07B6EECC0E4D59C6054B381CA3D5FC"
+    },
+    {
+      "id": "controls_move_controllers_left",
+      "expected": "Use the joystick on your left controller to move. Let the joystick return to the centre to stop.",
+      "transcript": "Use the joystick on your left controller to move. Let the joystick return to the center to stop.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 6.4,
+      "sample_rate": 24000,
+      "peak": 0.8411865234375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "652EC5EC99EBA07EAABC4BC15770DDE119A60AE55B9A13F011407431D21E60E3"
+    },
+    {
+      "id": "controls_move_controllers_right",
+      "expected": "Use the joystick on your right controller to move. Let the joystick return to the centre to stop.",
+      "transcript": "Use the joystick on your right controller to move. Let the joystick return to the center to stop.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.92,
+      "sample_rate": 24000,
+      "peak": 0.870208740234375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "9E16E420B2A330491ABACBEAFCE8540214C0673DAE224EA0D6EA393A63AD3B9A"
+    },
+    {
+      "id": "controls_calendar_hands_left",
+      "expected": "Keep your left hand free and away from objects. Pinch your thumb and index finger together to open the calendar, then release. Repeat the gesture to close it.",
+      "transcript": "Keep your left hand free and away from objects. Pinch your thumb and index finger together to open the calendar. Then release. Repeat the gesture to close it.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 10.24,
+      "sample_rate": 24000,
+      "peak": 0.990020751953125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "27A6B3E9D7977E49D69F819D4B1E869BA06210964C666228FEF456B1D1CF6112"
+    },
+    {
+      "id": "controls_calendar_hands_right",
+      "expected": "Keep your right hand free and away from objects. Pinch your thumb and index finger together to open the calendar, then release. Repeat the gesture to close it.",
+      "transcript": "Keep your right hand free and away from objects. Pinch your thumb and index finger together to open the calendar, then release. Repeat the gesture to close it.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 9.52,
+      "sample_rate": 24000,
+      "peak": 0.9345703125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "44777F67D8C3DA3BD406F2C3E9E7AE2E6B595888425F25D80E192C8598566114"
+    },
+    {
+      "id": "controls_calendar_controllers_left",
+      "expected": "Press the Y button on your left controller to open the calendar. Press it again to close it.",
+      "transcript": "Press the Y button on your left controller to open the calendar. Press it again to close it.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.64,
+      "sample_rate": 24000,
+      "peak": 0.808441162109375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "C1BCA48F2A8442863504CE882A58AF0E6B432517ECC816F57F48085C273BD330"
+    },
+    {
+      "id": "controls_calendar_controllers_right",
+      "expected": "Press the B button on your right controller to open the calendar. Press it again to close it.",
+      "transcript": "Press the B button on your right controller to open the calendar. Press it again to close it.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.2,
+      "sample_rate": 24000,
+      "peak": 0.74090576171875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "74F400ABA2B0FDBB3B69F634F31AC50F37123C6CB7A6CA37E93D59933086A323"
+    },
+    {
+      "id": "03_plant_seed_accessible",
+      "expected": "Pick up the seed labelled Tomato and gently drop it onto the soil in an empty small pot.",
+      "transcript": "Pick up the seed-labeled tomato and gently drop it onto the soil in an empty small pot.",
+      "differences": [
+        {
+          "operation": "replace",
+          "expected": "labelled",
+          "transcript": "labeled"
+        }
+      ],
+      "words_match": false,
+      "duration_seconds": 5.4,
+      "sample_rate": 24000,
+      "peak": 0.802886962890625,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "2ADC5C6E68E4D6CCA80CB219E32F69965EA6EBC56B141331F17194F50B869F3F"
+    },
+    {
+      "id": "12_harvest_accessible",
+      "expected": "Our tomato is ripe! Pick the fruit marked ready to harvest and gently place it in the harvest tray.",
+      "transcript": "Our tomato is ripe, pick the fruit marked ready to harvest, and gently place it in the harvest tray.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 6.08,
+      "sample_rate": 24000,
+      "peak": 0.798492431640625,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "48A1C17AE58C231C4BE081F3585E1D3B6A3A87946E24D085AC0D7871C391C2F9"
+    },
+    {
+      "id": "menu_intro",
+      "expected": "Ready to spend some time in the garden? Select Play to begin. You can also review the controls or adjust your settings before you start.",
+      "transcript": "Ready to spend some time in the garden? Select Play to begin. You can also review the controls or adjust your settings before you start.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 8.8,
+      "sample_rate": 24000,
+      "peak": 0.990020751953125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "9366F7D93FE2EA4CCDA800ED74997474DAAFB0BFEAB2D0425C17D3F9ACA43DE0"
+    },
+    {
+      "id": "menu_tutorial_intro",
+      "expected": "Choose hand tracking or controllers to review the controls. You can replay any demonstration and return to the garden whenever you're ready.",
+      "transcript": "Choose hand tracking or controllers to review the controls. You can replay any demonstration and return to the garden whenever you're ready.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 8.44,
+      "sample_rate": 24000,
+      "peak": 0.936859130859375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "39A8265795DDC9B00F21039E19C4230F35CAA082FCB66C11614EE9CCBC3A1249"
+    },
+    {
+      "id": "settings_voice_sample",
+      "expected": "Hello again! This is how loud my voice will sound. Adjust the volume until you can hear me comfortably.",
+      "transcript": "Hello again. This is how loud my voice will sound. Adjust the volume until you can hear me comfortably.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 6.44,
+      "sample_rate": 24000,
+      "peak": 0.93798828125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "CFF8E8D5A37F65367BFCF2F69BA98BC937C1505BC22C3AE05797671069570B07"
+    },
+    {
+      "id": "controls_watering_hands",
+      "expected": "Move your open hand close to the watering can. Close your fingers around it to pick it up, and keep them closed while you hold it.",
+      "transcript": "Move your open hand close to the watering can. Close your fingers around it to pick it up and keep them closed while you hold it.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 7.68,
+      "sample_rate": 24000,
+      "peak": 0.790130615234375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "851B2FB5824A3A9FA41D0EDD6F1CEB5218ED4530079991D51D013FE8FC0C3749"
+    },
+    {
+      "id": "controls_watering_controllers",
+      "expected": "Move your controller close to the watering can. Hold the Grip button to pick it up, and keep holding the button.",
+      "transcript": "Move your controller close to the watering can. Hold the grip button to pick it up and keep holding the button.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 6.52,
+      "sample_rate": 24000,
+      "peak": 0.884674072265625,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "87F9470D500FFF233522F2529141618A35F675352197455565A571E0BCC97831"
+    },
+    {
+      "id": "water_practice_intro",
+      "expected": "Let's practise watering first. During this practice, you can learn without worrying about running out of water.",
+      "transcript": "Let's practice watering first. During this practice, you can learn without worrying about running out of water.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 6.24,
+      "sample_rate": 24000,
+      "peak": 0.761932373046875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "7338525E7CC51D07E0873CC18A000467E529A58A5832934FE8ABFF2C69556407"
+    },
+    {
+      "id": "water_reserve_intro",
+      "expected": "Now we'll use a limited water supply. There's enough to grow your tomato, with a little room for mistakes.",
+      "transcript": "Now we'll use a limited water supply. There's enough to grow your tomato with a little room for mistakes.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 6.32,
+      "sample_rate": 24000,
+      "peak": 0.877655029296875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "46FBB460399CF30B322669225A0FE2347BF96DFDBCDB5215760242F99E36DF38"
+    },
+    {
+      "id": "water_reserve_explanation",
+      "expected": "Refilling your can takes water from the garden's reserve. It doesn't create more water, so every refill uses part of our supply.",
+      "transcript": "Refilling your can takes water from the garden's reserve. It doesn't create more water, so every refill uses part of our supply.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 7.92,
+      "sample_rate": 24000,
+      "peak": 0.835174560546875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "4795606E62F2BF5F4302C7C0408E0CFBD22896B76770B42717AA290114E87DB5"
+    },
+    {
+      "id": "water_reserve_rules",
+      "expected": "If both the reserve and your can run out before the plant has enough water, we'll need to try again.",
+      "transcript": "If both the reserve and your can run out before the plant has enough water, we'll need to try again.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 6.16,
+      "sample_rate": 24000,
+      "peak": 0.725555419921875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "4427ED2B39E12BEC76BAC16AC1985DFFA95DE57C257A0AD6B1CC8B603EE59FF7"
+    },
+    {
+      "id": "water_stopped_success",
+      "expected": "You've stopped at the target. Your plant has what it needs, and you've saved the remaining water for later.",
+      "transcript": "You've stopped at the target, your plant has what it needs, and you've saved the remaining water for later.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 6.2,
+      "sample_rate": 24000,
+      "peak": 0.836761474609375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "C843095A7503D09D0F69EB986D0EABE16BBA80AB3D22ABB52D5441146A0FA73B"
+    },
+    {
+      "id": "water_ready_next_phase",
+      "expected": "The watering is done. Open the calendar and select Advance phase to keep growing.",
+      "transcript": "The watering is done. Open the calendar and select Advanced Phase to keep growing.",
+      "differences": [
+        {
+          "operation": "replace",
+          "expected": "advance",
+          "transcript": "advanced"
+        }
+      ],
+      "words_match": false,
+      "duration_seconds": 5.72,
+      "sample_rate": 24000,
+      "peak": 0.901214599609375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "14A2BCB65E924D354767BD6FD55965A6BBB4A1F1C2518474EA097D2AE155E953"
+    },
+    {
+      "id": "help_missed_pot",
+      "expected": "The water is missing the soil. Hold the can upright, move it over the pot, then try again.",
+      "transcript": "The water is missing the soil. Hold the can upright. Move it over the pot. Then try again.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.96,
+      "sample_rate": 24000,
+      "peak": 0.7706298828125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "F1AFB50DE8F1187AA12A7A70DB6F1D4A6DCF17AD6360274D65CAC835308232AC"
+    },
+    {
+      "id": "help_stop_watering",
+      "expected": "Your plant already has enough water. Hold the can upright to avoid wasting any more.",
+      "transcript": "Your plant already has enough water. Hold the can upright to avoid wasting any more.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.84,
+      "sample_rate": 24000,
+      "peak": 0.990020751953125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "71F9283B6398EBEF14D67A66A4B79FD81758DB5491759F7A9B7A9416E4659B35"
+    },
+    {
+      "id": "controls_refill_select_hands",
+      "expected": "Point at Refill water, then pinch your thumb and index finger together to select it.",
+      "transcript": "Point at refill water, then pinch your thumb and index finger together to select it.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.04,
+      "sample_rate": 24000,
+      "peak": 0.687286376953125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "CF14C820FE183CC29144551308CB406EE02248A63985408C83E4967493E197BE"
+    },
+    {
+      "id": "controls_refill_select_controllers",
+      "expected": "Aim at Refill water, then press the Trigger to select it.",
+      "transcript": "Aim at refill water, then press the trigger to select it.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 4.28,
+      "sample_rate": 24000,
+      "peak": 0.986968994140625,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "93F2C2C44B214F31DD74738227D75F4E746F821E845139A022D6CE916DE25B28"
+    },
+    {
+      "id": "help_reserve_low",
+      "expected": "The water reserve is getting low. Pour carefully and stop when your plant has enough.",
+      "transcript": "The water reserve is getting low. Pour carefully and stop when your plant has enough.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.12,
+      "sample_rate": 24000,
+      "peak": 0.719970703125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "ABD02B0837598848792579F9E53E16B81DCE61D4FBE50112BFE3336A5B73887F"
+    },
+    {
+      "id": "help_reserve_empty",
+      "expected": "The reserve is empty, but there's still water in your can. Use the target to help you make it last.",
+      "transcript": "The reserve is empty, but there's still water in your can. Use the target to help you make it last.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 6.08,
+      "sample_rate": 24000,
+      "peak": 0.990020751953125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "970F9300FE4266133989872146962E06C1D8D8FBF7E5A335DA27FE10EE5B0982"
+    },
+    {
+      "id": "water_supply_exhausted",
+      "expected": "We've run out of water before the plant had enough. Let's try again and practise stopping at the target.",
+      "transcript": "We've run out of water before the plant had enough. Let's try again in practice stopping at the target.",
+      "differences": [
+        {
+          "operation": "replace",
+          "expected": "and",
+          "transcript": "in"
+        }
+      ],
+      "words_match": false,
+      "duration_seconds": 5.4,
+      "sample_rate": 24000,
+      "peak": 0.8775634765625,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "A4AEFC343AB432960C323CBA8E0FD82082C5CC793CEA8B0D907C3323E0982096"
+    },
+    {
+      "id": "water_retry",
+      "expected": "Select Try again to start with a fresh water supply.",
+      "transcript": "Select Try again to start with a fresh water supply.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 3.6,
+      "sample_rate": 24000,
+      "peak": 0.7099609375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "DC7F78B679CCFE4DEDB3C802848F0AB31EA4DE183D2DAF92FF322483ADBE11FB"
+    },
+    {
+      "id": "water_no_waste_complete",
+      "expected": "Your tomato is ready, and no water was wasted. You gave your plant just what it needed!",
+      "transcript": "Your tomato is ready, and no water was wasted. You gave your plant just what it needed.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.68,
+      "sample_rate": 24000,
+      "peak": 0.989990234375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "AA6992137B182D4B9A5C7DF3AE7A47213A6909A9F436EC4A6B73D09CC92E2499"
+    },
+    {
+      "id": "movement_success",
+      "expected": "That's it! Now come over to the gardening table.",
+      "transcript": "That's it. Now come over to the gardening table.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 3.16,
+      "sample_rate": 24000,
+      "peak": 0.903533935546875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "9C911A09E515F857C4A690DF21B3022837E8F8246BB1E0B676F4C9089B252365"
+    }
+  ]
+}

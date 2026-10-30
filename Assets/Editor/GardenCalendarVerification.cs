@@ -20,7 +20,6 @@ public static class GardenCalendarVerification
             Assert(settings.FindProperty("rayCollider").objectReferenceValue == collider, "Visibility ray collider binding");
             SerializedObject surface = new SerializedObject(prefab.GetComponent<Oculus.Interaction.Surfaces.ColliderSurface>());
             Assert(surface.FindProperty("_collider").objectReferenceValue == collider, "Meta ray surface binding");
-            Assert(settings.FindProperty("closeButton").objectReferenceValue != null, "Close button binding");
             SerializedObject panel = new SerializedObject(prefab.GetComponent<CalendarPanel>());
             Assert(panel.FindProperty("advanceButton").objectReferenceValue != null, "Advance button binding");
 

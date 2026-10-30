@@ -14,6 +14,38 @@ public static class GronnyAudioSetup
     private const string Interaction = "Packages/com.meta.xr.sdk.interaction";
     private const string Core = "Packages/com.meta.xr.sdk.core";
 
+    [Serializable] private sealed class Instruction
+    {
+        public string id = "";
+        public string instruction = "";
+        public string instructionDetail = "";
+        public float[] demonstrationTimes = Array.Empty<float>();
+        public int practiceOnlyFrom = -1;
+    }
+    [Serializable] private sealed class Instructions { public Instruction[] entries = Array.Empty<Instruction>(); }
+
+    internal static void ApplyInstructionCaptions(GronnyAudioCatalogue catalogue)
+    {
+        var script = JsonUtility.FromJson<Instructions>("{\"entries\":" +
+            File.ReadAllText("Docs/GronnyInstructionCaptions.json") + "}");
+        foreach (Instruction line in script.entries)
+        {
+            var cue = catalogue.Find(line.id);
+            // Keep later Inspector edits; this also supplies captions when recreating the catalogue.
+            if (cue == null || !string.IsNullOrEmpty(cue.instruction)) continue;
+            cue.instruction = line.instruction;
+            cue.instructionDetail = line.instructionDetail;
+            if (line.demonstrationTimes.Length == 0) continue;
+            if (line.demonstrationTimes.Length != cue.steps.Length)
+                throw new InvalidOperationException("Demonstration step count differs: " + cue.id);
+            for (int i = 0; i < cue.steps.Length; i++)
+            {
+                cue.steps[i].at = line.demonstrationTimes[i];
+                cue.steps[i].practiceOnly = line.practiceOnlyFrom >= 0 && i >= line.practiceOnlyFrom;
+            }
+        }
+    }
+
     [MenuItem("Garden/Gronny/Create initial audio catalogue")]
     public static void CreateInitialCatalogue()
     {
@@ -199,6 +231,12 @@ public static class GronnyAudioSetup
             string path = AssetDatabase.GetAssetPath(cue.clip);
             string hash = BitConverter.ToString(sha.ComputeHash(File.ReadAllBytes(path))).Replace("-", "");
             report.AppendLine($"`{path}` | {cue.clip.length:0.00} | {cue.mode} | {cue.demo} | `{hash}`");
+            foreach (var variation in cue.variations ?? Array.Empty<GronnyAudioCatalogue.VoiceVariation>())
+            {
+                string variationPath = AssetDatabase.GetAssetPath(variation.clip);
+                string variationHash = BitConverter.ToString(sha.ComputeHash(File.ReadAllBytes(variationPath))).Replace("-", "");
+                report.AppendLine($"`{variationPath}` | {variation.clip.length:0.00} | {cue.mode} | {cue.demo} | `{variationHash}`");
+            }
         }
         File.WriteAllText("Docs/GronnyAudioInventory.md", report.ToString());
     }

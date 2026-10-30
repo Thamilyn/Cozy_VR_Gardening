@@ -4,8 +4,9 @@ Saludo vigente: presentación, indicación de poner ambas manos frente al usuari
 si utiliza hand tracking, jardinería sustentable y reserva limitada en una sola
 grabación; después se practica el movimiento y se felicita al completarlo.
 La invitación a acercarse a la mesa se oye únicamente después de esa práctica.
-El catálogo contiene ahora 58 audios. Véase `SaludoYMovimiento.md`; las cifras y
-la secuencia de bienvenida de las entregas anteriores son históricas.
+El catálogo contiene ahora 58 avisos base y 18 grabaciones alternativas. Véanse
+`SaludoYMovimiento.md`, `VariacionesAvisosAgua.md` y `VariacionesRiegoCompleto.md`;
+las cifras y la secuencia de bienvenida de las entregas anteriores son históricas.
 
 Continuidad al actuar: las frases empezadas terminan aunque se complete la
 acción; se descartan las ayudas pendientes obsoletas. Las interrupciones urgentes
@@ -67,7 +68,7 @@ Audio | Evento y condición de pertinencia | Entrada | Visual
 `08_sprout` | Fase 1 del tomate | Ambas | Brote existente de SeedItem
 `09_young_plant` | Fase 2 | Ambas | Planta joven existente
 `10_flowering` | Fase 3 | Ambas | Floración existente
-`11_green_fruit` | Fase 4 | Ambas | Frutos verdes existentes
+`11_green_fruit` | Fase 4 | Ambas | Frutos inmaduros existentes, de distintos colores
 `12_harvest` | Fase 5, antes de cosechar | Ambas | Fruto maduro y bandeja existentes
 `13_complete` | CalendarSystem.RecordHarvest marca harvested | Ambas | Celebración existente del profesor; las demos terminan
 `help_planting` | Liberación de semilla de tomate rechazada, intento de avanzar sin plantar o inactividad | Ambas | Tierra y guía existentes

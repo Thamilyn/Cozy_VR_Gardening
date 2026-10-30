@@ -1,0 +1,96 @@
+{
+  "recognition_model": "openai/whisper-base.en",
+  "note": "Revisión automática; no sustituye escucha humana.",
+  "files": [
+    {
+      "id": "water_stopped_success_02",
+      "expected": "Lovely, that's just the water your tomato needs. The rest is saved for later.",
+      "transcript": "Lovely, that's just the water your tomato needs. The rest is saved for later.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.2,
+      "sample_rate": 24000,
+      "peak": 0.758392333984375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "6B12590A905DE73CF6194D4FE21C27E98E3FB241B919485C96E69F1B9CFB7425"
+    },
+    {
+      "id": "water_stopped_success_03",
+      "expected": "Well done! The plant has enough water for this stage, with some left for later.",
+      "transcript": "Well done! The plant has enough water for this stage, with some left for later.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.12,
+      "sample_rate": 24000,
+      "peak": 0.79632568359375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "45B7B303659133C69FDAF4DE0DC41F4838CE7CA4C6056DC7105A6FBBA40A52B8"
+    },
+    {
+      "id": "water_stopped_success_04",
+      "expected": "Nicely done. You've met the water target and kept the rest for the next stage.",
+      "transcript": "nicely done. You've met the water target and kept the rest for the next stage.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 5.48,
+      "sample_rate": 24000,
+      "peak": 0.96600341796875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "3584B9F0EFCA549060810B40BF260584FCA43BE01B89D2783E929605B9B62AB1"
+    },
+    {
+      "id": "water_ready_next_phase_02",
+      "expected": "The roots have what they need. Open the calendar and select Advance phase when you're ready.",
+      "transcript": "The roots have what they need. Open the calendar and select Advanced Phase when you're ready.",
+      "differences": [
+        {
+          "operation": "replace",
+          "expected": "advance",
+          "transcript": "advanced"
+        }
+      ],
+      "words_match": false,
+      "duration_seconds": 5.36,
+      "sample_rate": 24000,
+      "peak": 0.75,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "756D900AFDB181623B2C85557C63F0E8A12DE0ABE8DC990FD903047FC2E85E31"
+    },
+    {
+      "id": "water_ready_next_phase_03",
+      "expected": "Let's see your tomato grow. Open the calendar and choose Advance phase.",
+      "transcript": "Let's see your tomato grow. Open the calendar and choose advanced phase.",
+      "differences": [
+        {
+          "operation": "replace",
+          "expected": "advance",
+          "transcript": "advanced"
+        }
+      ],
+      "words_match": false,
+      "duration_seconds": 4.48,
+      "sample_rate": 24000,
+      "peak": 0.756072998046875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "3E1559E5BE095E247D51D8DBA96BDA1D687D8CC976607EA7002170A629612CB1"
+    },
+    {
+      "id": "water_ready_next_phase_04",
+      "expected": "This stage is watered. Open the calendar and select Advance phase to continue growing.",
+      "transcript": "This stage is watered. Open the calendar and select Advanced Phase to continue growing.",
+      "differences": [
+        {
+          "operation": "replace",
+          "expected": "advance",
+          "transcript": "advanced"
+        }
+      ],
+      "words_match": false,
+      "duration_seconds": 5.84,
+      "sample_rate": 24000,
+      "peak": 0.697723388671875,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "F8A9549A95F48B8258F215BD08744C607A1C9324970F7367D119476E7EF1162F"
+    }
+  ]
+}

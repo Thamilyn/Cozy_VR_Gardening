@@ -1,0 +1,25 @@
+{
+  "originalFilesChecked": 121,
+  "changedOriginalFiles": [],
+  "baseCataloguePreserved": true,
+  "groups": [
+    {
+      "id": "help_excess_water",
+      "count": 3
+    },
+    {
+      "id": "help_drained",
+      "count": 3
+    },
+    {
+      "id": "help_missed_pot",
+      "count": 3
+    },
+    {
+      "id": "help_stop_watering",
+      "count": 3
+    }
+  ],
+  "wavs": 12,
+  "wavMetas": 12
+}

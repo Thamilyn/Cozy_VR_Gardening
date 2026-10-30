@@ -361,7 +361,7 @@ public sealed class GardenMenuController : MonoBehaviour
             ? " — right-hand preview\nLive movement and calendar still use the left side."
             : " — left side\nMatches the current movement and calendar controls.";
         menu.Label(description, new Vector2(0f, 195f), new Vector2(790f, 95f), 24);
-        menu.Label(cue != null && !string.IsNullOrEmpty(cue.transcript) ? cue.transcript
+        menu.Label(cue != null && !string.IsNullOrEmpty(cue.instruction) ? cue.instruction + "\n" + cue.instructionDetail
             : "Watch the demonstration.\nYou can replay it or stop it at any time.",
             new Vector2(0f, 30f), new Vector2(760f, 225f), 26);
         menu.Button("Replay", new Vector2(-185f, -125f), new Vector2(340f, 65f), () => PlayDemonstration(id));

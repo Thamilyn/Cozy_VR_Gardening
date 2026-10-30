@@ -31,11 +31,22 @@ public static class GronnyAudioVerification
         string[] files = new[] { "Assets/Audio/controls_", "Assets/Audio/dialogues_cozy_gardening", "Assets/Audio/menu_accessibility", "Assets/Audio/water_saving" }
             .SelectMany(folder => Directory.GetFiles(folder, "*", SearchOption.AllDirectories))
             .Where(file => Path.GetExtension(file) != ".meta").Select(file => file.Replace('\\', '/')).ToArray();
-        Require(files.Length == 58 && files.All(file => catalogue.cues.Any(c => AssetDatabase.GetAssetPath(c.clip) == file)),
+        int variationCount = catalogue.cues.Sum(cue => cue.variations?.Length ?? 0);
+        Require(files.Length == 58 + variationCount && files.All(file => catalogue.cues.Any(c =>
+                AssetDatabase.GetAssetPath(c.clip) == file || (c.variations != null &&
+                    c.variations.Any(variation => variation != null && AssetDatabase.GetAssetPath(variation.clip) == file)))),
             "Every existing audio file referenced, including subdirectories");
         foreach (var cue in catalogue.cues)
         {
             Require(cue.clip != null && cue.clip.length > 0, cue.id + " imported");
+            var recordings = new System.Collections.Generic.HashSet<AudioClip> { cue.clip };
+            foreach (var variation in cue.variations ?? Array.Empty<GronnyAudioCatalogue.VoiceVariation>())
+            {
+                Require(variation != null && variation.clip != null && variation.clip.length > 0 &&
+                    !string.IsNullOrWhiteSpace(variation.transcript), cue.id + " variation imported with transcript");
+                Require(recordings.Add(variation.clip), cue.id + " distinct recordings");
+                Require(cue.steps.All(step => step.at < variation.clip.length), cue.id + " variation covers demonstration timing");
+            }
             if (cue.rightHand && cue.mode == GardenInputMode.Controllers)
                 Require(cue.controllerAnimation != null && catalogue.rightController.transform.Find(cue.controllerTarget) != null,
                     cue.id + " right controller animation and target");
@@ -65,7 +76,7 @@ public static class GronnyAudioVerification
         Require(catalogue.FindTutorialCue("controls_move_hands").id == "controls_move_hands" &&
             catalogue.FindTutorialCue("12_harvest").id == "12_harvest", "Updated lesson recordings take precedence over earlier variants");
         string suppliedFiles = GronnyWaterSavingAudioSetup.VerifyImportedFiles(catalogue);
-        File.WriteAllText("Docs/Validation/GronnyCatalogue.txt", "PASS: 58 audios; coverage; identifiers; durations; step timings; Meta bone bindings; Touch Plus references.\n" + suppliedFiles + "\nUnity " + Application.unityVersion);
+        File.WriteAllText("Docs/Validation/GronnyCatalogue.txt", "PASS: 58 base audios and " + variationCount + " variations; coverage; identifiers; durations; step timings; Meta bone bindings; Touch Plus references.\n" + suppliedFiles + "\nUnity " + Application.unityVersion);
         return "PASS: catalogue and installed Meta references";
     }
 
@@ -271,15 +282,15 @@ public static class GronnyAudioVerification
         Require(InstructionContains(tutorial, "Step 1/6"), "Progress starts at movement");
         Require(!seeds.TryPlant(seed) && !GronnyTutorial.Allows(GardenTutorialAction.Pour) &&
             !GronnyTutorial.Allows(GardenTutorialAction.OpenCalendar), "Future actions cannot skip movement");
-        GronnyTutorial.RecordSeedRelease(seed);
-        Require(InstructionContains(tutorial, "Step 1/6"), "Out-of-order release cannot complete the grab step");
+        GronnyTutorial.RecordSeedGrab(seed);
+        Require(InstructionContains(tutorial, "Step 1/6"), "Out-of-order grab cannot skip movement");
         SetControllerMode(tutorial);
         // Synthetic completion exercises progression; actual tracking remains a device check.
         Method(tutorial, "Learn").Invoke(tutorial, new object[] { "move" });
         Require(InstructionContains(tutorial, "Step 2/6") && !seeds.TryPlant(seed), "Movement unlocks grab before planting");
-        GronnyTutorial.RecordSeedRelease(seed);
+        GronnyTutorial.RecordSeedGrab(seed);
         Require(InstructionContains(tutorial, "Step 3/6") && GronnyTutorial.Allows(GardenTutorialAction.Plant),
-            "Seed release unlocks planting in the same frame");
+            "Picking up the seed unlocks planting guidance before release");
     }
 
     private static void VerifyRefillProgression(GronnyTutorial tutorial, SeedsController seeds)
@@ -295,7 +306,7 @@ public static class GronnyAudioVerification
         Require(InstructionContains(tutorial, "Step 6/6") && !GronnyTutorial.Allows(GardenTutorialAction.Advance) &&
             !GronnyTutorial.Allows(GardenTutorialAction.CloseCalendar) &&
             !GronnyTutorial.Allows(GardenTutorialAction.RefillWithController), "Refill lesson only permits its indicated button");
-        panel.RecoverCan();
+        panel.RestartPrototype();
         Require(!((System.Collections.Generic.HashSet<string>)Field(tutorial, "learned")).Contains("calendar_select"),
             "Unrelated calendar action cannot complete selection");
         var state = seeds.GetState(seeds.PrototypeTomato);

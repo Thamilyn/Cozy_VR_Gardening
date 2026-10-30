@@ -1,0 +1,403 @@
+{
+  "date": "2026-10-29",
+  "catalogue_cues": 58,
+  "unchanged_audio_and_meta_files": 120,
+  "protected_catalogue_fields_unchanged": true,
+  "timing_tracks_updated": 23,
+  "authored_times_valid": true,
+  "files": [
+    {
+      "id": "01_welcome",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "02_tomato_intro",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "03_plant_seed",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "04_first_watering",
+      "current_times": [
+        0.0,
+        3.86
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "05_water_target",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "06_enough_water",
+      "current_times": [
+        0.0,
+        1.42
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "07_first_advance",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "08_sprout",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "09_young_plant",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "10_flowering",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "11_green_fruit",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "12_harvest",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "13_complete",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "help_planting",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "help_low_water",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "help_excess_water",
+      "current_times": [
+        0.0,
+        1.9
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "help_drained",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "help_calendar",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "help_refill",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_move_hands",
+      "current_times": [
+        0.0,
+        5.26,
+        6.5,
+        6.86,
+        8.7,
+        9.0,
+        9.4,
+        9.8
+      ],
+      "practice_only_steps": 3
+    },
+    {
+      "id": "controls_grab_hands",
+      "current_times": [
+        0.0,
+        2.28,
+        4.32,
+        5.8
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_calendar_hands",
+      "current_times": [
+        0.0,
+        2.88,
+        6.6
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_calendar_select_hands",
+      "current_times": [
+        0.0,
+        1.82,
+        4.8
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_move_controllers",
+      "current_times": [
+        0.0,
+        3.82
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_grab_controllers",
+      "current_times": [
+        0.0,
+        2.5,
+        3.18,
+        4.6
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_calendar_controllers",
+      "current_times": [
+        0.0,
+        0.14,
+        3.1
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_calendar_select_controllers",
+      "current_times": [
+        0.0,
+        1.82,
+        3.5
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_move_hands_left",
+      "current_times": [
+        0.0,
+        4.3,
+        6.48,
+        8.18,
+        9.94,
+        10.44,
+        11.9,
+        12.48
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_move_hands_right",
+      "current_times": [
+        0.0,
+        4.56,
+        6.72,
+        8.82,
+        10.74,
+        11.18,
+        12.6,
+        13.36
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_move_controllers_left",
+      "current_times": [
+        0.0,
+        3.34
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_move_controllers_right",
+      "current_times": [
+        0.0,
+        3.06
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_calendar_hands_left",
+      "current_times": [
+        0.0,
+        3.42,
+        7.34
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_calendar_hands_right",
+      "current_times": [
+        0.0,
+        3.02,
+        6.66
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_calendar_controllers_left",
+      "current_times": [
+        0.0,
+        0.4,
+        3.6
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_calendar_controllers_right",
+      "current_times": [
+        0.0,
+        0.32,
+        3.2
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "03_plant_seed_accessible",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "12_harvest_accessible",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "menu_intro",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "menu_tutorial_intro",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "settings_voice_sample",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_watering_hands",
+      "current_times": [
+        0.0,
+        3.22,
+        5.46
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_watering_controllers",
+      "current_times": [
+        0.0,
+        3.1,
+        5.02
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "water_practice_intro",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "water_reserve_intro",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "water_reserve_explanation",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "water_reserve_rules",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "water_stopped_success",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "water_ready_next_phase",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "help_missed_pot",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "help_stop_watering",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_refill_select_hands",
+      "current_times": [
+        0.0,
+        1.8,
+        4.7
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "controls_refill_select_controllers",
+      "current_times": [
+        0.0,
+        2.12,
+        3.9
+      ],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "help_reserve_low",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "help_reserve_empty",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "water_supply_exhausted",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "water_retry",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "water_no_waste_complete",
+      "current_times": [],
+      "practice_only_steps": 0
+    },
+    {
+      "id": "movement_success",
+      "current_times": [],
+      "practice_only_steps": 0
+    }
+  ]
+}

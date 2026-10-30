@@ -1,0 +1,26 @@
+{
+  "text": "Our tomatoes are slowly ripening. This time, you decide when to stop watering. Use the target to guide you.",
+  "instruction": "Our tomatoes are slowly ripening.",
+  "duration_seconds": 7.48,
+  "voice": "Kiki",
+  "model_revision": "v2",
+  "preset": "expressive",
+  "temperature": 1.1,
+  "sha256": "771CB136412C58C9E136EB029F78B55FCA676155CD679EBEEA9579348D959265",
+  "backup": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Docs\\AudioBackups\\UnripeTomatoes_20261029_233614",
+  "changed_baseline_files": [
+    "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Audio\\dialogues_cozy_gardening\\11_green_fruit.wav",
+    "C:\\Users\\Trole\\Cozy_VR_Gardening\\Assets\\Resources\\GronnyAudio\\Tutorial.asset",
+    "C:\\Users\\Trole\\Cozy_VR_Gardening\\Docs\\GronnyWaterSavingDialogues.json",
+    "C:\\Users\\Trole\\Cozy_VR_Gardening\\Docs\\GronnyInstructionCaptions.json",
+    "C:\\Users\\Trole\\Cozy_VR_Gardening\\Docs\\GronnyDialogues.json",
+    "C:\\Users\\Trole\\Cozy_VR_Gardening\\Docs\\GuionVozGronny.md",
+    "C:\\Users\\Trole\\Cozy_VR_Gardening\\Docs\\GuionVozMenuYAccesibilidad.md",
+    "C:\\Users\\Trole\\Cozy_VR_Gardening\\Docs\\GronnyAudioInventory.md",
+    "C:\\Users\\Trole\\Cozy_VR_Gardening\\Docs\\GronnyAudioSystem.md"
+  ],
+  "changed_manifest": "C:\\Users\\Trole\\Cozy_VR_Gardening\\Docs\\WaterSavingAudioImport.json",
+  "other_audio_and_all_audio_meta_unchanged": true,
+  "lesson_hashes_verified": 45,
+  "unity_play_and_quest_validation": "Not run"
+}
