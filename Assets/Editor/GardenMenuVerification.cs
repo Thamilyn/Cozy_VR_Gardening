@@ -97,7 +97,7 @@ public static class GardenMenuVerification
         // No XR device is required for these fixtures. This pose exists only during Play.
         var rig = UnityEngine.Object.FindFirstObjectByType<OVRCameraRig>();
         rig.enabled = false;
-        rig.centerEyeAnchor.position = new Vector3(0f, 1.6f, -7.88f);
+        rig.centerEyeAnchor.position = rig.transform.position + Vector3.up * 1.6f;
         menu.Open();
         Arm(menu);
         yield return 0.2f;
@@ -126,7 +126,7 @@ public static class GardenMenuVerification
         CheckPose(view, station, "Launch menu stays fixed at entry when the player moves or turns");
         rig.transform.SetPositionAndRotation(initialRigPosition, initialRigRotation);
         Vector3 previewEyePosition = guidePanel.position + guidePanel.up * 0.4f - guidePanel.forward * 1.4f;
-        rig.centerEyeAnchor.SetPositionAndRotation(new Vector3(0f, 1.6f, -7.88f), Quaternion.identity);
+        rig.centerEyeAnchor.SetPositionAndRotation(initialRigPosition + Vector3.up * 1.6f, initialRigRotation);
         CheckText(view);
         ScreenCapture.CaptureScreenshot(Path.GetFullPath("output/MenuLaunchHome.png"));
         yield return 0.2f;
@@ -202,12 +202,22 @@ public static class GardenMenuVerification
         yield return 0.2f;
         Click(view, "Controls");
         CheckText(view);
-        Click(view, "Movement");
+        Click(view, "Walk in your room");
+        yield return 0.5f;
+        CheckText(view);
+        var demo = (GardenControlDemonstration)Field(menu, "menuDemonstration");
+        Check(menuVoice.CurrentCueId == "roomscale_walk" && !audio.isPlaying && Field(demo, "anchor") == null,
+            "Menu explains real walking by voice without a hand gesture demonstration or resuming the lesson");
+        Click(view, "Stop");
+        Check(menuVoice.CurrentCueId == null, "Physical walking preview can be stopped");
+        Click(view, "Replay");
+        yield return 0.5f;
+        Check(menuVoice.CurrentCueId == "roomscale_walk", "Physical walking instructions can be replayed");
+        Click(view, "Review optional movement controls");
         yield return 0.5f;
         CheckText(view);
         Check(menuVoice.CurrentCueId == "controls_move_hands" && !audio.isPlaying,
             "Menu plays the recorded hands demonstration while the tutorial voice stays paused");
-        var demo = (GardenControlDemonstration)Field(menu, "menuDemonstration");
         Check(Field(demo, "model") != null, "Review shows its independent hand model");
         Check(Mathf.Approximately(menuVoice.GetComponent<AudioSource>().pitch, 1f),
             "Hand instructions preserve the original voice pitch");
@@ -219,7 +229,7 @@ public static class GardenMenuVerification
         yield return 0.5f;
         CheckText(view);
         Check(menuVoice.CurrentCueId == "controls_move_hands_right" &&
-            view.Content.GetComponentsInChildren<Text>().Any(text => text.text.Contains("still use the left side")),
+            view.Content.GetComponentsInChildren<Text>().Any(text => text.text.Contains("use the left side")),
             "Right-hand preview uses its own voice and clearly identifies the current live controls");
         Click(view, "Stop");
         Check(menuVoice.CurrentCueId == null && Field(demo, "anchor") == null, "Stop clears both preview voice and model");
@@ -266,9 +276,11 @@ public static class GardenMenuVerification
         grab.ProcessPointerEvent(new PointerEvent(9871, PointerEventType.Hover, pose));
         grab.ProcessPointerEvent(new PointerEvent(9871, PointerEventType.Select, pose));
         yield return 0.15f;
+        string uprightState = DescribeCan(can);
         can.transform.rotation = Quaternion.Euler(180f, 0f, 0f);
         yield return 0.2f;
-        Check(can.IsHeld && can.IsPouring, "Synthetic held can pours before menu suspension");
+        Check(can.IsHeld && can.IsPouring, "Synthetic held can pours before menu suspension. Upright: " +
+            uprightState + "; tilted: " + DescribeCan(can));
         menu.Open();
         float waterBefore = can.CurrentWaterLitres;
         yield return 0.4f;
@@ -618,6 +630,20 @@ public static class GardenMenuVerification
         target.GetType().GetField(name, BindingFlags.Instance | BindingFlags.NonPublic).GetValue(target);
     private static void Click(GardenMenuView view, string name) =>
         view.Content.GetComponentsInChildren<Button>().Single(b => b.name == name).onClick.Invoke();
+    private static string DescribeCan(WateringCan can)
+    {
+        bool tracking = (bool)typeof(WateringCan).GetMethod("HasReliableTracking",
+            BindingFlags.Instance | BindingFlags.NonPublic).Invoke(can, null);
+        var calendar = UnityEngine.Object.FindFirstObjectByType<CalendarSystem>();
+        var supply = GardenWaterSupply.Active;
+        return $"held={can.IsHeld}, pouring={can.IsPouring}, tilted={can.IsTiltedToPour}, " +
+            $"requireUpright={Field(can, "_requireUpright")}, tracking={tracking}, " +
+            $"water={can.CurrentWaterLitres}, suspended={GardenMenuController.GardenSuspended}, " +
+            $"pourAllowed={GronnyTutorial.Allows(GardenTutorialAction.Pour)}, advancing={calendar != null && calendar.IsAdvancing}, " +
+            $"supplyExhausted={supply != null && supply.Exhausted}, supplyCompleted={supply != null && supply.Completed}, " +
+            $"hmd={OVRManager.isHmdPresent}, up={can.transform.up}";
+    }
+
     private static void Check(bool condition, string name)
     {
         if (!condition) throw new InvalidOperationException(name);

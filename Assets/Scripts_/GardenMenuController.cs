@@ -329,7 +329,7 @@ public sealed class GardenMenuController : MonoBehaviour
             new Vector2(185f, 200f), new Vector2(340f, 65f), () => { controlsMode = GardenInputMode.Controllers; ShowControls(); });
         menu.Label("Choose a demonstration to watch and hear.\nThe garden stays paused while you review.",
             new Vector2(0f, 125f), new Vector2(790f, 70f), 25);
-        menu.Button("Movement", new Vector2(-185f, 25f), new Vector2(340f, 65f), () => ShowDemonstration("move"));
+        menu.Button("Walk in your room", new Vector2(-185f, 25f), new Vector2(340f, 65f), () => ShowDemonstration("roomscale"));
         menu.Button("Grab and release", new Vector2(185f, 25f), new Vector2(340f, 65f), () => ShowDemonstration("grab"));
         menu.Button("Open and close calendar", new Vector2(-185f, -75f), new Vector2(340f, 65f), () => ShowDemonstration("calendar"));
         menu.Button("Select buttons", new Vector2(185f, -75f), new Vector2(340f, 65f), () => ShowDemonstration("calendar_select"));
@@ -347,19 +347,22 @@ public sealed class GardenMenuController : MonoBehaviour
     {
         StopMenuAudio();
         page = Page.Demonstration;
-        string id = "controls_" + control + (controlsMode == GardenInputMode.Hands ? "_hands" : "_controllers");
+        bool physicalWalking = control == "roomscale";
+        string id = physicalWalking ? "roomscale_walk"
+            : "controls_" + control + (controlsMode == GardenInputMode.Hands ? "_hands" : "_controllers");
         bool hasSides = control == "move" || control == "calendar";
         if (hasSides && right) id += "_right";
         GronnyAudioCatalogue.Cue cue = audioCatalogue != null ? audioCatalogue.Find(id) : null;
         previewId = id;
         menu.Clear();
-        menu.Label(control switch { "move" => "Movement", "grab" => "Grab and release",
+        menu.Label(control switch { "roomscale" => "Walk in your room", "move" => "Optional movement controls", "grab" => "Grab and release",
             "calendar" => "Calendar", "watering" => "Watering can", "refill_select" => "Refill water",
             _ => "Select buttons" }, new Vector2(0f, 280f), new Vector2(790f, 65f), 38);
-        string description = controlsMode == GardenInputMode.Hands ? "Hand tracking" : "Touch controllers";
+        string description = physicalWalking ? "Real walking — hands free\nStay inside your clear play area."
+            : controlsMode == GardenInputMode.Hands ? "Hand tracking" : "Touch controllers";
         if (hasSides) description += right
-            ? " — right-hand preview\nLive movement and calendar still use the left side."
-            : " — left side\nMatches the current movement and calendar controls.";
+            ? " — right-hand preview\nOptional movement and calendar controls use the left side."
+            : " — left side\nMatches the optional movement and calendar controls.";
         menu.Label(description, new Vector2(0f, 195f), new Vector2(790f, 95f), 24);
         menu.Label(cue != null && !string.IsNullOrEmpty(cue.instruction) ? cue.instruction + "\n" + cue.instructionDetail
             : "Watch the demonstration.\nYou can replay it or stop it at any time.",
@@ -369,6 +372,9 @@ public sealed class GardenMenuController : MonoBehaviour
         if (hasSides)
             menu.Button(right ? "Preview left hand" : "Preview right hand", new Vector2(0f, -205f),
                 new Vector2(710f, 65f), () => ShowDemonstration(control, !right));
+        if (physicalWalking)
+            menu.Button("Review optional movement controls", new Vector2(0f, -205f),
+                new Vector2(710f, 65f), () => ShowDemonstration("move"));
         menu.Button("Back", new Vector2(0f, -290f), new Vector2(710f, 65f), ShowControls);
         PlayDemonstration(id);
     }

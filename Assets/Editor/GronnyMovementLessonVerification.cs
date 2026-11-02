@@ -5,11 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Oculus.Interaction;
-using Oculus.Interaction.Locomotion;
 using UnityEditor;
 using UnityEngine;
 
-/// <summary>Exercises the real lesson and voice queue using synthetic Meta locomotion events.</summary>
+/// <summary>Exercises the spoken walking invitation and subsequent seed guidance.</summary>
 [InitializeOnLoad]
 public static class GronnyMovementLessonVerification
 {
@@ -69,7 +68,7 @@ public static class GronnyMovementLessonVerification
         File.WriteAllLines("output/WelcomeMovementPlay.txt", new[]
         {
             "Unity " + Application.unityVersion, "UTC " + DateTime.UtcNow.ToString("O"),
-            "Real lesson and AudioSource; synthetic locomotion events and audio seeks; no physical Quest test."
+            "Real lesson and AudioSource with audio seeks; spoken guidance only; no physical Quest test."
         }.Concat(checks.Select(check => "PASS: " + check)).Concat(new[] { error == null ? "RESULT: PASS" : "RESULT: FAIL\n" + error }));
         if (error == null) Debug.Log("Welcome and movement passed: " + checks.Count + " checks.");
         else Debug.LogError(error);
@@ -81,7 +80,7 @@ public static class GronnyMovementLessonVerification
         yield return 1f;
         var rig = UnityEngine.Object.FindFirstObjectByType<OVRCameraRig>();
         rig.enabled = false;
-        rig.centerEyeAnchor.position = new Vector3(0f, 1.6f, -7.88f);
+        rig.centerEyeAnchor.position = rig.transform.position + Vector3.up * 1.6f;
         var menu = UnityEngine.Object.FindFirstObjectByType<GardenMenuController>();
         Call(menu, "HandleInputRelease", false, Time.unscaledTime);
         Call(menu, "HandleInputRelease", true, Time.unscaledTime);
@@ -95,51 +94,33 @@ public static class GronnyMovementLessonVerification
         var source = tutorial.GetComponent<AudioSource>();
         source.mute = true;
         var learned = (HashSet<string>)Field(tutorial, "learned");
-        Set(tutorial, "mode", GardenInputMode.Hands);
+        Set(tutorial, "mode", GardenInputMode.Unknown);
         Set(tutorial, "candidateMode", GardenInputMode.Unknown);
         Set(tutorial, "modeChangedAt", Time.unscaledTime + 100f);
         tutorial.GetComponent<GardenControlDemonstration>().SetInputMode(GardenInputMode.Hands);
         Call(tutorial, "QueueControls");
         Check(voice.CurrentCueId == "01_welcome", "Welcome begins after Play");
-        Move(tutorial, rig, Vector3.right * 0.3f, LocomotionEvent.TranslationType.Relative);
-        yield return 0.2f;
-        Check(!learned.Contains("move"), "Movement during the greeting cannot skip the walking lesson");
+        Check(!learned.Contains("move"), "The welcome does not skip the spoken walking instruction");
         source.time = source.clip.length - 0.1f;
         yield return 0.9f;
-        Check(voice.CurrentCueId == "controls_move_hands", "Walking follows the combined welcome without an extra reserve speech");
-        Check((bool)Field(tutorial, "movementPracticeStarted"), "Walking detection starts with the actual instruction playback");
-        yield return 0.6f;
-        Check(!learned.Contains("move"), "Waiting alone does not complete the lesson");
-        rig.centerEyeAnchor.position += Vector3.right * 0.5f;
+        Check(voice.CurrentCueId == "roomscale_walk", "Gronny directs the player to the gardening table without requiring tracked hands or controllers");
+        string walkingScript = Resources.Load<GronnyAudioCatalogue>("GronnyAudio/Tutorial").Find("roomscale_walk").transcript;
+        Check(walkingScript.Contains("gardening table") && walkingScript.Contains("Tomato seed"),
+            "Walking speech connects the gardening table with the named tomato seed");
+        voice.CancelControls();
+        Check(voice.CurrentCueId == "roomscale_walk", "Changing input modes preserves the spoken walking guidance");
         yield return 0.2f;
-        Check(!learned.Contains("move"), "Moving the headset alone does not complete walking");
-        var rotation = new LocomotionEvent(1, Quaternion.Euler(0f, 30f, 0f), LocomotionEvent.RotationType.Relative);
-        Call(tutorial, "OnMoved", rotation, new Pose(Vector3.zero, rotation.Pose.rotation));
-        yield return 0.2f;
-        Check(!learned.Contains("move"), "A rotation event does not count as a step");
-        Move(tutorial, rig, Vector3.up * 0.2f, LocomotionEvent.TranslationType.Velocity);
-        yield return 0.2f;
-        Check(!learned.Contains("move"), "Vertical motion does not count as walking");
-        Move(tutorial, rig, Vector3.forward * 0.04f, LocomotionEvent.TranslationType.Velocity);
-        yield return 0.2f;
-        Check(!learned.Contains("move"), "A small joystick displacement does not yet complete walking");
-        Move(tutorial, rig, Vector3.forward * 0.04f, LocomotionEvent.TranslationType.Velocity);
-        yield return 0.2f;
-        Check(!learned.Contains("move"), "Joystick movement accumulates until the minimum distance");
-        Move(tutorial, rig, Vector3.forward * 0.04f, LocomotionEvent.TranslationType.Relative);
-        yield return 0.2f;
-        Check(learned.Contains("move"), "At least ten centimetres of controlled movement completes walking");
-        Check(voice.CurrentCueId == "controls_move_hands" && source.isPlaying,
-            "Successful movement lets the current spoken instruction finish");
+        Check(!learned.Contains("move") && source.isPlaying, "Gronny finishes the walking sentence before explaining the seed");
+        Set(tutorial, "mode", GardenInputMode.Hands);
         source.time = source.clip.length - 0.1f;
         yield return 0.9f;
-        Check(voice.CurrentCueId == "movement_success", "Movement success plays after the instruction finishes");
-        source.time = source.clip.length - 0.1f;
-        yield return 0.9f;
-        Check(voice.CurrentCueId == "controls_grab_hands", "Seed instructions follow the movement acknowledgement");
-        Call(tutorial, "Learn", "move");
+        Check(learned.Contains("move"), "Finishing the voice instruction continues without measuring steps or distance");
+        Check(voice.CurrentCueId == "controls_grab_hands", "Seed guidance follows the spoken invitation");
         var seed = UnityEngine.Object.FindObjectsByType<SeedItem>(FindObjectsSortMode.None)
             .First(item => item.Crop == SeedCrop.Tomato && !item.IsPlanted);
+        var seedLabel = seed.GetComponent<GardenObjectLabel>();
+        Check(((GameObject)Field(seedLabel, "label")).GetComponentInChildren<UnityEngine.UI.Text>(true).text == "Tomato seed",
+            "The real seed label matches the spoken Tomato seed instruction");
         var grab = seed.GetComponent<Grabbable>();
         var pose = new Pose(seed.transform.position, seed.transform.rotation);
         grab.ProcessPointerEvent(new PointerEvent(9895, PointerEventType.Hover, pose));
@@ -161,12 +142,6 @@ public static class GronnyMovementLessonVerification
             "Planting text matches the spoken instruction before release");
         grab.ProcessPointerEvent(new PointerEvent(9895, PointerEventType.Unselect, pose));
         grab.ProcessPointerEvent(new PointerEvent(9895, PointerEventType.Unhover, pose));
-    }
-
-    private static void Move(GronnyTutorial tutorial, OVRCameraRig rig, Vector3 delta, LocomotionEvent.TranslationType type)
-    {
-        rig.transform.position += delta;
-        Call(tutorial, "OnMoved", new LocomotionEvent(1, delta, type), new Pose(delta, Quaternion.identity));
     }
 
     private static object Field(object target, string name) => target.GetType().GetField(name, BindingFlags.Instance | BindingFlags.NonPublic).GetValue(target);

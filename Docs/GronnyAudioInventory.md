@@ -2,6 +2,7 @@
 
 Archivo original | Duración (s) | Modo | Demostración | SHA-256
 ---|---:|---|---|---
+`Assets/Audio/roomscale/roomscale_walk.wav` | 9.16 | Unknown | None | `EDFDF61A61AED4B396D617D7737C9A727974BA08555762A36F336C2746D1A067`
 `Assets/Audio/dialogues_cozy_gardening/01_welcome.wav` | 20.48 | Unknown | None | `0D92333F758E598484FE83141F6486DA794A7E60021D34BC88329F3EA568D352`
 `Assets/Audio/dialogues_cozy_gardening/02_tomato_intro.wav` | 6.48 | Unknown | None | `6C9220487730619859896C27F93D6DB73EF7F34E2370A398693CAEB96777022F`
 `Assets/Audio/dialogues_cozy_gardening/03_plant_seed.wav` | 7.76 | Unknown | None | `26B26C62CC2874AA184EB0E6C32B45538D9E21405C0716574D0073B836DB9555`

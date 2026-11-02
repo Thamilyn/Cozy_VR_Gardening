@@ -23,6 +23,34 @@ public static class GronnyAudioSetup
         public int practiceOnlyFrom = -1;
     }
     [Serializable] private sealed class Instructions { public Instruction[] entries = Array.Empty<Instruction>(); }
+    [Serializable] private sealed class Dialogue { public string id = ""; public string text = ""; }
+    [Serializable] private sealed class Dialogues { public Dialogue[] entries = Array.Empty<Dialogue>(); }
+
+    [MenuItem("Garden/Gronny/Connect physical walking audio")]
+    public static void ConnectPhysicalWalkingAudio()
+    {
+        var catalogue = Require<GronnyAudioCatalogue>(CataloguePath);
+        AddPhysicalWalkingAudio(catalogue);
+        EditorUtility.SetDirty(catalogue);
+        AssetDatabase.SaveAssetIfDirty(catalogue);
+    }
+
+    private static void AddPhysicalWalkingAudio(GronnyAudioCatalogue catalogue)
+    {
+        var script = JsonUtility.FromJson<Dialogues>("{\"entries\":" +
+            File.ReadAllText("Docs/GronnyRoomScaleDialogues.json") + "}");
+        var cues = catalogue.cues.ToList();
+        foreach (Dialogue line in script.entries)
+        {
+            if (catalogue.Find(line.id) != null) continue;
+            var cue = MakeCue(line.id, "Assets/Audio/roomscale", GardenInputMode.Unknown);
+            cue.transcript = line.text;
+            cue.assisted = line.id == "roomscale_walk";
+            cues.Add(cue);
+        }
+        catalogue.cues = cues.ToArray();
+        ApplyInstructionCaptions(catalogue);
+    }
 
     internal static void ApplyInstructionCaptions(GronnyAudioCatalogue catalogue)
     {
@@ -117,6 +145,7 @@ public static class GronnyAudioSetup
         catalogue.demonstrationMaterial = material;
         GronnyWaterSavingAudioSetup.Apply(catalogue);
         GronnyMenuAudioSetup.AddCues(catalogue);
+        AddPhysicalWalkingAudio(catalogue);
         AssetDatabase.CreateAsset(catalogue, CataloguePath);
         AssetDatabase.SaveAssets();
         WriteInventory(catalogue);

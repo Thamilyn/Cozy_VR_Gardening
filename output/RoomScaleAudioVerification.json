@@ -1,0 +1,24 @@
+{
+  "recognition_model": "openai/whisper-base.en",
+  "note": "Revisión automática; no sustituye escucha humana.",
+  "files": [
+    {
+      "id": "roomscale_walk",
+      "expected": "Walk towards the gardening table. Stay inside your clear play area. When you get there, look for the seed labelled Tomato seed. I'll show you how to pick it up.",
+      "transcript": "Walk towards the gardening table. Stay inside your clear play area. When you get there, look for the seed labeled tomato seed. I'll show you how to pick it up.",
+      "differences": [
+        {
+          "operation": "replace",
+          "expected": "labelled",
+          "transcript": "labeled"
+        }
+      ],
+      "words_match": false,
+      "duration_seconds": 9.16,
+      "sample_rate": 24000,
+      "peak": 0.8587646484375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "EDFDF61A61AED4B396D617D7737C9A727974BA08555762A36F336C2746D1A067"
+    }
+  ]
+}
