@@ -8,6 +8,8 @@ public sealed class TomatoFruit : MonoBehaviour
 {
     public const float DiameterMetres = 0.065f;
 
+    [SerializeField, Min(0.1f)] private float recoveryDelaySeconds = 2f;
+
     private SeedItem source;
     private Grabbable grabbable;
     private Rigidbody body;
@@ -18,6 +20,11 @@ public sealed class TomatoFruit : MonoBehaviour
     private MeshRenderer outline;
     private bool requireNewGrab;
     private GardenObjectLabel harvestLabel;
+    private Transform plantAttachment;
+    private Vector3 attachedLocalPosition;
+    private Quaternion attachedLocalRotation;
+    private Vector3 attachedLocalScale;
+    private float recoveryRemaining = -1f;
 
     public void Initialize(SeedItem seed)
     {
@@ -40,6 +47,10 @@ public sealed class TomatoFruit : MonoBehaviour
             transform.localScale *= DiameterMetres / diameter;
             transform.position += worldAttachment - mesh.transform.TransformPoint(attachment);
         }
+        plantAttachment = transform.parent;
+        attachedLocalPosition = transform.localPosition;
+        attachedLocalRotation = transform.localRotation;
+        attachedLocalScale = transform.localScale;
         MaterialPropertyBlock ripeColor = new();
         ripeColor.SetColor("_BaseColor", new Color(0.9f, 0.13f, 0.08f));
         ripeColor.SetColor("_Color", new Color(0.9f, 0.13f, 0.08f));
@@ -92,7 +103,9 @@ public sealed class TomatoFruit : MonoBehaviour
 
     private void OnPointerEvent(PointerEvent pointerEvent)
     {
-        if (stored || picked || pointerEvent.Type != PointerEventType.Select) return;
+        if (stored || pointerEvent.Type != PointerEventType.Select) return;
+        recoveryRemaining = -1f;
+        if (picked) return;
         picked = true;
         // Detach before Meta begins its grab transform, so its initial pose uses the
         // fruit's independent hierarchy rather than the scaled plant hierarchy.
@@ -114,15 +127,51 @@ public sealed class TomatoFruit : MonoBehaviour
             if (picked && !held) requireNewGrab = true;
             return;
         }
-        if (held) requireNewGrab = false;
-        if (requireNewGrab) return;
-        if (!picked || held) return;
-        if (basket == null && Time.unscaledTime >= nextBasketSearch)
+        if (held)
         {
-            basket = FindFirstObjectByType<TomatoHarvestBasket>();
-            nextBasketSearch = Time.unscaledTime + 1f;
+            requireNewGrab = false;
+            recoveryRemaining = -1f;
+            return;
         }
-        if (basket != null && basket.Contains(transform.position)) basket.Collect(this, source);
+        if (!picked) return;
+        if (!requireNewGrab)
+        {
+            if (basket == null && Time.unscaledTime >= nextBasketSearch)
+            {
+                basket = FindFirstObjectByType<TomatoHarvestBasket>();
+                nextBasketSearch = Time.unscaledTime + 1f;
+            }
+            // Allow a released tomato to fall into the tray before recovering it.
+            if (basket != null && basket.Contains(transform.position)) basket.Collect(this, source);
+            if (stored) return;
+        }
+        if (recoveryRemaining < 0f) recoveryRemaining = Mathf.Max(0.1f, recoveryDelaySeconds);
+        recoveryRemaining -= Time.deltaTime;
+        if (recoveryRemaining <= 0f) ReturnToPlant();
+    }
+
+    private void ReturnToPlant()
+    {
+        if (plantAttachment == null) return;
+        if (!body.isKinematic)
+        {
+            body.linearVelocity = Vector3.zero;
+            body.angularVelocity = Vector3.zero;
+        }
+        body.useGravity = false;
+        body.isKinematic = true;
+        // Restore the local pose so the fruit follows a pot moved since it was picked.
+        transform.SetParent(plantAttachment, false);
+        transform.SetLocalPositionAndRotation(attachedLocalPosition, attachedLocalRotation);
+        transform.localScale = attachedLocalScale;
+        body.position = transform.position;
+        body.rotation = transform.rotation;
+        GetComponent<GrabFreeTransformer>()?.Initialize(grabbable);
+        picked = false;
+        requireNewGrab = false;
+        recoveryRemaining = -1f;
+        if (outline != null) outline.enabled = true;
+        if (harvestLabel != null) harvestLabel.enabled = true;
     }
 
     public void StoreIn(Transform tray)

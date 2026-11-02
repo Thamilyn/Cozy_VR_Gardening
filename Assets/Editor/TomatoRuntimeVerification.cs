@@ -21,6 +21,9 @@ public static class TomatoRuntimeVerification
     private static int phaseStartDay;
     private static bool sawNight;
     private static bool harvestOnly;
+    private static Transform fruitAttachment;
+    private static Pose fruitAttachedPose;
+    private static Vector3 fruitAttachedScale;
 
     static TomatoRuntimeVerification()
     {
@@ -176,6 +179,9 @@ public static class TomatoRuntimeVerification
                 Require(fruit != null && fruit.GetComponent<Rigidbody>().isKinematic, "Fruit remains attached after Meta Start and scene scan");
                 VerifyHarvestFruit(fruit);
                 VerifyFruitDiameter(fruit, "attached");
+                fruitAttachment = fruit.transform.parent;
+                fruitAttachedPose = new Pose(fruit.transform.localPosition, fruit.transform.localRotation);
+                fruitAttachedScale = fruit.transform.localScale;
                 Grabbable grab = fruit.GetComponent<Grabbable>();
                 Pose pose = new(fruit.transform.position, fruit.transform.rotation);
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Hover, pose));
@@ -213,6 +219,42 @@ public static class TomatoRuntimeVerification
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Select, pose));
                 Require(grab.SelectingPointsCount == 1, "Released fruit can be picked up again");
                 VerifyFruitDiameter(fruit, "picked up again");
+                step = 23;
+                nextStepAt = EditorApplication.timeSinceStartup + 2.2;
+            }
+            else if (step == 23)
+            {
+                TomatoFruit fruit = UnityEngine.Object.FindFirstObjectByType<TomatoFruit>();
+                Grabbable grab = fruit.GetComponent<Grabbable>();
+                Require(grab.SelectingPointsCount == 1 && fruit.transform.parent == null,
+                    "Re-grabbing cancels recovery while the tomato is held");
+                Pose pose = new(fruit.transform.position, fruit.transform.rotation);
+                grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Unselect, pose));
+                grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Unhover, pose));
+                step = 24;
+                nextStepAt = EditorApplication.timeSinceStartup + 2.2;
+            }
+            else if (step == 24)
+            {
+                TomatoFruit fruit = UnityEngine.Object.FindFirstObjectByType<TomatoFruit>();
+                Require(!seeds.HarvestComplete && fruit.transform.parent == fruitAttachment,
+                    "Dropped tomato returns to the plant without recording harvest");
+                Require(Vector3.Distance(fruit.transform.localPosition, fruitAttachedPose.position) < 0.0001f &&
+                    Quaternion.Angle(fruit.transform.localRotation, fruitAttachedPose.rotation) < 0.01f &&
+                    Vector3.Distance(fruit.transform.localScale, fruitAttachedScale) < 0.0001f,
+                    "Recovery restores the original local position, rotation and scale");
+                Require(fruit.GetComponent<Rigidbody>().isKinematic && !fruit.GetComponent<Rigidbody>().useGravity,
+                    "Recovered fruit stays attached without gravity");
+                VerifyHarvestFruit(fruit);
+                Require(fruit.GetComponent<GardenObjectLabel>().enabled, "Recovery restores the harvest label");
+                Grabbable grab = fruit.GetComponent<Grabbable>();
+                Pose pose = new(fruit.transform.position, fruit.transform.rotation);
+                grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Hover, pose));
+                grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Select, pose));
+                Require(grab.SelectingPointsCount == 1 && fruit.transform.parent == null,
+                    "Recovered fruit can be harvested again");
+                VerifyFruitDiameter(fruit, "picked after recovery");
+                result += "PASS: re-grab cancels recovery; a later drop restores the plant attachment, local pose, scale, outline and label" + Environment.NewLine;
                 step = 21;
                 nextStepAt = EditorApplication.timeSinceStartup + 0.1;
             }
