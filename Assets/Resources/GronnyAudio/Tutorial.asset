@@ -13,6 +13,23 @@ MonoBehaviour:
   m_Name: Tutorial
   m_EditorClassIdentifier: Assembly-CSharp::GronnyAudioCatalogue
   cues:
+  - id: roomscale_walk
+    clip: {fileID: 8300000, guid: 6b73989ac6c14497a940328db752e492, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 0
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget:
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Walk towards the gardening table. Stay inside your clear play area.
+      When you get there, look for the seed labelled Tomato seed. I'll show you how to pick it up.
+    instruction: Walk to the gardening table.
+    instructionDetail: Look for Tomato seed. Gronny will explain how to pick it up.
+    steps: []
   - id: 01_welcome
     clip: {fileID: 8300000, guid: e4976e1c1644c9548bae1e00739b9e74, type: 3}
     variations: []

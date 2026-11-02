@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "if (UnityEditor.EditorApplication.isPlaying) throw new System.InvalidOperationException(\"Stop Play before changing the spawn.\"); var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene(); if (scene.path != \"Assets/Scenes/Garden_Moves.unity\" || scene.isDirty) throw new System.InvalidOperationException(\"Expected the clean Garden_Moves scene.\"); var rig = UnityEngine.Object.FindFirstObjectByType<OVRCameraRig>(); UnityEditor.Undo.RecordObject(rig.transform, \"Move garden player closer to table\"); var position = rig.transform.position; position.z = -3.6f; rig.transform.position = position; UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(scene); if (!UnityEditor.SceneManagement.EditorSceneManager.SaveScene(scene)) throw new System.InvalidOperationException(\"Could not save the spawn.\"); return rig.transform.position.ToString(\"F3\");"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "(0.000, 0.000, -3.600)"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

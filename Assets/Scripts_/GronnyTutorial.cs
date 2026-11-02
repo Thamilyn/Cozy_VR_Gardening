@@ -19,7 +19,6 @@ public sealed class GronnyTutorial : MonoBehaviour
     private CalendarSystem calendar;
     private CalendarVisibilityController visibility;
     private CalendarPanel panel;
-    private FirstPersonLocomotor[] locomotors;
     private WateringCan[] cans;
     private GronnyVoicePlayer voice;
     private GardenControlDemonstration demonstration;
@@ -39,10 +38,6 @@ public sealed class GronnyTutorial : MonoBehaviour
     private static GronnyTutorial active;
     private readonly HashSet<Behaviour> blockedInteractions = new();
     private float nextInteractionRefresh;
-    private Transform playerOrigin;
-    private Vector3 movementStart;
-    private bool movementRequested;
-    private bool movementPracticeStarted;
     private WateringCan refillCan;
     private int announcedWaterAttempt;
 
@@ -97,12 +92,11 @@ public sealed class GronnyTutorial : MonoBehaviour
         bool hands = mode == GardenInputMode.Hands;
         (text, detail) = Step switch
         {
-            GuideStep.Move => ("Step 1/6: Practise moving.", mode == GardenInputMode.Unknown
-                ? "Use your tracked hands or Touch controllers to begin."
-                : hands ? "Curl your index finger, tap your thumb, then swipe to step." : "Move with the left joystick."),
-            GuideStep.Grab => ("Step 2/6: Pick up Tomato.",
+            GuideStep.Move => ("Step 1/6: Walk to the gardening table.",
+                "Look for Tomato seed. Gronny will explain how to pick it up."),
+            GuideStep.Grab => ("Step 2/6: Pick up Tomato seed.",
                 hands ? "Pinch to grab. Keep holding the seed." : "Hold Grip to grab. Keep holding the seed."),
-            GuideStep.Plant => ("Step 3/6: Plant Tomato.", "Release the seed over the soil in an empty small pot."),
+            GuideStep.Plant => ("Step 3/6: Plant Tomato seed.", "Release the seed over the soil in an empty small pot."),
             GuideStep.Water => (Excess ? "Step 4/6: Stop watering."
                 : !NeedsWater ? "Step 4/6: Hold the can upright."
                 : "Step 4/6: Water the soil.", Excess ? "Let the extra water drain."
@@ -158,11 +152,10 @@ public sealed class GronnyTutorial : MonoBehaviour
         if (visibility != null) visibility.Close();
         panel = FindFirstObjectByType<CalendarPanel>(FindObjectsInactive.Include);
         cans = FindObjectsByType<WateringCan>(FindObjectsSortMode.None);
-        locomotors = FindObjectsByType<FirstPersonLocomotor>(FindObjectsSortMode.None);
         OVRCameraRig rig = FindFirstObjectByType<OVRCameraRig>();
-        if (visibility == null || panel == null || rig == null || locomotors.Length == 0)
+        if (visibility == null || panel == null || rig == null)
         {
-            Debug.LogError("Gronny's progressive tutorial needs the Meta camera rig, locomotion and calendar controls.", this);
+            Debug.LogError("Gronny's progressive tutorial needs the Meta camera rig and calendar controls.", this);
             enabled = false;
             yield break;
         }
@@ -174,8 +167,6 @@ public sealed class GronnyTutorial : MonoBehaviour
         voice.SetBackgroundDemonstration("04_first_watering", () => ShowWateringDemonstration);
         initialized = true;
         active = this;
-        playerOrigin = rig.transform;
-        movementStart = playerOrigin.position;
         if (GardenMenuController.StartsAtPlanting)
         {
             learned.Add("move");
@@ -210,8 +201,7 @@ public sealed class GronnyTutorial : MonoBehaviour
             visibility.VisibilityChanged += OnCalendarVisible;
         }
         if (panel != null) panel.ActionCompleted += OnCalendarAction;
-        foreach (FirstPersonLocomotor locomotor in locomotors)
-            if (locomotor != null) locomotor.WhenLocomotionEventHandled += OnMoved;
+        voice.AudioFinished += OnInstructionFinished;
         subscribed = true;
     }
 
@@ -225,8 +215,7 @@ public sealed class GronnyTutorial : MonoBehaviour
             visibility.VisibilityChanged -= OnCalendarVisible;
         }
         if (panel != null) panel.ActionCompleted -= OnCalendarAction;
-        foreach (FirstPersonLocomotor locomotor in locomotors)
-            if (locomotor != null) locomotor.WhenLocomotionEventHandled -= OnMoved;
+        if (voice != null) voice.AudioFinished -= OnInstructionFinished;
         subscribed = false;
     }
 
@@ -235,8 +224,6 @@ public sealed class GronnyTutorial : MonoBehaviour
         if (GardenMenuController.GardenSuspended)
         {
             lastActionAt = Time.unscaledTime;
-            movementRequested = false;
-            if (playerOrigin != null) movementStart = playerOrigin.position;
             return;
         }
         if (!Running)
@@ -249,9 +236,6 @@ public sealed class GronnyTutorial : MonoBehaviour
         foreach (WateringCan can in cans)
             if (can != null && can.IsHeld && can.CurrentWaterLitres <= 0f) refillCan = can;
         if (Step == GuideStep.Water && System.Array.Exists(cans, can => can != null && can.IsHeld)) Learn("watering_grab");
-        if (Step == GuideStep.Move && movementPracticeStarted && movementRequested && playerOrigin != null &&
-            Vector3.ProjectOnPlane(playerOrigin.position - movementStart, Vector3.up).sqrMagnitude >= 0.01f)
-            Learn("move");
         if (Time.unscaledTime >= nextInteractionRefresh)
         {
             nextInteractionRefresh = Time.unscaledTime + 0.5f;
@@ -376,9 +360,6 @@ public sealed class GronnyTutorial : MonoBehaviour
         mode = detected;
         voice.CancelControls();
         demonstration.SetInputMode(mode);
-        movementRequested = false;
-        movementPracticeStarted = false;
-        if (playerOrigin != null) movementStart = playerOrigin.position;
         QueueControls();
     }
 
@@ -388,18 +369,23 @@ public sealed class GronnyTutorial : MonoBehaviour
         if (GardenMenuController.GardenSuspended) return;
         if (!Running || !learned.Add(control)) return;
         lastActionAt = Time.unscaledTime;
-        if (control == "move")
-            Say("movement_success", "movement-success", () => Running && State == null);
         RefreshInteractionLocks();
         QueueControls();
     }
 
     private void QueueControls()
     {
-        if (!Running || mode == GardenInputMode.Unknown || calendar.IsAdvancing) return;
+        if (!Running || calendar.IsAdvancing) return;
         GuideStep step = Step;
-        if (step == GuideStep.Move) Control("move", () => Step == GuideStep.Move);
-        else if (step == GuideStep.Grab) Control("grab", () => Step == GuideStep.Grab);
+        // Spoken walking guidance is shared by both input modes.
+        if (step == GuideStep.Move)
+        {
+            Say("roomscale_walk", "roomscale-walk", () => Running && Step == GuideStep.Move,
+                false, true);
+            return;
+        }
+        if (mode == GardenInputMode.Unknown) return;
+        if (step == GuideStep.Grab) Control("grab", () => Step == GuideStep.Grab);
         else if (step == GuideStep.Plant)
         {
             Say("03_plant_seed", "plant", () => Running && Step == GuideStep.Plant);
@@ -438,13 +424,6 @@ public sealed class GronnyTutorial : MonoBehaviour
         };
         voice.Enqueue(id, key, () => (GardenWaterSupply.Active == null || !GardenWaterSupply.Active.Exhausted) && relevant(), () =>
         {
-            // Movement before its own lesson must not skip the demonstration.
-            if ((id == "controls_move_hands" || id == "controls_move_controllers") && Step == GuideStep.Move)
-            {
-                movementPracticeStarted = true;
-                movementRequested = false;
-                if (playerOrigin != null) movementStart = playerOrigin.position;
-            }
             if (catalogue.FindTutorialCue(id).assisted) calendar.RecordTutorialHelp(id);
         }, once, demoRelevant, waitForAction);
     }
@@ -495,13 +474,12 @@ public sealed class GronnyTutorial : MonoBehaviour
             Learn("calendar_select");
     }
 
-    private void OnMoved(LocomotionEvent evt, Pose delta)
+    private void OnInstructionFinished(string id)
     {
-        if (!GardenMenuController.GardenSuspended && Running && movementPracticeStarted && Step == GuideStep.Move &&
-            (evt.Translation == LocomotionEvent.TranslationType.Relative ||
-             evt.Translation == LocomotionEvent.TranslationType.Velocity) &&
-            Vector3.ProjectOnPlane(delta.position, Vector3.up).sqrMagnitude > 0.00000001f)
-            movementRequested = true;
+        // This is spoken guidance, not a measured walking challenge. Meta already
+        // tracks real movement; continue to grabbing when Gronny finishes speaking.
+        if (id == "roomscale_walk" && Running && Step == GuideStep.Move &&
+            !GardenMenuController.GardenSuspended) Learn("move");
     }
 
     private void RefreshInteractionLocks()

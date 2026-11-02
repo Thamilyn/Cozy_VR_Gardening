@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var rig = UnityEngine.Object.FindFirstObjectByType<OVRCameraRig>(); return new { playing = UnityEditor.EditorApplication.isPlaying, dirty = UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty, position = rig.transform.position.ToString(\"F3\"), hmdPresent = OVRManager.isHmdPresent, xrDeviceActive = UnityEngine.XR.XRSettings.isDeviceActive, xrDevice = UnityEngine.XR.XRSettings.loadedDeviceName };"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "playing": false,
+        "dirty": true,
+        "position": "(0.000, 0.000, -3.600)",
+        "hmdPresent": false,
+        "xrDeviceActive": false,
+        "xrDevice": ""
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

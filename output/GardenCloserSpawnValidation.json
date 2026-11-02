@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var rig = UnityEngine.Object.FindFirstObjectByType<OVRCameraRig>(); var p = rig.transform.position; var hits = UnityEngine.Physics.OverlapCapsule(p + UnityEngine.Vector3.up * 0.3f, p + UnityEngine.Vector3.up * 1.3f, 0.25f, ~0, UnityEngine.QueryTriggerInteraction.Ignore); foreach(var hit in hits) if (!hit.transform.IsChildOf(rig.transform)) throw new System.InvalidOperationException(\"Spawn overlaps \" + hit.name); GardenMenuVerification.Begin(); return new { position = p.ToString(\"F3\"), spawnClear = true, menuCheckStarted = true };"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "position": "(0.000, 0.000, -3.600)",
+        "spawnClear": true,
+        "menuCheckStarted": true
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

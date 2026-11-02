@@ -26,13 +26,13 @@ public static class GronnyAudioVerification
     public static string VerifyCatalogue()
     {
         var catalogue = Resources.Load<GronnyAudioCatalogue>("GronnyAudio/Tutorial");
-        Require(catalogue != null && catalogue.cues.Length == 58, "45 lesson cues and 13 menu/accessibility cues");
+        Require(catalogue != null && catalogue.cues.Length == 59, "46 lesson cues and 13 menu/accessibility cues");
         Require(catalogue.cues.Select(c => c.id).Distinct().Count() == catalogue.cues.Length, "Unique audio identifiers");
-        string[] files = new[] { "Assets/Audio/controls_", "Assets/Audio/dialogues_cozy_gardening", "Assets/Audio/menu_accessibility", "Assets/Audio/water_saving" }
+        string[] files = new[] { "Assets/Audio/controls_", "Assets/Audio/dialogues_cozy_gardening", "Assets/Audio/menu_accessibility", "Assets/Audio/water_saving", "Assets/Audio/roomscale" }
             .SelectMany(folder => Directory.GetFiles(folder, "*", SearchOption.AllDirectories))
             .Where(file => Path.GetExtension(file) != ".meta").Select(file => file.Replace('\\', '/')).ToArray();
         int variationCount = catalogue.cues.Sum(cue => cue.variations?.Length ?? 0);
-        Require(files.Length == 58 + variationCount && files.All(file => catalogue.cues.Any(c =>
+        Require(files.Length == catalogue.cues.Length + variationCount && files.All(file => catalogue.cues.Any(c =>
                 AssetDatabase.GetAssetPath(c.clip) == file || (c.variations != null &&
                     c.variations.Any(variation => variation != null && AssetDatabase.GetAssetPath(variation.clip) == file)))),
             "Every existing audio file referenced, including subdirectories");
@@ -76,7 +76,7 @@ public static class GronnyAudioVerification
         Require(catalogue.FindTutorialCue("controls_move_hands").id == "controls_move_hands" &&
             catalogue.FindTutorialCue("12_harvest").id == "12_harvest", "Updated lesson recordings take precedence over earlier variants");
         string suppliedFiles = GronnyWaterSavingAudioSetup.VerifyImportedFiles(catalogue);
-        File.WriteAllText("Docs/Validation/GronnyCatalogue.txt", "PASS: 58 base audios and " + variationCount + " variations; coverage; identifiers; durations; step timings; Meta bone bindings; Touch Plus references.\n" + suppliedFiles + "\nUnity " + Application.unityVersion);
+        File.WriteAllText("Docs/Validation/GronnyCatalogue.txt", "PASS: " + catalogue.cues.Length + " base audios and " + variationCount + " variations; coverage; identifiers; durations; step timings; Meta bone bindings; Touch Plus references.\n" + suppliedFiles + "\nUnity " + Application.unityVersion);
         return "PASS: catalogue and installed Meta references";
     }
 

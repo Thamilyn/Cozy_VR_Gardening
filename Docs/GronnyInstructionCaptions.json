@@ -56,5 +56,6 @@
   { "id": "water_supply_exhausted", "instruction": "Not enough water to finish.", "instructionDetail": "Try again. Practise stopping at the target." },
   { "id": "water_retry", "instruction": "Select Try again.", "instructionDetail": "Start with a fresh water supply." },
   { "id": "water_no_waste_complete", "instruction": "You grew a tomato without waste!", "instructionDetail": "You gave the plant just what it needed." },
-  { "id": "movement_success", "instruction": "You've got it!", "instructionDetail": "Come over to the gardening table." }
+  { "id": "movement_success", "instruction": "You've got it!", "instructionDetail": "Come over to the gardening table." },
+  { "id": "roomscale_walk", "instruction": "Walk to the gardening table.", "instructionDetail": "Look for Tomato seed. Gronny will explain how to pick it up." }
 ]

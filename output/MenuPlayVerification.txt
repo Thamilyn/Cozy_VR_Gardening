@@ -1,5 +1,5 @@
 Unity 6000.3.23f1
-UTC 2026-10-29T17:30:09.5908368Z
+UTC 2026-11-02T12:22:58.9888433Z
 Synthetic Play checks: camera pose, release decisions and pointer events; physical XR input not tested.
 PASS: Initial menu suspends the garden before Play
 PASS: Cultivation voice waits for Play
@@ -35,12 +35,16 @@ PASS: The greeting itself explains the limited water reserve
 PASS: Opening pause from another player position keeps the station beside Gronny
 PASS: Pause menu offers Return to garden instead of starting a new game
 PASS: Text fits its rectangles on page Controls
-PASS: Text fits its rectangles on page Movement
+PASS: Text fits its rectangles on page Walk in your room
+PASS: Menu explains real walking by voice without a hand gesture demonstration or resuming the lesson
+PASS: Physical walking preview can be stopped
+PASS: Physical walking instructions can be replayed
+PASS: Text fits its rectangles on page Optional movement controls
 PASS: Menu plays the recorded hands demonstration while the tutorial voice stays paused
 PASS: Review shows its independent hand model
 PASS: Hand instructions preserve the original voice pitch
 PASS: Hand demonstration gives each step at least 2.5 seconds without slowing the voice
-PASS: Text fits its rectangles on page Movement
+PASS: Text fits its rectangles on page Optional movement controls
 PASS: Right-hand preview uses its own voice and clearly identifies the current live controls
 PASS: Stop clears both preview voice and model
 PASS: Replay works without recording tutorial learning
@@ -53,47 +57,8 @@ PASS: Opening menu pauses the existing voice without losing its position
 PASS: Menu navigation records neither learning nor original tutorial assistance
 PASS: Returning from pause does not move the menu back to entry
 PASS: Returning resumes the same voice rather than replaying the welcome
-PASS: Synthetic held can pours before menu suspension
-PASS: Menu preserves an existing grab and stops water consumption
-PASS: Calendar refill is blocked while menu is open
-PASS: Returning with a tilted can cannot resume pouring
-PASS: Upright then tilted rearms intentional pouring
-PASS: Practice automatically refills a held empty can without consuming a limited budget
-PASS: Cultivation fixture plants a tomato after leaving the menu
-PASS: Real phase cycle begins before the suspension fixture
-PASS: Opening menu freezes phase lighting and prevents committing the day
-PASS: Menu blocks additional crop watering and phase requests
-PASS: Returning completes the interrupted phase exactly once
-PASS: First completed care phase switches from free practice to a finite reserve
-PASS: Finite supply includes a 100 percent margin for all remaining stages
-PASS: A full can lasts 24 seconds at the slower beginner watering rate
-PASS: Refilling a full can cannot debit or create water
-PASS: A newly spawned can starts empty in the limited lesson instead of creating free water
-PASS: Direct can refill transfers water from the shared reserve without changing the available total
-PASS: A real held tilted-can soil cast records useful water and waters the planted tomato
-PASS: Measured discharge equals the actual decrease in can water
-PASS: Pouring away from pots records missed water without crediting the plant
-PASS: Pour crossing the target splits useful water from surplus in the same stream (poured=2.519857, useful=0.9999821, surplus=1.388836, retained=63.10311, target=61.71429)
-PASS: Water balance closes and wasted water cannot earn the no-waste narration
-PASS: Calendar refill also preserves the shared finite budget: sample 1
-PASS: Calendar refill also preserves the shared finite budget: sample 2
-PASS: Meeting the last target with no water left does not trigger an unfair retry
-PASS: After harvest, refills and outflow cannot change the completed balance
-PASS: Exactly enough water for all remaining targets keeps the attempt playable
-PASS: Insufficient water triggers a clear failure before the player empties every can
-PASS: Exhaustion pauses watering and growth but leaves the recovery UI accessible
-PASS: Empty-reserve direct refill and advance cannot bypass exhaustion
-PASS: Insufficient supply automatically opens a visible interactive game-over panel without needing the tutorial
-PASS: Game-over panel clearly names the outcome and offers Try again
-PASS: Text fits its rectangles on page Game over
-PASS: Game over explains the insufficient supply and announces Try again while cultivation is paused
-PASS: Guide board agrees with the game-over panel rather than offering a missing Return button
-PASS: Meta rays can select the game-over panel in front of the player
-PASS: Repeated retry clicks cannot queue multiple scene reloads
-PASS: Try again unloads the previous crop, menu and voice player
-PASS: Retry starts the planting session directly without another Play selection
-PASS: Retry resets crop, day, journal and all water counters to the planting session
-PASS: Retry preserves the player's sound settings
-PASS: The planting restart waits for the retry selection to be released before speaking
-PASS: Gronny restarts at the planting dialogue with planting unlocked and later lessons reset
-RESULT: PASS
+RESULT: FAIL
+System.InvalidOperationException: Synthetic held can pours before menu suspension. Upright: held=True, pouring=False, tilted=False, requireUpright=True, tracking=False, water=0.24, suspended=False, pourAllowed=True, advancing=False, supplyExhausted=False, supplyCompleted=False, hmd=True, up=(0.00, 1.00, 0.00); tilted: held=True, pouring=False, tilted=True, requireUpright=True, tracking=False, water=0.24, suspended=False, pourAllowed=True, advancing=False, supplyExhausted=False, supplyCompleted=False, hmd=True, up=(0.00, -1.00, 0.00)
+  at GardenMenuVerification.Check (System.Boolean condition, System.String name) [0x00015] in C:\Users\Trole\Cozy_VR_Gardening\Assets\Editor\GardenMenuVerification.cs:651 
+  at GardenMenuVerification+<Run>d__11.MoveNext () [0x0149b] in C:\Users\Trole\Cozy_VR_Gardening\Assets\Editor\GardenMenuVerification.cs:282 
+  at GardenMenuVerification.Tick () [0x00036] in C:\Users\Trole\Cozy_VR_Gardening\Assets\Editor\GardenMenuVerification.cs:60 

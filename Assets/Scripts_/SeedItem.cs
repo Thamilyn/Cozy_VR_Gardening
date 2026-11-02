@@ -56,7 +56,7 @@ public sealed class SeedItem : MonoBehaviour
             _ => new Color(0.65f, 0.8f, 0.24f)
         });
         if (crop == SeedCrop.Tomato)
-            _nameLabel = GardenObjectLabel.Create(gameObject, "Tomato", Vector3.up * 0.08f);
+            _nameLabel = GardenObjectLabel.Create(gameObject, "Tomato seed", Vector3.up * 0.08f);
     }
 
     private void Start()

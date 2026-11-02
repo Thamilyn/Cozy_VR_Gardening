@@ -2,9 +2,11 @@
 
 Saludo vigente: presentación, indicación de poner ambas manos frente al usuario
 si utiliza hand tracking, jardinería sustentable y reserva limitada en una sola
-grabación; después se practica el movimiento y se felicita al completarlo.
-La invitación a acercarse a la mesa se oye únicamente después de esa práctica.
-El catálogo contiene ahora 58 avisos base y 18 grabaciones alternativas. Véanse
+grabación; después Gronny invita por voz a caminar hacia la gardening table y
+buscar la semilla con el rótulo Tomato seed. Al terminar la frase, enlaza con las
+instrucciones de agarre. No se miden pasos ni distancias. Véase
+`DesplazamientoFisico.md` para esta actualización del 2 de noviembre de 2026.
+El catálogo contiene ahora 59 avisos base y 18 grabaciones alternativas. Véanse
 `SaludoYMovimiento.md`, `VariacionesAvisosAgua.md` y `VariacionesRiegoCompleto.md`;
 las cifras y la secuencia de bienvenida de las entregas anteriores son históricas.
 
