@@ -20,7 +20,8 @@ public sealed class GardenObjectLabel : MonoBehaviour
     private void Build(string caption)
     {
         // Independent of the target hierarchy: seeds and fruit have very different scales.
-        label = new GameObject(caption + " label", typeof(RectTransform), typeof(Canvas), typeof(Image));
+        // Keep the UI name outside GardenGrabSetup's prop-name prefixes (e.g. "Shovel ").
+        label = new GameObject("Garden label: " + caption, typeof(RectTransform), typeof(Canvas), typeof(Image));
         label.layer = 2;
         RectTransform panel = (RectTransform)label.transform;
         panel.sizeDelta = new Vector2(400f, 80f);

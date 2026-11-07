@@ -157,6 +157,7 @@ GameObject:
   - component: {fileID: 6337859175736447836}
   - component: {fileID: 4791155613769754151}
   - component: {fileID: 1517842381245818391}
+  - component: {fileID: 11400001}
   m_Layer: 0
   m_Name: Shovel
   m_TagString: Untagged
@@ -252,6 +253,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.13350798, y: 0.06573939, z: 0.37419388}
   m_Center: {x: -0.0013616644, y: 0.037338138, z: 0.09350395}
+--- !u!114 &11400001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368317141486964152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63bf1a4bb508466ca6c8ddcf57bcba72, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::GardenShovel
+  localScoopPoint: {x: 0, y: 0.05, z: -0.025}
+  soilLoadSize: {x: 0.075, y: 0.035, z: 0.09}
+  recoveryDelaySeconds: 2
 --- !u!1001 &7496081602310655000
 PrefabInstance:
   m_ObjectHideFlags: 0

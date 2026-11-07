@@ -1,0 +1,34 @@
+Unity 6000.3.23f1
+UTC 2026-11-07T22:35:36.3227711Z
+Synthetic IHand samples, SDK release predicate and real scene tabletop; no scene saves.
+PASS: Fresh paused Play session
+PASS: Prefab installs the gesture component
+PASS: Shears start open on the table
+PASS: Pickup uses a palm grasp including the index finger
+PASS: Selection installs the SDK release predicate
+PASS: Meta pointer selection holds the shears
+PASS: Closing all four fingers produces a full squeeze
+PASS: A fist closes the blades, including in the initial menu
+PASS: Closed fist pointing down does not release
+PASS: Bending only the index finger cannot fully close the shears
+PASS: A partially open hand does not release
+PASS: Opening the hand produces an open-blade squeeze
+PASS: Opening the hand opens the blades while retaining the grasp
+PASS: An open palm facing up retains the shears
+PASS: An open palm facing sideways retains the shears
+PASS: An open palm over the real table starts a release dwell
+PASS: The scene's TableSet collider is recognized
+PASS: A stable open palm down over the table permits release
+PASS: Closing the hand cancels a pending release
+PASS: An open palm too far above the table retains the tool
+PASS: An open palm down away from the table does not release
+PASS: A solid prop between the hand and tabletop blocks release
+PASS: Tracking loss does not count as a release gesture
+PASS: Left palm down starts the same release dwell
+PASS: SDK left-hand palm orientation also permits tabletop release
+PASS: Ending the grasp clears its SDK release override
+PASS: No gesture samples remain attached to a released hand
+PASS: Released shears return to the open resting pose
+PASS: Disabling the component clears its override
+NOT TESTED: physical Quest 3 tracking, hand comfort and normal SDK candidate acquisition.
+RESULT: PASS

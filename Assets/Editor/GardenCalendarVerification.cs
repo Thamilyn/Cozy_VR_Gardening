@@ -294,6 +294,8 @@ public static class GardenCalendarVerification
             }
         }
         Assert(foundSoil, "Phase contains a soil surface");
+        Assert(body.center.y + body.size.y * 0.5f <= target.max.y + 0.001f,
+            "Support collider leaves the opening above the soil free for seeds");
         Assert(Mathf.Abs(bottom - (body.center.y - body.size.y * 0.5f)) < 0.001f,
             "Visible pot bottom meets its support collider");
     }

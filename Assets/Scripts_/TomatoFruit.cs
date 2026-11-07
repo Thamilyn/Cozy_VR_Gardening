@@ -9,6 +9,7 @@ public sealed class TomatoFruit : MonoBehaviour
     public const float DiameterMetres = 0.065f;
 
     [SerializeField, Min(0.1f)] private float recoveryDelaySeconds = 2f;
+    [SerializeField, Min(0.1f)] private float cutRecoveryDelaySeconds = 8f;
 
     private SeedItem source;
     private Grabbable grabbable;
@@ -25,6 +26,14 @@ public sealed class TomatoFruit : MonoBehaviour
     private Quaternion attachedLocalRotation;
     private Vector3 attachedLocalScale;
     private float recoveryRemaining = -1f;
+    private float looseRecoveryDelay;
+    private Vector3 stemLocalPosition;
+
+    // This component is installed by SeedItem only at the ripe growth stage.
+    public bool CanCutStem => isActiveAndEnabled && source != null && source.IsPlanted &&
+        source.Crop == SeedCrop.Tomato && !picked && !stored && grabbable != null &&
+        grabbable.SelectingPointsCount == 0;
+    public Vector3 StemPosition => transform.TransformPoint(stemLocalPosition);
 
     public void Initialize(SeedItem seed)
     {
@@ -47,6 +56,8 @@ public sealed class TomatoFruit : MonoBehaviour
             transform.localScale *= DiameterMetres / diameter;
             transform.position += worldAttachment - mesh.transform.TransformPoint(attachment);
         }
+        stemLocalPosition = transform.InverseTransformPoint(worldAttachment);
+        looseRecoveryDelay = recoveryDelaySeconds;
         plantAttachment = transform.parent;
         attachedLocalPosition = transform.localPosition;
         attachedLocalRotation = transform.localRotation;
@@ -105,7 +116,25 @@ public sealed class TomatoFruit : MonoBehaviour
     {
         if (stored || pointerEvent.Type != PointerEventType.Select) return;
         recoveryRemaining = -1f;
+        looseRecoveryDelay = recoveryDelaySeconds;
         if (picked) return;
+        DetachFromPlant();
+    }
+
+    public bool TryCutStem()
+    {
+        if (!CanCutStem || GardenMenuController.GardenSuspended) return false;
+        DetachFromPlant();
+        body.isKinematic = false;
+        body.linearVelocity = Vector3.zero;
+        body.angularVelocity = Vector3.zero;
+        looseRecoveryDelay = Mathf.Max(0.1f, cutRecoveryDelaySeconds);
+        recoveryRemaining = looseRecoveryDelay;
+        return true;
+    }
+
+    private void DetachFromPlant()
+    {
         picked = true;
         // Detach before Meta begins its grab transform, so its initial pose uses the
         // fruit's independent hierarchy rather than the scaled plant hierarchy.
@@ -145,7 +174,7 @@ public sealed class TomatoFruit : MonoBehaviour
             if (basket != null && basket.Contains(transform.position)) basket.Collect(this, source);
             if (stored) return;
         }
-        if (recoveryRemaining < 0f) recoveryRemaining = Mathf.Max(0.1f, recoveryDelaySeconds);
+        if (recoveryRemaining < 0f) recoveryRemaining = Mathf.Max(0.1f, looseRecoveryDelay);
         recoveryRemaining -= Time.deltaTime;
         if (recoveryRemaining <= 0f) ReturnToPlant();
     }

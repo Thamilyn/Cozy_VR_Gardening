@@ -322,6 +322,7 @@ public sealed class GardenGrabSetup : MonoBehaviour
         handGrab.InjectRigidbody(body);
         handGrab.InjectOptionalPointableElement(grabbable);
         handGrab.InjectSupportedGrabTypes(GrabTypeFlags.All);
+        if (target.GetComponent<GardenPruner>() != null) GardenPruner.ConfigureHandGrab(handGrab);
     }
 
     private static void AddBoundsCollider(GameObject target)

@@ -1,0 +1,34 @@
+Unity 6000.3.23f1 — 2026-11-07T22:36:34.2198714Z
+PASS: Paused Play session
+PASS: Scene menu available for pause regression
+PASS: Garden input is available
+PASS: Scene prefab initializes GardenPruner
+PASS: One shared Rigidbody
+PASS: Single-hand grab transform
+PASS: Controller grab uses the tool body
+PASS: Hand grab uses the tool body
+PASS: Separate convex colliders for both moving pieces
+PASS: Both blades animate around the hinge
+PASS: Plant actual tomato seed in actual pot
+PASS: Green fruit has no cuttable ripe component
+PASS: Only mature attached fruit becomes cuttable
+PASS: A complete snip far from the stalk does not detach fruit
+PASS: Moving closed blades onto the stalk does not cut
+PASS: Grabbing with the trigger held does not cut
+PASS: Changing the holding hand disarms the cut
+PASS: Lost tracking requires reopening before another cut
+PASS: Menu pause suppresses cutting and requires reopening
+PASS: Partial squeeze animates without cutting
+PASS: Full closing stroke detaches ripe fruit
+PASS: Cut fruit is released with dynamic gravity
+PASS: Cut preserves fruit world scale
+PASS: Snipping does not count harvest or allow a second cut
+PASS: Recovery restores plant attachment and scale and permits another cut
+PASS: Holding closed after recovery cannot repeat the cut
+PASS: Opening rearms the next snip
+PASS: Cut tomato can be picked up and cannot be cut while held
+PASS: Delivering cut fruit to the real tray records harvest and disables grabbing
+PASS: Exactly one harvest journal entry
+PASS: Stored fruit cannot be cut again
+PASS: Stored fruit does not duplicate journal entries
+NOT TESTED: physical Quest 3 tracking, analog trigger hardware, hand gesture comfort, APK or device performance.

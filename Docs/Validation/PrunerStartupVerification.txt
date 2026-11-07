@@ -1,0 +1,20 @@
+Unity 6000.3.23f1
+UTC 2026-11-07T22:36:11.3316657Z
+Real menu, tutorial and Meta pointer events; Play paused; no scene saves.
+PASS: Fresh paused Play session
+PASS: Initial menu remains open before starting
+PASS: Controller and hand grabs are enabled from the initial menu
+PASS: Initial menu does not freeze unheld shears
+PASS: Initial menu still blocks seed interaction
+PASS: Shears accept Meta Select and Move while the initial menu is open
+PASS: Releasing during the initial menu leaves shears available for another grab
+PASS: Normal Play and release flow still starts the garden
+PASS: Tutorial waits for normal start
+PASS: Real tutorial initializes after starting
+PASS: Shears remain grabbable during the first walking lesson
+PASS: Walking lesson retains the existing seed lock
+PASS: Shears remain available when seed grabbing unlocks
+PASS: Later pause menus still suspend unheld shears
+PASS: Continuing from a later pause restores both grab types
+NOT TESTED: physical Quest 3 hands/controllers or device comfort.
+RESULT: PASS

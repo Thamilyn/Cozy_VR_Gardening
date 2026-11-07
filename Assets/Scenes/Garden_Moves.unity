@@ -2524,15 +2524,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7615259342015169506, guid: 2b0e3862453db9f4195c90628cb75941, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.605
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7615259342015169506, guid: 2b0e3862453db9f4195c90628cb75941, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.226
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: 7615259342015169506, guid: 2b0e3862453db9f4195c90628cb75941, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.676
+      value: -2.218
       objectReference: {fileID: 0}
     - target: {fileID: 7615259342015169506, guid: 2b0e3862453db9f4195c90628cb75941, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5250,6 +5250,7 @@ MonoBehaviour:
   plantingRadius: 0.13
   plantingHeight: 0.18
   acceptsTomato: 1
+  startsWithSoil: 0
   substrateSurface: {fileID: 0}
   substrateAreaOverride: 0
 --- !u!114 &3000000102

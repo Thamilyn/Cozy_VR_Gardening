@@ -1,0 +1,26 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "Docs/Validation/PrunerRuntimeCheck.cs",
+      "entry": "PrunerRuntimeCheck.Main"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 98,
+      "executeMs": 74,
+      "assemblyName": "PipelineRunScript_PrunerRuntimeCheck_7fee3874d53f4aa6b985384420e17391",
+      "success": true,
+      "result": "Unity 6000.3.23f1 — 2026-11-07T22:36:34.2198714Z\r\nPASS: Paused Play session\r\nPASS: Scene menu available for pause regression\r\nPASS: Garden input is available\r\nPASS: Scene prefab initializes GardenPruner\r\nPASS: One shared Rigidbody\r\nPASS: Single-hand grab transform\r\nPASS: Controller grab uses the tool body\r\nPASS: Hand grab uses the tool body\r\nPASS: Separate convex colliders for both moving pieces\r\nPASS: Both blades animate around the hinge\r\nPASS: Plant actual tomato seed in actual pot\r\nPASS: Green fruit has no cuttable ripe component\r\nPASS: Only mature attached fruit becomes cuttable\r\nPASS: A complete snip far from the stalk does not detach fruit\r\nPASS: Moving closed blades onto the stalk does not cut\r\nPASS: Grabbing with the trigger held does not cut\r\nPASS: Changing the holding hand disarms the cut\r\nPASS: Lost tracking requires reopening before another cut\r\nPASS: Menu pause suppresses cutting and requires reopening\r\nPASS: Partial squeeze animates without cutting\r\nPASS: Full closing stroke detaches ripe fruit\r\nPASS: Cut fruit is released with dynamic gravity\r\nPASS: Cut preserves fruit world scale\r\nPASS: Snipping does not count harvest or allow a second cut\r\nPASS: Recovery restores plant attachment and scale and permits another cut\r\nPASS: Holding closed after recovery cannot repeat the cut\r\nPASS: Opening rearms the next snip\r\nPASS: Cut tomato can be picked up and cannot be cut while held\r\nPASS: Delivering cut fruit to the real tray records harvest and disables grabbing\r\nPASS: Exactly one harvest journal entry\r\nPASS: Stored fruit cannot be cut again\r\nPASS: Stored fruit does not duplicate journal entries\r\nNOT TESTED: physical Quest 3 tracking, analog trigger hardware, hand gesture comfort, APK or device performance.\r\n"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

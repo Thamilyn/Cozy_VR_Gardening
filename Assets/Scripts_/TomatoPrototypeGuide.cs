@@ -115,6 +115,12 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
         if (plant == null)
         {
             water.color = neutralWaterColor;
+            if (seeds.NeedsSoilPreparation && GronnyTutorial.Allows(GardenTutorialAction.FillSoil))
+            {
+                instruction.text = "Fill the empty small pot with soil.";
+                water.text = "Grab Shovel (pinch/Grip).\nScoop soil from SoilPot. Bring the loaded blade over the small pot.";
+                return;
+            }
             string step = null;
             string detail = null;
             bool guided = audioTutorial != null && (audioTutorial.TryGetSpokenInstruction(out step, out detail) ||

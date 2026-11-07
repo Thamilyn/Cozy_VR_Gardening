@@ -1,0 +1,26 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "Docs/Validation/PrunerGestureCheck.cs",
+      "entry": "PrunerGestureCheck.Main"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 1439,
+      "executeMs": 16,
+      "assemblyName": "PipelineRunScript_PrunerGestureCheck_ff394393d2ab4d11a6477a9d9495d66f",
+      "success": true,
+      "result": "PASS: Fresh paused Play session\r\nPASS: Prefab installs the gesture component\r\nPASS: Shears start open on the table\r\nPASS: Pickup uses a palm grasp including the index finger\r\nPASS: Selection installs the SDK release predicate\r\nPASS: Meta pointer selection holds the shears\r\nPASS: Closing all four fingers produces a full squeeze\r\nPASS: A fist closes the blades, including in the initial menu\r\nPASS: Closed fist pointing down does not release\r\nPASS: Bending only the index finger cannot fully close the shears\r\nPASS: A partially open hand does not release\r\nPASS: Opening the hand produces an open-blade squeeze\r\nPASS: Opening the hand opens the blades while retaining the grasp\r\nPASS: An open palm facing up retains the shears\r\nPASS: An open palm facing sideways retains the shears\r\nPASS: An open palm over the real table starts a release dwell\r\nPASS: The scene's TableSet collider is recognized\r\nPASS: A stable open palm down over the table permits release\r\nPASS: Closing the hand cancels a pending release\r\nPASS: An open palm too far above the table retains the tool\r\nPASS: An open palm down away from the table does not release\r\nPASS: A solid prop between the hand and tabletop blocks release\r\nPASS: Tracking loss does not count as a release gesture\r\nPASS: Left palm down starts the same release dwell\r\nPASS: SDK left-hand palm orientation also permits tabletop release\r\nPASS: Ending the grasp clears its SDK release override\r\nPASS: No gesture samples remain attached to a released hand\r\nPASS: Released shears return to the open resting pose\r\nPASS: Disabling the component clears its override\r\nNOT TESTED: physical Quest 3 tracking, hand comfort and normal SDK candidate acquisition.\r\nRESULT: PASS"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

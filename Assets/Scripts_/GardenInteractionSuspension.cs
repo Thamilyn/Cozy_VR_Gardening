@@ -43,6 +43,9 @@ public sealed class GardenInteractionSuspension
             {
                 Grabbable prop = behaviour.GetComponentInParent<Grabbable>();
                 block = prop != null && prop.SelectingPointsCount == 0;
+                // The shears can be picked up before starting the guided session.
+                if (!GardenMenuController.HasStarted && prop != null && prop.GetComponent<GardenPruner>() != null)
+                    block = false;
             }
             if (!block) continue;
             disabled.Add(behaviour);
@@ -55,6 +58,7 @@ public sealed class GardenInteractionSuspension
         foreach (Grabbable prop in props)
         {
             if (prop == null || prop.gameObject.scene != scene || prop.SelectingPointsCount > 0) continue;
+            if (!GardenMenuController.HasStarted && prop.GetComponent<GardenPruner>() != null) continue;
             Rigidbody body = prop.GetComponent<Rigidbody>();
             if (body == null || body.isKinematic) continue;
             body.linearVelocity = Vector3.zero;

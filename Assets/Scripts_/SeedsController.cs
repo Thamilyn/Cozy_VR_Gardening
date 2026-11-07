@@ -72,6 +72,9 @@ public sealed class SeedsController : MonoBehaviour
     public CalendarSystem Calendar => calendar;
     public PlantedSeed PrototypeTomato => plantedSeeds.Find(p => p.crop == SeedCrop.Tomato && p.seed != null);
     public bool HarvestComplete => PrototypeTomato != null && GetState(PrototypeTomato)?.harvested == true;
+    public bool NeedsSoilPreparation => PrototypeTomato == null && pots != null &&
+        Array.Exists(pots, pot => pot != null && pot.AcceptsTomato) &&
+        !Array.Exists(pots, pot => pot != null && pot.AcceptsTomato);
 
     private void Start()
     {
@@ -178,7 +181,9 @@ public sealed class SeedsController : MonoBehaviour
             if (Time.unscaledTime - saved.lastWaterAt < 0.5f)
                 return "Hold the can upright.\nWait until pouring stops.";
         }
-        if (!hasTomato) return "Drop the tomato seed onto the soil in an empty small pot.";
+        if (!hasTomato) return NeedsSoilPreparation
+            ? "Use the shovel to move soil from SoilPot into the empty small pot."
+            : "Drop the tomato seed onto the soil in an empty small pot.";
         if (calendar.IsCycleComplete) return "Pick the red tomato and place it in the tray.";
         return null;
     }
@@ -223,18 +228,18 @@ public sealed class SeedsController : MonoBehaviour
         }
     }
 
-    public bool TryPlant(SeedItem seed)
+    public bool TryPlant(SeedItem seed, bool showRejectionFeedback = true)
     {
         if (seed == null || seed.IsPlanted || calendar == null) return false;
         if (!GronnyTutorial.Allows(GardenTutorialAction.Plant)) return false;
         if (singleTomatoPrototype && (seed.Crop != SeedCrop.Tomato || PrototypeTomato != null))
         {
-            Guidance?.Invoke("This activity uses one tomato seed.");
+            if (showRejectionFeedback) Guidance?.Invoke("This activity uses one tomato seed.");
             return false;
         }
         if (calendar.IsCycleComplete)
         {
-            Guidance?.Invoke("Press Restart on the calendar to start a new crop.");
+            if (showRejectionFeedback) Guidance?.Invoke("Press Restart on the calendar to start a new crop.");
             return false;
         }
         if (calendar.FindPlant(seed.SeedId) != null) return false;
@@ -261,8 +266,13 @@ public sealed class SeedsController : MonoBehaviour
             Guidance?.Invoke("Seed planted!\nTilt the watering can over the soil.");
             return true;
         }
-        Guidance?.Invoke("Drop the seed onto the center of an empty small pot.");
-        PlantingRejected?.Invoke(seed);
+        if (showRejectionFeedback)
+        {
+            Guidance?.Invoke(NeedsSoilPreparation
+                ? "Fill the small pot first.\nUse the shovel to collect soil from SoilPot."
+                : "Drop the seed onto the center of an empty small pot.");
+            PlantingRejected?.Invoke(seed);
+        }
         return false;
     }
 

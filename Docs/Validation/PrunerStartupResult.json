@@ -1,0 +1,26 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "Docs/Validation/PrunerStartupCheck.cs",
+      "entry": "PrunerStartupCheck.Main"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 96,
+      "executeMs": 22,
+      "assemblyName": "PipelineRunScript_PrunerStartupCheck_fbe52f1aab074c26925c584df548b75e",
+      "success": true,
+      "result": "PASS: Fresh paused Play session\r\nPASS: Initial menu remains open before starting\r\nPASS: Controller and hand grabs are enabled from the initial menu\r\nPASS: Initial menu does not freeze unheld shears\r\nPASS: Initial menu still blocks seed interaction\r\nPASS: Shears accept Meta Select and Move while the initial menu is open\r\nPASS: Releasing during the initial menu leaves shears available for another grab\r\nPASS: Normal Play and release flow still starts the garden\r\nPASS: Tutorial waits for normal start\r\nPASS: Real tutorial initializes after starting\r\nPASS: Shears remain grabbable during the first walking lesson\r\nPASS: Walking lesson retains the existing seed lock\r\nPASS: Shears remain available when seed grabbing unlocks\r\nPASS: Later pause menus still suspend unheld shears\r\nPASS: Continuing from a later pause restores both grab types\r\nNOT TESTED: physical Quest 3 hands/controllers or device comfort.\r\nRESULT: PASS"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

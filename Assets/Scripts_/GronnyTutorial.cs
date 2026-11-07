@@ -7,7 +7,7 @@ using Oculus.Interaction.Locomotion;
 using UnityEngine;
 
 // Keep the remaining action values stable after removing manual can recovery (6).
-public enum GardenTutorialAction { Plant, Pour, OpenCalendar, Advance, Refill, RefillWithController, Restart = 7, CloseCalendar }
+public enum GardenTutorialAction { Plant, Pour, OpenCalendar, Advance, Refill, RefillWithController, Restart = 7, CloseCalendar, FillSoil }
 
 /// <summary>Unlocks the first tomato instructions after the player completes each action.</summary>
 [DisallowMultipleComponent]
@@ -34,7 +34,7 @@ public sealed class GronnyTutorial : MonoBehaviour
     private bool completed;
     private bool initialized;
     private bool subscribed;
-    private enum GuideStep { Move, Grab, Plant, Water, Calendar, CalendarSelect, Free }
+    private enum GuideStep { Move, Soil, Grab, Plant, Water, Calendar, CalendarSelect, Free }
     private static GronnyTutorial active;
     private readonly HashSet<Behaviour> blockedInteractions = new();
     private float nextInteractionRefresh;
@@ -46,6 +46,7 @@ public sealed class GronnyTutorial : MonoBehaviour
         get
         {
             if (!Learned("move")) return GuideStep.Move;
+            if (seeds != null && seeds.NeedsSoilPreparation) return GuideStep.Soil;
             if (!Learned("grab")) return GuideStep.Grab;
             if (State == null) return GuideStep.Plant;
             if (State.tomatoPhase > 0) return GuideStep.Free;
@@ -69,6 +70,7 @@ public sealed class GronnyTutorial : MonoBehaviour
         return action switch
         {
             GardenTutorialAction.Plant => step == GuideStep.Plant,
+            GardenTutorialAction.FillSoil => step == GuideStep.Soil,
             GardenTutorialAction.Pour => step == GuideStep.Water,
             GardenTutorialAction.OpenCalendar => step == GuideStep.Calendar || step == GuideStep.CalendarSelect,
             GardenTutorialAction.Advance => step == GuideStep.CalendarSelect && active.Ready && !active.CanEmpty,
@@ -92,18 +94,20 @@ public sealed class GronnyTutorial : MonoBehaviour
         bool hands = mode == GardenInputMode.Hands;
         (text, detail) = Step switch
         {
-            GuideStep.Move => ("Step 1/6: Walk to the gardening table.",
-                "Look for Tomato seed. Gronny will explain how to pick it up."),
-            GuideStep.Grab => ("Step 2/6: Pick up Tomato seed.",
+            GuideStep.Move => ("Step 1/7: Walk to the gardening table.",
+                "Look for Shovel and SoilPot. Fill the small pot before planting."),
+            GuideStep.Soil => ("Step 2/7: Fill the empty small pot with soil.",
+                "Grab Shovel (pinch/Grip).\nScoop soil from SoilPot, then bring the loaded blade over the small pot."),
+            GuideStep.Grab => ("Step 3/7: Pick up Tomato seed.",
                 hands ? "Pinch to grab. Keep holding the seed." : "Hold Grip to grab. Keep holding the seed."),
-            GuideStep.Plant => ("Step 3/6: Plant Tomato seed.", "Release the seed over the soil in an empty small pot."),
-            GuideStep.Water => (Excess ? "Step 4/6: Stop watering."
-                : !NeedsWater ? "Step 4/6: Hold the can upright."
-                : "Step 4/6: Water the soil.", Excess ? "Let the extra water drain."
+            GuideStep.Plant => ("Step 4/7: Plant Tomato seed.", "Release the seed over the soil in the small pot."),
+            GuideStep.Water => (Excess ? "Step 5/7: Stop watering."
+                : !NeedsWater ? "Step 5/7: Hold the can upright."
+                : "Step 5/7: Water the soil.", Excess ? "Let the extra water drain."
                 : !NeedsWater ? "Your plant has enough water." : "Stop pouring at the water target."),
-            GuideStep.Calendar => ("Step 5/6: Open the calendar.",
+            GuideStep.Calendar => ("Step 6/7: Open the calendar.",
                 hands ? "Pinch with your left hand away from objects." : "Press Y on the left controller."),
-            _ => (CanEmpty ? "Step 6/6: Select Refill water." : "Step 6/6: Select Advance phase.",
+            _ => (CanEmpty ? "Step 7/7: Select Refill water." : "Step 7/7: Select Advance phase.",
                 hands ? "Point at the button and pinch." : "Aim at the button and press Trigger.")
         };
         return true;
@@ -113,6 +117,7 @@ public sealed class GronnyTutorial : MonoBehaviour
     {
         text = detail = null;
         if (!initialized || !isActiveAndEnabled || GardenMenuController.GardenSuspended || voice == null) return false;
+        if (Step == GuideStep.Soil) return false;
         // Water feedback must respond immediately even while an earlier sentence finishes.
         if (Caring && (Excess || !NeedsWater || CanEmpty)) return false;
         return voice.TryGetInstruction(out text, out detail);
@@ -439,7 +444,7 @@ public sealed class GronnyTutorial : MonoBehaviour
         float delay = phase >= 2 ? catalogue.independentHelpSeconds : catalogue.idleHelpSeconds;
         if (Time.unscaledTime - lastActionAt < delay) return;
         lastActionAt = Time.unscaledTime;
-        if (Step == GuideStep.Move || Step == GuideStep.Grab || Step == GuideStep.Calendar ||
+        if (Step == GuideStep.Move || Step == GuideStep.Soil || Step == GuideStep.Grab || Step == GuideStep.Calendar ||
             Step == GuideStep.CalendarSelect) return;
         if (State == null) Help("help_planting", () => State == null);
         else if (NeedsWater) Help("help_low_water", () => NeedsWater);
@@ -449,13 +454,13 @@ public sealed class GronnyTutorial : MonoBehaviour
     private void OnPlantingRejected(SeedItem seed)
     {
         if (seed != null && seed.Crop == SeedCrop.Tomato)
-            Help("help_planting", () => Running && State == null);
+            Help("help_planting", () => Running && Step == GuideStep.Plant);
     }
 
     private void OnAdvanceBlocked(string reason)
     {
         if (!Running) return;
-        if (Step == GuideStep.Move || Step == GuideStep.Grab) return;
+        if (Step == GuideStep.Move || Step == GuideStep.Soil || Step == GuideStep.Grab) return;
         if (State == null) Help("help_planting", () => State == null);
         else if (Excess) Help("help_excess_water", () => Excess);
         else if (NeedsWater) Help("help_low_water", () => NeedsWater);
@@ -496,8 +501,12 @@ public sealed class GronnyTutorial : MonoBehaviour
                 Grabbable grab = behaviour.GetComponentInParent<Grabbable>();
                 SeedItem seed = grab != null ? grab.GetComponent<SeedItem>() : null;
                 WateringCan can = grab != null ? grab.GetComponent<WateringCan>() : null;
+                GardenShovel shovel = grab != null ? grab.GetComponent<GardenShovel>() : null;
                 if (seed != null && seed.IsPlanted) { blockedInteractions.Remove(behaviour); continue; }
+                // Soil readiness gates planting, so the player can still pick up the seed during preparation.
                 allowed = (grab != null && grab.SelectingPointsCount > 0) ||
+                    (grab != null && grab.GetComponent<GardenPruner>() != null) ||
+                    (step == GuideStep.Soil && shovel != null) ||
                     (step != GuideStep.Move && seed != null && seed.Crop == SeedCrop.Tomato) ||
                     (Learned("grab") && State != null && can != null);
             }

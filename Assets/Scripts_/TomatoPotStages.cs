@@ -15,8 +15,36 @@ public  class TomatoPotStages : MonoBehaviour
     private Renderer[] originalRenderers;
     private GameObject currentVisual;
     private int currentIndex = -1;
+    private MeshRenderer currentSoilRenderer;
+    private int currentSoilMaterialIndex;
+    private Material currentSoilMaterial;
+    private Material hiddenSoilMaterial;
 
     public GameObject CurrentVisual => currentVisual;
+
+    public void SetSoilFilled(bool filled)
+    {
+        if (currentSoilRenderer == null) return;
+        if (!filled && hiddenSoilMaterial == null)
+        {
+            Shader shader = Resources.Load<Shader>("GardenSoil/HiddenSoil");
+            if (shader == null)
+            {
+                Debug.LogError("Empty pots need Resources/GardenSoil/HiddenSoil.shader.", this);
+                return;
+            }
+            hiddenSoilMaterial = new Material(shader) { hideFlags = HideFlags.DontSave };
+        }
+        // Imported stages can combine pot and soil in one mesh. Hide only the soil slot.
+        Material[] materials = currentSoilRenderer.sharedMaterials;
+        materials[currentSoilMaterialIndex] = filled ? currentSoilMaterial : hiddenSoilMaterial;
+        currentSoilRenderer.sharedMaterials = materials;
+    }
+
+    private void OnDestroy()
+    {
+        if (hiddenSoilMaterial != null) Destroy(hiddenSoilMaterial);
+    }
 
     private void Awake()
     {
@@ -85,6 +113,11 @@ public  class TomatoPotStages : MonoBehaviour
         if (currentVisual != null) RemoveVisual(currentVisual);
         currentVisual = next;
         currentIndex = index;
+        currentSoilRenderer = soilRenderer;
+        currentSoilMaterialIndex = materialIndex;
+        currentSoilMaterial = soilRenderer.sharedMaterials[materialIndex];
+        GardenPot pot = GetComponent<GardenPot>();
+        SetSoilFilled(pot == null );
         if (soil != null) soil.SetVisualSurface(soilRenderer, materialIndex);
         visual = next;
         return true;
@@ -151,6 +184,14 @@ public  class TomatoPotStages : MonoBehaviour
     private void FitPotCollider(GameObject visual)
     {
         if (potCollider == null || !TryGetVisualBounds(visual, out Bounds bounds)) return;
+        if (substrateSurface != null && substrateSurface.sharedMesh != null)
+        {
+            Bounds surface = InPotSpace(substrateSurface.transform, substrateSurface.sharedMesh.bounds);
+            float top = Mathf.Min(bounds.max.y, surface.max.y);
+            // A box fitted to the whole rim seals the opening and leaves seeds rolling above the soil.
+            if (top > bounds.min.y)
+                bounds.SetMinMax(bounds.min, new Vector3(bounds.max.x, top, bounds.max.z));
+        }
         potCollider.center = bounds.center;
         potCollider.size = bounds.size;
     }
