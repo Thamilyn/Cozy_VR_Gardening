@@ -1873,6 +1873,56 @@ MonoBehaviour:
     instruction: You've got it!
     instructionDetail: Come over to the gardening table.
     steps: []
+  - id: soil_cover_seed
+    clip: {fileID: 0}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 10
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget:
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Great job! Now use your shovel to cover the seed with soil. Hold the
+      loaded blade level over the pot, then gently tilt it to pour.
+    instruction: Cover the seed with soil.
+    instructionDetail: Hold the loaded blade level above the pot, then gently tilt it to pour.
+    steps: []
+  - id: soil_scoop_first
+    clip: {fileID: 0}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 10
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget:
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Great job! Scoop up some soil with your shovel. Hold the loaded blade
+      level over the pot, then gently tilt it to cover the seed.
+    instruction: Scoop soil with the shovel, then cover the seed.
+    instructionDetail: Scoop from SoilPot. Hold the loaded blade level above the pot, then gently tilt it.
+    steps: []
+  - id: soil_seed_covered
+    clip: {fileID: 0}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 10
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget:
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Perfect! Your seed is all covered up.
+    instruction: Your seed is covered!
+    instructionDetail: Gronny will explain watering next.
+    steps: []
   waterSavingAudioVersion: 3
   leftHand:
     prefab: {fileID: 8007592865782270689, guid: aca0706bac5a68a4394ac02275753161, type: 3}

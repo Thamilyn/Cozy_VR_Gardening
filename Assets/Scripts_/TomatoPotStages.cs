@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-/// <summary>Replaces a small pot's appearance before planting and through its six crop stages.</summary>
+/// <summary>Shows the soil bed before planting and replaces the pot through its crop stages.</summary>
 [DisallowMultipleComponent]
 public  class TomatoPotStages : MonoBehaviour
 {
@@ -19,11 +19,13 @@ public  class TomatoPotStages : MonoBehaviour
     private int currentSoilMaterialIndex;
     private Material currentSoilMaterial;
     private Material hiddenSoilMaterial;
+    private bool soilFilled;
 
     public GameObject CurrentVisual => currentVisual;
 
     public void SetSoilFilled(bool filled)
     {
+        soilFilled = filled;
         if (currentSoilRenderer == null) return;
         if (!filled && hiddenSoilMaterial == null)
         {
@@ -48,6 +50,8 @@ public  class TomatoPotStages : MonoBehaviour
 
     private void Awake()
     {
+        // The pot starts with a soil bed; covering the planted seed is a later action.
+        soilFilled = true;
         TryShowVisual(0, out _);
     }
     public bool TryShowStage(GrowthStage stage, out GameObject visual)
@@ -116,8 +120,7 @@ public  class TomatoPotStages : MonoBehaviour
         currentSoilRenderer = soilRenderer;
         currentSoilMaterialIndex = materialIndex;
         currentSoilMaterial = soilRenderer.sharedMaterials[materialIndex];
-        GardenPot pot = GetComponent<GardenPot>();
-        SetSoilFilled(pot == null );
+        SetSoilFilled(soilFilled);
         if (soil != null) soil.SetVisualSurface(soilRenderer, materialIndex);
         visual = next;
         return true;

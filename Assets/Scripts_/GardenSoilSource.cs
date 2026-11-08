@@ -7,11 +7,26 @@ public sealed class GardenSoilSource : MonoBehaviour
 {
     [SerializeField] private MeshFilter soilSurface;
     [SerializeField] private int soilMaterialIndex = -1;
+    [SerializeField, Min(0.02f), Tooltip("Reachable space above the soil; the blade need not penetrate the container.")]
+    private float scoopHeightAboveSoil = 0.14f;
+    [SerializeField, Min(0.01f)] private float scoopDepthBelowSoil = 0.08f;
     private Bounds surfaceBounds;
 
     public Material SoilMaterial { get; private set; }
 
     private void Awake()
+    {
+        if (!TryResolveSurface())
+        {
+            Debug.LogError("SoilPot needs a mesh with a Soil material for scooping.", this);
+            enabled = false;
+            return;
+        }
+        GardenObjectLabel.Create(gameObject, "SoilPot",
+            transform.TransformVector(Vector3.up * surfaceBounds.max.y) + Vector3.up * 0.1f);
+    }
+
+    private bool TryResolveSurface()
     {
         foreach (MeshFilter candidate in GetComponentsInChildren<MeshFilter>(true))
         {
@@ -22,10 +37,8 @@ public sealed class GardenSoilSource : MonoBehaviour
             {
                 if (materials[i] == null) continue;
                 if (soilMaterialIndex >= 0 && i != soilMaterialIndex) continue;
-                if (soilMaterialIndex < 0 &&
-                    !materials[i].name.StartsWith("Soil", StringComparison.OrdinalIgnoreCase)) continue;
+                if (soilMaterialIndex < 0 && !IsSoilMaterial(materials[i].name)) continue;
                 soilSurface = candidate;
-                soilMaterialIndex = i;
                 SoilMaterial = materials[i];
                 Bounds bounds = candidate.sharedMesh.GetSubMesh(i).bounds;
                 Matrix4x4 matrix = transform.worldToLocalMatrix * candidate.transform.localToWorldMatrix;
@@ -34,23 +47,57 @@ public sealed class GardenSoilSource : MonoBehaviour
                     surfaceBounds.Encapsulate(matrix.MultiplyPoint3x4(bounds.center + Vector3.Scale(bounds.extents,
                         new Vector3((corner & 1) == 0 ? -1f : 1f,
                             (corner & 2) == 0 ? -1f : 1f, (corner & 4) == 0 ? -1f : 1f))));
-                GardenObjectLabel.Create(gameObject, "SoilPot",
-                    transform.TransformVector(Vector3.up * surfaceBounds.max.y) + Vector3.up * 0.1f);
-                return;
+                return true;
             }
         }
-        Debug.LogError("SoilPot needs a mesh with a Soil material for scooping.", this);
-        enabled = false;
+        return false;
     }
 
-    public bool ContainsScoopPoint(Vector3 worldPoint)
+    private static bool IsSoilMaterial(string materialName)
     {
-        if (!isActiveAndEnabled || SoilMaterial == null || Vector3.Dot(transform.up, Vector3.up) < 0.5f) return false;
-        Vector3 point = transform.InverseTransformPoint(worldPoint);
-        float x = (point.x - surfaceBounds.center.x) / Mathf.Max(0.0001f, surfaceBounds.extents.x * 0.85f);
-        float z = (point.z - surfaceBounds.center.z) / Mathf.Max(0.0001f, surfaceBounds.extents.z * 0.85f);
-        Vector3 top = transform.TransformPoint(new Vector3(point.x, surfaceBounds.max.y, point.z));
-        float height = Vector3.Dot(worldPoint - top, transform.up);
-        return x * x + z * z <= 1f && height >= -0.08f && height <= 0.06f;
+        // The imported mesh has both "SoilPot" (the container) and "Soil.001".
+        // A plain StartsWith("Soil") selects the container's material and bounds.
+        return materialName.Equals("Soil", StringComparison.OrdinalIgnoreCase) ||
+            materialName.StartsWith("Soil.", StringComparison.OrdinalIgnoreCase) ||
+            materialName.StartsWith("Soil_", StringComparison.OrdinalIgnoreCase) ||
+            materialName.StartsWith("Soil ", StringComparison.OrdinalIgnoreCase);
+    }
+
+    public bool ContainsScoopPoint(Vector3 worldPoint, float bladeRadius = 0f)
+    {
+        return CanSupplySoil && ScoopBounds(bladeRadius).Contains(transform.InverseTransformPoint(worldPoint));
+    }
+
+    public bool IntersectsScoopPath(Vector3 from, Vector3 to, float bladeRadius)
+    {
+        if (!CanSupplySoil) return false;
+        Bounds bounds = ScoopBounds(bladeRadius);
+        Vector3 start = transform.InverseTransformPoint(from);
+        Vector3 end = transform.InverseTransformPoint(to);
+        if (bounds.Contains(start) || bounds.Contains(end)) return true;
+        Vector3 delta = end - start;
+        float distance = delta.magnitude;
+        // Test the swept blade as well, so a short, quick scoop is not missed between frames.
+        return distance > 0f && bounds.IntersectRay(new Ray(start, delta / distance), out float hit) && hit <= distance;
+    }
+
+    private bool CanSupplySoil => isActiveAndEnabled && SoilMaterial != null &&
+        Vector3.Dot(transform.up, Vector3.up) >= 0.5f;
+
+    private Bounds ScoopBounds(float bladeRadius)
+    {
+        float xScale = Mathf.Max(0.0001f, transform.TransformVector(Vector3.right).magnitude);
+        float yScale = Mathf.Max(0.0001f, transform.TransformVector(Vector3.up).magnitude);
+        float zScale = Mathf.Max(0.0001f, transform.TransformVector(Vector3.forward).magnitude);
+        float radius = Mathf.Max(0f, bladeRadius);
+        Vector3 min = new(surfaceBounds.center.x - surfaceBounds.extents.x * 0.95f - radius / xScale,
+            surfaceBounds.max.y - scoopDepthBelowSoil / yScale,
+            surfaceBounds.center.z - surfaceBounds.extents.z * 0.95f - radius / zScale);
+        Vector3 max = new(surfaceBounds.center.x + surfaceBounds.extents.x * 0.95f + radius / xScale,
+            surfaceBounds.max.y + scoopHeightAboveSoil / yScale,
+            surfaceBounds.center.z + surfaceBounds.extents.z * 0.95f + radius / zScale);
+        Bounds bounds = new();
+        bounds.SetMinMax(min, max);
+        return bounds;
     }
 }

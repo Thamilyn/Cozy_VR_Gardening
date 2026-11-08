@@ -23,6 +23,9 @@ public sealed class GronnyTutorial : MonoBehaviour
     private GronnyVoicePlayer voice;
     private GardenControlDemonstration demonstration;
     private readonly HashSet<string> learned = new();
+    private readonly HashSet<string> missingAudio = new();
+    private GardenShovel[] shovels;
+    private string soilInstructionId;
     private GardenInputMode mode;
     private GardenInputMode candidateMode;
     private float modeChangedAt;
@@ -46,9 +49,9 @@ public sealed class GronnyTutorial : MonoBehaviour
         get
         {
             if (!Learned("move")) return GuideStep.Move;
-            if (seeds != null && seeds.NeedsSoilPreparation) return GuideStep.Soil;
             if (!Learned("grab")) return GuideStep.Grab;
             if (State == null) return GuideStep.Plant;
+            if (!State.soilCovered) return GuideStep.Soil;
             if (State.tomatoPhase > 0) return GuideStep.Free;
             bool open = visibility != null && visibility.IsVisible;
             if (CanEmpty) return open && Learned("calendar") ? GuideStep.CalendarSelect : GuideStep.Calendar;
@@ -95,12 +98,14 @@ public sealed class GronnyTutorial : MonoBehaviour
         (text, detail) = Step switch
         {
             GuideStep.Move => ("Step 1/7: Walk to the gardening table.",
-                "Look for Shovel and SoilPot. Fill the small pot before planting."),
-            GuideStep.Soil => ("Step 2/7: Fill the empty small pot with soil.",
-                "Grab Shovel (pinch/Grip).\nScoop soil from SoilPot, then bring the loaded blade over the small pot."),
-            GuideStep.Grab => ("Step 3/7: Pick up Tomato seed.",
+                "Look for Tomato seed. Gronny will explain how to pick it up."),
+            GuideStep.Soil => ("Step 4/7: Cover the seed with soil.",
+                HasLoadedShovel
+                    ? "Hold the loaded blade level above the pot, then gently tilt it to pour."
+                    : "Grab Shovel (pinch/Grip). Make a short pass over the soil in SoilPot.\nThen hold the loaded blade level above the pot and gently tilt it to pour."),
+            GuideStep.Grab => ("Step 2/7: Pick up Tomato seed.",
                 hands ? "Pinch to grab. Keep holding the seed." : "Hold Grip to grab. Keep holding the seed."),
-            GuideStep.Plant => ("Step 4/7: Plant Tomato seed.", "Release the seed over the soil in the small pot."),
+            GuideStep.Plant => ("Step 3/7: Plant Tomato seed.", "Release the seed over the centre of the small pot."),
             GuideStep.Water => (Excess ? "Step 5/7: Stop watering."
                 : !NeedsWater ? "Step 5/7: Hold the can upright."
                 : "Step 5/7: Water the soil.", Excess ? "Let the extra water drain."
@@ -127,7 +132,9 @@ public sealed class GronnyTutorial : MonoBehaviour
     private CalendarSystem.PlantSave State => seeds != null ? seeds.GetState(Plant) : null;
     private bool Running => initialized && isActiveAndEnabled && !completed &&
         seeds != null && seeds.isActiveAndEnabled && calendar != null;
-    private bool Caring => Running && State != null && State.tomatoPhase < 5 && !calendar.IsAdvancing &&
+    private bool HasLoadedShovel => shovels != null && System.Array.Exists(shovels,
+        shovel => shovel != null && shovel.isActiveAndEnabled && shovel.HasSoil);
+    private bool Caring => Running && State != null && State.soilCovered && State.tomatoPhase < 5 && !calendar.IsAdvancing &&
         (GardenWaterSupply.Active == null || !GardenWaterSupply.Active.Exhausted);
     private bool Excess => Caring && State.retainedWaterMillilitres > seeds.ExcessLimit(Plant);
     private bool NeedsWater => Caring && seeds.TargetMillilitres(Plant) > 0f &&
@@ -157,6 +164,7 @@ public sealed class GronnyTutorial : MonoBehaviour
         if (visibility != null) visibility.Close();
         panel = FindFirstObjectByType<CalendarPanel>(FindObjectsInactive.Include);
         cans = FindObjectsByType<WateringCan>(FindObjectsSortMode.None);
+        shovels = FindObjectsByType<GardenShovel>(FindObjectsSortMode.None);
         OVRCameraRig rig = FindFirstObjectByType<OVRCameraRig>();
         if (visibility == null || panel == null || rig == null)
         {
@@ -200,6 +208,7 @@ public sealed class GronnyTutorial : MonoBehaviour
     {
         if (subscribed || completed) return;
         seeds.PlantingRejected += OnPlantingRejected;
+        seeds.SeedCovered += OnSeedCovered;
         calendar.AdvanceBlocked += OnAdvanceBlocked;
         if (visibility != null)
         {
@@ -214,6 +223,7 @@ public sealed class GronnyTutorial : MonoBehaviour
     {
         if (!subscribed) return;
         if (seeds != null) seeds.PlantingRejected -= OnPlantingRejected;
+        if (seeds != null) seeds.SeedCovered -= OnSeedCovered;
         if (calendar != null) calendar.AdvanceBlocked -= OnAdvanceBlocked;
         if (visibility != null)
         {
@@ -340,7 +350,7 @@ public sealed class GronnyTutorial : MonoBehaviour
             Say("03_plant_seed", "plant", () => Running && Step == GuideStep.Plant);
         else if (phase == 0)
         {
-            Say("water_practice_intro", "water-practice", () => Caring && phase == 0 && NeedsWater);
+            soilInstructionId = null;
         }
         else
         {
@@ -389,6 +399,15 @@ public sealed class GronnyTutorial : MonoBehaviour
                 false, true);
             return;
         }
+        if (step == GuideStep.Soil)
+        {
+            // Select one complete instruction rather than queueing two versions of the same task.
+            soilInstructionId ??= HasLoadedShovel ? "soil_cover_seed" : "soil_scoop_first";
+            Say(soilInstructionId, "cover-seed", () => Running && Step == GuideStep.Soil);
+            return;
+        }
+        if (step == GuideStep.Water && phase == 0)
+            Say("water_practice_intro", "water-practice", () => Caring && phase == 0 && NeedsWater);
         if (mode == GardenInputMode.Unknown) return;
         if (step == GuideStep.Grab) Control("grab", () => Step == GuideStep.Grab);
         else if (step == GuideStep.Plant)
@@ -421,7 +440,13 @@ public sealed class GronnyTutorial : MonoBehaviour
 
     private void Say(string id, string key, System.Func<bool> relevant, bool once = true, bool waitForAction = false)
     {
-        System.Func<bool> demoRelevant = catalogue.FindTutorialCue(id)?.demo switch
+        GronnyAudioCatalogue.Cue cue = catalogue.FindTutorialCue(id);
+        if (cue == null || cue.clip == null)
+        {
+            if (missingAudio.Add(id)) Debug.LogWarning("Gronny recording is not assigned: " + id, this);
+            return;
+        }
+        System.Func<bool> demoRelevant = cue.demo switch
         {
             GardenControlDemo.Water => () => ShowWateringDemonstration,
             GardenControlDemo.Upright => () => System.Array.Exists(cans, can => can != null && can.IsPouring),
@@ -429,7 +454,7 @@ public sealed class GronnyTutorial : MonoBehaviour
         };
         voice.Enqueue(id, key, () => (GardenWaterSupply.Active == null || !GardenWaterSupply.Active.Exhausted) && relevant(), () =>
         {
-            if (catalogue.FindTutorialCue(id).assisted) calendar.RecordTutorialHelp(id);
+            if (cue.assisted) calendar.RecordTutorialHelp(id);
         }, once, demoRelevant, waitForAction);
     }
 
@@ -455,6 +480,17 @@ public sealed class GronnyTutorial : MonoBehaviour
     {
         if (seed != null && seed.Crop == SeedCrop.Tomato)
             Help("help_planting", () => Running && Step == GuideStep.Plant);
+    }
+
+    private void OnSeedCovered(SeedsController.PlantedSeed plant)
+    {
+        if (!Running || plant != Plant) return;
+        lastActionAt = Time.unscaledTime;
+        // Discard stale queued planting help, while letting any spoken sentence finish.
+        voice.FinishCurrent();
+        Say("soil_seed_covered", "soil-covered", () => Running && State != null && State.soilCovered);
+        RefreshInteractionLocks();
+        QueueControls();
     }
 
     private void OnAdvanceBlocked(string reason)
@@ -503,12 +539,11 @@ public sealed class GronnyTutorial : MonoBehaviour
                 WateringCan can = grab != null ? grab.GetComponent<WateringCan>() : null;
                 GardenShovel shovel = grab != null ? grab.GetComponent<GardenShovel>() : null;
                 if (seed != null && seed.IsPlanted) { blockedInteractions.Remove(behaviour); continue; }
-                // Soil readiness gates planting, so the player can still pick up the seed during preparation.
                 allowed = (grab != null && grab.SelectingPointsCount > 0) ||
                     (grab != null && grab.GetComponent<GardenPruner>() != null) ||
                     (step == GuideStep.Soil && shovel != null) ||
                     (step != GuideStep.Move && seed != null && seed.Crop == SeedCrop.Tomato) ||
-                    (Learned("grab") && State != null && can != null);
+                    (Learned("grab") && State != null && State.soilCovered && can != null);
             }
             else if (behaviour is LocomotionAxisTurnerInteractor || behaviour is LocomotionTurnerInteractor ||
                 behaviour is TeleportInteractor) allowed = false;

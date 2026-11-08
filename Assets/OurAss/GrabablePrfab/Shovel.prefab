@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63bf1a4bb508466ca6c8ddcf57bcba72, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::GardenShovel
-  localScoopPoint: {x: 0, y: 0.05, z: -0.025}
+  localScoopPoint: {x: 0, y: 0.019, z: 0.195}
   soilLoadSize: {x: 0.075, y: 0.035, z: 0.09}
   recoveryDelaySeconds: 2
 --- !u!1001 &7496081602310655000

@@ -57,7 +57,7 @@ public sealed class PlantWaterProgress : MonoBehaviour
         if (canvas == null) return;
         CalendarSystem.PlantSave saved = seeds != null ? seeds.GetState(plant) : null;
         GardenWaterSupply supply = GardenWaterSupply.Active;
-        canvas.enabled = isActiveAndEnabled && saved != null && (!saved.harvested || supply != null);
+        canvas.enabled = isActiveAndEnabled && saved != null && saved.soilCovered && (!saved.harvested || supply != null);
         if (!canvas.enabled) return;
         if (visibleStage != plant.stage || visibleVisual != plant.seed.StageVisual)
         {

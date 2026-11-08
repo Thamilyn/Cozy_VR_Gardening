@@ -1,22 +1,43 @@
 using Oculus.Interaction;
 using UnityEngine;
 
-/// <summary>Carry one visible scoop from SoilPot to an empty pot using Meta hand/controller grabs.</summary>
+/// <summary>Carry and tip one visible scoop over a planted seed using Meta hand/controller grabs.</summary>
 [DisallowMultipleComponent]
 public sealed class GardenShovel : MonoBehaviour
 {
     [SerializeField, Tooltip("Centre of the blade in the existing Shovel prefab's local space.")]
-    private Vector3 localScoopPoint = new(0f, 0.05f, -0.025f);
+    private Vector3 localScoopPoint = new(0f, 0.019f, 0.195f);
     [SerializeField] private Vector3 soilLoadSize = new(0.075f, 0.035f, 0.09f);
+    [SerializeField, Tooltip("Brown patch of the existing Soil texture atlas; the remaining atlas area is black.")]
+    private Rect soilTextureRegion = new(0.02f, 0.02f, 0.58f, 0.96f);
+    [SerializeField, Min(0.01f), Tooltip("Blade reach around the scoop point, in metres.")]
+    private float scoopRadius = 0.05f;
+    [SerializeField, Min(0.005f), Tooltip("A short, gentle stroke near SoilPot loads the blade. No digging or button press is needed.")]
+    private float minimumScoopTravel = 0.015f;
+    [SerializeField, Tooltip("Normal pointing out of the loaded face of the blade, in shovel local space.")]
+    private Vector3 localBladeUp = Vector3.up;
+    [SerializeField, Range(30f, 80f)] private float pourTiltDegrees = 55f;
+    [SerializeField, Min(0.1f)] private float pourHoldSeconds = 0.35f;
     [SerializeField, Min(0.1f)] private float recoveryDelaySeconds = 2f;
     private Grabbable grabbable;
     private Rigidbody body;
     private GardenSoilSource[] sources;
     private GardenPot[] pots;
     private GameObject soilLoad;
+    private MaterialPropertyBlock soilLoadProperties;
     private Vector3 startingPosition;
     private Quaternion startingRotation;
     private float droppedSeconds;
+    private SeedsController seeds;
+    private GardenPot pourTarget;
+    private bool pourArmed;
+    private float pouringSeconds;
+    private GardenSoilSource scoopSource;
+    private Vector3 previousScoopPoint;
+    private bool hasPreviousScoopPoint;
+    private float scoopTravel;
+    private float scoopStartedAt;
+    private float nextTargetRefresh;
 
     public bool HasSoil => soilLoad != null && soilLoad.activeSelf;
     public Vector3 ScoopPoint => transform.TransformPoint(localScoopPoint);
@@ -35,40 +56,171 @@ public sealed class GardenShovel : MonoBehaviour
     {
         startingPosition = transform.position;
         startingRotation = transform.rotation;
-        sources = FindObjectsByType<GardenSoilSource>(FindObjectsSortMode.None);
-        pots = FindObjectsByType<GardenPot>(FindObjectsSortMode.None);
+        RefreshTargets();
+    }
+
+    private void OnEnable()
+    {
+        if (grabbable == null) grabbable = GetComponent<Grabbable>();
+        if (grabbable != null) grabbable.WhenPointerEventRaised += OnPointerEvent;
+        RefreshTargets();
+        ResetScoop();
+    }
+
+    private void OnPointerEvent(PointerEvent pointerEvent)
+    {
+        if (pointerEvent.Type == PointerEventType.Select || pointerEvent.Type == PointerEventType.Unselect ||
+            pointerEvent.Type == PointerEventType.Cancel)
+        {
+            ResetPour();
+            ResetScoop();
+        }
     }
 
     private void Update()
     {
-        if (GardenMenuController.GardenSuspended) return;
+        if (GardenMenuController.GardenSuspended)
+        {
+            ResetPour();
+            ResetScoop();
+            return;
+        }
         bool held = grabbable.SelectingPointsCount > 0;
         if (!held)
         {
+            ResetPour();
+            ResetScoop();
             RecoverIfDropped();
             return;
         }
         droppedSeconds = 0f;
-        if (!GronnyTutorial.Allows(GardenTutorialAction.FillSoil)) return;
+        if (!GronnyTutorial.Allows(GardenTutorialAction.FillSoil))
+        {
+            ResetPour();
+            ResetScoop();
+            return;
+        }
 
+        if (sources == null || pots == null || Time.unscaledTime >= nextTargetRefresh) RefreshTargets();
         if (HasSoil)
         {
-            foreach (GardenPot pot in pots)
-            {
-                if (pot == null || !pot.isActiveAndEnabled) continue;
-                soilLoad.SetActive(false);
-                return;
-            }
+            ResetScoop();
+            UpdatePour();
         }
         else
         {
-            foreach (GardenSoilSource source in sources)
-            {
-                if (source == null || !source.ContainsScoopPoint(ScoopPoint)) continue;
-                ShowSoilLoad(source.SoilMaterial);
-                return;
-            }
+            ResetPour();
+            UpdateScoop();
         }
+    }
+
+    private void RefreshTargets()
+    {
+        sources = FindObjectsByType<GardenSoilSource>(FindObjectsSortMode.None);
+        pots = FindObjectsByType<GardenPot>(FindObjectsSortMode.None);
+        seeds = FindFirstObjectByType<SeedsController>();
+        nextTargetRefresh = Time.unscaledTime + 0.5f;
+    }
+
+    private void UpdateScoop()
+    {
+        Vector3 point = ScoopPoint;
+        if (!hasPreviousScoopPoint)
+        {
+            previousScoopPoint = point;
+            hasPreviousScoopPoint = true;
+            return;
+        }
+        float travel = Vector3.Distance(previousScoopPoint, point);
+        GardenSoilSource target = null;
+        // Large tracking jumps do not count as a gardening gesture.
+        if (travel <= 0.25f)
+            foreach (GardenSoilSource source in sources)
+                if (source != null && source.IntersectsScoopPath(previousScoopPoint, point, scoopRadius))
+                {
+                    target = source;
+                    break;
+                }
+        previousScoopPoint = point;
+        if (target == null)
+        {
+            scoopSource = null;
+            scoopTravel = 0f;
+            return;
+        }
+        if (scoopSource != target || Time.unscaledTime - scoopStartedAt > 0.8f)
+        {
+            scoopSource = target;
+            scoopTravel = 0f;
+            scoopStartedAt = Time.unscaledTime;
+        }
+        scoopTravel += travel;
+        if (scoopTravel < minimumScoopTravel) return;
+        ShowSoilLoad(target.SoilMaterial);
+        ResetScoop();
+    }
+
+    private void ResetScoop()
+    {
+        scoopSource = null;
+        hasPreviousScoopPoint = false;
+        scoopTravel = 0f;
+    }
+
+    private void UpdatePour()
+    {
+        GardenPot target = null;
+        if (seeds != null)
+            foreach (GardenPot pot in pots)
+                if (pot != null && seeds.NeedsSoilCover(pot) && pot.CanReceiveSoilAt(ScoopPoint))
+                {
+                    target = pot;
+                    break;
+                }
+        if (target == null) { ResetPour(); return; }
+        if (pourTarget != target)
+        {
+            ResetPour();
+            pourTarget = target;
+        }
+
+        float upright = Vector3.Dot(transform.TransformDirection(localBladeUp.normalized), Vector3.up);
+        // First present a level load over this pot, then tip it. Entering already tilted
+        // or merely touching the pot cannot cover a seed.
+        if (upright >= 0.85f) pourArmed = true;
+        if (!pourArmed || upright > Mathf.Cos(pourTiltDegrees * Mathf.Deg2Rad))
+        {
+            pouringSeconds = 0f;
+            return;
+        }
+        pouringSeconds += Time.deltaTime;
+        if (pouringSeconds < pourHoldSeconds) return;
+        if (seeds.TryCoverSeed(target)) soilLoad.SetActive(false);
+        ResetPour();
+        ResetScoop();
+    }
+
+    private void ResetPour()
+    {
+        pourTarget = null;
+        pourArmed = false;
+        pouringSeconds = 0f;
+    }
+
+    private void OnDisable()
+    {
+        if (grabbable != null) grabbable.WhenPointerEventRaised -= OnPointerEvent;
+        ResetPour();
+        ResetScoop();
+    }
+
+    private void OnValidate()
+    {
+        if (localBladeUp.sqrMagnitude < 0.0001f) localBladeUp = Vector3.up;
+        pourHoldSeconds = Mathf.Max(0.1f, pourHoldSeconds);
+        pourTiltDegrees = Mathf.Clamp(pourTiltDegrees, 30f, 80f);
+        scoopRadius = Mathf.Max(0.01f, scoopRadius);
+        minimumScoopTravel = Mathf.Max(0.005f, minimumScoopTravel);
     }
 
     private void ShowSoilLoad(Material material)
@@ -81,14 +233,22 @@ public sealed class GardenShovel : MonoBehaviour
             collider.enabled = false;
             Destroy(collider);
             soilLoad.transform.SetParent(transform, false);
-            soilLoad.transform.localPosition = localScoopPoint;
+            soilLoad.transform.position = ScoopPoint + transform.TransformDirection(localBladeUp.normalized) * soilLoadSize.y * 0.5f;
             Vector3 scale = transform.lossyScale;
             soilLoad.transform.localScale = new Vector3(
                 soilLoadSize.x / Mathf.Max(0.0001f, Mathf.Abs(scale.x)),
                 soilLoadSize.y / Mathf.Max(0.0001f, Mathf.Abs(scale.y)),
                 soilLoadSize.z / Mathf.Max(0.0001f, Mathf.Abs(scale.z)));
         }
-        soilLoad.GetComponent<Renderer>().sharedMaterial = material;
+        Renderer renderer = soilLoad.GetComponent<Renderer>();
+        renderer.sharedMaterial = material;
+        soilLoadProperties ??= new MaterialPropertyBlock();
+        Vector4 textureTransform = new(soilTextureRegion.width, soilTextureRegion.height,
+            soilTextureRegion.x, soilTextureRegion.y);
+        // Remap the scoop's sphere UVs without changing the material shared by SoilPot.
+        soilLoadProperties.SetVector("_BaseMap_ST", textureTransform);
+        soilLoadProperties.SetVector("_MainTex_ST", textureTransform);
+        renderer.SetPropertyBlock(soilLoadProperties);
         soilLoad.SetActive(true);
     }
 

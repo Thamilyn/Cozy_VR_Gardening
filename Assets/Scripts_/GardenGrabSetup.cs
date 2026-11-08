@@ -276,7 +276,9 @@ public sealed class GardenGrabSetup : MonoBehaviour
         grabbable.InjectOptionalTargetTransform(target.transform);
         grabbable.InjectOptionalRigidbody(body);
 
-        if (grabbable.SelectingPointsCount == 0)
+        // Props can call this from Awake before Meta's PointableElement.Awake has
+        // created SelectingPoints. Treat that initial state as an unheld prop.
+        if (grabbable.SelectingPoints == null || grabbable.SelectingPointsCount == 0)
         {
             body.useGravity = true;
             body.isKinematic = false;

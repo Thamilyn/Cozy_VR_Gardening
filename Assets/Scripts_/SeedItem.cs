@@ -34,6 +34,7 @@ public sealed class SeedItem : MonoBehaviour
     private TomatoPotStages _potStages;
     private GameObject _stageVisual;
     private GardenObjectLabel _nameLabel;
+    private bool _soilCovered;
 
     public SeedCrop Crop => crop;
     public string SeedId => seedId;
@@ -151,7 +152,10 @@ public sealed class SeedItem : MonoBehaviour
         transform.SetParent(pot.transform, false);
         transform.localPosition = pot.LocalPlantingPoint;
         transform.localRotation = Quaternion.identity;
-        if (crop == SeedCrop.Tomato) _potStages = pot.GetComponent<TomatoPotStages>();
+        if (crop == SeedCrop.Tomato)
+        {
+            _potStages = pot.GetComponent<TomatoPotStages>();
+        }
         Rigidbody body = GetComponent<Rigidbody>();
         if (body != null) { body.linearVelocity = Vector3.zero; body.angularVelocity = Vector3.zero; body.isKinematic = true; }
         if (_grabbable != null) _grabbable.enabled = false;
@@ -169,7 +173,7 @@ public sealed class SeedItem : MonoBehaviour
             {
                 bool shown = _potStages.TryShowStage(stage, out GameObject potVisual);
                 _stageVisual = shown ? potVisual : _potStages.CurrentVisual;
-                if (seedRenderer != null) seedRenderer.enabled = _stageVisual == null;
+                if (seedRenderer != null) seedRenderer.enabled = stage == GrowthStage.Seed && !_soilCovered;
                 // A failed replacement keeps the last pot; never stack a fallback pot inside it.
                 if (shown && Application.isPlaying && stage == GrowthStage.Mature) PrepareRipeFruit(potVisual);
                 return;
@@ -196,7 +200,8 @@ public sealed class SeedItem : MonoBehaviour
                 if (_tomatoStageInstances[i] != null) _tomatoStageInstances[i].SetActive(i == active);
             }
             _stageVisual = _tomatoStageInstances[active];
-            if (seedRenderer != null) seedRenderer.enabled = active == 0 && _tomatoStageInstances[0] == null;
+            if (seedRenderer != null) seedRenderer.enabled = active == 0 && !_soilCovered && _tomatoStageInstances[0] == null;
+            if (active == 0 && _soilCovered && _stageVisual != null) _stageVisual.SetActive(false);
             if (Application.isPlaying && active == 5 && !_ripeFruitPrepared && _tomatoStageInstances[5] != null)
             {
                 PrepareRipeFruit(_tomatoStageInstances[5]);
@@ -205,9 +210,17 @@ public sealed class SeedItem : MonoBehaviour
         }
         if (_sproutVisual == null) _sproutVisual = BuildPlant(false);
         if (_matureVisual == null) _matureVisual = BuildPlant(true);
-        if (seedRenderer != null) seedRenderer.enabled = stage == GrowthStage.Seed;
+        if (seedRenderer != null) seedRenderer.enabled = stage == GrowthStage.Seed && !_soilCovered;
         _sproutVisual.SetActive(stage == GrowthStage.Sprout);
         _matureVisual.SetActive(stage == GrowthStage.Mature);
+    }
+
+    public void SetSoilCovered()
+    {
+        if (!IsPlanted || _soilCovered) return;
+        _soilCovered = true;
+        if (_potStages != null) _potStages.SetSoilFilled(true);
+        ShowStage(GrowthStage.Seed);
     }
 
     private void PrepareRipeFruit(GameObject visual)

@@ -1,0 +1,1 @@
+PASS: Meta setup before Awake; real SoilPot material, footprint, depth, scene pose, above-rim reach, blade radius and swept path; hidden soil shader imported. Unity 6000.3.23f1. Physical Quest input not tested.

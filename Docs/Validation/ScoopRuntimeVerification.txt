@@ -1,0 +1,22 @@
+PASS: Tutorial initialized after menu selection
+PASS: Pot starts with a visible soil bed before planting
+PASS: Real tomato seed planted for the soil step
+PASS: Planting preserves the visible soil bed while the seed needs covering
+PASS: Uncovered seed rejects watering before the scoop
+PASS: Real shovel completes Awake and Start without the Meta initialization exception
+PASS: Shovel has initialized soil sources
+PASS: Unheld shovel does not collect soil
+PASS: Meta Select event holds the actual shovel
+PASS: Gesture far above the container does not load the blade
+PASS: A gentle 2 cm stroke 12 cm above the soil loads the blade immediately
+PASS: Loaded soil has the real brown soil material and follows the shovel
+PASS: Soil load sits above the blade face
+PASS: Soil sits over the broad metal blade, not over the narrow handle
+PASS: Re-enabling restores source discovery
+PASS: Level loaded blade over the pot does not complete coverage
+PASS: Timed tilt consumes the scoop and covers the planted seed
+PASS: Coverage is reported exactly once
+PASS: Covered seed is hidden
+PASS: Tutorial advances once to watering
+PASS: Covered seed accepts the next watering step
+RESULT: PASS. Synthetic Meta pointer events in Unity 6000.3.23f1. Physical Quest 3 hands/controllers not tested.

@@ -1,0 +1,8 @@
+Shovel; self=True; hierarchy=True; scene=Garden_Moves; shovel=False; held=0; prefab=
+Shovel/Shovel; self=True; hierarchy=True; scene=Garden_Moves; shovel=absent; held=no grab; prefab=
+Side2_Pots/PotSmall/Shovel/Shovel; self=True; hierarchy=True; scene=Garden_Moves; shovel=absent; held=no grab; prefab=
+Side2_Pots/WateringCup/Shovel; self=True; hierarchy=True; scene=Garden_Moves; shovel=absent; held=no grab; prefab=
+SoilPot; self=True; hierarchy=True; scene=Garden_Moves; shovel=absent; held=no grab; prefab=
+Side2_Pots/WateringCup/Shovel/Shovel; self=True; hierarchy=True; scene=Garden_Moves; shovel=absent; held=no grab; prefab=
+Side2_Pots/PotSmall/Shovel; self=True; hierarchy=True; scene=Garden_Moves; shovel=absent; held=no grab; prefab=
+TableSet/SoilPot; self=True; hierarchy=True; scene=Garden_Moves; shovel=absent; held=no grab; prefab=

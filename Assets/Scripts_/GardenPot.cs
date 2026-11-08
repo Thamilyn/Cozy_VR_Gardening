@@ -60,6 +60,17 @@ public sealed class GardenPot : MonoBehaviour
         return height >= -0.015f && height <= 0.08f;
     }
 
+    public bool CanReceiveSoilAt(Vector3 worldPoint)
+    {
+        if (!isActiveAndEnabled || !ContainsSoilPoint(worldPoint)) return false;
+        Bounds bounds = substrateSurface.sharedMesh.bounds;
+        Vector3 surfaceTop = substrateSurface.transform.TransformPoint(
+            new Vector3(bounds.center.x, bounds.max.y, bounds.center.z));
+        float height = Vector3.Dot(worldPoint - surfaceTop, substrateSurface.transform.up);
+        // Pour above the opening, without pushing the blade into the pot's collider.
+        return height >= 0.02f && height <= 0.25f;
+    }
+
     public void SetSoilWaterMillilitres(float millilitres)
     {
         GardenSoil soil = GetComponentInChildren<GardenSoil>(true);

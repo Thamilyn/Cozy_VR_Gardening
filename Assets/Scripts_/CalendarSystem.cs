@@ -37,6 +37,7 @@ public sealed class CalendarSystem : MonoBehaviour
         public float plantedAtGameDay;
         public float elapsedGameDays;
         public string stage;
+        public bool soilCovered;
         public int tomatoPhase;
         public float phaseWaterMillilitres;
         public float retainedWaterMillilitres;

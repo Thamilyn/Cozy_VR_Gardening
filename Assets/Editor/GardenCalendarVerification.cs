@@ -6,6 +6,80 @@ using UnityEngine;
 /// <summary>Optional editor check for milestone and session-only state behavior.</summary>
 public static class GardenCalendarVerification
 {
+    [MenuItem("Garden/Verify grab setup before Meta Awake")]
+    public static void VerifyGrabSetupBeforeMetaAwake()
+    {
+        if (EditorApplication.isPlayingOrWillChangePlaymode)
+            throw new InvalidOperationException("Run this check outside Play.");
+        GameObject prop = new("Early Meta grab verification");
+        prop.SetActive(false);
+        try
+        {
+            Rigidbody body = prop.AddComponent<Rigidbody>();
+            prop.AddComponent<BoxCollider>();
+            var grab = prop.AddComponent<Oculus.Interaction.Grabbable>();
+            Assert(grab.SelectingPoints == null, "Fixture reproduces Meta state before Awake");
+            MethodInfo configure = typeof(GardenGrabSetup).GetMethod("ConfigureGrabbable", BindingFlags.Static | BindingFlags.NonPublic);
+            configure.Invoke(null, new object[] { prop });
+            Assert(body.useGravity && !body.isKinematic, "Early prop setup succeeds without reading an uninitialized Meta list");
+            Assert(prop.GetComponentInChildren<Oculus.Interaction.GrabInteractable>(true) != null &&
+                prop.GetComponentInChildren<Oculus.Interaction.HandGrab.HandGrabInteractable>(true) != null,
+                "Early setup preserves both controller and hand grabs");
+            Debug.Log("Early Meta grab setup verification passed.");
+        }
+        finally { UnityEngine.Object.DestroyImmediate(prop); }
+    }
+
+    [MenuItem("Garden/Verify SoilPot scoop surface")]
+    public static void VerifySoilScoopSurface()
+    {
+        if (EditorApplication.isPlayingOrWillChangePlaymode)
+            throw new InvalidOperationException("Run this check outside Play.");
+        GameObject prefab = PrefabUtility.LoadPrefabContents("Assets/Prefabs/Furniture/SoilPot.prefab");
+        try
+        {
+            GardenSoilSource source = prefab.GetComponent<GardenSoilSource>();
+            Assert(source != null, "SoilPot has its scoop source");
+            MethodInfo resolve = typeof(GardenSoilSource).GetMethod("TryResolveSurface", BindingFlags.NonPublic | BindingFlags.Instance);
+            Assert((bool)resolve.Invoke(source, null), "Imported SoilPot surface resolves without a manual override");
+            Assert(source.SoilMaterial != null && source.SoilMaterial.name.StartsWith("Soil.", StringComparison.OrdinalIgnoreCase),
+                "Imported soil is selected instead of the SoilPot container material");
+            MeshFilter surface = new SerializedObject(source).FindProperty("soilSurface").objectReferenceValue as MeshFilter;
+            int slot = Array.IndexOf(surface.GetComponent<MeshRenderer>().sharedMaterials, source.SoilMaterial);
+            Assert(slot >= 0, "Selected soil material belongs to the surface");
+            Bounds bounds = BoundsInRoot(prefab.transform, surface.transform, surface.sharedMesh.GetSubMesh(slot).bounds);
+            Vector3 centre = new(bounds.center.x, bounds.max.y, bounds.center.z);
+            Assert(source.ContainsScoopPoint(prefab.transform.TransformPoint(centre) + Vector3.up * 0.02f),
+                "Blade over the visible soil centre collects soil");
+            Vector3 corner = centre + new Vector3(bounds.extents.x * 0.8f, 0f, bounds.extents.z * 0.8f);
+            Assert(source.ContainsScoopPoint(prefab.transform.TransformPoint(corner)), "Visible rectangular soil corners collect soil");
+            Assert(!source.ContainsScoopPoint(prefab.transform.TransformPoint(centre + Vector3.right * bounds.extents.x * 1.1f)),
+                "Outside the soil footprint does not collect soil");
+            Assert(!source.ContainsScoopPoint(prefab.transform.TransformPoint(centre) - Vector3.up * 0.1f),
+                "Touching the container below the soil does not collect soil");
+            prefab.transform.SetPositionAndRotation(new Vector3(0.3f, 1.09f, -2.2f), Quaternion.Euler(0f, 90f, 0f));
+            prefab.transform.localScale = Vector3.one * 0.0143083995f;
+            Assert(source.ContainsScoopPoint(prefab.transform.TransformPoint(centre) + Vector3.up * 0.02f),
+                "Scoop detection follows the scene scale and pose");
+            Vector3 reachablePoint = prefab.transform.TransformPoint(centre) + Vector3.up * 0.12f;
+            Assert(source.ContainsScoopPoint(reachablePoint, 0.05f), "Blade can scoop above the rim without digging");
+            Vector3 edge = prefab.transform.TransformPoint(centre + Vector3.right * bounds.extents.x);
+            Vector3 outsideBladeCentre = edge + prefab.transform.right * 0.03f + Vector3.up * 0.03f;
+            Assert(!source.ContainsScoopPoint(outsideBladeCentre) && source.ContainsScoopPoint(outsideBladeCentre, 0.05f),
+                "Blade width counts when the scoop point passes beside the soil");
+            Vector3 sweepStart = prefab.transform.TransformPoint(centre) - prefab.transform.right * 0.18f + Vector3.up * 0.03f;
+            Vector3 sweepEnd = sweepStart + prefab.transform.right * 0.36f;
+            Assert(!source.ContainsScoopPoint(sweepStart, 0.05f) && !source.ContainsScoopPoint(sweepEnd, 0.05f) &&
+                source.IntersectsScoopPath(sweepStart, sweepEnd, 0.05f), "Swept blade detects a pass between frames");
+            Assert(!source.IntersectsScoopPath(sweepStart + Vector3.up, sweepEnd + Vector3.up, 0.05f),
+                "Passing far above SoilPot does not supply soil");
+            source.enabled = false;
+            Assert(!source.ContainsScoopPoint(prefab.transform.TransformPoint(centre)), "Disabled source cannot supply soil");
+            Debug.Log("SoilPot scoop surface verification passed: material, centre, corners, outside, depth and scene pose.");
+        }
+        finally { PrefabUtility.UnloadPrefabContents(prefab); }
+    }
+
     [MenuItem("Garden/Verify calendar hand input")]
     public static void VerifyHandInput()
     {
@@ -95,6 +169,10 @@ public static class GardenCalendarVerification
             Assert(Mathf.Abs(pot.SubstrateAreaSquareMetres - 0.0144f) < 0.00001f, "Measured soil area");
             Assert(!pot.ContainsSoilPoint(pot.PlantingPoint + Vector3.right * 0.2f), "Rim and outside soil rejected");
             Assert(!pot.CanReceiveWaterAt(pot.PlantingPoint - Vector3.up * 0.2f), "Pot bottom is not soil watering");
+            Assert(pot.CanReceiveSoilAt(pot.PlantingPoint + Vector3.up * 0.1f), "Soil pour above the opening");
+            Assert(!pot.CanReceiveSoilAt(pot.PlantingPoint - Vector3.up * 0.1f), "Soil pour rejects the pot interior");
+            Assert(!pot.CanReceiveSoilAt(pot.PlantingPoint + Vector3.up * 0.4f), "Soil pour rejects excessive height");
+            Assert(!pot.CanReceiveSoilAt(pot.PlantingPoint + new Vector3(0.2f, 0.1f, 0f)), "Soil pour rejects the side");
             seedObject = UnityEngine.Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(
                 "Assets/Prefabs/SeedsPrefab/TomatoSeed.prefab"));
             SeedItem seed = seedObject.GetComponent<SeedItem>();
@@ -105,9 +183,20 @@ public static class GardenCalendarVerification
             Set(controller, "calendar", clock);
             Set(controller, "pots", new[] { pot });
             Invoke(controller, "Start");
+            Assert(!controller.TryCoverSeed(pot), "Empty pot cannot be covered");
             Assert(controller.TryPlant(seed), "Planting valid tomato");
             var plant = controller.PrototypeTomato;
             var saved = controller.GetState(plant);
+            Assert(!saved.soilCovered && controller.NeedsSoilCover(pot), "Planting requires soil cover");
+            controller.ReceiveWater(pot, 1f);
+            Assert(saved.waterMillilitres == 0f, "Uncovered seed rejects water even without the tutorial");
+            clock.AdvancePhase();
+            Assert(clock.CurrentDay == 0 && plant.stage == GrowthStage.Seed, "Uncovered seed cannot grow");
+            int covered = 0;
+            controller.SeedCovered += _ => covered++;
+            Assert(controller.TryCoverSeed(pot), "Planted seed accepts soil cover");
+            Assert(saved.soilCovered && !controller.NeedsSoilCover(pot), "Covered pot no longer needs soil");
+            Assert(!controller.TryCoverSeed(pot) && covered == 1, "Cover completion is idempotent");
             Assert(Mathf.Abs(controller.TargetMillilitres(plant) - 51.42857f) < 0.01f, "Area and care-day conversion");
             clock.RecordHarvest(saved);
             Assert(!saved.harvested, "No harvest before maturity");
@@ -160,7 +249,7 @@ public static class GardenCalendarVerification
             CalendarSystem fresh = freshObject.AddComponent<CalendarSystem>();
             Assert(fresh.CurrentDay == 0 && fresh.Plants.Count == 0 && fresh.Journal.Count == 0,
                 "New session starts empty");
-            Debug.Log("Garden tomato verification passed: area, dry/partial/excess water gates, five transitions, counters, harvest and fresh session.");
+            Debug.Log("Garden tomato verification passed: soil cover gates, area, dry/partial/excess water gates, five transitions, counters, harvest and fresh session.");
         }
         finally
         {
@@ -222,7 +311,8 @@ public static class GardenCalendarVerification
                 AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/SeedsPrefab/TomatoSeed.prefab"), preview);
             SeedItem seed = seedObject.GetComponent<SeedItem>();
             seed.PlantIn(pot);
-            // Planting keeps the bare soil. The first visible sprout follows watering and advance.
+            seed.SetSoilCovered();
+            // Covered soil precedes the first sprout, which follows watering and advance.
             int[] expectedStageSlots = { 0, 1, 2, 4, 5, 6 };
             foreach (GrowthStage phase in phases)
             {

@@ -68,13 +68,13 @@ public sealed class SeedsController : MonoBehaviour
 
     public event Action<string> Guidance;
     public event Action<SeedItem> PlantingRejected;
+    public event Action<PlantedSeed> SeedCovered;
     public IReadOnlyList<PlantedSeed> PlantedSeeds => plantedSeeds;
     public CalendarSystem Calendar => calendar;
     public PlantedSeed PrototypeTomato => plantedSeeds.Find(p => p.crop == SeedCrop.Tomato && p.seed != null);
     public bool HarvestComplete => PrototypeTomato != null && GetState(PrototypeTomato)?.harvested == true;
-    public bool NeedsSoilPreparation => PrototypeTomato == null && pots != null &&
-        Array.Exists(pots, pot => pot != null && pot.AcceptsTomato) &&
-        !Array.Exists(pots, pot => pot != null && pot.AcceptsTomato);
+    public bool NeedsSoilCover(GardenPot pot) => pot != null && pot.isActiveAndEnabled &&
+        GetState(FindByPot(pot)) is { soilCovered: false };
 
     private void Start()
     {
@@ -148,6 +148,7 @@ public sealed class SeedsController : MonoBehaviour
     {
         CalendarSystem.PlantSave saved = GetState(plant);
         if (saved == null) return "Not planted";
+        if (!saved.soilCovered) return "Cover the seed with soil using the shovel before watering";
         if (saved.tomatoPhase >= 5) return "Ripe: harvest now; no more watering is needed in this prototype";
         float target = TargetMillilitres(plant);
         if (target <= 0f) return "Check the soil area and water targets in the Inspector";
@@ -164,6 +165,9 @@ public sealed class SeedsController : MonoBehaviour
         if (GardenWaterSupply.Active != null && GardenWaterSupply.Active.Exhausted)
             return "Not enough water remains to finish. Select Try again to plant a new seed.";
         if (!GronnyTutorial.Allows(GardenTutorialAction.Advance)) return "Complete the current instruction first.";
+        foreach (PlantedSeed plant in plantedSeeds)
+            if (GetState(plant) is { soilCovered: false })
+                return "Use the loaded shovel to cover the seed with soil before advancing.";
         bool hasTomato = false;
         foreach (PlantedSeed plant in plantedSeeds)
         {
@@ -181,9 +185,7 @@ public sealed class SeedsController : MonoBehaviour
             if (Time.unscaledTime - saved.lastWaterAt < 0.5f)
                 return "Hold the can upright.\nWait until pouring stops.";
         }
-        if (!hasTomato) return NeedsSoilPreparation
-            ? "Use the shovel to move soil from SoilPot into the empty small pot."
-            : "Drop the tomato seed onto the soil in an empty small pot.";
+        if (!hasTomato) return "Drop the tomato seed into an empty small pot, then cover it with soil using the shovel.";
         if (calendar.IsCycleComplete) return "Pick the red tomato and place it in the tray.";
         return null;
     }
@@ -194,7 +196,7 @@ public sealed class SeedsController : MonoBehaviour
         {
             if (plant.crop != SeedCrop.Tomato || plant.seed == null) continue;
             CalendarSystem.PlantSave saved = GetState(plant);
-            if (saved == null || saved.tomatoPhase >= 5) continue;
+            if (saved == null || !saved.soilCovered || saved.tomatoPhase >= 5) continue;
             saved.tomatoPhase++;
             saved.phaseWaterMillilitres = 0f;
             saved.retainedWaterMillilitres = 0f;
@@ -219,7 +221,7 @@ public sealed class SeedsController : MonoBehaviour
             plant.elapsedGameDays = Mathf.Max(0f, calendar.ElapsedGameDays - saved.plantedAtGameDay);
             plant.waterMillilitres = saved.waterMillilitres;
             saved.elapsedGameDays = plant.elapsedGameDays;
-            GrowthStage stage = plant.crop == SeedCrop.Tomato ? TomatoStage(saved.tomatoPhase) :
+            GrowthStage stage = !saved.soilCovered ? GrowthStage.Seed : plant.crop == SeedCrop.Tomato ? TomatoStage(saved.tomatoPhase) :
                 CalculateLegacyStage(plant.crop, plant.elapsedGameDays, plant.waterMillilitres);
             saved.stage = stage.ToString();
             if (plant.stage == stage) continue;
@@ -263,17 +265,32 @@ public sealed class SeedsController : MonoBehaviour
                     seed.gameObject.AddComponent<PlantWaterProgress>();
                 progress.Initialize(this, plant);
             }
-            Guidance?.Invoke("Seed planted!\nTilt the watering can over the soil.");
+            Guidance?.Invoke("Seed planted!\nScoop soil from SoilPot with the shovel, then gently tip the loaded blade over the pot.");
             return true;
         }
         if (showRejectionFeedback)
         {
-            Guidance?.Invoke(NeedsSoilPreparation
-                ? "Fill the small pot first.\nUse the shovel to collect soil from SoilPot."
-                : "Drop the seed onto the center of an empty small pot.");
+            Guidance?.Invoke("Drop the seed onto the center of an empty small pot.");
             PlantingRejected?.Invoke(seed);
         }
         return false;
+    }
+
+    // GardenShovel validates the held, loaded blade and deliberate pouring gesture.
+    public bool TryCoverSeed(GardenPot pot)
+    {
+        if (calendar == null || calendar.IsAdvancing || !NeedsSoilCover(pot) ||
+            !GronnyTutorial.Allows(GardenTutorialAction.FillSoil)) return false;
+        PlantedSeed plant = FindByPot(pot);
+        CalendarSystem.PlantSave saved = GetState(plant);
+        saved.soilCovered = true;
+        // Start care time after planting is complete, including for the legacy crops.
+        saved.plantedAtGameDay = calendar.ElapsedGameDays;
+        plant.seed.SetSoilCovered();
+        calendar.NotifyChanged();
+        SeedCovered?.Invoke(plant);
+        Guidance?.Invoke("Perfect! Your seed is all covered up.\nNow water the soil.");
+        return true;
     }
 
     public void ReceiveWater(GardenPot pot, float amountLitres)
@@ -283,7 +300,7 @@ public sealed class SeedsController : MonoBehaviour
         if (!GronnyTutorial.Allows(GardenTutorialAction.Pour)) return;
         PlantedSeed plant = FindByPot(pot);
         CalendarSystem.PlantSave saved = GetState(plant);
-        if (saved == null) return;
+        if (saved == null || !saved.soilCovered) return;
         float millilitres = amountLitres * 1000f;
         if (Time.unscaledTime - saved.lastWaterAt > 0.5f) saved.currentPourMillilitres = 0f;
         saved.currentPourMillilitres += millilitres;

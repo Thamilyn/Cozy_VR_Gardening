@@ -1,0 +1,12 @@
+Playing=True; scene=Assets/Scenes/Garden_Moves.unity; suspended=False; FillSoilAllowed=True
+Shovel Shovel active=False held=0 loaded=False scoop=(0.01, 0.94, -2.38) scale=(1.00, 1.00, 1.00)
+Cached sources=null
+Source=SoilPot active=True material=Soil.001 (UnityEngine.Material) bounds=Center: (0.05, 1.23, -0.02), Extents: (6.74, 0.76, 4.20) contains=False
+Source=SoilPot active=True material=Soil.001 (UnityEngine.Material) bounds=Center: (0.05, 1.23, -0.02), Extents: (6.74, 0.76, 4.20) contains=False
+Assets/Prefabs/Furniture/SoilPot.prefab
+Mesh=SoilPot local=(-0.93, 0.58, 0.00) scale=(0.04, 0.04, 0.04) bounds=Center: (-0.07, -5.72, 0.03), Extents: (7.56, 8.69, 4.88)
+  Slot 0 material=SoilPot bounds=Center: (-0.07, -5.72, 0.03), Extents: (7.56, 8.69, 4.88)
+  Slot 1 material=Soil.001 bounds=Center: (0.05, 1.23, -0.02), Extents: (6.74, 0.76, 4.20)
+Assets/OurAss/GrabablePrfab/Shovel.prefab
+Mesh=Shovel local=(0.00, 0.03, 0.00) scale=(1.00, 1.00, 1.00) bounds=Center: (0.00, 0.00, 0.09), Extents: (0.05, 0.02, 0.18)
+  Slot 0 material=GardenPropsMaterial bounds=Center: (0.00, 0.00, 0.09), Extents: (0.05, 0.02, 0.18)

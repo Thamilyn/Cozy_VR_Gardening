@@ -104,6 +104,7 @@ public static class TomatoRuntimeVerification
                 Require(pot != null && seed != null, "Seed and pot for focused harvest check");
                 seed.transform.position = pot.PlantingPoint;
                 Require(seeds.TryPlant(seed), "Planting for focused harvest check");
+                Require(seeds.TryCoverSeed(pot), "Soil cover for focused harvest check");
                 var plant = seeds.PrototypeTomato;
                 plant.stage = GrowthStage.Mature;
                 seeds.GetState(plant).tomatoPhase = 5;
@@ -125,6 +126,7 @@ public static class TomatoRuntimeVerification
                 Require(pot != null && seed != null, "Seed and soil in runtime scene");
                 seed.transform.position = pot.PlantingPoint;
                 Require(seeds.TryPlant(seed), "Planting in runtime scene");
+                Require(seeds.TryCoverSeed(pot), "Soil cover before watering integration check");
                 Require(cycle != null && cycle.TryPrepare(out _), "Sky cycle configured");
                 step = 10;
             }
