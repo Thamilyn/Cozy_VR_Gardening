@@ -1,0 +1,18 @@
+PASS: Paused fixture, with no physical input required
+PASS: harvest_cut_stem has real imported mono audio and a transcript
+PASS: harvest_stem_cut has real imported mono audio and a transcript
+PASS: harvest_picked has real imported mono audio and a transcript
+PASS: A green tomato does not request the ripe instruction
+PASS: Missing soil cover does not request harvesting guidance
+PASS: Ripe instruction is queued once
+PASS: Ripe event selects the generated stem-cut instruction
+PASS: Valid cut queues one acknowledgement and preserves the current sentence
+PASS: Cut acknowledgement follows the ripe instruction
+PASS: Meta pickup queues one congratulation behind the cut acknowledgement
+PASS: Fast tray delivery uses the existing harvest path
+PASS: Pickup congratulation survives immediate delivery and tutorial completion
+PASS: Repeated observations cannot replay delivered harvest cues
+PASS: Session closing follows all three harvest cues
+PASS: All harvest speech shares one AudioSource
+PASS: Repeated observations do not duplicate spoken help credit
+NOT TESTED: perceived voice naturalness, real-time sentence duration, hardware audio or Quest 3 tracking. Sentence endings were advanced explicitly.

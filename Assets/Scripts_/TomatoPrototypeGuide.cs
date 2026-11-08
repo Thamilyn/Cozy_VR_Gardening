@@ -150,6 +150,33 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
             water.text = supply.SummaryText;
             return;
         }
+        if (saved.soilCovered && saved.tomatoPhase == 5 && saved.stage == GrowthStage.Mature.ToString() &&
+            !saved.harvested)
+        {
+            TomatoFruit fruit = plant.seed != null ? plant.seed.HarvestFruit : null;
+            water.color = neutralWaterColor;
+            if (fruit == null || !fruit.IsRipe)
+            {
+                instruction.text = "Your tomato is ripe.";
+                water.text = "The ripe tomato's harvest interaction is unavailable. Check the mature plant model.";
+            }
+            else if (fruit.IsPickedUp)
+            {
+                instruction.text = "Well done! You've harvested your tomato!";
+                water.text = "Place it in the harvest tray to finish the gardening session.";
+            }
+            else if (fruit.IsStemCut)
+            {
+                instruction.text = "Nicely done! Now you can pick up your tomato.";
+                water.text = "Pinch or hold Grip to pick up the separated tomato.";
+            }
+            else
+            {
+                instruction.text = "Your tomato is ripe! Use Pruner to cut the stem.";
+                water.text = "Hold Pruner. Open the blades around the stem connecting the tomato to the plant.\nClose your hand or squeeze Trigger to snip.";
+            }
+            return;
+        }
         if (saved.waterMillilitres != lastTotalWater || saved.tomatoPhase != lastPhase)
         {
             // A planting or blocked-advance hint must not ask for more water after watering succeeds.
@@ -166,7 +193,7 @@ public sealed class TomatoPrototypeGuide : MonoBehaviour
         bool excess = saved.retainedWaterMillilitres > seeds.ExcessLimit(plant) && saved.tomatoPhase < 5;
         bool pouring = Time.unscaledTime - saved.lastWaterAt < 0.5f;
         string prompt = saved.harvested ? "Well done! You harvested a tomato.\nCalendar: Restart to play again." :
-            saved.tomatoPhase >= 5 ? "Pick the largest red tomato.\nPlace it in the harvest tray." :
+            saved.tomatoPhase >= 5 ? "Use Pruner to cut the ripe tomato's stem.\nThen pick up the separated tomato." :
             excess ? "Stop watering.\nLet the extra water drain away." :
             saved.retainedWaterMillilitres >= seeds.TargetMillilitres(plant)
                 ? "Enough water! Hold the can upright.\nCalendar: Advance phase."

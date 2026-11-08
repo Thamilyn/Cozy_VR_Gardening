@@ -37,12 +37,13 @@ public sealed class GronnyTutorial : MonoBehaviour
     private bool completed;
     private bool initialized;
     private bool subscribed;
-    private enum GuideStep { Move, Soil, Grab, Plant, Water, Calendar, CalendarSelect, Free }
+    private enum GuideStep { Move, Soil, Grab, Plant, Water, Calendar, CalendarSelect, CutStem, PickTomato, Free }
     private static GronnyTutorial active;
     private readonly HashSet<Behaviour> blockedInteractions = new();
     private float nextInteractionRefresh;
     private WateringCan refillCan;
     private int announcedWaterAttempt;
+    private string backgroundInstructionId = "04_first_watering";
 
     private GuideStep Step
     {
@@ -52,6 +53,8 @@ public sealed class GronnyTutorial : MonoBehaviour
             if (!Learned("grab")) return GuideStep.Grab;
             if (State == null) return GuideStep.Plant;
             if (!State.soilCovered) return GuideStep.Soil;
+            if (Fruit != null && Fruit.IsRipe && !Fruit.IsPickedUp)
+                return Fruit.IsStemCut ? GuideStep.PickTomato : GuideStep.CutStem;
             if (State.tomatoPhase > 0) return GuideStep.Free;
             bool open = visibility != null && visibility.IsVisible;
             if (CanEmpty) return open && Learned("calendar") ? GuideStep.CalendarSelect : GuideStep.Calendar;
@@ -69,7 +72,7 @@ public sealed class GronnyTutorial : MonoBehaviour
                 action == GardenTutorialAction.Restart;
         if (active == null || !active.Running) return true;
         GuideStep step = active.Step;
-        if (step == GuideStep.Free) return true;
+        if (step == GuideStep.Free || step == GuideStep.CutStem || step == GuideStep.PickTomato) return true;
         return action switch
         {
             GardenTutorialAction.Plant => step == GuideStep.Plant,
@@ -112,6 +115,11 @@ public sealed class GronnyTutorial : MonoBehaviour
                 : !NeedsWater ? "Your plant has enough water." : "Stop pouring at the water target."),
             GuideStep.Calendar => ("Step 6/7: Open the calendar.",
                 hands ? "Pinch with your left hand away from objects." : "Press Y on the left controller."),
+            GuideStep.CutStem => ("Your tomato is ripe! Cut the stem with Pruner.",
+                hands ? "Hold Pruner in your palm. Open the blades around the stem, then close your hand."
+                    : "Hold Pruner with Grip. Release Trigger to open the blades around the stem, then squeeze Trigger."),
+            GuideStep.PickTomato => ("Nicely done! Now pick up your tomato.",
+                hands ? "Pinch to pick up the separated tomato." : "Hold Grip to pick up the separated tomato."),
             _ => (CanEmpty ? "Step 7/7: Select Refill water." : "Step 7/7: Select Advance phase.",
                 hands ? "Point at the button and pinch." : "Aim at the button and press Trigger.")
         };
@@ -129,6 +137,7 @@ public sealed class GronnyTutorial : MonoBehaviour
     }
 
     private SeedsController.PlantedSeed Plant => seeds != null ? seeds.PrototypeTomato : null;
+    private TomatoFruit Fruit => Plant?.seed != null ? Plant.seed.HarvestFruit : null;
     private CalendarSystem.PlantSave State => seeds != null ? seeds.GetState(Plant) : null;
     private bool Running => initialized && isActiveAndEnabled && !completed &&
         seeds != null && seeds.isActiveAndEnabled && calendar != null;
@@ -146,6 +155,8 @@ public sealed class GronnyTutorial : MonoBehaviour
         can => can != null && can.isActiveAndEnabled && (can.IsHeld || can == refillCan) && can.CurrentWaterLitres <= 0f);
     private bool ShowWateringDemonstration => Caring && phase == 0 && Step == GuideStep.Water &&
         NeedsWater && !Excess && !CanEmpty;
+    private bool ShowCutDemonstration => Running && Fruit != null && Fruit.IsRipe && !Fruit.IsStemCut;
+    private bool ShowPickDemonstration => Running && Fruit != null && Fruit.IsRipe && Fruit.IsStemCut && !Fruit.IsPickedUp;
 
     private IEnumerator Start()
     {
@@ -277,13 +288,15 @@ public sealed class GronnyTutorial : MonoBehaviour
             foreach (string id in new[] { "water_reserve_intro", "water_reserve_rules" })
                 Say(id, id + "-" + attempt, () => Running && supply.Attempt == attempt && State.tomatoPhase < 5);
         }
+        QueueHarvest();
         if (State.harvested)
         {
-            voice.FinishCurrent();
+            // Preserve cut/pick acknowledgements even if the player delivers immediately.
+            // Stale care requests already carry relevance predicates and expire in the voice queue.
             completed = true;
             ReleaseInteractionLocks();
             Unsubscribe();
-            // The closing line is the only request allowed after tutorial completion.
+            // Queue the session closing after the cut/pick acknowledgements.
             voice.Enqueue("13_complete", "complete", () => isActiveAndEnabled && State?.harvested == true);
             if (supply != null && supply.HasNoMeasuredWaste)
                 voice.Enqueue("water_no_waste_complete", "no-waste", () => isActiveAndEnabled && State?.harvested == true && supply.HasNoMeasuredWaste);
@@ -352,17 +365,41 @@ public sealed class GronnyTutorial : MonoBehaviour
         {
             soilInstructionId = null;
         }
-        else
+        else if (phase < 5)
         {
             string id = phase switch
             {
                 1 => "08_sprout", 2 => "09_young_plant", 3 => "10_flowering",
-                4 => "11_green_fruit", _ => "12_harvest"
+                _ => "11_green_fruit"
             };
             Say(id, "phase-" + phase, () => Running && State != null &&
                 State.tomatoPhase == captured && !calendar.IsAdvancing);
         }
         QueueControls();
+    }
+
+    private void QueueHarvest()
+    {
+        TomatoFruit fruit = Fruit;
+        if (fruit == null) return;
+        string background = ShowCutDemonstration ? "harvest_cut_stem" :
+            ShowPickDemonstration ? "harvest_stem_cut" : "04_first_watering";
+        if (background != backgroundInstructionId)
+        {
+            backgroundInstructionId = background;
+            System.Func<bool> relevant = background == "harvest_cut_stem" ? () => ShowCutDemonstration :
+                background == "harvest_stem_cut" ? () => ShowPickDemonstration : () => ShowWateringDemonstration;
+            voice.SetBackgroundDemonstration(background, relevant);
+        }
+        if (fruit.IsRipe && !fruit.IsStemCut)
+            Say("harvest_cut_stem", "harvest-ripe", () => Running && fruit == Fruit &&
+                fruit.IsRipe && !fruit.IsStemCut);
+        // Keep acknowledgements in order even when cut, pickup and tray release occur
+        // between tutorial updates. These flags survive recovery and tutorial completion.
+        if (fruit.IsStemCut)
+            Say("harvest_stem_cut", "harvest-cut", () => isActiveAndEnabled && fruit == Fruit && fruit.IsStemCut);
+        if (fruit.IsPickedUp)
+            Say("harvest_picked", "harvest-picked", () => isActiveAndEnabled && fruit == Fruit && fruit.IsPickedUp);
     }
 
     private void UpdateMode()
@@ -450,6 +487,8 @@ public sealed class GronnyTutorial : MonoBehaviour
         {
             GardenControlDemo.Water => () => ShowWateringDemonstration,
             GardenControlDemo.Upright => () => System.Array.Exists(cans, can => can != null && can.IsPouring),
+            GardenControlDemo.CutStem => () => ShowCutDemonstration,
+            GardenControlDemo.PickTomato => () => ShowPickDemonstration,
             _ => null
         };
         voice.Enqueue(id, key, () => (GardenWaterSupply.Active == null || !GardenWaterSupply.Active.Exhausted) && relevant(), () =>
@@ -525,7 +564,7 @@ public sealed class GronnyTutorial : MonoBehaviour
 
     private void RefreshInteractionLocks()
     {
-        bool free = !Running || Step == GuideStep.Free;
+        bool free = !Running || Step == GuideStep.Free || Step == GuideStep.CutStem || Step == GuideStep.PickTomato;
         if (free) { ReleaseInteractionLocks(); return; }
         GuideStep step = Step;
         foreach (MonoBehaviour behaviour in FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None))
@@ -534,6 +573,9 @@ public sealed class GronnyTutorial : MonoBehaviour
             bool allowed;
             if (behaviour is GrabInteractable || behaviour is HandGrabInteractable)
             {
+                // Fruit owns its attachment lock. Tutorial cleanup must never enable
+                // a ripe tomato's Meta interactables before the stalk is cut.
+                if (behaviour.GetComponentInParent<TomatoFruit>() != null) continue;
                 Grabbable grab = behaviour.GetComponentInParent<Grabbable>();
                 SeedItem seed = grab != null ? grab.GetComponent<SeedItem>() : null;
                 WateringCan can = grab != null ? grab.GetComponent<WateringCan>() : null;

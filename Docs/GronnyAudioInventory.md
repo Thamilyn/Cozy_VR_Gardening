@@ -79,3 +79,6 @@ Archivo original | Duración (s) | Modo | Demostración | SHA-256
 `Assets/Audio/water_saving/water_retry.wav` | 3.60 | Unknown | None | `DC7F78B679CCFE4DEDB3C802848F0AB31EA4DE183D2DAF92FF322483ADBE11FB`
 `Assets/Audio/water_saving/water_no_waste_complete.wav` | 5.68 | Unknown | None | `AA6992137B182D4B9A5C7DF3AE7A47213A6909A9F436EC4A6B73D09CC92E2499`
 `Assets/Audio/water_saving/movement_success.wav` | 3.16 | Unknown | None | `9C911A09E515F857C4A690DF21B3022837E8F8246BB1E0B676F4C9089B252365`
+`Assets/Audio/dialogues_cozy_gardening/harvest_cut_stem.wav` | 12.04 | Unknown | CutStem | `64774CB7C433CB346B1A1493935BF37EDBD2B94BC2BF75310C9FEB7BAC75CEF1`
+`Assets/Audio/dialogues_cozy_gardening/harvest_stem_cut.wav` | 3.24 | Unknown | PickTomato | `6BC7493B6031F5CE7B59F2C957B9CA0DC8224AFC5DD9F5BD01EE080F24CCF76A`
+`Assets/Audio/dialogues_cozy_gardening/harvest_picked.wav` | 3.08 | Unknown | None | `3A58CE64E388A4600C5E2BF2585BDBF0EFF2D99B4AA169A7CC732C8DB694D2E5`

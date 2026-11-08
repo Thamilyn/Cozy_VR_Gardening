@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Reflection;
 using Oculus.Interaction;
 using Oculus.Interaction.HandGrab;
 using UnityEditor;
@@ -183,13 +184,30 @@ public static class TomatoRuntimeVerification
                 VerifyFruitDiameter(fruit, "attached");
                 fruitAttachment = fruit.transform.parent;
                 fruitAttachedPose = new Pose(fruit.transform.localPosition, fruit.transform.localRotation);
-                fruitAttachedScale = fruit.transform.localScale;
+                fruitAttachedScale = fruit.transform.lossyScale;
+                Require(!fruit.IsStemCut && !fruit.IsPickedUp && !fruit.GetComponent<Grabbable>().enabled,
+                    "Ripe attached tomato is neither cut nor picked and its Grabbable is disabled");
+                foreach (GrabInteractable interactable in fruit.GetComponentsInChildren<GrabInteractable>(true))
+                    Require(!interactable.enabled, "Attached fruit rejects controller grabbing");
+                foreach (HandGrabInteractable interactable in fruit.GetComponentsInChildren<HandGrabInteractable>(true))
+                    Require(!interactable.enabled, "Attached fruit rejects hand grabbing");
+                VerifyStemCut(fruit, seeds);
+                Require(fruit.IsStemCut && !fruit.IsPickedUp && !seeds.HarvestComplete && !fruit.CanStore,
+                    "Valid snip enables picking without completing pickup or tray delivery");
+                step = 12;
+                // Allow Meta Start to initialize the newly enabled fruit before synthetic selection.
+                nextStepAt = EditorApplication.timeSinceStartup + 0.2;
+            }
+            else if (step == 12)
+            {
+                TomatoFruit fruit = UnityEngine.Object.FindFirstObjectByType<TomatoFruit>();
                 Grabbable grab = fruit.GetComponent<Grabbable>();
                 Pose pose = new(fruit.transform.position, fruit.transform.rotation);
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Hover, pose));
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Select, pose));
                 Require(grab.SelectingPointsCount == 1, "Simulated Meta selection");
-                Require(fruit.transform.parent == null, "Selection detaches before the grab transform begins");
+                Require(fruit.transform.parent == null && fruit.IsPickedUp,
+                    "Meta selection picks up the tomato only after its stalk was cut");
                 VerifyFruitDiameter(fruit, "just selected");
                 Require(!HarvestOutline(fruit).enabled,
                     "Harvest outline disappears on selection");
@@ -239,24 +257,27 @@ public static class TomatoRuntimeVerification
             else if (step == 24)
             {
                 TomatoFruit fruit = UnityEngine.Object.FindFirstObjectByType<TomatoFruit>();
-                Require(!seeds.HarvestComplete && fruit.transform.parent == fruitAttachment,
-                    "Dropped tomato returns to the plant without recording harvest");
-                Require(Vector3.Distance(fruit.transform.localPosition, fruitAttachedPose.position) < 0.0001f &&
-                    Quaternion.Angle(fruit.transform.localRotation, fruitAttachedPose.rotation) < 0.01f &&
-                    Vector3.Distance(fruit.transform.localScale, fruitAttachedScale) < 0.0001f,
-                    "Recovery restores the original local position, rotation and scale");
+                Require(!seeds.HarvestComplete && fruit.transform.parent == null && fruit.IsStemCut &&
+                    fruit.IsPickedUp && !fruit.CanCutStem,
+                    "Recovery preserves cut and pickup progress without reattaching or recording tray delivery");
+                Vector3 recoveryPosition = fruitAttachment.TransformPoint(fruitAttachedPose.position);
+                float recoveryDistance = Vector3.Distance(fruit.transform.position, recoveryPosition);
+                Require(recoveryDistance > TomatoFruit.DiameterMetres && recoveryDistance < TomatoFruit.DiameterMetres * 2f &&
+                    Mathf.Abs(fruit.transform.position.y - recoveryPosition.y) < 0.0001f &&
+                    Quaternion.Angle(fruit.transform.rotation, fruitAttachment.rotation * fruitAttachedPose.rotation) < 0.01f &&
+                    Vector3.Distance(fruit.transform.lossyScale, fruitAttachedScale) < 0.0001f,
+                    "Recovery restores a reachable world pose and preserves independent fruit scale");
                 Require(fruit.GetComponent<Rigidbody>().isKinematic && !fruit.GetComponent<Rigidbody>().useGravity,
-                    "Recovered fruit stays attached without gravity");
+                    "Recovered loose fruit waits stably without gravity");
                 VerifyHarvestFruit(fruit);
-                Require(fruit.GetComponent<GardenObjectLabel>().enabled, "Recovery restores the harvest label");
                 Grabbable grab = fruit.GetComponent<Grabbable>();
                 Pose pose = new(fruit.transform.position, fruit.transform.rotation);
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Hover, pose));
                 grab.ProcessPointerEvent(new PointerEvent(901, PointerEventType.Select, pose));
                 Require(grab.SelectingPointsCount == 1 && fruit.transform.parent == null,
-                    "Recovered fruit can be harvested again");
+                    "Recovered cut fruit can be picked up without cutting again");
                 VerifyFruitDiameter(fruit, "picked after recovery");
-                result += "PASS: re-grab cancels recovery; a later drop restores the plant attachment, local pose, scale, outline and label" + Environment.NewLine;
+                result += "PASS: re-grab cancels recovery; a later drop recovers the loose fruit without resetting cut/pickup progress or changing scale" + Environment.NewLine;
                 step = 21;
                 nextStepAt = EditorApplication.timeSinceStartup + 0.1;
             }
@@ -328,7 +349,7 @@ public static class TomatoRuntimeVerification
                 if (harvestOnly)
                 {
                     result += "PASS: RootswithTomatoes.036 retains its stalk, mesh and materials; all ripe fruit models are at most 6.5 cm; harvest fruit has its own collider and Meta hand/controller interactables" + Environment.NewLine;
-                    result += "PASS: harvest outline visible on plant, Select detaches fruit immediately and hides outline, release outside tray does not harvest, re-grab and tray delivery succeed" + Environment.NewLine;
+                    result += "PASS: attached Meta grabs blocked, only a valid ripe stalk snip detaches; pickup and tray delivery are separate, re-grab succeeds" + Environment.NewLine;
                     result += "PASS: delivered tomato remains visible on the box floor, with gravity, colliders and all Meta grabs disabled" + Environment.NewLine;
                     result += "NOT TESTED: physical hands/controllers, shader appearance in headset, watering/growth sequence, scene restart, APK and Quest 3 performance" + Environment.NewLine;
                     Finish();
@@ -339,7 +360,7 @@ public static class TomatoRuntimeVerification
                     Require(Mathf.Approximately(can.CurrentWaterLitres, can.CapacityLitres), "Can refilled");
                 foreach (Text text in UnityEngine.Object.FindFirstObjectByType<TomatoPrototypeGuide>().GetComponentsInChildren<Text>())
                     Require(text.preferredHeight <= text.rectTransform.rect.height + 1, "Guide text fits its panel");
-                result += "PASS: isolated 6.5 cm fruit, harvest outline, simulated Meta detach, release and re-grab, tray delivery, refill and text layout" + Environment.NewLine;
+                result += "PASS: isolated 6.5 cm fruit, harvest outline, simulated pruner cut, Meta pickup, release and re-grab, tray delivery, refill and text layout" + Environment.NewLine;
                 panel.RestartPrototype();
                 step = 4;
                 nextStepAt = EditorApplication.timeSinceStartup + 2;
@@ -375,6 +396,95 @@ public static class TomatoRuntimeVerification
         if (!condition) throw new Exception("Tomato runtime verification: " + label);
     }
 
+    private static void VerifyStemCut(TomatoFruit fruit, SeedsController seeds)
+    {
+        MeshFilter fruitMesh = fruit.GetComponentInChildren<MeshFilter>();
+        Vector3 stalkTip = fruitMesh.transform.InverseTransformPoint(fruit.StemPosition);
+        // Bounds measured on the actual imported stalk cap, independently of the
+        // detection algorithm. The old farthest-vertex target was a calyx leaf.
+        Require(stalkTip.x > -0.06f && stalkTip.x < -0.02f && stalkTip.y > 0.015f &&
+            stalkTip.y < 0.06f && stalkTip.z > 0.09f,
+            "RootswithTomatoes.036 cuts at its stalk tip, not a calyx leaf");
+        GardenPruner pruner = UnityEngine.Object.FindFirstObjectByType<GardenPruner>();
+        Require(pruner != null && pruner.isActiveAndEnabled, "Existing Pruner available");
+        Grabbable toolGrab = pruner.GetComponent<Grabbable>();
+        Require(toolGrab.SelectingPointsCount == 0, "Verification starts with unheld shears");
+        const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
+        MethodInfo updateBlades = typeof(GardenPruner).GetMethod("UpdateBlades", flags);
+        MethodInfo cutStem = typeof(TomatoFruit).GetMethod("TryCutStem", flags);
+        void Squeeze(float value) => updateBlades.Invoke(pruner, new object[] { true, value, 913, 1f });
+        CalendarSystem.PlantSave state = seeds.GetState(seeds.PrototypeTomato);
+        Vector3 startingPosition = pruner.transform.position;
+        Quaternion startingRotation = pruner.transform.rotation;
+        int startingPhase = state.tomatoPhase;
+        string startingStage = state.stage;
+        bool startingCover = state.soilCovered;
+        Pose toolPose = new(startingPosition, startingRotation);
+        try
+        {
+            Require(!(bool)cutStem.Invoke(fruit, new object[] { null }), "No tool cannot cut a tomato");
+            toolGrab.ProcessPointerEvent(new PointerEvent(913, PointerEventType.Hover, toolPose));
+            toolGrab.ProcessPointerEvent(new PointerEvent(913, PointerEventType.Select, toolPose));
+            Transform model = (Transform)typeof(GardenPruner).GetField("model", flags).GetValue(pruner);
+            Vector3 start = (Vector3)typeof(GardenPruner).GetField("cuttingStart", flags).GetValue(pruner);
+            Vector3 end = (Vector3)typeof(GardenPruner).GetField("cuttingEnd", flags).GetValue(pruner);
+            void Align(Vector3 target)
+            {
+                pruner.transform.position += target - model.TransformPoint((start + end) * 0.5f);
+                pruner.GetComponent<Rigidbody>().position = pruner.transform.position;
+            }
+            Align(fruit.StemPosition + Vector3.right);
+            Squeeze(0f);
+            Squeeze(1f);
+            Require(!fruit.IsStemCut, "Closing away from the stalk does not cut");
+            Align(fruit.StemPosition);
+            Squeeze(1f);
+            Require(!fruit.IsStemCut, "Moving closed blades onto the stalk does not cut");
+            Require(!(bool)cutStem.Invoke(fruit, new object[] { pruner }),
+                "Tool proximity outside a completed snip does not cut");
+            state.tomatoPhase = 4;
+            state.stage = GrowthStage.GreenFruit.ToString();
+            Squeeze(0f);
+            Squeeze(1f);
+            Require(!fruit.IsStemCut && !fruit.IsPickedUp && !fruit.CanCutStem,
+                "Green calendar state rejects a valid tool gesture even on a ripe mesh");
+            state.tomatoPhase = startingPhase;
+            state.stage = startingStage;
+            state.soilCovered = false;
+            Squeeze(0f);
+            Squeeze(1f);
+            Require(!fruit.IsStemCut, "Missing soil cover rejects harvesting");
+            state.soilCovered = startingCover;
+            Squeeze(0f);
+            Squeeze(0.6f);
+            Require(!fruit.IsStemCut, "Partial closure does not cut");
+            Squeeze(1f);
+            Require(fruit.IsStemCut && fruit.transform.parent == null && !fruit.IsPickedUp,
+                "A full held-tool stroke at the real stalk detaches without counting pickup");
+            Require(!(bool)cutStem.Invoke(fruit, new object[] { pruner }) && !fruit.CanCutStem,
+                "A severed tomato rejects duplicate cuts");
+        }
+        finally
+        {
+            state.tomatoPhase = startingPhase;
+            state.stage = startingStage;
+            state.soilCovered = startingCover;
+            toolPose = new Pose(pruner.transform.position, pruner.transform.rotation);
+            toolGrab.ProcessPointerEvent(new PointerEvent(913, PointerEventType.Unselect, toolPose));
+            toolGrab.ProcessPointerEvent(new PointerEvent(913, PointerEventType.Unhover, toolPose));
+            updateBlades.Invoke(pruner, new object[] { false, 0f, -1, 1f });
+            pruner.transform.SetPositionAndRotation(startingPosition, startingRotation);
+            Rigidbody body = pruner.GetComponent<Rigidbody>();
+            body.position = startingPosition;
+            body.rotation = startingRotation;
+            if (!body.isKinematic)
+            {
+                body.linearVelocity = Vector3.zero;
+                body.angularVelocity = Vector3.zero;
+            }
+        }
+    }
+
     private static void VerifyHarvestFruit(TomatoFruit fruit)
     {
         MeshFilter filter = fruit.GetComponentInChildren<MeshFilter>();
@@ -389,14 +499,16 @@ public static class TomatoRuntimeVerification
         SphereCollider collider = fruit.GetComponent<SphereCollider>();
         Require(collider != null && collider.enabled && !collider.isTrigger &&
             collider.attachedRigidbody == fruit.GetComponent<Rigidbody>(), "Fruit has its own active solid collider");
-        foreach (Collider candidate in fruit.GetComponentInChildren<HandGrabInteractable>().Colliders)
-            Require(candidate == collider, "Hand grab targets only the fruit collider");
+        var grabColliders = fruit.GetComponentInChildren<HandGrabInteractable>(true).Colliders;
+        if (grabColliders != null)
+            foreach (Collider candidate in grabColliders)
+                Require(candidate == collider, "Hand grab targets only the fruit collider");
         MeshRenderer shell = HarvestOutline(fruit);
-        Require(shell != null && shell.enabled &&
+        Require(shell != null &&
             shell.sharedMaterial.shader.name == "Cozy Garden/Tomato Harvest Outline" &&
             shell.GetComponent<MeshFilter>().sharedMesh.subMeshCount == 1 &&
             shell.GetComponent<Collider>() == null, "Outline follows only the tomato surface without a grab collider");
-        foreach (MeshFilter model in fruit.transform.parent.GetComponentsInChildren<MeshFilter>())
+        foreach (MeshFilter model in fruit.Source.StageVisual.GetComponentsInChildren<MeshFilter>())
         {
             if (!model.name.StartsWith("RootswithTomatoes", StringComparison.Ordinal) ||
                 !TomatoFruitMesh.TryGetFruitBounds(model, model.GetComponent<MeshRenderer>(), out Bounds modelBounds)) continue;

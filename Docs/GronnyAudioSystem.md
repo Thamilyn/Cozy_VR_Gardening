@@ -71,7 +71,9 @@ Audio | Evento y condición de pertinencia | Entrada | Visual
 `09_young_plant` | Fase 2 | Ambas | Planta joven existente
 `10_flowering` | Fase 3 | Ambas | Floración existente
 `11_green_fruit` | Fase 4 | Ambas | Frutos inmaduros existentes, de distintos colores
-`12_harvest` | Fase 5, antes de cosechar | Ambas | Fruto maduro y bandeja existentes
+`harvest_cut_stem` | Madurez real de fase 5, con tierra y tallo unido | Ambas | Explica Pruner, apertura de hojas y cierre de mano o gatillo
+`harvest_stem_cut` | Primer corte válido de la unión | Ambas | Invita a recoger el tomate separado
+`harvest_picked` | Primer agarre Meta del tomate separado | Ambas | Felicita por la recogida; la bandeja conserva el cierre posterior
 `13_complete` | CalendarSystem.RecordHarvest marca harvested | Ambas | Celebración existente del profesor; las demos terminan
 `help_planting` | Liberación de semilla de tomate rechazada, intento de avanzar sin plantar o inactividad | Ambas | Tierra y guía existentes
 `help_low_water` | Intento de avanzar con agua insuficiente o inactividad | Ambas | Panel existente
@@ -89,6 +91,8 @@ Audio | Evento y condición de pertinencia | Entrada | Visual
 `controls_calendar_select_controllers` | Mismo contexto | Mandos | MetaQuestTouchPlus_Right y clip trigger; rayo y botón de ejemplo propios
 
 Los avisos y fases se observan cada 0,15 s. Durante el salto temporal se limpia la cola. Cada instrucción se cancela también si su acción ya ocurrió o cambió la fase. Las referencias a la planta se consultan de nuevo, por lo que una petición pendiente no conserva un estado de agua antiguo.
+
+Las tres voces de corte/recogida están generadas con Kiki y asignadas en el catálogo. `12_harvest` y su variante accesible se conservan como grabaciones anteriores, pero el tutorial actual no las solicita al madurar. Detalles y validación: `GronnyHarvestVoice.md`.
 
 ## Entrada y aprendizaje
 

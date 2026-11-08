@@ -1,0 +1,42 @@
+{
+  "recognition": "Whisper base.en offline",
+  "note": "Automatic transcription does not evaluate naturalness.",
+  "recordings": [
+    {
+      "id": "harvest_cut_stem",
+      "expected": "Look! Your tomato is ripe! Pick up the pruning shears. Open the blades around the stem connecting your tomato to the plant. Then close your hand, or squeeze the trigger, to snip the stem.",
+      "transcript": "Look, your tomato is ripe. Pick up the pruning shears. Open the blades around the stem connecting your tomato to the plant. Then close your hand or squeeze the trigger to snip the stem.",
+      "words_match": true,
+      "seconds": 12.04,
+      "sample_rate": 24000,
+      "channels": 1,
+      "peak": 0.862518310546875,
+      "clipped_samples": 0,
+      "sha256": "64774CB7C433CB346B1A1493935BF37EDBD2B94BC2BF75310C9FEB7BAC75CEF1"
+    },
+    {
+      "id": "harvest_stem_cut",
+      "expected": "Nicely done! Now you can pick up your tomato.",
+      "transcript": "Nicely done! Now you can pick up your tomato!",
+      "words_match": true,
+      "seconds": 3.24,
+      "sample_rate": 24000,
+      "channels": 1,
+      "peak": 0.97998046875,
+      "clipped_samples": 0,
+      "sha256": "6BC7493B6031F5CE7B59F2C957B9CA0DC8224AFC5DD9F5BD01EE080F24CCF76A"
+    },
+    {
+      "id": "harvest_picked",
+      "expected": "Well done! You have harvested your tomato!",
+      "transcript": "Well done, you have harvested your tomato.",
+      "words_match": true,
+      "seconds": 3.08,
+      "sample_rate": 24000,
+      "channels": 1,
+      "peak": 0.665863037109375,
+      "clipped_samples": 0,
+      "sha256": "3A58CE64E388A4600C5E2BF2585BDBF0EFF2D99B4AA169A7CC732C8DB694D2E5"
+    }
+  ]
+}

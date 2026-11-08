@@ -54,26 +54,52 @@ public sealed class TomatoFruitMesh : MonoBehaviour
 
     public static Vector3 GetAttachmentPoint(MeshFilter filter, MeshRenderer renderer, Bounds fruitBounds)
     {
+        return TryGetAttachmentPoint(filter, renderer, fruitBounds, out Vector3 point)
+            ? point : fruitBounds.center;
+    }
+
+    public static bool TryGetAttachmentPoint(MeshFilter filter, MeshRenderer renderer, Bounds fruitBounds,
+        out Vector3 point)
+    {
         Mesh mesh = filter.sharedMesh;
-        Vector3 point = fruitBounds.center;
-        float farthest = 0f;
-        if (!mesh.isReadable) return point;
+        point = fruitBounds.center;
+        // Never use the fruit's centre as a cutting target when stalk geometry is unavailable.
+        if (!mesh.isReadable) return false;
         Vector3[] vertices = mesh.vertices;
         Material[] materials = renderer.sharedMaterials;
-        // RootswithTomatoes includes a calyx and a short stalk. Its farthest stalk
-        // vertex marks the connection to the plant, independently of the imported pivot.
+        var stalkIndices = new HashSet<int>();
         for (int i = 0; i < mesh.subMeshCount && i < materials.Length; i++)
         {
-            if (IsFruitMaterial(materials[i])) continue;
-            foreach (int index in mesh.GetTriangles(i))
-            {
-                float distance = (vertices[index] - fruitBounds.center).sqrMagnitude;
-                if (distance <= farthest) continue;
-                farthest = distance;
-                point = vertices[index];
-            }
+            if (materials[i] == null || IsFruitMaterial(materials[i])) continue;
+            foreach (int index in mesh.GetTriangles(i)) stalkIndices.Add(index);
         }
-        return point;
+        if (stalkIndices.Count == 0) return false;
+
+        Vector3 stalkCentre = Vector3.zero;
+        foreach (int index in stalkIndices) stalkCentre += vertices[index];
+        stalkCentre /= stalkIndices.Count;
+        Vector3 axis = stalkCentre - fruitBounds.center;
+        if (axis.sqrMagnitude < 0.00000001f) return false;
+        axis.Normalize();
+
+        // The calyx leaves extend farther sideways than the short stalk. Radial
+        // distance therefore targets a leaf tip. Project along the fruit-to-stalk
+        // axis instead, then centre the terminal ring rather than picking one edge.
+        float farthest = float.NegativeInfinity;
+        foreach (int index in stalkIndices)
+            farthest = Mathf.Max(farthest, Vector3.Dot(vertices[index] - fruitBounds.center, axis));
+        float tipDepth = fruitBounds.size.magnitude * 0.02f;
+        if (farthest <= tipDepth) return false;
+        Vector3 tip = Vector3.zero;
+        int tipCount = 0;
+        foreach (int index in stalkIndices)
+        {
+            if (Vector3.Dot(vertices[index] - fruitBounds.center, axis) < farthest - tipDepth) continue;
+            tip += vertices[index];
+            tipCount++;
+        }
+        point = tip / tipCount;
+        return true;
     }
 
     public static bool TryGetFruitBounds(MeshFilter filter, MeshRenderer renderer, out Bounds bounds)

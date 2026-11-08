@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "Docs/Validation/HarvestAnimationRegression.cs"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 53,
+      "executeMs": 194,
+      "assemblyName": "PipelineRunScript_HarvestAnimationRegression_0646df04c53045d8934d314e125d75ea",
+      "success": true,
+      "result": "PASS: Paused Play fixture\nPASS: Existing serialized demonstration values preserved\nPASS: Recorded cues reference the new visuals and existing Pruner\nPASS: Hands: cut example appears\nPASS: Hands cut: visual has no physical interaction\nPASS: Hands cut: example cannot cut, harvest or register a Meta grab\nPASS: Hands: open blades leave the example stem intact\nPASS: Hands: squeeze deforms the actual Meta hand mesh\nPASS: Hands: closing blades separates one whole fruit\nPASS: Hands: caption explains the matching input\nPASS: Hands pickup: visual has no physical interaction\nPASS: Hands pickup: example cannot cut, harvest or register a Meta grab\nPASS: Hands: silent pickup practice holds poses for a readable cycle\nPASS: Hands: picked example tomato lifts with the hand/controller\nPASS: Hands: changing mode removes the previous animation\nPASS: Controllers: cut example appears\nPASS: Controllers cut: visual has no physical interaction\nPASS: Controllers cut: example cannot cut, harvest or register a Meta grab\nPASS: Controllers: open blades leave the example stem intact\nPASS: Controllers: closing blades separates one whole fruit\nPASS: Controllers: caption explains the matching input\nPASS: Controllers pickup: visual has no physical interaction\nPASS: Controllers pickup: example cannot cut, harvest or register a Meta grab\nPASS: Controllers: silent pickup practice holds poses for a readable cycle\nPASS: Controllers: picked example tomato lifts with the hand/controller\nPASS: Controllers: changing mode removes the previous animation\nPASS: Cut animation continues without replaying speech while awaiting the action\nPASS: Actual cut immediately replaces the stale visual while voice can finish\nPASS: Actual pickup removes the harvest animation\nPASS: Menu suspension hides the demonstration\nNOT TESTED: headset comfort, physical input or device frame time. Rendered views and synthetic animation times used."
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

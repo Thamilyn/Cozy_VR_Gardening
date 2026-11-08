@@ -1,0 +1,56 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "eval_file",
+    "parameters": {
+      "file": "Docs/Validation/InspectStemCut.cs"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "scene": "Assets/Scenes/Garden_Moves.unity",
+        "dirty": false,
+        "playing": false,
+        "paused": false,
+        "suspended": false,
+        "fruits": [],
+        "tools": [
+          {
+            "name": "Pruner",
+            "enabled": true,
+            "held": null,
+            "closure": 0,
+            "armed": false,
+            "model": null
+          },
+          {
+            "name": "Pruner",
+            "enabled": true,
+            "held": null,
+            "closure": 0,
+            "armed": false,
+            "model": null
+          },
+          {
+            "name": "Pruner",
+            "enabled": true,
+            "held": null,
+            "closure": 0,
+            "armed": false,
+            "model": null
+          }
+        ]
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

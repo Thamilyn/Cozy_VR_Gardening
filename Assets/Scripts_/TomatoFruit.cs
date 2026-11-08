@@ -2,7 +2,7 @@ using Oculus.Interaction;
 using Oculus.Interaction.HandGrab;
 using UnityEngine;
 
-/// <summary>Ripe fruit follows the plant until grabbed and counts only after release in the tray.</summary>
+/// <summary>Ripe fruit must be snipped before a Meta grab; tray delivery records the crop.</summary>
 [DisallowMultipleComponent]
 public sealed class TomatoFruit : MonoBehaviour
 {
@@ -12,11 +12,14 @@ public sealed class TomatoFruit : MonoBehaviour
     [SerializeField, Min(0.1f)] private float cutRecoveryDelaySeconds = 8f;
 
     private SeedItem source;
+    private SeedsController controller;
     private Grabbable grabbable;
     private Rigidbody body;
     private TomatoHarvestBasket basket;
     private bool picked;
+    private bool stemCut;
     private bool stored;
+    private bool waitingAtRecoveryPoint;
     private float nextBasketSearch;
     private MeshRenderer outline;
     private bool requireNewGrab;
@@ -24,20 +27,35 @@ public sealed class TomatoFruit : MonoBehaviour
     private Transform plantAttachment;
     private Vector3 attachedLocalPosition;
     private Quaternion attachedLocalRotation;
-    private Vector3 attachedLocalScale;
     private float recoveryRemaining = -1f;
     private float looseRecoveryDelay;
     private Vector3 stemLocalPosition;
 
-    // This component is installed by SeedItem only at the ripe growth stage.
-    public bool CanCutStem => isActiveAndEnabled && source != null && source.IsPlanted &&
-        source.Crop == SeedCrop.Tomato && !picked && !stored && grabbable != null &&
+    public SeedItem Source => source;
+    public bool IsStemCut => stemCut;
+    public bool IsPickedUp => picked;
+    public bool IsRipe
+    {
+        get
+        {
+            CalendarSystem calendar = controller != null ? controller.Calendar : null;
+            CalendarSystem.PlantSave state = source != null && calendar != null
+                ? calendar.FindPlant(source.SeedId) : null;
+            return isActiveAndEnabled && grabbable != null && source != null && source.IsPlanted && source.Crop == SeedCrop.Tomato &&
+                calendar != null && !calendar.IsAdvancing && state != null && state.soilCovered &&
+                state.tomatoPhase == 5 && state.stage == GrowthStage.Mature.ToString() && !state.harvested;
+        }
+    }
+    public bool CanCutStem => IsRipe && !stemCut && !stored && grabbable != null &&
         grabbable.SelectingPointsCount == 0;
+    public bool CanStore => IsRipe && stemCut && picked && !stored && grabbable != null &&
+        grabbable.SelectingPointsCount == 0 && !requireNewGrab && !GardenMenuController.GardenSuspended;
     public Vector3 StemPosition => transform.TransformPoint(stemLocalPosition);
 
     public void Initialize(SeedItem seed)
     {
         source = seed;
+        controller = FindFirstObjectByType<SeedsController>();
         MeshFilter mesh = GetComponentInChildren<MeshFilter>();
         MeshRenderer renderer = mesh != null ? mesh.GetComponent<MeshRenderer>() : null;
         if (mesh == null || mesh.sharedMesh == null || renderer == null)
@@ -45,9 +63,16 @@ public sealed class TomatoFruit : MonoBehaviour
             Debug.LogError("Harvestable tomato needs its own mesh and renderer.", this);
             return;
         }
-        Bounds bounds = TomatoFruitMesh.TryGetFruitBounds(mesh, renderer, out Bounds fruitBounds)
-            ? fruitBounds : mesh.sharedMesh.bounds;
-        Vector3 attachment = TomatoFruitMesh.GetAttachmentPoint(mesh, renderer, bounds);
+        if (!TomatoFruitMesh.TryGetFruitBounds(mesh, renderer, out Bounds bounds))
+        {
+            Debug.LogError("Harvestable tomato needs a Tomato material distinct from its stalk.", this);
+            return;
+        }
+        if (!TomatoFruitMesh.TryGetAttachmentPoint(mesh, renderer, bounds, out Vector3 attachment))
+        {
+            Debug.LogError("Harvestable tomato needs readable stalk geometry for its cutting point.", this);
+            return;
+        }
         Vector3 worldAttachment = mesh.transform.TransformPoint(attachment);
         Vector3 size = Vector3.Scale(bounds.size, mesh.transform.lossyScale);
         float diameter = Mathf.Max(Mathf.Abs(size.x), Mathf.Abs(size.y), Mathf.Abs(size.z));
@@ -61,7 +86,6 @@ public sealed class TomatoFruit : MonoBehaviour
         plantAttachment = transform.parent;
         attachedLocalPosition = transform.localPosition;
         attachedLocalRotation = transform.localRotation;
-        attachedLocalScale = transform.localScale;
         MaterialPropertyBlock ripeColor = new();
         ripeColor.SetColor("_BaseColor", new Color(0.9f, 0.13f, 0.08f));
         ripeColor.SetColor("_Color", new Color(0.9f, 0.13f, 0.08f));
@@ -87,8 +111,9 @@ public sealed class TomatoFruit : MonoBehaviour
         body.useGravity = false;
         body.isKinematic = true;
         grabbable.ForceKinematicDisabled = true;
+        SetGrabEnabled(false);
         CreateOutline(mesh, renderer);
-        harvestLabel = GardenObjectLabel.Create(gameObject, "Ready to harvest", Vector3.up * 0.12f);
+        harvestLabel = GardenObjectLabel.Create(gameObject, "Cut the stem", Vector3.up * 0.12f);
     }
 
     private void CreateOutline(MeshFilter mesh, MeshRenderer renderer)
@@ -114,28 +139,34 @@ public sealed class TomatoFruit : MonoBehaviour
 
     private void OnPointerEvent(PointerEvent pointerEvent)
     {
-        if (stored || pointerEvent.Type != PointerEventType.Select) return;
+        if (stored || !stemCut || !IsRipe || GardenMenuController.GardenSuspended ||
+            pointerEvent.Type != PointerEventType.Select) return;
         recoveryRemaining = -1f;
+        waitingAtRecoveryPoint = false;
         looseRecoveryDelay = recoveryDelaySeconds;
-        if (picked) return;
-        DetachFromPlant();
+        body.useGravity = true;
+        picked = true;
+        if (outline != null) outline.enabled = false;
+        if (harvestLabel != null) harvestLabel.enabled = false;
     }
 
-    public bool TryCutStem()
+    internal bool TryCutStem(GardenPruner pruner)
     {
-        if (!CanCutStem || GardenMenuController.GardenSuspended) return false;
+        if (!CanCutStem || GardenMenuController.GardenSuspended || pruner == null ||
+            !pruner.IsCuttingStem(this)) return false;
+        stemCut = true;
         DetachFromPlant();
         body.isKinematic = false;
         body.linearVelocity = Vector3.zero;
         body.angularVelocity = Vector3.zero;
         looseRecoveryDelay = Mathf.Max(0.1f, cutRecoveryDelaySeconds);
         recoveryRemaining = looseRecoveryDelay;
+        SetGrabEnabled(true);
         return true;
     }
 
     private void DetachFromPlant()
     {
-        picked = true;
         // Detach before Meta begins its grab transform, so its initial pose uses the
         // fruit's independent hierarchy rather than the scaled plant hierarchy.
         transform.SetParent(null, true);
@@ -145,6 +176,13 @@ public sealed class TomatoFruit : MonoBehaviour
         body.useGravity = true;
         if (outline != null) outline.enabled = false;
         if (harvestLabel != null) harvestLabel.enabled = false;
+    }
+
+    private void SetGrabEnabled(bool available)
+    {
+        grabbable.enabled = available;
+        foreach (GrabInteractable grab in GetComponentsInChildren<GrabInteractable>(true)) grab.enabled = available;
+        foreach (HandGrabInteractable grab in GetComponentsInChildren<HandGrabInteractable>(true)) grab.enabled = available;
     }
 
     private void Update()
@@ -162,8 +200,8 @@ public sealed class TomatoFruit : MonoBehaviour
             recoveryRemaining = -1f;
             return;
         }
-        if (!picked) return;
-        if (!requireNewGrab)
+        if (!stemCut || waitingAtRecoveryPoint) return;
+        if (picked && !requireNewGrab)
         {
             if (basket == null && Time.unscaledTime >= nextBasketSearch)
             {
@@ -176,10 +214,10 @@ public sealed class TomatoFruit : MonoBehaviour
         }
         if (recoveryRemaining < 0f) recoveryRemaining = Mathf.Max(0.1f, looseRecoveryDelay);
         recoveryRemaining -= Time.deltaTime;
-        if (recoveryRemaining <= 0f) ReturnToPlant();
+        if (recoveryRemaining <= 0f) RecoverLooseFruit();
     }
 
-    private void ReturnToPlant()
+    private void RecoverLooseFruit()
     {
         if (plantAttachment == null) return;
         if (!body.isKinematic)
@@ -189,28 +227,30 @@ public sealed class TomatoFruit : MonoBehaviour
         }
         body.useGravity = false;
         body.isKinematic = true;
-        // Restore the local pose so the fruit follows a pot moved since it was picked.
-        transform.SetParent(plantAttachment, false);
-        transform.SetLocalPositionAndRotation(attachedLocalPosition, attachedLocalRotation);
-        transform.localScale = attachedLocalScale;
+        // Return within reach, but never reconnect a severed stalk or require another cut.
+        // Keep the independent world scale established when detaching from the scaled pot.
+        Vector3 recoveryPosition = plantAttachment.TransformPoint(attachedLocalPosition);
+        Vector3 awayFromPlant = Vector3.ProjectOnPlane(recoveryPosition - plantAttachment.position, Vector3.up);
+        if (awayFromPlant.sqrMagnitude < 0.000001f) awayFromPlant = Vector3.right;
+        recoveryPosition += awayFromPlant.normalized * DiameterMetres * 1.5f;
+        transform.SetPositionAndRotation(recoveryPosition,
+            plantAttachment.rotation * attachedLocalRotation);
         body.position = transform.position;
         body.rotation = transform.rotation;
         GetComponent<GrabFreeTransformer>()?.Initialize(grabbable);
-        picked = false;
+        waitingAtRecoveryPoint = true;
         requireNewGrab = false;
         recoveryRemaining = -1f;
-        if (outline != null) outline.enabled = true;
-        if (harvestLabel != null) harvestLabel.enabled = true;
+        if (outline != null) outline.enabled = !picked;
     }
 
     public void StoreIn(Transform tray)
     {
+        if (!CanStore || tray == null) return;
         stored = true;
         if (harvestLabel != null) harvestLabel.enabled = false;
         if (outline != null) outline.enabled = false;
-        grabbable.enabled = false;
-        foreach (GrabInteractable grab in GetComponentsInChildren<GrabInteractable>()) grab.enabled = false;
-        foreach (HandGrabInteractable grab in GetComponentsInChildren<HandGrabInteractable>()) grab.enabled = false;
+        SetGrabEnabled(false);
         foreach (Collider collider in GetComponentsInChildren<Collider>()) collider.enabled = false;
         if (!body.isKinematic)
         {

@@ -28,6 +28,7 @@ public sealed class GardenPruner : MonoBehaviour
     private float closure;
     private int holdingInteractor = -1;
     private bool cutArmed;
+    private TomatoFruit cuttingFruit;
 
     private void Awake()
     {
@@ -173,7 +174,17 @@ public sealed class GardenPruner : MonoBehaviour
             nearestDistance = distance;
             nearest = fruit;
         }
-        if (nearest != null) nearest.TryCutStem();
+        if (nearest == null) return;
+        cuttingFruit = nearest;
+        try { nearest.TryCutStem(this); }
+        finally { cuttingFruit = null; }
+    }
+
+    internal bool IsCuttingStem(TomatoFruit fruit)
+    {
+        // Authorize only the stalk selected by this completed closing stroke.
+        return isActiveAndEnabled && fruit != null && cuttingFruit == fruit &&
+            grabbable != null && grabbable.SelectingPointsCount > 0 && closure >= 0.9f;
     }
 
     private void ResetCut()

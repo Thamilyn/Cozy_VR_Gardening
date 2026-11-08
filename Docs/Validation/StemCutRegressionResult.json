@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "Docs/Validation/StemCutRegression.cs"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 85,
+      "executeMs": 15,
+      "assemblyName": "PipelineRunScript_StemCutRegression_5bbcf93c26dc467db5fc45d476d3b9bc",
+      "success": true,
+      "result": "PASS: Paused Play fixture\nPASS: Cut target lies in the actual stalk terminal ring of RootswithTomatoes.036, outside the calyx leaf tips\nPASS: Ripe source state starts attached and unpicked\nPASS: Attached fruit cannot be grabbed and stays stable\nPASS: Existing Pruner passes invalid-action checks and a full stroke at the real stalk detaches exactly once\nPASS: Cut preserves fruit world scale\nPASS: Cut enables existing Meta grab and dynamic gravity\nPASS: An unpicked cut tomato recovers without reconnecting or requiring a second cut\nPASS: Falling into tray after cutting without a pickup does not harvest\nPASS: Hand hover does not count as pickup\nPASS: Meta Select completes pickup independently of tray delivery\nPASS: Held fruit cannot complete tray delivery\nPASS: Releasing the separated picked tomato inside the tray records harvest and stores it\nPASS: Repeated delivery does not repeat harvest credit\nNOT TESTED: real tracking/physical gestures, audio recordings, Quest 3 comfort or performance."
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

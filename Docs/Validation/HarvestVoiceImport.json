@@ -1,0 +1,56 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "Docs/Validation/ConnectHarvestVoice.cs"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 127,
+      "executeMs": 1339,
+      "assemblyName": "PipelineRunScript_ConnectHarvestVoice_3f4bf9f5cf9541d38e12b670003f6625",
+      "success": true,
+      "result": {
+        "connected": [
+          {
+            "id": "harvest_cut_stem",
+            "path": "Assets/Audio/dialogues_cozy_gardening/harvest_cut_stem.wav",
+            "guid": "c4af10517d14a894195a26d55a495694",
+            "seconds": 12.04,
+            "sampleRate": 24000,
+            "channels": 1,
+            "sha256": "64774CB7C433CB346B1A1493935BF37EDBD2B94BC2BF75310C9FEB7BAC75CEF1"
+          },
+          {
+            "id": "harvest_stem_cut",
+            "path": "Assets/Audio/dialogues_cozy_gardening/harvest_stem_cut.wav",
+            "guid": "0c346d4f7f5069148b8e84ac83ce2c35",
+            "seconds": 3.24,
+            "sampleRate": 24000,
+            "channels": 1,
+            "sha256": "6BC7493B6031F5CE7B59F2C957B9CA0DC8224AFC5DD9F5BD01EE080F24CCF76A"
+          },
+          {
+            "id": "harvest_picked",
+            "path": "Assets/Audio/dialogues_cozy_gardening/harvest_picked.wav",
+            "guid": "888f51713c7cfb24d9781d29adf2ac37",
+            "seconds": 3.08,
+            "sampleRate": 24000,
+            "channels": 1,
+            "sha256": "3A58CE64E388A4600C5E2BF2585BDBF0EFF2D99B4AA169A7CC732C8DB694D2E5"
+          }
+        ],
+        "total": 3
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

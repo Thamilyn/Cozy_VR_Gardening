@@ -1,0 +1,38 @@
+{
+  "model": "KittenML/kitten-tts-2",
+  "revision": "v2",
+  "voice": "Kiki",
+  "preset": "expressive",
+  "expression": "tender",
+  "temperature": 0.9,
+  "pitch_and_speed_processing": false,
+  "recordings": [
+    {
+      "id": "harvest_cut_stem",
+      "text": "Look! Your tomato is ripe! Pick up the pruning shears. Open the blades around the stem connecting your tomato to the plant. Then close your hand, or squeeze the trigger, to snip the stem.",
+      "seed": 811,
+      "sample_rate": 24000,
+      "seconds": 12.04,
+      "peak": 0.8625273108482361,
+      "sha256": "64774CB7C433CB346B1A1493935BF37EDBD2B94BC2BF75310C9FEB7BAC75CEF1"
+    },
+    {
+      "id": "harvest_stem_cut",
+      "text": "Nicely done! Now you can pick up your tomato.",
+      "seed": 812,
+      "sample_rate": 24000,
+      "seconds": 3.24,
+      "peak": 0.9800000190734863,
+      "sha256": "6BC7493B6031F5CE7B59F2C957B9CA0DC8224AFC5DD9F5BD01EE080F24CCF76A"
+    },
+    {
+      "id": "harvest_picked",
+      "text": "Well done! You've harvested your tomato!",
+      "seed": 813,
+      "sample_rate": 24000,
+      "seconds": 3.28,
+      "peak": 0.8785243034362793,
+      "sha256": "5B8D83052A84BDB16F1D6FEEA39D795D1532271E87140F31C5BF555DA5F579CE"
+    }
+  ]
+}

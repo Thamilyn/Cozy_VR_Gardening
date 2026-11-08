@@ -40,6 +40,7 @@ public sealed class SeedItem : MonoBehaviour
     public string SeedId => seedId;
     public bool IsPlanted { get; private set; }
     public GameObject StageVisual => _stageVisual;
+    public TomatoFruit HarvestFruit { get; private set; }
 
     private void Awake()
     {
@@ -229,7 +230,8 @@ public sealed class SeedItem : MonoBehaviour
         Transform fruit = visual.transform.Find("Tomato_PLACEHOLDER_0");
         if (fruit == null) fruit = TomatoFruitMesh.PrepareHarvestModel(visual);
         if (fruit == null) return;
-        fruit.gameObject.AddComponent<TomatoFruit>().Initialize(this);
+        HarvestFruit = fruit.gameObject.AddComponent<TomatoFruit>();
+        HarvestFruit.Initialize(this);
         _ripeFruitPrepared = true;
     }
 

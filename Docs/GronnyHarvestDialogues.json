@@ -1,0 +1,17 @@
+[
+  {
+    "id": "harvest_cut_stem",
+    "text": "Look! Your tomato is ripe! Pick up the pruning shears. Open the blades around the stem connecting your tomato to the plant. Then close your hand, or squeeze the trigger, to snip the stem.",
+    "seed": 811
+  },
+  {
+    "id": "harvest_stem_cut",
+    "text": "Nicely done! Now you can pick up your tomato.",
+    "seed": 812
+  },
+  {
+    "id": "harvest_picked",
+    "text": "Well done! You have harvested your tomato!",
+    "seed": 814
+  }
+]

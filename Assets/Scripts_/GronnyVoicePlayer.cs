@@ -172,9 +172,9 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
             if (!source.isPlaying && !playing.waitForAction) StopCurrent();
             else
             {
-                if (playing.contextExpired) demonstration.Hide();
+                if (playing.contextExpired) UpdateBackgroundDemonstration();
                 else if (playing.cue.demo == GardenControlDemo.None) UpdateBackgroundDemonstration();
-                else if (playing.demonstrationRelevant != null && !playing.demonstrationRelevant()) demonstration.Hide();
+                else if (playing.demonstrationRelevant != null && !playing.demonstrationRelevant()) UpdateBackgroundDemonstration();
                 else
                 {
                     if (!demonstration.IsShowing(playing.cue)) demonstration.Show(playing.cue);
@@ -257,8 +257,14 @@ public sealed class GronnyVoicePlayer : MonoBehaviour
             demonstration.Show(backgroundDemonstration);
             backgroundStartedAt = Time.unscaledTime;
         }
-        float duration = Mathf.Max(0.01f, backgroundDemonstration.clip.length / catalogue.pitch);
-        demonstration.Tick(Mathf.Repeat(Time.unscaledTime - backgroundStartedAt, duration) * catalogue.pitch);
+        float elapsed = Time.unscaledTime - backgroundStartedAt;
+        if (demonstration.UsesHandTeachingTiming)
+            demonstration.TickTeaching(Mathf.Repeat(elapsed, demonstration.CycleDurationSeconds));
+        else
+        {
+            float duration = Mathf.Max(0.01f, backgroundDemonstration.clip.length / catalogue.pitch);
+            demonstration.Tick(Mathf.Repeat(elapsed, duration) * catalogue.pitch);
+        }
     }
 
     private void StopCurrent()

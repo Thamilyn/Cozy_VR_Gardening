@@ -22,11 +22,12 @@ MonoBehaviour:
     volume: 1
     cooldown: 0
     assisted: 1
-    controllerTarget:
+    controllerTarget: 
     rightHand: 0
     controllerAnimation: {fileID: 0}
     transcript: Walk towards the gardening table. Stay inside your clear play area.
-      When you get there, look for the seed labelled Tomato seed. I'll show you how to pick it up.
+      When you get there, look for the seed labelled Tomato seed. I'll show you how
+      to pick it up.
     instruction: Walk to the gardening table.
     instructionDetail: Look for Tomato seed. Gronny will explain how to pick it up.
     steps: []
@@ -1882,13 +1883,14 @@ MonoBehaviour:
     volume: 1
     cooldown: 0
     assisted: 1
-    controllerTarget:
+    controllerTarget: 
     rightHand: 0
     controllerAnimation: {fileID: 0}
-    transcript: Great job! Now use your shovel to cover the seed with soil. Hold the
-      loaded blade level over the pot, then gently tilt it to pour.
+    transcript: Great job! Now use your shovel to cover the seed with soil. Hold
+      the loaded blade level over the pot, then gently tilt it to pour.
     instruction: Cover the seed with soil.
-    instructionDetail: Hold the loaded blade level above the pot, then gently tilt it to pour.
+    instructionDetail: Hold the loaded blade level above the pot, then gently tilt
+      it to pour.
     steps: []
   - id: soil_scoop_first
     clip: {fileID: 0}
@@ -1899,13 +1901,14 @@ MonoBehaviour:
     volume: 1
     cooldown: 0
     assisted: 1
-    controllerTarget:
+    controllerTarget: 
     rightHand: 0
     controllerAnimation: {fileID: 0}
     transcript: Great job! Scoop up some soil with your shovel. Hold the loaded blade
       level over the pot, then gently tilt it to cover the seed.
     instruction: Scoop soil with the shovel, then cover the seed.
-    instructionDetail: Scoop from SoilPot. Hold the loaded blade level above the pot, then gently tilt it.
+    instructionDetail: Scoop from SoilPot. Hold the loaded blade level above the
+      pot, then gently tilt it.
     steps: []
   - id: soil_seed_covered
     clip: {fileID: 0}
@@ -1916,12 +1919,133 @@ MonoBehaviour:
     volume: 1
     cooldown: 0
     assisted: 0
-    controllerTarget:
+    controllerTarget: 
     rightHand: 0
     controllerAnimation: {fileID: 0}
     transcript: Perfect! Your seed is all covered up.
     instruction: Your seed is covered!
     instructionDetail: Gronny will explain watering next.
+    steps: []
+  - id: harvest_cut_stem
+    clip: {fileID: 8300000, guid: c4af10517d14a894195a26d55a495694, type: 3}
+    variations: []
+    mode: 0
+    demo: 8
+    priority: 10
+    volume: 1
+    cooldown: 0
+    assisted: 1
+    controllerTarget: right_oculus_controller_world/right_b_trigger_front
+    rightHand: 0
+    controllerAnimation: {fileID: -6338187929255524150, guid: deed68a7fd2e9234899298cf80fae7ad, type: 3}
+    transcript: Look! Your tomato is ripe! Pick up the pruning shears. Open the blades
+      around the stem connecting your tomato to the plant. Then close your hand,
+      or squeeze the trigger, to snip the stem.
+    instruction: Your tomato is ripe! Cut the stem with Pruner.
+    instructionDetail: Open the blades around the stem. Close your hand or squeeze
+      Trigger to snip.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 2
+      position: {x: -0.13, y: -0.05, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Pick up Pruner
+      press: 0
+    - at: 3.2
+      practiceOnly: 0
+      pose: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Open blades around the stem
+      press: 0
+    - at: 8.5
+      practiceOnly: 0
+      pose: 2
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Close to cut the stem
+      press: 1
+    - at: 10.8
+      practiceOnly: 0
+      pose: 2
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: The tomato is separated
+      press: 1
+  - id: harvest_stem_cut
+    clip: {fileID: 8300000, guid: 0c346d4f7f5069148b8e84ac83ce2c35, type: 3}
+    variations: []
+    mode: 0
+    demo: 9
+    priority: 10
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: right_oculus_controller_world/right_b_trigger_grip
+    rightHand: 0
+    controllerAnimation: {fileID: -7415750269733489216, guid: deed68a7fd2e9234899298cf80fae7ad, type: 3}
+    transcript: Nicely done! Now you can pick up your tomato.
+    instruction: Pick up your separated tomato.
+    instructionDetail: Pinch or hold Grip to pick it up.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 0
+      position: {x: -0.1, y: 0, z: -0.02}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Reach for the loose tomato
+      press: 0
+    - at: 1
+      practiceOnly: 0
+      pose: 1
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Pinch or hold Grip
+      press: 1
+    - at: 2.4
+      practiceOnly: 0
+      pose: 1
+      position: {x: 0, y: 0.08, z: -0.03}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Lift the separated tomato
+      press: 1
+  - id: harvest_picked
+    clip: {fileID: 8300000, guid: 888f51713c7cfb24d9781d29adf2ac37, type: 3}
+    variations: []
+    mode: 0
+    demo: 0
+    priority: 10
+    volume: 1
+    cooldown: 0
+    assisted: 0
+    controllerTarget: 
+    rightHand: 0
+    controllerAnimation: {fileID: 0}
+    transcript: Well done! You have harvested your tomato!
+    instruction: You've harvested your tomato!
+    instructionDetail: Place it in the harvest tray to finish the gardening session.
     steps: []
   waterSavingAudioVersion: 3
   leftHand:
@@ -1947,6 +2071,7 @@ MonoBehaviour:
   controllerY: {fileID: -6048466920149098984, guid: 2b1aaafc31655024394d83dc00911c1c, type: 3}
   controllerTrigger: {fileID: -6338187929255524150, guid: deed68a7fd2e9234899298cf80fae7ad, type: 3}
   demonstrationMaterial: {fileID: 2100000, guid: 575f1a14acfa4b3409a2104843b085ff, type: 2}
+  pruningShearsVisual: {fileID: 6451540459712408966, guid: 1db0bc129c0994bd68c8177096e5a2d3, type: 3}
   voiceVolume: 0.85
   pitch: 1
   gapSeconds: 0.35

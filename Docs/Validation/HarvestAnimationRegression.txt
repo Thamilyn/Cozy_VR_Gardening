@@ -1,0 +1,31 @@
+PASS: Paused Play fixture
+PASS: Existing serialized demonstration values preserved
+PASS: Recorded cues reference the new visuals and existing Pruner
+PASS: Hands: cut example appears
+PASS: Hands cut: visual has no physical interaction
+PASS: Hands cut: example cannot cut, harvest or register a Meta grab
+PASS: Hands: open blades leave the example stem intact
+PASS: Hands: squeeze deforms the actual Meta hand mesh
+PASS: Hands: closing blades separates one whole fruit
+PASS: Hands: caption explains the matching input
+PASS: Hands pickup: visual has no physical interaction
+PASS: Hands pickup: example cannot cut, harvest or register a Meta grab
+PASS: Hands: silent pickup practice holds poses for a readable cycle
+PASS: Hands: picked example tomato lifts with the hand/controller
+PASS: Hands: changing mode removes the previous animation
+PASS: Controllers: cut example appears
+PASS: Controllers cut: visual has no physical interaction
+PASS: Controllers cut: example cannot cut, harvest or register a Meta grab
+PASS: Controllers: open blades leave the example stem intact
+PASS: Controllers: closing blades separates one whole fruit
+PASS: Controllers: caption explains the matching input
+PASS: Controllers pickup: visual has no physical interaction
+PASS: Controllers pickup: example cannot cut, harvest or register a Meta grab
+PASS: Controllers: silent pickup practice holds poses for a readable cycle
+PASS: Controllers: picked example tomato lifts with the hand/controller
+PASS: Controllers: changing mode removes the previous animation
+PASS: Cut animation continues without replaying speech while awaiting the action
+PASS: Actual cut immediately replaces the stale visual while voice can finish
+PASS: Actual pickup removes the harvest animation
+PASS: Menu suspension hides the demonstration
+NOT TESTED: headset comfort, physical input or device frame time. Rendered views and synthetic animation times used.

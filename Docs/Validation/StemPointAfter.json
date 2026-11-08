@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "Docs/Validation/StemGeometryDiagnosis.cs"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 285,
+      "executeMs": 48,
+      "assemblyName": "PipelineRunScript_StemGeometryDiagnosis_6b78a0f706954db7a53e14583bbf61f1",
+      "success": true,
+      "result": {
+        "fruit": "(0.04849, 1.27096, -2.38863)",
+        "stem": "(0.03067, 1.28840, -2.34122)",
+        "groups": [
+          {
+            "material": "GreenTomato",
+            "count": 125,
+            "min": "(0.01716, 1.23846, -2.42024)",
+            "max": "(0.07982, 1.30346, -2.35701)"
+          },
+          {
+            "material": "Material.001",
+            "count": 256,
+            "min": "(0.00391, 1.24806, -2.38198)",
+            "max": "(0.06675, 1.30659, -2.33913)"
+          }
+        ]
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

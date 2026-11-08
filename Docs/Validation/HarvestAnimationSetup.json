@@ -1,0 +1,29 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "Docs/Validation/ConfigureHarvestAnimations.cs"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 1037,
+      "executeMs": 124,
+      "assemblyName": "PipelineRunScript_ConfigureHarvestAnimations_f2559d59b3114c138b7f1e9041fc369f",
+      "success": true,
+      "result": {
+        "cutSteps": 4,
+        "pickSteps": 3,
+        "shears": "Assets/MamkinEnthusiast/3D Mini Garden Props/Prefabs/Pruner.prefab"
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

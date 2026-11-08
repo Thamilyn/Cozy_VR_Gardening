@@ -27,6 +27,12 @@ public sealed class GardenControlDemonstration : MonoBehaviour
     private Transform[] thumbJoints;
     private Quaternion[] thumbBaseRotations;
     private float[] handStepTimes;
+    private GardenHarvestDemonstration harvest;
+    private Transform harvestThumbTip;
+    private Transform harvestIndexTip;
+
+    private bool IsHarvest => cue != null &&
+        (cue.demo == GardenControlDemo.CutStem || cue.demo == GardenControlDemo.PickTomato);
 
     public bool UsesHandTeachingTiming => handStepTimes != null;
     public float CycleDurationSeconds => handStepTimes != null
@@ -60,7 +66,8 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         }
         if (viewer == null) return;
         cue = instruction;
-        if (mode == GardenInputMode.Hands && cue.mode == GardenInputMode.Hands && cue.steps != null && cue.steps.Length > 0)
+        if (((mode == GardenInputMode.Hands && cue.mode == GardenInputMode.Hands) || IsHarvest) &&
+            cue.steps != null && cue.steps.Length > 0)
         {
             // Keep short replacement WAVs from compressing each teaching pose into a flash.
             handStepTimes = new float[cue.steps.Length];
@@ -150,9 +157,9 @@ public sealed class GardenControlDemonstration : MonoBehaviour
             pressClip = cue.controllerAnimation != null ? cue.controllerAnimation : cue.demo switch
             {
                 GardenControlDemo.Move => catalogue.controllerStick,
-                GardenControlDemo.Grab or GardenControlDemo.WateringGrab => catalogue.controllerGrip,
+                GardenControlDemo.Grab or GardenControlDemo.WateringGrab or GardenControlDemo.PickTomato => catalogue.controllerGrip,
                 GardenControlDemo.Calendar => catalogue.controllerY,
-                GardenControlDemo.CalendarSelect => catalogue.controllerTrigger,
+                GardenControlDemo.CalendarSelect or GardenControlDemo.CutStem => catalogue.controllerTrigger,
                 _ => null
             };
             Transform target = string.IsNullOrEmpty(cue.controllerTarget) ? null : model.transform.Find(cue.controllerTarget);
@@ -168,11 +175,14 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         caption.GetComponent<MeshRenderer>().sharedMaterial = caption.font.material;
         caption.anchor = TextAnchor.MiddleCenter;
         caption.alignment = TextAlignment.Center;
-        caption.characterSize = 0.008f;
+        caption.characterSize = IsHarvest ? 0.006f : 0.008f;
         caption.fontSize = fixedGardeningPosition ? 64 : 48;
         caption.color = Color.white;
         if (cue.demo == GardenControlDemo.CalendarSelect) CreatePointer();
         if (cue.demo == GardenControlDemo.Water || cue.demo == GardenControlDemo.Upright || cue.demo == GardenControlDemo.WateringGrab) CreateCanSymbol();
+        if (IsHarvest)
+            harvest = new GardenHarvestDemonstration(cue.demo, visuals, motion,
+                catalogue.pruningShearsVisual, visualMaterial);
         foreach (Transform child in anchor.GetComponentsInChildren<Transform>(true)) child.gameObject.layer = 2;
         anchor.SetActive(true);
         Tick(0f);
@@ -191,6 +201,8 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         {
             poses[0][j] = joints[j].localRotation;
             restPositions[j] = joints[j].localPosition;
+            if (joints[j].name.EndsWith("thumb_null")) harvestThumbTip = joints[j];
+            if (joints[j].name.EndsWith("index_null")) harvestIndexTip = joints[j];
         }
         AnimationClip[] clips = { null, hand.pinch, hand.curled, hand.point, hand.thumbFree };
         for (int p = 1; p < poses.Length; p++)
@@ -236,7 +248,11 @@ public sealed class GardenControlDemonstration : MonoBehaviour
             motion.localPosition = position;
             motion.localRotation = MirrorRotation(motion.localRotation);
         }
-        caption.text = ReadableCaption(step.label);
+        caption.text = ReadableCaption(step.label, IsHarvest ? 22 : 26);
+        if (cue.demo == GardenControlDemo.CutStem && index == 2)
+            caption.text = ReadableCaption(mode == GardenInputMode.Hands ? "Close your hand to cut" : "Squeeze Trigger to cut", 22);
+        if (cue.demo == GardenControlDemo.PickTomato && index == 1)
+            caption.text = ReadableCaption(mode == GardenInputMode.Hands ? "Pinch to pick up" : "Hold Grip to pick up", 22);
         if (mode == GardenInputMode.Hands && poses != null)
         {
             for (int j = 0; j < joints.Length; j++)
@@ -262,6 +278,13 @@ public sealed class GardenControlDemonstration : MonoBehaviour
             pointer.SetPosition(1, motion.localPosition + Vector3.forward * 0.35f);
         }
         if (buttonHighlight != null) buttonHighlight.SetActive(step.press > 0f);
+        if (harvest != null)
+        {
+            Vector3 grip = motion.localPosition + new Vector3(0.06f, 0.02f, 0f);
+            if (mode == GardenInputMode.Hands && harvestThumbTip != null && harvestIndexTip != null)
+                grip = visuals.InverseTransformPoint((harvestThumbTip.position + harvestIndexTip.position) * 0.5f);
+            harvest.Tick(Mathf.Lerp(previous.press, step.press, t), grip);
+        }
     }
 
     private static Quaternion MirrorRotation(Quaternion rotation) =>
@@ -305,10 +328,10 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         }
     }
 
-    private static string ReadableCaption(string text)
+    private static string ReadableCaption(string text, int maximumLineLength = 26)
     {
-        if (string.IsNullOrEmpty(text) || text.Length <= 26 || text.Contains("\n")) return text;
-        int split = text.LastIndexOf(' ', 26);
+        if (string.IsNullOrEmpty(text) || text.Length <= maximumLineLength || text.Contains("\n")) return text;
+        int split = text.LastIndexOf(' ', maximumLineLength);
         return split > 0 ? text.Substring(0, split) + "\n" + text.Substring(split + 1) : text;
     }
 
@@ -391,6 +414,8 @@ public sealed class GardenControlDemonstration : MonoBehaviour
 
     public void Hide()
     {
+        harvest?.Dispose();
+        harvest = null;
         if (anchor != null) { anchor.SetActive(false); Destroy(anchor); }
         anchor = null;
         model = null;
@@ -406,6 +431,8 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         thumbJoints = null;
         thumbBaseRotations = null;
         handStepTimes = null;
+        harvestThumbTip = null;
+        harvestIndexTip = null;
     }
 
     private void OnDisable() => Hide();

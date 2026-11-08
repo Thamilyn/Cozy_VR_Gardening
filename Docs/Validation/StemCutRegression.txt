@@ -1,0 +1,15 @@
+PASS: Paused Play fixture
+PASS: Cut target lies in the actual stalk terminal ring of RootswithTomatoes.036, outside the calyx leaf tips
+PASS: Ripe source state starts attached and unpicked
+PASS: Attached fruit cannot be grabbed and stays stable
+PASS: Existing Pruner passes invalid-action checks and a full stroke at the real stalk detaches exactly once
+PASS: Cut preserves fruit world scale
+PASS: Cut enables existing Meta grab and dynamic gravity
+PASS: An unpicked cut tomato recovers without reconnecting or requiring a second cut
+PASS: Falling into tray after cutting without a pickup does not harvest
+PASS: Hand hover does not count as pickup
+PASS: Meta Select completes pickup independently of tray delivery
+PASS: Held fruit cannot complete tray delivery
+PASS: Releasing the separated picked tomato inside the tray records harvest and stores it
+PASS: Repeated delivery does not repeat harvest credit
+NOT TESTED: real tracking/physical gestures, audio recordings, Quest 3 comfort or performance.

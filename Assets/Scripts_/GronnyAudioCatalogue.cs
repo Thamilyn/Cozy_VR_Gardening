@@ -2,7 +2,8 @@ using System;
 using UnityEngine;
 
 public enum GardenInputMode { Unknown, Hands, Controllers }
-public enum GardenControlDemo { None, Move, Grab, Calendar, CalendarSelect, Water, Upright, WateringGrab }
+// Append values to preserve the demonstrations serialized in the existing catalogue.
+public enum GardenControlDemo { None, Move, Grab, Calendar, CalendarSelect, Water, Upright, WateringGrab, CutStem, PickTomato }
 public enum GardenDemoPose { Open, Pinch, Curled, Point, ThumbFree }
 
 /// <summary>References the original audio and Meta visual assets without moving or duplicating them.</summary>
@@ -79,6 +80,9 @@ public sealed class GronnyAudioCatalogue : ScriptableObject
     public AnimationClip controllerY;
     public AnimationClip controllerTrigger;
     public Material demonstrationMaterial;
+    [Header("Harvest demonstration")]
+    [Tooltip("Only the meshes and materials are copied; gameplay components are never instantiated.")]
+    public GameObject pruningShearsVisual;
     [Header("Playback")]
     [Range(0f, 1f)] public float voiceVolume = 0.85f;
     [Range(0.75f, 1.25f)] public float pitch = 1f;
