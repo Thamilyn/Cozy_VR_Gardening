@@ -8,6 +8,12 @@ public sealed class GardenObjectLabel : MonoBehaviour
     private GameObject label;
     private Vector3 offset;
     private Transform viewer;
+    private Text captionText;
+
+    public void SetCaption(string caption)
+    {
+        if (captionText != null && captionText.text != caption) captionText.text = caption;
+    }
 
     public static GardenObjectLabel Create(GameObject target, string caption, Vector3 offset)
     {
@@ -37,6 +43,7 @@ public sealed class GardenObjectLabel : MonoBehaviour
         rect.SetParent(panel, false);
         rect.sizeDelta = new Vector2(380f, 72f);
         Text text = textObject.GetComponent<Text>();
+        captionText = text;
         text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         text.fontSize = 30;
         text.alignment = TextAnchor.MiddleCenter;

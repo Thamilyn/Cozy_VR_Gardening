@@ -11,7 +11,12 @@ public sealed class GardenPruner : MonoBehaviour
     [SerializeField, Range(1f, 45f)] private float closingAngle = 22f;
     [SerializeField, Min(0.01f)] private float animationDuration = 0.12f;
     [Tooltip("Maximum distance in metres between a stalk and the cutting edges.")]
-    [SerializeField, Min(0.001f)] private float cuttingRadius = 0.015f;
+    [SerializeField, Min(0.001f)] private float cuttingRadius = 0.025f;
+    [Tooltip("A deliberate squeeze closes the blades without requiring a fully clenched tracked hand.")]
+    [SerializeField, Range(0.5f, 1f)] private float squeezeToCut = 0.75f;
+    [SerializeField, Range(0.05f, 0.45f)] private float squeezeToOpen = 0.3f;
+    [Tooltip("Brief alignment memory during closing, to tolerate small hand-tracking movements.")]
+    [SerializeField, Range(0f, 0.3f)] private float alignmentGraceSeconds = 0.18f;
 
     private Transform bottomPart;
     private Transform topPart;
@@ -29,6 +34,10 @@ public sealed class GardenPruner : MonoBehaviour
     private int holdingInteractor = -1;
     private bool cutArmed;
     private TomatoFruit cuttingFruit;
+    private TomatoFruit[] strokeFruits;
+    private TomatoFruit alignedDuringClosing;
+    private float alignedAt = float.NegativeInfinity;
+    private float nextFruitScan;
 
     private void Awake()
     {
@@ -108,7 +117,8 @@ public sealed class GardenPruner : MonoBehaviour
             holdingInteractor = interactor;
         }
 
-        closure = Mathf.MoveTowards(closure, held ? squeeze : 0f,
+        float desiredClosure = held ? Mathf.InverseLerp(squeezeToOpen, squeezeToCut, squeeze) : 0f;
+        closure = Mathf.MoveTowards(closure, desiredClosure,
             deltaTime / Mathf.Max(0.01f, animationDuration));
         ApplyBladePose();
         if (GardenMenuController.GardenSuspended)
@@ -117,10 +127,44 @@ public sealed class GardenPruner : MonoBehaviour
             return;
         }
         // Require opening after grabbing, changing hands, pausing or losing tracking.
-        if (held && squeeze <= 0.25f && closure <= 0.25f) cutArmed = true;
-        if (!held || !cutArmed || squeeze < 0.9f || closure < 0.9f) return;
+        if (held && squeeze <= squeezeToOpen && closure <= 0.25f)
+        {
+            // Refresh while open as fruit may ripen after the tool is picked up.
+            // Keep scene discovery out of the per-frame aiming/closing path.
+            if (!cutArmed || Time.unscaledTime >= nextFruitScan)
+            {
+                strokeFruits = FindObjectsByType<TomatoFruit>(FindObjectsSortMode.None);
+                nextFruitScan = Time.unscaledTime + 0.5f;
+            }
+            cutArmed = true;
+            alignedDuringClosing = null;
+            alignedAt = float.NegativeInfinity;
+        }
+        if (!held || !cutArmed) return;
+        TomatoFruit aligned = FindNearestStalk(cuttingRadius);
+        if (aligned != null)
+        {
+            aligned.ShowCutAlignment();
+            if (squeeze > squeezeToOpen)
+            {
+                alignedDuringClosing = aligned;
+                alignedAt = Time.unscaledTime;
+            }
+        }
+        if (squeeze < squeezeToCut || closure < 0.9f) return;
         cutArmed = false;
-        CutNearestStalk();
+        TomatoFruit target = aligned;
+        float graceRadius = cuttingRadius + 0.01f;
+        // Allow a centimetre of drift while the blades close. Moving closed blades
+        // onto a new stalk still cannot cut: this stroke has already been consumed.
+        if (target == null && alignmentGraceSeconds > 0f && alignedDuringClosing != null && alignedDuringClosing.CanCutStem &&
+            Time.unscaledTime - alignedAt <= alignmentGraceSeconds &&
+            SquaredDistanceToStalk(alignedDuringClosing) <= graceRadius * graceRadius)
+            target = alignedDuringClosing;
+        if (target == null) return;
+        cuttingFruit = target;
+        try { target.TryCutStem(this); }
+        finally { cuttingFruit = null; }
     }
 
     private bool TryGetSqueeze(out float squeeze, out int interactorId)
@@ -154,30 +198,30 @@ public sealed class GardenPruner : MonoBehaviour
             Quaternion.AngleAxis(topClosingSign * closingAngle * closure, Vector3.up);
     }
 
-    private void CutNearestStalk()
+    private TomatoFruit FindNearestStalk(float radius)
     {
-        Vector3 start = model.TransformPoint(cuttingStart);
-        Vector3 end = model.TransformPoint(cuttingEnd);
-        Vector3 segment = end - start;
-        if (segment.sqrMagnitude < 0.000001f) return;
-
+        if (strokeFruits == null) return null;
         TomatoFruit nearest = null;
-        float nearestDistance = cuttingRadius * cuttingRadius;
-        // A search only on a completed snip avoids scene scans or allocations every frame.
-        foreach (TomatoFruit fruit in FindObjectsByType<TomatoFruit>(FindObjectsSortMode.None))
+        float nearestDistance = radius * radius;
+        foreach (TomatoFruit fruit in strokeFruits)
         {
-            if (fruit.gameObject.scene != gameObject.scene || !fruit.CanCutStem) continue;
-            Vector3 stalk = fruit.StemPosition;
-            Vector3 closest = start + segment * Mathf.Clamp01(Vector3.Dot(stalk - start, segment) / segment.sqrMagnitude);
-            float distance = (stalk - closest).sqrMagnitude;
+            if (fruit == null || fruit.gameObject.scene != gameObject.scene || !fruit.CanCutStem) continue;
+            float distance = SquaredDistanceToStalk(fruit);
             if (distance > nearestDistance) continue;
             nearestDistance = distance;
             nearest = fruit;
         }
-        if (nearest == null) return;
-        cuttingFruit = nearest;
-        try { nearest.TryCutStem(this); }
-        finally { cuttingFruit = null; }
+        return nearest;
+    }
+
+    private float SquaredDistanceToStalk(TomatoFruit fruit)
+    {
+        Vector3 start = model.TransformPoint(cuttingStart);
+        Vector3 segment = model.TransformPoint(cuttingEnd) - start;
+        if (segment.sqrMagnitude < 0.000001f) return float.PositiveInfinity;
+        Vector3 closest = start + segment * Mathf.Clamp01(
+            Vector3.Dot(fruit.StemPosition - start, segment) / segment.sqrMagnitude);
+        return fruit.IsOutsideFruit(closest) ? (fruit.StemPosition - closest).sqrMagnitude : float.PositiveInfinity;
     }
 
     internal bool IsCuttingStem(TomatoFruit fruit)
@@ -191,6 +235,9 @@ public sealed class GardenPruner : MonoBehaviour
     {
         holdingInteractor = -1;
         cutArmed = false;
+        strokeFruits = null;
+        alignedDuringClosing = null;
+        alignedAt = float.NegativeInfinity;
     }
 
     private void OnDisable()

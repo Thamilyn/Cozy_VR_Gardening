@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "Docs/Validation/HarvestVoiceRegression.cs"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 140,
+      "executeMs": 46,
+      "assemblyName": "PipelineRunScript_HarvestVoiceRegression_510e94b552b04028abbe5b641e8891a5",
+      "success": true,
+      "result": "PASS: Paused fixture, with no physical input required\nPASS: harvest_cut_stem has real imported mono audio and a transcript\nPASS: harvest_stem_cut has real imported mono audio and a transcript\nPASS: harvest_picked has real imported mono audio and a transcript\nPASS: A green tomato does not request the ripe instruction\nPASS: Missing soil cover does not request harvesting guidance\nPASS: Ripe instruction is queued once\nPASS: Ripe event selects the generated stem-cut instruction\nPASS: Valid cut queues one acknowledgement and preserves the current sentence\nPASS: Cut acknowledgement follows the ripe instruction\nPASS: Meta pickup queues one congratulation behind the cut acknowledgement\nPASS: Fast tray delivery uses the existing harvest path\nPASS: Pickup congratulation survives immediate delivery and tutorial completion\nPASS: Repeated observations cannot replay delivered harvest cues\nPASS: Session closing follows all three harvest cues\nPASS: All harvest speech shares one AudioSource\nPASS: Repeated observations do not duplicate spoken help credit\nNOT TESTED: perceived voice naturalness, real-time sentence duration, hardware audio or Quest 3 tracking. Sentence endings were advanced explicitly."
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

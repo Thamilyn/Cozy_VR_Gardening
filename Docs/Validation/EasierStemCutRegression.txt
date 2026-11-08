@@ -1,0 +1,25 @@
+PASS: Paused Play fixture
+PASS: Real Pruner instance inherits 2.5 cm tolerance and 75 percent deliberate squeeze
+PASS: Stem guide shader imported without errors
+PASS: Tool held through Meta pointer selection
+PASS: Aligned open blades show a green target at the real stalk
+PASS: Aligned target asks for a deliberate closing action
+PASS: Alignment and proximity alone do not cut or pick up
+PASS: Unheld tool cannot cut
+PASS: Green source rejects cutting and hides target feedback
+PASS: Closing on the fruit surface is rejected even inside the enlarged stem tolerance
+PASS: Moving already closed blades onto the stalk still cannot cut
+PASS: Partial 60 percent squeeze is still insufficient
+PASS: 75 percent squeeze cuts at 22 mm offset that the former 15 mm tolerance rejected
+PASS: Cut preserves scale and immediately hides the stem target
+PASS: Repeated closure cannot cut again or count as a pickup/delivery
+PASS: A small 32 mm drift during the same closing stroke uses the brief alignment grace
+PASS: Alignment older than 180 ms cannot authorize a distant cut
+PASS: Large movement beyond the extra centimetre is rejected
+PASS: Pausing blocks the cut and hides target feedback
+PASS: Resuming with closed blades requires reopening
+PASS: Tracking loss discards alignment memory and requires reopening
+PASS: Changing the holding hand discards alignment memory
+PASS: Expired alignment returns the marker to amber
+PASS: No cut or feedback sample awards a harvest without pickup and tray delivery
+NOT TESTED: physical tracking or perceived ease on Quest 3. Squeeze samples, input loss and grace expiry were supplied synthetically.

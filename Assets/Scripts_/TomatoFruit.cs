@@ -30,6 +30,13 @@ public sealed class TomatoFruit : MonoBehaviour
     private float recoveryRemaining = -1f;
     private float looseRecoveryDelay;
     private Vector3 stemLocalPosition;
+    private SphereCollider fruitCollider;
+    private LineRenderer stemGuide;
+    private Material stemGuideMaterial;
+    private Transform guideViewer;
+    private float alignmentUntil = float.NegativeInfinity;
+    private readonly Vector3[] guidePositions = new Vector3[24];
+    private readonly Vector2[] guideCircle = new Vector2[24];
 
     public SeedItem Source => source;
     public bool IsStemCut => stemCut;
@@ -102,6 +109,7 @@ public sealed class TomatoFruit : MonoBehaviour
         Vector3 rootScale = transform.lossyScale;
         collider.radius = Mathf.Max(Mathf.Abs(worldSize.x), Mathf.Abs(worldSize.y), Mathf.Abs(worldSize.z)) * 0.5f /
             Mathf.Max(Mathf.Abs(rootScale.x), Mathf.Abs(rootScale.y), Mathf.Abs(rootScale.z));
+        fruitCollider = collider;
         GardenGrabSetup.ConfigureGrabbable(gameObject);
         grabbable = GetComponent<Grabbable>();
         grabbable.MaxGrabPoints = 1;
@@ -114,6 +122,64 @@ public sealed class TomatoFruit : MonoBehaviour
         SetGrabEnabled(false);
         CreateOutline(mesh, renderer);
         harvestLabel = GardenObjectLabel.Create(gameObject, "Cut the stem", Vector3.up * 0.12f);
+        CreateStemGuide();
+    }
+
+    internal bool IsOutsideFruit(Vector3 bladePoint)
+    {
+        if (fruitCollider == null) return false;
+        Vector3 scale = transform.lossyScale;
+        float radius = fruitCollider.radius * Mathf.Max(Mathf.Abs(scale.x), Mathf.Abs(scale.y), Mathf.Abs(scale.z)) + 0.002f;
+        return (bladePoint - transform.TransformPoint(fruitCollider.center)).sqrMagnitude > radius * radius;
+    }
+
+    internal void ShowCutAlignment() => alignmentUntil = Time.unscaledTime + 0.12f;
+
+    private void CreateStemGuide()
+    {
+        Shader shader = Resources.Load<Shader>("GardenHarvest/StemCutGuide");
+        if (shader == null)
+        {
+            Debug.LogWarning("Missing stem cutting guide shader.", this);
+            return;
+        }
+        stemGuideMaterial = new Material(shader);
+        GameObject guide = new("Stem cutting guide");
+        guide.layer = 2;
+        guide.transform.SetParent(transform, false);
+        stemGuide = guide.AddComponent<LineRenderer>();
+        stemGuide.sharedMaterial = stemGuideMaterial;
+        stemGuide.useWorldSpace = true;
+        stemGuide.loop = true;
+        stemGuide.positionCount = guidePositions.Length;
+        stemGuide.startWidth = stemGuide.endWidth = 0.0018f;
+        stemGuide.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        stemGuide.receiveShadows = false;
+        for (int i = 0; i < guideCircle.Length; i++)
+        {
+            float angle = i * Mathf.PI * 2f / guideCircle.Length;
+            guideCircle[i] = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+        }
+        guide.SetActive(false);
+    }
+
+    private void UpdateStemGuide()
+    {
+        if (stemGuide == null) return;
+        bool visible = !GardenMenuController.GardenSuspended && CanCutStem;
+        stemGuide.gameObject.SetActive(visible);
+        if (!visible) return;
+        if (guideViewer == null && Camera.main != null) guideViewer = Camera.main.transform;
+        Vector3 right = guideViewer != null ? guideViewer.right : Vector3.right;
+        Vector3 up = guideViewer != null ? guideViewer.up : Vector3.up;
+        Vector3 centre = StemPosition;
+        for (int i = 0; i < guidePositions.Length; i++)
+            guidePositions[i] = centre + (right * guideCircle[i].x + up * guideCircle[i].y) * 0.012f;
+        stemGuide.SetPositions(guidePositions);
+        bool aligned = Time.unscaledTime <= alignmentUntil;
+        Color color = aligned ? new Color(0.25f, 1f, 0.45f, 0.95f) : new Color(1f, 0.8f, 0.15f, 0.9f);
+        stemGuide.startColor = stemGuide.endColor = color;
+        if (harvestLabel != null) harvestLabel.SetCaption(aligned ? "Close Pruner" : "Cut the stem");
     }
 
     private void CreateOutline(MeshFilter mesh, MeshRenderer renderer)
@@ -155,6 +221,7 @@ public sealed class TomatoFruit : MonoBehaviour
         if (!CanCutStem || GardenMenuController.GardenSuspended || pruner == null ||
             !pruner.IsCuttingStem(this)) return false;
         stemCut = true;
+        if (stemGuide != null) stemGuide.gameObject.SetActive(false);
         DetachFromPlant();
         body.isKinematic = false;
         body.linearVelocity = Vector3.zero;
@@ -187,6 +254,7 @@ public sealed class TomatoFruit : MonoBehaviour
 
     private void Update()
     {
+        UpdateStemGuide();
         if (stored || grabbable == null) return;
         bool held = grabbable.SelectingPointsCount > 0;
         if (GardenMenuController.GardenSuspended)
@@ -288,5 +356,6 @@ public sealed class TomatoFruit : MonoBehaviour
     private void OnDestroy()
     {
         if (grabbable != null) grabbable.WhenPointerEventRaised -= OnPointerEvent;
+        if (stemGuideMaterial != null) Destroy(stemGuideMaterial);
     }
 }

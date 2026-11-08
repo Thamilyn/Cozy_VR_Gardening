@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GardenPruner
   closingAngle: 22
   animationDuration: 0.12
-  cuttingRadius: 0.015
+  cuttingRadius: 0.025
 --- !u!114 &6191147729864432002
 MonoBehaviour:
   m_ObjectHideFlags: 0

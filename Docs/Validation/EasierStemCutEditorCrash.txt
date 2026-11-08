@@ -1,0 +1,130 @@
+C:\Program Files\Unity\Hub\Editor\6000.3.23f1\Editor\radeonrays.dll:radeonrays.dll (00007FFA248B0000), size: 344064 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Unity\Hub\Editor\6000.3.23f1\Editor\radeonrays.dll'
+C:\Program Files\Unity\Hub\Editor\6000.3.23f1\Editor\Data\MonoBleedingEdge\EmbedRuntime\mono-2.0-bdwgc.dll:mono-2.0-bdwgc.dll (00007FF9AE6C0000), size: 10756096 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Unity\Hub\Editor\6000.3.23f1\Editor\Data\MonoBleedingEdge\EmbedRuntime\mono-2.0-bdwgc.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.unity.burst@2f3d916873ea\.Runtime\MonoDebuggerHandling.dll:MonoDebuggerHandling.dll (00007FFA05630000), size: 368640 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.unity.burst@2f3d916873ea\.Runtime\MonoDebuggerHandling.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.meta.xr.sdk.core@c0efcbf2ba70\Plugins\Win64OpenXR\OVRPlugin.dll:OVRPlugin.dll (00007FF9AF480000), size: 8310784 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.meta.xr.sdk.core@c0efcbf2ba70\Plugins\Win64OpenXR\OVRPlugin.dll', fileVersion: 1.205.0.0
+C:\windows\SYSTEM32\dbghelp.dll:dbghelp.dll (00007FFAD4910000), size: 2408448 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\dbghelp.dll', fileVersion: 10.0.26100.9549
+C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.meta.xr.sdk.interaction@b67d311217e9\Runtime\Plugins\Win64\ISDKEngineTelemetry.dll:ISDKEngineTelemetry.dll (00007FF9ADEA0000), size: 8474624 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.meta.xr.sdk.interaction@b67d311217e9\Runtime\Plugins\Win64\ISDKEngineTelemetry.dll'
+C:\windows\system32\apphelp.dll:apphelp.dll (00007FFAD3780000), size: 651264 (result: 0), SymType: '-exported-', PDB: 'C:\windows\system32\apphelp.dll', fileVersion: 10.0.26100.9711
+C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.unity.burst@2f3d916873ea\.Runtime\burst-llvm-21.dll:burst-llvm-21.dll (00007FF99D8E0000), size: 64184320 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.unity.burst@2f3d916873ea\.Runtime\burst-llvm-21.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\f9d1b63154c7001768dedff1a3d7e7ba.dll:f9d1b63154c7001768dedff1a3d7e7ba.dll (00007FFA05DB0000), size: 20480 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\f9d1b63154c7001768dedff1a3d7e7ba.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\155cf5ddbbec5ed92a3838c5e91f2e33.dll:155cf5ddbbec5ed92a3838c5e91f2e33.dll (00007FFA05DA0000), size: 32768 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\155cf5ddbbec5ed92a3838c5e91f2e33.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\b671808488f60074a8f58d3501bfbad3.dll:b671808488f60074a8f58d3501bfbad3.dll (00007FFA05D90000), size: 49152 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\b671808488f60074a8f58d3501bfbad3.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\ebf786df4ce4842e5c2d264977919fd4.dll:ebf786df4ce4842e5c2d264977919fd4.dll (00007FFA05620000), size: 32768 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\ebf786df4ce4842e5c2d264977919fd4.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\90328d4d7c71d3cc276156bcfa64ac61.dll:90328d4d7c71d3cc276156bcfa64ac61.dll (00007FFA05610000), size: 53248 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\90328d4d7c71d3cc276156bcfa64ac61.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\27b44159303b574a50b34614701cdd1c.dll:27b44159303b574a50b34614701cdd1c.dll (00007FFA055F0000), size: 110592 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\27b44159303b574a50b34614701cdd1c.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\b045ba104ab8fdea496fd15bc334fc99.dll:b045ba104ab8fdea496fd15bc334fc99.dll (00007FFA055E0000), size: 36864 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\b045ba104ab8fdea496fd15bc334fc99.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\073ce13b5fdf8df3889b50f723376e02.dll:073ce13b5fdf8df3889b50f723376e02.dll (00007FFA055D0000), size: 61440 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\073ce13b5fdf8df3889b50f723376e02.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\09f0b12db1e2c0bb6a5434e1bc54f7a2.dll:09f0b12db1e2c0bb6a5434e1bc54f7a2.dll (00007FFA055C0000), size: 49152 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\09f0b12db1e2c0bb6a5434e1bc54f7a2.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\638d2570e09cd3a8dafb1730d51b5c0f.dll:638d2570e09cd3a8dafb1730d51b5c0f.dll (00007FFA055B0000), size: 24576 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\638d2570e09cd3a8dafb1730d51b5c0f.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\4d3f338c4662172325f42c1a48b882f1.dll:4d3f338c4662172325f42c1a48b882f1.dll (00007FFA055A0000), size: 53248 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\4d3f338c4662172325f42c1a48b882f1.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\af33f7fee9bb202b797072fdc6691716.dll:af33f7fee9bb202b797072fdc6691716.dll (00007FFA05590000), size: 53248 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\af33f7fee9bb202b797072fdc6691716.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\c935283558c4a51fb0d9f3fbb64b055c.dll:c935283558c4a51fb0d9f3fbb64b055c.dll (00007FFA05560000), size: 176128 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\BurstCache\JIT\c935283558c4a51fb0d9f3fbb64b055c.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.meta.xr.sdk.audio@baafb66e77db\Runtime\Plugins\x86_64\MetaXRAudioUnity.dll:MetaXRAudioUnity.dll (00007FF9FDAE0000), size: 2727936 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.meta.xr.sdk.audio@baafb66e77db\Runtime\Plugins\x86_64\MetaXRAudioUnity.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.meta.xr.sdk.voice@856439ff2689\Lib\Telemetry\Plugins\SDKTelemetry.dll:SDKTelemetry.dll (00007FF9ACD60000), size: 8654848 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.meta.xr.sdk.voice@856439ff2689\Lib\Telemetry\Plugins\SDKTelemetry.dll'
+C:\windows\system32\dataexchange.dll:dataexchange.dll (00007FFA739C0000), size: 376832 (result: 0), SymType: '-exported-', PDB: 'C:\windows\system32\dataexchange.dll', fileVersion: 10.0.26100.9549
+C:\windows\system32\twinapi.appcore.dll:twinapi.appcore.dll (00007FFACD890000), size: 2428928 (result: 0), SymType: '-exported-', PDB: 'C:\windows\system32\twinapi.appcore.dll', fileVersion: 10.0.26100.9711
+C:\Windows\System32\Windows.Gaming.Input.dll:Windows.Gaming.Input.dll (00007FFACDB40000), size: 888832 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\Windows.Gaming.Input.dll', fileVersion: 10.0.26100.9549
+C:\windows\SYSTEM32\inputhost.dll:inputhost.dll (00007FFA7FEE0000), size: 1990656 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\inputhost.dll', fileVersion: 10.0.26100.9711
+C:\windows\SYSTEM32\PROPSYS.dll:PROPSYS.dll (00007FFAD2240000), size: 1003520 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\PROPSYS.dll', fileVersion: 7.0.26100.9549
+C:\Windows\System32\Windows.FileExplorer.Common.dll:Windows.FileExplorer.Common.dll (00007FFAA3130000), size: 794624 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\Windows.FileExplorer.Common.dll', fileVersion: 10.0.26100.9549
+C:\Windows\System32\urlmon.dll:urlmon.dll (00007FFAB6FF0000), size: 1957888 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\urlmon.dll', fileVersion: 11.0.26100.9711
+C:\Windows\System32\iertutil.dll:iertutil.dll (00007FFAB6BC0000), size: 2899968 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\iertutil.dll', fileVersion: 11.0.26100.9549
+C:\Windows\System32\netutils.dll:netutils.dll (00007FFAD5D10000), size: 53248 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\netutils.dll', fileVersion: 10.0.26100.1882
+C:\Windows\System32\srvcli.dll:srvcli.dll (00007FFAB0CD0000), size: 167936 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\srvcli.dll', fileVersion: 10.0.26100.1150
+C:\windows\SYSTEM32\virtdisk.dll:virtdisk.dll (00007FFAA9DE0000), size: 94208 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\virtdisk.dll', fileVersion: 10.0.26100.9278
+C:\windows\SYSTEM32\windows.staterepositoryclient.dll:windows.staterepositoryclient.dll (00007FFAAA250000), size: 286720 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\windows.staterepositoryclient.dll', fileVersion: 10.0.26100.9711
+C:\windows\SYSTEM32\edputil.dll:edputil.dll (00007FFA86960000), size: 167936 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\edputil.dll', fileVersion: 10.0.26100.9278
+C:\Windows\System32\cldapi.dll:cldapi.dll (00007FFA86790000), size: 196608 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\cldapi.dll', fileVersion: 10.0.26100.9278
+C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.unity.xr.openxr@b5b77b4027be\Runtime\windows\x64\UnityOpenXR.dll:UnityOpenXR.dll (00007FF9B68B0000), size: 950272 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.unity.xr.openxr@b5b77b4027be\Runtime\windows\x64\UnityOpenXR.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Assets\XR\APILayers~\WindowsLayers\x64\XrApiLayer_METAX_operator.dll:XrApiLayer_METAX_operator.dll (00007FF9AB620000), size: 7430144 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Assets\XR\APILayers~\WindowsLayers\x64\XrApiLayer_METAX_operator.dll'
+C:\windows\system32\nvapi64.dll:nvapi64.dll (00007FFAB4050000), size: 561152 (result: 0), SymType: '-exported-', PDB: 'C:\windows\system32\nvapi64.dll', fileVersion: 32.0.16.1714
+C:\windows\system32\DriverStore\FileRepository\nvhmi.inf_amd64_8d155ac014c1a4ba\nvapi64_impl.dll:nvapi64_impl.dll (00007FFAB3AB0000), size: 5840896 (result: 0), SymType: '-exported-', PDB: 'C:\windows\system32\DriverStore\FileRepository\nvhmi.inf_amd64_8d155ac014c1a4ba\nvapi64_impl.dll', fileVersion: 32.0.16.1714
+C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.meta.xr.sdk.interaction@b67d311217e9\Runtime\Plugins\Win64\InteractionSdk.dll:InteractionSdk.dll (00007FFA53C10000), size: 565248 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.meta.xr.sdk.interaction@b67d311217e9\Runtime\Plugins\Win64\InteractionSdk.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.unity.xr.openxr@b5b77b4027be\RuntimeLoaders\windows\x64\openxr_loader.dll:openxr_loader.dll (00007FF9FF130000), size: 2412544 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.unity.xr.openxr@b5b77b4027be\RuntimeLoaders\windows\x64\openxr_loader.dll', fileVersion: 1.1.54.0
+C:\Program Files\Meta Horizon\Support\oculus-runtime\LibOVRRTImpl64_1.dll:LibOVRRTImpl64_1.dll (00007FF97BDD0000), size: 6529024 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\LibOVRRTImpl64_1.dll', fileVersion: 208.0.84.535
+C:\Program Files\Meta Horizon\Support\oculus-runtime\RuntimeIPCServiceClient_64.dll:RuntimeIPCServiceClient_64.dll (00007FFAA35C0000), size: 3706880 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\RuntimeIPCServiceClient_64.dll', fileVersion: 208.0.84.535
+C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_EXT_hand_interaction.dll:XR_EXT_hand_interaction.dll (00007FF99CAF0000), size: 1691648 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_EXT_hand_interaction.dll'
+C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_EXT_hand_tracking.dll:XR_EXT_hand_tracking.dll (00007FF99C810000), size: 2985984 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_EXT_hand_tracking.dll'
+C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_EXT_stationary_reference_space.dll:XR_EXT_stationary_reference_space.dll (00007FF99C700000), size: 1093632 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_EXT_stationary_reference_space.dll'
+C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_FB_body_tracking.dll:XR_FB_body_tracking.dll (00007FF99C460000), size: 2711552 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_FB_body_tracking.dll'
+C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_FB_eye_tracking_social.dll:XR_FB_eye_tracking_social.dll (00007FF99C320000), size: 1261568 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_FB_eye_tracking_social.dll'
+C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_FB_face_tracking.dll:XR_FB_face_tracking.dll (00007FF99C1F0000), size: 1241088 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_FB_face_tracking.dll'
+C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_FB_passthrough.dll:XR_FB_passthrough.dll (00007FF99C0A0000), size: 1331200 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_FB_passthrough.dll'
+C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_FB_render_model.dll:XR_FB_render_model.dll (00007FF99C000000), size: 606208 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_FB_render_model.dll'
+C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_FB_spatial_entity.dll:XR_FB_spatial_entity.dll (00007FF99B9A0000), size: 6639616 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_FB_spatial_entity.dll'
+C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_META_boundary.dll:XR_META_boundary.dll (00007FF99B860000), size: 1257472 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_META_boundary.dll'
+C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_META_colocation.dll:XR_META_colocation.dll (00007FF99B6F0000), size: 1470464 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_META_colocation.dll'
+C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_META_colocation_discovery.dll:XR_META_colocation_discovery.dll (00007FF99B630000), size: 778240 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_META_colocation_discovery.dll'
+C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_META_dynamic_object_tracker.dll:XR_META_dynamic_object_tracker.dll (00007FF99B510000), size: 1134592 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_META_dynamic_object_tracker.dll'
+C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_META_environment_depth.dll:XR_META_environment_depth.dll (00007FF99B3D0000), size: 1253376 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_META_environment_depth.dll'
+C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_META_environment_raycast.dll:XR_META_environment_raycast.dll (00007FF99AE00000), size: 6033408 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_META_environment_raycast.dll'
+C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_META_passthrough_camera_data.dll:XR_META_passthrough_camera_data.dll (00007FF979980000), size: 1105920 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_META_passthrough_camera_data.dll'
+C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_META_virtual_keyboard.dll:XR_META_virtual_keyboard.dll (00007FF9797A0000), size: 1908736 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files\Meta Horizon\Support\oculus-runtime\client-plugins\x64\XR_META_virtual_keyboard.dll'
+C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.meta.xr.mrutilitykit@2979546e7179\Plugins\Win64\mrutilitykitshared.dll:mrutilitykitshared.dll (00007FF9FD6A0000), size: 4456448 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Trole\Cozy_VR_Gardening\Library\PackageCache\com.meta.xr.mrutilitykit@2979546e7179\Plugins\Win64\mrutilitykitshared.dll'
+  ERROR: SymGetSymFromAddr64, GetLastError: 'Attempt to access invalid address.' (Address: 00007FF9A62122F4)
+0x00007FF9A62122F4 (Unity) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: 'Attempt to access invalid address.' (Address: 00007FF9A62191B3)
+0x00007FF9A62191B3 (Unity) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: 'Attempt to access invalid address.' (Address: 00007FF9A6214755)
+0x00007FF9A6214755 (Unity) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: 'Attempt to access invalid address.' (Address: 00007FF9A56EC09B)
+0x00007FF9A56EC09B (Unity) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: 'Attempt to access invalid address.' (Address: 00007FF9A60DDDD8)
+0x00007FF9A60DDDD8 (Unity) (function-name not available)
+0x00007FF9A696E1DD (Unity) UnityMain
+0x00007FF9A6EE356E (Unity) udnSetPath
+  ERROR: SymGetSymFromAddr64, GetLastError: 'Attempt to access invalid address.' (Address: 00007FF9A6530261)
+0x00007FF9A6530261 (Unity) (function-name not available)
+0x000001F0331F8A4A (Mono JIT Code) (wrapper managed-to-native) UnityEditor.EditorGUIUtility:RenderPlayModeViewCamerasInternal_Injected (intptr,int,UnityEngine.Vector2&,bool,bool)
+0x000001F0331F8963 (Mono JIT Code) UnityEditor.EditorGUIUtility:RenderPlayModeViewCamerasInternal (UnityEngine.RenderTexture,int,UnityEngine.Vector2,bool,bool)
+0x000001F0331F7573 (Mono JIT Code) UnityEditor.PlayModeView:RenderView (UnityEngine.Vector2,bool)
+0x000001F01554BAEB (Mono JIT Code) UnityEditor.GameView:OnGUI ()
+0x000001F015548E2A (Mono JIT Code) UnityEditor.HostView:InvokeOnGUI (UnityEngine.Rect)
+0x000001F015540F73 (Mono JIT Code) UnityEditor.MaximizedHostView:OldOnGUI ()
+0x000001F01552925F (Mono JIT Code) UnityEngine.UIElements.IMGUIContainer:DoOnGUI (UnityEngine.Event,UnityEngine.Matrix4x4,UnityEngine.Rect,bool,UnityEngine.Rect,System.Action,bool)
+0x000001F01552824B (Mono JIT Code) UnityEngine.UIElements.IMGUIContainer:HandleIMGUIEvent (UnityEngine.Event,UnityEngine.Matrix4x4,UnityEngine.Rect,System.Action,bool)
+0x000001F0331D6313 (Mono JIT Code) UnityEngine.UIElements.IMGUIContainer:DoIMGUIRepaint ()
+0x000001F0331D48D4 (Mono JIT Code) UnityEngine.UIElements.UIR.RenderChainCommand:ExecuteNonDrawMesh (UnityEngine.UIElements.UIR.DrawParams,single,System.Exception&)
+0x000001F0331D17B3 (Mono JIT Code) UnityEngine.UIElements.UIR.UIRenderDevice:EvaluateChain (UnityEngine.UIElements.UIR.RenderChainCommand,UnityEngine.Material,UnityEngine.Texture,UnityEngine.Texture,System.Nullable`1<UnityEngine.Rect>,UnityEngine.Vector2,single,bool,UnityEngine.UIElements.TextureSlotCount,bool,System.Exception&)
+0x000001F0331CECB3 (Mono JIT Code) UnityEngine.UIElements.UIR.RenderTreeManager:RenderSingleTree (UnityEngine.UIElements.UIR.RenderTree,UnityEngine.RenderTexture,UnityEngine.RectInt,UnityEngine.Rect)
+0x000001F0331CDC8B (Mono JIT Code) UnityEngine.UIElements.UIR.RenderTreeManager:RenderRootTree ()
+0x000001F0331CD9BB (Mono JIT Code) UnityEngine.UIElements.UIRRepaintUpdater:Render ()
+0x000001F0331CD936 (Mono JIT Code) UnityEngine.UIElements.BaseVisualElementPanel:Render ()
+0x000001F0331CD7BB (Mono JIT Code) UnityEngine.UIElements.Panel:Render ()
+0x000001EFED043803 (Mono JIT Code) UnityEngine.UIElements.UIElementsUtility:DoDispatch (UnityEngine.UIElements.BaseVisualElementPanel)
+0x000001EFED04359B (Mono JIT Code) UnityEngine.UIElements.UIElementsUtility:UnityEngine.UIElements.IUIElementsUtility.ProcessEvent (int,intptr,bool&)
+0x000001EFED0432DF (Mono JIT Code) UnityEngine.UIElements.UIEventRegistration:ProcessEvent (int,intptr)
+0x000001EFED0431FB (Mono JIT Code) UnityEngine.UIElements.UIEventRegistration/<>c:<.cctor>b__1_2 (int,intptr)
+0x000001EFED04210A (Mono JIT Code) UnityEngine.GUIUtility:ProcessEvent (int,intptr,bool&)
+0x000001EFED0422C6 (Mono JIT Code) (wrapper runtime-invoke) <Module>:runtime_invoke_void_int_intptr_intptr& (object,intptr,intptr,intptr)
+0x00007FF9AE946C0E (mono-2.0-bdwgc) mono_jit_set_domain
+0x00007FF9AE888984 (mono-2.0-bdwgc) mono_object_get_virtual_method
+0x00007FF9AE888A70 (mono-2.0-bdwgc) mono_runtime_invoke
+  ERROR: SymGetSymFromAddr64, GetLastError: 'Attempt to access invalid address.' (Address: 00007FF9A62122F4)
+0x00007FF9A62122F4 (Unity) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: 'Attempt to access invalid address.' (Address: 00007FF9A62191B3)
+0x00007FF9A62191B3 (Unity) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: 'Attempt to access invalid address.' (Address: 00007FF9A6214755)
+0x00007FF9A6214755 (Unity) (function-name not available)
+0x00007FF9A71B169D (Unity) udnSetPath
+0x00007FF9A6F6DC44 (Unity) udnSetPath
+0x00007FF9A686DBB9 (Unity) UnityMain
+0x00007FF9A6F6DB73 (Unity) udnSetPath
+0x00007FF9A6F6DA01 (Unity) udnSetPath
+0x00007FF9A68699A1 (Unity) UnityMain
+0x00007FF9A6F64F3A (Unity) udnSetPath
+0x00007FF9A6A51553 (Unity) UnityMain
+0x00007FF9A6A5324F (Unity) UnityMain
+0x00007FF9A6A4D01D (Unity) UnityMain
+  ERROR: SymGetSymFromAddr64, GetLastError: 'Attempt to access invalid address.' (Address: 00007FF9A682DC4C)
+0x00007FF9A682DC4C (Unity) (function-name not available)
+0x00007FF9A68356E2 (Unity) UnityMain
+  ERROR: SymGetSymFromAddr64, GetLastError: 'Attempt to access invalid address.' (Address: 00007FF6EBCE2F2A)
+0x00007FF6EBCE2F2A (Unity) (function-name not available)
+0x00007FFAD9C8DDA7 (KERNEL32) BaseThreadInitThunk
+0x00007FFADA5FEE4C (ntdll) RtlUserThreadStart
+
+========== END OF STACKTRACE ===========
+
+A crash has been intercepted by the crash handler. For call stack and other details, see the latest crash report generated in:
+ * C:/Users/Trole/AppData/Local/Temp/Unity/Editor/Crashes

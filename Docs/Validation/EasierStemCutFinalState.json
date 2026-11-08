@@ -1,0 +1,44 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "eval_file",
+    "parameters": {
+      "file": "Docs/Validation/RestoreEasierCutScene.cs"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "scene": "Assets/Scenes/Garden_Moves_Test 2.unity",
+        "dirty": false,
+        "playing": false,
+        "tools": [
+          {
+            "name": "Pruner",
+            "radius": 0.025,
+            "squeeze": 0.75
+          },
+          {
+            "name": "Pruner",
+            "radius": 0.025,
+            "squeeze": 0.75
+          },
+          {
+            "name": "Pruner",
+            "radius": 0.025,
+            "squeeze": 0.75
+          }
+        ]
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}
