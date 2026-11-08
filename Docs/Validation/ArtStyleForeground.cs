@@ -1,0 +1,2 @@
+var scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+return scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<UnityEngine.MeshRenderer>(true)).Where(r=>r.GetComponentInParent<OVRCameraRig>(true)==null && (r.name.ToLower().Contains("grass")||r.name.ToLower().Contains("flower")||r.name.ToLower().Contains("leaf")||r.name.ToLower().Contains("bush"))).Select(r=>new{name=r.name, material=r.sharedMaterial==null?"":r.sharedMaterial.name,size=r.localBounds.size.ToString(),position=r.transform.position.ToString()}).ToArray();

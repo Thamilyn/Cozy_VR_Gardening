@@ -37,6 +37,7 @@ public sealed class GardenShovel : MonoBehaviour
     private float scoopTravel;
     private float scoopStartedAt;
     private float nextTargetRefresh;
+    private GardenObjectLabel nameLabel;
 
     public bool HasSoil => soilLoad != null && soilLoad.activeSelf;
     public Vector3 ScoopPoint => transform.TransformPoint(localScoopPoint);
@@ -48,7 +49,7 @@ public sealed class GardenShovel : MonoBehaviour
         grabbable.MaxGrabPoints = 1;
         body = GetComponent<Rigidbody>();
         body.mass = 0.2f;
-        GardenObjectLabel.Create(gameObject, "Shovel", Vector3.up * 0.12f);
+        nameLabel = GardenObjectLabel.Create(gameObject, "Shovel", Vector3.up * 0.12f);
     }
 
     private void Start()
@@ -156,6 +157,7 @@ public sealed class GardenShovel : MonoBehaviour
         scoopTravel += travel;
         if (scoopTravel < minimumScoopTravel) return;
         ShowSoilLoad(target.SoilMaterial);
+        target.RecordScoop();
         ResetScoop();
     }
 
@@ -193,7 +195,11 @@ public sealed class GardenShovel : MonoBehaviour
         }
         pouringSeconds += Time.deltaTime;
         if (pouringSeconds < pourHoldSeconds) return;
-        if (seeds.TryCoverSeed(target)) soilLoad.SetActive(false);
+        if (seeds.TryCoverSeed(target))
+        {
+            soilLoad.SetActive(false);
+            if (nameLabel != null) nameLabel.enabled = false;
+        }
         ResetPour();
         ResetScoop();
     }

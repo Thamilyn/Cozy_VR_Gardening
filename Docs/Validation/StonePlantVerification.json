@@ -1,0 +1,43 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "eval_file",
+    "parameters": {
+      "file": "Docs/Validation/VerifyStonePlant.cs"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "scene": "Garden_Moves",
+        "saved": true,
+        "playing": false,
+        "rockRenderers": 6,
+        "rockShaderErrors": false,
+        "plants": [
+          {
+            "name": "Basket_S",
+            "shader": "Cozy Garden/Styled Props",
+            "material": "Assets/Materials/GardenPastel/Basket_SPastel.mat",
+            "shaderErrors": false
+          },
+          {
+            "name": "Sprout",
+            "shader": "Cozy Garden/Styled Props",
+            "material": "Assets/Materials/GardenPastel/SproutPastel.mat",
+            "shaderErrors": false
+          }
+        ]
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

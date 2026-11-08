@@ -79,6 +79,7 @@ public sealed class GardenMenuController : MonoBehaviour
         startOnReady = startAtPlanting;
         restartAtPlanting = false;
         GardenPreferences.Load();
+        if (GetComponent<GardenBackgroundMusic>() == null) gameObject.AddComponent<GardenBackgroundMusic>();
         if (FindFirstObjectByType<GardenWaterSupply>() == null) gameObject.AddComponent<GardenWaterSupply>();
         suspension = new GardenInteractionSuspension(gameObject.scene);
         menu = new GardenMenuView("Garden menu", transform, new Vector2(860f, 710f));

@@ -45,6 +45,8 @@ public sealed class GronnyTutorial : MonoBehaviour
     private int announcedWaterAttempt;
     private string backgroundInstructionId = "04_first_watering";
 
+    public static bool RequestsPruner => active != null && active.Running && active.Step == GuideStep.CutStem;
+
     private GuideStep Step
     {
         get

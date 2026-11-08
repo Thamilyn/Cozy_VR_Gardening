@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "Docs/Validation/EasierStemCutRegression.cs"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 59,
+      "executeMs": 78,
+      "assemblyName": "PipelineRunScript_EasierStemCutRegression_2f22d857bc364422a0280b5f12010008",
+      "success": true,
+      "result": "PASS: Paused Play fixture\nPASS: Real Pruner instance inherits 2.5 cm tolerance and 75 percent deliberate squeeze\nPASS: Stem guide shader imported without errors\nPASS: Tool held through Meta pointer selection\nPASS: Aligned open blades show a green target at the real stalk\nPASS: Aligned target asks for a deliberate closing action\nPASS: Alignment and proximity alone do not cut or pick up\nPASS: Unheld tool cannot cut\nPASS: Green source rejects cutting and hides target feedback\nPASS: Closing on the fruit surface is rejected even inside the enlarged stem tolerance\nPASS: Moving already closed blades onto the stalk still cannot cut\nPASS: Partial 60 percent squeeze is still insufficient\nPASS: 75 percent squeeze cuts at 22 mm offset that the former 15 mm tolerance rejected\nPASS: Cut preserves scale and immediately hides the stem target\nPASS: Repeated closure cannot cut again or count as a pickup/delivery\nPASS: A small 32 mm drift during the same closing stroke uses the brief alignment grace\nPASS: Alignment older than 180 ms cannot authorize a distant cut\nPASS: Large movement beyond the extra centimetre is rejected\nPASS: Pausing blocks the cut and hides target feedback\nPASS: Resuming with closed blades requires reopening\nPASS: Tracking loss discards alignment memory and requires reopening\nPASS: Changing the holding hand discards alignment memory\nPASS: Expired alignment returns the marker to amber\nPASS: No cut or feedback sample awards a harvest without pickup and tray delivery\nNOT TESTED: physical tracking or perceived ease on Quest 3. Squeeze samples, input loss and grace expiry were supplied synthetically."
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

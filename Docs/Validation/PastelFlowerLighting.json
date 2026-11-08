@@ -1,0 +1,37 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "eval_file",
+    "parameters": {
+      "file": "Docs/Validation/VerifyFlowerLighting.cs"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "status": "PASS",
+        "litDay": 0.007329879815072814,
+        "litNight": 0.0015033148273486908,
+        "litNightToDayRatio": 0.20509406228698948,
+        "originalUnlitNightToDayRatio": 1,
+        "shader": "Cozy Garden/PastelFlowers",
+        "shaderMessages": [
+          {
+            "severity": "Warning",
+            "message": "pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them"
+          }
+        ],
+        "note": "Editor isolated render using actual cycle day/night sun and ambient settings; scene lighting restored"
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

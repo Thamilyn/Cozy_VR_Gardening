@@ -1,0 +1,101 @@
+{
+  "scene": "Assets/Scenes/Garden_Moves.unity",
+  "materialAssetsChanged": 19,
+  "styledRenderers": 234,
+  "foregroundWindRenderers": 110,
+  "metaRigStyledRenderers": 0,
+  "characterShaders": [
+    "VRM10/Universal Render Pipeline/MToon10"
+  ],
+  "wind": [
+    {
+      "name": "GrassWind_4d856157f7c1a4219987a0119d6b987d_744e82699c9ee42149d6e4b0e211b52e_-5404487779211743949",
+      "shader": "Cozy Garden/Styled Props",
+      "strength": 0.02
+    },
+    {
+      "name": "GrassWind_4d856157f7c1a4219987a0119d6b987d_1a31098e93b7b4ed5ac030d2b7365c92_-2626922734516518890",
+      "shader": "Cozy Garden/Styled Props",
+      "strength": 0.02
+    },
+    {
+      "name": "Flowers (Garden scenery)",
+      "shader": "Shader Graphs/Flower",
+      "strength": 0.1
+    },
+    {
+      "name": "Grass_02 (Garden scenery)",
+      "shader": "Shader Graphs/Grass",
+      "strength": 0.16
+    },
+    {
+      "name": "Grass_01 (Garden scenery)",
+      "shader": "Shader Graphs/Grass",
+      "strength": 0.16
+    },
+    {
+      "name": "Shrub_02 (Garden scenery)",
+      "shader": "Shader Graphs/Leaves",
+      "strength": 0.025
+    },
+    {
+      "name": "Shrub_01 (Garden scenery)",
+      "shader": "Shader Graphs/Leaves",
+      "strength": 0.025
+    },
+    {
+      "name": "Tree_leaves_02 (Garden scenery)",
+      "shader": "Shader Graphs/Leaves",
+      "strength": 0.025
+    },
+    {
+      "name": "Tree_leaves_01 (Garden scenery)",
+      "shader": "Shader Graphs/Leaves",
+      "strength": 0.025
+    },
+    {
+      "name": "Tree_leaves_03 (Garden scenery)",
+      "shader": "Shader Graphs/Leaves",
+      "strength": 0.025
+    },
+    {
+      "name": "Big_Tree_Leaves (Garden scenery)",
+      "shader": "Shader Graphs/Leaves",
+      "strength": 0.025
+    }
+  ],
+  "shaderMessages": [
+    {
+      "shader": "VRM10/Universal Render Pipeline/MToon10",
+      "severity": "Warning",
+      "message": "_FORWARD_PLUS shader keyword has been deprecated. Please update your shaders to use _CLUSTER_LIGHT_LOOP shader keyword instead, otherwise shader compilation times may be negatively affected."
+    },
+    {
+      "shader": "VRM10/Universal Render Pipeline/MToon10",
+      "severity": "Warning",
+      "message": "'MToon_TransformObjectToWorldDir': implicit truncation of vector type"
+    },
+    {
+      "shader": "VRM10/Universal Render Pipeline/MToon10",
+      "severity": "Warning",
+      "message": "gradient instruction used in a loop with varying iteration; partial derivatives may have undefined value"
+    },
+    {
+      "shader": "VRM10/Universal Render Pipeline/MToon10",
+      "severity": "Warning",
+      "message": "gradient instruction used in a loop with varying iteration; partial derivatives may have undefined value"
+    },
+    {
+      "shader": "Shader Graphs/Flower",
+      "severity": "Warning",
+      "message": "pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them"
+    },
+    {
+      "shader": "Shader Graphs/Flower",
+      "severity": "Warning",
+      "message": "pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them"
+    }
+  ],
+  "shaderErrors": 0,
+  "quest3Performance": "Not measured; Editor graphics validation only"
+}

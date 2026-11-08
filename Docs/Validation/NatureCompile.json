@@ -1,0 +1,20 @@
+{
+  "success": true,
+  "command": "recompile",
+  "data": {
+    "status": "completed",
+    "compiling": false,
+    "failed": false,
+    "compilationFailed": false,
+    "errors": [],
+    "warnings": [],
+    "summary": {
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "errors": [],
+  "warnings": [
+    "This project's com.unity.pipeline uses the old command names. Run unity pipeline upgrade."
+  ]
+}

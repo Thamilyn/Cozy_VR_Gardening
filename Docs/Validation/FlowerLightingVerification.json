@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "litDay": 0.0073298798150728149,
+  "litNight": 0.0015033148273486908,
+  "litNightToDayRatio": 0.20509406228698948,
+  "originalUnlitNightToDayRatio": 1.0,
+  "shader": "Cozy Garden/PastelFlowers",
+  "shaderMessages": [
+    {
+      "severity": "Warning",
+      "message": "pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them"
+    }
+  ],
+  "note": "Editor isolated render using actual cycle day/night sun and ambient settings; scene lighting restored"
+}

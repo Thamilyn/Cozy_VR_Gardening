@@ -4,14 +4,16 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Oculus.Interaction;
+using Oculus.Interaction.Grab;
 using Oculus.Interaction.HandGrab;
 using Oculus.Interaction.Input;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-// Paused Play fixture. Supplies synthetic IHand joints and a selected hand to the
-// SDK release override; does not simulate sensor tracking or the SDK candidate search.
+// Paused Play fixture. Exercises Meta's real gesture/proximity candidate filter
+// with synthetic finger input, then checks selected-tool retention and release.
+// Does not simulate Quest sensors or the full frame-by-frame selection lifecycle.
 public static class PrunerGestureCheck
 {
     private const BindingFlags Private = BindingFlags.Instance | BindingFlags.NonPublic;
@@ -36,8 +38,9 @@ public static class PrunerGestureCheck
             Quaternion open = bottom.localRotation;
             grabbable = pruner.GetComponent<Grabbable>();
             var grab = pruner.GetComponentInChildren<HandGrabInteractable>();
-            Check(grab.PalmGrabRules[HandFinger.Index] == Oculus.Interaction.GrabAPI.FingerRequirement.Required,
-                "Pickup uses a palm grasp including the index finger");
+            Check(grab.PalmGrabRules[HandFinger.Middle] == Oculus.Interaction.GrabAPI.FingerRequirement.Required &&
+                (grab.SupportedGrabTypes & GrabTypeFlags.Pinch) != 0,
+                "Pickup accepts pinch or a palm grasp with the middle finger closed");
 
             Collider table = Object.FindObjectsByType<Collider>(FindObjectsSortMode.None)
                 .First(collider => collider.name == "TableSet" && collider.enabled && !collider.isTrigger);
@@ -46,6 +49,7 @@ public static class PrunerGestureCheck
             handObject = new GameObject("Pruner synthetic hand interactor");
             interactor = handObject.AddComponent<HandGrabInteractor>();
             interactor.InjectHand(hand);
+            CheckPickup(pruner, grab, interactor, handObject, hand);
             FindField(interactor, "_selectedInteractable").SetValue(interactor, grab);
             Call(gestures, "OnHandSelected", interactor);
             var release = (Func<bool>)FindField(interactor, "_computeShouldUnselectOverride").GetValue(interactor);
@@ -123,7 +127,7 @@ public static class PrunerGestureCheck
             Check(FindField(interactor, "_computeShouldUnselectOverride").GetValue(interactor) == null,
                 "Disabling the component clears its override");
             gestures.enabled = true;
-            checks.Add("NOT TESTED: physical Quest 3 tracking, hand comfort and normal SDK candidate acquisition.");
+            checks.Add("NOT TESTED: physical Quest 3 tracking, hand comfort and full SDK frame-by-frame acquisition.");
             checks.Add("RESULT: PASS");
             return string.Join(Environment.NewLine, checks);
         }
@@ -136,8 +140,109 @@ public static class PrunerGestureCheck
             if (handObject != null) Object.DestroyImmediate(handObject);
             File.WriteAllLines("Docs/Validation/PrunerGestureVerification.txt",
                 new[] { "Unity " + Application.unityVersion, "UTC " + DateTime.UtcNow.ToString("O"),
-                    "Synthetic IHand samples, SDK release predicate and real scene tabletop; no scene saves." }.Concat(checks));
+                    "Synthetic fingers, actual Meta candidate proximity/rules, IHand joints and scene tabletop; no scene saves." }.Concat(checks));
         }
+    }
+
+    private static void CheckPickup(GardenPruner pruner, HandGrabInteractable grab,
+        HandGrabInteractor interactor, GameObject handObject, SampleHand hand)
+    {
+        foreach (GardenPruner tool in Object.FindObjectsByType<GardenPruner>(FindObjectsSortMode.None))
+        {
+            BoxCollider handle = tool.transform.Find("Pruner handle pickup").GetComponent<BoxCollider>();
+            var sdkGrab = tool.GetComponentInChildren<HandGrabInteractable>();
+            Check(handle.enabled && handle.isTrigger && handle.attachedRigidbody == tool.GetComponent<Rigidbody>() &&
+                sdkGrab.Colliders.Contains(handle), "Handle pickup volume belongs to the existing body and Meta collider cache: " + tool.GetInstanceID());
+            Check(tool.GetComponentsInChildren<MeshCollider>().All(collider => collider.convex && !collider.isTrigger),
+                "Solid convex blade/handle physics remain intact: " + tool.GetInstanceID());
+        }
+
+        var api = handObject.AddComponent<Oculus.Interaction.GrabAPI.HandGrabAPI>();
+        var pinch = new SampleFingers();
+        var palm = new SampleFingers();
+        api.InjectHand(hand);
+        api.InjectOptionalFingerPinchAPI(pinch);
+        api.InjectOptionalFingerGrabAPI(palm);
+        interactor.InjectHandGrabApi(api);
+        interactor.InjectGrabOrigin(handObject.transform);
+        interactor.InjectOptionalGripPoint(handObject.transform);
+        interactor.InjectOptionalPinchPoint(handObject.transform);
+        var body = handObject.AddComponent<Rigidbody>();
+        body.isKinematic = true;
+        body.useGravity = false;
+        interactor.InjectRigidbody(body);
+        var volume = handObject.AddComponent<SphereCollider>();
+        volume.radius = 0.004f;
+        volume.isTrigger = true;
+        interactor.InjectOptionalGripCollider(volume);
+        interactor.InjectOptionalPinchCollider(volume);
+        var pickup = pruner.transform.Find("Pruner handle pickup").GetComponent<BoxCollider>();
+        Vector3 nearby = default;
+        bool found = false;
+        foreach (Vector3 axis in new[] { Vector3.up, Vector3.down, Vector3.right, Vector3.left, Vector3.forward, Vector3.back })
+        {
+            Vector3 offset = Vector3.Scale(axis, pickup.size * 0.5f - Vector3.one * 0.006f);
+            handObject.transform.position = pickup.transform.TransformPoint(pickup.center + offset);
+            Physics.SyncTransforms();
+            bool hitsSolid = grab.Colliders.Any(collider => !collider.isTrigger && Overlap(volume, collider));
+            if (!hitsSolid && Overlap(volume, pickup))
+            {
+                nearby = handObject.transform.position;
+                found = true;
+                break;
+            }
+        }
+        Check(found, "A tracked fingertip can overlap the padded handles without penetrating solid meshes");
+        Check(!pruner.GetComponent<Rigidbody>().isKinematic && pruner.GetComponent<Rigidbody>().useGravity,
+            "Pickup tolerance does not freeze the real tool or disable gravity");
+        foreach (Handedness side in new[] { Handedness.Left, Handedness.Right })
+        {
+            hand.Side = side;
+            Check(interactor.CanInteractWith(grab), side + " hand can interact with Pruner");
+            pinch.Flags = palm.Flags = HandFingerFlags.None;
+            Check(SelectingTypes(interactor, grab) == GrabTypeFlags.None,
+                side + " open hand near handles does not automatically grab");
+            palm.Flags = HandFingerFlags.Middle;
+            Check((SelectingTypes(interactor, grab) & GrabTypeFlags.Palm) != 0,
+                side + " palm grasp does not require all three fingers to close simultaneously");
+            palm.Flags = HandFingerFlags.None;
+            pinch.Flags = HandFingerFlags.Index;
+            Check((SelectingTypes(interactor, grab) & GrabTypeFlags.Pinch) != 0,
+                side + " index pinch is accepted by the actual Meta proximity/gesture filter");
+            pickup.enabled = false;
+            Check(SelectingTypes(interactor, grab) == GrabTypeFlags.None,
+                side + " near-handle tolerance is supplied by the new volume, not a forced selection");
+            pickup.enabled = true;
+            handObject.transform.position = nearby + Vector3.up;
+            Physics.SyncTransforms();
+            Check(SelectingTypes(interactor, grab) == GrabTypeFlags.None,
+                side + " pinch at a distance cannot select the tool");
+            handObject.transform.position = nearby;
+            Physics.SyncTransforms();
+        }
+        pinch.Flags = palm.Flags = HandFingerFlags.None;
+        hand.Side = Handedness.Right;
+        Object.DestroyImmediate(volume);
+        Object.DestroyImmediate(api);
+    }
+
+    private static bool Overlap(Collider first, Collider second) => Physics.ComputePenetration(first,
+        first.transform.position, first.transform.rotation, second, second.transform.position, second.transform.rotation, out _, out _);
+
+    private static GrabTypeFlags SelectingTypes(HandGrabInteractor interactor, HandGrabInteractable grab)
+    {
+        object[] arguments = { grab, float.NegativeInfinity, 0f };
+        return (GrabTypeFlags)Call(interactor, "SelectingGrabTypes", arguments);
+    }
+
+    private sealed class SampleFingers : IFingerAPI
+    {
+        public HandFingerFlags Flags;
+        public bool GetFingerIsGrabbing(HandFinger finger) => (Flags & (HandFingerFlags)(1 << (int)finger)) != 0;
+        public bool GetFingerIsGrabbingChanged(HandFinger finger, bool target) => target && GetFingerIsGrabbing(finger);
+        public float GetFingerGrabScore(HandFinger finger) => GetFingerIsGrabbing(finger) ? 1f : 0f;
+        public Vector3 GetWristOffsetLocal() => Vector3.zero;
+        public void Update(IHand hand) { }
     }
 
     private static FieldInfo FindField(object target, string name)

@@ -1,0 +1,1 @@
+try{var setup=System.AppDomain.CurrentDomain.GetAssemblies().Select(a=>a.GetType("GardenStonePlantRefinement")).First(t=>t!=null);setup.GetMethod("Apply").Invoke(null,null);return new{applied=true,error=""};}catch(System.Exception error){return new{applied=false,error=(error.InnerException??error).ToString()};}

@@ -1,10 +1,30 @@
 Unity 6000.3.23f1
-UTC 2026-11-07T22:35:36.3227711Z
-Synthetic IHand samples, SDK release predicate and real scene tabletop; no scene saves.
+UTC 2026-11-08T16:50:20.3394625Z
+Synthetic fingers, actual Meta candidate proximity/rules, IHand joints and scene tabletop; no scene saves.
 PASS: Fresh paused Play session
 PASS: Prefab installs the gesture component
 PASS: Shears start open on the table
-PASS: Pickup uses a palm grasp including the index finger
+PASS: Pickup accepts pinch or a palm grasp with the middle finger closed
+PASS: Handle pickup volume belongs to the existing body and Meta collider cache: -2070
+PASS: Solid convex blade/handle physics remain intact: -2070
+PASS: Handle pickup volume belongs to the existing body and Meta collider cache: -11696
+PASS: Solid convex blade/handle physics remain intact: -11696
+PASS: Handle pickup volume belongs to the existing body and Meta collider cache: -11244
+PASS: Solid convex blade/handle physics remain intact: -11244
+PASS: A tracked fingertip can overlap the padded handles without penetrating solid meshes
+PASS: Pickup tolerance does not freeze the real tool or disable gravity
+PASS: Left hand can interact with Pruner
+PASS: Left open hand near handles does not automatically grab
+PASS: Left palm grasp does not require all three fingers to close simultaneously
+PASS: Left index pinch is accepted by the actual Meta proximity/gesture filter
+PASS: Left near-handle tolerance is supplied by the new volume, not a forced selection
+PASS: Left pinch at a distance cannot select the tool
+PASS: Right hand can interact with Pruner
+PASS: Right open hand near handles does not automatically grab
+PASS: Right palm grasp does not require all three fingers to close simultaneously
+PASS: Right index pinch is accepted by the actual Meta proximity/gesture filter
+PASS: Right near-handle tolerance is supplied by the new volume, not a forced selection
+PASS: Right pinch at a distance cannot select the tool
 PASS: Selection installs the SDK release predicate
 PASS: Meta pointer selection holds the shears
 PASS: Closing all four fingers produces a full squeeze
@@ -30,5 +50,5 @@ PASS: Ending the grasp clears its SDK release override
 PASS: No gesture samples remain attached to a released hand
 PASS: Released shears return to the open resting pose
 PASS: Disabling the component clears its override
-NOT TESTED: physical Quest 3 tracking, hand comfort and normal SDK candidate acquisition.
+NOT TESTED: physical Quest 3 tracking, hand comfort and full SDK frame-by-frame acquisition.
 RESULT: PASS

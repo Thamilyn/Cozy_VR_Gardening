@@ -1,0 +1,1 @@
+return new{scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path,playing=UnityEditor.EditorApplication.isPlaying,changing=UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode};

@@ -1,0 +1,45 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "eval_file",
+    "parameters": {
+      "file": "Docs/Validation/NatureVerify.cs"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "prefabInstances": 333,
+        "renderers": 333,
+        "prefabTriangles": 102851,
+        "totalEnvironmentTriangles": 106147,
+        "activeDecorativeColliders": 0,
+        "grassGround": true,
+        "floorHeight": 0,
+        "removedPlatform": true,
+        "shaderMessages": [
+          {
+            "shader": "Shader Graphs/Flower",
+            "severity": "Warning",
+            "message": "pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them"
+          },
+          {
+            "shader": "Shader Graphs/Flower",
+            "severity": "Warning",
+            "message": "pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them"
+          }
+        ],
+        "sceneDirty": true
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

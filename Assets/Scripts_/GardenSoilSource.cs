@@ -11,6 +11,7 @@ public sealed class GardenSoilSource : MonoBehaviour
     private float scoopHeightAboveSoil = 0.14f;
     [SerializeField, Min(0.01f)] private float scoopDepthBelowSoil = 0.08f;
     private Bounds surfaceBounds;
+    private GardenObjectLabel nameLabel;
 
     public Material SoilMaterial { get; private set; }
 
@@ -22,8 +23,13 @@ public sealed class GardenSoilSource : MonoBehaviour
             enabled = false;
             return;
         }
-        GardenObjectLabel.Create(gameObject, "SoilPot",
+        nameLabel = GardenObjectLabel.Create(gameObject, "Soil Pot",
             transform.TransformVector(Vector3.up * surfaceBounds.max.y) + Vector3.up * 0.1f);
+    }
+
+    internal void RecordScoop()
+    {
+        if (nameLabel != null) nameLabel.enabled = false;
     }
 
     private bool TryResolveSurface()

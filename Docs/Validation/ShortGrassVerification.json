@@ -1,0 +1,17 @@
+{
+  "chunks": 172,
+  "nearTriangles": 1600464,
+  "farTriangles": 267192,
+  "note": "Logical triangles across all chunks before frustum, native LOD and GPU coverage reduction. Only six meshes are stored.",
+  "largestChunkVertices": 52020,
+  "uniqueNearMeshes": 3,
+  "uniqueFarMeshes": 3,
+  "meshMemoryMiB": 7.83,
+  "activeOldGrass": 0,
+  "hiddenOldGrass": 110,
+  "floorFound": true,
+  "floorY": 0.0,
+  "shaderMessages": [],
+  "shaderErrors": 0,
+  "quest3Performance": "Not measured on headset"
+}

@@ -1,0 +1,2 @@
+var renderer=UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<UnityEngine.Renderer>(true)).First(r=>r.name=="PlantPot");
+return renderer.GetComponentsInChildren<UnityEngine.Renderer>(true).Select(r=>new{name=r.name,enabled=r.enabled,active=r.gameObject.activeInHierarchy,mesh=r.GetComponent<UnityEngine.MeshFilter>()?.sharedMesh?.name,size=r.bounds.size.ToString(),material=r.sharedMaterial?.name}).ToArray();

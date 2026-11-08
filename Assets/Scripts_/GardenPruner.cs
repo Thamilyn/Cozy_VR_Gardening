@@ -1,5 +1,6 @@
 using Oculus.Interaction;
 using Oculus.Interaction.Grab;
+using Oculus.Interaction.GrabAPI;
 using Oculus.Interaction.HandGrab;
 using Oculus.Interaction.Input;
 using UnityEngine;
@@ -17,6 +18,8 @@ public sealed class GardenPruner : MonoBehaviour
     [SerializeField, Range(0.05f, 0.45f)] private float squeezeToOpen = 0.3f;
     [Tooltip("Brief alignment memory during closing, to tolerate small hand-tracking movements.")]
     [SerializeField, Range(0f, 0.3f)] private float alignmentGraceSeconds = 0.18f;
+    [Tooltip("Extra hand-grab tolerance around the handles, in metres. Does not change solid collisions or cutting reach.")]
+    [SerializeField, Range(0.005f, 0.03f)] private float handleGrabPadding = 0.018f;
 
     private Transform bottomPart;
     private Transform topPart;
@@ -70,6 +73,7 @@ public sealed class GardenPruner : MonoBehaviour
         cuttingStart = new Vector3(-bottomClosingSign * 0.05f, 0f, 0.25f) * reach;
         cuttingEnd = new Vector3(-bottomClosingSign * 0.2f, 0f, 0.9f) * reach;
 
+        PrepareHandleGrabVolume(bottomBounds, topBounds);
         GardenGrabSetup.ConfigureGrabbable(gameObject);
         grabbable = GetComponent<Grabbable>();
         grabbable.MaxGrabPoints = 1;
@@ -78,6 +82,8 @@ public sealed class GardenPruner : MonoBehaviour
         handGestures = GetComponent<PrunerHandGrab>();
         if (handGestures == null) handGestures = gameObject.AddComponent<PrunerHandGrab>();
         ApplyBladePose();
+        GardenObjectLabel.Create(gameObject, "Pruner", Vector3.up * 0.12f,
+            () => GronnyTutorial.RequestsPruner);
     }
 
     private static bool TryPreparePart(Transform part, out Bounds bounds)
@@ -98,9 +104,57 @@ public sealed class GardenPruner : MonoBehaviour
 
     internal static void ConfigureHandGrab(HandGrabInteractable handGrab)
     {
-        // A normal palm grab picks up the shears; PrunerHandGrab owns the release gesture.
-        handGrab.InjectSupportedGrabTypes(GrabTypeFlags.Palm);
-        handGrab.InjectPalmGrabRules(Oculus.Interaction.GrabAPI.GrabbingRule.DefaultPalmRule);
+        // Both natural pickup gestures use Meta's selection. PrunerHandGrab keeps
+        // the tool held when the fingers open again to operate the blades.
+        handGrab.InjectSupportedGrabTypes(GrabTypeFlags.Pinch | GrabTypeFlags.Palm);
+        handGrab.InjectPinchGrabRules(GrabbingRule.DefaultPinchRule);
+        GrabbingRule palmRule = GrabbingRule.DefaultPalmRule;
+        palmRule[HandFinger.Index] = FingerRequirement.Optional;
+        palmRule[HandFinger.Ring] = FingerRequirement.Optional;
+        handGrab.InjectPalmGrabRules(palmRule);
+    }
+
+    private void PrepareHandleGrabVolume(Bounds bottomBounds, Bounds topBounds)
+    {
+        const string volumeName = "Pruner handle pickup";
+        if (transform.Find(volumeName) != null) return;
+
+        // Thin moving mesh hulls are difficult to overlap with tracked palm/pinch
+        // volumes. Bridge only the handles, leaving physical hulls and blades alone.
+        Bounds handles = HandleBoundsInRoot(bottomPart, bottomBounds);
+        handles.Encapsulate(HandleBoundsInRoot(topPart, topBounds));
+        Vector3 scale = transform.lossyScale;
+        handles.Expand(new Vector3(
+            2f * handleGrabPadding / Mathf.Max(Mathf.Abs(scale.x), 0.0001f),
+            2f * handleGrabPadding / Mathf.Max(Mathf.Abs(scale.y), 0.0001f),
+            2f * handleGrabPadding / Mathf.Max(Mathf.Abs(scale.z), 0.0001f)));
+
+        GameObject pickup = new GameObject(volumeName);
+        pickup.layer = gameObject.layer;
+        pickup.transform.SetParent(transform, false);
+        BoxCollider volume = pickup.AddComponent<BoxCollider>();
+        volume.center = handles.center;
+        volume.size = handles.size;
+        volume.isTrigger = true;
+        // Created before Meta's Start caches the body's colliders. No extra body
+        // or custom hand detector is needed, and the table still uses solid hulls.
+    }
+
+    private Bounds HandleBoundsInRoot(Transform part, Bounds meshBounds)
+    {
+        Vector3 minimum = meshBounds.min;
+        Vector3 maximum = meshBounds.max;
+        maximum.z = Mathf.Min(0f, maximum.z); // Handles are behind this model's hinge.
+        Bounds bounds = new Bounds(transform.InverseTransformPoint(part.TransformPoint(minimum)), Vector3.zero);
+        for (int corner = 0; corner < 8; corner++)
+        {
+            Vector3 point = new Vector3(
+                (corner & 1) == 0 ? minimum.x : maximum.x,
+                (corner & 2) == 0 ? minimum.y : maximum.y,
+                (corner & 4) == 0 ? minimum.z : maximum.z);
+            bounds.Encapsulate(transform.InverseTransformPoint(part.TransformPoint(point)));
+        }
+        return bounds;
     }
 
     private void LateUpdate()

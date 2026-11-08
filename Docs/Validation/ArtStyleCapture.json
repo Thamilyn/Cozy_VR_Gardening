@@ -1,0 +1,104 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "eval_file",
+    "parameters": {
+      "file": "Docs/Validation/NatureCapture.cs"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": [
+        {
+          "name": "Nature - Fence_01",
+          "count": 6,
+          "triangles": 1080
+        },
+        {
+          "name": "Nature - Flower_01_3",
+          "count": 20,
+          "triangles": 2080
+        },
+        {
+          "name": "Nature - Flower_09_2",
+          "count": 19,
+          "triangles": 4788
+        },
+        {
+          "name": "Nature - Flower_06_2",
+          "count": 19,
+          "triangles": 1596
+        },
+        {
+          "name": "Nature - Flower_03_3",
+          "count": 19,
+          "triangles": 1254
+        },
+        {
+          "name": "Nature - Flower_02_3",
+          "count": 19,
+          "triangles": 1254
+        },
+        {
+          "name": "Nature - Gras_02",
+          "count": 96,
+          "triangles": 10368
+        },
+        {
+          "name": "Nature - Gras_01",
+          "count": 96,
+          "triangles": 8064
+        },
+        {
+          "name": "Nature - Rock_02",
+          "count": 3,
+          "triangles": 216
+        },
+        {
+          "name": "Nature - Rock_01",
+          "count": 3,
+          "triangles": 192
+        },
+        {
+          "name": "Nature - Shrubs_02",
+          "count": 6,
+          "triangles": 2112
+        },
+        {
+          "name": "Nature - Shrubs_01",
+          "count": 6,
+          "triangles": 1020
+        },
+        {
+          "name": "Nature - Tree_02",
+          "count": 7,
+          "triangles": 17451
+        },
+        {
+          "name": "Nature - Tree_01",
+          "count": 7,
+          "triangles": 15771
+        },
+        {
+          "name": "Nature - Tree_03",
+          "count": 6,
+          "triangles": 18492
+        },
+        {
+          "name": "Nature - Big Tree",
+          "count": 1,
+          "triangles": 17113
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

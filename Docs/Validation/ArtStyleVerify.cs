@@ -1,0 +1,11 @@
+var scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+var authored=scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<UnityEngine.Renderer>(true)).ToArray();
+var nature=UnityEngine.Resources.FindObjectsOfTypeAll<UnityEngine.GameObject>().Where(g=>g.name.StartsWith("Nature - ")).SelectMany(g=>g.GetComponentsInChildren<UnityEngine.Renderer>()).ToArray();
+var materials=authored.Concat(nature).SelectMany(r=>r.sharedMaterials).Where(m=>m!=null).Distinct().ToArray();
+var shaders=materials.Select(m=>m.shader).Concat(new[]{UnityEngine.Shader.Find("Cozy Garden/Landscape")}).Distinct().ToArray();
+var messages=shaders.SelectMany(s=>UnityEditor.ShaderUtil.GetShaderMessages(s).Select(m=>new{shader=s.name,severity=m.severity.ToString(),message=m.message})).ToArray();
+var wind=materials.Where(m=>m.shader.name=="Shader Graphs/Grass"||m.shader.name=="Shader Graphs/Flower"||m.shader.name=="Shader Graphs/Leaves"||m.IsKeywordEnabled("_GARDEN_WIND")).Select(m=>new{name=m.name,shader=m.shader.name,strength=m.HasProperty("_Wind_Strength")?m.GetFloat("_Wind_Strength"):m.HasProperty("_WindJitter")?m.GetFloat("_WindJitter"):m.GetFloat("_WindStrength")}).ToArray();
+var report=new{scene=scene.path,materialAssetsChanged=System.IO.File.ReadAllLines("Docs/Validation/ArtStyleMaterials.txt").Length,styledRenderers=authored.Count(r=>r.sharedMaterials.Any(m=>m!=null&&m.shader.name=="Cozy Garden/Styled Props")),foregroundWindRenderers=authored.Count(r=>r.sharedMaterials.Any(m=>m!=null&&m.IsKeywordEnabled("_GARDEN_WIND"))),metaRigStyledRenderers=authored.Count(r=>r.GetComponentInParent<OVRCameraRig>(true)!=null&&r.sharedMaterials.Any(m=>m!=null&&m.shader.name=="Cozy Garden/Styled Props")),characterShaders=authored.OfType<UnityEngine.SkinnedMeshRenderer>().Where(r=>r.GetComponentInParent<OVRCameraRig>(true)==null).SelectMany(r=>r.sharedMaterials).Where(m=>m!=null).Select(m=>m.shader.name).Distinct().ToArray(),wind=wind,shaderMessages=messages,shaderErrors=messages.Count(m=>m.severity=="Error"),quest3Performance="Not measured; Editor graphics validation only"};
+System.IO.File.WriteAllText("Docs/Validation/ArtStyleVerification.json",Newtonsoft.Json.JsonConvert.SerializeObject(report,Newtonsoft.Json.Formatting.Indented));
+UnityEditor.SceneManagement.EditorSceneManager.SaveScene(scene);
+return report;

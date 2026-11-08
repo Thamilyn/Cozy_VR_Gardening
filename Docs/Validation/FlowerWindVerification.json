@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "changedPixels": 1135,
+  "changedSilhouettePixels": 298,
+  "intervalSeconds": 1.2058085999997274,
+  "mode": "Editor isolated GPU render; not a headset performance test"
+}

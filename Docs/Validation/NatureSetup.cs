@@ -1,0 +1,12 @@
+var floor=UnityEngine.GameObject.Find("Floor");
+var component=floor.GetComponent("GardenDistantGround");
+var serialized=new UnityEditor.SerializedObject(component);
+var flowers=serialized.FindProperty("flowers");
+var names=new[]{"Flower_01_3","Flower_02_3","Flower_03_3","Flower_06_2","Flower_09_2"};
+flowers.arraySize=names.Length;
+for(int i=0;i<names.Length;i++) flowers.GetArrayElementAtIndex(i).objectReferenceValue=UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>("Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/"+names[i]+".prefab");
+serialized.ApplyModifiedProperties();
+component.SendMessage("Rebuild");
+UnityEditor.EditorUtility.SetDirty(component);
+UnityEditor.SceneManagement.EditorSceneManager.SaveScene(floor.scene);
+return new {scene=floor.scene.path,flowers=names,updated=true};

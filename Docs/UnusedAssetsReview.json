@@ -1,0 +1,4688 @@
+{
+  "scope": "Enabled build scenes, Resources, StreamingAssets, project settings references and all scripts/shaders protected",
+  "warning": "Candidates for manual review, not safe-to-delete proof. Dynamic string loads and external tools may still reference them. Nothing deleted.",
+  "rootCount": 348,
+  "referencedAssets": 1312,
+  "candidateCount": 766,
+  "candidateSourceMiB": 618.09,
+  "folders": [
+    {
+      "folder": "OurAss",
+      "count": 229,
+      "bytes": 409018783
+    },
+    {
+      "folder": "Polytope Studio",
+      "count": 127,
+      "bytes": 111570385
+    },
+    {
+      "folder": "3D set of stylized nature - GHIBLI style",
+      "count": 157,
+      "bytes": 88068146
+    },
+    {
+      "folder": "Starter Assets",
+      "count": 115,
+      "bytes": 21493569
+    },
+    {
+      "folder": "_Recovery",
+      "count": 13,
+      "bytes": 5048139
+    },
+    {
+      "folder": "Assets",
+      "count": 6,
+      "bytes": 5041898
+    },
+    {
+      "folder": "BOXOPHOBIC",
+      "count": 57,
+      "bytes": 1778211
+    },
+    {
+      "folder": "Free_JapanVillage",
+      "count": 34,
+      "bytes": 1766850
+    },
+    {
+      "folder": "Vroid",
+      "count": 3,
+      "bytes": 1715440
+    },
+    {
+      "folder": "Scenes",
+      "count": 3,
+      "bytes": 1201735
+    },
+    {
+      "folder": "Prefabs",
+      "count": 12,
+      "bytes": 869612
+    },
+    {
+      "folder": "MamkinEnthusiast",
+      "count": 4,
+      "bytes": 278347
+    },
+    {
+      "folder": "Samples",
+      "count": 1,
+      "bytes": 232505
+    },
+    {
+      "folder": "TutorialInfo",
+      "count": 1,
+      "bytes": 24069
+    },
+    {
+      "folder": "Settings",
+      "count": 3,
+      "bytes": 8186
+    },
+    {
+      "folder": "Materials",
+      "count": 1,
+      "bytes": 3655
+    }
+  ],
+  "assets": [
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Skybox_Texture_01.png",
+      "bytes": 20967897,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Ground_Grass_Green_01.png",
+      "bytes": 18886629,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Candle_normals.tga",
+      "bytes": 16777757,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/MetObj_Normal.tga",
+      "bytes": 16777260,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/MetObj_Diffuse.tga",
+      "bytes": 16777260,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Column_normals.tga",
+      "bytes": 16766953,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Crypt_normals.tga",
+      "bytes": 16765403,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Floor_normals.tga",
+      "bytes": 16757957,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/WoodPlank_normals.tga",
+      "bytes": 16755473,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Tombstones_normals.tga",
+      "bytes": 16742916,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/WoodPlank_Diffuse.tga",
+      "bytes": 16312719,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Tombstones_Diffuse.tga",
+      "bytes": 16237007,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Floor_Diffuse.tga",
+      "bytes": 16119532,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Column_Diffuse.tga",
+      "bytes": 16065156,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Crypt_Diffuse.tga",
+      "bytes": 15992152,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Altars_BC.png",
+      "bytes": 14473136,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/WoodPlank_Specular.tga",
+      "bytes": 13563628,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Column_Roughness.tga",
+      "bytes": 10751515,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Tombstones_Roughness.tga",
+      "bytes": 9826798,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Floor_Specular.tga",
+      "bytes": 9522882,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Crypt_Roughness.tga",
+      "bytes": 9465183,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Candle_Emis.tga",
+      "bytes": 9386342,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Floor_Roughness.tga",
+      "bytes": 8831863,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/WoodPlank_Rough.tga",
+      "bytes": 8765577,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Altars_OMG.png",
+      "bytes": 8219757,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Crypt_Specular.tga",
+      "bytes": 8034221,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_6dc76592-a48a-4163-91df-c29ec1a99c66.asset",
+      "bytes": 6735664,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_832163fb-b19c-4118-97c2-cf0a3b224fca.asset",
+      "bytes": 6712728,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_88efe361-6f68-4188-bcd0-e9554ca440b9.asset",
+      "bytes": 6707728,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_445999c2-5240-4b5c-9394-4cacb62d7eec.asset",
+      "bytes": 6703652,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_d3c37e8d-6092-48f4-b81e-93b97326e4d2.asset",
+      "bytes": 6703412,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_ff4b5190-b520-4d46-b960-ee1d0967df26.asset",
+      "bytes": 6664720,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Column_Specular.tga",
+      "bytes": 6519727,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_c82c1fc5-a7ad-4f88-a7ff-c071a4dae8e5.asset",
+      "bytes": 6234872,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Mossy_OMG.png",
+      "bytes": 6205681,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/New Terrain.asset",
+      "bytes": 5935696,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Candle_Diffuse.tga",
+      "bytes": 5863111,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Terrain/TerrainData_984456c3-d32f-475f-a118-27bb19f92a65.asset",
+      "bytes": 5749128,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/Tombstones_Specular.tga",
+      "bytes": 5529101,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/ice_with_grass_01_1k/ice_with_grass_01_baseColor_1k.png",
+      "bytes": 5460905,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/ice_with_grass_01_1k/ice_with_grass_01_normal_gl_1k.png",
+      "bytes": 5369679,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/ice_with_grass_01_1k/ice_with_grass_01_normal_dx_1k.png",
+      "bytes": 5365535,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Models/Armature.fbx",
+      "bytes": 5021936,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Wave Noise.png",
+      "bytes": 4965201,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Ground_Generic_03.png",
+      "bytes": 4793914,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Rock_001_OMG.png",
+      "bytes": 4754085,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Arc_N.png",
+      "bytes": 4182975,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/SpaceRobotKyle/Textures/KyleRobot_BaseMap.png",
+      "bytes": 3874838,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Arc_BC.png",
+      "bytes": 3520909,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Road_OMG.png",
+      "bytes": 3365190,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Stone_Slab_BC.png",
+      "bytes": 2887164,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Wood_2_OMG.png",
+      "bytes": 2710663,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Textures/Soil normal.png",
+      "bytes": 2469785,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/grass_with_rocks_01_1k/grass_with_rocks_01_color_1k.png",
+      "bytes": 2204204,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/moss_ground_01_1k/moss_groud_01_Normal_gl_1k.png",
+      "bytes": 2166125,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/moss_ground_01_1k/moss_groud_01_Normal_dx_1k.png",
+      "bytes": 2164811,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/water_albedo_2k.png",
+      "bytes": 2159205,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/water_normal_2k.png",
+      "bytes": 2143816,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/water_height_2k.png",
+      "bytes": 2058509,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/Tomato_AI_Texture.png",
+      "bytes": 2056154,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/grass_with_rocks_01_1k/grass_with_rocks_01_normal_dx_1k.png",
+      "bytes": 2051252,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/grass_with_rocks_01_1k/grass_with_rocks_01_normal_gl_1k.png",
+      "bytes": 2050958,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/New Terrain 3.asset",
+      "bytes": 1963192,
+      "category": "Sin referencia estática detectada",
+      "folder": "Assets"
+    },
+    {
+      "path": "Assets/New Terrain 2.asset",
+      "bytes": 1958916,
+      "category": "Sin referencia estática detectada",
+      "folder": "Assets"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Rock_11_BC.png",
+      "bytes": 1956800,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Textures/Snow-Capped Volcano Game Asset.png",
+      "bytes": 1946259,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Rock_11_N.png",
+      "bytes": 1899351,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Textures/ice_with_grass_01_1k/ice_with_grass_01_ambientOcclusion_1k.png",
+      "bytes": 1776098,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/SpaceRobotKyle/Textures/KyleRobot_Normal.png",
+      "bytes": 1754276,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/OurAss/ChatGPT Image Oct 29, 2026, 01_32_22 PM.png",
+      "bytes": 1749386,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/Stylized Green Mountain Island.png",
+      "bytes": 1716807,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Rock_10_BC.png",
+      "bytes": 1711623,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Rock_09_BC.png",
+      "bytes": 1680274,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Grass_ground_OMG.png",
+      "bytes": 1672209,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Textures/moss_ground_01_1k/moss_groud_01_Height_1k.png",
+      "bytes": 1671158,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/Worn Sage Planter UV Texture.png",
+      "bytes": 1647208,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/Stylized Green Mountai.png",
+      "bytes": 1642718,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/grass_with_rocks_01_1k/grass_with_rocks_01_height_1k.png",
+      "bytes": 1632301,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/Stylized Grassy Mountain Landscape Asset.png",
+      "bytes": 1581547,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Rock_10_N.png",
+      "bytes": 1551962,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Textures/Stylized Green Mo.png",
+      "bytes": 1514839,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/moss_ground_01_1k/moss_groud_01_Base_Color_1k.png",
+      "bytes": 1491969,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Rock_09_N.png",
+      "bytes": 1464640,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Textures/ice_with_grass_01_1k/ice_with_grass_01_roughness_1k.png",
+      "bytes": 1461760,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Rock_07_BC.png",
+      "bytes": 1421782,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Textures/grass_01_1k/grass_01_height_1k.png",
+      "bytes": 1418224,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Rock_08_N.png",
+      "bytes": 1405615,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Rock_08_BC.png",
+      "bytes": 1385547,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Rock_07_N.png",
+      "bytes": 1345160,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Textures/floor_tiles_05_1k/floor_tiles__05_normal_gl_1k.png",
+      "bytes": 1331873,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/Stylized Grassy Mountain.png",
+      "bytes": 1327698,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/ice_with_grass_01_1k/ice_with_grass_01_height_1k.png",
+      "bytes": 1258607,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Rock_06_BC.png",
+      "bytes": 1216388,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Textures/floor_tiles_05_1k/floor_tiles__05_normal_dx_1k.png",
+      "bytes": 1205279,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/Snow-Capped Volcan.png",
+      "bytes": 1202327,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Rock_06_N.png",
+      "bytes": 1196339,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Leaf_Cute.png",
+      "bytes": 1182095,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Street_Light_BC.png",
+      "bytes": 1179742,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Rock_04_N.png",
+      "bytes": 1175455,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Textures/sand_03_1k 1/sand_03_height_1k.png",
+      "bytes": 1156572,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/grass_01_1k/grass_01_color_1k.png",
+      "bytes": 1156009,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/Pastel Wooden Table UV Atlas.png",
+      "bytes": 1136155,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Animations/Stand--Idle.anim.fbx",
+      "bytes": 1123312,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Stone_Slab_N.png",
+      "bytes": 1105513,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Textures/wood_planks_07_1k 1/wood_planks_07_height_1k.png",
+      "bytes": 1061711,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/floor_tiles_05_1k/floor_tiles__05_baseColor_1k.png",
+      "bytes": 1036825,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Rock_04_BC.png",
+      "bytes": 963194,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Altars_N.png",
+      "bytes": 955780,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Animations/Jump--InAir.anim.fbx",
+      "bytes": 920880,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Rock_05_N.png",
+      "bytes": 844628,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Textures/moss_ground_01_1k/moss_groud_01_Ambient_Occlusion_1k.png",
+      "bytes": 842045,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/grass_with_rocks_01_1k/grass_with_rocks_01_roughness_1k.png",
+      "bytes": 837041,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Vroid/Animations/Idle (1).fbx",
+      "bytes": 791616,
+      "category": "Sin referencia estática detectada",
+      "folder": "Vroid"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Animations/Jump--Jump.anim.fbx",
+      "bytes": 783936,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Street_Light_N.png",
+      "bytes": 779734,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Generic_Tree_Leaves_01.png",
+      "bytes": 778747,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/SpaceRobotKyle/Models/KyleRobot.fbx",
+      "bytes": 763472,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/OurAss/Textures/grass_with_rocks_01_1k/grass_with_rocks_01_ambientocclusion_1k.png",
+      "bytes": 741817,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Fence_002_BC.png",
+      "bytes": 738699,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Textures/ice_with_grass_01_1k/ice_with_grass_01_metallic_1k.png",
+      "bytes": 738187,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Rock_05_BC.png",
+      "bytes": 736582,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Textures/wood_planks_07_1k 1/wood_planks_07_ambient_occlusion_1k.png",
+      "bytes": 688219,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/grass_01_1k/grass_01_normal_gl_1k.png",
+      "bytes": 666535,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/wood_planks_07_1k 1/wood_planks_07_normal_gl_1k.png",
+      "bytes": 660859,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Animations/Locomotion--Walk_N_Land.anim.fbx",
+      "bytes": 652800,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Animations/Locomotion--Walk_N.anim.fbx",
+      "bytes": 652672,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/OurAss/Textures/grass_01_1k/grass_01_normal_dx_1k.png",
+      "bytes": 652483,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/sand_03_1k 1/sand_03_normal_gl_1k.png",
+      "bytes": 644748,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/sand_03_1k 1/sand_03_normal_dx_1k.png",
+      "bytes": 644118,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/sand_03_1k 1/sand_03_color_1k.png",
+      "bytes": 640652,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/wood_planks_07_1k 1/wood_planks_07_color_1k.png",
+      "bytes": 627354,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/_Recovery/0 (4).unity",
+      "bytes": 621045,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "_Recovery"
+    },
+    {
+      "path": "Assets/_Recovery/0 (3).unity",
+      "bytes": 620098,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "_Recovery"
+    },
+    {
+      "path": "Assets/Prefabs/FullEnviorment.prefab",
+      "bytes": 612575,
+      "category": "Sin referencia estática detectada",
+      "folder": "Prefabs"
+    },
+    {
+      "path": "Assets/_Recovery/0 (2).unity",
+      "bytes": 612441,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "_Recovery"
+    },
+    {
+      "path": "Assets/Scenes/Garden_Test.unity",
+      "bytes": 612133,
+      "category": "Sin referencia estática detectada",
+      "folder": "Scenes"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Animations/Locomotion--Run_N_Land.anim.fbx",
+      "bytes": 605552,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Animations/Locomotion--Run_N.anim.fbx",
+      "bytes": 605520,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Animations/Locomotion--Run_S.anim.fbx",
+      "bytes": 600032,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Arc_OMG.png",
+      "bytes": 597363,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Textures/wood_planks_07_1k 1/wood_planks_07_normal_dx_1k.png",
+      "bytes": 587145,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/_Recovery/0 (1).unity",
+      "bytes": 572396,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "_Recovery"
+    },
+    {
+      "path": "Assets/Vroid/Animations/Quick Formal Bow.fbx",
+      "bytes": 569424,
+      "category": "Sin referencia estática detectada",
+      "folder": "Vroid"
+    },
+    {
+      "path": "Assets/New Terrain 1.asset",
+      "bytes": 557364,
+      "category": "Sin referencia estática detectada",
+      "folder": "Assets"
+    },
+    {
+      "path": "Assets/New Terrain.asset",
+      "bytes": 557360,
+      "category": "Sin referencia estática detectada",
+      "folder": "Assets"
+    },
+    {
+      "path": "Assets/_Recovery/0.unity",
+      "bytes": 541147,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "_Recovery"
+    },
+    {
+      "path": "Assets/OurAss/Textures/grass_01_1k/grass_01_roughness_1k.png",
+      "bytes": 533580,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/wood_planks_07_1k 1/wood_planks_07_roughness_1k.png",
+      "bytes": 533005,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/floor_tiles_05_1k/floor_tiles__05_ambientOcclusion_1k.png",
+      "bytes": 499074,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Generic_Leaves_01.png",
+      "bytes": 495238,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/OurAss/Textures/sand_03_1k 1/sand_03_roughness_1k.png",
+      "bytes": 490529,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/sand_03_1k 1/sand_03_ambient_occlusion_1k.png",
+      "bytes": 477556,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Tree_Trunk_01.png",
+      "bytes": 432637,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Fruit_Tree_Flowers_01.png",
+      "bytes": 383206,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Welcome_Screen/Editor/Textures/banner_dark.png",
+      "bytes": 373713,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Scenes/Garden_Moves_Test 2.unity",
+      "bytes": 368417,
+      "category": "Sin referencia estática detectada",
+      "folder": "Scenes"
+    },
+    {
+      "path": "Assets/OurAss/Textures/floor_tiles_05_1k/floor_tiles__05_roughness_1k.png",
+      "bytes": 360739,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Fence_002_OMG.png",
+      "bytes": 359155,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/_Recovery/0 (12).unity",
+      "bytes": 358677,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "_Recovery"
+    },
+    {
+      "path": "Assets/OurAss/Textures/grass_01_1k/grass_01_ambient_occlusion_1k.png",
+      "bytes": 357780,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Vroid/Animations/Clapping.fbx",
+      "bytes": 354400,
+      "category": "Sin referencia estática detectada",
+      "folder": "Vroid"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_apples.fbx",
+      "bytes": 328672,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_pears.fbx",
+      "bytes": 328544,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_plums.fbx",
+      "bytes": 324720,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/OurAss/Plants/Phase3.fbx",
+      "bytes": 316156,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes/LowPoly - Terrain.FBX",
+      "bytes": 311584,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/OurAss/Textures/floor_tiles_05_1k/floor_tiles__05_height_1k.png",
+      "bytes": 308456,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/wood_occlusion.tga",
+      "bytes": 306880,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_green.fbx",
+      "bytes": 302352,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/FirstPersonController/Playground/ReflectionProbe-2.exr",
+      "bytes": 288483,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/ThirdPersonController/Playground/ReflectionProbe-2.exr",
+      "bytes": 288457,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/FirstPersonController/Playground/ReflectionProbe-0.exr",
+      "bytes": 287375,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/ThirdPersonController/Playground/ReflectionProbe-0.exr",
+      "bytes": 287345,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/_Recovery/0 (5).unity",
+      "bytes": 286056,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "_Recovery"
+    },
+    {
+      "path": "Assets/_Recovery/0 (6).unity",
+      "bytes": 284024,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "_Recovery"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Box_BC.png",
+      "bytes": 257592,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Pine_Tree_01.png",
+      "bytes": 251453,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Street_Light_OMG.png",
+      "bytes": 251194,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/MamkinEnthusiast/3D Mini Garden Props/Textures/GrassTexture.png",
+      "bytes": 250978,
+      "category": "Sin referencia estática detectada",
+      "folder": "MamkinEnthusiast"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Tree_04.fbx",
+      "bytes": 249372,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Textures/moss_ground_01_1k/moss_groud_01_Roughness_1k.png",
+      "bytes": 235410,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Samples/Meta XR Interaction ​SDK/205.0.0/Tools/HandGrabPoseTool.unity",
+      "bytes": 232505,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "Samples"
+    },
+    {
+      "path": "Assets/_Recovery/0 (11).unity",
+      "bytes": 230455,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "_Recovery"
+    },
+    {
+      "path": "Assets/_Recovery/0 (10).unity",
+      "bytes": 230450,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "_Recovery"
+    },
+    {
+      "path": "Assets/_Recovery/0 (7).unity",
+      "bytes": 230450,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "_Recovery"
+    },
+    {
+      "path": "Assets/_Recovery/0 (8).unity",
+      "bytes": 230450,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "_Recovery"
+    },
+    {
+      "path": "Assets/_Recovery/0 (9).unity",
+      "bytes": 230450,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "_Recovery"
+    },
+    {
+      "path": "Assets/Starter Assets/TutorialInfo/Icons/ReadMeImg.PNG",
+      "bytes": 230181,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Pine_Tree_03_dead.fbx",
+      "bytes": 228064,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Scenes/Garden_Moves_Test 1.unity",
+      "bytes": 221185,
+      "category": "Sin referencia estática detectada",
+      "folder": "Scenes"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/ThirdPersonController/Playground/ReflectionProbe-1.exr",
+      "bytes": 220422,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/FirstPersonController/Playground/ReflectionProbe-1.exr",
+      "bytes": 220329,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Fruit_Tree_Leaves_01.png",
+      "bytes": 213847,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Welcome_Screen/Editor/Textures/icon_Instagram.png",
+      "bytes": 211993,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Scene/Human.png",
+      "bytes": 205342,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Sign_BC.png",
+      "bytes": 197416,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Village/Sources/Textures/PT_texture.tga",
+      "bytes": 196652,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Fence.prefab",
+      "bytes": 194839,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Demo/Overiew.unity",
+      "bytes": 188078,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Settings/HD Sky.exr",
+      "bytes": 186501,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Tree_05.fbx",
+      "bytes": 184428,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Rocks/PT_Ore_Rock_01_split.fbx",
+      "bytes": 178416,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Box_OMG.png",
+      "bytes": 162225,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/TomatPhase6.fbx",
+      "bytes": 161564,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Poppy_01.png",
+      "bytes": 154615,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/ThirdPersonController/Playground/LightingData.asset",
+      "bytes": 153016,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/FirstPersonController/Playground/LightingData.asset",
+      "bytes": 153016,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_green_cut.fbx",
+      "bytes": 152864,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_dead.fbx",
+      "bytes": 151856,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Pine_Tree_03_green.fbx",
+      "bytes": 151312,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/House_4x5.fbx",
+      "bytes": 151100,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Stone_Slab_OMG.png",
+      "bytes": 146343,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Village/Sources/Meshes/Modular/Bridge/PT_Wooden_Bridge_02.fbx",
+      "bytes": 144272,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Altar.fbx",
+      "bytes": 139276,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Polytope Studio/Welcome_Screen/Editor/Textures/game3.png",
+      "bytes": 131282,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes/LowPoly - FirTree A.FBX",
+      "bytes": 129264,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/Polytope Studio/Welcome_Screen/Editor/Textures/game4.png",
+      "bytes": 127074,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Prefabs/Environment_Prefab.prefab",
+      "bytes": 122530,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Grass_01.png",
+      "bytes": 119624,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Mushrooms_01.png",
+      "bytes": 119045,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Pine_Tree_03_dead_cut.fbx",
+      "bytes": 117536,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes/LowPoly - FirTree B.FBX",
+      "bytes": 111168,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/Polytope Studio/Welcome_Screen/Editor/Textures/game2.png",
+      "bytes": 109830,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Welcome_Screen/Editor/Textures/demo2.png",
+      "bytes": 107518,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Welcome_Screen/Editor/Textures/demo1.png",
+      "bytes": 105430,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Rocks/PT_Ore_Rock_01.fbx",
+      "bytes": 104608,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Grass_High_01.png",
+      "bytes": 102109,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Demo Night.unity",
+      "bytes": 97207,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Demo Blend.unity",
+      "bytes": 97178,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Demo Day.unity",
+      "bytes": 97177,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/Polytope Studio/Welcome_Screen/Editor/Textures/game5.png",
+      "bytes": 96749,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Rock_08.fbx",
+      "bytes": 93484,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Environment_Free.unity",
+      "bytes": 89765,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes/LowPoly - Fence A.FBX",
+      "bytes": 86656,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Prefabs/PlayerArmature.prefab",
+      "bytes": 85375,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Shrubs/PT_Generic_Shrub_01_green.fbx",
+      "bytes": 83840,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Welcome_Screen/Editor/Textures/game1.png",
+      "bytes": 83549,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/SpaceRobotKyle/Prefabs/RobotKyle.prefab",
+      "bytes": 83153,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Models/Stairs_650_400_300_Mesh.fbx",
+      "bytes": 83088,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Log_Cluster.fbx",
+      "bytes": 82604,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Village/Sources/Meshes/Modular/Fence/PT_Modular_Gate_Wood_01.fbx",
+      "bytes": 81072,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_dead_cut.fbx",
+      "bytes": 79600,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/SpaceRobotKyle/Textures/KyleRobot_Metallic.png",
+      "bytes": 75577,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Rock_10.fbx",
+      "bytes": 74460,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Pine_Tree_03_logs.fbx",
+      "bytes": 73184,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Pine_Tree_03_green_cut.fbx",
+      "bytes": 72592,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_logs.fbx",
+      "bytes": 72384,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/ToriGate.fbx",
+      "bytes": 70060,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes/LowPoly - Grass B.FBX",
+      "bytes": 68304,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/OurAss/CozyGarden.fbx",
+      "bytes": 67948,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes/LowPoly - Grass A.FBX",
+      "bytes": 67744,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Prefabs/Structure_Prefab.prefab",
+      "bytes": 65341,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Models/Structure_Mesh.fbx",
+      "bytes": 64832,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Rock_11.fbx",
+      "bytes": 64412,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/WoodenBox_Stack.fbx",
+      "bytes": 63308,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/OurAss/Table.prefab",
+      "bytes": 61090,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/CeremicPot.fbx",
+      "bytes": 61068,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Street_Lamp.fbx",
+      "bytes": 60156,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Fence_002_N.png",
+      "bytes": 60077,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Rocks/PT_Menhir_Rock_02.fbx",
+      "bytes": 59312,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Corn.fbx",
+      "bytes": 57372,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/OurAss/Plants/Phase2.fbx",
+      "bytes": 56044,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Shrubs/PT_Generic_Shrub_01_dead.fbx",
+      "bytes": 55840,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Barrel.fbx",
+      "bytes": 54556,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Chair.fbx",
+      "bytes": 54540,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Potato.fbx",
+      "bytes": 54364,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Sign_OMG.png",
+      "bytes": 54274,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Rocks/PT_River_Rock_Pile_02.fbx",
+      "bytes": 53904,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Basket_L.fbx",
+      "bytes": 53500,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/MetObj_Gates2_2.fbx",
+      "bytes": 52828,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/ThirdPersonController/Playground.unity",
+      "bytes": 52184,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Carrot_Orange.fbx",
+      "bytes": 51660,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Models/Stairs_200x100x200_Mesh.fbx",
+      "bytes": 51120,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Polytope Studio/Welcome_Screen/Editor/Textures/game6.png",
+      "bytes": 51021,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/MetObj_Gates1_1.fbx",
+      "bytes": 50828,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/RiceBin.fbx",
+      "bytes": 50764,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Mallet.fbx",
+      "bytes": 50748,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Sfx/Player_Footstep_09.wav",
+      "bytes": 49904,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes/LowPoly - Fence B.FBX",
+      "bytes": 49824,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Box_N.png",
+      "bytes": 49505,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Road_Cross.fbx",
+      "bytes": 48716,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/LogStorage.fbx",
+      "bytes": 48668,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/ColumnGateArch.fbx",
+      "bytes": 48396,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Rocks/PT_Generic_Rock_01.fbx",
+      "bytes": 48368,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Tomato.fbx",
+      "bytes": 48332,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Sfx/Player_Footstep_05.wav",
+      "bytes": 48110,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Sfx/Player_Footstep_04.wav",
+      "bytes": 47678,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Rock_07.fbx",
+      "bytes": 47276,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/FloorCircle.fbx",
+      "bytes": 47276,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Prefabs/Furniture/bookcaseClosedWide.fbx",
+      "bytes": 47192,
+      "category": "Sin referencia estática detectada",
+      "folder": "Prefabs"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/WoodenCrate_S.fbx",
+      "bytes": 47148,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Tree_RedPlum.fbx",
+      "bytes": 47148,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/WoodenCrate_L.fbx",
+      "bytes": 47004,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/FirstPersonController/Playground.unity",
+      "bytes": 46789,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/MarketStall_Table_wSpace.fbx",
+      "bytes": 46684,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/MarketStall_Table_SideTiered.fbx",
+      "bytes": 46476,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Sfx/Player_Footstep_10.wav",
+      "bytes": 46410,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Sfx/Player_Footstep_08.wav",
+      "bytes": 46176,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Models/Box_350x250x300_Mesh.fbx",
+      "bytes": 46016,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Ladder.fbx",
+      "bytes": 45772,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/WoodenBox.fbx",
+      "bytes": 45692,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Flowers/PT_Poppy_02.fbx",
+      "bytes": 45584,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Rock_06.fbx",
+      "bytes": 45580,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/MarketStall_Table_Flat.fbx",
+      "bytes": 45516,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Models/Wall_Mesh.fbx",
+      "bytes": 45440,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Models/Tunnel_Mesh.fbx",
+      "bytes": 45056,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Sfx/Player_Footstep_06.wav",
+      "bytes": 44906,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/StoneLantern.fbx",
+      "bytes": 44876,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Plants/PT_Grass_02.fbx",
+      "bytes": 44576,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Prefabs/Furniture/bookcaseClosed.fbx",
+      "bytes": 44542,
+      "category": "Sin referencia estática detectada",
+      "folder": "Prefabs"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Models/Box_350x250x200_Mesh.fbx",
+      "bytes": 44416,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/MarketStall_Table_Tiered.fbx",
+      "bytes": 44316,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Prefabs/Furniture/bookcaseClosedDoors.fbx",
+      "bytes": 43875,
+      "category": "Sin referencia estática detectada",
+      "folder": "Prefabs"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Road_Corner_Open.fbx",
+      "bytes": 43532,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Sfx/Player_Footstep_03.wav",
+      "bytes": 43526,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Sfx/Player_Footstep_07.wav",
+      "bytes": 42626,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Sweets_RiceDumpling_SoySauce.fbx",
+      "bytes": 42572,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Mobile/UI/Images/UI_Circle_Faded.png",
+      "bytes": 42557,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Models/Ramp_Mesh.fbx",
+      "bytes": 42320,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Fence_Wood.fbx",
+      "bytes": 41836,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Sickle.fbx",
+      "bytes": 41772,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Models/Ground_Mesh.fbx",
+      "bytes": 41696,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Sweets_RiceDumpling_Spring.fbx",
+      "bytes": 41132,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Sfx/Player_Footstep_02.wav",
+      "bytes": 39506,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Road_End_S.fbx",
+      "bytes": 39468,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Sfx/Player_Footstep_01.wav",
+      "bytes": 38168,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Village/Sources/Meshes/Modular/Fence/PT_Modular_Fence_Wood_03.fbx",
+      "bytes": 38160,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Prefabs/Furniture/bookcaseOpen.fbx",
+      "bytes": 38100,
+      "category": "Sin referencia estática detectada",
+      "folder": "Prefabs"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/FBX/Table_Circular.fbx",
+      "bytes": 37468,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Sfx/Player_Land.wav",
+      "bytes": 36848,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Village/Sources/Meshes/Modular/Fence/PT_Modular_Fence_Wood_01.fbx",
+      "bytes": 36688,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Rock_09.fbx",
+      "bytes": 36652,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Village/Sources/Meshes/Modular/Fence/PT_Modular_Fence_Wood_02.fbx",
+      "bytes": 35984,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Textures/PT_Runes_02.png",
+      "bytes": 35933,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Tombstones.005.fbx",
+      "bytes": 35772,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Rock_04.fbx",
+      "bytes": 35340,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Leave_003.png",
+      "bytes": 35205,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes/LowPoly - Rock A.FBX",
+      "bytes": 34880,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/MetObj_GatesArch.fbx",
+      "bytes": 34092,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/TombstonesCoffinWood.002.fbx",
+      "bytes": 33820,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Tombstones.004.fbx",
+      "bytes": 33388,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Fruit_Tree_01_stump.fbx",
+      "bytes": 32896,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Trees/PT_Pine_Tree_03_stump.fbx",
+      "bytes": 32384,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Tombstones.002.fbx",
+      "bytes": 31916,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Tombstones.003.fbx",
+      "bytes": 31612,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Rock_05.fbx",
+      "bytes": 30540,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Arch.fbx",
+      "bytes": 30524,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Stone_Slab.fbx",
+      "bytes": 30204,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptMiniRootf1.fbx",
+      "bytes": 30092,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Meshes/Mushrooms/PT_Caesars_Mushroom_01.fbx",
+      "bytes": 29856,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Settings/Demo.asset",
+      "bytes": 29037,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/MetObj_Lamp.fbx",
+      "bytes": 28844,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Tombstones.001.fbx",
+      "bytes": 28684,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Mobile/UI/Images/UI_Circle_Bevel_Base.png",
+      "bytes": 28521,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Box.fbx",
+      "bytes": 28124,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Fence_02.fbx",
+      "bytes": 27164,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/ColumnGateColumn.fbx",
+      "bytes": 27132,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/PlantHolderBox.fbx",
+      "bytes": 26188,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Prefabs/Furniture/bookcaseOpenLow.fbx",
+      "bytes": 26186,
+      "category": "Sin referencia estática detectada",
+      "folder": "Prefabs"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/TombstonesCoffinWood.005.fbx",
+      "bytes": 25388,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Plants/Phase1.fbx",
+      "bytes": 25372,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptArch1.fbx",
+      "bytes": 25356,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_08_2.fbx",
+      "bytes": 25212,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/RenderPipelineProfiles/StarterAssetsHDRPVolumeProfile.asset",
+      "bytes": 25130,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/MetObj_Fence1.fbx",
+      "bytes": 24988,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Gras_03.fbx",
+      "bytes": 24940,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/MetObj_Fence2.fbx",
+      "bytes": 24908,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Mobile/UI/Images/UI_Icon_Jump.png",
+      "bytes": 24900,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_11.fbx",
+      "bytes": 24828,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_12.fbx",
+      "bytes": 24732,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/MetObj_Fence3.fbx",
+      "bytes": 24668,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/PlantPlace.fbx",
+      "bytes": 24620,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_13.fbx",
+      "bytes": 24412,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Settings/Standard Volume.asset",
+      "bytes": 24366,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptMiniWall.fbx",
+      "bytes": 24140,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/TutorialInfo/Icons/URP.png",
+      "bytes": 24069,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "TutorialInfo"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/RenderPipelineProfiles/StarterAssetsURPGlobalSettings.asset",
+      "bytes": 24021,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Tombstones.fbx",
+      "bytes": 23756,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/TombstonesCoffinWood.007.fbx",
+      "bytes": 23564,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/TombstonesCoffinWood1.fbx",
+      "bytes": 23516,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptArch2.fbx",
+      "bytes": 23116,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/TombstonesCoffinWood.008.fbx",
+      "bytes": 22796,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/TombstonesCoffinWood.fbx",
+      "bytes": 22764,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Meshes/LowPoly - Rock B.FBX",
+      "bytes": 22272,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptMiniRootf2.fbx",
+      "bytes": 22204,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_10.fbx",
+      "bytes": 22172,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptMiniCross1.fbx",
+      "bytes": 22076,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptFoundation.fbx",
+      "bytes": 21820,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/TombstonesCoffinWood.006.fbx",
+      "bytes": 21740,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_09_1.fbx",
+      "bytes": 21228,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_08_1.fbx",
+      "bytes": 21196,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/GrabablePrfab/PartEnviorment.prefab",
+      "bytes": 21114,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Textures/Grid_01_Normal.png",
+      "bytes": 21103,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/TombstonesCoffinWood.001.fbx",
+      "bytes": 20956,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Rock_03.fbx",
+      "bytes": 20940,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Mobile/UI/Images/UI_Icon_Sprint.png",
+      "bytes": 20825,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/OurAss/WoodFloor.fbx",
+      "bytes": 20652,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/ShelfFixedUVs.fbx",
+      "bytes": 20604,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Sign.fbx",
+      "bytes": 20188,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/MamkinEnthusiast/3D Mini Garden Props/Scenes/ExampleScene.unity",
+      "bytes": 20182,
+      "category": "Sin referencia estática detectada",
+      "folder": "MamkinEnthusiast"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Candle3.fbx",
+      "bytes": 19916,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/ColumnCrypt2.fbx",
+      "bytes": 19516,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Settings/DefaultVolumeProfile.asset",
+      "bytes": 19451,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptRootf2.fbx",
+      "bytes": 19420,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptMiniCross.fbx",
+      "bytes": 19372,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/ColumnCrypt1.fbx",
+      "bytes": 19148,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptRootf4.fbx",
+      "bytes": 19004,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Shrubs_03.fbx",
+      "bytes": 18780,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptRootf3.fbx",
+      "bytes": 18748,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_04_3.fbx",
+      "bytes": 18524,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Candle2.fbx",
+      "bytes": 18444,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/TombstonesCoffinWood.004.fbx",
+      "bytes": 18412,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptRootf5.fbx",
+      "bytes": 18220,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_07_2.fbx",
+      "bytes": 18092,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/TombstonesCoffinWood.003.fbx",
+      "bytes": 17868,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_05_3.fbx",
+      "bytes": 17804,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptMiniFoundation1.fbx",
+      "bytes": 17756,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptRootf1.fbx",
+      "bytes": 17692,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Gras_02.fbx",
+      "bytes": 17484,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Animations/StarterAssetsThirdPerson.controller",
+      "bytes": 17459,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_01_2.fbx",
+      "bytes": 17420,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptRootf6.fbx",
+      "bytes": 17420,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Mobile/UI/Images/UI_Icon_Look.png",
+      "bytes": 17387,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Free_JapanVillage/FreePack/GLTF/textures/ColorAtlas.png",
+      "bytes": 17078,
+      "category": "Sin referencia estática detectada",
+      "folder": "Free_JapanVillage"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_04_2.fbx",
+      "bytes": 16972,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptMiniFoundation2.fbx",
+      "bytes": 16940,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Candle1.fbx",
+      "bytes": 16892,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/ColumnGateBorder.fbx",
+      "bytes": 16668,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_01_1.fbx",
+      "bytes": 16636,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/ColumnFoundation4.fbx",
+      "bytes": 16588,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/ColumnFoundation1.fbx",
+      "bytes": 16428,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_02_2.fbx",
+      "bytes": 16252,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_05_2.fbx",
+      "bytes": 16204,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_03_2.fbx",
+      "bytes": 16204,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/ColumnFoundation2.fbx",
+      "bytes": 16140,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Gras_01.fbx",
+      "bytes": 16124,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_04_1.fbx",
+      "bytes": 16076,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_06_1.fbx",
+      "bytes": 15980,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_07_1.fbx",
+      "bytes": 15964,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Mobile/UI/Images/UI_Icon_Move.png",
+      "bytes": 15860,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/ColumnFoundation6.fbx",
+      "bytes": 15836,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/ColumnFoundation3.fbx",
+      "bytes": 15804,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Models/Ramp_100x100x200_Mesh.fbx",
+      "bytes": 15712,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptMiniCoffin2.fbx",
+      "bytes": 15660,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptMiniCoffin1.fbx",
+      "bytes": 15532,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_05_1.fbx",
+      "bytes": 15436,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_03_1.fbx",
+      "bytes": 15420,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Meshes/Flower_02_1.fbx",
+      "bytes": 15420,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptWall.fbx",
+      "bytes": 15404,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/ColumnFoundation5.fbx",
+      "bytes": 15340,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptColumnPlane3.fbx",
+      "bytes": 15260,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptColumnPlane4.fbx",
+      "bytes": 15244,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Prefabs/NestedParentArmature_Unpack.prefab",
+      "bytes": 15072,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/FirstPersonController/Prefabs/NestedParent_Unpack.prefab",
+      "bytes": 14955,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptFoundationLadder3.fbx",
+      "bytes": 14860,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptColumnPlane1.fbx",
+      "bytes": 14748,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptColumnPlane2.fbx",
+      "bytes": 14652,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptFoundationLadder2.fbx",
+      "bytes": 14652,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Prefabs/NestedParentCapsule_Unpack.prefab",
+      "bytes": 14644,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/ColumnCrypt3.fbx",
+      "bytes": 14620,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptFoundationLadder4.fbx",
+      "bytes": 14604,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptFoundationLadder5.fbx",
+      "bytes": 14604,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/MetObj_Gates1.fbx",
+      "bytes": 14588,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/MetObj_Gates2.fbx",
+      "bytes": 14540,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.009.fbx",
+      "bytes": 14508,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptFoundationLadder1.fbx",
+      "bytes": 14476,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.018.fbx",
+      "bytes": 14348,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.011.fbx",
+      "bytes": 14156,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Scene/Scene Empty.unity",
+      "bytes": 14028,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.014.fbx",
+      "bytes": 13948,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/ColumnCrypt4.fbx",
+      "bytes": 13932,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/FloorFoundation9.fbx",
+      "bytes": 13852,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/FloorFoundation4.fbx",
+      "bytes": 13836,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/CircularROck.fbx",
+      "bytes": 13804,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.fbx",
+      "bytes": 13804,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/FloorFoundation6.fbx",
+      "bytes": 13708,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/FloorFoundation1.fbx",
+      "bytes": 13644,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptBorder2.fbx",
+      "bytes": 13596,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptBorder1.fbx",
+      "bytes": 13548,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.004.fbx",
+      "bytes": 13532,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/CryptDoor.fbx",
+      "bytes": 13516,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/MetObj_FenceFoundation.fbx",
+      "bytes": 13468,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.010.fbx",
+      "bytes": 13404,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.023.fbx",
+      "bytes": 13244,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.001.fbx",
+      "bytes": 13196,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.019.fbx",
+      "bytes": 13180,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.020.fbx",
+      "bytes": 13148,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.005.fbx",
+      "bytes": 13132,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.008.fbx",
+      "bytes": 13116,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Settings/HD Volume Day.asset",
+      "bytes": 13000,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Settings/HD Volume Low.asset",
+      "bytes": 12998,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.007.fbx",
+      "bytes": 12972,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.026.fbx",
+      "bytes": 12972,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/FloorFoundation2.fbx",
+      "bytes": 12956,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.017.fbx",
+      "bytes": 12908,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.002.fbx",
+      "bytes": 12908,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/FloorFoundation7.fbx",
+      "bytes": 12876,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.003.fbx",
+      "bytes": 12860,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.012.fbx",
+      "bytes": 12828,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/FloorFoundation8.fbx",
+      "bytes": 12828,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.015.fbx",
+      "bytes": 12828,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/FloorFoundation11.fbx",
+      "bytes": 12796,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/FloorFoundation3.fbx",
+      "bytes": 12796,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.013.fbx",
+      "bytes": 12780,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/FloorFoundation10.fbx",
+      "bytes": 12748,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.027.fbx",
+      "bytes": 12668,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/FloorFoundation5.fbx",
+      "bytes": 12652,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.006.fbx",
+      "bytes": 12604,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.016.fbx",
+      "bytes": 12540,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.022.fbx",
+      "bytes": 12508,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.024.fbx",
+      "bytes": 12508,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.025.fbx",
+      "bytes": 12460,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Floor.021.fbx",
+      "bytes": 12460,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Sign_N.png",
+      "bytes": 12352,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Prefabs/PlayerCapsule.prefab",
+      "bytes": 11225,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/FirstPersonController/Prefabs/PlayerCapsule.prefab",
+      "bytes": 11148,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Tree_05.mat",
+      "bytes": 10953,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Tree_04.mat",
+      "bytes": 10953,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Textures/Street_Light_Emissive.png",
+      "bytes": 10891,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Prefabs/Cube (6).prefab",
+      "bytes": 10679,
+      "category": "Sin referencia estática detectada",
+      "folder": "Prefabs"
+    },
+    {
+      "path": "Assets/Prefabs/Cube (7).prefab",
+      "bytes": 10674,
+      "category": "Sin referencia estática detectada",
+      "folder": "Prefabs"
+    },
+    {
+      "path": "Assets/Prefabs/Cube (8).prefab",
+      "bytes": 10673,
+      "category": "Sin referencia estática detectada",
+      "folder": "Prefabs"
+    },
+    {
+      "path": "Assets/Prefabs/Cube (9).prefab",
+      "bytes": 10668,
+      "category": "Sin referencia estática detectada",
+      "folder": "Prefabs"
+    },
+    {
+      "path": "Assets/Prefabs/Cube (5).prefab",
+      "bytes": 10578,
+      "category": "Sin referencia estática detectada",
+      "folder": "Prefabs"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Village/Prefabs/Modular/Fence/PT_Modular_Gate_Wood_01.prefab",
+      "bytes": 9874,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Grass_03.mat",
+      "bytes": 9788,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Grass_01.mat",
+      "bytes": 9786,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Grass_02.mat",
+      "bytes": 9786,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Shrubs/PT_Generic_Shrub_01_green.prefab",
+      "bytes": 9706,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_plums.prefab",
+      "bytes": 9671,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_apples.prefab",
+      "bytes": 9664,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_pears.prefab",
+      "bytes": 9664,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_green.prefab",
+      "bytes": 9663,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Pine_Tree_03_green.prefab",
+      "bytes": 9659,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Textures/Grid_02_BaseMap.png",
+      "bytes": 9489,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Shrubs/PT_Generic_Shrub_01_dead.prefab",
+      "bytes": 9472,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_dead.prefab",
+      "bytes": 9462,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Flowers/PT_Poppy_02.prefab",
+      "bytes": 9425,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Rocks/PT_River_Rock_Pile_02.prefab",
+      "bytes": 9424,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Pine_Tree_03_dead.prefab",
+      "bytes": 9421,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Plants/PT_Grass_02.prefab",
+      "bytes": 9415,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Rocks/PT_Ore_Rock_01_split.prefab",
+      "bytes": 9412,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Rocks/PT_Menhir_Rock_02.prefab",
+      "bytes": 9412,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Rocks/PT_Generic_Rock_01.prefab",
+      "bytes": 9409,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Rocks/PT_Ore_Rock_01.prefab",
+      "bytes": 9403,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Welcome_Screen/Editor/Textures/icon_artstation.png",
+      "bytes": 8578,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Textures/Grid_01_Emissive.png",
+      "bytes": 8225,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Textures/Grid_01_BaseMap.png",
+      "bytes": 8210,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Polytope Studio/Welcome_Screen/Editor/Textures/icon_Tiktok.png",
+      "bytes": 8063,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Welcome_Screen/Editor/Textures/icon_twitter.png",
+      "bytes": 7935,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Village/Prefabs/Modular/Bridge/PT_Wooden_Bridge_02.prefab",
+      "bytes": 7565,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Rock_10.mat",
+      "bytes": 6816,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Rock_07.mat",
+      "bytes": 6816,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Rock_09.mat",
+      "bytes": 6816,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Rock_8.mat",
+      "bytes": 6815,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Rock_04.mat",
+      "bytes": 6706,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Rock_06.mat",
+      "bytes": 6706,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Rock_05.mat",
+      "bytes": 6706,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Rock_11.mat",
+      "bytes": 6705,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Scene/Camera HD.prefab",
+      "bytes": 6470,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/Polytope Studio/Welcome_Screen/Editor/Textures/icon_facebook.png",
+      "bytes": 6385,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Welcome_Screen/Editor/Textures/icon_Youtube.png",
+      "bytes": 6102,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Scene/Light HD Low.prefab",
+      "bytes": 5485,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Scene/Light HD Day.prefab",
+      "bytes": 5481,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Tree_04.prefab",
+      "bytes": 5226,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Tree_05.prefab",
+      "bytes": 5221,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Rock_05.prefab",
+      "bytes": 5159,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Stone_Slab.prefab",
+      "bytes": 5159,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Rock_04.prefab",
+      "bytes": 5156,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Rock_11.prefab",
+      "bytes": 5156,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Rock_09.prefab",
+      "bytes": 5155,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Core/Functions/Compute Rotation Y.asset",
+      "bytes": 5154,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Rock_06.prefab",
+      "bytes": 5153,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Rock_08.prefab",
+      "bytes": 5153,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Fence_02.prefab",
+      "bytes": 5153,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Rock_07.prefab",
+      "bytes": 5152,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Rock_03.prefab",
+      "bytes": 5151,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Street_Lamp.prefab",
+      "bytes": 5149,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Rock_10.prefab",
+      "bytes": 5147,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Sign.prefab",
+      "bytes": 5145,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Box.prefab",
+      "bytes": 5139,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Arch.prefab",
+      "bytes": 5134,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Altar.prefab",
+      "bytes": 5127,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Mobile/Prefabs/UI_TouchScreenInput.prefab",
+      "bytes": 5126,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Tree_leaves_04.mat",
+      "bytes": 5029,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Shrub_03.mat",
+      "bytes": 5028,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Tree_leaves_05.mat",
+      "bytes": 5027,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Street_lamp.mat",
+      "bytes": 4880,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Village/Sources/Textures/PT_Medieval_Buildings_Texture_01mask2.png",
+      "bytes": 4794,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Settings/Very High_PipelineAsset.asset",
+      "bytes": 4760,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Settings/Very Low_PipelineAsset.asset",
+      "bytes": 4759,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Settings/Medium_PipelineAsset.asset",
+      "bytes": 4757,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Settings/Ultra_PipelineAsset.asset",
+      "bytes": 4757,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Settings/High_PipelineAsset.asset",
+      "bytes": 4755,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Settings/Low_PipelineAsset.asset",
+      "bytes": 4754,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/RenderPipelineProfiles/StarterAssetsURPAsset.asset",
+      "bytes": 4742,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/FirstPersonController/Prefabs/MainCamera.prefab",
+      "bytes": 4727,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Terrain_mat.mat",
+      "bytes": 4689,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Settings/Mobile_RPAsset.asset",
+      "bytes": 4672,
+      "category": "Sin referencia estática detectada",
+      "folder": "Settings"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/LowPoly - TreeTrunk.mat",
+      "bytes": 4666,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Prefabs/MainCamera.prefab",
+      "bytes": 4650,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/MamkinEnthusiast/3D Mini Garden Props/Materials/FloorDiffuse.mat",
+      "bytes": 4539,
+      "category": "Sin referencia estática detectada",
+      "folder": "MamkinEnthusiast"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Prefabs/Tunnel_Prefab.prefab",
+      "bytes": 4450,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Settings/Universal Volume Bloom.asset",
+      "bytes": 4368,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/LowPoly - FirTreeVariation.mat",
+      "bytes": 4327,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Settings/Universal Volume.asset",
+      "bytes": 4318,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/LowPoly - Grass.mat",
+      "bytes": 4312,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/LowPoly - FirTree.mat",
+      "bytes": 4305,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Stone Slab.mat",
+      "bytes": 4298,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Fence_02.mat",
+      "bytes": 4296,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Altar.mat",
+      "bytes": 4293,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Arch.mat",
+      "bytes": 4292,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Sign.mat",
+      "bytes": 4292,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Materials/Box.mat",
+      "bytes": 4291,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Village/Sources/Materials/PT_Buildings_mat.mat",
+      "bytes": 4271,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/RockCircular.mat",
+      "bytes": 4266,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/LowPoly - Rock.mat",
+      "bytes": 4235,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/OurAss/Textures/floor_tiles_05_1k/FloorTiiles 1.mat",
+      "bytes": 4219,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/floor_tiles_05_1k/FloorTiiles.mat",
+      "bytes": 4215,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Materials/GridOrange_01_Mat.mat",
+      "bytes": 4210,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/OurAss/Textures/wood_planks_07_1k 1/WoodFloor.mat",
+      "bytes": 4208,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/New Material.mat",
+      "bytes": 4206,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures 1/New Material.mat",
+      "bytes": 4203,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/sand_03_1k 1/New Material.mat",
+      "bytes": 4194,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Materials/GridWhite_01_Mat.mat",
+      "bytes": 4193,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Materials/GridBlue_01_Mat.mat",
+      "bytes": 4191,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/OurAss/New Material.mat",
+      "bytes": 4168,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Scene/Camera Standard.prefab",
+      "bytes": 4163,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/OurAss/Textures/PlantSoil.mat",
+      "bytes": 4129,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Soil.mat",
+      "bytes": 4116,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Materials/M_Armature_Legs.mat",
+      "bytes": 4096,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/SpaceRobotKyle/Materials/KyleRobot.mat",
+      "bytes": 4095,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Materials/M_Armature_Body.mat",
+      "bytes": 4088,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Materials/M_Armature_Arms.mat",
+      "bytes": 4088,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/OurAss/Textures/BoxShelf.mat",
+      "bytes": 4048,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Village/Sources/Materials/PT_mat.mat",
+      "bytes": 4028,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Materials/Material.001.mat",
+      "bytes": 3998,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/Plane mat.mat",
+      "bytes": 3997,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Materials/Material.002.mat",
+      "bytes": 3997,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Materials/Material.mat",
+      "bytes": 3992,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Materials/GreyBlue_Mat.mat",
+      "bytes": 3981,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/OurAss/Meshes/Materials/No Name.mat",
+      "bytes": 3937,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/New Material.mat",
+      "bytes": 3922,
+      "category": "Sin referencia estática detectada",
+      "folder": "Assets"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/LowPoly - Terrain.mat",
+      "bytes": 3891,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/LowPoly - Wood.mat",
+      "bytes": 3890,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Materials/URP_HDRP_ShaderGraph/ShaderGraphGrid_01_Mat.mat",
+      "bytes": 3879,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Prefabs/New Material.mat",
+      "bytes": 3870,
+      "category": "Sin referencia estática detectada",
+      "folder": "Prefabs"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Scene/Camera Universal.prefab",
+      "bytes": 3863,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Materials/Blue_Mat.mat",
+      "bytes": 3854,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Prefabs/Wall_Prefab.prefab",
+      "bytes": 3779,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/FirstPersonController/Prefabs/PlayerFollowCamera.prefab",
+      "bytes": 3728,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Prefabs/PlayerFollowCamera.prefab",
+      "bytes": 3717,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Materials/GardenPhaseSkybox.mat",
+      "bytes": 3655,
+      "category": "Sin referencia estática detectada",
+      "folder": "Materials"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/Skybox Cubemap Extended Blend.mat",
+      "bytes": 3641,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Rocks_mat.mat",
+      "bytes": 3634,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Pine_Tree_Leaves_Mat.mat",
+      "bytes": 3456,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/Skybox Cubemap Extended Day.mat",
+      "bytes": 3456,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Materials/Skybox Cubemap Extended Night.mat",
+      "bytes": 3442,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_High_Grass_Mat 1.mat",
+      "bytes": 3384,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_High_Grass_Mat.mat",
+      "bytes": 3336,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Pine_Tree_Trunk_Mat.mat",
+      "bytes": 3257,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Generic_Tree_Leaves_mat.mat",
+      "bytes": 3221,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Poppy_mat.mat",
+      "bytes": 3204,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Prefabs/Stairs_650_400_300_Prefab.prefab",
+      "bytes": 3199,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Generic_Leaf_mat.mat",
+      "bytes": 3199,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Prefabs/Stairs_200x100x200_Prefab.prefab",
+      "bytes": 3196,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Mobile/Prefabs/EventSystem/UI_EventSystem.prefab",
+      "bytes": 3193,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Prefabs/Ramp_Prefab.prefab",
+      "bytes": 3184,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Fruit_Tree_Foliage_Mat.mat",
+      "bytes": 3175,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/OurAss/Sprout (1).prefab",
+      "bytes": 3105,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Scene/Light Universal Day.prefab",
+      "bytes": 3104,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Materials/Built-in_RP/M_ArmatureColor_Arms.mat",
+      "bytes": 3097,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Materials/Built-in_RP/M_ArmatureColor_Legs.mat",
+      "bytes": 3097,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/ThirdPersonController/Character/Materials/Built-in_RP/M_ArmatureColor_Body.mat",
+      "bytes": 3072,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Fruit_Tree_Opaque_mat.mat",
+      "bytes": 3036,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Scene/Light Universal Low.prefab",
+      "bytes": 3032,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Generic_Tree_Trunk_mat.mat",
+      "bytes": 3032,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/OurAss/Script/Terrain.prefab",
+      "bytes": 3012,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Village/Prefabs/Modular/Fence/PT_Modular_Fence_Wood_01.prefab",
+      "bytes": 2954,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Village/Prefabs/Modular/Fence/PT_Modular_Fence_Wood_03.prefab",
+      "bytes": 2954,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Mushrooms_mat.mat",
+      "bytes": 2948,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Prefabs/Box_350x250x300_Prefab.prefab",
+      "bytes": 2944,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Village/Prefabs/Modular/Fence/PT_Modular_Fence_Wood_02.prefab",
+      "bytes": 2941,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Prefabs/Box_350x250x200_Prefab.prefab",
+      "bytes": 2913,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Prefabs/Ramp_100x100x200_Mesh.prefab",
+      "bytes": 2876,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Prefabs/Box_100x100x100_Prefab.prefab",
+      "bytes": 2864,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Scene/Scene Skybox.mat",
+      "bytes": 2723,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/MamkinEnthusiast/3D Mini Garden Props/Scenes/Floor.prefab",
+      "bytes": 2648,
+      "category": "Sin referencia estática detectada",
+      "folder": "MamkinEnthusiast"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Pine_Tree_03_green_cut.prefab",
+      "bytes": 2605,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_green_cut.prefab",
+      "bytes": 2600,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_River_Rock_Pile_02_v1.prefab",
+      "bytes": 2538,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Pine_Tree_03_dead_cut.prefab",
+      "bytes": 2532,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Mushrooms/PT_Caesars_Mushroom_01.prefab",
+      "bytes": 2530,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_dead_cut.prefab",
+      "bytes": 2530,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_High_Grass_02_v1.prefab",
+      "bytes": 2530,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Pine_Tree_03_stump.prefab",
+      "bytes": 2529,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_stump.prefab",
+      "bytes": 2528,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_Grass_02_v1.prefab",
+      "bytes": 2527,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Pine_Tree_03_logs.prefab",
+      "bytes": 2527,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_Poppy_02_v1.prefab",
+      "bytes": 2527,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_Grass_02_v2.prefab",
+      "bytes": 2527,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Prefabs/Trees/PT_Fruit_Tree_01_logs.prefab",
+      "bytes": 2525,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Water_mat.mat",
+      "bytes": 2439,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_06_1.prefab",
+      "bytes": 2431,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_02_2.prefab",
+      "bytes": 2431,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_08_1.prefab",
+      "bytes": 2431,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_01_2.prefab",
+      "bytes": 2431,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_04_3.prefab",
+      "bytes": 2431,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_05_3.prefab",
+      "bytes": 2430,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_05_2.prefab",
+      "bytes": 2430,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_04_2.prefab",
+      "bytes": 2430,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_03_2.prefab",
+      "bytes": 2430,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_02_1.prefab",
+      "bytes": 2430,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_04_1.prefab",
+      "bytes": 2430,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_10.prefab",
+      "bytes": 2429,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_12.prefab",
+      "bytes": 2429,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_09_1.prefab",
+      "bytes": 2429,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_03_1.prefab",
+      "bytes": 2429,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_07_1.prefab",
+      "bytes": 2429,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_08_2.prefab",
+      "bytes": 2429,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_05_1.prefab",
+      "bytes": 2428,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Shrubs_03.prefab",
+      "bytes": 2428,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_07_2.prefab",
+      "bytes": 2428,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_11.prefab",
+      "bytes": 2428,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_13.prefab",
+      "bytes": 2428,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Flower_01_1.prefab",
+      "bytes": 2427,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Gras_03.prefab",
+      "bytes": 2427,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Gras_02.prefab",
+      "bytes": 2426,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/3D set of stylized nature - GHIBLI style/Art/Prefabs/Gras_01.prefab",
+      "bytes": 2424,
+      "category": "Sin referencia estática detectada",
+      "folder": "3D set of stylized nature - GHIBLI style"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Skybox/SkyboxLiteWarm.mat",
+      "bytes": 2424,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Skybox/SkyboxLite.mat",
+      "bytes": 2404,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Prefabs/LowPoly - FirTree B.prefab",
+      "bytes": 2394,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Skybox_mat.mat",
+      "bytes": 2383,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Scene/Light Standard Day.prefab",
+      "bytes": 2349,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Scene/Light Standard Low.prefab",
+      "bytes": 2332,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Prefabs/LowPoly - FirTree A.prefab",
+      "bytes": 2326,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Prefabs/LowPoly - Grass B.prefab",
+      "bytes": 2283,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Prefabs/LowPoly - Grass A.prefab",
+      "bytes": 2283,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/Art/Materials/Built-in_RP/BuiltInTriplanar_01_Mat.mat",
+      "bytes": 2273,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Prefabs/LowPoly - Rock B.prefab",
+      "bytes": 2252,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Prefabs/LowPoly - Fence B.prefab",
+      "bytes": 2252,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Prefabs/LowPoly - Fence A.prefab",
+      "bytes": 2252,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Demo/Prefabs/LowPoly - Rock A.prefab",
+      "bytes": 2251,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Mobile/UI/TouchScreenInputPanelSetting.asset",
+      "bytes": 1923,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/OurAss/Textures/moss_ground_01_1k/moss_groud_01_Metallic_1k.png",
+      "bytes": 1911,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/OurAss/Textures/floor_tiles_05_1k/floor_tiles__05_metallic_1k.png",
+      "bytes": 1911,
+      "category": "Sin referencia estática detectada",
+      "folder": "OurAss"
+    },
+    {
+      "path": "Assets/Starter Assets/Sample/Environment/RenderPipelineProfiles/StarterAssetsURPRenderer.asset",
+      "bytes": 1860,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Settings/Very High_PipelineAsset_ForwardRenderer.asset",
+      "bytes": 1819,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Settings/Very Low_PipelineAsset_ForwardRenderer.asset",
+      "bytes": 1818,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Settings/Medium_PipelineAsset_ForwardRenderer.asset",
+      "bytes": 1816,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Settings/Ultra_PipelineAsset_ForwardRenderer.asset",
+      "bytes": 1815,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Settings/High_PipelineAsset_ForwardRenderer.asset",
+      "bytes": 1814,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Starter Assets/Runtime/Settings/Low_PipelineAsset_ForwardRenderer.asset",
+      "bytes": 1813,
+      "category": "Sin referencia estática detectada",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/Settings/Build Profiles/Meta Quest.asset",
+      "bytes": 1801,
+      "category": "Sin referencia estática detectada",
+      "folder": "Settings"
+    },
+    {
+      "path": "Assets/Settings/Mobile_Renderer.asset",
+      "bytes": 1713,
+      "category": "Sin referencia estática detectada",
+      "folder": "Settings"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Scene/Post Universal Bloom.prefab",
+      "bytes": 1557,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Scene/Post Universal.prefab",
+      "bytes": 1528,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Scene/Post HD Day.prefab",
+      "bytes": 1506,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/Starter Assets/TutorialInfo/Readme.asset",
+      "bytes": 1484,
+      "category": "Demos, ejemplos o recuperación",
+      "folder": "Starter Assets"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Scene/Post HD Low.prefab",
+      "bytes": 1476,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Scene/Post Standard.prefab",
+      "bytes": 1461,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PT_Grass_Mat 1.mat",
+      "bytes": 1309,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/Readme.asset",
+      "bytes": 1144,
+      "category": "Sin referencia estática detectada",
+      "folder": "Assets"
+    },
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Environments/Sources/Materials/PT_Grass_Mat.mat",
+      "bytes": 1056,
+      "category": "Sin referencia estática detectada",
+      "folder": "Polytope Studio"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Utils/Editor/Version.asset",
+      "bytes": 427,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    },
+    {
+      "path": "Assets/BOXOPHOBIC/Skybox Cubemap Extended/Core/Editor/Version.asset",
+      "bytes": 426,
+      "category": "Sin referencia estática detectada",
+      "folder": "BOXOPHOBIC"
+    }
+  ]
+}

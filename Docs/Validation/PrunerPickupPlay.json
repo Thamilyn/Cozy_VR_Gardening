@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "Docs/Validation/PrunerGestureCheck.cs"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 133,
+      "executeMs": 20,
+      "assemblyName": "PipelineRunScript_PrunerGestureCheck_debfabc9330f4082867f3065b0f1a4e3",
+      "success": true,
+      "result": "PASS: Fresh paused Play session\r\nPASS: Prefab installs the gesture component\r\nPASS: Shears start open on the table\r\nPASS: Pickup accepts pinch or a palm grasp with the middle finger closed\r\nPASS: Handle pickup volume belongs to the existing body and Meta collider cache: -2070\r\nPASS: Solid convex blade/handle physics remain intact: -2070\r\nPASS: Handle pickup volume belongs to the existing body and Meta collider cache: -11696\r\nPASS: Solid convex blade/handle physics remain intact: -11696\r\nPASS: Handle pickup volume belongs to the existing body and Meta collider cache: -11244\r\nPASS: Solid convex blade/handle physics remain intact: -11244\r\nPASS: A tracked fingertip can overlap the padded handles without penetrating solid meshes\r\nPASS: Pickup tolerance does not freeze the real tool or disable gravity\r\nPASS: Left hand can interact with Pruner\r\nPASS: Left open hand near handles does not automatically grab\r\nPASS: Left palm grasp does not require all three fingers to close simultaneously\r\nPASS: Left index pinch is accepted by the actual Meta proximity/gesture filter\r\nPASS: Left near-handle tolerance is supplied by the new volume, not a forced selection\r\nPASS: Left pinch at a distance cannot select the tool\r\nPASS: Right hand can interact with Pruner\r\nPASS: Right open hand near handles does not automatically grab\r\nPASS: Right palm grasp does not require all three fingers to close simultaneously\r\nPASS: Right index pinch is accepted by the actual Meta proximity/gesture filter\r\nPASS: Right near-handle tolerance is supplied by the new volume, not a forced selection\r\nPASS: Right pinch at a distance cannot select the tool\r\nPASS: Selection installs the SDK release predicate\r\nPASS: Meta pointer selection holds the shears\r\nPASS: Closing all four fingers produces a full squeeze\r\nPASS: A fist closes the blades, including in the initial menu\r\nPASS: Closed fist pointing down does not release\r\nPASS: Bending only the index finger cannot fully close the shears\r\nPASS: A partially open hand does not release\r\nPASS: Opening the hand produces an open-blade squeeze\r\nPASS: Opening the hand opens the blades while retaining the grasp\r\nPASS: An open palm facing up retains the shears\r\nPASS: An open palm facing sideways retains the shears\r\nPASS: An open palm over the real table starts a release dwell\r\nPASS: The scene's TableSet collider is recognized\r\nPASS: A stable open palm down over the table permits release\r\nPASS: Closing the hand cancels a pending release\r\nPASS: An open palm too far above the table retains the tool\r\nPASS: An open palm down away from the table does not release\r\nPASS: A solid prop between the hand and tabletop blocks release\r\nPASS: Tracking loss does not count as a release gesture\r\nPASS: Left palm down starts the same release dwell\r\nPASS: SDK left-hand palm orientation also permits tabletop release\r\nPASS: Ending the grasp clears its SDK release override\r\nPASS: No gesture samples remain attached to a released hand\r\nPASS: Released shears return to the open resting pose\r\nPASS: Disabling the component clears its override\r\nNOT TESTED: physical Quest 3 tracking, hand comfort and full SDK frame-by-frame acquisition.\r\nRESULT: PASS"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

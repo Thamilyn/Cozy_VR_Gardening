@@ -9,16 +9,19 @@ public sealed class GardenObjectLabel : MonoBehaviour
     private Vector3 offset;
     private Transform viewer;
     private Text captionText;
+    private System.Func<bool> visibilityCondition;
 
     public void SetCaption(string caption)
     {
         if (captionText != null && captionText.text != caption) captionText.text = caption;
     }
 
-    public static GardenObjectLabel Create(GameObject target, string caption, Vector3 offset)
+    public static GardenObjectLabel Create(GameObject target, string caption, Vector3 offset,
+        System.Func<bool> visibilityCondition = null)
     {
         GardenObjectLabel result = target.AddComponent<GardenObjectLabel>();
         result.offset = offset;
+        result.visibilityCondition = visibilityCondition;
         result.Build(caption);
         return result;
     }
@@ -57,7 +60,8 @@ public sealed class GardenObjectLabel : MonoBehaviour
     {
         if (label == null) return;
         if (viewer == null && Camera.main != null) viewer = Camera.main.transform;
-        bool visible = viewer != null && !GardenMenuController.GardenSuspended;
+        bool visible = viewer != null && !GardenMenuController.GardenSuspended &&
+            (visibilityCondition == null || visibilityCondition());
         label.SetActive(visible);
         if (!visible) return;
         label.transform.position = transform.position + offset;

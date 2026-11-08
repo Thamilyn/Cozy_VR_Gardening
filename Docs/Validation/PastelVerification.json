@@ -1,0 +1,15 @@
+{
+  "scene": "Assets/Scenes/Garden_Moves.unity",
+  "sky": "Cozy Garden/Pastel Sky",
+  "skyAssignedToCycle": true,
+  "dayNightTextures": true,
+  "usedNatureShaders": [
+    "Cozy Garden/PastelProps",
+    "Cozy Garden/PastelFlowers",
+    "Cozy Garden/PastelLayered",
+    "Cozy Garden/PastelLeaves"
+  ],
+  "shaderErrors": [],
+  "deletedAssets": 0,
+  "quest3Performance": "Not measured on headset"
+}
