@@ -7,6 +7,7 @@ public sealed class GardenSoilSource : MonoBehaviour
 {
     [SerializeField] private MeshFilter soilSurface;
     [SerializeField] private int soilMaterialIndex = -1;
+    [SerializeField] private bool showNameLabel = true;
     [SerializeField, Min(0.02f), Tooltip("Reachable space above the soil; the blade need not penetrate the container.")]
     private float scoopHeightAboveSoil = 0.14f;
     [SerializeField, Min(0.01f)] private float scoopDepthBelowSoil = 0.08f;
@@ -23,8 +24,9 @@ public sealed class GardenSoilSource : MonoBehaviour
             enabled = false;
             return;
         }
-        nameLabel = GardenObjectLabel.Create(gameObject, "Soil Pot",
-            transform.TransformVector(Vector3.up * surfaceBounds.max.y) + Vector3.up * 0.1f);
+        if (showNameLabel)
+            nameLabel = GardenObjectLabel.Create(gameObject, "Soil Pot",
+                transform.TransformVector(Vector3.up * surfaceBounds.max.y) + Vector3.up * 0.1f);
     }
 
     internal void RecordScoop()

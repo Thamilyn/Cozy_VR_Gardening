@@ -1,0 +1,50 @@
+{
+  "materials": 35,
+  "nameMismatches": [],
+  "shaderErrors": [],
+  "cutoutMaterials": 3,
+  "prefabs": [
+    {
+      "path": "Assets/Prefabs/TomatoStages/PotRed.prefab",
+      "soil": false,
+      "nonPastel": []
+    },
+    {
+      "path": "Assets/Prefabs/TomatoStages/Tomate0.prefab",
+      "soil": true,
+      "nonPastel": []
+    },
+    {
+      "path": "Assets/Prefabs/TomatoStages/Tomatev1.4.prefab",
+      "soil": true,
+      "nonPastel": []
+    },
+    {
+      "path": "Assets/Prefabs/TomatoStages/TomatPhase2.prefab",
+      "soil": true,
+      "nonPastel": []
+    },
+    {
+      "path": "Assets/Prefabs/TomatoStages/TomatPhase3.prefab",
+      "soil": true,
+      "nonPastel": []
+    },
+    {
+      "path": "Assets/Prefabs/TomatoStages/TomatPhase4.prefab",
+      "soil": true,
+      "nonPastel": []
+    },
+    {
+      "path": "Assets/Prefabs/TomatoStages/TomatPhase5.prefab",
+      "soil": true,
+      "nonPastel": []
+    },
+    {
+      "path": "Assets/Prefabs/TomatoStages/TomatPhasefinal.prefab",
+      "soil": true,
+      "nonPastel": []
+    }
+  ],
+  "transparentBottle": "Transparency retained; smoothness, metallic, specular and environment reflections disabled",
+  "saved": true
+}

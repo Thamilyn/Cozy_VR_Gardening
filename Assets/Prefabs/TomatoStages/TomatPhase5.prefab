@@ -65,17 +65,45 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 543c04deef86bc8488d7871cdee8e217, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: eeb20dbb844b4ed4b9620cb882922f8c, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 543c04deef86bc8488d7871cdee8e217, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: 2100000, guid: 42f9e72f1609a584e99c5dc8277010e7, type: 2}
+      objectReference: {fileID: 2100000, guid: 9231f1a10b4f5d74498c02a7b07e2a5a, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 543c04deef86bc8488d7871cdee8e217, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f4c4cacb0e6a9084c80072ace8fe3458, type: 2}
     - target: {fileID: -7511558181221131132, guid: 543c04deef86bc8488d7871cdee8e217, type: 3}
       propertyPath: 'm_Materials.Array.data[3]'
       value: 
-      objectReference: {fileID: 2100000, guid: 1c9085bf835f3fa49bf9ac49aaaad901, type: 2}
+      objectReference: {fileID: 2100000, guid: 5b9f4180d780e9046acfd6c36f0e26f5, type: 2}
     - target: {fileID: -7511558181221131132, guid: 543c04deef86bc8488d7871cdee8e217, type: 3}
       propertyPath: 'm_Materials.Array.data[4]'
       value: 
-      objectReference: {fileID: 2100000, guid: 1c9085bf835f3fa49bf9ac49aaaad901, type: 2}
+      objectReference: {fileID: 2100000, guid: 5b9f4180d780e9046acfd6c36f0e26f5, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 543c04deef86bc8488d7871cdee8e217, type: 3}
+      propertyPath: 'm_Materials.Array.data[5]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 50d50f0a078d2784cbd931629c968ba4, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 543c04deef86bc8488d7871cdee8e217, type: 3}
+      propertyPath: 'm_Materials.Array.data[6]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 546d0b14756242243bfdb9763df17b1a, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 543c04deef86bc8488d7871cdee8e217, type: 3}
+      propertyPath: 'm_Materials.Array.data[7]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bc874b453f346d74f9ad887c965c5d0c, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 543c04deef86bc8488d7871cdee8e217, type: 3}
+      propertyPath: 'm_Materials.Array.data[8]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d717ecbc3d51454786b2aec79546daf, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 543c04deef86bc8488d7871cdee8e217, type: 3}
+      propertyPath: 'm_Materials.Array.data[9]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3956b34ee2ab34a49b7d0760a671e8ff, type: 2}
     - target: {fileID: 919132149155446097, guid: 543c04deef86bc8488d7871cdee8e217, type: 3}
       propertyPath: m_Name
       value: TomatPhase5

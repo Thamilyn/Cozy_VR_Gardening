@@ -36,6 +36,7 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
     private float maximumCenterHeight;
     private bool hasViewHeight;
     private bool keepStatic;
+    private bool lockAfterPlacement;
     private bool checkFullSightline;
     private bool ignorePlayerAndGrabbables;
     private int ignoredLayers;
@@ -45,7 +46,7 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
 
     public void Configure(Transform presentation, Transform view, Collider targetCollider = null,
         bool keepStatic = false, bool checkFullSightline = false, Transform visualObstacleRoot = null,
-        bool ignorePlayerAndGrabbables = false)
+        bool ignorePlayerAndGrabbables = false, bool lockAfterPlacement = false)
     {
         // Restore the saved visual state before replacing the cached components/states.
         SetSuppressed(false);
@@ -55,6 +56,7 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
         // Interaction targets must never turn a relocating visual into a physical platform.
         if (interactionCollider != null) interactionCollider.isTrigger = true;
         this.keepStatic = keepStatic;
+        this.lockAfterPlacement = lockAfterPlacement;
         this.checkFullSightline = checkFullSightline;
         this.ignorePlayerAndGrabbables = ignorePlayerAndGrabbables;
         ignoredLayers = ignorePlayerAndGrabbables
@@ -167,6 +169,14 @@ public sealed class GardenPresentationPlacement : MonoBehaviour
         {
             // Interpolating from an intersecting pose would leave the panel inside the table.
             transform.position = originalPosition + offset;
+            // Interactive UI must stay under the user's pointer after its opening placement.
+            // Head movement and later obstacles must not trigger another search until reopened.
+            if (lockAfterPlacement)
+            {
+                lockedPosition = transform.position;
+                lockedRotation = transform.rotation;
+                positionLocked = true;
+            }
         }
         else
         {

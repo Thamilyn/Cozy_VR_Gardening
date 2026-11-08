@@ -1,0 +1,193 @@
+{
+  "prefabs": [
+    "Assets/Prefabs/TomatoStages/01_Brote_PLACEHOLDER.prefab",
+    "Assets/Prefabs/TomatoStages/02_PlantaJoven_PLACEHOLDER.prefab",
+    "Assets/Prefabs/TomatoStages/03_Floracion_PLACEHOLDER.prefab",
+    "Assets/Prefabs/TomatoStages/04_TomatesVerdes_PLACEHOLDER.prefab",
+    "Assets/Prefabs/TomatoStages/05_TomatesMaduros_PLACEHOLDER.prefab",
+    "Assets/Prefabs/TomatoStages/Tomate0.prefab",
+    "Assets/Prefabs/TomatoStages/Tomatev1.4.prefab",
+    "Assets/Prefabs/TomatoStages/TomatPhase2.prefab",
+    "Assets/Prefabs/TomatoStages/TomatPhase3.prefab",
+    "Assets/Prefabs/TomatoStages/TomatPhase4.prefab",
+    "Assets/Prefabs/TomatoStages/TomatPhase5.prefab",
+    "Assets/Prefabs/TomatoStages/TomatPhasefinal.prefab"
+  ],
+  "materials": [
+    {
+      "source": "Assets/Prefabs/TomatoStages/Placeholder_LeafGreen.mat",
+      "name": "Placeholder_LeafGreen",
+      "pastel": "Assets/Materials/GardenPastel/Crops/e6640f3fe9a5c5547bff4e2b6d312973_2100000.mat"
+    },
+    {
+      "source": "Assets/Prefabs/TomatoStages/Placeholder_FlowerYellow.mat",
+      "name": "Placeholder_FlowerYellow",
+      "pastel": "Assets/Materials/GardenPastel/Crops/8869f66fce7ac314ea09f6cfd130ca5c_2100000.mat"
+    },
+    {
+      "source": "Assets/Prefabs/TomatoStages/Placeholder_TomatoGreen.mat",
+      "name": "Placeholder_TomatoGreen",
+      "pastel": "Assets/Materials/GardenPastel/Crops/9da89b7723fefd84c8858624c0399b56_2100000.mat"
+    },
+    {
+      "source": "Assets/Prefabs/TomatoStages/Placeholder_TomatoRed.mat",
+      "name": "Placeholder_TomatoRed",
+      "pastel": "Assets/Materials/GardenPastel/Crops/5b2a53dc83495d84fb392b974cdae1eb_2100000.mat"
+    },
+    {
+      "source": "Assets/OurAss/Tomate0_EmptyPot.fbx",
+      "name": "Soil",
+      "pastel": "Assets/Materials/GardenPastel/Crops/387869f89a754ed0a067d7ca796e51e2_-6193881494005093130.mat"
+    },
+    {
+      "source": "Assets/OurAss/Tomate0_EmptyPot.fbx",
+      "name": "Material.002",
+      "pastel": "Assets/Materials/GardenPastel/Crops/387869f89a754ed0a067d7ca796e51e2_-3846018093981099296.mat"
+    },
+    {
+      "source": "Assets/OurAss/Tomatev1.4.fbx",
+      "name": "Soil",
+      "pastel": "Assets/Materials/GardenPastel/Crops/e8a59af6291c9d245ad257998e4bec61_-6193881494005093130.mat"
+    },
+    {
+      "source": "Assets/OurAss/Leaf_CuteGermination.mat",
+      "name": "Leaf_CuteGermination",
+      "pastel": "Assets/Materials/GardenPastel/Crops/0a91d69be5950034780d7da172ed56dc_2100000.mat"
+    },
+    {
+      "source": "Assets/OurAss/Tomatev1.4.fbx",
+      "name": "Material.002",
+      "pastel": "Assets/Materials/GardenPastel/Crops/e8a59af6291c9d245ad257998e4bec61_-3846018093981099296.mat"
+    },
+    {
+      "source": "Assets/OurAss/Leaf.mat",
+      "name": "Leaf",
+      "pastel": "Assets/Materials/GardenPastel/Crops/1c9085bf835f3fa49bf9ac49aaaad901_2100000.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhase2.fbx",
+      "name": "Material.002",
+      "pastel": "Assets/Materials/GardenPastel/Crops/b0a69dc6a39cac545b1ddf0e797cc482_-3846018093981099296.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhase2.fbx",
+      "name": "Soil",
+      "pastel": "Assets/Materials/GardenPastel/Crops/b0a69dc6a39cac545b1ddf0e797cc482_-6193881494005093130.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhase3.fbx",
+      "name": "Material.002",
+      "pastel": "Assets/Materials/GardenPastel/Crops/588284546a3ce594a8841dcb68935a27_-3846018093981099296.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhase3.fbx",
+      "name": "Material",
+      "pastel": "Assets/Materials/GardenPastel/Crops/588284546a3ce594a8841dcb68935a27_-876546973899608171.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhase3.fbx",
+      "name": "Soil",
+      "pastel": "Assets/Materials/GardenPastel/Crops/588284546a3ce594a8841dcb68935a27_-6193881494005093130.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhase4.fbx",
+      "name": "Material",
+      "pastel": "Assets/Materials/GardenPastel/Crops/cfe6323bf350cdb45aa1358ce02e50d2_-876546973899608171.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhase4.fbx",
+      "name": "Material.002",
+      "pastel": "Assets/Materials/GardenPastel/Crops/cfe6323bf350cdb45aa1358ce02e50d2_-3846018093981099296.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhase4.fbx",
+      "name": "Soil",
+      "pastel": "Assets/Materials/GardenPastel/Crops/cfe6323bf350cdb45aa1358ce02e50d2_-6193881494005093130.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhase4.fbx",
+      "name": "Material.001",
+      "pastel": "Assets/Materials/GardenPastel/Crops/cfe6323bf350cdb45aa1358ce02e50d2_-6478536213147159724.mat"
+    },
+    {
+      "source": "Assets/OurAss/Flower.mat",
+      "name": "Flower",
+      "pastel": "Assets/Materials/GardenPastel/Crops/42f9e72f1609a584e99c5dc8277010e7_2100000.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhase5.fbx",
+      "name": "Material.001",
+      "pastel": "Assets/Materials/GardenPastel/Crops/543c04deef86bc8488d7871cdee8e217_-6478536213147159724.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhase5.fbx",
+      "name": "Material.002",
+      "pastel": "Assets/Materials/GardenPastel/Crops/543c04deef86bc8488d7871cdee8e217_-3846018093981099296.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhase5.fbx",
+      "name": "Soil",
+      "pastel": "Assets/Materials/GardenPastel/Crops/543c04deef86bc8488d7871cdee8e217_-6193881494005093130.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhase5.fbx",
+      "name": "GreenTomato",
+      "pastel": "Assets/Materials/GardenPastel/Crops/543c04deef86bc8488d7871cdee8e217_-8504049060200355362.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhase5.fbx",
+      "name": "BadTomato",
+      "pastel": "Assets/Materials/GardenPastel/Crops/543c04deef86bc8488d7871cdee8e217_975066346320515861.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhase5.fbx",
+      "name": "YellowishTomato",
+      "pastel": "Assets/Materials/GardenPastel/Crops/543c04deef86bc8488d7871cdee8e217_5410259920558685837.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhase5.fbx",
+      "name": "RootOf Leaf",
+      "pastel": "Assets/Materials/GardenPastel/Crops/543c04deef86bc8488d7871cdee8e217_-4526035865614503878.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhasefinal.fbx",
+      "name": "RootOf Leaf",
+      "pastel": "Assets/Materials/GardenPastel/Crops/b6564bbb8360e0049904bfa5dbab2a76_-4526035865614503878.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhasefinal.fbx",
+      "name": "GreenTomato",
+      "pastel": "Assets/Materials/GardenPastel/Crops/b6564bbb8360e0049904bfa5dbab2a76_-8504049060200355362.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhasefinal.fbx",
+      "name": "Material.001",
+      "pastel": "Assets/Materials/GardenPastel/Crops/b6564bbb8360e0049904bfa5dbab2a76_-6478536213147159724.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhasefinal.fbx",
+      "name": "Material",
+      "pastel": "Assets/Materials/GardenPastel/Crops/b6564bbb8360e0049904bfa5dbab2a76_-876546973899608171.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhasefinal.fbx",
+      "name": "Material.002",
+      "pastel": "Assets/Materials/GardenPastel/Crops/b6564bbb8360e0049904bfa5dbab2a76_-3846018093981099296.mat"
+    },
+    {
+      "source": "Assets/OurAss/TomatPhasefinal.fbx",
+      "name": "Soil",
+      "pastel": "Assets/Materials/GardenPastel/Crops/b6564bbb8360e0049904bfa5dbab2a76_-6193881494005093130.mat"
+    },
+    {
+      "source": "Packages/com.meta.xr.sdk.interaction/Runtime/Sample/Objects/Props/Plants/Materials/PlantSetMat.mat",
+      "name": "PlantSetMat",
+      "pastel": "Assets/Materials/GardenPastel/Crops/e700c31a6eeeac54096048f6c6b946c2_2100000.mat"
+    },
+    {
+      "source": "Packages/com.unity.render-pipelines.universal/Runtime/Materials/Lit.mat",
+      "name": "Lit",
+      "pastel": "Assets/Materials/GardenPastel/Crops/31321ba15b8f8eb4c954353edc038b1d_2100000.mat"
+    }
+  ]
+}

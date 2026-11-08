@@ -54,7 +54,7 @@ public sealed class CalendarVisibilityController : MonoBehaviour
             placement = gameObject.AddComponent<GardenPresentationPlacement>();
             placement.Configure(panelContent.transform, viewTransform, rayCollider,
                 checkFullSightline: true, visualObstacleRoot: tableContents,
-                ignorePlayerAndGrabbables: true);
+                ignorePlayerAndGrabbables: true, lockAfterPlacement: true);
         }
     }
 
@@ -175,6 +175,11 @@ public sealed class CalendarVisibilityController : MonoBehaviour
     private void ApplyVisible(bool visible)
     {
         bool changed = IsVisible != visible;
+        if (visible && !changed)
+        {
+            if (calendarPanel != null) calendarPanel.Refresh();
+            return;
+        }
         IsVisible = visible;
         if (changed) VisibilityChanged?.Invoke(visible);
         if (!visible)

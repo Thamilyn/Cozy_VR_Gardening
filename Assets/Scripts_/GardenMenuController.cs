@@ -37,6 +37,7 @@ public sealed class GardenMenuController : MonoBehaviour
     private GronnyVoicePlayer menuVoice;
     private GardenControlDemonstration menuDemonstration;
     private GardenInputMode controlsMode = GardenInputMode.Hands;
+    private int controlsPage;
     private enum Page { Home, Controls, Demonstration, Sound, GameOver }
     private Page page;
     private string previewId;
@@ -310,11 +311,11 @@ public sealed class GardenMenuController : MonoBehaviour
             if (retry) { GardenWaterSupply.Active.Retry(); return; }
             Continue();
         });
-        menu.Button("Controls", new Vector2(0f, -15f), new Vector2(650f, 85f), ShowControls);
+        menu.Button("Controls", new Vector2(0f, -15f), new Vector2(650f, 85f), () => { controlsPage = 0; ShowControls(); });
         menu.Button("Sound settings", new Vector2(0f, -125f), new Vector2(650f, 85f), ShowSound);
         menu.Label(started
-            ? "Adjust sound or review the controls.\nYour current garden continues when you return."
-            : "Practise first with free refills.\nThen grow your tomato with a limited water reserve.\nRefilling uses that reserve: save water to finish.",
+            ? "Review movement, planting, soil and harvest controls.\nYour current garden continues when you return."
+            : "Plant a seed, cover it with soil, water and harvest.\nPractise with free refills before the limited reserve.\nSave water for every growth stage.",
             new Vector2(0f, -260f), new Vector2(790f, 110f), 25);
     }
 
@@ -328,15 +329,39 @@ public sealed class GardenMenuController : MonoBehaviour
             new Vector2(-185f, 200f), new Vector2(340f, 65f), () => { controlsMode = GardenInputMode.Hands; ShowControls(); });
         menu.Button(controlsMode == GardenInputMode.Controllers ? "Controllers — selected" : "Controllers",
             new Vector2(185f, 200f), new Vector2(340f, 65f), () => { controlsMode = GardenInputMode.Controllers; ShowControls(); });
-        menu.Label("Choose a demonstration to watch and hear.\nThe garden stays paused while you review.",
+        string section = controlsPage switch { 1 => "Planting and care", 2 => "Harvest and restart", _ => "Basic controls" };
+        menu.Label(section + " — " + (controlsPage + 1) + "/3\nThe garden stays paused while you review.",
             new Vector2(0f, 125f), new Vector2(790f, 70f), 25);
-        menu.Button("Walk in your room", new Vector2(-185f, 25f), new Vector2(340f, 65f), () => ShowDemonstration("roomscale"));
-        menu.Button("Grab and release", new Vector2(185f, 25f), new Vector2(340f, 65f), () => ShowDemonstration("grab"));
-        menu.Button("Open and close calendar", new Vector2(-185f, -75f), new Vector2(340f, 65f), () => ShowDemonstration("calendar"));
-        menu.Button("Select buttons", new Vector2(185f, -75f), new Vector2(340f, 65f), () => ShowDemonstration("calendar_select"));
-        menu.Button("Watering can", new Vector2(-185f, -175f), new Vector2(340f, 65f), () => ShowDemonstration("watering"));
-        menu.Button("Refill water", new Vector2(185f, -175f), new Vector2(340f, 65f), () => ShowDemonstration("refill_select"));
-        menu.Button("Back", new Vector2(0f, -290f), new Vector2(710f, 65f), ShowHome);
+        if (controlsPage == 0)
+        {
+            ControlButton("Walk in your room", "roomscale", 0);
+            ControlButton("Grab and release", "grab", 1);
+            ControlButton("Open and close calendar", "calendar", 2);
+            ControlButton("Select buttons", "calendar_select", 3);
+            ControlButton("Watering can", "watering", 4);
+            ControlButton("Refill water", "refill_select", 5);
+        }
+        else if (controlsPage == 1)
+        {
+            ControlButton("Plant a seed", "plant", 0);
+            ControlButton("Scoop soil", "soil_scoop", 1);
+            ControlButton("Cover the seed", "soil_pour", 2);
+            ControlButton("Stop watering", "stop_water", 3);
+            ControlButton("Advance growth", "advance", 4);
+            ControlButton("Save water", "reserve", 5);
+        }
+        else
+        {
+            ControlButton("Cut the stem", "cut", 0);
+            ControlButton("Pick the tomato", "pick", 1);
+            ControlButton("Harvest tray", "tray", 2);
+            ControlButton("Restart / Try again", "restart", 3);
+        }
+        menu.Button("Previous", new Vector2(-185f, -225f), new Vector2(340f, 60f),
+            () => { controlsPage--; ShowControls(); }).interactable = controlsPage > 0;
+        menu.Button("Next", new Vector2(185f, -225f), new Vector2(340f, 60f),
+            () => { controlsPage++; ShowControls(); }).interactable = controlsPage < 2;
+        menu.Button("Back", new Vector2(0f, -300f), new Vector2(710f, 60f), ShowHome);
         if (!controlsIntroPlayed && menuVoice != null)
         {
             controlsIntroPlayed = true;
@@ -344,32 +369,75 @@ public sealed class GardenMenuController : MonoBehaviour
         }
     }
 
+    private void ControlButton(string title, string control, int slot)
+    {
+        float x = slot % 2 == 0 ? -185f : 185f;
+        float y = 30f - (slot / 2) * 85f;
+        menu.Button(title, new Vector2(x, y), new Vector2(340f, 65f), () => ShowDemonstration(control));
+    }
+
     private void ShowDemonstration(string control, bool right = false)
     {
         StopMenuAudio();
         page = Page.Demonstration;
         bool physicalWalking = control == "roomscale";
-        string id = physicalWalking ? "roomscale_walk"
-            : "controls_" + control + (controlsMode == GardenInputMode.Hands ? "_hands" : "_controllers");
+        // Gardening cues are shared by hands and controllers; their visuals use controlsMode.
+        string id = control switch
+        {
+            "roomscale" => "roomscale_walk",
+            "plant" => "03_plant_seed",
+            "soil_scoop" => "soil_scoop_first",
+            "soil_pour" => "soil_cover_seed",
+            "stop_water" => "help_stop_watering",
+            "advance" => "07_first_advance",
+            "reserve" => "water_reserve_rules",
+            "cut" => "harvest_cut_stem",
+            "pick" => "harvest_stem_cut",
+            "tray" => "harvest_picked",
+            "restart" => null,
+            _ => "controls_" + control + (controlsMode == GardenInputMode.Hands ? "_hands" : "_controllers")
+        };
         bool hasSides = control == "move" || control == "calendar";
         if (hasSides && right) id += "_right";
-        GronnyAudioCatalogue.Cue cue = audioCatalogue != null ? audioCatalogue.Find(id) : null;
+        GronnyAudioCatalogue.Cue cue = audioCatalogue != null && id != null ? audioCatalogue.Find(id) : null;
         previewId = id;
         menu.Clear();
         menu.Label(control switch { "roomscale" => "Walk in your room", "move" => "Optional movement controls", "grab" => "Grab and release",
             "calendar" => "Calendar", "watering" => "Watering can", "refill_select" => "Refill water",
+            "plant" => "Plant a seed", "soil_scoop" => "Scoop soil", "soil_pour" => "Cover the seed",
+            "stop_water" => "Stop watering", "advance" => "Advance growth", "reserve" => "Save water",
+            "cut" => "Cut the stem", "pick" => "Pick the tomato", "tray" => "Harvest tray",
+            "restart" => "Restart / Try again",
             _ => "Select buttons" }, new Vector2(0f, 280f), new Vector2(790f, 65f), 38);
         string description = physicalWalking ? "Real walking — hands free\nStay inside your clear play area."
             : controlsMode == GardenInputMode.Hands ? "Hand tracking" : "Touch controllers";
         if (hasSides) description += right
             ? " — right-hand preview\nOptional movement and calendar controls use the left side."
             : " — left side\nMatches the optional movement and calendar controls.";
+        if (cue == null || cue.clip == null || menuVoice == null)
+            description += "\nWritten instructions";
         menu.Label(description, new Vector2(0f, 195f), new Vector2(790f, 95f), 24);
-        menu.Label(cue != null && !string.IsNullOrEmpty(cue.instruction) ? cue.instruction + "\n" + cue.instructionDetail
-            : "Watch the demonstration.\nYou can replay it or stop it at any time.",
+        string instructions = control switch
+        {
+            "plant" => "Pinch or hold Grip to grab the Tomato seed.\nRelease it onto the soil in an empty small pot.",
+            "soil_scoop" => "Grab Shovel with pinch or Grip.\nMake a short pass over the soil in SoilPot to load the blade.",
+            "soil_pour" => "Keep the loaded blade level above the planted pot.\nGently tilt it and hold briefly to cover the seed.",
+            "stop_water" => "Watch the water bar above your plant.\nHold the can upright at the target.\nLet excess water drain before advancing.",
+            "advance" => "Cover the seed and water to the stage's target.\nOpen the calendar and select Advance phase.\nWatering pauses while time passes.",
+            "reserve" => "Practice has free refills. Later stages share a limited reserve.\nRefill water transfers it to the can.\nPour onto the soil and stop at the target to avoid waste.",
+            "cut" => "Hold Pruner with the blades open around the ripe tomato's stem.\nClose your hand or squeeze Trigger to snip.",
+            "pick" => "Cut the stem first.\nPinch or hold Grip to lift the separated tomato.",
+            "tray" => "Carry the picked tomato to the harvest tray.\nOpen your fingers or release Grip to leave it in the tray and finish.",
+            "restart" => "Return to the garden and release all objects.\nCalendar: Restart begins a new session.\nAfter water failure, Try again starts at planting with a fresh supply.",
+            _ => null
+        };
+        menu.Label(instructions ?? (cue != null && !string.IsNullOrEmpty(cue.instruction) ? cue.instruction + "\n" + cue.instructionDetail
+            : "Watch the demonstration.\nYou can replay it or stop it at any time."),
             new Vector2(0f, 30f), new Vector2(760f, 225f), 26);
-        menu.Button("Replay", new Vector2(-185f, -125f), new Vector2(340f, 65f), () => PlayDemonstration(id));
-        menu.Button("Stop", new Vector2(185f, -125f), new Vector2(340f, 65f), StopMenuAudio);
+        menu.Button("Replay", new Vector2(-185f, -125f), new Vector2(340f, 65f), () => PlayDemonstration(id))
+            .interactable = cue != null && cue.clip != null && menuVoice != null;
+        menu.Button("Stop", new Vector2(185f, -125f), new Vector2(340f, 65f), StopMenuAudio)
+            .interactable = cue != null && cue.clip != null && menuVoice != null;
         if (hasSides)
             menu.Button(right ? "Preview left hand" : "Preview right hand", new Vector2(0f, -205f),
                 new Vector2(710f, 65f), () => ShowDemonstration(control, !right));
@@ -377,7 +445,7 @@ public sealed class GardenMenuController : MonoBehaviour
             menu.Button("Review optional movement controls", new Vector2(0f, -205f),
                 new Vector2(710f, 65f), () => ShowDemonstration("move"));
         menu.Button("Back", new Vector2(0f, -290f), new Vector2(710f, 65f), ShowControls);
-        PlayDemonstration(id);
+        if (cue != null && cue.clip != null) PlayDemonstration(id);
     }
 
     private void PlayDemonstration(string id)

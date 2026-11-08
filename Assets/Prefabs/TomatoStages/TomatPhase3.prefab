@@ -65,9 +65,21 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 588284546a3ce594a8841dcb68935a27, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 767f916175d34644f8d5939bfa7043bc, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 588284546a3ce594a8841dcb68935a27, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0609542b90501924680de994066c209a, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 588284546a3ce594a8841dcb68935a27, type: 3}
       propertyPath: 'm_Materials.Array.data[2]'
       value: 
-      objectReference: {fileID: 2100000, guid: 1c9085bf835f3fa49bf9ac49aaaad901, type: 2}
+      objectReference: {fileID: 2100000, guid: 5b9f4180d780e9046acfd6c36f0e26f5, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 588284546a3ce594a8841dcb68935a27, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bfdf29724e9383f4ba4b9ab9a29f2add, type: 2}
     - target: {fileID: 919132149155446097, guid: 588284546a3ce594a8841dcb68935a27, type: 3}
       propertyPath: m_Name
       value: TomatPhase3

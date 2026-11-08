@@ -1,0 +1,1 @@
+var type=System.AppDomain.CurrentDomain.GetAssemblies().Select(a=>a.GetType("GardenCropPastelSetup")).First(t=>t!=null);try{type.GetMethod("Apply").Invoke(null,null);return new{applied=true};}catch(System.Exception e){return new{applied=false,error=(e.InnerException??e).ToString()};}

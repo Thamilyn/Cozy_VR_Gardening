@@ -1,0 +1,72 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "eval_file",
+    "parameters": {
+      "file": "Docs/Validation/VerifyCropPastel.cs"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "materials": 35,
+        "nameMismatches": [],
+        "shaderErrors": [],
+        "cutoutMaterials": 3,
+        "prefabs": [
+          {
+            "path": "Assets/Prefabs/TomatoStages/PotRed.prefab",
+            "soil": false,
+            "nonPastel": []
+          },
+          {
+            "path": "Assets/Prefabs/TomatoStages/Tomate0.prefab",
+            "soil": true,
+            "nonPastel": []
+          },
+          {
+            "path": "Assets/Prefabs/TomatoStages/Tomatev1.4.prefab",
+            "soil": true,
+            "nonPastel": []
+          },
+          {
+            "path": "Assets/Prefabs/TomatoStages/TomatPhase2.prefab",
+            "soil": true,
+            "nonPastel": []
+          },
+          {
+            "path": "Assets/Prefabs/TomatoStages/TomatPhase3.prefab",
+            "soil": true,
+            "nonPastel": []
+          },
+          {
+            "path": "Assets/Prefabs/TomatoStages/TomatPhase4.prefab",
+            "soil": true,
+            "nonPastel": []
+          },
+          {
+            "path": "Assets/Prefabs/TomatoStages/TomatPhase5.prefab",
+            "soil": true,
+            "nonPastel": []
+          },
+          {
+            "path": "Assets/Prefabs/TomatoStages/TomatPhasefinal.prefab",
+            "soil": true,
+            "nonPastel": []
+          }
+        ],
+        "transparentBottle": "Transparency retained; smoothness, metallic, specular and environment reflections disabled",
+        "saved": true
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

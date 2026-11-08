@@ -52,7 +52,7 @@ public sealed class CalendarSystem : MonoBehaviour
         new Milestone { day = 7, displayName = "Sprout / germination", color = new Color(0.55f, 0.75f, 0.38f) },
         new Milestone { day = 45, displayName = "Young plant and growth", color = new Color(0.32f, 0.7f, 0.36f) },
         new Milestone { day = 60, displayName = "Flowering", color = new Color(0.95f, 0.8f, 0.38f) },
-        new Milestone { day = 80, displayName = "Green tomatoes", color = new Color(0.42f, 0.72f, 0.3f) },
+        new Milestone { day = 80, displayName = "Ripening tomatoes", color = new Color(0.42f, 0.72f, 0.3f) },
         new Milestone { day = 110, displayName = "Ripe tomatoes and harvest", color = new Color(0.9f, 0.34f, 0.25f) }
     };
     // Runtime state is intentionally not serialized into the scene or a JSON file.

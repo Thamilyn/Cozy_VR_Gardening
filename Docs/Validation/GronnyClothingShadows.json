@@ -1,0 +1,47 @@
+[
+  {
+    "material": "N00_007_01_Tops_01_CLOTH_01 Soft Shadows",
+    "path": "Assets/Materials/GardenPastel/Gronny/c758e44ed6af95c4aa50fa3e608b95e0_2653117248278823225.mat",
+    "lit": "RGBA(0.746, 0.863, 0.382, 1.000)",
+    "oldShade": "RGBA(0.967, 0.965, 0.974, 1.000)",
+    "shade": "RGBA(0.640, 0.728, 0.368, 1.000)",
+    "texturePreserved": true,
+    "shader": "VRM10/Universal Render Pipeline/MToon10"
+  },
+  {
+    "material": "N00_004_01_Shoes_01_CLOTH Soft Shadows",
+    "path": "Assets/Materials/GardenPastel/Gronny/c758e44ed6af95c4aa50fa3e608b95e0_-8406702592541528301.mat",
+    "lit": "RGBA(0.646, 0.709, 0.464, 1.000)",
+    "oldShade": "RGBA(0.812, 0.839, 0.969, 1.000)",
+    "shade": "RGBA(0.553, 0.600, 0.416, 1.000)",
+    "texturePreserved": true,
+    "shader": "VRM10/Universal Render Pipeline/MToon10"
+  },
+  {
+    "material": "N00_010_01_Onepiece_00_CLOTH_03 Soft Shadows",
+    "path": "Assets/Materials/GardenPastel/Gronny/c758e44ed6af95c4aa50fa3e608b95e0_2601858927673969104.mat",
+    "lit": "RGBA(0.514, 0.608, 0.486, 1.000)",
+    "oldShade": "RGBA(0.967, 0.965, 0.974, 1.000)",
+    "shade": "RGBA(0.443, 0.514, 0.423, 1.000)",
+    "texturePreserved": true,
+    "shader": "VRM10/Universal Render Pipeline/MToon10"
+  },
+  {
+    "material": "N00_007_01_Tops_01_CLOTH_02 Soft Shadows",
+    "path": "Assets/Materials/GardenPastel/Gronny/c758e44ed6af95c4aa50fa3e608b95e0_5200781367325247788.mat",
+    "lit": "RGBA(0.623, 0.701, 0.334, 1.000)",
+    "oldShade": "RGBA(0.967, 0.965, 0.974, 1.000)",
+    "shade": "RGBA(0.533, 0.591, 0.317, 1.000)",
+    "texturePreserved": true,
+    "shader": "VRM10/Universal Render Pipeline/MToon10"
+  },
+  {
+    "material": "N00_007_01_Tops_01_CLOTH_03 Soft Shadows",
+    "path": "Assets/Materials/GardenPastel/Gronny/c758e44ed6af95c4aa50fa3e608b95e0_-2870194574405414958.mat",
+    "lit": "RGBA(0.515, 0.610, 0.485, 1.000)",
+    "oldShade": "RGBA(0.967, 0.965, 0.974, 1.000)",
+    "shade": "RGBA(0.444, 0.515, 0.422, 1.000)",
+    "texturePreserved": true,
+    "shader": "VRM10/Universal Render Pipeline/MToon10"
+  }
+]

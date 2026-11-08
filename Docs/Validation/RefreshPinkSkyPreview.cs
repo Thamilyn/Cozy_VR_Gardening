@@ -1,0 +1,1 @@
+var sky=UnityEngine.RenderSettings.skybox;sky.SetColor("_HorizonPink",new UnityEngine.Color(0.91f,0.81f,0.85f));sky.SetFloat("_PastelGradientStrength",0.65f);return new{playing=UnityEditor.EditorApplication.isPlaying,strength=sky.GetFloat("_PastelGradientStrength")};

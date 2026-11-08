@@ -1518,6 +1518,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 519f8016843631e49adcf94c7322bb41, type: 2}
+    - target: {fileID: -5713056762112849301, guid: 571146e28831f458a97a0dcc62ea1709, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c91e508abc59f7418ee9d42f37c67c7, type: 2}
     - target: {fileID: 919132149155446097, guid: 571146e28831f458a97a0dcc62ea1709, type: 3}
       propertyPath: m_Name
       value: PotSmall (1)
@@ -1967,7 +1971,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 090631d2ca1abb249a1161b1a0c58091, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: e700c31a6eeeac54096048f6c6b946c2, type: 2}
+      objectReference: {fileID: 2100000, guid: 4294d91ff582e81469a3e5b92fa47949, type: 2}
     - target: {fileID: 919132149155446097, guid: 090631d2ca1abb249a1161b1a0c58091, type: 3}
       propertyPath: m_Name
       value: PlantPot
@@ -4833,6 +4837,26 @@ PrefabInstance:
       propertyPath: m_AABB.m_Extent.z
       value: 0.18942176
       objectReference: {fileID: 0}
+    - target: {fileID: -5694092435888646316, guid: c758e44ed6af95c4aa50fa3e608b95e0, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a2dc8488fe77f34d8e700523368455c, type: 2}
+    - target: {fileID: -5694092435888646316, guid: c758e44ed6af95c4aa50fa3e608b95e0, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8cdff384955d1bb4a8f53f5eb1ae9e61, type: 2}
+    - target: {fileID: -5694092435888646316, guid: c758e44ed6af95c4aa50fa3e608b95e0, type: 3}
+      propertyPath: 'm_Materials.Array.data[8]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 628f32c69636fcf4b84494131bba6498, type: 2}
+    - target: {fileID: -5694092435888646316, guid: c758e44ed6af95c4aa50fa3e608b95e0, type: 3}
+      propertyPath: 'm_Materials.Array.data[9]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 23d81e3f077730646963623e48365f9d, type: 2}
+    - target: {fileID: -5694092435888646316, guid: c758e44ed6af95c4aa50fa3e608b95e0, type: 3}
+      propertyPath: 'm_Materials.Array.data[10]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fe909d69541915649a946d20e86c32ce, type: 2}
     - target: {fileID: -1728013695380148634, guid: c758e44ed6af95c4aa50fa3e608b95e0, type: 3}
       propertyPath: m_Name
       value: Gardener Kawaii - Profesor de jardineria
@@ -6359,7 +6383,7 @@ MonoBehaviour:
     icon: {fileID: -3840449707809081413, guid: 086353fe901150541b90133217766b5b, type: 3}
     color: {r: 0.95, g: 0.8, b: 0.38, a: 1}
   - day: 80
-    displayName: Green tomatoes
+    displayName: Ripening tomatoes
     icon: {fileID: -4340009195191301107, guid: 45ab05a037b571b4991498e588b03c2f, type: 3}
     color: {r: 0.42, g: 0.72, b: 0.3, a: 1}
   - day: 110

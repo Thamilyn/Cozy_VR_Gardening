@@ -19,7 +19,7 @@ public static class GardenCalendarBuilder
     private static readonly string[] Names =
     {
         "Seed", "Sprout / germination", "Young plant and growth",
-        "Flowering", "Green tomatoes", "Ripe tomatoes and harvest"
+        "Flowering", "Ripening tomatoes", "Ripe tomatoes and harvest"
     };
     private static readonly string[] AssetNames =
     {

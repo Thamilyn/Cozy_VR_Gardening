@@ -5,9 +5,9 @@ Shader "Cozy Garden/Pastel Sky"
 	Properties
 	{
         [Header(Pastel horizon)]
-        _HorizonPink("Horizon pink", Color) = (0.96, 0.76, 0.83, 1)
+        _HorizonPink("Horizon pink", Color) = (0.91, 0.81, 0.85, 1)
         _ZenithBlue("Upper sky blue", Color) = (0.55, 0.78, 0.95, 1)
-        _PastelGradientStrength("Day gradient strength", Range(0, 1)) = 0.9
+        _PastelGradientStrength("Day gradient strength", Range(0, 1)) = 0.65
         _PastelGradientHeight("Gradient height", Range(0.1, 1)) = 0.65
 		[StyledBanner(Skybox Cubemap Blend)] _SkyboxExtended( "< SkyboxExtended >", Float ) = 1
 		[StyledCategory(Cubemap Settings, 5, 10)] _Cubemapp( "[ Cubemapp ]", Float ) = 1

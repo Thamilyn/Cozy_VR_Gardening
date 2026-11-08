@@ -1,0 +1,97 @@
+{
+  "playing": false,
+  "ambient": "Skybox",
+  "ambientSky": "RGBA(0.212, 0.227, 0.259, 1.000)",
+  "sun": "RGBA(1.000, 0.957, 0.839, 1.000)",
+  "renderers": [
+    {
+      "name": "Face",
+      "root": "Gardener Kawaii - Profesor de jardineria",
+      "materials": []
+    },
+    {
+      "name": "Body",
+      "root": "Gardener Kawaii - Profesor de jardineria",
+      "materials": [
+        {
+          "name": "N00_007_01_Tops_01_CLOTH_01 (Instance)",
+          "color": "RGBA(0.746, 0.863, 0.382, 1.000)",
+          "shade": "RGBA(0.967, 0.965, 0.974, 1.000)",
+          "texture": "Assets/Vroid/Gardenerkawaii.vrm",
+          "originalColor": "RGBA(0.746, 0.863, 0.382, 1.000)",
+          "hasPropertyBlock": false
+        },
+        {
+          "name": "N00_004_01_Shoes_01_CLOTH (Instance)",
+          "color": "RGBA(0.646, 0.709, 0.464, 1.000)",
+          "shade": "RGBA(0.812, 0.839, 0.969, 1.000)",
+          "texture": "Assets/Vroid/Gardenerkawaii.vrm",
+          "originalColor": "RGBA(0.646, 0.709, 0.464, 1.000)",
+          "hasPropertyBlock": false
+        },
+        {
+          "name": "N00_010_01_Onepiece_00_CLOTH_01 (Instance)",
+          "color": "RGBA(1.000, 1.000, 1.000, 1.000)",
+          "shade": "RGBA(0.967, 0.965, 0.974, 1.000)",
+          "texture": "Assets/Vroid/Gardenerkawaii.vrm",
+          "originalColor": "RGBA(1.000, 1.000, 1.000, 1.000)",
+          "hasPropertyBlock": false
+        },
+        {
+          "name": "Accessory_RabbitEar_01_CLOTH (Instance)",
+          "color": "RGBA(1.000, 1.000, 1.000, 1.000)",
+          "shade": "RGBA(0.863, 0.931, 0.863, 1.000)",
+          "texture": "Assets/Vroid/Gardenerkawaii.vrm",
+          "originalColor": "RGBA(1.000, 1.000, 1.000, 1.000)",
+          "hasPropertyBlock": false
+        },
+        {
+          "name": "Accessory_RabbitTail_01_CLOTH (Instance)",
+          "color": "RGBA(1.000, 1.000, 1.000, 1.000)",
+          "shade": "RGBA(0.800, 0.933, 0.859, 1.000)",
+          "texture": "Assets/Vroid/Gardenerkawaii.vrm",
+          "originalColor": "RGBA(1.000, 1.000, 1.000, 1.000)",
+          "hasPropertyBlock": false
+        },
+        {
+          "name": "N00_010_01_Onepiece_00_CLOTH_02 (Instance)",
+          "color": "RGBA(1.000, 1.000, 1.000, 1.000)",
+          "shade": "RGBA(0.967, 0.965, 0.974, 1.000)",
+          "texture": "Assets/Vroid/Gardenerkawaii.vrm",
+          "originalColor": "RGBA(1.000, 1.000, 1.000, 1.000)",
+          "hasPropertyBlock": false
+        },
+        {
+          "name": "N00_010_01_Onepiece_00_CLOTH_03 (Instance)",
+          "color": "RGBA(0.514, 0.608, 0.486, 1.000)",
+          "shade": "RGBA(0.967, 0.965, 0.974, 1.000)",
+          "texture": "Assets/Vroid/Gardenerkawaii.vrm",
+          "originalColor": "RGBA(0.514, 0.608, 0.486, 1.000)",
+          "hasPropertyBlock": false
+        },
+        {
+          "name": "N00_007_01_Tops_01_CLOTH_02 (Instance)",
+          "color": "RGBA(0.623, 0.701, 0.334, 1.000)",
+          "shade": "RGBA(0.967, 0.965, 0.974, 1.000)",
+          "texture": "Assets/Vroid/Gardenerkawaii.vrm",
+          "originalColor": "RGBA(0.623, 0.701, 0.334, 1.000)",
+          "hasPropertyBlock": false
+        },
+        {
+          "name": "N00_007_01_Tops_01_CLOTH_03 (Instance)",
+          "color": "RGBA(0.515, 0.610, 0.485, 1.000)",
+          "shade": "RGBA(0.967, 0.965, 0.974, 1.000)",
+          "texture": "Assets/Vroid/Gardenerkawaii.vrm",
+          "originalColor": "RGBA(0.515, 0.610, 0.485, 1.000)",
+          "hasPropertyBlock": false
+        }
+      ]
+    },
+    {
+      "name": "Hair",
+      "root": "Gardener Kawaii - Profesor de jardineria",
+      "materials": []
+    }
+  ],
+  "animations": []
+}

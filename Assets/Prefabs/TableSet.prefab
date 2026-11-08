@@ -171,6 +171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoilPot
       objectReference: {fileID: 0}
+    - target: {fileID: 11400001, guid: 2b0e3862453db9f4195c90628cb75941, type: 3}
+      propertyPath: showNameLabel
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7615259342015169506, guid: 2b0e3862453db9f4195c90628cb75941, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.931

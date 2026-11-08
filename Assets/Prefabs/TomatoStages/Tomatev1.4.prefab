@@ -65,9 +65,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: e8a59af6291c9d245ad257998e4bec61, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9015af540b5b38a46ac87dfda6a4ecf8, type: 2}
+    - target: {fileID: -7511558181221131132, guid: e8a59af6291c9d245ad257998e4bec61, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0a91d69be5950034780d7da172ed56dc, type: 2}
+      objectReference: {fileID: 2100000, guid: 7ce617731fd014f409c07aa70dc80943, type: 2}
+    - target: {fileID: -7511558181221131132, guid: e8a59af6291c9d245ad257998e4bec61, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bb937273b466cf246a1a10e2193a2211, type: 2}
     - target: {fileID: 919132149155446097, guid: e8a59af6291c9d245ad257998e4bec61, type: 3}
       propertyPath: m_Name
       value: Tomatev1.4

@@ -95,3 +95,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GardenSoilSource
   soilSurface: {fileID: 0}
   soilMaterialIndex: -1
+  showNameLabel: 1

@@ -20,6 +20,7 @@ public static class GardenPresentationVerification
             Check("A colliderless visual hides blocked UI and allows recovery", CalendarVisualBlocking, report);
             Check("Calendar ignores grabbable colliders and visuals while retaining fixed obstacles", CalendarMovableProps, report);
             Check("Calendar ignores hands and the nearby headset without losing ray selection", CalendarPlayer, report);
+            Check("An opened calendar stays fixed until its next opening placement", CalendarStaysPlaced, report);
             Check("Animated demonstration and caption move together", AnimatedCaption, report);
             Check("A tall wall selects nearer free space", NearerSpace, report);
             Check("Blocked UI hides and recovers its interaction collider", BlockedPanel, report);
@@ -63,6 +64,45 @@ public static class GardenPresentationVerification
             UnityEngine.Object.DestroyImmediate(fixture);
             Physics.SyncTransforms();
         }
+    }
+
+    private static void CalendarStaysPlaced(Transform fixture, Transform eye)
+    {
+        GardenPresentationPlacement panel = Panel(fixture, eye, out RectTransform content, out BoxCollider target);
+        Vector3 openingPosition = panel.transform.position;
+        Collider table = Solid(fixture, new Vector3(0f, 0.8f, 1.3f), new Vector3(2f, 0.5f, 1f));
+        Physics.SyncTransforms();
+        panel.Configure(content, eye, target, checkFullSightline: true, lockAfterPlacement: true);
+        Assert(panel.transform.position.y > openingPosition.y && Bottom(content) > table.bounds.max.y,
+            "Opening placement must still move the bottom edge clear of the table before locking.");
+        Vector3 settledPosition = panel.transform.position;
+        Quaternion settledRotation = panel.transform.rotation;
+        // A new obstruction would previously trigger a nearer or sideways candidate each frame.
+        Collider wall = Solid(fixture, new Vector3(0f, 1.3f, 0.6f), new Vector3(4f, 4f, 0.1f));
+        for (int i = 0; i < 6; i++)
+        {
+            eye.position += Vector3.right * 0.1f;
+            eye.rotation *= Quaternion.Euler(0f, 10f, 0f);
+            Physics.SyncTransforms();
+            Assert(panel.ResolveNow() && panel.transform.position == settledPosition &&
+                panel.transform.rotation == settledRotation && panel.GetComponent<Canvas>().enabled && target.enabled,
+                "Head movement and new occlusion must not move, rotate or hide an opened calendar.");
+        }
+        UnityEngine.Object.DestroyImmediate(wall.gameObject);
+        // Simulate closing and opening at a new pose, including an initially blocked placement.
+        content.gameObject.SetActive(false);
+        panel.transform.position = openingPosition;
+        panel.ResetReferencePose();
+        Assert(!panel.ResolveNow(), "Hidden content must not be placed.");
+        content.gameObject.SetActive(true);
+        Collider blocker = Solid(fixture, new Vector3(0f, 1.3f, 1.3f), Vector3.one * 8f);
+        Physics.SyncTransforms();
+        Assert(!panel.ResolveNow() && !target.enabled, "A blocked opening must wait for free space.");
+        UnityEngine.Object.DestroyImmediate(table.gameObject);
+        UnityEngine.Object.DestroyImmediate(blocker.gameObject);
+        Physics.SyncTransforms();
+        Assert(panel.ResolveNow() && panel.transform.position == openingPosition && target.enabled,
+            "Reopening must release the old lock and recover once the new position is clear.");
     }
 
     private static void CalendarEdges(Transform fixture, Transform eye)

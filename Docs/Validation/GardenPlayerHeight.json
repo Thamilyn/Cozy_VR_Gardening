@@ -1,14 +1,14 @@
 {
-    "utc": "2026-11-08T19:10:34.5900695Z",
-    "playSeconds": 58.16447448730469,
+    "utc": "2026-11-08T20:54:24.9216429Z",
+    "playSeconds": 169.0519561767578,
     "headsetPresent": true,
-    "headsetWorn": false,
-    "positionTracked": false,
-    "trackingOrigin": "EyeLevel",
+    "headsetWorn": true,
+    "positionTracked": true,
+    "trackingOrigin": "FloorLevel",
     "originPosition": {
-        "x": 0.0,
+        "x": -0.19144181907176972,
         "y": -0.002499997615814209,
-        "z": -3.5999999046325685
+        "z": -2.575160026550293
     },
     "originScale": {
         "x": 1.0,
@@ -26,14 +26,14 @@
         "z": 1.0
     },
     "eyeLocalPosition": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
+        "x": 0.012957930564880371,
+        "y": 1.5053192377090455,
+        "z": -0.14602024853229524
     },
     "eyeWorldPosition": {
-        "x": 0.0,
-        "y": -0.002499997615814209,
-        "z": -3.5999999046325685
+        "x": -0.17848388850688935,
+        "y": 1.502819299697876,
+        "z": -2.7211802005767824
     },
     "headPoseOffset": {
         "x": 0.0,
@@ -45,11 +45,11 @@
     "calibrationOffset": 0.0,
     "hasCharacter": true,
     "capsulePosition": {
-        "x": 0.0,
-        "y": 0.2524999976158142,
-        "z": -3.696499824523926
+        "x": -0.1652037501335144,
+        "y": 0.8231678605079651,
+        "z": -2.812910318374634
     },
-    "capsuleHeight": 0.5,
+    "capsuleHeight": 1.6413357257843018,
     "capsuleFeetY": -0.002500002272427082,
     "grounded": true,
     "groundCollider": "Floor",

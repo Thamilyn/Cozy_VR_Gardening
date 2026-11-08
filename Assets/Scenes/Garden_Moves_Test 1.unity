@@ -4801,7 +4801,7 @@ MonoBehaviour:
     icon: {fileID: -3840449707809081413, guid: 086353fe901150541b90133217766b5b, type: 3}
     color: {r: 0.95, g: 0.8, b: 0.38, a: 1}
   - day: 80
-    displayName: Green tomatoes
+    displayName: Ripening tomatoes
     icon: {fileID: -4340009195191301107, guid: 45ab05a037b571b4991498e588b03c2f, type: 3}
     color: {r: 0.42, g: 0.72, b: 0.3, a: 1}
   - day: 110

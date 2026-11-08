@@ -2535,7 +2535,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Green tomatoes
+  m_Text: Ripening tomatoes
 --- !u!1 &8568790549154537103
 GameObject:
   m_ObjectHideFlags: 0
