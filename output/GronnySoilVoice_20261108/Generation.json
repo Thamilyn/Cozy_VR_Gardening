@@ -1,0 +1,38 @@
+{
+  "model": "KittenML/kitten-tts-2",
+  "revision": "v2",
+  "voice": "Kiki",
+  "preset": "expressive",
+  "expression": "tender",
+  "temperature": 0.9,
+  "pitch_and_speed_processing": false,
+  "recordings": [
+    {
+      "id": "soil_cover_seed",
+      "text": "Great job! Now use your shovel to cover the seed with soil. Hold the loaded blade above the pot, then gently tilt it and hold briefly to pour.",
+      "seed": 821,
+      "sample_rate": 24000,
+      "seconds": 9.4,
+      "peak": 0.9800000190734863,
+      "sha256": "6BE67595EDB1AB6425B611832575698553FCD844BF2AA2F759E71866BD7A33FD"
+    },
+    {
+      "id": "soil_scoop_first",
+      "text": "Great job! Scoop up some soil with your shovel. Hold the loaded blade above the pot, then gently tilt it and hold briefly to cover the seed.",
+      "seed": 822,
+      "sample_rate": 24000,
+      "seconds": 8.92,
+      "peak": 0.7236784100532532,
+      "sha256": "52292AA4F4D40BD0D119A29C5BBF7E779BCCEBB8C8D5248E64EB6641E3F8AC5D"
+    },
+    {
+      "id": "soil_seed_covered",
+      "text": "Perfect! Your seed is all covered up.",
+      "seed": 823,
+      "sample_rate": 24000,
+      "seconds": 3.16,
+      "peak": 0.6952528357505798,
+      "sha256": "3D62DF5256E1B135E2EE4EE2FB2CDAB4F372461CFF16FA0537BEE847CDE14FBE"
+    }
+  ]
+}

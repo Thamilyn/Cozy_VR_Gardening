@@ -1,0 +1,14 @@
+PASS: Validation runs in paused Play
+PASS: Only the two configured scene pots retain growth controllers
+PASS: PotSmall: real planting surface and soil remain assigned
+PASS: PotSmall: all seven growth models remain assigned
+PASS: PotSmall: initial soil-bed visual was created successfully in Awake
+PASS: PotSmall: real planting surface and soil remain assigned
+PASS: PotSmall: all seven growth models remain assigned
+PASS: PotSmall: initial soil-bed visual was created successfully in Awake
+PASS: The real tomato planting pot retains its growth controller
+PASS: Decorative pot retains its models and collider without an invalid growth controller
+PASS: Shovel events reference the existing Meta HandGrabInteractable
+PASS: Meta wrapper completed Awake and Start with a valid interactable view
+PASS: Hand and controller grabs retain the shovel body while menu/tutorial locks may disable interaction
+PASS: Shovel completes its gardening initialization

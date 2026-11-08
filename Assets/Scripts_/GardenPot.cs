@@ -60,15 +60,29 @@ public sealed class GardenPot : MonoBehaviour
         return height >= -0.015f && height <= 0.08f;
     }
 
-    public bool CanReceiveSoilAt(Vector3 worldPoint)
+    public bool CanReceiveSoilAt(Vector3 worldPoint, float bladeRadius = 0f)
     {
-        if (!isActiveAndEnabled || !ContainsSoilPoint(worldPoint)) return false;
+        if (!isActiveAndEnabled) return false;
+        ResolveSurface();
+        if (substrateSurface == null || substrateSurface.sharedMesh == null) return false;
+        if (Vector3.Dot(substrateSurface.transform.up, Vector3.up) < 0.5f) return false;
         Bounds bounds = substrateSurface.sharedMesh.bounds;
+        Vector3 point = substrateSurface.transform.InverseTransformPoint(worldPoint);
+        if (point.x < bounds.min.x || point.x > bounds.max.x ||
+            point.z < bounds.min.z || point.z > bounds.max.z)
+        {
+            Vector3 closestPoint = new(Mathf.Clamp(point.x, bounds.min.x, bounds.max.x),
+                point.y, Mathf.Clamp(point.z, bounds.min.z, bounds.max.z));
+            // Use metres in world space so the blade's width works with scaled pot meshes.
+            float radius = Mathf.Max(0f, bladeRadius);
+            if ((worldPoint - substrateSurface.transform.TransformPoint(closestPoint)).sqrMagnitude > radius * radius)
+                return false;
+        }
         Vector3 surfaceTop = substrateSurface.transform.TransformPoint(
             new Vector3(bounds.center.x, bounds.max.y, bounds.center.z));
         float height = Vector3.Dot(worldPoint - surfaceTop, substrateSurface.transform.up);
         // Pour above the opening, without pushing the blade into the pot's collider.
-        return height >= 0.02f && height <= 0.25f;
+        return height >= 0.005f && height <= 0.35f;
     }
 
     public void SetSoilWaterMillilitres(float millilitres)

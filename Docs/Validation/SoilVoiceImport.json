@@ -1,0 +1,57 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "Docs/Validation/ConnectSoilVoice.cs",
+      "entry": "ConnectSoilVoice.Main"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 48,
+      "executeMs": 746,
+      "assemblyName": "PipelineRunScript_ConnectSoilVoice_a1494d64151f431a9276781cb0528a2d",
+      "success": true,
+      "result": {
+        "connected": [
+          {
+            "id": "soil_cover_seed",
+            "path": "Assets/Audio/dialogues_cozy_gardening/soil_cover_seed.wav",
+            "guid": "043c0abd671324945998e31a0f608a2c",
+            "seconds": 9.4,
+            "sampleRate": 24000,
+            "channels": 1,
+            "sha256": "6BE67595EDB1AB6425B611832575698553FCD844BF2AA2F759E71866BD7A33FD"
+          },
+          {
+            "id": "soil_scoop_first",
+            "path": "Assets/Audio/dialogues_cozy_gardening/soil_scoop_first.wav",
+            "guid": "99f1e8e78224214489464898cb4dd71f",
+            "seconds": 8.92,
+            "sampleRate": 24000,
+            "channels": 1,
+            "sha256": "52292AA4F4D40BD0D119A29C5BBF7E779BCCEBB8C8D5248E64EB6641E3F8AC5D"
+          },
+          {
+            "id": "soil_seed_covered",
+            "path": "Assets/Audio/dialogues_cozy_gardening/soil_seed_covered.wav",
+            "guid": "f60ccdfec72d24a46ac552bd303bbb8c",
+            "seconds": 3.16,
+            "sampleRate": 24000,
+            "channels": 1,
+            "sha256": "3D62DF5256E1B135E2EE4EE2FB2CDAB4F372461CFF16FA0537BEE847CDE14FBE"
+          }
+        ],
+        "total": 3
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

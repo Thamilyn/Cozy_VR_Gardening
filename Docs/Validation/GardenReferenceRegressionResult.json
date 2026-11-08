@@ -1,0 +1,45 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "Docs/Validation/GardenReferenceRegression.cs",
+      "entry": "GardenReferenceRegression.Main"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 38,
+      "executeMs": 5,
+      "assemblyName": "PipelineRunScript_GardenReferenceRegression_8b203482684845c599979a07c86dacf5",
+      "success": true,
+      "result": {
+        "passed": 14,
+        "checks": [
+          "PASS: Validation runs in paused Play",
+          "PASS: Only the two configured scene pots retain growth controllers",
+          "PASS: PotSmall: real planting surface and soil remain assigned",
+          "PASS: PotSmall: all seven growth models remain assigned",
+          "PASS: PotSmall: initial soil-bed visual was created successfully in Awake",
+          "PASS: PotSmall: real planting surface and soil remain assigned",
+          "PASS: PotSmall: all seven growth models remain assigned",
+          "PASS: PotSmall: initial soil-bed visual was created successfully in Awake",
+          "PASS: The real tomato planting pot retains its growth controller",
+          "PASS: Decorative pot retains its models and collider without an invalid growth controller",
+          "PASS: Shovel events reference the existing Meta HandGrabInteractable",
+          "PASS: Meta wrapper completed Awake and Start with a valid interactable view",
+          "PASS: Hand and controller grabs retain the shovel body while menu/tutorial locks may disable interaction",
+          "PASS: Shovel completes its gardening initialization"
+        ],
+        "physicalQuestInputTested": false
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

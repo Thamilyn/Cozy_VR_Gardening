@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "Docs/Validation/SoilAnimationRegression.cs",
+      "entry": "SoilAnimationRegression.Main",
+      "timeout_ms": "45000"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 1209,
+      "executeMs": 250,
+      "assemblyName": "PipelineRunScript_SoilAnimationRegression_306f57e3fec74de186cf2d35c8312389",
+      "success": true,
+      "result": "PASS: Paused Play fixture\nPASS: Previous serialized demo values preserved\nPASS: Only actionable soil cues animate\nPASS: Hands: scoop guide appears\nPASS: Hands: copied props cannot collect soil or register grabs\nPASS: Hands: guide has no physical collisions\nPASS: Hands: copied pot ground uses brown soil instead of the red placeholder\nPASS: Hands: hidden original pot meshes remain hidden\nPASS: Hands: scoop begins with an empty blade\nPASS: Hands: caption uses the matching grab input\nPASS: Hands: short stroke visibly loads the blade\nPASS: Hands: Meta pinch is aligned with the shovel handle\nPASS: Hands: hand and loaded blade carry the soil across to the pot\nPASS: Hands: tipping shows falling soil\nPASS: Hands: displayed tilt meets the real shovel threshold\nPASS: Hands: one scoop empties and covers the example seed\nPASS: Hands: loaded guide starts over the pot without another soil supply\nPASS: Hands: silent practice holds poses for a readable cycle\nPASS: Hands: loaded guide finishes the transfer\nPASS: Hands: changing mode removes the previous guide\nPASS: Controllers: scoop guide appears\nPASS: Controllers: copied props cannot collect soil or register grabs\nPASS: Controllers: guide has no physical collisions\nPASS: Controllers: copied pot ground uses brown soil instead of the red placeholder\nPASS: Controllers: hidden original pot meshes remain hidden\nPASS: Controllers: scoop begins with an empty blade\nPASS: Controllers: caption uses the matching grab input\nPASS: Controllers: short stroke visibly loads the blade\nPASS: Controllers: hand and loaded blade carry the soil across to the pot\nPASS: Controllers: tipping shows falling soil\nPASS: Controllers: displayed tilt meets the real shovel threshold\nPASS: Controllers: one scoop empties and covers the example seed\nPASS: Controllers: loaded guide starts over the pot without another soil supply\nPASS: Controllers: silent practice holds poses for a readable cycle\nPASS: Controllers: loaded guide finishes the transfer\nPASS: Controllers: changing mode removes the previous guide\nPASS: Scoop animation persists without repeating speech\nPASS: Loading the real shovel can replace the scoop guide immediately\nPASS: Coverage removes the soil guide\nPASS: Menu suspension hides the guide"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

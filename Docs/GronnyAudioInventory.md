@@ -82,3 +82,6 @@ Archivo original | Duración (s) | Modo | Demostración | SHA-256
 `Assets/Audio/dialogues_cozy_gardening/harvest_cut_stem.wav` | 12.04 | Unknown | CutStem | `64774CB7C433CB346B1A1493935BF37EDBD2B94BC2BF75310C9FEB7BAC75CEF1`
 `Assets/Audio/dialogues_cozy_gardening/harvest_stem_cut.wav` | 3.24 | Unknown | PickTomato | `6BC7493B6031F5CE7B59F2C957B9CA0DC8224AFC5DD9F5BD01EE080F24CCF76A`
 `Assets/Audio/dialogues_cozy_gardening/harvest_picked.wav` | 3.08 | Unknown | None | `3A58CE64E388A4600C5E2BF2585BDBF0EFF2D99B4AA169A7CC732C8DB694D2E5`
+`Assets/Audio/dialogues_cozy_gardening/soil_cover_seed.wav` | 9.40 | Unknown | None | `6BE67595EDB1AB6425B611832575698553FCD844BF2AA2F759E71866BD7A33FD`
+`Assets/Audio/dialogues_cozy_gardening/soil_scoop_first.wav` | 8.92 | Unknown | None | `52292AA4F4D40BD0D119A29C5BBF7E779BCCEBB8C8D5248E64EB6641E3F8AC5D`
+`Assets/Audio/dialogues_cozy_gardening/soil_seed_covered.wav` | 3.16 | Unknown | None | `3D62DF5256E1B135E2EE4EE2FB2CDAB4F372461CFF16FA0537BEE847CDE14FBE`

@@ -123,7 +123,17 @@ grab.ProcessPointerEvent(new Oculus.Interaction.PointerEvent(pointer, Oculus.Int
 Check(!state.soilCovered && shovel.HasSoil, "Level loaded blade over the pot does not complete coverage");
 int covered = 0;
 seeds.SeedCovered += _ => covered++;
-var tiltedPose = PoseFor(overPot, UnityEngine.Quaternion.Euler(0f, 0f, 60f));
+// Leaving after the level pose must not force another level pose to empty the blade.
+var awayPose = PoseFor(overPot + UnityEngine.Vector3.up * 0.5f, UnityEngine.Quaternion.Euler(0f, 0f, 60f));
+grab.ProcessPointerEvent(new Oculus.Interaction.PointerEvent(pointer, Oculus.Interaction.PointerEventType.Move, awayPose)); Tick(shovel);
+Check(!state.soilCovered && shovel.HasSoil, "Tilt away from the pot preserves the load");
+var surface = pot.GetComponentInChildren<GardenSoil>(true).GetComponent<UnityEngine.MeshFilter>();
+var surfaceBounds = surface.sharedMesh.bounds;
+var edgePoint = surface.transform.TransformPoint(new UnityEngine.Vector3(surfaceBounds.max.x, surfaceBounds.max.y, surfaceBounds.center.z));
+var overlappingPoint = edgePoint + surface.transform.right * 0.025f + surface.transform.up * 0.1f;
+Check(!pot.CanReceiveSoilAt(overlappingPoint) && pot.CanReceiveSoilAt(overlappingPoint, 0.05f),
+    "Loaded blade overlaps the pot while its centre is just outside the opening");
+var tiltedPose = PoseFor(overlappingPoint, UnityEngine.Quaternion.Euler(0f, 0f, 60f));
 grab.ProcessPointerEvent(new Oculus.Interaction.PointerEvent(pointer, Oculus.Interaction.PointerEventType.Move, tiltedPose)); Tick(shovel);
 var started = UnityEditor.EditorApplication.timeSinceStartup;
 System.IO.File.WriteAllText("Docs/Validation/ScoopRuntimeVerification.txt", string.Join("\n", checks) + "\nWaiting for the real pour hold interval.\n");
@@ -132,7 +142,7 @@ finish = () => {
     if (UnityEditor.EditorApplication.timeSinceStartup - started < 1.2) return;
     UnityEditor.EditorApplication.update -= finish;
     try {
-        Check(state.soilCovered && !shovel.HasSoil, "Timed tilt consumes the scoop and covers the planted seed");
+        Check(state.soilCovered && !shovel.HasSoil, "Entering already tilted with blade overlap consumes the scoop after the hold interval");
         Check(covered == 1 && !seeds.TryCoverSeed(pot), "Coverage is reported exactly once");
         var seedRenderer = (UnityEngine.Renderer)Field(seed, "seedRenderer");
         Check(!seedRenderer.enabled, "Covered seed is hidden");

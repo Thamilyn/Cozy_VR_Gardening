@@ -8,26 +8,28 @@ Se reutilizan `GardenShovel`, `GardenSoilSource`, los agarres de manos/mandos de
 
 1. Soltar correctamente la semilla registra la plantación con `CalendarSystem.PlantSave.soilCovered = false` y activa el paso 4/7 del tutorial. La semilla permanece visible.
 2. Con la pala sostenida, hacer una pasada corta sobre la abertura del SoilPot muestra una carga de tierra. Basta un recorrido de 1,5 cm en la zona de recogida; no hay que hundir la hoja en el recipiente ni pulsar otro botón. Una pala vacía no deposita tierra.
-3. Llevar la hoja cargada **nivelada** sobre la abertura de la maceta y después inclinarla al menos 55 grados durante 0,35 segundos. El punto de la hoja debe permanecer dentro de la huella de la superficie, entre 2 y 25 cm por encima de ella. No hace falta tocar ni penetrar la maceta, sacudir la pala ni pulsar otro botón.
-4. El gesto solo se arma sobre una maceta activa con una semilla registrada y pendiente de cubrir. Entrar ya inclinado, pasar por el lateral, tocar la maceta, usar una pala vacía o dejar caer la pala no completa el paso. Salir de la zona, cambiar de maceta, soltar/cancelar el agarre, desactivar la pala o abrir el menú reinicia el gesto; conserva la carga.
+3. Llevar la hoja cargada sobre la abertura de la maceta e inclinarla al menos 55 grados durante 0,35 segundos. Puede entrar ya inclinada: no se exige una pose horizontal previa. La detección incluye el radio de hoja de 5 cm alrededor del punto de recogida, de modo que el centro puede quedar ligeramente fuera mientras la hoja solape la abertura. El punto debe estar entre 0,5 y 35 cm por encima de la superficie. No hace falta tocar ni penetrar la maceta, sacudir la pala ni pulsar otro botón.
+4. El gesto solo cuenta sobre una maceta activa con una semilla registrada y pendiente de cubrir. Pasar completamente por el lateral, introducir la hoja bajo la tierra, usar una pala vacía o dejar caer la pala no completa el paso. Salir de la zona, cambiar de maceta, soltar/cancelar el agarre, desactivar la pala o abrir el menú reinicia el tiempo del gesto; conserva la carga. Se puede reanudar entrando ya inclinado y manteniendo de nuevo el intervalo completo.
 5. Una acción válida consume la carga una sola vez, oculta la semilla bajo la tierra base y registra `soilCovered = true`. La tierra permanece visible antes de plantar, mientras la semilla está descubierta y en las siguientes fases. No se cambian las colisiones ni las referencias de los modelos.
 6. El tutorial permite regar después de cubrir. `SeedsController` también rechaza agua y bloquea crecimiento/avance sin cobertura cuando el tutorial está desactivado. El indicador de agua aparece después de cubrir. Los objetivos, drenaje, práctica, calendario, fases y cosecha mantienen sus reglas actuales.
 
 La cobertura pertenece a la sesión, igual que los datos existentes del calendario. Reiniciar/reintentar recarga la escena y vuelve a exigir plantar y cubrir. No se ha añadido la mecánica de cortar el tomate.
 
-## Inspector y grabaciones pendientes
+## Inspector y voces de Gronny
 
-No se encontraron clips ni entradas de catálogo para estas instrucciones en los audios del proyecto o sus guiones/catalogación existentes. **Las tres voces nuevas siguen pendientes de grabación.** Los textos y campos preparados no son grabaciones terminadas.
+Las tres voces se generaron con Kiki y se asignaron al catálogo el 8 de noviembre de 2026. Están en `Assets/Audio/dialogues_cozy_gardening/`. La transcripción automática coincide con el guion de los tres clips; detalles e informes en `Docs/GronnySoilVoice.md`. Quedan pendientes la escucha humana y la comprobación del flujo real en Quest 3.
 
-En `Assets/Resources/GronnyAudio/Tutorial.asset`, desplegar `Cues`, localizar cada `id` y asignar la grabación correspondiente al campo **Clip**. Mantener `Mode = Unknown`, `Demo = None`, `Priority = 10`, `Cooldown = 0`; la prioridad conserva el reconocimiento de cobertura por delante de las instrucciones normales de riego, sin interrumpir una frase en curso. Se puede guardar cada WAV importado en `Assets/Audio/dialogues_cozy_gardening/` con el nombre de su ID.
+Las voces de recogida y vertido ya tienen guías animadas para manos y mandos: `Docs/GronnySoilAnimations.md`. Se usan copias visuales de la pala y las macetas, sin interacción ni avance automático del juego.
 
-| ID / nombre sugerido de WAV | Texto en inglés para grabar |
+En `Assets/Resources/GronnyAudio/Tutorial.asset`, los campos **Clip** ya están asignados. Se conservan `Mode = Unknown`, `Priority = 10`, `Cooldown = 0`. Las instrucciones usan `Demo = SoilScoop` y `SoilPour`; la felicitación conserva `None`. La prioridad conserva el reconocimiento de cobertura por delante de las instrucciones normales de riego, sin interrumpir una frase en curso.
+
+| ID / nombre del WAV | Texto grabado en inglés |
 | --- | --- |
-| `soil_cover_seed` | Great job! Now use your shovel to cover the seed with soil. Hold the loaded blade level over the pot, then gently tilt it to pour. |
-| `soil_scoop_first` | Great job! Scoop up some soil with your shovel. Hold the loaded blade level over the pot, then gently tilt it to cover the seed. |
+| `soil_cover_seed` | Great job! Now use your shovel to cover the seed with soil. Hold the loaded blade above the pot, then gently tilt it and hold briefly to pour. |
+| `soil_scoop_first` | Great job! Scoop up some soil with your shovel. Hold the loaded blade above the pot, then gently tilt it and hold briefly to cover the seed. |
 | `soil_seed_covered` | Perfect! Your seed is all covered up. |
 
-Interpretación: el Gronny cercano, tranquilo y alentador de las tomas existentes, con una pausa natural tras “Great job!” y “Perfect!”. La segunda frase sustituye a la primera si todavía hace falta cargar la pala; no se encadenan ambas instrucciones. La indicación de nivelar e inclinar corresponde al gesto real implementado.
+Interpretación: el Gronny cercano, tranquilo y alentador de las tomas existentes, con una pausa natural tras “Great job!” y “Perfect!”. La segunda frase sustituye a la primera si todavía hace falta cargar la pala; no se encadenan ambas instrucciones. La indicación de inclinar y mantener brevemente corresponde al gesto real implementado.
 
 La voz utiliza `GronnyVoicePlayer`: una sola fuente, solicitudes con relevancia, deduplicación y finalización de la frase actual antes de la siguiente. Al cubrir se descartan instrucciones pendientes de plantación/cobertura y se encola el reconocimiento antes del riego. Las instrucciones que ya no corresponden se retiran de la cola. Los clips nulos se omiten y generan un aviso por ID y sesión del tutorial; la mecánica y el panel siguen funcionando sin simular una voz ni bloquear al jugador esperando un audio inexistente.
 
@@ -51,8 +53,8 @@ Pendiente, tras autorizar la validación en Unity y después con manos y mandos 
 
 1. Verificar en Quest que la tierra base se ve al inicio y al plantar, la semilla desaparece al cubrir y la tierra permanece visible en todas las fases. La compilación y el flujo hasta el primer riego ya se comprobaron en Unity con eventos sintéticos.
 2. Confirmar la alineación de carga y normal de la hoja, alcance cómodo desde la mesa, lectura del panel y margen de altura de vertido. Probar sin levantar el brazo por encima del hombro ni hacer movimientos bruscos.
-3. Rechazar pala vacía, maceta vacía, lateral/fondo, entrada ya inclinada, contacto fugaz y depósito repetido. Con la pala nivelada, acercarse sobre la abertura, inclinar y mantener brevemente: una sola cobertura y consumo de carga.
-4. Interrumpir el gesto saliendo de la zona, soltando la pala o pausando. Reanudar requiere volver a nivelar sobre la maceta. Confirmar la recuperación existente de una pala caída y probar pérdida/recuperación de tracking.
+3. Rechazar pala vacía, maceta vacía, lateral/fondo, contacto fugaz y depósito repetido. Aceptar tanto acercarse nivelado y después inclinar como entrar ya inclinado y mantener brevemente: una sola cobertura y consumo de carga. Probar también con el centro de la hoja 2,5 cm fuera del borde, manteniendo el solape sobre la abertura.
+4. Interrumpir el gesto saliendo de la zona, soltando la pala o pausando. Reanudar requiere mantener de nuevo el intervalo completo de inclinación sobre la maceta. Confirmar la recuperación existente de una pala caída y probar pérdida/recuperación de tracking.
 5. Intentar agua/avance antes de cubrir, también sin tutorial. Después cubrir y recorrer riego, drenaje, calendario y crecimiento hasta las fases posteriores.
 6. Con las grabaciones asignadas, probar la instrucción con pala vacía y ya cargada, realización rápida del paso, pausa durante voz, cambio entre manos/mandos y reconocimiento de cobertura seguido de riego: sin solapamientos ni repeticiones. Repetir sin clips: avisos limitados, panel correcto y flujo utilizable.
 7. Reiniciar/reintentar: estado limpio, semilla visible al plantar y cobertura requerida otra vez. Revisar en Android Quest 3 el shader existente que oculta/muestra la tierra.
@@ -81,3 +83,11 @@ Validación ejecutada:
 - Recompilación final: cero errores y cero advertencias de compilación. El CLI informa de que Pipeline usa nombres antiguos de comandos; no se actualizó el paquete.
 
 Durante la validación hubo cierres nativos de Unity. Las comprobaciones anteriores terminaron correctamente antes del último intento de salir de Play. El usuario ha pedido detener la validación automática y realizará las siguientes pruebas manualmente; no se afirma que el Editor haya quedado estable tras el cierre. La inspección se realizó en el Editor conectado; FFmpeg no estaba disponible y no se extrajeron fotogramas del vídeo adjunto. Queda pendiente comprobar en Meta Quest 3 la sensación con manos/mandos, pérdida de tracking y las grabaciones de voz aún sin asignar.
+
+## Corrección del vertido — 8 de noviembre de 2026
+
+La revisión del código identificó que el vertido exigía primero una normal de hoja casi vertical (`upright >= 0.85`) dentro de la huella exacta de la maceta. Entrar ya inclinado o salir ligeramente de esa huella al girar reiniciaba el armado y podía mantener la carga indefinidamente. Se eliminó ese requisito previo; se conservan los 55 grados y los 0,35 segundos continuos, con reinicio del tiempo al salir, cambiar de maceta, soltar o pausar. La detección ahora cuenta el radio de hoja en metros y amplía el margen vertical de 2–25 cm a 0,5–35 cm. Las reglas de riego no cambian. Los textos del panel y los dos textos de voz se ajustaron al nuevo gesto; después se generaron y asignaron las tres voces, documentadas en `Docs/GronnySoilVoice.md`.
+
+Se prepararon comprobaciones geométricas en `GardenCalendarVerification.Verify` y se adaptó `Docs/Validation/VerifyScoopRuntime.cs` para reproducir la entrada ya inclinada después de abandonar la zona y el solape del borde. **Estas comprobaciones no se han ejecutado para esta corrección.** Los resultados PASS anteriores corresponden a la implementación previa.
+
+Validación de esta corrección: revisión estática de detección, temporización, consumo único y reinicios. Unity CLI 1.0.0-beta.17 detectó el proyecto con Unity 6000.3.23f1, pero `unity status --format json` devolvió `STATUS_ALL_UNREACHABLE`. No se inició el Editor, no se recompiló ni se ejecutaron pruebas. Tampoco se reprodujo la grabación adjunta con una herramienta externa. Quedan pendientes la compilación y la comprobación del gesto real en Unity y Meta Quest 3.

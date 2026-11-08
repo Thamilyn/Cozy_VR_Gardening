@@ -28,11 +28,14 @@ public sealed class GardenControlDemonstration : MonoBehaviour
     private Quaternion[] thumbBaseRotations;
     private float[] handStepTimes;
     private GardenHarvestDemonstration harvest;
+    private GardenSoilDemonstration soil;
     private Transform harvestThumbTip;
     private Transform harvestIndexTip;
 
     private bool IsHarvest => cue != null &&
         (cue.demo == GardenControlDemo.CutStem || cue.demo == GardenControlDemo.PickTomato);
+    private bool IsSoil => cue != null &&
+        (cue.demo == GardenControlDemo.SoilScoop || cue.demo == GardenControlDemo.SoilPour);
 
     public bool UsesHandTeachingTiming => handStepTimes != null;
     public float CycleDurationSeconds => handStepTimes != null
@@ -66,7 +69,14 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         }
         if (viewer == null) return;
         cue = instruction;
-        if (((mode == GardenInputMode.Hands && cue.mode == GardenInputMode.Hands) || IsHarvest) &&
+        if (IsSoil && (catalogue.shovelVisual == null || catalogue.soilPotVisual == null ||
+            (cue.demo == GardenControlDemo.SoilScoop && catalogue.soilSourceVisual == null)))
+        {
+            Debug.LogWarning("Assign the existing Shovel, SoilPot and planting pot visuals to Gronny's soil demonstration.", this);
+            Hide();
+            return;
+        }
+        if (((mode == GardenInputMode.Hands && cue.mode == GardenInputMode.Hands) || IsHarvest || IsSoil) &&
             cue.steps != null && cue.steps.Length > 0)
         {
             // Keep short replacement WAVs from compressing each teaching pose into a flash.
@@ -90,7 +100,7 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         {
             // Use the scene's clear demonstration area, independent of the player's pose or watering.
             anchor.transform.SetPositionAndRotation(gardeningAnchor.position, gardeningAnchor.rotation);
-            anchor.transform.localScale = Vector3.one * 1.5f;
+            anchor.transform.localScale = Vector3.one * (IsSoil ? 1.1f : 1.5f);
         }
         else
         {
@@ -157,7 +167,8 @@ public sealed class GardenControlDemonstration : MonoBehaviour
             pressClip = cue.controllerAnimation != null ? cue.controllerAnimation : cue.demo switch
             {
                 GardenControlDemo.Move => catalogue.controllerStick,
-                GardenControlDemo.Grab or GardenControlDemo.WateringGrab or GardenControlDemo.PickTomato => catalogue.controllerGrip,
+                GardenControlDemo.Grab or GardenControlDemo.WateringGrab or GardenControlDemo.PickTomato or
+                    GardenControlDemo.SoilScoop or GardenControlDemo.SoilPour => catalogue.controllerGrip,
                 GardenControlDemo.Calendar => catalogue.controllerY,
                 GardenControlDemo.CalendarSelect or GardenControlDemo.CutStem => catalogue.controllerTrigger,
                 _ => null
@@ -175,7 +186,7 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         caption.GetComponent<MeshRenderer>().sharedMaterial = caption.font.material;
         caption.anchor = TextAnchor.MiddleCenter;
         caption.alignment = TextAlignment.Center;
-        caption.characterSize = IsHarvest ? 0.006f : 0.008f;
+        caption.characterSize = IsHarvest || IsSoil ? 0.006f : 0.008f;
         caption.fontSize = fixedGardeningPosition ? 64 : 48;
         caption.color = Color.white;
         if (cue.demo == GardenControlDemo.CalendarSelect) CreatePointer();
@@ -183,6 +194,18 @@ public sealed class GardenControlDemonstration : MonoBehaviour
         if (IsHarvest)
             harvest = new GardenHarvestDemonstration(cue.demo, visuals, motion,
                 catalogue.pruningShearsVisual, visualMaterial);
+        if (IsSoil)
+        {
+            soil = new GardenSoilDemonstration(cue.demo, visuals, motion, catalogue, visualMaterial);
+            if (mode == GardenInputMode.Hands && harvestThumbTip != null && harvestIndexTip != null)
+            {
+                // Align the real Meta pinch pose with the copied handle, independent
+                // of the FBX's wrist pivot and centimetre-to-metre conversion.
+                for (int j = 0; j < joints.Length; j++) joints[j].localRotation = poses[(int)GardenDemoPose.Pinch][j];
+                Vector3 grip = (harvestThumbTip.position + harvestIndexTip.position) * 0.5f;
+                model.transform.position += soil.GripPoint - grip;
+            }
+        }
         foreach (Transform child in anchor.GetComponentsInChildren<Transform>(true)) child.gameObject.layer = 2;
         anchor.SetActive(true);
         Tick(0f);
@@ -248,7 +271,10 @@ public sealed class GardenControlDemonstration : MonoBehaviour
             motion.localPosition = position;
             motion.localRotation = MirrorRotation(motion.localRotation);
         }
-        caption.text = ReadableCaption(step.label, IsHarvest ? 22 : 26);
+        caption.text = ReadableCaption(step.label, IsHarvest || IsSoil ? 22 : 26);
+        if (cue.demo == GardenControlDemo.SoilScoop && index == 0)
+            caption.text = ReadableCaption(mode == GardenInputMode.Hands
+                ? "Pinch and hold the shovel" : "Hold Grip on the shovel", 22);
         if (cue.demo == GardenControlDemo.CutStem && index == 2)
             caption.text = ReadableCaption(mode == GardenInputMode.Hands ? "Close your hand to cut" : "Squeeze Trigger to cut", 22);
         if (cue.demo == GardenControlDemo.PickTomato && index == 1)
@@ -278,6 +304,7 @@ public sealed class GardenControlDemonstration : MonoBehaviour
             pointer.SetPosition(1, motion.localPosition + Vector3.forward * 0.35f);
         }
         if (buttonHighlight != null) buttonHighlight.SetActive(step.press > 0f);
+        soil?.Tick(index, Mathf.Max(0f, audioSeconds - StepTime(index, handClock)), blend);
         if (harvest != null)
         {
             Vector3 grip = motion.localPosition + new Vector3(0.06f, 0.02f, 0f);
@@ -414,6 +441,8 @@ public sealed class GardenControlDemonstration : MonoBehaviour
 
     public void Hide()
     {
+        soil?.Dispose();
+        soil = null;
         harvest?.Dispose();
         harvest = null;
         if (anchor != null) { anchor.SetActive(false); Destroy(anchor); }

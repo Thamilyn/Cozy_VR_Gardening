@@ -1,0 +1,43 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "console",
+    "parameters": {
+      "level": "error",
+      "tail": "30",
+      "since": "49511",
+      "since_session": "bfb6970d5cd348c8b7a1d815292514d1"
+    },
+    "result": {
+      "entries": [],
+      "cursor": 52068,
+      "session": "bfb6970d5cd348c8b7a1d815292514d1",
+      "returned": 0,
+      "dropped": true,
+      "reset": false,
+      "counts": {
+        "error": 0,
+        "warn": 998,
+        "log": 1002
+      },
+      "groundTruth": {
+        "sampledUtc": "2026-11-08T03:31:37.3286088Z",
+        "ageMs": 79,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 1,
+        "consoleWarnings": 1261,
+        "consoleLogs": 1296,
+        "seeded": true
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

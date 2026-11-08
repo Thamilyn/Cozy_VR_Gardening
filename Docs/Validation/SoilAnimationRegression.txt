@@ -1,0 +1,40 @@
+PASS: Paused Play fixture
+PASS: Previous serialized demo values preserved
+PASS: Only actionable soil cues animate
+PASS: Hands: scoop guide appears
+PASS: Hands: copied props cannot collect soil or register grabs
+PASS: Hands: guide has no physical collisions
+PASS: Hands: copied pot ground uses brown soil instead of the red placeholder
+PASS: Hands: hidden original pot meshes remain hidden
+PASS: Hands: scoop begins with an empty blade
+PASS: Hands: caption uses the matching grab input
+PASS: Hands: short stroke visibly loads the blade
+PASS: Hands: Meta pinch is aligned with the shovel handle
+PASS: Hands: hand and loaded blade carry the soil across to the pot
+PASS: Hands: tipping shows falling soil
+PASS: Hands: displayed tilt meets the real shovel threshold
+PASS: Hands: one scoop empties and covers the example seed
+PASS: Hands: loaded guide starts over the pot without another soil supply
+PASS: Hands: silent practice holds poses for a readable cycle
+PASS: Hands: loaded guide finishes the transfer
+PASS: Hands: changing mode removes the previous guide
+PASS: Controllers: scoop guide appears
+PASS: Controllers: copied props cannot collect soil or register grabs
+PASS: Controllers: guide has no physical collisions
+PASS: Controllers: copied pot ground uses brown soil instead of the red placeholder
+PASS: Controllers: hidden original pot meshes remain hidden
+PASS: Controllers: scoop begins with an empty blade
+PASS: Controllers: caption uses the matching grab input
+PASS: Controllers: short stroke visibly loads the blade
+PASS: Controllers: hand and loaded blade carry the soil across to the pot
+PASS: Controllers: tipping shows falling soil
+PASS: Controllers: displayed tilt meets the real shovel threshold
+PASS: Controllers: one scoop empties and covers the example seed
+PASS: Controllers: loaded guide starts over the pot without another soil supply
+PASS: Controllers: silent practice holds poses for a readable cycle
+PASS: Controllers: loaded guide finishes the transfer
+PASS: Controllers: changing mode removes the previous guide
+PASS: Scoop animation persists without repeating speech
+PASS: Loading the real shovel can replace the scoop guide immediately
+PASS: Coverage removes the soil guide
+PASS: Menu suspension hides the guide

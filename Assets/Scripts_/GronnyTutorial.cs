@@ -104,8 +104,8 @@ public sealed class GronnyTutorial : MonoBehaviour
                 "Look for Tomato seed. Gronny will explain how to pick it up."),
             GuideStep.Soil => ("Step 4/7: Cover the seed with soil.",
                 HasLoadedShovel
-                    ? "Hold the loaded blade level above the pot, then gently tilt it to pour."
-                    : "Grab Shovel (pinch/Grip). Make a short pass over the soil in SoilPot.\nThen hold the loaded blade level above the pot and gently tilt it to pour."),
+                    ? "Hold the loaded blade above the pot. Gently tilt it and hold briefly to pour."
+                    : "Grab Shovel (pinch/Grip). Make a short pass over the soil in SoilPot.\nThen hold the loaded blade above the pot, gently tilt it and hold briefly to pour."),
             GuideStep.Grab => ("Step 2/7: Pick up Tomato seed.",
                 hands ? "Pinch to grab. Keep holding the seed." : "Hold Grip to grab. Keep holding the seed."),
             GuideStep.Plant => ("Step 3/7: Plant Tomato seed.", "Release the seed over the centre of the small pot."),
@@ -288,6 +288,7 @@ public sealed class GronnyTutorial : MonoBehaviour
             foreach (string id in new[] { "water_reserve_intro", "water_reserve_rules" })
                 Say(id, id + "-" + attempt, () => Running && supply.Attempt == attempt && State.tomatoPhase < 5);
         }
+        UpdateGardeningDemonstration();
         QueueHarvest();
         if (State.harvested)
         {
@@ -378,19 +379,30 @@ public sealed class GronnyTutorial : MonoBehaviour
         QueueControls();
     }
 
-    private void QueueHarvest()
+    private void UpdateGardeningDemonstration()
     {
-        TomatoFruit fruit = Fruit;
-        if (fruit == null) return;
-        string background = ShowCutDemonstration ? "harvest_cut_stem" :
+        string background = Step == GuideStep.Soil ? (HasLoadedShovel ? "soil_cover_seed" : "soil_scoop_first") :
+            ShowCutDemonstration ? "harvest_cut_stem" :
             ShowPickDemonstration ? "harvest_stem_cut" : "04_first_watering";
         if (background != backgroundInstructionId)
         {
             backgroundInstructionId = background;
-            System.Func<bool> relevant = background == "harvest_cut_stem" ? () => ShowCutDemonstration :
-                background == "harvest_stem_cut" ? () => ShowPickDemonstration : () => ShowWateringDemonstration;
+            System.Func<bool> relevant = background switch
+            {
+                "soil_scoop_first" => () => Running && Step == GuideStep.Soil && !HasLoadedShovel,
+                "soil_cover_seed" => () => Running && Step == GuideStep.Soil && HasLoadedShovel,
+                "harvest_cut_stem" => () => ShowCutDemonstration,
+                "harvest_stem_cut" => () => ShowPickDemonstration,
+                _ => () => ShowWateringDemonstration
+            };
             voice.SetBackgroundDemonstration(background, relevant);
         }
+    }
+
+    private void QueueHarvest()
+    {
+        TomatoFruit fruit = Fruit;
+        if (fruit == null) return;
         if (fruit.IsRipe && !fruit.IsStemCut)
             Say("harvest_cut_stem", "harvest-ripe", () => Running && fruit == Fruit &&
                 fruit.IsRipe && !fruit.IsStemCut);
@@ -489,6 +501,8 @@ public sealed class GronnyTutorial : MonoBehaviour
             GardenControlDemo.Upright => () => System.Array.Exists(cans, can => can != null && can.IsPouring),
             GardenControlDemo.CutStem => () => ShowCutDemonstration,
             GardenControlDemo.PickTomato => () => ShowPickDemonstration,
+            GardenControlDemo.SoilScoop => () => Running && Step == GuideStep.Soil && !HasLoadedShovel,
+            GardenControlDemo.SoilPour => () => Running && Step == GuideStep.Soil && HasLoadedShovel,
             _ => null
         };
         voice.Enqueue(id, key, () => (GardenWaterSupply.Active == null || !GardenWaterSupply.Active.Exhausted) && relevant(), () =>

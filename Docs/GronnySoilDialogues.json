@@ -1,0 +1,17 @@
+[
+  {
+    "id": "soil_cover_seed",
+    "text": "Great job! Now use your shovel to cover the seed with soil. Hold the loaded blade above the pot, then gently tilt it and hold briefly to pour.",
+    "seed": 821
+  },
+  {
+    "id": "soil_scoop_first",
+    "text": "Great job! Scoop up some soil with your shovel. Hold the loaded blade above the pot, then gently tilt it and hold briefly to cover the seed.",
+    "seed": 822
+  },
+  {
+    "id": "soil_seed_covered",
+    "text": "Perfect! Your seed is all covered up.",
+    "seed": 823
+  }
+]

@@ -30,7 +30,6 @@ public sealed class GardenShovel : MonoBehaviour
     private float droppedSeconds;
     private SeedsController seeds;
     private GardenPot pourTarget;
-    private bool pourArmed;
     private float pouringSeconds;
     private GardenSoilSource scoopSource;
     private Vector3 previousScoopPoint;
@@ -172,7 +171,7 @@ public sealed class GardenShovel : MonoBehaviour
         GardenPot target = null;
         if (seeds != null)
             foreach (GardenPot pot in pots)
-                if (pot != null && seeds.NeedsSoilCover(pot) && pot.CanReceiveSoilAt(ScoopPoint))
+                if (pot != null && seeds.NeedsSoilCover(pot) && pot.CanReceiveSoilAt(ScoopPoint, scoopRadius))
                 {
                     target = pot;
                     break;
@@ -185,10 +184,9 @@ public sealed class GardenShovel : MonoBehaviour
         }
 
         float upright = Vector3.Dot(transform.TransformDirection(localBladeUp.normalized), Vector3.up);
-        // First present a level load over this pot, then tip it. Entering already tilted
-        // or merely touching the pot cannot cover a seed.
-        if (upright >= 0.85f) pourArmed = true;
-        if (!pourArmed || upright > Mathf.Cos(pourTiltDegrees * Mathf.Deg2Rad))
+        // The held tilt and continuous dwell express intent, even when the blade
+        // enters already tilted. Requiring a level pose here can trap the load.
+        if (upright > Mathf.Cos(pourTiltDegrees * Mathf.Deg2Rad))
         {
             pouringSeconds = 0f;
             return;
@@ -203,7 +201,6 @@ public sealed class GardenShovel : MonoBehaviour
     private void ResetPour()
     {
         pourTarget = null;
-        pourArmed = false;
         pouringSeconds = 0f;
     }
 

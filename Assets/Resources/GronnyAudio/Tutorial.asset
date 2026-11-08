@@ -1875,43 +1875,123 @@ MonoBehaviour:
     instructionDetail: Come over to the gardening table.
     steps: []
   - id: soil_cover_seed
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 043c0abd671324945998e31a0f608a2c, type: 3}
     variations: []
     mode: 0
-    demo: 0
+    demo: 11
     priority: 10
     volume: 1
     cooldown: 0
     assisted: 1
-    controllerTarget: 
+    controllerTarget: right_oculus_controller_world/right_b_trigger_grip
     rightHand: 0
-    controllerAnimation: {fileID: 0}
+    controllerAnimation: {fileID: -7415750269733489216, guid: deed68a7fd2e9234899298cf80fae7ad, type: 3}
     transcript: Great job! Now use your shovel to cover the seed with soil. Hold
-      the loaded blade level over the pot, then gently tilt it to pour.
+      the loaded blade above the pot, then gently tilt it and hold briefly to pour.
     instruction: Cover the seed with soil.
-    instructionDetail: Hold the loaded blade level above the pot, then gently tilt
-      it to pour.
-    steps: []
+    instructionDetail: Hold the loaded blade above the pot, then gently tilt it and
+      hold briefly to pour.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 1
+      position: {x: -0.01, y: 0.12, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Hold the loaded blade above the pot
+      press: 1
+    - at: 7
+      practiceOnly: 0
+      pose: 1
+      position: {x: -0.01, y: 0.12, z: 0}
+      rotation: {x: 65, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Tilt and hold briefly to pour
+      press: 1
+    - at: 8.4
+      practiceOnly: 0
+      pose: 1
+      position: {x: -0.01, y: 0.12, z: 0}
+      rotation: {x: 65, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: The soil covers the seed
+      press: 1
   - id: soil_scoop_first
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 99f1e8e78224214489464898cb4dd71f, type: 3}
     variations: []
     mode: 0
-    demo: 0
+    demo: 10
     priority: 10
     volume: 1
     cooldown: 0
     assisted: 1
-    controllerTarget: 
+    controllerTarget: right_oculus_controller_world/right_b_trigger_grip
     rightHand: 0
-    controllerAnimation: {fileID: 0}
+    controllerAnimation: {fileID: -7415750269733489216, guid: deed68a7fd2e9234899298cf80fae7ad, type: 3}
     transcript: Great job! Scoop up some soil with your shovel. Hold the loaded blade
-      level over the pot, then gently tilt it to cover the seed.
+      above the pot, then gently tilt it and hold briefly to cover the seed.
     instruction: Scoop soil with the shovel, then cover the seed.
-    instructionDetail: Scoop from SoilPot. Hold the loaded blade level above the
-      pot, then gently tilt it.
-    steps: []
+    instructionDetail: Scoop from SoilPot. Hold the loaded blade above the pot, then
+      gently tilt it and hold briefly.
+    steps:
+    - at: 0
+      practiceOnly: 0
+      pose: 0
+      position: {x: -0.32, y: 0.1, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Pick up the shovel
+      press: 0
+    - at: 1.3
+      practiceOnly: 0
+      pose: 1
+      position: {x: -0.29, y: 0.1, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Make a short pass over SoilPot
+      press: 1
+    - at: 3.3
+      practiceOnly: 0
+      pose: 1
+      position: {x: -0.01, y: 0.12, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Carry the soil above the pot
+      press: 1
+    - at: 6.4
+      practiceOnly: 0
+      pose: 1
+      position: {x: -0.01, y: 0.12, z: 0}
+      rotation: {x: 65, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: Tilt and hold briefly to pour
+      press: 1
+    - at: 8
+      practiceOnly: 0
+      pose: 1
+      position: {x: -0.01, y: 0.12, z: 0}
+      rotation: {x: 65, y: 0, z: 0}
+      thumbRotation: {x: 0, y: 0, z: 0}
+      thumbSwipeProgress: 0
+      thumbSwipeWeight: 0
+      label: The soil covers the seed
+      press: 1
   - id: soil_seed_covered
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: f60ccdfec72d24a46ac552bd303bbb8c, type: 3}
     variations: []
     mode: 0
     demo: 0
@@ -2072,6 +2152,9 @@ MonoBehaviour:
   controllerTrigger: {fileID: -6338187929255524150, guid: deed68a7fd2e9234899298cf80fae7ad, type: 3}
   demonstrationMaterial: {fileID: 2100000, guid: 575f1a14acfa4b3409a2104843b085ff, type: 2}
   pruningShearsVisual: {fileID: 6451540459712408966, guid: 1db0bc129c0994bd68c8177096e5a2d3, type: 3}
+  shovelVisual: {fileID: 3368317141486964152, guid: 7a6eb6c242fa3634aab1ccda4a1b103c, type: 3}
+  soilSourceVisual: {fileID: 7126109315483195736, guid: 2b0e3862453db9f4195c90628cb75941, type: 3}
+  soilPotVisual: {fileID: 1615639952321317042, guid: 5fd76413c5890406689031301aeac8a9, type: 3}
   voiceVolume: 0.85
   pitch: 1
   gapSeconds: 0.35

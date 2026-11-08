@@ -1,0 +1,34 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "Docs/Validation/ConfigureSoilAnimations.cs",
+      "entry": "ConfigureSoilAnimations.Main"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 966,
+      "executeMs": 121,
+      "assemblyName": "PipelineRunScript_ConfigureSoilAnimations_45c9937eb5b343cfa6052e9d895bd982",
+      "success": true,
+      "result": {
+        "scoopSteps": 5,
+        "pourSteps": 3,
+        "shovel": "Assets/OurAss/GrabablePrfab/Shovel.prefab",
+        "source": "Assets/Prefabs/Furniture/SoilPot.prefab",
+        "pot": "Assets/MamkinEnthusiast/3D Mini Garden Props/Prefabs/PotSmall.prefab",
+        "scoopClip": "Assets/Audio/dialogues_cozy_gardening/soil_scoop_first.wav",
+        "pourClip": "Assets/Audio/dialogues_cozy_gardening/soil_cover_seed.wav"
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

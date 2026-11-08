@@ -1,5 +1,9 @@
 # Audio y demostraciones de Gronny
 
+Voces de tierra añadidas el 8 de noviembre de 2026: `soil_scoop_first`, `soil_cover_seed` y `soil_seed_covered` ya tienen clips Kiki asignados. Explican recoger, inclinar y mantener la pala sobre la maceta, y confirman la cobertura antes del riego. Generación, importación y comprobaciones: `GronnySoilVoice.md`.
+
+Las instrucciones de recogida y vertido incluyen guías animadas con manos Meta y Touch Plus, con cambio visual al cargar la pala y retirada al cubrir. Detalles y validación: `GronnySoilAnimations.md`.
+
 Saludo vigente: presentación, indicación de poner ambas manos frente al usuario
 si utiliza hand tracking, jardinería sustentable y reserva limitada en una sola
 grabación; después Gronny invita por voz a caminar hacia la gardening table y

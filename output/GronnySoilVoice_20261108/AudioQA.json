@@ -1,0 +1,42 @@
+{
+  "recognition_model": "openai/whisper-base.en",
+  "note": "Revisión automática; no sustituye escucha humana.",
+  "files": [
+    {
+      "id": "soil_cover_seed",
+      "expected": "Great job! Now use your shovel to cover the seed with soil. Hold the loaded blade above the pot, then gently tilt it and hold briefly to pour.",
+      "transcript": "Great job! Now use your shovel to cover the seed with soil. Hold the loaded blade above the pot, then gently tilt it and hold briefly to pour.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 9.4,
+      "sample_rate": 24000,
+      "peak": 0.980010986328125,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "6BE67595EDB1AB6425B611832575698553FCD844BF2AA2F759E71866BD7A33FD"
+    },
+    {
+      "id": "soil_scoop_first",
+      "expected": "Great job! Scoop up some soil with your shovel. Hold the loaded blade above the pot, then gently tilt it and hold briefly to cover the seed.",
+      "transcript": "Great job! Scoop up some soil with your shovel. Hold the loaded blade above the pot, then gently tilt it and hold briefly to cover the seed.",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 8.92,
+      "sample_rate": 24000,
+      "peak": 0.72369384765625,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "52292AA4F4D40BD0D119A29C5BBF7E779BCCEBB8C8D5248E64EB6641E3F8AC5D"
+    },
+    {
+      "id": "soil_seed_covered",
+      "expected": "Perfect! Your seed is all covered up.",
+      "transcript": "Perfect! Your seed is all covered up!",
+      "differences": [],
+      "words_match": true,
+      "duration_seconds": 3.16,
+      "sample_rate": 24000,
+      "peak": 0.69525146484375,
+      "clipped_sample_fraction": 0.0,
+      "sha256": "3D62DF5256E1B135E2EE4EE2FB2CDAB4F372461CFF16FA0537BEE847CDE14FBE"
+    }
+  ]
+}

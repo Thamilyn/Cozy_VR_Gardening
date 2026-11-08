@@ -212,7 +212,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6177356905507557871}
-  - component: {fileID: 471100100633140710}
   - component: {fileID: 2401642475648302647}
   m_Layer: 0
   m_Name: PotSmall
@@ -238,30 +237,6 @@ Transform:
   - {fileID: 1631075095554171094}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &471100100633140710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8999075363548152149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99965267ba20923428daa87dd0a378b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TomatoPotStages
-  stagePrefabs:
-  - {fileID: 8646881097538398800, guid: 4264b2e3edb89c648a92e21661dda6da, type: 3}
-  - {fileID: 8646881097538398800, guid: 3986b519d2f6bda4194574e81e70927e, type: 3}
-  - {fileID: 25715236997105040, guid: 7c3b095066a8d194f9d49d2dfbc7ca0e, type: 3}
-  - {fileID: 7097185542107518241, guid: d3213c402a128fd49a093b7ed9e8983c, type: 3}
-  - {fileID: 8008850460788849669, guid: 3c53c799cfe45ee4ba46a1ef18839bf8, type: 3}
-  - {fileID: 3601468100277834477, guid: ec8c476072af93945a9ae3175fd962cb, type: 3}
-  - {fileID: 5969511068075408364, guid: e74f0e567aa670b429235d1869cdfd39, type: 3}
-  substrateSurface: {fileID: 0}
-  soil: {fileID: 0}
-  emptyPotVisual: {fileID: 558009018854463726}
-  potCollider: {fileID: 2401642475648302647}
 --- !u!65 &2401642475648302647
 BoxCollider:
   m_ObjectHideFlags: 0

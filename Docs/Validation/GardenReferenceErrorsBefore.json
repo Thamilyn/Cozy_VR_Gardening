@@ -1,0 +1,85 @@
+{
+  "success": true,
+  "command": "command",
+  "data": {
+    "command": "run_script",
+    "parameters": {
+      "file": "Docs/Validation/InspectGardenReferenceErrors.cs",
+      "entry": "InspectGardenReferenceErrors.Main"
+    },
+    "result": {
+      "diagnostics": [],
+      "compileMs": 155,
+      "executeMs": 4,
+      "assemblyName": "PipelineRunScript_InspectGardenReferenceErrors_1b626aa46af746d7b5616ba8f86e03a1",
+      "success": true,
+      "result": {
+        "scene": "Assets/Scenes/Garden_Moves.unity",
+        "dirty": false,
+        "stages": [
+          {
+            "path": "PotSmall",
+            "active": true,
+            "prefab": "Assets/MamkinEnthusiast/3D Mini Garden Props/Prefabs/PotSmall.prefab",
+            "surface": true,
+            "soil": true,
+            "ownPot": true,
+            "parentPot": true,
+            "childPot": true,
+            "nestedStages": 1
+          },
+          {
+            "path": "PotSmall (2)",
+            "active": true,
+            "prefab": "Assets/OurAss/GrabablePrfab/PotSmall.prefab",
+            "surface": false,
+            "soil": false,
+            "ownPot": false,
+            "parentPot": false,
+            "childPot": false,
+            "nestedStages": 1
+          },
+          {
+            "path": "Side2_Pots/PotSmall",
+            "active": true,
+            "prefab": "Assets/MamkinEnthusiast/3D Mini Garden Props/Prefabs/PotSmall.prefab",
+            "surface": true,
+            "soil": true,
+            "ownPot": false,
+            "parentPot": false,
+            "childPot": false,
+            "nestedStages": 1
+          }
+        ],
+        "wrappers": [
+          {
+            "path": "Shovel/ISDK_HandGrabInteraction",
+            "active": true,
+            "prefab": "Assets/OurAss/GrabablePrfab/Shovel.prefab",
+            "handGrab": true,
+            "controllerGrab": true
+          }
+        ],
+        "pots": [
+          {
+            "path": "PotSmall",
+            "id": "small-pot-1",
+            "stages": true
+          },
+          {
+            "path": "Plant_Pot",
+            "id": "plant-pot",
+            "stages": false
+          }
+        ]
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\Trole\\Cozy_VR_Gardening"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

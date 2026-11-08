@@ -1,0 +1,9 @@
+{
+  "existing_recordings_preserved": 80,
+  "other_catalogue_fields_preserved": true,
+  "yaml_line_wrapping_normalized": true,
+  "new_clips_verified": 3,
+  "result": "PASS",
+  "play_mode_tested": false,
+  "quest_3_tested": false
+}

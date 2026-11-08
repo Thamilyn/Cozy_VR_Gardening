@@ -173,6 +173,23 @@ public static class GardenCalendarVerification
             Assert(!pot.CanReceiveSoilAt(pot.PlantingPoint - Vector3.up * 0.1f), "Soil pour rejects the pot interior");
             Assert(!pot.CanReceiveSoilAt(pot.PlantingPoint + Vector3.up * 0.4f), "Soil pour rejects excessive height");
             Assert(!pot.CanReceiveSoilAt(pot.PlantingPoint + new Vector3(0.2f, 0.1f, 0f)), "Soil pour rejects the side");
+            MeshFilter soilSurface = pot.GetComponentInChildren<GardenSoil>(true).GetComponent<MeshFilter>();
+            Bounds soilBounds = soilSurface.sharedMesh.bounds;
+            Vector3 soilTop = soilSurface.transform.TransformPoint(
+                new Vector3(soilBounds.center.x, soilBounds.max.y, soilBounds.center.z));
+            Vector3 soilUp = soilSurface.transform.up;
+            Vector3 soilRight = soilSurface.transform.right;
+            Vector3 edge = soilSurface.transform.TransformPoint(
+                new Vector3(soilBounds.max.x, soilBounds.max.y, soilBounds.center.z));
+            Vector3 overlappingBlade = edge + soilRight * 0.025f + soilUp * 0.1f;
+            Assert(!pot.CanReceiveSoilAt(overlappingBlade) && pot.CanReceiveSoilAt(overlappingBlade, 0.05f),
+                "Blade overlap counts even when its centre is just outside the opening");
+            Assert(!pot.CanReceiveSoilAt(edge + soilRight * 0.06f + soilUp * 0.1f, 0.05f),
+                "Blade entirely outside the opening cannot pour");
+            Assert(pot.CanReceiveSoilAt(soilTop + soilUp * 0.01f, 0.05f), "Low blade above the soil can pour");
+            Assert(pot.CanReceiveSoilAt(soilTop + soilUp * 0.3f, 0.05f), "Comfortable pour height is accepted");
+            Assert(!pot.CanReceiveSoilAt(soilTop - soilUp * 0.01f, 0.05f), "Blade width does not allow pouring below the soil");
+            Assert(!pot.CanReceiveSoilAt(soilTop + soilUp * 0.4f, 0.05f), "Blade width does not bypass the height limit");
             seedObject = UnityEngine.Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(
                 "Assets/Prefabs/SeedsPrefab/TomatoSeed.prefab"));
             SeedItem seed = seedObject.GetComponent<SeedItem>();
