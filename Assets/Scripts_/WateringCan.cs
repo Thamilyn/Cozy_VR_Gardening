@@ -116,6 +116,9 @@ public sealed class WateringCan : MonoBehaviour
         _initialRotation = transform.rotation;
         _recoveryCenterOffset = Quaternion.Inverse(_initialRotation) *
             (_body.worldCenterOfMass - _initialPosition);
+        // Park at the authored upright pose until the first real grab. A menu or
+        // tutorial delay must not leave the can toppled before the player reaches it.
+        RecoverToPose(_initialPosition, _initialRotation);
         GardenWaterSupply.Active?.RegisterCan(this);
         if (GetComponent<WateringCanWaterDisplay>() == null)
             gameObject.AddComponent<WateringCanWaterDisplay>();
@@ -512,13 +515,36 @@ public sealed class WateringCan : MonoBehaviour
         if (!TryGetGardenCanMesh(out MeshFilter canMesh, out float modelScale, out float frontSign))
             return;
 
-        // A single hull over the whole model fills the space between the body,
-        // handles and nozzle. Use separate shapes so it rests on visible geometry.
-        // BoxCollider bodyCollider = GetComponent<BoxCollider>();
-        // if (bodyCollider == null) bodyCollider = gameObject.AddComponent<BoxCollider>();
-        // bodyCollider.center = new Vector3(0f, 0.1885f, 0f) * modelScale;
-        // bodyCollider.size = new Vector3(0.3645f, 0.377f, 0.4347f) * modelScale;
-        // bodyCollider.isTrigger = false;
+        // The imported hull spans the body, handle and nozzle. Keep it for pickup,
+        // but use the flat-bottomed body and separate spout shapes for solid contact.
+        MeshCollider importedHull = GetComponent<MeshCollider>();
+        if (importedHull != null)
+        {
+            importedHull.convex = true;
+            importedHull.isTrigger = true;
+        }
+        BoxCollider bodyCollider = GetComponent<BoxCollider>();
+        if (bodyCollider == null) bodyCollider = gameObject.AddComponent<BoxCollider>();
+        bodyCollider.center = new Vector3(0f, 0.1885f, 0f) * modelScale;
+        bodyCollider.size = new Vector3(0.3645f, 0.377f, 0.4347f) * modelScale;
+        bodyCollider.isTrigger = false;
+
+        Transform handle = transform.Find("Handle");
+        MeshFilter handleMesh = handle.GetComponent<MeshFilter>();
+        if (handleMesh != null && handleMesh.sharedMesh != null)
+        {
+            BoxCollider pickup = handle.GetComponent<BoxCollider>();
+            if (pickup == null) pickup = handle.gameObject.AddComponent<BoxCollider>();
+            Bounds bounds = handleMesh.sharedMesh.bounds;
+            Vector3 scale = handle.lossyScale;
+            // A small world-space margin lets both tracked palms and controller
+            // grab volumes overlap the thin upper handle before Meta caches colliders.
+            bounds.Expand(new Vector3(0.03f / Mathf.Abs(scale.x),
+                0.03f / Mathf.Abs(scale.y), 0.03f / Mathf.Abs(scale.z)));
+            pickup.center = bounds.center;
+            pickup.size = bounds.size;
+            pickup.isTrigger = true;
+        }
 
         if (transform.Find("Spout Physics") != null) return;
         GameObject nozzle = new("Spout Physics");

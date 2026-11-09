@@ -1,0 +1,32 @@
+{
+  "Sheet1": [
+    [
+      "ID",
+      "Hora de inicio",
+      "Hora de finalización",
+      "Correo electrónico",
+      "Nombre",
+      "Hora de la última modificación",
+      "Did movement in VR match your real steps?",
+      "How did the distance to the gardening table feel?",
+      "How clear were Gronny’s instructions?",
+      "How easy was it to find the “Tomato seed”?",
+      "Did you experience any discomfort? ",
+      "What should we improve?"
+    ],
+    [
+      1,
+      "2026-11-02 14:56:47",
+      "2026-11-02 15:06:58",
+      "anonymous",
+      null,
+      null,
+      "Very well",
+      "About right",
+      "Very clear",
+      "Very easy",
+      "None",
+      "There is a lot of controlls to remember. It can get a bit overwhelming with everything. "
+    ]
+  ]
+}

@@ -1,0 +1,16 @@
+PASS: Both pruning-shear meshes are visible beside the tomato pot
+PASS: Working-table collider supports the new position
+PASS: Tool is parked without changing Meta's dynamic body state
+PASS: Both Meta grab types are ready even in the initial menu
+PASS: Other two copies retain their existing behavior
+PASS: Initial menu and three seconds of physics cannot displace the tool
+PASS: Session starts through real menu release flow
+PASS: Meta pickup releases parking and moves the shears
+PASS: Released shears use normal physics
+PASS: Meta pickup releases parking and moves the shears
+PASS: Released shears use normal physics
+PASS: Placing the shears elsewhere on the table does not recall them
+PASS: After the drop timer expires the shears return to their visible table position
+PASS: Recovery does not create a synthetic selection
+NOT TESTED: physical Quest sensors or perception; drop timer expiry was supplied synthetically.
+RESULT: PASS

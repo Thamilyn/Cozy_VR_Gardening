@@ -601,7 +601,7 @@ public sealed class GronnyTutorial : MonoBehaviour
                     (grab != null && grab.GetComponent<GardenPruner>() != null) ||
                     (step == GuideStep.Soil && shovel != null) ||
                     (step != GuideStep.Move && seed != null && seed.Crop == SeedCrop.Tomato) ||
-                    (Learned("grab") && State != null && State.soilCovered && can != null);
+                    can != null; // Pickup stays available; Allows(Pour) still gates watering.
             }
             else if (behaviour is LocomotionAxisTurnerInteractor || behaviour is LocomotionTurnerInteractor ||
                 behaviour is TeleportInteractor) allowed = false;

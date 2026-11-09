@@ -1,0 +1,24 @@
+PASS: Real scene in paused Play
+PASS: Can starts upright
+PASS: Initial pose is parked until first pickup
+PASS: Initial menu still suspends controller pickup
+PASS: Real menu continue and release flow starts the garden
+PASS: Tutorial initializes after starting
+PASS: Both grab types remain available before planting or covering soil
+PASS: Tutorial still blocks pouring before the watering step
+PASS: Can remains at its upright starting pose through three seconds of physics and an impulse
+PASS: Upper handle has a non-solid pickup volume
+PASS: Controller grabs cache the upper-handle volume and target the correct body and Grabbable
+PASS: Hand grabs cache the same upper-handle volume and target the correct body and Grabbable
+PASS: Flat body supplies solid contact; imported full hull is pickup only
+PASS: Meta selection clears the parked state for pointer 9400
+PASS: Selected can follows the grab target for pointer 9400
+PASS: Releasing returns the can to normal dynamic physics for pointer 9400
+PASS: Meta selection clears the parked state for pointer 9401
+PASS: Selected can follows the grab target for pointer 9401
+PASS: Releasing returns the can to normal dynamic physics for pointer 9401
+PASS: Can settles upright on the real table after being released
+PASS: Pause still suspends both grab types
+PASS: Resuming restores both grab types
+NOT TESTED: real Quest hand/controller sensors, comfort or device rendering.
+RESULT: PASS

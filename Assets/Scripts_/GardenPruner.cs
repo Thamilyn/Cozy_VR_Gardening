@@ -41,6 +41,13 @@ public sealed class GardenPruner : MonoBehaviour
     private TomatoFruit alignedDuringClosing;
     private float alignedAt = float.NegativeInfinity;
     private float nextFruitScan;
+    private Rigidbody body;
+    private bool hasTableHome;
+    private bool parkedAtHome;
+    private Vector3 homePosition;
+    private Quaternion homeRotation;
+    private RigidbodyConstraints homeConstraints;
+    private float droppedFor;
 
     private void Awake()
     {
@@ -157,8 +164,72 @@ public sealed class GardenPruner : MonoBehaviour
         return bounds;
     }
 
+    private void Start()
+    {
+        body = GetComponent<Rigidbody>();
+        if (body == null || grabbable == null) return;
+        // Only tools placed on the working table own a return pose. Decorative
+        // copies elsewhere in the garden keep their existing placement and physics.
+        foreach (Collider surface in FindObjectsByType<Collider>(FindObjectsSortMode.None))
+        {
+            if (surface.gameObject.scene != gameObject.scene || surface.name != "TableSet" ||
+                !surface.enabled || surface.isTrigger) continue;
+            if (!surface.Raycast(new Ray(transform.position + Vector3.up * 0.2f, Vector3.down),
+                out _, 0.5f)) continue;
+            hasTableHome = true;
+            homePosition = transform.position;
+            homeRotation = transform.rotation;
+            homeConstraints = body.constraints;
+            ParkOnTable();
+            break;
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (grabbable != null) grabbable.WhenPointerEventRaised += HandlePickup;
+    }
+
+    private void HandlePickup(PointerEvent evt)
+    {
+        if (evt.Type != PointerEventType.Select || !parkedAtHome || body == null) return;
+        body.constraints = homeConstraints;
+        parkedAtHome = false;
+        droppedFor = 0f;
+    }
+
+    private void UpdateTableRecovery()
+    {
+        if (!hasTableHome || parkedAtHome || body == null) return;
+        if (grabbable.SelectingPointsCount > 0 || transform.position.y >= homePosition.y - 0.45f)
+        {
+            droppedFor = 0f;
+            return;
+        }
+        if (GardenMenuController.GardenSuspended) return;
+        droppedFor += Time.deltaTime;
+        if (droppedFor >= 2f) ParkOnTable();
+    }
+
+    private void ParkOnTable()
+    {
+        if (grabbable.SelectingPointsCount > 0) return;
+        if (!body.isKinematic)
+        {
+            body.linearVelocity = Vector3.zero;
+            body.angularVelocity = Vector3.zero;
+        }
+        transform.SetPositionAndRotation(homePosition, homeRotation);
+        body.position = homePosition;
+        body.rotation = homeRotation;
+        body.constraints = RigidbodyConstraints.FreezeAll;
+        parkedAtHome = true;
+        droppedFor = 0f;
+    }
+
     private void LateUpdate()
     {
+        UpdateTableRecovery();
         bool held = TryGetSqueeze(out float squeeze, out int interactor);
         UpdateBlades(held, squeeze, interactor, Time.deltaTime);
     }
@@ -296,6 +367,7 @@ public sealed class GardenPruner : MonoBehaviour
 
     private void OnDisable()
     {
+        if (grabbable != null) grabbable.WhenPointerEventRaised -= HandlePickup;
         ResetCut();
         closure = 0f;
         if (model != null) ApplyBladePose();
